@@ -1,0 +1,9 @@
+.toolbar {
+  width: 40vw;
+  height: 7.5vh;
+  position: absolute;
+  top: 2.5vh;
+  left: 30vw;
+  z-index: 5;
+  background-color: rgb(131, 131, 131);
+}
