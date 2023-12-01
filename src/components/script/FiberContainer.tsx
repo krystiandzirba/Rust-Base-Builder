@@ -1,7 +1,6 @@
 import * as THREE from "three";
-// import { createRoot } from "react-dom/client";
-import React, { useRef, useState } from "react";
-import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
+import { useRef, useState } from "react";
+import { Canvas, ThreeElements } from "@react-three/fiber";
 import { PerspectiveCamera, CameraControls, Grid } from "@react-three/drei";
 
 function Box(props: ThreeElements["mesh"]) {
@@ -14,12 +13,12 @@ function Box(props: ThreeElements["mesh"]) {
       {...props}
       ref={ref}
       scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}
+      onClick={(event) => [click(!clicked), console.log(event)]}
+      onPointerOver={(event) => [hover(true), console.log(event)]}
+      onPointerOut={(event) => [hover(false), console.log(event)]}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "red" : "orange"} />
+      <meshStandardMaterial color={hovered ? "red" : "#ffffff"} />
     </mesh>
   );
 }
@@ -32,6 +31,7 @@ export default function FiberContainer() {
         <PerspectiveCamera makeDefault fov={90} position={[0, 0, 2]} />
         <CameraControls maxPolarAngle={Math.PI / 2.1} />
         <ambientLight />
+        <directionalLight />
         <pointLight position={[10, 10, 10]} />
         <Box position={[-1.2, 1, 0]} rotation={[0, 0, 70]} />
         <Box position={[1.2, 1, 0]} />

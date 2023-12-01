@@ -1,0 +1,30 @@
+.objects_container {
+  width: 30vw;
+  height: 95vh;
+  position: absolute;
+  top: 2.5vh;
+  left: 1%;
+  z-index: 10;
+  background-color: rgb(65, 65, 65);
+}
+
+.object_list {
+  width: 95%;
+  height: 85%;
+  position: absolute;
+  top: 12.5%;
+  left: 1%;
+  background-color: rgb(155, 64, 64);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr)); /* Adjust the percentage based on your preference */
+  grid-gap: 1vh;
+  overflow-y: auto;
+  padding: 1vh;
+}
+
+.object {
+  width: 100%; /* Adjust the width percentage based on your preference */
+  height: 15vh;
+  background-color: rgb(184, 184, 184);
+  margin-bottom: 1vh; /* Add margin-bottom to create space between rows */
+}
