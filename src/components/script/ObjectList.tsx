@@ -1,4 +1,8 @@
-const ObjectList = () => {
+interface ObjectListProps {
+  type: string;
+}
+
+const ObjectList: React.FC<ObjectListProps> = ({ type }) => {
   const object_list = [
     ["twig_foundation_low", "thumbnail", "FL0"],
     ["wooden_foundation_low", "thumbnail", "FL1"],
@@ -26,7 +30,11 @@ const ObjectList = () => {
   ];
 
   return (
-    <div className="objects_container">
+    <div
+      className={
+        type === "edit" ? "objects_container objects_container_displayed" : "objects_container objects_container_hidden"
+      }
+    >
       <div className="object_list">
         {object_list.map((item) => (
           <div className="object" key={item[2]}>

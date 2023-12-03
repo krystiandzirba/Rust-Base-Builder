@@ -1,7 +1,6 @@
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import Toolbar from "./components/script/Toolbar.tsx";
 import Version from "./components/script/Version.tsx";
-import ObjectList from "./components/script/ObjectList.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/canvas_container.css";
@@ -15,7 +14,6 @@ function App() {
       <CanvasContainer />
       <Toolbar />
       <Version />
-      <ObjectList />
     </div>
   );
 }
@@ -31,3 +29,5 @@ export default App;
 // object copy: "C"
 // object delete: "del"
 // controls menu
+// upkeep cost
+// build cost
