@@ -7,12 +7,19 @@
   z-index: 5;
   background-color: rgb(131, 131, 131);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .toolbar_button {
   height: 90%;
   width: 30%;
-  background-color: white;
   text-align: center;
+}
+
+.active {
+  background-color: white;
+}
+
+.unactive {
+  background-color: rgb(52, 52, 52);
 }

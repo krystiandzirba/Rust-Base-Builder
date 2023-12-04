@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Canvas, ThreeElements } from "@react-three/fiber";
 import { PerspectiveCamera, CameraControls, Grid } from "@react-three/drei";
 
-import StoneFoundationHigh from "../../assets/models/StoneFoundationHigh.tsx";
+import StoneFoundationHigh from "../models/StoneFoundationHigh.tsx";
 
 type ModelProps = ThreeElements["mesh"] & {
   position: [number, number, number];

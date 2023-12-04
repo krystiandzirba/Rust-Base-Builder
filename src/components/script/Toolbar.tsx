@@ -7,13 +7,22 @@ export default function Toolbar() {
   return (
     <>
       <div className="toolbar">
-        <div className="toolbar_button overview_button" onClick={() => set_type("overview")}>
+        <div
+          className={type === "overview" ? "toolbar_button active" : "toolbar_button inactive"}
+          onClick={() => set_type("overview")}
+        >
           overview
         </div>
-        <div className="toolbar_button edit_button" onClick={() => [set_type("edit"), console.log(type)]}>
+        <div
+          className={type === "edit" ? "toolbar_button active" : "toolbar_button inactive"}
+          onClick={() => [set_type("edit"), console.log(type)]}
+        >
           edit
         </div>
-        <div className="toolbar_button raid_button" onClick={() => set_type("raid")}>
+        <div
+          className={type === "raid" ? "toolbar_button active" : "toolbar_button inactive"}
+          onClick={() => set_type("raid")}
+        >
           raid
         </div>
       </div>

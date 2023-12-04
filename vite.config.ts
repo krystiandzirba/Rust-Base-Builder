@@ -8,7 +8,7 @@ export default defineConfig({
   base: "/Rust-Base-Builder/",
   resolve: {
     alias: {
-      "@/assets": "/src/assets",
+      // "@/assets": "/src/assets",
     },
   },
 });
