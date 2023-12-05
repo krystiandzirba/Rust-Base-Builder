@@ -1,3 +1,4 @@
+import { useState } from "react";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import Toolbar from "./components/script/Toolbar.tsx";
 import Version from "./components/script/Version.tsx";
@@ -6,13 +7,14 @@ import "./components/styles/global.css";
 import "./components/styles/canvas_container.css";
 import "./components/styles/toolbar.css";
 import "./components/styles/version.css";
-import "./components/styles/object_list.css";
 
 function App() {
+  const [type, setType] = useState<string>("overview");
+
   return (
     <div>
-      <CanvasContainer />
-      <Toolbar />
+      <Toolbar type={type} setType={setType} />
+      <CanvasContainer type={type} />
       <Version />
     </div>
   );
@@ -31,3 +33,4 @@ export default App;
 // controls menu
 // upkeep cost
 // build cost
+// different "save files / base plans"
