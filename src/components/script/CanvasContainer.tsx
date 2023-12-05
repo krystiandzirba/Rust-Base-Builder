@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Canvas, ThreeElements } from "@react-three/fiber";
-import { PerspectiveCamera, CameraControls, Grid } from "@react-three/drei";
+import { PerspectiveCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
 
 import StoneFoundationHigh from "../models/StoneFoundationHigh.tsx";
 import StoneFoundationMid from "../models/StoneFoundationMid.tsx";
@@ -10,7 +10,10 @@ interface CanvasContainerProps {
 }
 
 export default function CanvasContainer({ type }: CanvasContainerProps) {
+  const [pivot_control, set_pivot_control] = useState(false);
+  const [camera_pan, set_camera_pan] = useState(true);
   const [models, setModels] = useState<React.FC[]>([]);
+  const [selected_model_index, setSelectedModelIndex] = useState<number | null>(null);
 
   const object_list = [
     { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
@@ -44,19 +47,47 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
     setModels((prevModels) => [...prevModels, modelComponent]);
   };
 
+  const handleModelClick = (index: number) => {
+    setSelectedModelIndex(index);
+    set_pivot_control(true);
+    console.log("object clicked", index, pivot_control);
+  };
+
   return (
     <>
       <div className="canvas_container">
         <Canvas>
           <Grid cellSize={3} infiniteGrid={true} fadeStrength={5} sectionColor={"white"} />
-          <PerspectiveCamera makeDefault fov={90} position={[0, 1, 2]} />
-          <CameraControls maxPolarAngle={Math.PI / 2.1} />
+          <PerspectiveCamera makeDefault fov={90} position={[0, 4, 4]} />
+
+          {!camera_pan ? null : <CameraControls maxPolarAngle={Math.PI / 2.1} />}
+
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
-          {models.map((ModelComponent, index) => (
-            <ModelComponent key={index} />
-          ))}
+          {models.map((ModelComponent, index) => {
+            return (
+              <PivotControls
+                visible={selected_model_index === index ? true : false}
+                autoTransform={selected_model_index === index ? true : false}
+                key={index}
+                scale={3}
+                depthTest={false}
+                activeAxes={[true, false, true]}
+                hoveredColor={"Red"}
+                onDragStart={() => set_camera_pan(false)}
+                onDragEnd={() => set_camera_pan(true)}
+              >
+                <mesh
+                  key={index}
+                  onClick={() => handleModelClick(index)}
+                  // scale={selected_model_index === index ? [1.2, 1.2, 1.2] : [1, 1, 1]}
+                >
+                  <ModelComponent />
+                </mesh>
+              </PivotControls>
+            );
+          })}
         </Canvas>
       </div>
       <div
@@ -68,7 +99,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
       >
         <div className="object_list">
           {object_list.map((item) => (
-            <button key={item.id} className="object" onClick={item.onClick}>
+            <button key={item.id} className="object" onClick={() => item.onClick && item.onClick()}>
               {item.name}
             </button>
           ))}
