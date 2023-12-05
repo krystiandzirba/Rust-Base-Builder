@@ -13,7 +13,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
   const [pivot_control, set_pivot_control] = useState(false);
   const [camera_pan, set_camera_pan] = useState(true);
   const [models, setModels] = useState<React.FC[]>([]);
-  const [selected_model_index, setSelectedModelIndex] = useState<number | null>(null);
+  const [selected_model_index, set_selected_model_index] = useState<number | null>(null);
 
   const object_list = [
     { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
@@ -25,8 +25,10 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
     { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
 
     { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
-    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => addModel(StoneFoundationMid) },
-    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => addModel(StoneFoundationHigh) },
+    //prettier-ignore
+    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => [set_selected_model_index(-1), addModel(StoneFoundationMid)],},
+    //prettier-ignore
+    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => [set_selected_model_index(-1), addModel(StoneFoundationHigh)],},
 
     { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
     { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
@@ -48,7 +50,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
   };
 
   const handleModelClick = (index: number) => {
-    setSelectedModelIndex(index);
+    set_selected_model_index(index);
     set_pivot_control(true);
     console.log("object clicked", index, pivot_control);
   };

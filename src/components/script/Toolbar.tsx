@@ -31,3 +31,13 @@ export default function Toolbar({ type, setType }: ToolbarProps) {
     </>
   );
 }
+
+function randomIdGenerator() {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let random_id = "";
+  for (let i = 0; i < 10; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    random_id += characters[randomIndex];
+  }
+  return random_id;
+}
