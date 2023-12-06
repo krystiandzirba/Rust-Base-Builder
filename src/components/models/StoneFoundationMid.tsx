@@ -15,7 +15,7 @@ type GLTFResult = GLTF & {
 type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>>;
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("public/stone_foundation_mid.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./stone_foundation_mid.glb") as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Cube.geometry} material={materials.Material} />
@@ -23,4 +23,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("public/stone_foundation_mid.glb");
+useGLTF.preload("./stone_foundation_mid.glb");
