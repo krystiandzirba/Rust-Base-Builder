@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { Canvas, ThreeElements } from "@react-three/fiber";
 import { PerspectiveCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
 
-import StoneFoundationHigh from "../models/StoneFoundationHigh.tsx";
-import StoneFoundationMid from "../models/StoneFoundationMid.tsx";
+import { Model as StoneFoundationMid } from "../models/StoneFoundationMid.tsx";
+import { Model as StoneFoundationHigh } from "../models/StoneFoundationHigh.tsx";
 
 interface CanvasContainerProps {
   type: string;
@@ -26,9 +26,9 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
 
     { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
     //prettier-ignore
-    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => [set_selected_model_index(-1), addModel(StoneFoundationMid)],},
+    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationMid)],},
     //prettier-ignore
-    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => [set_selected_model_index(-1), addModel(StoneFoundationHigh)],},
+    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationHigh)],},
 
     { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
     { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },

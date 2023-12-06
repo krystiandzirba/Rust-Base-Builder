@@ -1,9 +1,26 @@
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { useLoader } from "@react-three/fiber";
+import * as THREE from "three";
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
+import { GLTF } from "three-stdlib";
 
-const StoneFoundationHigh: React.FC = () => {
-  const gltf = useLoader(GLTFLoader, "./stone_foundation_high.glb");
-  return <primitive object={gltf.scene} scale={1} />;
+type GLTFResult = GLTF & {
+  nodes: {
+    Cube: THREE.Mesh;
+  };
+  materials: {
+    Material: THREE.MeshStandardMaterial;
+  };
 };
 
-export default StoneFoundationHigh;
+type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>>;
+
+export function Model(props: JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("public/stone_foundation_high.glb") as GLTFResult;
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Cube.geometry} material={materials.Material} />
+    </group>
+  );
+}
+
+useGLTF.preload("public/stone_foundation_high.glb");
