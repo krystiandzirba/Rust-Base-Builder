@@ -29,10 +29,11 @@ interface CanvasContainerProps {
 }
 
 export default function CanvasContainer({ type }: CanvasContainerProps) {
-  const [pivot_control, set_pivot_control] = useState(false);
   const [camera_pan, set_camera_pan] = useState(true);
   const [models, setModels] = useState<React.FC[]>([]);
   const [selected_model_index, set_selected_model_index] = useState<number | null>(null);
+
+  const [model_hover_index, set_model_hover_index] = useState<number>(-1);
 
   const object_list = [
     // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
@@ -45,9 +46,15 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
 
     { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
     //prettier-ignore
-    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationMid), console.log(models)],},
+    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => {
+      set_selected_model_index(-1),
+      addModel(StoneFoundationMid)
+    }},
     //prettier-ignore
-    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationHigh)],},
+    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => {
+      set_selected_model_index(-1),
+      addModel(StoneFoundationHigh)
+    }},
 
     // { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
     // { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
@@ -66,12 +73,6 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
 
   const addModel = (modelComponent: React.FC) => {
     setModels((prevModels) => [...prevModels, modelComponent]);
-  };
-
-  const handleModelClick = (index: number) => {
-    set_selected_model_index(index);
-    set_pivot_control(true);
-    console.log("object clicked", index, pivot_control);
   };
 
   return (
@@ -93,16 +94,25 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
                 autoTransform={selected_model_index === index ? true : false}
                 key={index}
                 scale={3}
+                lineWidth={2}
                 depthTest={false}
                 activeAxes={[true, false, true]}
-                hoveredColor={"Red"}
-                onDragStart={() => set_camera_pan(false)}
+                onDragStart={() => {
+                  set_selected_model_index(index);
+                  set_camera_pan(false);
+                }}
                 onDragEnd={() => set_camera_pan(true)}
               >
                 <mesh
-                  onPointerOver={() => console.log("over")}
                   key={index}
-                  onClick={() => handleModelClick(index)}
+                  onPointerOver={() => {
+                    set_model_hover_index(index), console.log("over", model_hover_index);
+                  }}
+                  onPointerOut={() => {
+                    set_model_hover_index(index), console.log("out", model_hover_index);
+                  }}
+                  onClick={() => [set_selected_model_index(index)]}
+                  onPointerMissed={() => set_selected_model_index(-1)}
                   // scale={selected_model_index === index ? [1.2, 1.2, 1.2] : [1, 1, 1]}
                 >
                   <ModelComponent />
