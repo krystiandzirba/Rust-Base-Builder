@@ -24,3 +24,5 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 }
 
 useGLTF.preload("./stone_foundation_mid.glb");
+
+Model.displayName = "StoneFoundationMid";

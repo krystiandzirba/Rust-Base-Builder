@@ -5,6 +5,25 @@ import { PerspectiveCamera, CameraControls, Grid, PivotControls } from "@react-t
 import { Model as StoneFoundationMid } from "../models/StoneFoundationMid.tsx";
 import { Model as StoneFoundationHigh } from "../models/StoneFoundationHigh.tsx";
 
+interface CanvasModelsListProps {
+  models: React.FC[];
+}
+
+const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
+  return (
+    <div className="canvas_models_list">
+      <h3>active models:</h3>
+      <ul>
+        {models.map((ModelComponent, index) => (
+          <li key={index}>
+            name: {ModelComponent.displayName || ModelComponent.name} index: {index}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 interface CanvasContainerProps {
   type: string;
 }
@@ -16,33 +35,33 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
   const [selected_model_index, set_selected_model_index] = useState<number | null>(null);
 
   const object_list = [
-    { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
-    { name: "twig_foundation_mid", thumbnail: "", id: "FM0" },
-    { name: "twig_foundation_high", thumbnail: "", id: "FH0" },
+    // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
+    // { name: "twig_foundation_mid", thumbnail: "", id: "FM0" },
+    // { name: "twig_foundation_high", thumbnail: "", id: "FH0" },
 
-    { name: "wooden_foundation_low", thumbnail: "", id: "FL1" },
-    { name: "wooden_foundation_mid", thumbnail: "", id: "FM1" },
-    { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
+    // { name: "wooden_foundation_low", thumbnail: "", id: "FL1" },
+    // { name: "wooden_foundation_mid", thumbnail: "", id: "FM1" },
+    // { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
 
     { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
     //prettier-ignore
-    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationMid)],},
+    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationMid), console.log(models)],},
     //prettier-ignore
     { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => [set_selected_model_index(-1),  addModel(StoneFoundationHigh)],},
 
-    { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
-    { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
-    { name: "metal_foundation_high", thumbnail: "", id: "FH3" },
+    // { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
+    // { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
+    // { name: "metal_foundation_high", thumbnail: "", id: "FH3" },
 
-    { name: "armored_foundation_low", thumbnail: "", id: "FL4" },
-    { name: "armored_foundation_mid", thumbnail: "", id: "FM4" },
-    { name: "armored_foundation_high", thumbnail: "", id: "FH4" },
+    // { name: "armored_foundation_low", thumbnail: "", id: "FL4" },
+    // { name: "armored_foundation_mid", thumbnail: "", id: "FM4" },
+    // { name: "armored_foundation_high", thumbnail: "", id: "FH4" },
 
-    { name: "twig_wall", thumbnail: "", id: "W0" },
-    { name: "wooden_wall", thumbnail: "", id: "W1" },
-    { name: "stone_wall", thumbnail: "", id: "W2" },
-    { name: "metal_wall", thumbnail: "", id: "W3" },
-    { name: "armored_wall", thumbnail: "", id: "W4" },
+    // { name: "twig_wall", thumbnail: "", id: "W0" },
+    // { name: "wooden_wall", thumbnail: "", id: "W1" },
+    // { name: "stone_wall", thumbnail: "", id: "W2" },
+    // { name: "metal_wall", thumbnail: "", id: "W3" },
+    // { name: "armored_wall", thumbnail: "", id: "W4" },
   ];
 
   const addModel = (modelComponent: React.FC) => {
@@ -81,6 +100,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
                 onDragEnd={() => set_camera_pan(true)}
               >
                 <mesh
+                  onPointerOver={() => console.log("over")}
                   key={index}
                   onClick={() => handleModelClick(index)}
                   // scale={selected_model_index === index ? [1.2, 1.2, 1.2] : [1, 1, 1]}
@@ -107,6 +127,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
           ))}
         </div>
       </div>
+      <CanvasModelsList models={models} />
     </>
   );
 }

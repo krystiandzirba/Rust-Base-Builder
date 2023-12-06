@@ -47,3 +47,14 @@
   background-color: rgb(184, 184, 184);
   margin-bottom: 1vh;
 }
+
+.canvas_models_list {
+  width: 25vw;
+  height: 27.5vh;
+  position: absolute;
+  top: 70vh;
+  left: 73.5%;
+  z-index: 10;
+  background-color: rgb(191, 191, 191);
+  overflow-x: auto;
+}
