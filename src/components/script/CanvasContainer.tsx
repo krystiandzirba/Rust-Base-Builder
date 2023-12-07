@@ -94,7 +94,8 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
                 autoTransform={selected_model_index === index ? true : false}
                 key={index}
                 scale={3}
-                lineWidth={2}
+                lineWidth={0}
+                rotation={[0, 0, 0]}
                 depthTest={false}
                 activeAxes={[true, false, true]}
                 onDragStart={() => {
@@ -113,7 +114,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
                   }}
                   onClick={() => [set_selected_model_index(index)]}
                   onPointerMissed={() => set_selected_model_index(-1)}
-                  // scale={selected_model_index === index ? [1.2, 1.2, 1.2] : [1, 1, 1]}
+                  //  scale={selected_model_index === index ? [1.1, 1.1, 1.1] : [1, 1, 1]}
                 >
                   <ModelComponent />
                 </mesh>

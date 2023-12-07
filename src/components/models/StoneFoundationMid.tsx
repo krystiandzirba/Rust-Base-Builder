@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
@@ -16,9 +16,21 @@ type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicE
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("./stone_foundation_mid.glb") as GLTFResult;
+  const [model_hover, set_model_hover] = useState<boolean>(false);
+  const [model_click, set_model_click] = useState<boolean>(false);
+
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Cube.geometry} material={materials.Material} />
+      <mesh
+        geometry={nodes.Cube.geometry}
+        material={materials.Material}
+        onClick={() => set_model_click(!model_click)}
+        onPointerOver={() => set_model_hover(true)}
+        onPointerOut={() => set_model_hover(false)}
+        // onPointerMissed={() => set_model_click(!model_click)}
+      >
+        <meshStandardMaterial color={model_hover ? "#ffffff" : "#bbbbbb"} />
+      </mesh>
     </group>
   );
 }
