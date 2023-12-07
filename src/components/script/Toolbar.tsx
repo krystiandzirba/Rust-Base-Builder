@@ -2,38 +2,37 @@ import { useDispatch } from "react-redux";
 import { set_page_mode } from "../../Store.tsx";
 
 import { store } from "../../Store.tsx";
+import { RootState } from "../../Store";
+import { useSelector } from "react-redux";
 
-interface ToolbarProps {
-  type: string;
-  setType: (type: string) => void;
-}
-
-export default function PageMode({ type, setType }: ToolbarProps) {
+export default function PageMode() {
   const dispatch = useDispatch();
+
+  const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
 
   return (
     <>
       <div className="toolbar">
         <div
-          className={type === "overview" ? "toolbar_button active" : "toolbar_button inactive"}
+          className={page_mode === "overview" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
-            setType("overview"), dispatch(set_page_mode("overview")), console.log(store.getState());
+            dispatch(set_page_mode("overview")), console.log(store.getState());
           }}
         >
           overview
         </div>
         <div
-          className={type === "edit" ? "toolbar_button active" : "toolbar_button inactive"}
+          className={page_mode === "edit" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
-            setType("edit"), dispatch(set_page_mode("edit")), console.log(store.getState());
+            dispatch(set_page_mode("edit")), console.log(store.getState());
           }}
         >
           edit
         </div>
         <div
-          className={type === "raid" ? "toolbar_button active" : "toolbar_button inactive"}
+          className={page_mode === "raid" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
-            setType("raid"), dispatch(set_page_mode("raid")), console.log(store.getState());
+            dispatch(set_page_mode("raid")), console.log(store.getState());
           }}
         >
           raid

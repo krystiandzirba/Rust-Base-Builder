@@ -2,6 +2,9 @@ import React, { useRef, useState } from "react";
 import { Canvas, ThreeElements } from "@react-three/fiber";
 import { PerspectiveCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
 
+import { RootState } from "../../Store";
+import { useSelector } from "react-redux";
+
 import { Model as StoneFoundationMid } from "../models/StoneFoundationMid.tsx";
 import { Model as StoneFoundationHigh } from "../models/StoneFoundationHigh.tsx";
 
@@ -24,11 +27,9 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
   );
 };
 
-interface CanvasContainerProps {
-  type: string;
-}
+export default function CanvasContainer() {
+  const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
 
-export default function CanvasContainer({ type }: CanvasContainerProps) {
   const [camera_pan, set_camera_pan] = useState(true);
   const [models, setModels] = useState<React.FC[]>([]);
   const [selected_model_index, set_selected_model_index] = useState<number | null>(null);
@@ -125,7 +126,7 @@ export default function CanvasContainer({ type }: CanvasContainerProps) {
       </div>
       <div
         className={
-          type === "edit"
+          page_mode === "edit"
             ? "objects_container objects_container_displayed"
             : "objects_container objects_container_hidden"
         }

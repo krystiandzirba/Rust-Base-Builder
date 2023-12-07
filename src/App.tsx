@@ -9,12 +9,10 @@ import "./components/styles/toolbar.css";
 import "./components/styles/version.css";
 
 function App() {
-  const [type, setType] = useState<string>("overview");
-
   return (
     <div>
-      <Toolbar type={type} setType={setType} />
-      <CanvasContainer type={type} />
+      <Toolbar />
+      <CanvasContainer />
       <Version />
     </div>
   );
