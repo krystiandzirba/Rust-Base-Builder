@@ -22,13 +22,20 @@ export default App;
 
 // reset camera
 // 3d camera / 2d camera 5 sides
-// black-white theme
+// dark-light theme
 // performance settings
 // list of active canvas 3d objects (editable)
 // object move type: mouse, gizmo
 // object copy: "C"
 // object delete: "del"
-// controls menu
+// controls menu (mouse + keyboard)
 // upkeep cost
 // build cost
+// raid cost
 // different "save files / base plans"
+// xray
+// "overview" - more rendered look, more lights and so on / "edit" - more raw look
+// 2 types of building (freehand - without snapping and restrictions, with rust rules - with snapping and restrictions)
+
+//errors?
+// - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

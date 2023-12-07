@@ -45,14 +45,14 @@ export default function CanvasContainer() {
     // { name: "wooden_foundation_mid", thumbnail: "", id: "FM1" },
     // { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
 
-    { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
+    // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
     //prettier-ignore
-    { name: "stone_foundation_mid", thumbnail: "", id: "FM2", onClick: () => {
+    { name: "stone_foundation_mid", build_cost: "", upkeep_cost: "", thumbnail: "", id: "FM2", onClick: () => {
       set_selected_model_index(-1),
       addModel(StoneFoundationMid)
     }},
     //prettier-ignore
-    { name: "stone_foundation_high", thumbnail: "", id: "FH2", onClick: () => {
+    { name: "stone_foundation_high", build_cost: "", upkeep_cost: "",  thumbnail: "", id: "FH2", onClick: () => {
       set_selected_model_index(-1),
       addModel(StoneFoundationHigh)
     }},
@@ -76,6 +76,45 @@ export default function CanvasContainer() {
     setModels((prevModels) => [...prevModels, modelComponent]);
   };
 
+  function PivotDragStart(index: number) {
+    if (page_mode === "edit") {
+      set_selected_model_index(index);
+      set_camera_pan(false);
+    }
+  }
+
+  function PivotDragEnd() {
+    if (page_mode === "edit") {
+      set_camera_pan(true);
+      set_selected_model_index(-1);
+    }
+  }
+
+  function MeshPointerOver(index: number) {
+    if (page_mode === "edit") {
+      set_model_hover_index(index), console.log("over", model_hover_index);
+    }
+  }
+
+  function MeshPointerOut(index: number) {
+    if (page_mode === "edit") {
+      set_model_hover_index(index), console.log("out", model_hover_index);
+    }
+  }
+
+  function MeshOnClick(index: number) {
+    if (page_mode === "edit") {
+      set_selected_model_index(index);
+      console.log(index, "clicked");
+    }
+  }
+
+  function MeshOnMissed() {
+    if (page_mode === "edit") {
+      set_selected_model_index(-1);
+    }
+  }
+
   return (
     <>
       <div className="canvas_container">
@@ -92,30 +131,24 @@ export default function CanvasContainer() {
             return (
               <PivotControls
                 visible={selected_model_index === index ? true : false}
-                autoTransform={selected_model_index === index ? true : false}
+                // autoTransform={selected_model_index === index ? true : false}
                 key={index}
-                scale={3}
+                scale={selected_model_index === index ? 3 : 0}
                 lineWidth={0}
                 rotation={[0, 0, 0]}
                 depthTest={false}
                 activeAxes={[true, false, true]}
-                onDragStart={() => {
-                  set_selected_model_index(index);
-                  set_camera_pan(false);
-                }}
-                onDragEnd={() => set_camera_pan(true)}
+                axisColors={["orange", "yellow", "orange"]}
+                onDragStart={() => PivotDragStart(index)}
+                onDragEnd={() => PivotDragEnd()}
               >
                 <mesh
                   key={index}
-                  onPointerOver={() => {
-                    set_model_hover_index(index), console.log("over", model_hover_index);
-                  }}
-                  onPointerOut={() => {
-                    set_model_hover_index(index), console.log("out", model_hover_index);
-                  }}
-                  onClick={() => [set_selected_model_index(index)]}
-                  onPointerMissed={() => set_selected_model_index(-1)}
-                  //  scale={selected_model_index === index ? [1.1, 1.1, 1.1] : [1, 1, 1]}
+                  onPointerOver={() => MeshPointerOver(index)}
+                  onPointerOut={() => MeshPointerOut(index)}
+                  onClick={() => MeshOnClick(index)}
+                  onPointerMissed={() => MeshOnMissed()}
+                  // scale={selected_model_index === index ? [1.1, 1.1, 1.1] : [1, 1, 1]}
                 >
                   <ModelComponent />
                 </mesh>
@@ -133,7 +166,7 @@ export default function CanvasContainer() {
       >
         <div className="object_list">
           {object_list.map((item) => (
-            <button key={item.id} className="object" onClick={() => item.onClick && item.onClick()}>
+            <button key={item.id} className="object" onClick={item.onClick ?? (() => {})}>
               {item.name}
             </button>
           ))}
