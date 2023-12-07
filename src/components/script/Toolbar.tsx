@@ -1,43 +1,44 @@
-//import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { set_page_mode } from "../../Store.tsx";
+
+import { store } from "../../Store.tsx";
 
 interface ToolbarProps {
   type: string;
   setType: (type: string) => void;
 }
 
-export default function Toolbar({ type, setType }: ToolbarProps) {
+export default function PageMode({ type, setType }: ToolbarProps) {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="toolbar">
         <div
           className={type === "overview" ? "toolbar_button active" : "toolbar_button inactive"}
-          onClick={() => setType("overview")}
+          onClick={() => {
+            setType("overview"), dispatch(set_page_mode("overview")), console.log(store.getState());
+          }}
         >
           overview
         </div>
         <div
           className={type === "edit" ? "toolbar_button active" : "toolbar_button inactive"}
-          onClick={() => setType("edit")}
+          onClick={() => {
+            setType("edit"), dispatch(set_page_mode("edit")), console.log(store.getState());
+          }}
         >
           edit
         </div>
         <div
           className={type === "raid" ? "toolbar_button active" : "toolbar_button inactive"}
-          onClick={() => setType("raid")}
+          onClick={() => {
+            setType("raid"), dispatch(set_page_mode("raid")), console.log(store.getState());
+          }}
         >
           raid
         </div>
       </div>
     </>
   );
-}
-
-function randomIdGenerator() {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let random_id = "";
-  for (let i = 0; i < 10; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    random_id += characters[randomIndex];
-  }
-  return random_id;
 }

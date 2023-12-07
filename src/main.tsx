@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 
-import store from "./Store.tsx";
+import { store } from "./Store.tsx";
 import { Provider } from "react-redux";
 
 console.log(store.getState());
