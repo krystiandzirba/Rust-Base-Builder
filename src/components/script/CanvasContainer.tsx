@@ -32,7 +32,7 @@ export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
   const transform_model_axis = useSelector((state: RootState) => state.TransformAxis.transform_model_axis);
 
-  const [camera_pan, set_camera_pan] = useState(true);
+  const [camera_rotation, set_camera_rotation] = useState(true);
   const [models, setModels] = useState<React.FC[]>([]);
   const [selected_model_index, set_selected_model_index] = useState<number | null>(null);
 
@@ -90,13 +90,13 @@ export default function CanvasContainer() {
   function PivotDragStart(index: number) {
     if (page_mode === "edit") {
       set_selected_model_index(index);
-      set_camera_pan(false);
+      set_camera_rotation(false);
     }
   }
 
   function PivotDragEnd() {
     if (page_mode === "edit") {
-      set_camera_pan(true);
+      set_camera_rotation(true);
       set_selected_model_index(-1);
     }
   }
@@ -134,7 +134,7 @@ export default function CanvasContainer() {
           <Grid cellSize={3} infiniteGrid={true} fadeStrength={5} sectionColor={"white"} />
           <PerspectiveCamera makeDefault fov={90} position={[0, 4, 4]} />
 
-          {!camera_pan ? null : <CameraControls maxPolarAngle={Math.PI / 2.1} />}
+          {!camera_rotation ? null : <CameraControls maxPolarAngle={Math.PI / 2.1} />}
 
           <ambientLight />
           <directionalLight />

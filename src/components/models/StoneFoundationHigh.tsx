@@ -24,23 +24,49 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   const { nodes, materials } = useGLTF("./stone_foundation_high.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
+  const [model_selected, set_model_selected] = useState<boolean>(false);
 
   const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
+
+  function ModelOnClick() {
+    dispatch(set_transform_model_axis("XZ"));
+    set_model_selected(true);
+  }
+
+  function ModelMissedClick() {
+    set_model_selected(false);
+  }
+
+  function ModelOnPointerOver() {
+    set_model_hover(true);
+  }
+
+  function ModelOnPointerOut() {
+    set_model_hover(false);
+  }
+
+  function ModelColorChange(): THREE.MeshStandardMaterialParameters {
+    const base_color = page_mode === "edit" && model_hover ? "lightblue" : "#bbbbbb";
+    const opacity = page_mode === "edit" && model_hover ? 0.8 : 1;
+
+    return {
+      transparent: true,
+      opacity: model_selected ? 1 : opacity,
+      color: model_selected ? "#3672ff" : base_color,
+    };
+  }
 
   return (
     <group {...props} dispose={null}>
       <mesh
         geometry={nodes.Cube.geometry}
         material={materials.Material}
-        onClick={() => dispatch(set_transform_model_axis("XZ"))}
-        onPointerOver={() => set_model_hover(true)}
-        onPointerOut={() => set_model_hover(false)}
+        onClick={() => ModelOnClick()}
+        onPointerOver={() => ModelOnPointerOver()}
+        onPointerOut={() => ModelOnPointerOut()}
+        onPointerMissed={() => ModelMissedClick()}
       >
-        <meshStandardMaterial
-          transparent
-          opacity={page_mode === "edit" && model_hover ? 0.8 : 1}
-          color={page_mode === "edit" && model_hover ? "lightblue" : "#bbbbbb"}
-        />
+        <meshStandardMaterial {...ModelColorChange()} />
       </mesh>
     </group>
   );
