@@ -22,7 +22,7 @@ type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicE
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
 
-  const { nodes, materials } = useGLTF("./stone_foundation_mid.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./stone_wall_high.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
 
   const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
@@ -32,7 +32,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Cube.geometry}
         material={materials.Material}
-        onClick={() => dispatch(set_transform_model_axis("XZ"))}
+        onClick={() => dispatch(set_transform_model_axis("XYZ"))}
         onPointerOver={() => set_model_hover(true)}
         onPointerOut={() => set_model_hover(false)}
       >
@@ -46,6 +46,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./stone_foundation_mid.glb");
+useGLTF.preload("./stone_wall_high.glb");
 
-Model.displayName = "StoneFoundationMid";
+Model.displayName = "StoneWallHigh";

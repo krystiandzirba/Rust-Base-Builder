@@ -39,3 +39,5 @@ export default App;
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
+
+// 0.23.0 / Added temporary stone_wall_high_glb / different pivot axis controls (ZYX / ZX ) depending on the model clicked

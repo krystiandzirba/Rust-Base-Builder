@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 import { Model as StoneFoundationMid } from "../models/StoneFoundationMid.tsx";
 import { Model as StoneFoundationHigh } from "../models/StoneFoundationHigh.tsx";
+import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 interface CanvasModelsListProps {
   models: React.FC[];
@@ -29,6 +30,7 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 
 export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
+  const transform_model_axis = useSelector((state: RootState) => state.TransformAxis.transform_model_axis);
 
   const [camera_pan, set_camera_pan] = useState(true);
   const [models, setModels] = useState<React.FC[]>([]);
@@ -70,6 +72,15 @@ export default function CanvasContainer() {
     // { name: "stone_wall", thumbnail: "", id: "W2" },
     // { name: "metal_wall", thumbnail: "", id: "W3" },
     // { name: "armored_wall", thumbnail: "", id: "W4" },
+
+    {
+      name: "stone_wall_high",
+      thumbnail: "",
+      id: "WH2",
+      onClick: () => {
+        set_selected_model_index(-1), addModel(StoneWallHigh);
+      },
+    },
   ];
 
   const addModel = (modelComponent: React.FC) => {
@@ -104,6 +115,7 @@ export default function CanvasContainer() {
 
   function MeshOnClick(index: number) {
     if (page_mode === "edit") {
+      console.log(transform_model_axis, "eeeeeee");
       set_selected_model_index(index);
       console.log(index, "clicked");
     }
@@ -137,7 +149,7 @@ export default function CanvasContainer() {
                 lineWidth={0}
                 rotation={[0, 0, 0]}
                 depthTest={false}
-                activeAxes={[true, false, true]}
+                activeAxes={transform_model_axis === "XYZ" ? [true, true, true] : [true, false, true]}
                 axisColors={["orange", "yellow", "orange"]}
                 onDragStart={() => PivotDragStart(index)}
                 onDragEnd={() => PivotDragEnd()}

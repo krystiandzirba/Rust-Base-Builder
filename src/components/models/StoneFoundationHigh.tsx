@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
+import { useDispatch } from "react-redux";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
+import { set_transform_model_axis } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,9 +20,10 @@ type GLTFResult = GLTF & {
 type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>>;
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
+  const dispatch = useDispatch();
+
   const { nodes, materials } = useGLTF("./stone_foundation_high.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
-  // const [model_click, set_model_click] = useState<boolean>(false);
 
   const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
 
@@ -29,10 +32,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Cube.geometry}
         material={materials.Material}
-        //  onClick={() => set_model_click(!model_click)}
+        onClick={() => dispatch(set_transform_model_axis("XZ"))}
         onPointerOver={() => set_model_hover(true)}
         onPointerOut={() => set_model_hover(false)}
-        // onPointerMissed={() => set_model_click(!model_click)}
       >
         <meshStandardMaterial
           transparent
