@@ -5,8 +5,8 @@ import { PerspectiveCamera, CameraControls, Grid, PivotControls } from "@react-t
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 
-import { Model as StoneFoundationMid } from "../models/StoneFoundationMid.tsx";
-import { Model as StoneFoundationHigh } from "../models/StoneFoundationHigh.tsx";
+import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
+import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 interface CanvasModelsListProps {
@@ -38,12 +38,12 @@ export default function CanvasContainer() {
   const transform_model_axis = useSelector((state: RootState) => state.TransformAxis.transform_model_axis);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
+
   const [models, setModels] = useState<ModelType[]>([]);
-  const [selected_model_index, set_selected_model_index] = useState<string>("empty");
+  const [selected_model_id, set_selected_model_id] = useState<string>("empty");
+  const [model_hover_id, set_model_hover_id] = useState<string>("empty");
 
-  const [model_hover_index, set_model_hover_index] = useState<string>("empty");
-
-  const [object_id, set_object_id] = useState<string>(randomIdGenerator());
+  const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
 
   const object_list = [
     // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
@@ -55,19 +55,32 @@ export default function CanvasContainer() {
     // { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
 
     // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
-    //prettier-ignore
-    { name: "stone_foundation_mid", build_cost: "", upkeep_cost: "", thumbnail: "", id: "FM2", onClick: () => {
-      set_selected_model_index("empty"),
-      set_object_id(randomIdGenerator()),
-      addModel(StoneFoundationMid, object_id)
-    }},
-    //prettier-ignore
-    { name: "stone_foundation_high", build_cost: "", upkeep_cost: "",  thumbnail: "", id: "FH2", onClick: () => {
-      
-      set_selected_model_index("empty"),
-      set_object_id(randomIdGenerator()),
-      addModel(StoneFoundationHigh, object_id)
-    }},
+
+    {
+      name: "stone_foundation_square_mid",
+      build_cost: "300STONE",
+      upkeep_cost: "30STONE",
+      thumbnail: "",
+      id: "FM2",
+      onClick: () => {
+        set_selected_model_id("empty"),
+          set_generated_id(randomIdGenerator()),
+          addModel(StoneFoundationSquareMid, generated_id);
+      },
+    },
+
+    {
+      name: "stone_foundation_square_high",
+      build_cost: "300STONE",
+      upkeep_cost: "30STONE",
+      thumbnail: "",
+      id: "FH2",
+      onClick: () => {
+        set_selected_model_id("empty"),
+          set_generated_id(randomIdGenerator()),
+          addModel(StoneFoundationSquareHigh, generated_id);
+      },
+    },
 
     // { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
     // { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
@@ -84,35 +97,16 @@ export default function CanvasContainer() {
     // { name: "armored_wall", thumbnail: "", id: "W4" },
 
     {
-      name: "test",
-      onClick: () => {
-        console.log(models);
-      },
-    },
-
-    {
-      name: "del",
-      onClick: () => {
-        removeModel("mwB1CnxK8w");
-      },
-    },
-
-    {
       name: "stone_wall_high",
+      build_cost: "300STONE",
+      upkeep_cost: "30STONE",
       thumbnail: "",
       id: "WH2",
       onClick: () => {
-        const object_id = randomIdGenerator();
-        set_selected_model_index("empty"), set_object_id(randomIdGenerator()), addModel(StoneWallHigh, object_id);
+        set_selected_model_id("empty"), set_generated_id(randomIdGenerator()), addModel(StoneWallHigh, generated_id);
       },
     },
   ];
-
-  const addModel = (modelComponent: React.FC, id: string) => {
-    setModels((prevModels) => [...prevModels, { id, component: modelComponent }]);
-  };
-
-  // let random_id;
 
   function randomIdGenerator() {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -124,17 +118,21 @@ export default function CanvasContainer() {
     return random_id;
   }
 
-  const removeModel = (id: string) => {
+  const addModel = (modelComponent: React.FC, id: string) => {
+    setModels((prevModels) => [...prevModels, { id, component: modelComponent }]);
+  };
+
+  const RemoveSelectedModel = (id: string) => {
     setModels((prevModels) => prevModels.filter((model) => model.id !== id));
   };
 
-  const removeModels = () => {
+  const RemoveAllModels = () => {
     setModels([]);
   };
 
   function PivotDragStart(index: string) {
     if (page_mode === "edit") {
-      set_selected_model_index(index);
+      set_selected_model_id(index);
       set_camera_rotation(false);
     }
   }
@@ -142,34 +140,35 @@ export default function CanvasContainer() {
   function PivotDragEnd() {
     if (page_mode === "edit") {
       set_camera_rotation(true);
-      set_selected_model_index("empty");
+      set_selected_model_id("empty");
     }
   }
 
-  const MeshPointerOver = (index: string) => {
+  const MeshPointerOver = (selected_object_id: string) => {
     if (page_mode === "edit") {
-      set_model_hover_index(index);
-      console.log("over", model_hover_index);
+      set_model_hover_id(selected_object_id);
+      console.log("meshover", model_hover_id);
     }
   };
 
-  const MeshPointerOut = (index: string) => {
+  const MeshPointerOut = (selected_object_id: string) => {
     if (page_mode === "edit") {
-      set_model_hover_index(index);
-      console.log("out", model_hover_index);
+      set_model_hover_id(selected_object_id);
+      console.log("meshout", model_hover_id);
     }
   };
 
   function MeshOnClick(selected_object_id: string) {
     if (page_mode === "edit") {
-      set_selected_model_index(selected_object_id);
-      console.log(selected_object_id, "clicked");
+      set_selected_model_id(selected_object_id);
+      console.log("meshclick", selected_object_id);
     }
   }
 
-  function MeshOnMissed() {
+  function MeshOnMissed(selected_object_id: string) {
     if (page_mode === "edit") {
-      set_selected_model_index("empty");
+      set_selected_model_id(selected_object_id);
+      console.log("meshmiss", selected_object_id);
     }
   }
 
@@ -189,9 +188,9 @@ export default function CanvasContainer() {
             const { id, component: ModelComponent } = model;
             return (
               <PivotControls
-                visible={selected_model_index === id ? true : false}
+                visible={selected_model_id === id ? true : false}
                 key={id}
-                scale={selected_model_index === id ? 3 : 0}
+                scale={selected_model_id === id ? 3 : 0}
                 lineWidth={0}
                 rotation={[0, 0, 0]}
                 depthTest={false}
@@ -205,7 +204,7 @@ export default function CanvasContainer() {
                   onPointerOver={() => MeshPointerOver(id)}
                   onPointerOut={() => MeshPointerOut(id)}
                   onClick={() => MeshOnClick(id)}
-                  onPointerMissed={() => MeshOnMissed()}
+                  onPointerMissed={() => MeshOnMissed("empty")}
                 >
                   <ModelComponent />
                 </mesh>
@@ -230,12 +229,26 @@ export default function CanvasContainer() {
         </div>
       </div>
       <CanvasModelsList models={models} />
-      <button className="remove_selected_model" onClick={() => removeModel(model_hover_index)}>
-        remove selected model
-      </button>
-      <button className="remove_all_models" onClick={() => removeModels()}>
-        remove all models
-      </button>
+      {page_mode === "edit" && (
+        <button
+          className="remove_selected_model"
+          onClick={() => {
+            RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+          }}
+        >
+          remove selected model
+        </button>
+      )}
+      {page_mode === "edit" && (
+        <button
+          className="remove_all_models"
+          onClick={() => {
+            RemoveAllModels(), set_selected_model_id("empty");
+          }}
+        >
+          remove all models
+        </button>
+      )}
     </>
   );
 }

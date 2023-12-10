@@ -4,7 +4,7 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import { useDispatch } from "react-redux";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
 import { set_transform_model_axis } from "../../Store.tsx";
 
@@ -22,7 +22,7 @@ type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicE
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
 
-  const { nodes, materials } = useGLTF("./stone_foundation_high.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./stone_foundation_square_high.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
 
@@ -72,6 +72,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./stone_foundation_high.glb");
+useGLTF.preload("./stone_foundation_square_high.glb");
 
-Model.displayName = "StoneFoundationHigh";
+Model.displayName = "StoneFoundationSquareHigh";
