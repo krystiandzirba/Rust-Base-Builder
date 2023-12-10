@@ -10,17 +10,22 @@ import { Model as StoneFoundationHigh } from "../models/StoneFoundationHigh.tsx"
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 interface CanvasModelsListProps {
-  models: React.FC[];
+  models: ModelType[];
 }
+
+type ModelType = {
+  id: string;
+  component: React.FC;
+};
 
 const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
   return (
     <div className="canvas_models_list">
       <h3>active models:</h3>
       <ul>
-        {models.map((ModelComponent, index) => (
-          <li key={index}>
-            name: {ModelComponent.displayName || ModelComponent.name} index: {index}
+        {models.map(({ id, component: ModelComponent }, index) => (
+          <li key={id}>
+            name: {ModelComponent.displayName} id: {id} index: {index}
           </li>
         ))}
       </ul>
@@ -33,10 +38,12 @@ export default function CanvasContainer() {
   const transform_model_axis = useSelector((state: RootState) => state.TransformAxis.transform_model_axis);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
-  const [models, setModels] = useState<React.FC[]>([]);
-  const [selected_model_index, set_selected_model_index] = useState<number | null>(null);
+  const [models, setModels] = useState<ModelType[]>([]);
+  const [selected_model_index, set_selected_model_index] = useState<string>("empty");
 
-  const [model_hover_index, set_model_hover_index] = useState<number>(-1);
+  const [model_hover_index, set_model_hover_index] = useState<string>("empty");
+
+  const [object_id, set_object_id] = useState<string>(randomIdGenerator());
 
   const object_list = [
     // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
@@ -50,13 +57,16 @@ export default function CanvasContainer() {
     // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
     //prettier-ignore
     { name: "stone_foundation_mid", build_cost: "", upkeep_cost: "", thumbnail: "", id: "FM2", onClick: () => {
-      set_selected_model_index(-1),
-      addModel(StoneFoundationMid)
+      set_selected_model_index("empty"),
+      set_object_id(randomIdGenerator()),
+      addModel(StoneFoundationMid, object_id)
     }},
     //prettier-ignore
     { name: "stone_foundation_high", build_cost: "", upkeep_cost: "",  thumbnail: "", id: "FH2", onClick: () => {
-      set_selected_model_index(-1),
-      addModel(StoneFoundationHigh)
+      
+      set_selected_model_index("empty"),
+      set_object_id(randomIdGenerator()),
+      addModel(StoneFoundationHigh, object_id)
     }},
 
     // { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
@@ -74,20 +84,55 @@ export default function CanvasContainer() {
     // { name: "armored_wall", thumbnail: "", id: "W4" },
 
     {
+      name: "test",
+      onClick: () => {
+        console.log(models);
+      },
+    },
+
+    {
+      name: "del",
+      onClick: () => {
+        removeModel("mwB1CnxK8w");
+      },
+    },
+
+    {
       name: "stone_wall_high",
       thumbnail: "",
       id: "WH2",
       onClick: () => {
-        set_selected_model_index(-1), addModel(StoneWallHigh);
+        const object_id = randomIdGenerator();
+        set_selected_model_index("empty"), set_object_id(randomIdGenerator()), addModel(StoneWallHigh, object_id);
       },
     },
   ];
 
-  const addModel = (modelComponent: React.FC) => {
-    setModels((prevModels) => [...prevModels, modelComponent]);
+  const addModel = (modelComponent: React.FC, id: string) => {
+    setModels((prevModels) => [...prevModels, { id, component: modelComponent }]);
   };
 
-  function PivotDragStart(index: number) {
+  // let random_id;
+
+  function randomIdGenerator() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let random_id = "";
+    for (let i = 0; i < 10; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      random_id += characters[randomIndex];
+    }
+    return random_id;
+  }
+
+  const removeModel = (id: string) => {
+    setModels((prevModels) => prevModels.filter((model) => model.id !== id));
+  };
+
+  const removeModels = () => {
+    setModels([]);
+  };
+
+  function PivotDragStart(index: string) {
     if (page_mode === "edit") {
       set_selected_model_index(index);
       set_camera_rotation(false);
@@ -97,33 +142,34 @@ export default function CanvasContainer() {
   function PivotDragEnd() {
     if (page_mode === "edit") {
       set_camera_rotation(true);
-      set_selected_model_index(-1);
+      set_selected_model_index("empty");
     }
   }
 
-  function MeshPointerOver(index: number) {
+  const MeshPointerOver = (index: string) => {
     if (page_mode === "edit") {
-      set_model_hover_index(index), console.log("over", model_hover_index);
+      set_model_hover_index(index);
+      console.log("over", model_hover_index);
     }
-  }
+  };
 
-  function MeshPointerOut(index: number) {
+  const MeshPointerOut = (index: string) => {
     if (page_mode === "edit") {
-      set_model_hover_index(index), console.log("out", model_hover_index);
+      set_model_hover_index(index);
+      console.log("out", model_hover_index);
     }
-  }
+  };
 
-  function MeshOnClick(index: number) {
+  function MeshOnClick(selected_object_id: string) {
     if (page_mode === "edit") {
-      console.log(transform_model_axis, "eeeeeee");
-      set_selected_model_index(index);
-      console.log(index, "clicked");
+      set_selected_model_index(selected_object_id);
+      console.log(selected_object_id, "clicked");
     }
   }
 
   function MeshOnMissed() {
     if (page_mode === "edit") {
-      set_selected_model_index(-1);
+      set_selected_model_index("empty");
     }
   }
 
@@ -139,28 +185,27 @@ export default function CanvasContainer() {
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
-          {models.map((ModelComponent, index) => {
+          {models.map((model, index) => {
+            const { id, component: ModelComponent } = model;
             return (
               <PivotControls
-                visible={selected_model_index === index ? true : false}
-                // autoTransform={selected_model_index === index ? true : false}
-                key={index}
-                scale={selected_model_index === index ? 3 : 0}
+                visible={selected_model_index === id ? true : false}
+                key={id}
+                scale={selected_model_index === id ? 3 : 0}
                 lineWidth={0}
                 rotation={[0, 0, 0]}
                 depthTest={false}
                 activeAxes={transform_model_axis === "XYZ" ? [true, true, true] : [true, false, true]}
                 axisColors={["orange", "yellow", "orange"]}
-                onDragStart={() => PivotDragStart(index)}
+                onDragStart={() => PivotDragStart(id)}
                 onDragEnd={() => PivotDragEnd()}
               >
                 <mesh
-                  key={index}
-                  onPointerOver={() => MeshPointerOver(index)}
-                  onPointerOut={() => MeshPointerOut(index)}
-                  onClick={() => MeshOnClick(index)}
+                  key={id}
+                  onPointerOver={() => MeshPointerOver(id)}
+                  onPointerOut={() => MeshPointerOut(id)}
+                  onClick={() => MeshOnClick(id)}
                   onPointerMissed={() => MeshOnMissed()}
-                  // scale={selected_model_index === index ? [1.1, 1.1, 1.1] : [1, 1, 1]}
                 >
                   <ModelComponent />
                 </mesh>
@@ -185,6 +230,9 @@ export default function CanvasContainer() {
         </div>
       </div>
       <CanvasModelsList models={models} />
+      <button className="remove_selected_model" onClick={() => removeModel(model_hover_index)}>
+        remove selected model
+      </button>
     </>
   );
 }
