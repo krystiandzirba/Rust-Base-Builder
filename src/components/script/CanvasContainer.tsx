@@ -185,7 +185,7 @@ export default function CanvasContainer() {
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
-          {models.map((model, index) => {
+          {models.map((model) => {
             const { id, component: ModelComponent } = model;
             return (
               <PivotControls
@@ -222,8 +222,8 @@ export default function CanvasContainer() {
         }
       >
         <div className="object_list">
-          {object_list.map((item) => (
-            <button key={item.id} className="object" onClick={item.onClick ?? (() => {})}>
+          {object_list.map((item, index) => (
+            <button key={index} className="object" onClick={item.onClick ?? (() => {})}>
               {item.name}
             </button>
           ))}
@@ -232,6 +232,9 @@ export default function CanvasContainer() {
       <CanvasModelsList models={models} />
       <button className="remove_selected_model" onClick={() => removeModel(model_hover_index)}>
         remove selected model
+      </button>
+      <button className="remove_all_models" onClick={() => removeModels()}>
+        remove all models
       </button>
     </>
   );

@@ -69,3 +69,14 @@
   background-color: rgb(191, 191, 191);
   overflow-x: auto;
 }
+
+.remove_all_models {
+  width: 7.5vw;
+  height: 5vh;
+  position: absolute;
+  top: 11.5vh;
+  left: 56.5%;
+  z-index: 10;
+  background-color: rgb(191, 191, 191);
+  overflow-x: auto;
+}
