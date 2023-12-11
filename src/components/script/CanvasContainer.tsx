@@ -34,8 +34,8 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 };
 
 export default function CanvasContainer() {
-  const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
-  const transform_model_axis = useSelector((state: RootState) => state.TransformAxis.transform_model_axis);
+  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+  const transform_model_axis = useSelector((state: RootState) => state.transformAxis.transform_model_axis);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
 
@@ -228,7 +228,7 @@ export default function CanvasContainer() {
           ))}
         </div>
       </div>
-      <CanvasModelsList models={models} />
+      {page_mode === "edit" && <CanvasModelsList models={models} />}
       {page_mode === "edit" && (
         <button
           className="remove_selected_model"

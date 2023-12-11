@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 export default function PageMode() {
   const dispatch = useDispatch();
 
-  const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
+  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
 
   return (
     <>

@@ -2,11 +2,13 @@ import { useState } from "react";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import Toolbar from "./components/script/Toolbar.tsx";
 import Version from "./components/script/Version.tsx";
+import CameraType from "./components/script/CameraSwitch.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/canvas_container.css";
 import "./components/styles/toolbar.css";
 import "./components/styles/version.css";
+import "./components/styles/camera_switch.css";
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Toolbar />
       <CanvasContainer />
       <Version />
+      <CameraType />
     </div>
   );
 }
@@ -25,7 +28,7 @@ export default App;
 // dark-light theme
 // performance settings
 // list of active canvas 3d objects (editable)
-// object move type: mouse, gizmo
+// object move type: mouse-follow, gizmo
 // object copy: "C"
 // object delete: "del"
 // controls menu (mouse + keyboard)

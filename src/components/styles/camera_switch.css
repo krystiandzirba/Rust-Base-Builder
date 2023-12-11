@@ -1,0 +1,10 @@
+.camera_switch_button {
+  width: 10vw;
+  height: 10vh;
+  position: absolute;
+  top: 5vh;
+  left: 87.5%;
+  z-index: 10;
+  background-color: rgb(191, 191, 191);
+  text-align: center;
+}
