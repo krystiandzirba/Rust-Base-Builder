@@ -26,7 +26,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
 
-  const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
+  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
 
   function ModelOnClick() {
     dispatch(set_transform_model_axis("XYZ"));
