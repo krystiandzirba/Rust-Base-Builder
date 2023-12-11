@@ -37,9 +37,10 @@ export default App;
 // raid cost
 // different "save files / base plans"
 // xray
-// "overview" - more rendered look, more lights and so on / "edit" - more raw look
+// "overview" - more rendered look textured objects, more lights and so on / "edit" - more raw look, objects with simple colors
 // 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
 // toggle system stats ( fps, mem, cpu)
+// adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Canvas, ThreeElements } from "@react-three/fiber";
-import { PerspectiveCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
+import { PerspectiveCamera, OrthographicCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
 
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
@@ -36,6 +36,7 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const transform_model_axis = useSelector((state: RootState) => state.transformAxis.transform_model_axis);
+  const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
 
@@ -177,9 +178,17 @@ export default function CanvasContainer() {
       <div className="canvas_container">
         <Canvas>
           <Grid cellSize={3} infiniteGrid={true} fadeStrength={5} sectionColor={"white"} />
-          <PerspectiveCamera makeDefault fov={90} position={[0, 4, 4]} />
+          {camera_type === "3D_PerspectiveCamera" && <PerspectiveCamera makeDefault fov={90} position={[0, 4, 4]} />}
+          {camera_type === "2D_OrtographicCamera" && (
+            <OrthographicCamera makeDefault zoom={25} position={[45, 0, 0]} near={0.1} far={100} />
+          )}
 
-          {!camera_rotation ? null : <CameraControls maxPolarAngle={Math.PI / 2.1} />}
+          {!camera_rotation ? null : (
+            <CameraControls
+              maxPolarAngle={camera_type === "3D_PerspectiveCamera" ? Math.PI / 2.1 : 360}
+              enabled={camera_type === "3D_PerspectiveCamera" ? true : false}
+            />
+          )}
 
           <ambientLight />
           <directionalLight />
