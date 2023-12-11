@@ -29,7 +29,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const page_mode = useSelector((state: RootState) => state.PageMode.page_mode);
 
   function ModelOnClick() {
-    dispatch(set_transform_model_axis("XZ"));
+    dispatch(set_transform_model_axis("XYZ"));
     set_model_selected(true);
   }
 
