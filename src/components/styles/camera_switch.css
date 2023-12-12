@@ -12,6 +12,7 @@
   font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  transition: transform 0.1s;
 }
 
 .camera_text {
@@ -19,7 +20,7 @@
 }
 
 .camera_switch_button:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .camera_button_switch {
@@ -29,10 +30,11 @@
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  transition: transform 0.1s;
 }
 
 .camera_button_switch:hover {
-  transform: scale(1.3);
+  transform: scale(1.1);
 }
 
 .switch_top {

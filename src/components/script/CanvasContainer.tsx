@@ -37,6 +37,8 @@ export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const transform_model_axis = useSelector((state: RootState) => state.transformAxis.transform_model_axis);
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
+  // prettier-ignore
+  const ortographic_camera_position = useSelector((state: RootState) => state.ortographicCameraPosition.ortographic_camera_position);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
 
@@ -180,7 +182,14 @@ export default function CanvasContainer() {
           <Grid cellSize={3} infiniteGrid={true} fadeStrength={5} sectionColor={"white"} />
           {camera_type === "3D_PerspectiveCamera" && <PerspectiveCamera makeDefault fov={90} position={[0, 4, 4]} />}
           {camera_type === "2D_OrtographicCamera" && (
-            <OrthographicCamera makeDefault zoom={25} position={[45, 0, 0]} near={0.1} far={100} />
+            <OrthographicCamera
+              key={ortographic_camera_position.join(",")}
+              makeDefault
+              zoom={25}
+              position={ortographic_camera_position as [number, number, number]}
+              near={0.1}
+              far={100}
+            />
           )}
 
           {!camera_rotation ? null : (
