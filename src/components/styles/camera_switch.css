@@ -56,3 +56,34 @@
   top: 16.25vh;
   left: 92.25vw;
 }
+
+.perspective_camera_reset {
+  width: 3.5vw;
+  height: 5.75vh;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  transition: transform 0.1s;
+  top: 2vh;
+  left: 96vw;
+}
+
+.perspective_camera_reset:hover {
+  transform: scale(1.1);
+}
+
+.camera_reset_text {
+  font-size: 0.65vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  padding-top: 0.75vh;
+}
+
+.reset_text_white {
+  color: #bbbbbb;
+}
+
+.reset_text_black {
+  color: rgba(255, 255, 255, 0.1);
+}

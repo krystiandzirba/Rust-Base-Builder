@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Canvas, ThreeElements } from "@react-three/fiber";
+import React, { useRef, useState, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
 import { PerspectiveCamera, OrthographicCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
 
 import { RootState } from "../../Store";
@@ -39,6 +39,9 @@ export default function CanvasContainer() {
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
   // prettier-ignore
   const ortographic_camera_position = useSelector((state: RootState) => state.ortographicCameraPosition.ortographic_camera_position);
+  // prettier-ignore
+  const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
+  const cameraControlsRef = useRef<CameraControls>(null);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
 
@@ -109,6 +112,17 @@ export default function CanvasContainer() {
         set_selected_model_id("empty"), set_generated_id(randomIdGenerator()), addModel(StoneWallHigh, generated_id);
       },
     },
+
+    {
+      name: "test",
+
+      onClick: () => {
+        {
+          PerspectiveCameraReset();
+          console.log(perspective_camera_reset);
+        }
+      },
+    },
   ];
 
   function randomIdGenerator() {
@@ -175,12 +189,22 @@ export default function CanvasContainer() {
     }
   }
 
+  const PerspectiveCameraReset = () => {
+    if (cameraControlsRef.current) {
+      cameraControlsRef.current.reset(true);
+    }
+  };
+
+  useEffect(() => {
+    PerspectiveCameraReset();
+  }, [perspective_camera_reset]);
+
   return (
     <>
       <div className="canvas_container">
         <Canvas>
           <Grid cellSize={3} infiniteGrid={true} fadeStrength={5} sectionColor={"white"} />
-          {camera_type === "3D_PerspectiveCamera" && <PerspectiveCamera makeDefault fov={90} position={[0, 4, 4]} />}
+          {camera_type === "3D_PerspectiveCamera" && <PerspectiveCamera makeDefault fov={90} position={[0, 15, 15]} />}
           {camera_type === "2D_OrtographicCamera" && (
             <OrthographicCamera
               key={ortographic_camera_position.join(",")}
@@ -194,8 +218,9 @@ export default function CanvasContainer() {
 
           {!camera_rotation ? null : (
             <CameraControls
+              ref={cameraControlsRef}
               maxPolarAngle={camera_type === "3D_PerspectiveCamera" ? Math.PI / 2.1 : 360}
-              enabled={camera_type === "3D_PerspectiveCamera" ? true : true}
+              enabled={camera_type === "3D_PerspectiveCamera" ? true : false}
             />
           )}
 

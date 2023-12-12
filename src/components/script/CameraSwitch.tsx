@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { set_camera_type } from "../../Store.tsx";
 import { set_ortographic_camera_position } from "../../Store.tsx";
+import { set_perspective_camera_reset } from "../../Store.tsx";
 
 import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
@@ -8,12 +9,21 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faUpLong, faRightLong, faDownLong, faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCamera,
+  faUpLong,
+  faRightLong,
+  faDownLong,
+  faLeftLong,
+  faCameraRotate,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function CameraType() {
   const dispatch = useDispatch();
 
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
+  //prettier-ignore
+  const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
   const [camera_switch_text, set_camera_switch_text] = useState<string>("3D 360°");
   const [camera_button_hover, set_camera_button_hover] = useState<boolean>(false);
 
@@ -21,13 +31,26 @@ export default function CameraType() {
   const [switch_button_right_hover, set_switch_button_right_hover] = useState<boolean>(false);
   const [switch_button_down_hover, set_switch_button_down_hover] = useState<boolean>(false);
   const [switch_button_left_hover, set_switch_button_left_hover] = useState<boolean>(false);
+  const [perspective_camera_reset_hover, set_perspective_camera_reset_hover] = useState<boolean>(false);
 
-  function ButtonColorChange(button: boolean) {
+  function CameraButtonsColorChange(button: boolean) {
     if (camera_type === "2D_OrtographicCamera") {
       return {
         color: button ? "#d4d4d4" : "#a8a8a8",
       };
     } else if (camera_type === "3D_PerspectiveCamera") {
+      return {
+        color: "rgba(255, 255, 255, 0.1)",
+      };
+    }
+  }
+
+  function CameraResetColorChange(button: boolean) {
+    if (camera_type === "3D_PerspectiveCamera") {
+      return {
+        color: button ? "#d4d4d4" : "#a8a8a8",
+      };
+    } else if (camera_type === "2D_OrtographicCamera") {
       return {
         color: "rgba(255, 255, 255, 0.1)",
       };
@@ -49,7 +72,7 @@ export default function CameraType() {
           ortographic_camera_position[1] === 0 &&
           ortographic_camera_position[2] === 45) ||
         (ortographic_camera_position[0] === 0 &&
-          ortographic_camera_position[1] === 45 &&
+          ortographic_camera_position[1] === -45 &&
           ortographic_camera_position[2] === 0)
       ) {
         const newPosition = [-45, 0, 0];
@@ -141,6 +164,13 @@ export default function CameraType() {
     }
   }
 
+  function ResetPerspectiveCamera() {
+    if (camera_type === "3D_PerspectiveCamera") {
+      dispatch(set_perspective_camera_reset(!perspective_camera_reset));
+    }
+    return;
+  }
+
   return (
     <>
       <button
@@ -172,37 +202,58 @@ export default function CameraType() {
           CameraTopView();
         }}
       >
-        <FontAwesomeIcon icon={faUpLong} size="2xl" style={ButtonColorChange(switch_button_top_hover)} />
+        <FontAwesomeIcon icon={faUpLong} size="2xl" style={CameraButtonsColorChange(switch_button_top_hover)} />
       </button>
       <button
         className="camera_button_switch switch_right"
         onMouseEnter={() => set_switch_button_right_hover(true)}
         onMouseLeave={() => set_switch_button_right_hover(false)}
         onClick={() => {
-          CameraRightView(), console.log(store.getState());
+          CameraRightView();
         }}
       >
-        <FontAwesomeIcon icon={faRightLong} size="2xl" style={ButtonColorChange(switch_button_right_hover)} />
+        <FontAwesomeIcon icon={faRightLong} size="2xl" style={CameraButtonsColorChange(switch_button_right_hover)} />
       </button>
       <button
         className="camera_button_switch switch_bottom"
         onClick={() => {
-          CameraBottomView(), console.log(store.getState());
+          CameraBottomView();
         }}
         onMouseEnter={() => set_switch_button_down_hover(true)}
         onMouseLeave={() => set_switch_button_down_hover(false)}
       >
-        <FontAwesomeIcon icon={faDownLong} size="2xl" style={ButtonColorChange(switch_button_down_hover)} />
+        <FontAwesomeIcon icon={faDownLong} size="2xl" style={CameraButtonsColorChange(switch_button_down_hover)} />
       </button>
       <button
         className="camera_button_switch switch_left"
         onClick={() => {
-          CameraLeftView(), console.log(store.getState());
+          CameraLeftView();
         }}
         onMouseEnter={() => set_switch_button_left_hover(true)}
         onMouseLeave={() => set_switch_button_left_hover(false)}
       >
-        <FontAwesomeIcon icon={faLeftLong} size="2xl" style={ButtonColorChange(switch_button_left_hover)} />
+        <FontAwesomeIcon icon={faLeftLong} size="2xl" style={CameraButtonsColorChange(switch_button_left_hover)} />
+      </button>
+      <button
+        className="perspective_camera_reset"
+        onMouseEnter={() => set_perspective_camera_reset_hover(true)}
+        onMouseLeave={() => set_perspective_camera_reset_hover(false)}
+        onClick={() => ResetPerspectiveCamera()}
+      >
+        <FontAwesomeIcon
+          icon={faCameraRotate}
+          size="2xl"
+          style={CameraResetColorChange(perspective_camera_reset_hover)}
+        />
+        <div
+          className={
+            camera_type === "3D_PerspectiveCamera"
+              ? "camera_reset_text reset_text_white"
+              : "camera_reset_text reset_text_black"
+          }
+        >
+          reset
+        </div>
       </button>
     </>
   );

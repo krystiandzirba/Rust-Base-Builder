@@ -23,8 +23,6 @@ function App() {
 
 export default App;
 
-// reset camera
-// 3d camera / 2d camera 5 sides
 // dark-light theme
 // performance settings
 // list of active canvas 3d objects (editable)

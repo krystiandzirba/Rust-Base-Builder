@@ -7,7 +7,7 @@ const pageModeSlice = createSlice({
   },
   reducers: {
     set_page_mode: (state, action) => {
-      state.page_mode = action.payload;
+      return { ...state, page_mode: action.payload };
     },
   },
 });
@@ -19,7 +19,7 @@ const transformAxisSlice = createSlice({
   },
   reducers: {
     set_transform_model_axis: (state, action) => {
-      state.transform_model_axis = action.payload;
+      return { ...state, transform_model_axis: action.payload };
     },
   },
 });
@@ -31,7 +31,7 @@ const cameraTypeSlice = createSlice({
   },
   reducers: {
     set_camera_type: (state, action) => {
-      state.camera_type = action.payload;
+      return { ...state, camera_type: action.payload };
     },
   },
 });
@@ -43,7 +43,19 @@ const ortographicCameraPositionSlice = createSlice({
   },
   reducers: {
     set_ortographic_camera_position: (state, action) => {
-      state.ortographic_camera_position = action.payload;
+      return { ...state, ortographic_camera_position: action.payload };
+    },
+  },
+});
+
+const perspectiveCameraResetSlice = createSlice({
+  name: "perspectiveCameraReset",
+  initialState: {
+    perspective_camera_reset: false,
+  },
+  reducers: {
+    set_perspective_camera_reset: (state, action) => {
+      return { ...state, perspective_camera_reset: action.payload };
     },
   },
 });
@@ -52,6 +64,7 @@ export const { set_page_mode } = pageModeSlice.actions;
 export const { set_transform_model_axis } = transformAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
 export const { set_ortographic_camera_position } = ortographicCameraPositionSlice.actions;
+export const { set_perspective_camera_reset } = perspectiveCameraResetSlice.actions;
 
 export const store = configureStore({
   reducer: {
@@ -59,6 +72,7 @@ export const store = configureStore({
     transformAxis: transformAxisSlice.reducer,
     cameraType: cameraTypeSlice.reducer,
     ortographicCameraPosition: ortographicCameraPositionSlice.reducer,
+    perspectiveCameraReset: perspectiveCameraResetSlice.reducer,
   },
 });
 
