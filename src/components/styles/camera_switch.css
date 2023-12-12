@@ -1,10 +1,56 @@
 .camera_switch_button {
-  width: 10vw;
+  width: 7.5vw;
   height: 10vh;
   position: absolute;
-  top: 5vh;
-  left: 87.5%;
+  top: 6.75vh;
+  left: 90%;
   z-index: 10;
-  background-color: rgb(191, 191, 191);
+  background-color: rgba(0, 0, 0, 0);
   text-align: center;
+  border: none;
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.camera_text {
+  padding-top: 0.75vh;
+}
+
+.camera_switch_button:hover {
+  transform: scale(1.1);
+}
+
+.camera_button_switch {
+  width: 3vw;
+  height: 4.5vh;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.camera_button_switch:hover {
+  transform: scale(1.3);
+}
+
+.switch_top {
+  top: 2vh;
+  left: 92.25vw;
+}
+
+.switch_right {
+  top: 9.25vh;
+  left: 96vw;
+}
+
+.switch_left {
+  top: 9.25vh;
+  left: 88.5vw;
+}
+
+.switch_bottom {
+  top: 16.25vh;
+  left: 92.25vw;
 }
