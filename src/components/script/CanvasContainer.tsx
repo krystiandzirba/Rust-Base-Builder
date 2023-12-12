@@ -195,7 +195,7 @@ export default function CanvasContainer() {
           {!camera_rotation ? null : (
             <CameraControls
               maxPolarAngle={camera_type === "3D_PerspectiveCamera" ? Math.PI / 2.1 : 360}
-              enabled={camera_type === "3D_PerspectiveCamera" ? true : false}
+              enabled={camera_type === "3D_PerspectiveCamera" ? true : true}
             />
           )}
 
