@@ -74,4 +74,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
 useGLTF.preload("./stone_foundation_square_high.glb");
 
-Model.displayName = "StoneFoundationSquareHigh";
+Model.displayName = "SFSH";

@@ -23,6 +23,7 @@ function App() {
 
 export default App;
 
+// add 0,0,0 color grid lines
 // dark-light theme
 // performance settings
 // list of active canvas 3d objects (editable)
