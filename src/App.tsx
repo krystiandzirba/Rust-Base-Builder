@@ -1,29 +1,33 @@
-import { useState } from "react";
-import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import Toolbar from "./components/script/Toolbar.tsx";
+import Presets from "./components/script/Presets.tsx";
+import Sidebar from "./components/script/Sidebar.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
+import CanvasContainer from "./components/script/CanvasContainer.tsx";
 
 import "./components/styles/global.css";
-import "./components/styles/canvas_container.css";
 import "./components/styles/toolbar.css";
+import "./components/styles/presets.css";
+import "./components/styles/sidebar.css";
 import "./components/styles/version.css";
 import "./components/styles/camera_switch.css";
+import "./components/styles/canvas_container.css";
 
 function App() {
   return (
     <div>
       <Toolbar />
-      <CanvasContainer />
+      <Presets />
+      <Sidebar />
       <Version />
       <CameraType />
+      <CanvasContainer />
     </div>
   );
 }
 
 export default App;
 
-// add 0,0,0 color grid lines
 // dark-light theme
 // performance settings
 // make a separate component for different light setups
@@ -42,7 +46,7 @@ export default App;
 // toggle system stats ( fps, mem, cpu)
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
 // enable-disable a controls hints, a few currently available shortcuts on screen
-// change camera controls (camera pan - left button, truck - right button | camera pan right button, truck - left button etc.)
+// object clicked -> display options above mouse position (delete selected object, rotate -90d, +90d )
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

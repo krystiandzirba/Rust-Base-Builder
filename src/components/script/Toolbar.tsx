@@ -5,14 +5,14 @@ import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 
-export default function PageMode() {
+const Toolbar = () => {
   const dispatch = useDispatch();
 
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
 
   return (
     <>
-      <div className="toolbar">
+      <div className="toolbar_container">
         <div
           className={page_mode === "overview" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
@@ -40,4 +40,6 @@ export default function PageMode() {
       </div>
     </>
   );
-}
+};
+
+export default Toolbar;

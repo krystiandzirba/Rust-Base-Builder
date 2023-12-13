@@ -9,11 +9,11 @@
 }
 
 .objects_container {
-  width: 30vw;
-  height: 95vh;
+  width: 22.5vw;
+  height: 100vh;
   position: absolute;
-  top: 2.5vh;
-  left: 1%;
+  top: 0vh;
+  left: 0vw;
   z-index: 10;
   background-color: rgb(65, 65, 65);
   transition: transform 0.1s ease-in-out;
@@ -29,9 +29,9 @@
 
 .object_list {
   width: 95%;
-  height: 85%;
+  height: 80%;
   position: absolute;
-  top: 12.5%;
+  top: 15%;
   left: 1%;
   background-color: rgb(155, 64, 64);
   display: grid;
@@ -46,6 +46,7 @@
   height: 15vh;
   background-color: rgb(184, 184, 184);
   margin-bottom: 1vh;
+  word-wrap: break-word;
 }
 
 .canvas_models_list {

@@ -11,19 +11,36 @@ export default function CanvasGrids() {
     <>
       <Box
         scale={
-          ortographic_camera_direction === "front" || ortographic_camera_direction === "back"
-            ? [101, 0.1, 0.1]
+          ortographic_camera_direction === "front" ||
+          ortographic_camera_direction === "back" ||
+          ortographic_camera_direction === "top" ||
+          ortographic_camera_direction === "bottom"
+            ? [101, 0.1, 0.08]
             : [0, 0, 0]
         }
-        material-color="red"
+        material-color="#ff6e52"
       />
       <Box
         scale={
-          ortographic_camera_direction === "left" || ortographic_camera_direction === "right"
-            ? [0.1, 0.1, 101]
+          ortographic_camera_direction === "left" ||
+          ortographic_camera_direction === "right" ||
+          ortographic_camera_direction === "top" ||
+          ortographic_camera_direction === "bottom"
+            ? [0.08, 0.1, 101]
             : [0, 0, 0]
         }
-        material-color="blue"
+        material-color="#69b1ff"
+      />
+      <Box
+        scale={
+          ortographic_camera_direction === "left" ||
+          ortographic_camera_direction === "right" ||
+          ortographic_camera_direction === "front" ||
+          ortographic_camera_direction === "back"
+            ? [0.1, 101, 0.08]
+            : [0, 0, 0]
+        }
+        material-color="#70ff77"
       />
       {ortographic_camera_direction !== "bottom" && (
         <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"white"} />
