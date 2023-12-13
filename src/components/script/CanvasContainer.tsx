@@ -48,7 +48,7 @@ export default function CanvasContainer() {
   // prettier-ignore
   const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
-  const cameraControlsRef = useRef<CameraControls>(null);
+  const perspectiveCameraControlsRef = useRef<CameraControls>(null);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
 
@@ -199,8 +199,8 @@ export default function CanvasContainer() {
   }
 
   const PerspectiveCameraReset = () => {
-    if (cameraControlsRef.current) {
-      cameraControlsRef.current.reset(true);
+    if (perspectiveCameraControlsRef.current) {
+      perspectiveCameraControlsRef.current.reset(true);
     }
   };
 
@@ -235,29 +235,37 @@ export default function CanvasContainer() {
           <pointLight position={[10, 10, 10]} />
           <CanvasGrids />
 
-          {camera_type === "3D_PerspectiveCamera" && <PerspectiveCamera makeDefault fov={90} position={[0, 15, 15]} />}
-          {camera_type === "2D_OrtographicCamera" && (
-            <OrthographicCamera
-              key={ortographic_camera_position.join(",")}
-              makeDefault
-              zoom={25}
-              position={ortographic_camera_position as [number, number, number]}
-              near={0.1}
-              far={100}
-            />
-          )}
+          {camera_type === "3D_PerspectiveCamera" && (
+            <>
+              {/* prettier-ignore */}
+              <PerspectiveCamera 
+              makeDefault 
+              fov={90} 
+              position={[0, 15, 15]} 
+              near={0.1} 
+              far={100} 
+              />
 
-          {!camera_rotation ? null : (
-            <CameraControls
-              ref={cameraControlsRef}
-              maxPolarAngle={camera_type === "3D_PerspectiveCamera" ? Math.PI / 2.1 : 360}
-              //  enabled={camera_type === "3D_PerspectiveCamera" ? true : false}
-              mouseButtons={
-                camera_type === "3D_PerspectiveCamera"
-                  ? { left: 1, right: 2, middle: 0, wheel: 8 }
-                  : { left: 2, right: 2, middle: 0, wheel: 16 }
-              }
-            />
+              <CameraControls
+                ref={perspectiveCameraControlsRef}
+                maxPolarAngle={Math.PI / 2.1}
+                enabled={camera_rotation}
+                mouseButtons={{ left: 1, right: 2, middle: 0, wheel: 8 }}
+              />
+            </>
+          )}
+          {camera_type === "2D_OrtographicCamera" && (
+            <>
+              <OrthographicCamera
+                key={ortographic_camera_position.join(",")}
+                makeDefault
+                zoom={25}
+                position={ortographic_camera_position as [number, number, number]}
+                near={0.1}
+                far={100}
+              />
+              <CameraControls enabled={camera_rotation} mouseButtons={{ left: 2, right: 2, middle: 0, wheel: 16 }} />
+            </>
           )}
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
