@@ -3,6 +3,7 @@ import { set_camera_type } from "../../Store.tsx";
 import { set_ortographic_camera_position } from "../../Store.tsx";
 import { set_perspective_camera_reset } from "../../Store.tsx";
 import { set_ortographic_camera_direction } from "../../Store.tsx";
+import { set_cursor_type } from "../../Store.tsx";
 
 import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
@@ -79,36 +80,36 @@ export default function CameraType() {
           ortographic_camera_position[1] === 45 &&
           ortographic_camera_position[2] === 0)
       ) {
-        const newPosition = [-45, 0, 0];
+        const new_camera_position = [-45, 0, 0];
         set_camera_switch_text("2D left");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("left"));
       } else if (
         ortographic_camera_position[0] === -45 &&
         ortographic_camera_position[1] === 0 &&
         ortographic_camera_position[2] === 0
       ) {
-        const newPosition = [0, 0, -45];
+        const new_camera_position = [0, 0, -45];
         set_camera_switch_text("2D back");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("back"));
       } else if (
         ortographic_camera_position[0] === 0 &&
         ortographic_camera_position[1] === 0 &&
         ortographic_camera_position[2] === -45
       ) {
-        const newPosition = [45, 0, 0];
+        const new_camera_position = [45, 0, 0];
         set_camera_switch_text("2D right");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("right"));
       } else if (
         ortographic_camera_position[0] === 45 &&
         ortographic_camera_position[1] === 0 &&
         ortographic_camera_position[2] === 0
       ) {
-        const newPosition = [0, 0, 45];
+        const new_camera_position = [0, 0, 45];
         set_camera_switch_text("2D front");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("front"));
       }
     }
@@ -127,36 +128,36 @@ export default function CameraType() {
           ortographic_camera_position[1] === 45 &&
           ortographic_camera_position[2] === 0)
       ) {
-        const newPosition = [45, 0, 0];
+        const new_camera_position = [45, 0, 0];
         set_camera_switch_text("2D right");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("right"));
       } else if (
         ortographic_camera_position[0] === -45 &&
         ortographic_camera_position[1] === 0 &&
         ortographic_camera_position[2] === 0
       ) {
-        const newPosition = [0, 0, 45];
+        const new_camera_position = [0, 0, 45];
         set_camera_switch_text("2D front");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("front"));
       } else if (
         ortographic_camera_position[0] === 0 &&
         ortographic_camera_position[1] === 0 &&
         ortographic_camera_position[2] === -45
       ) {
-        const newPosition = [-45, 0, 0];
+        const new_camera_position = [-45, 0, 0];
         set_camera_switch_text("2D left");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("left"));
       } else if (
         ortographic_camera_position[0] === 45 &&
         ortographic_camera_position[1] === 0 &&
         ortographic_camera_position[2] === 0
       ) {
-        const newPosition = [0, 0, -45];
+        const new_camera_position = [0, 0, -45];
         set_camera_switch_text("2D back");
-        dispatch(setOrtographicCameraPosition(newPosition));
+        dispatch(setOrtographicCameraPosition(new_camera_position));
         dispatch(set_ortographic_camera_direction("back"));
       }
     }
@@ -165,18 +166,18 @@ export default function CameraType() {
   function CameraTopView() {
     console.log(ortographic_camera_position);
     if (camera_type === "2D_OrtographicCamera") {
-      const newPosition = [0, 45, 0];
+      const new_camera_position = [0, 45, 0];
       set_camera_switch_text("2D top");
-      dispatch(setOrtographicCameraPosition(newPosition));
+      dispatch(setOrtographicCameraPosition(new_camera_position));
       dispatch(set_ortographic_camera_direction("top"));
     }
   }
 
   function CameraBottomView() {
     if (camera_type === "2D_OrtographicCamera") {
-      const newPosition = [0, -45, 0];
+      const new_camera_position = [0, -45, 0];
       set_camera_switch_text("2D bottom");
-      dispatch(setOrtographicCameraPosition(newPosition));
+      dispatch(setOrtographicCameraPosition(new_camera_position));
       dispatch(set_ortographic_camera_direction("bottom"));
     }
   }
@@ -195,12 +196,14 @@ export default function CameraType() {
         onClick={() => {
           if (camera_type === "3D_PerspectiveCamera") {
             dispatch(set_camera_type("2D_OrtographicCamera")), console.log(store.getState());
-            const newPosition = [0, 0, 45];
-            dispatch(setOrtographicCameraPosition(newPosition));
+            dispatch(set_cursor_type("move"));
+            const new_camera_position = [0, 0, 45];
+            dispatch(setOrtographicCameraPosition(new_camera_position));
             set_camera_switch_text("2D front");
             dispatch(set_ortographic_camera_direction("front"));
           } else if (camera_type === "2D_OrtographicCamera") {
             dispatch(set_camera_type("3D_PerspectiveCamera")), console.log(store.getState());
+            dispatch(set_cursor_type("default"));
             set_camera_switch_text("3D 360°");
             dispatch(set_ortographic_camera_direction(""));
           }

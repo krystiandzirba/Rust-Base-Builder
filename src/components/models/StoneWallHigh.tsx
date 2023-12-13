@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 import { set_transform_model_axis } from "../../Store.tsx";
+import { set_cursor_type } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -27,22 +28,31 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const [model_selected, set_model_selected] = useState<boolean>(false);
 
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+  const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
 
   function ModelOnClick() {
-    dispatch(set_transform_model_axis("XYZ"));
-    set_model_selected(true);
+    if (page_mode === "edit") {
+      dispatch(set_transform_model_axis("XYZ"));
+      set_model_selected(true);
+      dispatch(set_cursor_type("grab"));
+    }
   }
 
   function ModelMissedClick() {
     set_model_selected(false);
+    dispatch(set_cursor_type("default"));
   }
 
   function ModelOnPointerOver() {
     set_model_hover(true);
+    dispatch(set_cursor_type("pointer"));
   }
 
   function ModelOnPointerOut() {
     set_model_hover(false);
+    if (cursor_type === "pointer") {
+      dispatch(set_cursor_type("default"));
+    }
   }
 
   function ModelColorChange(): THREE.MeshStandardMaterialParameters {
@@ -51,8 +61,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
     return {
       transparent: true,
-      opacity: model_selected ? 1 : opacity,
-      color: model_selected ? "#3672ff" : base_color,
+      opacity: model_selected && page_mode === "edit" ? 1 : opacity,
+      color: model_selected && page_mode === "edit" ? "#3672ff" : base_color,
     };
   }
 

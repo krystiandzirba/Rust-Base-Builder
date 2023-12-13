@@ -3,7 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls } from "@react-three/drei";
 
 import { RootState } from "../../Store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { set_cursor_type } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -36,6 +37,7 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 };
 
 export default function CanvasContainer() {
+  const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const transform_model_axis = useSelector((state: RootState) => state.transformAxis.transform_model_axis);
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
@@ -45,6 +47,7 @@ export default function CanvasContainer() {
   const ortographic_camera_direction = useSelector((state: RootState) => state.ortographicCameraDirection.ortographic_camera_direction);
   // prettier-ignore
   const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
+  const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const cameraControlsRef = useRef<CameraControls>(null);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
@@ -144,16 +147,19 @@ export default function CanvasContainer() {
 
   const RemoveSelectedModel = (id: string) => {
     setModels((prevModels) => prevModels.filter((model) => model.id !== id));
+    dispatch(set_cursor_type("default"));
   };
 
   const RemoveAllModels = () => {
     setModels([]);
+    dispatch(set_cursor_type("default"));
   };
 
   function PivotDragStart(index: string) {
     if (page_mode === "edit") {
       set_selected_model_id(index);
       set_camera_rotation(false);
+      dispatch(set_cursor_type("grab"));
     }
   }
 
@@ -202,10 +208,28 @@ export default function CanvasContainer() {
     PerspectiveCameraReset();
   }, [perspective_camera_reset]);
 
+  document.body.style.cursor = cursor_type;
+
+  function CanvasPointerDown(event: any) {
+    if (event.button === 0) {
+      dispatch(set_cursor_type("crosshair"));
+    } else if (event.button === 2) {
+      dispatch(set_cursor_type("move"));
+    }
+  }
+
+  function CanvasPointerUp(event: any) {
+    if (event.button === 0) {
+      dispatch(set_cursor_type("default"));
+    } else if (event.button === 2) {
+      dispatch(set_cursor_type("default"));
+    }
+  }
+
   return (
     <>
       <div className="canvas_container">
-        <Canvas>
+        <Canvas onPointerDown={(event) => CanvasPointerDown(event)} onPointerUp={(event) => CanvasPointerUp(event)}>
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
@@ -239,7 +263,7 @@ export default function CanvasContainer() {
             const { id, component: ModelComponent } = model;
             return (
               <PivotControls
-                visible={selected_model_id === id ? true : false}
+                visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
                 scale={selected_model_id === id ? 3 : 0}
                 lineWidth={0}

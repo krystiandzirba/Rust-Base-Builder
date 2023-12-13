@@ -72,12 +72,26 @@ const perspectiveCameraResetSlice = createSlice({
   },
 });
 
+const cursorTypeSlice = createSlice({
+  name: "cursorType",
+  initialState: {
+    cursor_type: "default",
+  },
+  reducers: {
+    set_cursor_type: (state, action) => {
+      return { ...state, cursor_type: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 export const { set_transform_model_axis } = transformAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
 export const { set_ortographic_camera_position } = ortographicCameraPositionSlice.actions;
 export const { set_ortographic_camera_direction } = ortographicCameraDirectionSlice.actions;
 export const { set_perspective_camera_reset } = perspectiveCameraResetSlice.actions;
+
+export const { set_cursor_type } = cursorTypeSlice.actions;
 
 export const store = configureStore({
   reducer: {
@@ -87,6 +101,8 @@ export const store = configureStore({
     ortographicCameraPosition: ortographicCameraPositionSlice.reducer,
     ortographicCameraDirection: ortographicCameraDirectionSlice.reducer,
     perspectiveCameraReset: perspectiveCameraResetSlice.reducer,
+
+    cursorType: cursorTypeSlice.reducer,
   },
 });
 

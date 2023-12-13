@@ -13,7 +13,7 @@
   height: 100vh;
   position: absolute;
   top: 0vh;
-  left: 0vw;
+  left: 1vw;
   z-index: 10;
   background-color: rgb(65, 65, 65);
   transition: transform 0.1s ease-in-out;
@@ -32,13 +32,13 @@
   height: 80%;
   position: absolute;
   top: 15%;
-  left: 1%;
+  left: 0%;
   background-color: rgb(155, 64, 64);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
   grid-gap: 1vh;
   overflow-y: auto;
-  padding: 1vh;
+  margin: 1vh;
 }
 
 .object {

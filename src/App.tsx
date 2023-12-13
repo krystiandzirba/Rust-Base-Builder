@@ -50,3 +50,4 @@ export default App;
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
+// trucking the camera in 2D mode, followed by moving the object causes the camera to shift its perspective
