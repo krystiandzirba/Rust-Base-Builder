@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, OrthographicCamera, CameraControls, Grid, PivotControls } from "@react-three/drei";
+import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls } from "@react-three/drei";
 
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
+
+import CanvasGrids from "./CanvasGrids.tsx";
 
 interface CanvasModelsListProps {
   models: ModelType[];
@@ -204,63 +206,11 @@ export default function CanvasContainer() {
     <>
       <div className="canvas_container">
         <Canvas>
-          {ortographic_camera_direction !== "bottom" && (
-            <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"white"} />
-          )}
-          {/* prettier-ignore */}
-          {ortographic_camera_direction === "front" && (
-            <Grid
-              cellSize={3}
-              infiniteGrid={true}
-              fadeStrength={2}
-              sectionColor={"white"}
-              position={[0, 50, -50]}
-              rotation={[Math.PI / 2, 0, 0]}
-            />
-          )}
-          {/* prettier-ignore */}
-          {ortographic_camera_direction === "back" && (
-            <Grid
-              cellSize={3}
-              infiniteGrid={true}
-              fadeStrength={2}
-              sectionColor={"white"}
-              position={[0, 50, 50]}
-              rotation={[Math.PI / 2, 0, Math.PI]}
-            />
-          )}
-          {/* prettier-ignore */}
-          {ortographic_camera_direction === "left" && (
-            <Grid
-              cellSize={3}
-              infiniteGrid={true}
-              fadeStrength={2}
-              sectionColor={"white"}
-              position={[50, 50, 0]}
-              rotation={[Math.PI / 2, 0, Math.PI / 2]}
-            />
-          )}
-          {/* prettier-ignore */}
-          {ortographic_camera_direction === "right" && (
-            <Grid
-              cellSize={3}
-              infiniteGrid={true}
-              fadeStrength={2}
-              sectionColor={"white"}
-              position={[-50, 50, 0]}
-              rotation={[Math.PI / 2, Math.PI, Math.PI / 2]}
-            />
-          )}
-          {ortographic_camera_direction === "bottom" && (
-            <Grid
-              cellSize={3}
-              infiniteGrid={true}
-              fadeStrength={2}
-              sectionColor={"white"}
-              position={[0, 50, 0]}
-              rotation={[Math.PI / 2, Math.PI / 2, Math.PI / 2]}
-            />
-          )}
+          <ambientLight />
+          <directionalLight />
+          <pointLight position={[10, 10, 10]} />
+          <CanvasGrids />
+
           {camera_type === "3D_PerspectiveCamera" && <PerspectiveCamera makeDefault fov={90} position={[0, 15, 15]} />}
           {camera_type === "2D_OrtographicCamera" && (
             <OrthographicCamera
@@ -285,10 +235,6 @@ export default function CanvasContainer() {
               }
             />
           )}
-
-          <ambientLight />
-          <directionalLight />
-          <pointLight position={[10, 10, 10]} />
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
             return (

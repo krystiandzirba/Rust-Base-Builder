@@ -26,6 +26,7 @@ export default App;
 // add 0,0,0 color grid lines
 // dark-light theme
 // performance settings
+// make a separate component for different light setups
 // list of active canvas 3d objects (editable)
 // object move type: mouse-follow, gizmo
 // object copy: "C"
