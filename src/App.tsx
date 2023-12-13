@@ -40,6 +40,8 @@ export default App;
 // 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
 // toggle system stats ( fps, mem, cpu)
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
+// enable-disable a controls hints, a few currently available shortcuts on screen
+// change camera controls (camera pan - left button, truck - right button | camera pan right button, truck - left button etc.)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
