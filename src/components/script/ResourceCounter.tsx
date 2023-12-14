@@ -106,7 +106,6 @@ models.filter(
       wood_build_cost_50;
 
     // twig + wood
-
     // stone
 
     let stone_build_cost_300 =
@@ -160,13 +159,66 @@ models.filter(
     // stone
     // metal
 
+    let metal_build_cost_200 =
+      models.filter(
+        (model) =>
+          model === "MetalFoundationSquareHigh" ||
+          model === "MetalFoundationSquareMid" ||
+          model === "MetalFoundationSquareLow" ||
+          model === "MetalFoundationStairs" ||
+          model === "MetalWallHigh" ||
+          model === "MetalWallMid" ||
+          model === "MetalStairs" ||
+          model === "MetalRoof"
+      ).length * 200;
+    // console.log("metal_200", metal_build_cost_200);
+
+    // prettier-ignore
+    let metal_build_cost_140 =
+      models.filter(
+        (model) =>
+          model === "MetalDoorway" ||
+          model === "MetalWindow"
+      ).length * 140;
+    // console.log("metal_140", metal_build_cost_140);
+
+    let metal_build_cost_100 =
+      models.filter(
+        (model) =>
+          model === "MetalFoundationTriangleHigh" ||
+          model === "MetalFoundationTriangleMid" ||
+          model === "MetalFoundationTriangleLow" ||
+          model === "MetalSquareFloor" ||
+          model === "MetalWallLow" ||
+          model === "MetalWallFrame" ||
+          model === "MetalFloorFrame"
+      ).length * 100;
+    // console.log("metal_100", metal_build_cost_100);
+
+    //prettier-ignore
+    let metal_build_cost_50 =
+        models.filter(
+            (model) =>
+            model === "MetalTriangleFloor"
+  ).length * 50;
+    // console.log("metal_50", metal_build_cost_50);
+
+    let total_metal_build_cost =
+      metal_build_cost_200 + metal_build_cost_140 + metal_build_cost_100 + metal_build_cost_50;
+
     // metal
     // hq metal
 
+    // hq metal
     // display
 
     set_build_cost((prevBuildCost) => {
-      return [{ wood: total_wood_build_cost }, { stone: total_stone_build_cost }, prevBuildCost[2], prevBuildCost[3]];
+      return [
+        { wood: total_wood_build_cost },
+        { stone: total_stone_build_cost },
+        { stone: total_metal_build_cost },
+        prevBuildCost[3],
+      ];
     });
 
     console.log(models.length);

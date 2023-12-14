@@ -49,8 +49,9 @@ export default App;
 // toggle system stats ( fps, mem, cpu)
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
 // enable-disable a controls hints, a few currently available shortcuts on screen
-// object clicked -> display options above mouse position (delete selected object, rotate -90d, +90d )
+// object clicked -> display options above mouse position (delete selected object, rotate -90d, +90d square foundations, -45d, +45d for everything else)
 // make a separate resource counter function for miscs (crates, rugs ...) so it wont interfere the structure upkeep cost rampup
+// if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
