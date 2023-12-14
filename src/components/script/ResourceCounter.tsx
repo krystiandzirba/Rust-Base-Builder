@@ -7,7 +7,7 @@ export default function ResourceCounter() {
   const [build_cost, set_build_cost] = useState([{ wood: 0 }, { stone: 0 }, { metal: 0 }, { armored: 0 }]);
 
   function countBuildCost(models: string[]) {
-    let wood_build_cost_50 =
+    let twig_build_cost_50 =
       models.filter(
         (model) =>
           model === "TwigFoundationSquareHigh" ||
@@ -18,18 +18,18 @@ export default function ResourceCounter() {
           model === "TwigStairs" ||
           model === "TwigRoof"
       ).length * 50;
-    // console.log("wood_50", wood_build_cost_50);
+    // console.log("wood_50", twig_build_cost_50);
 
     // prettier-ignore
-    let wood_build_cost_35 =
+    let twig_build_cost_35 =
       models.filter(
         (model) =>
           model === "TwigDoorway" ||
           model === "TwigWindow"
       ).length * 35;
-    // console.log("wood_35", wood_build_cost_35);
+    // console.log("wood_35", twig_build_cost_35);
 
-    let wood_build_cost_25 =
+    let twig_build_cost_25 =
       models.filter(
         (model) =>
           model === "TwigFoundationTriangleHigh" ||
@@ -41,17 +41,69 @@ export default function ResourceCounter() {
           model === "TwigWallFrame" ||
           model === "TwigFloorFrame"
       ).length * 25;
-    // console.log("wood_25", wood_build_cost_25);
+    // console.log("wood_25", twig_build_cost_25);
 
     // prettier-ignore
-    let wood_build_cost_13 =
+    let twig_build_cost_13 =
     models.filter(
       (model) =>
         model === "TwigTriangleFloor" 
     ).length * 13;
-    // console.log("wood_13", wood_build_cost_13);
+    // console.log("wood_13", twig_build_cost_13);
 
-    let total_wood_build_cost = wood_build_cost_50 + wood_build_cost_35 + wood_build_cost_25 + wood_build_cost_13;
+    let wood_build_cost_200 =
+      models.filter(
+        (model) =>
+          model === "WoodenFoundationSquareHigh" ||
+          model === "WoodenFoundationSquareMid" ||
+          model === "WoodenFoundationSquareLow" ||
+          model === "WoodenWallHigh" ||
+          model === "WoodenWallMid" ||
+          model === "WoodenStairs" ||
+          model === "WoodenRoof"
+      ).length * 200;
+    // console.log("wood_200", wood_build_cost_200);
+
+    //prettier-ignore
+    let wood_build_cost_140 =
+    models.filter(
+      (model) =>
+        model === "WoodenDoorway" ||
+        model === "WoodenWindow"
+    ).length * 140;
+    // console.log("wood_140", wood_build_cost_140);
+
+    let wood_build_cost_100 =
+      models.filter(
+        (model) =>
+          model === "WoodenFoundationTriangleHigh" ||
+          model === "WoodenFoundationTriangleMid" ||
+          model === "WoodenFoundationTriangleLow" ||
+          model === "WoodenFoundationStairs" ||
+          model === "WoodenSquareFloor" ||
+          model === "WoodenWallLow" ||
+          model === "WoodenWallFrame" ||
+          model === "WoodenFloorFrame"
+      ).length * 100;
+    // console.log("wood_100", wood_build_cost_100);
+
+    //prettier-ignore
+    let wood_build_cost_50 =
+models.filter(
+  (model) =>
+    model === "WoodenTriangleFloor"
+).length * 50;
+    // console.log("wood_50", wood_build_cost_50);
+
+    let total_wood_build_cost =
+      twig_build_cost_50 +
+      twig_build_cost_35 +
+      twig_build_cost_25 +
+      twig_build_cost_13 +
+      wood_build_cost_200 +
+      wood_build_cost_140 +
+      wood_build_cost_100 +
+      wood_build_cost_50;
 
     // twig + wood
 
