@@ -209,19 +209,65 @@ models.filter(
     // metal
     // hq metal
 
+    let hq_metal_build_cost_25 =
+      models.filter(
+        (model) =>
+          model === "ArmoredFoundationSquareHigh" ||
+          model === "ArmoredFoundationSquareMid" ||
+          model === "ArmoredFoundationSquareLow" ||
+          model === "ArmoredFoundationStairs" ||
+          model === "ArmoredWallHigh" ||
+          model === "ArmoredWallMid" ||
+          model === "ArmoredStairs" ||
+          model === "ArmoredRoof"
+      ).length * 25;
+    // console.log("hq_metal_25", hq_metal_build_cost_25);
+
+    // prettier-ignore
+    let hq_metal_build_cost_18 =
+      models.filter(
+        (model) =>
+          model === "ArmoredDoorway" ||
+          model === "ArmoredWindow"
+      ).length * 18;
+    // console.log("hq_metal_18", hq_metal_build_cost_18);
+
+    let hq_metal_build_cost_13 =
+      models.filter(
+        (model) =>
+          model === "ArmoredFoundationTriangleHigh" ||
+          model === "ArmoredFoundationTriangleMid" ||
+          model === "ArmoredFoundationTriangleLow" ||
+          model === "ArmoredSquareFloor" ||
+          model === "ArmoredWallLow" ||
+          model === "ArmoredWallFrame" ||
+          model === "ArmoredFloorFrame"
+      ).length * 13;
+    // console.log("hq_metal_13", hq_metal_build_cost_13);
+
+    //prettier-ignore
+    let hq_metal_build_cost_7 =
+        models.filter(
+            (model) =>
+            model === "ArmoredTriangleFloor"
+        ).length * 7;
+    // console.log("hq_metal_7", hq_metal_build_cost_7);
+
+    let total_hq_metal_build_cost =
+      hq_metal_build_cost_25 + hq_metal_build_cost_18 + hq_metal_build_cost_13 + hq_metal_build_cost_7;
+
     // hq metal
     // display
 
-    set_build_cost((prevBuildCost) => {
-      return [
-        { wood: total_wood_build_cost },
-        { stone: total_stone_build_cost },
-        { stone: total_metal_build_cost },
-        prevBuildCost[3],
-      ];
-    });
+    set_build_cost([
+      { wood: total_wood_build_cost },
+      { stone: total_stone_build_cost },
+      { metal: total_metal_build_cost },
+      { armored: total_hq_metal_build_cost },
+    ]);
 
     console.log(models.length);
+    console.log(build_cost[1]);
 
     // display
   }
