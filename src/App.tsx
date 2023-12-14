@@ -3,6 +3,7 @@ import Presets from "./components/script/Presets.tsx";
 import Sidebar from "./components/script/Sidebar.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
+import ResourceCounter from "./components/script/ResourceCounter.tsx";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 
 import "./components/styles/global.css";
@@ -12,6 +13,7 @@ import "./components/styles/sidebar.css";
 import "./components/styles/version.css";
 import "./components/styles/camera_switch.css";
 import "./components/styles/canvas_container.css";
+import "./components/styles/resource_counter.css";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
       <Sidebar />
       <Version />
       <CameraType />
+      <ResourceCounter />
       <CanvasContainer />
     </div>
   );

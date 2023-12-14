@@ -18,8 +18,6 @@ type GLTFResult = GLTF & {
   };
 };
 
-type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>>;
-
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
 
@@ -84,4 +82,4 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
 useGLTF.preload("./stone_wall_high.glb");
 
-Model.displayName = "SWH";
+Model.displayName = "StoneWallHigh";

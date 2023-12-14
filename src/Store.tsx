@@ -84,14 +84,26 @@ const cursorTypeSlice = createSlice({
   },
 });
 
+const canvasModelsArraySlice = createSlice({
+  name: "canvasModelsArray",
+  initialState: {
+    canvas_models_array: [],
+  },
+  reducers: {
+    set_canvas_models_array: (state, action) => {
+      return { ...state, canvas_models_array: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 export const { set_transform_model_axis } = transformAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
 export const { set_ortographic_camera_position } = ortographicCameraPositionSlice.actions;
 export const { set_ortographic_camera_direction } = ortographicCameraDirectionSlice.actions;
 export const { set_perspective_camera_reset } = perspectiveCameraResetSlice.actions;
-
 export const { set_cursor_type } = cursorTypeSlice.actions;
+export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
 
 export const store = configureStore({
   reducer: {
@@ -101,8 +113,8 @@ export const store = configureStore({
     ortographicCameraPosition: ortographicCameraPositionSlice.reducer,
     ortographicCameraDirection: ortographicCameraDirectionSlice.reducer,
     perspectiveCameraReset: perspectiveCameraResetSlice.reducer,
-
     cursorType: cursorTypeSlice.reducer,
+    canvasModelsArray: canvasModelsArraySlice.reducer,
   },
 });
 

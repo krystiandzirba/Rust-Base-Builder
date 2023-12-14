@@ -5,6 +5,7 @@ import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls } 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 import { set_cursor_type } from "../../Store.tsx";
+import { set_canvas_models_array } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -44,18 +45,15 @@ export default function CanvasContainer() {
   // prettier-ignore
   const ortographic_camera_position = useSelector((state: RootState) => state.ortographicCameraPosition.ortographic_camera_position);
   // prettier-ignore
-  const ortographic_camera_direction = useSelector((state: RootState) => state.ortographicCameraDirection.ortographic_camera_direction);
-  // prettier-ignore
   const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
-  const perspectiveCameraControlsRef = useRef<CameraControls>(null);
 
+  const perspectiveCameraControlsRef = useRef<CameraControls>(null);
   const [camera_rotation, set_camera_rotation] = useState(true);
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [selected_model_id, set_selected_model_id] = useState<string>("empty");
   const [model_hover_id, set_model_hover_id] = useState<string>("empty");
-
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
 
   const object_list = [
@@ -70,7 +68,7 @@ export default function CanvasContainer() {
     // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
 
     {
-      name: "stone_foundation_square_mid",
+      name: "stone foundation square (mid)",
       build_cost: "300STONE",
       upkeep_cost: "30STONE",
       thumbnail: "",
@@ -83,7 +81,7 @@ export default function CanvasContainer() {
     },
 
     {
-      name: "stone_foundation_square_high",
+      name: "stone foundation square (high)",
       build_cost: "300STONE",
       upkeep_cost: "30STONE",
       thumbnail: "",
@@ -110,7 +108,7 @@ export default function CanvasContainer() {
     // { name: "armored_wall", thumbnail: "", id: "W4" },
 
     {
-      name: "stone_wall_high",
+      name: "stone wall (high)",
       build_cost: "300STONE",
       upkeep_cost: "30STONE",
       thumbnail: "",
@@ -125,7 +123,6 @@ export default function CanvasContainer() {
 
       onClick: () => {
         {
-          console.log(ortographic_camera_direction);
         }
       },
     },
@@ -204,12 +201,6 @@ export default function CanvasContainer() {
     }
   };
 
-  useEffect(() => {
-    PerspectiveCameraReset();
-  }, [perspective_camera_reset]);
-
-  document.body.style.cursor = cursor_type;
-
   function CanvasPointerDown(event: any) {
     if (event.button === 0) {
       dispatch(set_cursor_type("crosshair"));
@@ -225,6 +216,22 @@ export default function CanvasContainer() {
       dispatch(set_cursor_type("default"));
     }
   }
+
+  function storeCanvasModelsNames(models: any[]) {
+    return models.map((model) => model.component.displayName);
+  }
+
+  document.body.style.cursor = cursor_type;
+
+  useEffect(() => {
+    PerspectiveCameraReset();
+  }, [perspective_camera_reset]);
+
+  useEffect(() => {
+    {
+      dispatch(set_canvas_models_array(storeCanvasModelsNames(models)));
+    }
+  }, [models]);
 
   return (
     <>
@@ -311,7 +318,7 @@ export default function CanvasContainer() {
           ))}
         </div>
       </div>
-      {page_mode === "edit" && <CanvasModelsList models={models} />}
+      <CanvasModelsList models={models} />
       {page_mode === "edit" && (
         <button
           className="remove_selected_model"
