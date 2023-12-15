@@ -39,8 +39,6 @@ export default App;
 // object copy: "C"
 // object delete: "del"
 // controls menu (mouse + keyboard)
-// upkeep cost
-// build cost
 // raid cost
 // different "save files / base plans"
 // xray

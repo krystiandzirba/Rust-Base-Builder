@@ -1,9 +1,9 @@
 .resources_container {
-  width: 20vw;
+  width: 22vw;
   height: 28.5vh;
   position: absolute;
   top: 70vh;
-  left: 79vw;
+  left: 77vw;
   z-index: 10;
   background-color: rgb(191, 191, 191);
   display: flex;
@@ -26,7 +26,11 @@
 .build_cost_wood,
 .build_cost_stone,
 .build_cost_metal,
-.build_cost_hq_metal {
+.build_cost_hq_metal,
+.upkeep_cost_wood,
+.upkeep_cost_stone,
+.upkeep_cost_metal,
+.upkeep_cost_hq_metal {
   width: 25%;
   height: 100%;
   background-color: rgb(137, 137, 137);
