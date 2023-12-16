@@ -61,6 +61,10 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       transparent: true,
       opacity: model_selected && page_mode === "edit" ? 1 : opacity,
       color: model_selected && page_mode === "edit" ? "#3672ff" : base_color,
+      // wireframe: page_mode === "edit",
+      //  metalness: 0.9,
+      //  roughness: 0,
+      //  emissive: 0x00ff00,
     };
   }
 

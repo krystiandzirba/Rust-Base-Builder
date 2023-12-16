@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls } from "@react-three/drei";
+import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box } from "@react-three/drei";
+import * as THREE from "three";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -49,12 +50,20 @@ export default function CanvasContainer() {
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
 
   const perspectiveCameraControlsRef = useRef<CameraControls>(null);
+  const raycasterBoxIntersector = useRef(null);
+
   const [camera_rotation, set_camera_rotation] = useState(true);
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [selected_model_id, set_selected_model_id] = useState<string>("empty");
   const [model_hover_id, set_model_hover_id] = useState<string>("empty");
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
+
+  const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
+  const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
+
+  const raycaster = new THREE.Raycaster();
+  const mouse_window_click = new THREE.Vector2();
 
   const object_list = [
     // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
@@ -233,10 +242,40 @@ export default function CanvasContainer() {
     }
   }, [models]);
 
+  function CanvasIntersectionCoordinates(event: { clientX: number; clientY: number }) {
+    mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
+
+    const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
+
+    if (intersects.length > 0) {
+      const { x, z } = intersects[0].point;
+
+      // Round x and z to the closest 0.5
+      // const rounded_x = Math.round(x * 2) / 2;
+      //  const rounded_z = Math.round(z * 2) / 2;
+
+      const rounded_x = parseFloat(x.toFixed(0));
+      const rounded_z = parseFloat(z.toFixed(0));
+
+      set_mouse_canvas_x_coordinate(rounded_x);
+      set_mouse_canvas_z_coordinate(rounded_z);
+
+      console.log(mouse_canvas_x_coordinate);
+      console.log(mouse_canvas_z_coordinate);
+    }
+  }
+
   return (
     <>
       <div className="canvas_container">
-        <Canvas onPointerDown={(event) => CanvasPointerDown(event)} onPointerUp={(event) => CanvasPointerUp(event)}>
+        <Canvas
+          onPointerDown={(event) => CanvasPointerDown(event)}
+          onPointerUp={(event) => CanvasPointerUp(event)}
+          onMouseMove={(event) => CanvasIntersectionCoordinates(event)}
+        >
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
@@ -274,6 +313,9 @@ export default function CanvasContainer() {
               <CameraControls enabled={camera_rotation} mouseButtons={{ left: 2, right: 2, middle: 0, wheel: 16 }} />
             </>
           )}
+          <Box ref={raycasterBoxIntersector} scale={[105, 0.1, 105]} position={[0, -0.5, 0]}>
+            <meshStandardMaterial transparent opacity={0} />
+          </Box>
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
             return (

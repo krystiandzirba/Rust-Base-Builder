@@ -42,6 +42,10 @@ export default App;
 // raid cost
 // different "save files / base plans"
 // xray
+// add selective visibility options (toggle off, foundations, walls, miscs ... visibility) ( conditional meshStandardMaterial rendering)
+// add wireframe, solid and textured look
+// add object list filters (walls / foundations / stairs / roofs / miscs )
+// add search bar to object list
 // "overview" - more rendered look textured objects, more lights and so on / "edit" - more raw look, objects with simple colors
 // 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
 // toggle system stats ( fps, mem, cpu)
