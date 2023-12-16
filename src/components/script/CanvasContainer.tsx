@@ -393,6 +393,7 @@ export default function CanvasContainer() {
             const modelPosition = models_coordinates[id] || { x: 0, z: 0 }; // performance issue 2/3
             return (
               <PivotControls
+                offset={[modelPosition.x, 0, modelPosition.z]}
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
                 scale={selected_model_id === id ? 3 : 0}
