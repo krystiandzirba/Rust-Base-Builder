@@ -54,6 +54,8 @@ export default App;
 // object clicked -> display options above mouse position (delete selected object, rotate -90d, +90d square foundations, -45d, +45d for everything else)
 // make a separate resource counter function for miscs (crates, rugs ...) so it wont interfere the structure upkeep cost rampup
 // if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
+// performance mode (simple boxes, no textures just colors)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
+// - (multiple objects on canvas, hovering over any object causes frames to drop)

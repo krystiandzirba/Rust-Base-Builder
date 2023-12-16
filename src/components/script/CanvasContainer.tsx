@@ -65,6 +65,12 @@ export default function CanvasContainer() {
   const raycaster = new THREE.Raycaster();
   const mouse_window_click = new THREE.Vector2();
 
+  const [models_coordinates, set_models_coordinates] = useState<{ [id: string]: { x: number; z: number } }>({}); // performance issue 1/3
+
+  const [selected_object_list, set_selected_object_list] = useState<number>(-1);
+  const [allow_model_creation, set_allow_model_creation] = useState<boolean>(false);
+  const [model_to_create, set_model_to_create] = useState<string>("none");
+
   const object_list = [
     // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
     // { name: "twig_foundation_mid", thumbnail: "", id: "FM0" },
@@ -78,27 +84,26 @@ export default function CanvasContainer() {
 
     {
       name: "stone foundation square (mid)",
-      build_cost: "300STONE",
-      upkeep_cost: "30STONE",
       thumbnail: "",
       id: "FM2",
       onClick: () => {
-        set_selected_model_id("empty"),
-          set_generated_id(randomIdGenerator()),
-          addModel(StoneFoundationSquareMid, generated_id);
+        //  set_selected_model_id("empty"),
+        //   set_generated_id(randomIdGenerator()),
+        // addModel(StoneFoundationSquareMid, generated_id);
+
+        set_model_to_create("StoneFoundationSquareMid");
       },
     },
 
     {
       name: "stone foundation square (high)",
-      build_cost: "300STONE",
-      upkeep_cost: "30STONE",
       thumbnail: "",
       id: "FH2",
       onClick: () => {
-        set_selected_model_id("empty"),
-          set_generated_id(randomIdGenerator()),
-          addModel(StoneFoundationSquareHigh, generated_id);
+        //  set_selected_model_id("empty"),
+        //   set_generated_id(randomIdGenerator()),
+        //   addModel(StoneFoundationSquareHigh, generated_id);
+        set_model_to_create("StoneFoundationSquareHigh");
       },
     },
 
@@ -118,12 +123,14 @@ export default function CanvasContainer() {
 
     {
       name: "stone wall (high)",
-      build_cost: "300STONE",
-      upkeep_cost: "30STONE",
       thumbnail: "",
       id: "WH2",
       onClick: () => {
-        set_selected_model_id("empty"), set_generated_id(randomIdGenerator()), addModel(StoneWallHigh, generated_id);
+        // set_selected_model_id("empty"),
+        // set_generated_id(randomIdGenerator()),
+        //   addModel(StoneWallHigh, generated_id);
+
+        set_model_to_create("StoneWallHigh");
       },
     },
 
@@ -242,7 +249,27 @@ export default function CanvasContainer() {
     }
   }, [models]);
 
-  function CanvasIntersectionCoordinates(event: { clientX: number; clientY: number }) {
+  function CanvasOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
+    if (page_mode === "edit") {
+      mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
+
+      const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
+
+      if (intersects.length > 0) {
+        const { x, z } = intersects[0].point;
+        const rounded_x = parseFloat(x.toFixed(0));
+        const rounded_z = parseFloat(z.toFixed(0));
+
+        set_mouse_canvas_x_coordinate(rounded_x);
+        set_mouse_canvas_z_coordinate(rounded_z);
+      }
+    }
+  }
+
+  function CanvasClickIntersectionCoordinates(event: { clientX: number; clientY: number }) {
     mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -253,18 +280,58 @@ export default function CanvasContainer() {
     if (intersects.length > 0) {
       const { x, z } = intersects[0].point;
 
-      // Round x and z to the closest 0.5
-      // const rounded_x = Math.round(x * 2) / 2;
-      //  const rounded_z = Math.round(z * 2) / 2;
-
       const rounded_x = parseFloat(x.toFixed(0));
       const rounded_z = parseFloat(z.toFixed(0));
 
-      set_mouse_canvas_x_coordinate(rounded_x);
-      set_mouse_canvas_z_coordinate(rounded_z);
+      set_models_coordinates((prevCoordinates) => ({
+        ...prevCoordinates,
+        [generated_id]: { x: rounded_x, z: rounded_z },
+      }));
+    }
+  }
 
-      console.log(mouse_canvas_x_coordinate);
-      console.log(mouse_canvas_z_coordinate);
+  // function CanvasIntersectionCoordinates(event: { clientX: number; clientY: number }) {
+  //   mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
+  //   mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  //   raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
+
+  //   const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
+
+  //   if (intersects.length > 0) {
+  //     const { x, z } = intersects[0].point;
+
+  //     // Round x and z to the closest 0.5
+  //     // const rounded_x = Math.round(x * 2) / 2;
+  //     //  const rounded_z = Math.round(z * 2) / 2;
+
+  //     const rounded_x = parseFloat(x.toFixed(0));
+  //     const rounded_z = parseFloat(z.toFixed(0));
+
+  //     set_mouse_canvas_x_coordinate(rounded_x);
+  //     set_mouse_canvas_z_coordinate(rounded_z);
+
+  //     console.log(mouse_canvas_x_coordinate);
+  //     console.log(mouse_canvas_z_coordinate);
+  //   }
+  // }
+
+  function CanvasOnClick() {
+    set_selected_model_id("empty");
+
+    if (model_to_create === "StoneFoundationSquareHigh") {
+      set_generated_id(randomIdGenerator());
+      addModel(StoneFoundationSquareHigh, generated_id);
+    }
+
+    if (model_to_create === "StoneFoundationSquareMid") {
+      set_generated_id(randomIdGenerator());
+      addModel(StoneFoundationSquareMid, generated_id);
+    }
+
+    if (model_to_create === "StoneWallHigh") {
+      set_generated_id(randomIdGenerator());
+      addModel(StoneWallHigh, generated_id);
     }
   }
 
@@ -274,7 +341,12 @@ export default function CanvasContainer() {
         <Canvas
           onPointerDown={(event) => CanvasPointerDown(event)}
           onPointerUp={(event) => CanvasPointerUp(event)}
-          onMouseMove={(event) => CanvasIntersectionCoordinates(event)}
+          onMouseMove={(event) => CanvasOverIntersectionCoordinates(event)}
+          onClick={(event) => {
+            if (allow_model_creation) {
+              CanvasClickIntersectionCoordinates(event), CanvasOnClick();
+            }
+          }}
         >
           <ambientLight />
           <directionalLight />
@@ -313,11 +385,12 @@ export default function CanvasContainer() {
               <CameraControls enabled={camera_rotation} mouseButtons={{ left: 2, right: 2, middle: 0, wheel: 16 }} />
             </>
           )}
-          <Box ref={raycasterBoxIntersector} scale={[105, 0.1, 105]} position={[0, -0.5, 0]}>
+          <Box ref={raycasterBoxIntersector} scale={[100, 0.1, 100]} position={[0, -0.5, 0]}>
             <meshStandardMaterial transparent opacity={0} />
           </Box>
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
+            const modelPosition = models_coordinates[id] || { x: 0, z: 0 }; // performance issue 2/3
             return (
               <PivotControls
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
@@ -332,6 +405,7 @@ export default function CanvasContainer() {
                 onDragEnd={() => PivotDragEnd()}
               >
                 <mesh
+                  position={[modelPosition.x, 0, modelPosition.z]} // performance issue 3/3
                   key={id}
                   onPointerOver={() => MeshPointerOver(id)}
                   onPointerOut={() => MeshPointerOut(id)}
@@ -343,6 +417,11 @@ export default function CanvasContainer() {
               </PivotControls>
             );
           })}
+          {allow_model_creation && (
+            <Box position={[mouse_canvas_x_coordinate, 0, mouse_canvas_z_coordinate]} scale={[2, 0.01, 2]}>
+              <meshStandardMaterial transparent opacity={1} color={"#59d0ff"} />
+            </Box>
+          )}
         </Canvas>
       </div>
       <div
@@ -354,7 +433,21 @@ export default function CanvasContainer() {
       >
         <div className="object_list">
           {object_list.map((item, index) => (
-            <button key={index} className="object" onClick={item.onClick ?? (() => {})}>
+            <button
+              key={index}
+              className={selected_object_list === index ? "object object_selected" : "object object_deselected"}
+              onClick={() => {
+                if (selected_object_list === index) {
+                  set_selected_object_list(-1);
+                  set_allow_model_creation(false);
+                  set_model_to_create("none");
+                } else {
+                  set_selected_object_list(index);
+                  set_allow_model_creation(true);
+                }
+                item.onClick?.();
+              }}
+            >
               {item.name}
             </button>
           ))}
