@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box } from "@react-three/drei";
 import * as THREE from "three";
+import { Perf } from "r3f-perf";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -348,6 +349,14 @@ export default function CanvasContainer() {
             }
           }}
         >
+          <Perf
+            position={"top-left"}
+            logsPerSecond={3}
+            matrixUpdate={true}
+            showGraph={true}
+            deepAnalyze={true}
+            // chart={[10, 12]}
+          />
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
