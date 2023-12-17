@@ -251,7 +251,7 @@ export default function CanvasContainer() {
   }, [models]);
 
   function CanvasOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
       mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -271,23 +271,25 @@ export default function CanvasContainer() {
   }
 
   function CanvasClickIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
+      mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
+      raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
 
-    const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
+      const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
 
-    if (intersects.length > 0) {
-      const { x, z } = intersects[0].point;
+      if (intersects.length > 0) {
+        const { x, z } = intersects[0].point;
 
-      const rounded_x = parseFloat(x.toFixed(0));
-      const rounded_z = parseFloat(z.toFixed(0));
+        const rounded_x = parseFloat(x.toFixed(0));
+        const rounded_z = parseFloat(z.toFixed(0));
 
-      set_models_coordinates((prevCoordinates) => ({
-        ...prevCoordinates,
-        [generated_id]: { x: rounded_x, z: rounded_z },
-      }));
+        set_models_coordinates((prevCoordinates) => ({
+          ...prevCoordinates,
+          [generated_id]: { x: rounded_x, z: rounded_z },
+        }));
+      }
     }
   }
 
@@ -320,19 +322,21 @@ export default function CanvasContainer() {
   function CanvasOnClick() {
     set_selected_model_id("empty");
 
-    if (model_to_create === "StoneFoundationSquareHigh") {
-      set_generated_id(randomIdGenerator());
-      addModel(StoneFoundationSquareHigh, generated_id);
-    }
+    if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
+      if (model_to_create === "StoneFoundationSquareHigh") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationSquareHigh, generated_id);
+      }
 
-    if (model_to_create === "StoneFoundationSquareMid") {
-      set_generated_id(randomIdGenerator());
-      addModel(StoneFoundationSquareMid, generated_id);
-    }
+      if (model_to_create === "StoneFoundationSquareMid") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationSquareMid, generated_id);
+      }
 
-    if (model_to_create === "StoneWallHigh") {
-      set_generated_id(randomIdGenerator());
-      addModel(StoneWallHigh, generated_id);
+      if (model_to_create === "StoneWallHigh") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneWallHigh, generated_id);
+      }
     }
   }
 
