@@ -23,6 +23,7 @@ interface CanvasModelsListProps {
 type ModelType = {
   id: string;
   component: React.FC;
+  rotation: THREE.Euler;
 };
 
 const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
@@ -68,6 +69,10 @@ export default function CanvasContainer() {
   const mouse_window_click = new THREE.Vector2();
 
   const [models_coordinates, set_models_coordinates] = useState<{ [id: string]: { x: number; z: number } }>({}); // performance issue 1/3
+
+  const [modelsTransforms, setModelsTransforms] = useState<{
+    [id: string]: { position: { x: number; z: number }; rotation: THREE.Euler };
+  }>({});
 
   const [selected_object_list, set_selected_object_list] = useState<number>(-1);
   const [allow_model_creation, set_allow_model_creation] = useState<boolean>(false);
@@ -141,6 +146,7 @@ export default function CanvasContainer() {
 
       onClick: () => {
         {
+          console.log(modelsTransforms);
         }
       },
     },
@@ -156,8 +162,10 @@ export default function CanvasContainer() {
     return random_id;
   }
 
-  const addModel = (modelComponent: React.FC, id: string) => {
-    setModels((prevModels) => [...prevModels, { id, component: modelComponent }]);
+  const defaultRotation = new THREE.Euler(0, 0, 0);
+
+  const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
+    setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
   };
 
   const RemoveSelectedModel = (id: string) => {
@@ -286,13 +294,32 @@ export default function CanvasContainer() {
         const rounded_x = parseFloat(x.toFixed(0));
         const rounded_z = parseFloat(z.toFixed(0));
 
-        set_models_coordinates((prevCoordinates) => ({
-          ...prevCoordinates,
-          [generated_id]: { x: rounded_x, z: rounded_z },
+        setModelsTransforms((prevTransforms) => ({
+          ...prevTransforms,
+          [generated_id]: { position: { x: rounded_x, z: rounded_z }, rotation: new THREE.Euler(0, 0, 0) },
         }));
       }
     }
   }
+
+  const rotateObject = (objectId: string, degrees: number) => {
+    setModelsTransforms((prevTransforms) => {
+      const updatedTransforms = { ...prevTransforms };
+
+      if (updatedTransforms[objectId]) {
+        const newRotation = updatedTransforms[objectId].rotation.clone();
+
+        newRotation.y += THREE.MathUtils.degToRad(degrees);
+
+        updatedTransforms[objectId] = {
+          ...updatedTransforms[objectId],
+          rotation: newRotation,
+        };
+      }
+
+      return updatedTransforms;
+    });
+  };
 
   // function CanvasIntersectionCoordinates(event: { clientX: number; clientY: number }) {
   //   mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -326,17 +353,17 @@ export default function CanvasContainer() {
     if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
       if (model_to_create === "StoneFoundationSquareHigh") {
         set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareHigh, generated_id);
+        addModel(StoneFoundationSquareHigh, generated_id, defaultRotation);
       }
 
       if (model_to_create === "StoneFoundationSquareMid") {
         set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareMid, generated_id);
+        addModel(StoneFoundationSquareMid, generated_id, defaultRotation);
       }
 
       if (model_to_create === "StoneWallHigh") {
         set_generated_id(randomIdGenerator());
-        addModel(StoneWallHigh, generated_id);
+        addModel(StoneWallHigh, generated_id, defaultRotation);
       }
     }
   }
@@ -397,15 +424,18 @@ export default function CanvasContainer() {
           </Box>
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
-            const modelPosition = models_coordinates[id] || { x: 0, z: 0 }; // performance issue 2/3
+            const modelTransform = modelsTransforms[id] || {
+              position: { x: 0, z: 0 },
+              rotation: new THREE.Euler(0, 0, 0),
+            }; // performance issue 2/3
             return (
               <PivotControls
-                offset={[modelPosition.x, 0, modelPosition.z]}
+                offset={[modelTransform.position.x, 0, modelTransform.position.z]}
+                rotation={modelTransform.rotation.toArray().map(Number) as [number, number, number]}
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
                 scale={selected_model_id === id ? 3 : 0}
                 lineWidth={0}
-                rotation={[0, 0, 0]}
                 depthTest={false}
                 activeAxes={transform_model_axis === "XYZ" ? [true, true, true] : [true, false, true]}
                 axisColors={["orange", "yellow", "orange"]}
@@ -413,7 +443,8 @@ export default function CanvasContainer() {
                 onDragEnd={() => PivotDragEnd()}
               >
                 <mesh
-                  position={[modelPosition.x, 0, modelPosition.z]} // performance issue 3/3
+                  position={[modelTransform.position.x, 0, modelTransform.position.z]}
+                  rotation={modelTransform.rotation} // performance issue 3/3
                   key={id}
                   onPointerOver={() => MeshPointerOver(id)}
                   onPointerOut={() => MeshPointerOut(id)}
@@ -482,6 +513,14 @@ export default function CanvasContainer() {
           remove all models
         </button>
       )}
+      <button
+        className="rotate_selected_object"
+        onClick={() => {
+          rotateObject(selected_model_id, +45);
+        }}
+      >
+        rotate object
+      </button>
     </>
   );
 }
