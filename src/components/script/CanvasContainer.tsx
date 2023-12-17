@@ -78,6 +78,9 @@ export default function CanvasContainer() {
   const [allow_model_creation, set_allow_model_creation] = useState<boolean>(false);
   const [model_to_create, set_model_to_create] = useState<string>("none");
 
+  const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
+  const [model_rotation_direction, set_model_rotation_direction] = useState<string>("+");
+
   const object_list = [
     // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
     // { name: "twig_foundation_mid", thumbnail: "", id: "FM0" },
@@ -302,14 +305,16 @@ export default function CanvasContainer() {
     }
   }
 
-  const rotateObject = (objectId: string, degrees: number) => {
+  const rotateObject = (objectId: string) => {
     setModelsTransforms((prevTransforms) => {
       const updatedTransforms = { ...prevTransforms };
+
+      const rotationDirection = model_rotation_direction === "+" ? -1 : 1;
 
       if (updatedTransforms[objectId]) {
         const newRotation = updatedTransforms[objectId].rotation.clone();
 
-        newRotation.y += THREE.MathUtils.degToRad(degrees);
+        newRotation.y += THREE.MathUtils.degToRad(model_rotation_degree * rotationDirection);
 
         updatedTransforms[objectId] = {
           ...updatedTransforms[objectId],
@@ -365,6 +370,20 @@ export default function CanvasContainer() {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallHigh, generated_id, defaultRotation);
       }
+    }
+  }
+
+  function ChangeRotationDegree() {
+    if (model_rotation_degree === 90) {
+      set_model_rotation_degree(45);
+    }
+
+    if (model_rotation_degree === 45) {
+      set_model_rotation_degree(22.5);
+    }
+
+    if (model_rotation_degree === 22.5) {
+      set_model_rotation_degree(90);
     }
   }
 
@@ -513,14 +532,18 @@ export default function CanvasContainer() {
           remove all models
         </button>
       )}
-      <button
-        className="rotate_selected_object"
-        onClick={() => {
-          rotateObject(selected_model_id, +45);
-        }}
-      >
+      <button className="rotate_selected_object" onClick={() => {}}>
         rotate object
       </button>
+
+      <div className="object_manipulation_container">
+        <button onClick={() => rotateObject(selected_model_id)}>rotate left</button>
+        <button onClick={() => ChangeRotationDegree()}>
+          {model_rotation_direction}
+          {model_rotation_degree}
+        </button>
+        <button onClick={() => rotateObject(selected_model_id)}>rotate right</button>
+      </div>
     </>
   );
 }

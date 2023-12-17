@@ -101,3 +101,14 @@
   background-color: rgb(191, 191, 191);
   overflow-x: auto;
 }
+
+.object_manipulation_container {
+  width: 10vw;
+  height: 5vh;
+  position: absolute;
+  top: 20vh;
+  left: 50%;
+  z-index: 10;
+  background-color: rgb(191, 191, 191);
+  overflow-x: auto;
+}
