@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box } from "@react-three/drei";
+import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box, Stats } from "@react-three/drei";
 import * as THREE from "three";
 import { Perf } from "r3f-perf";
 
@@ -14,6 +14,7 @@ import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSqu
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
+import PerformanceStats from "./PerformanceStats.tsx";
 
 interface CanvasModelsListProps {
   models: ModelType[];
@@ -353,14 +354,7 @@ export default function CanvasContainer() {
             }
           }}
         >
-          <Perf
-            position={"top-left"}
-            logsPerSecond={3}
-            matrixUpdate={true}
-            showGraph={true}
-            deepAnalyze={true}
-            // chart={[10, 12]}
-          />
+          <PerformanceStats />
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
