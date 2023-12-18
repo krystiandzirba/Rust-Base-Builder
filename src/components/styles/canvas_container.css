@@ -8,55 +8,6 @@
   background-color: rgb(37, 37, 37);
 }
 
-.objects_container {
-  width: 22.5vw;
-  height: 100vh;
-  position: absolute;
-  top: 0vh;
-  left: 0vw;
-  z-index: 10;
-  background-color: rgb(65, 65, 65);
-  transition: transform 0.1s ease-in-out;
-}
-
-.objects_container_displayed {
-  transform: translateX(0);
-}
-
-.objects_container_hidden {
-  transform: translateX(-110%);
-}
-
-.object_list {
-  width: 95%;
-  height: 80%;
-  position: absolute;
-  top: 15%;
-  left: 0%;
-  background-color: rgb(155, 64, 64);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
-  grid-gap: 1vh;
-  overflow-y: auto;
-  margin: 1vh;
-}
-
-.object {
-  width: 100%;
-  height: 15vh;
-
-  margin-bottom: 1vh;
-  word-wrap: break-word;
-}
-
-.object_deselected {
-  background-color: rgb(184, 184, 184);
-}
-
-.object_selected {
-  background-color: rgb(255, 255, 255);
-}
-
 .canvas_models_list {
   width: 17.5vw;
   height: 27.5vh;

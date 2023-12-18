@@ -1,13 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box, Stats } from "@react-three/drei";
+import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box } from "@react-three/drei";
 import * as THREE from "three";
-import { Perf } from "r3f-perf";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type } from "../../Store.tsx";
-import { set_canvas_models_array } from "../../Store.tsx";
+import { set_cursor_type, set_canvas_models_array } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -53,6 +51,8 @@ export default function CanvasContainer() {
   // prettier-ignore
   const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
+  const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
+  const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
 
   const perspectiveCameraControlsRef = useRef<CameraControls>(null);
   const raycasterBoxIntersector = useRef(null);
@@ -84,80 +84,6 @@ export default function CanvasContainer() {
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
   const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(22.5);
   const [model_rotation_direction, set_model_rotation_direction] = useState<string>("+");
-
-  const object_list = [
-    // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
-    // { name: "twig_foundation_mid", thumbnail: "", id: "FM0" },
-    // { name: "twig_foundation_high", thumbnail: "", id: "FH0" },
-
-    // { name: "wooden_foundation_low", thumbnail: "", id: "FL1" },
-    // { name: "wooden_foundation_mid", thumbnail: "", id: "FM1" },
-    // { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
-
-    // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
-
-    {
-      name: "stone foundation square (mid)",
-      thumbnail: "",
-      id: "FM2",
-      onClick: () => {
-        //  set_selected_model_id("empty"),
-        //   set_generated_id(randomIdGenerator()),
-        // addModel(StoneFoundationSquareMid, generated_id);
-
-        set_model_to_create("StoneFoundationSquareMid");
-      },
-    },
-
-    {
-      name: "stone foundation square (high)",
-      thumbnail: "",
-      id: "FH2",
-      onClick: () => {
-        //  set_selected_model_id("empty"),
-        //   set_generated_id(randomIdGenerator()),
-        //   addModel(StoneFoundationSquareHigh, generated_id);
-        set_model_to_create("StoneFoundationSquareHigh");
-      },
-    },
-
-    // { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
-    // { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
-    // { name: "metal_foundation_high", thumbnail: "", id: "FH3" },
-
-    // { name: "armored_foundation_low", thumbnail: "", id: "FL4" },
-    // { name: "armored_foundation_mid", thumbnail: "", id: "FM4" },
-    // { name: "armored_foundation_high", thumbnail: "", id: "FH4" },
-
-    // { name: "twig_wall", thumbnail: "", id: "W0" },
-    // { name: "wooden_wall", thumbnail: "", id: "W1" },
-    // { name: "stone_wall", thumbnail: "", id: "W2" },
-    // { name: "metal_wall", thumbnail: "", id: "W3" },
-    // { name: "armored_wall", thumbnail: "", id: "W4" },
-
-    {
-      name: "stone wall (high)",
-      thumbnail: "",
-      id: "WH2",
-      onClick: () => {
-        // set_selected_model_id("empty"),
-        // set_generated_id(randomIdGenerator()),
-        //   addModel(StoneWallHigh, generated_id);
-
-        set_model_to_create("StoneWallHigh");
-      },
-    },
-
-    {
-      name: "test",
-
-      onClick: () => {
-        {
-          console.log(modelsTransforms);
-        }
-      },
-    },
-  ];
 
   function randomIdGenerator() {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -360,17 +286,20 @@ export default function CanvasContainer() {
     set_selected_model_id("empty");
 
     if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
-      if (model_to_create === "StoneFoundationSquareHigh") {
+      if (model_type_to_create === "StoneFoundationSquareHigh") {
+        // if (model_to_create === "StoneFoundationSquareHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareHigh, generated_id, defaultRotation);
       }
 
-      if (model_to_create === "StoneFoundationSquareMid") {
+      if (model_type_to_create === "StoneFoundationSquareMid") {
+        //  if (model_to_create === "StoneFoundationSquareMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareMid, generated_id, defaultRotation);
       }
 
-      if (model_to_create === "StoneWallHigh") {
+      if (model_type_to_create === "StoneWallHigh") {
+        // if (model_to_create === "StoneWallHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallHigh, generated_id, defaultRotation);
       }
@@ -405,7 +334,7 @@ export default function CanvasContainer() {
           onPointerUp={(event) => CanvasPointerUp(event)}
           onMouseMove={(event) => CanvasOverIntersectionCoordinates(event)}
           onClick={(event) => {
-            if (allow_model_creation) {
+            if (model_creation_state) {
               CanvasClickIntersectionCoordinates(event), CanvasOnClick();
             }
           }}
@@ -485,41 +414,12 @@ export default function CanvasContainer() {
               </PivotControls>
             );
           })}
-          {allow_model_creation && (
+          {model_creation_state && (
             <Box position={[mouse_canvas_x_coordinate, 0, mouse_canvas_z_coordinate]} scale={[2, 0.01, 2]}>
               <meshStandardMaterial transparent opacity={1} color={"#59d0ff"} />
             </Box>
           )}
         </Canvas>
-      </div>
-      <div
-        className={
-          page_mode === "edit"
-            ? "objects_container objects_container_displayed"
-            : "objects_container objects_container_hidden"
-        }
-      >
-        <div className="object_list">
-          {object_list.map((item, index) => (
-            <button
-              key={index}
-              className={selected_object_list === index ? "object object_selected" : "object object_deselected"}
-              onClick={() => {
-                if (selected_object_list === index) {
-                  set_selected_object_list(-1);
-                  set_allow_model_creation(false);
-                  set_model_to_create("none");
-                } else {
-                  set_selected_object_list(index);
-                  set_allow_model_creation(true);
-                }
-                item.onClick?.();
-              }}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
       </div>
       <CanvasModelsList models={models} />
 

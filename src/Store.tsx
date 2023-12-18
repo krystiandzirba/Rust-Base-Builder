@@ -96,6 +96,22 @@ const canvasModelsArraySlice = createSlice({
   },
 });
 
+const objectListModelCreatorSlice = createSlice({
+  name: "objectListModelCreator",
+  initialState: {
+    model_type_to_create: "",
+    model_creation_state: false,
+  },
+  reducers: {
+    set_model_type_to_create: (state, action) => {
+      return { ...state, model_type_to_create: action.payload };
+    },
+    set_model_creation_state: (state, action) => {
+      return { ...state, model_creation_state: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 export const { set_transform_model_axis } = transformAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
@@ -104,6 +120,7 @@ export const { set_ortographic_camera_direction } = ortographicCameraDirectionSl
 export const { set_perspective_camera_reset } = perspectiveCameraResetSlice.actions;
 export const { set_cursor_type } = cursorTypeSlice.actions;
 export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
+export const { set_model_type_to_create, set_model_creation_state } = objectListModelCreatorSlice.actions;
 
 export const store = configureStore({
   reducer: {
@@ -115,6 +132,7 @@ export const store = configureStore({
     perspectiveCameraReset: perspectiveCameraResetSlice.reducer,
     cursorType: cursorTypeSlice.reducer,
     canvasModelsArray: canvasModelsArraySlice.reducer,
+    modelTypeToCreate: objectListModelCreatorSlice.reducer,
   },
 });
 
