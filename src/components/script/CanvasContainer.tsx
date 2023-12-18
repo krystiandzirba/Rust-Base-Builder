@@ -16,6 +16,8 @@ import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCanArrowUp, faArrowRotateRight, faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
 interface CanvasModelsListProps {
   models: ModelType[];
 }
@@ -78,7 +80,9 @@ export default function CanvasContainer() {
   const [allow_model_creation, set_allow_model_creation] = useState<boolean>(false);
   const [model_to_create, set_model_to_create] = useState<string>("none");
 
+  const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
+  const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(22.5);
   const [model_rotation_direction, set_model_rotation_direction] = useState<string>("+");
 
   const object_list = [
@@ -375,15 +379,21 @@ export default function CanvasContainer() {
 
   function ChangeRotationDegree() {
     if (model_rotation_degree === 90) {
+      set_previous_model_rotation_degree(22.5);
       set_model_rotation_degree(45);
+      set_next_model_rotation_degree(90);
     }
 
     if (model_rotation_degree === 45) {
+      set_previous_model_rotation_degree(90);
       set_model_rotation_degree(22.5);
+      set_next_model_rotation_degree(45);
     }
 
     if (model_rotation_degree === 22.5) {
+      set_previous_model_rotation_degree(45);
       set_model_rotation_degree(90);
+      set_next_model_rotation_degree(22.5);
     }
   }
 
@@ -512,38 +522,48 @@ export default function CanvasContainer() {
         </div>
       </div>
       <CanvasModelsList models={models} />
-      {page_mode === "edit" && (
-        <button
-          className="remove_selected_model"
-          onClick={() => {
-            RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
-          }}
-        >
-          remove selected model
-        </button>
-      )}
-      {page_mode === "edit" && (
-        <button
-          className="remove_all_models"
-          onClick={() => {
-            RemoveAllModels(), set_selected_model_id("empty");
-          }}
-        >
-          remove all models
-        </button>
-      )}
-      <button className="rotate_selected_object" onClick={() => {}}>
-        rotate object
-      </button>
 
-      <div className="object_manipulation_container">
-        <button onClick={() => rotateObject(selected_model_id)}>rotate left</button>
-        <button onClick={() => ChangeRotationDegree()}>
-          {model_rotation_direction}
-          {model_rotation_degree}
-        </button>
-        <button onClick={() => rotateObject(selected_model_id)}>rotate right</button>
-      </div>
+      {/* OBJECT MANIPULATION ( DELETE / ROTATE ) */}
+
+      {page_mode === "edit" && (
+        <>
+          <button
+            className="remove_all_models"
+            onClick={() => {
+              RemoveAllModels(), set_selected_model_id("empty");
+            }}
+          >
+            remove all models
+          </button>
+          <div className="object_manipulation_container">
+            <button
+              className="remove_selected_model"
+              onClick={() => {
+                RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+              }}
+            >
+              <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
+            </button>
+            <div className="object_rotation_container">
+              <button onClick={() => rotateObject(selected_model_id)} className="rotation_left">
+                <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
+              </button>
+              <div className="model_rotation_wheel">
+                <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
+                <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
+                  -{model_rotation_degree}°-
+                </button>
+                <div className="model_rotation_next">{next_model_rotation_degree}°</div>
+              </div>
+              <button onClick={() => rotateObject(selected_model_id)} className="rotation_right">
+                <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* OBJECT MANIPULATION ( DELETE / ROTATE ) */}
     </>
   );
 }

@@ -60,3 +60,4 @@ export default App;
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
 // - (multiple objects on canvas, hovering over any object causes frames to drop)
 // - creating models while panning the camera
+// - rotate the model pivot together with the model itself
