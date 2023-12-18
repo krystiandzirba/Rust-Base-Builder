@@ -58,6 +58,7 @@ export default App;
 // make a separate resource counter function for miscs (crates, rugs ...) so it wont interfere the structure upkeep cost rampup
 // if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
 // performance mode (simple boxes, no textures just colors)
+// add a fov slider
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

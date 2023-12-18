@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const pageModeSlice = createSlice({
-  name: "pageMode",
+  name: "page mode",
   initialState: {
     page_mode: "overview",
   },
@@ -12,22 +12,22 @@ const pageModeSlice = createSlice({
   },
 });
 
-const transformAxisSlice = createSlice({
-  name: "transformAxis",
+const modelPivotAxisSlice = createSlice({
+  name: "transform axis",
   initialState: {
-    transform_model_axis: null,
+    model_pivot_axis: null,
   },
   reducers: {
-    set_transform_model_axis: (state, action) => {
-      return { ...state, transform_model_axis: action.payload };
+    set_model_pivot_axis: (state, action) => {
+      return { ...state, model_pivot_axis: action.payload };
     },
   },
 });
 
 const cameraTypeSlice = createSlice({
-  name: "cameraType",
+  name: "camera type",
   initialState: {
-    camera_type: "3D_PerspectiveCamera",
+    camera_type: "camera_3d",
   },
   reducers: {
     set_camera_type: (state, action) => {
@@ -36,44 +36,44 @@ const cameraTypeSlice = createSlice({
   },
 });
 
-const ortographicCameraPositionSlice = createSlice({
-  name: "ortographicCameraPosition",
+const camera2DPositionSlice = createSlice({
+  name: "2d camera position",
   initialState: {
-    ortographic_camera_position: [0, 0, 45],
+    camera_2d_position: [0, 0, 45],
   },
   reducers: {
-    set_ortographic_camera_position: (state, action) => {
-      return { ...state, ortographic_camera_position: action.payload };
+    set_camera_2d_position: (state, action) => {
+      return { ...state, camera_2d_position: action.payload };
     },
   },
 });
 
-const ortographicCameraDirectionSlice = createSlice({
-  name: "ortographicCameraDirection",
+const camera2DDirectionSlice = createSlice({
+  name: "2d camera direction",
   initialState: {
-    ortographic_camera_direction: "",
+    camera_2d_direction: "",
   },
   reducers: {
-    set_ortographic_camera_direction: (state, action) => {
-      return { ...state, ortographic_camera_direction: action.payload };
+    set_camera_2d_direction: (state, action) => {
+      return { ...state, camera_2d_direction: action.payload };
     },
   },
 });
 
-const perspectiveCameraResetSlice = createSlice({
-  name: "perspectiveCameraReset",
+const camera3DResetSlice = createSlice({
+  name: "3d camera reset",
   initialState: {
-    perspective_camera_reset: false,
+    camera_3d_reset: false,
   },
   reducers: {
-    set_perspective_camera_reset: (state, action) => {
-      return { ...state, perspective_camera_reset: action.payload };
+    set_camera_3d_reset: (state, action) => {
+      return { ...state, camera_3d_reset: action.payload };
     },
   },
 });
 
 const cursorTypeSlice = createSlice({
-  name: "cursorType",
+  name: "cursor type",
   initialState: {
     cursor_type: "default",
   },
@@ -85,7 +85,7 @@ const cursorTypeSlice = createSlice({
 });
 
 const canvasModelsArraySlice = createSlice({
-  name: "canvasModelsArray",
+  name: "canvas models array",
   initialState: {
     canvas_models_array: [],
   },
@@ -97,7 +97,7 @@ const canvasModelsArraySlice = createSlice({
 });
 
 const objectListModelCreatorSlice = createSlice({
-  name: "objectListModelCreator",
+  name: "object list models creator",
   initialState: {
     model_type_to_create: "",
     model_creation_state: false,
@@ -113,11 +113,11 @@ const objectListModelCreatorSlice = createSlice({
 });
 
 export const { set_page_mode } = pageModeSlice.actions;
-export const { set_transform_model_axis } = transformAxisSlice.actions;
+export const { set_model_pivot_axis } = modelPivotAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
-export const { set_ortographic_camera_position } = ortographicCameraPositionSlice.actions;
-export const { set_ortographic_camera_direction } = ortographicCameraDirectionSlice.actions;
-export const { set_perspective_camera_reset } = perspectiveCameraResetSlice.actions;
+export const { set_camera_2d_position } = camera2DPositionSlice.actions;
+export const { set_camera_2d_direction } = camera2DDirectionSlice.actions;
+export const { set_camera_3d_reset } = camera3DResetSlice.actions;
 export const { set_cursor_type } = cursorTypeSlice.actions;
 export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
 export const { set_model_type_to_create, set_model_creation_state } = objectListModelCreatorSlice.actions;
@@ -125,11 +125,11 @@ export const { set_model_type_to_create, set_model_creation_state } = objectList
 export const store = configureStore({
   reducer: {
     pageMode: pageModeSlice.reducer,
-    transformAxis: transformAxisSlice.reducer,
+    modelPivotAxis: modelPivotAxisSlice.reducer,
     cameraType: cameraTypeSlice.reducer,
-    ortographicCameraPosition: ortographicCameraPositionSlice.reducer,
-    ortographicCameraDirection: ortographicCameraDirectionSlice.reducer,
-    perspectiveCameraReset: perspectiveCameraResetSlice.reducer,
+    camera2DPosition: camera2DPositionSlice.reducer,
+    camera2DDirection: camera2DDirectionSlice.reducer,
+    camera3DReset: camera3DResetSlice.reducer,
     cursorType: cursorTypeSlice.reducer,
     canvasModelsArray: canvasModelsArraySlice.reducer,
     modelTypeToCreate: objectListModelCreatorSlice.reducer,

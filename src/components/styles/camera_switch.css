@@ -57,7 +57,7 @@
   left: 92.25vw;
 }
 
-.perspective_camera_reset {
+.camera_3d_reset {
   width: 3.5vw;
   height: 5.75vh;
   position: absolute;
@@ -69,7 +69,7 @@
   left: 96vw;
 }
 
-.perspective_camera_reset:hover {
+.camera_3d_reset:hover {
   transform: scale(1.1);
 }
 

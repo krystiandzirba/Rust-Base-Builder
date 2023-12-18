@@ -44,58 +44,41 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 export default function CanvasContainer() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const transform_model_axis = useSelector((state: RootState) => state.transformAxis.transform_model_axis);
+  const model_pivot_axis = useSelector((state: RootState) => state.modelPivotAxis.model_pivot_axis);
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
   // prettier-ignore
-  const ortographic_camera_position = useSelector((state: RootState) => state.ortographicCameraPosition.ortographic_camera_position);
+  const camera_2d_position = useSelector((state: RootState) => state.camera2DPosition.camera_2d_position);
   // prettier-ignore
-  const perspective_camera_reset = useSelector((state: RootState) => state.perspectiveCameraReset.perspective_camera_reset);
+  const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
 
+  const [camera_rotation, set_camera_rotation] = useState(true);
+  const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
+  const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
+
   const perspectiveCameraControlsRef = useRef<CameraControls>(null);
   const raycasterBoxIntersector = useRef(null);
 
-  const [camera_rotation, set_camera_rotation] = useState(true);
+  const raycaster = new THREE.Raycaster();
+  const mouse_window_click = new THREE.Vector2();
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [selected_model_id, set_selected_model_id] = useState<string>("empty");
   const [model_hover_id, set_model_hover_id] = useState<string>("empty");
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
 
-  const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
-  const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
-
-  const raycaster = new THREE.Raycaster();
-  const mouse_window_click = new THREE.Vector2();
-
-  const [models_coordinates, set_models_coordinates] = useState<{ [id: string]: { x: number; z: number } }>({}); // performance issue 1/3
-
   const [modelsTransforms, setModelsTransforms] = useState<{
     [id: string]: { position: { x: number; z: number }; rotation: THREE.Euler };
   }>({});
-
-  const [selected_object_list, set_selected_object_list] = useState<number>(-1);
-  const [allow_model_creation, set_allow_model_creation] = useState<boolean>(false);
-  const [model_to_create, set_model_to_create] = useState<string>("none");
 
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
   const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(22.5);
   const [model_rotation_direction, set_model_rotation_direction] = useState<string>("+");
 
-  function randomIdGenerator() {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let random_id = "";
-    for (let i = 0; i < 10; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      random_id += characters[randomIndex];
-    }
-    return random_id;
-  }
-
-  const defaultRotation = new THREE.Euler(0, 0, 0);
+  const default_object_rotation = new THREE.Euler(0, 0, 0);
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
@@ -110,6 +93,20 @@ export default function CanvasContainer() {
     setModels([]);
     dispatch(set_cursor_type("default"));
   };
+
+  function storeCanvasModelsNames(models: any[]) {
+    return models.map((model) => model.component.displayName);
+  }
+
+  function randomIdGenerator() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let random_id = "";
+    for (let i = 0; i < 10; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      random_id += characters[randomIndex];
+    }
+    return random_id;
+  }
 
   function PivotDragStart(index: string) {
     if (page_mode === "edit") {
@@ -176,24 +173,8 @@ export default function CanvasContainer() {
     }
   }
 
-  function storeCanvasModelsNames(models: any[]) {
-    return models.map((model) => model.component.displayName);
-  }
-
-  document.body.style.cursor = cursor_type;
-
-  useEffect(() => {
-    PerspectiveCameraReset();
-  }, [perspective_camera_reset]);
-
-  useEffect(() => {
-    {
-      dispatch(set_canvas_models_array(storeCanvasModelsNames(models)));
-    }
-  }, [models]);
-
-  function CanvasOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
+  function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
+    if (page_mode === "edit" && camera_type === "camera_3d") {
       mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -212,8 +193,8 @@ export default function CanvasContainer() {
     }
   }
 
-  function CanvasClickIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
+  function CanvasMouseClickIntersectionCoordinates(event: { clientX: number; clientY: number }) {
+    if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
       mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -235,76 +216,45 @@ export default function CanvasContainer() {
     }
   }
 
-  const rotateObject = (objectId: string) => {
+  function CanvasOnClick() {
+    if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
+      if (model_type_to_create === "StoneFoundationSquareHigh") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationSquareHigh, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneFoundationSquareMid" && model_creation_state) {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationSquareMid, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneWallHigh" && model_creation_state) {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneWallHigh, generated_id, default_object_rotation);
+      }
+    }
+  }
+
+  const RotateSelectedObject = (objectId: string) => {
     setModelsTransforms((prevTransforms) => {
-      const updatedTransforms = { ...prevTransforms };
+      const updatedModelTransforms = { ...prevTransforms };
 
       const rotationDirection = model_rotation_direction === "+" ? -1 : 1;
 
-      if (updatedTransforms[objectId]) {
-        const newRotation = updatedTransforms[objectId].rotation.clone();
+      if (updatedModelTransforms[objectId]) {
+        const newRotation = updatedModelTransforms[objectId].rotation.clone();
 
         newRotation.y += THREE.MathUtils.degToRad(model_rotation_degree * rotationDirection);
 
-        updatedTransforms[objectId] = {
-          ...updatedTransforms[objectId],
+        updatedModelTransforms[objectId] = {
+          ...updatedModelTransforms[objectId],
           rotation: newRotation,
         };
       }
 
-      return updatedTransforms;
+      return updatedModelTransforms;
     });
   };
-
-  // function CanvasIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-  //   mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
-  //   mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  //   raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
-
-  //   const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
-
-  //   if (intersects.length > 0) {
-  //     const { x, z } = intersects[0].point;
-
-  //     // Round x and z to the closest 0.5
-  //     // const rounded_x = Math.round(x * 2) / 2;
-  //     //  const rounded_z = Math.round(z * 2) / 2;
-
-  //     const rounded_x = parseFloat(x.toFixed(0));
-  //     const rounded_z = parseFloat(z.toFixed(0));
-
-  //     set_mouse_canvas_x_coordinate(rounded_x);
-  //     set_mouse_canvas_z_coordinate(rounded_z);
-
-  //     console.log(mouse_canvas_x_coordinate);
-  //     console.log(mouse_canvas_z_coordinate);
-  //   }
-  // }
-
-  function CanvasOnClick() {
-    set_selected_model_id("empty");
-
-    if (page_mode === "edit" && camera_type === "3D_PerspectiveCamera") {
-      if (model_type_to_create === "StoneFoundationSquareHigh") {
-        // if (model_to_create === "StoneFoundationSquareHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareHigh, generated_id, defaultRotation);
-      }
-
-      if (model_type_to_create === "StoneFoundationSquareMid") {
-        //  if (model_to_create === "StoneFoundationSquareMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareMid, generated_id, defaultRotation);
-      }
-
-      if (model_type_to_create === "StoneWallHigh") {
-        // if (model_to_create === "StoneWallHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneWallHigh, generated_id, defaultRotation);
-      }
-    }
-  }
 
   function ChangeRotationDegree() {
     if (model_rotation_degree === 90) {
@@ -326,17 +276,27 @@ export default function CanvasContainer() {
     }
   }
 
+  document.body.style.cursor = cursor_type;
+
+  useEffect(() => {
+    PerspectiveCameraReset();
+  }, [camera_3d_reset]);
+
+  useEffect(() => {
+    {
+      dispatch(set_canvas_models_array(storeCanvasModelsNames(models)));
+    }
+  }, [models]);
+
   return (
     <>
       <div className="canvas_container">
         <Canvas
           onPointerDown={(event) => CanvasPointerDown(event)}
           onPointerUp={(event) => CanvasPointerUp(event)}
-          onMouseMove={(event) => CanvasOverIntersectionCoordinates(event)}
+          onMouseMove={(event) => CanvasMouseOverIntersectionCoordinates(event)}
           onClick={(event) => {
-            if (model_creation_state) {
-              CanvasClickIntersectionCoordinates(event), CanvasOnClick();
-            }
+            CanvasMouseClickIntersectionCoordinates(event), CanvasOnClick();
           }}
         >
           <PerformanceStats />
@@ -345,7 +305,7 @@ export default function CanvasContainer() {
           <pointLight position={[10, 10, 10]} />
           <CanvasGrids />
 
-          {camera_type === "3D_PerspectiveCamera" && (
+          {camera_type === "camera_3d" && (
             <>
               {/* prettier-ignore */}
               <PerspectiveCamera 
@@ -364,13 +324,13 @@ export default function CanvasContainer() {
               />
             </>
           )}
-          {camera_type === "2D_OrtographicCamera" && (
+          {camera_type === "camera_2d" && (
             <>
               <OrthographicCamera
-                key={ortographic_camera_position.join(",")}
+                key={camera_2d_position.join(",")}
                 makeDefault
                 zoom={25}
-                position={ortographic_camera_position as [number, number, number]}
+                position={camera_2d_position as [number, number, number]}
                 near={0.1}
                 far={100}
               />
@@ -385,7 +345,7 @@ export default function CanvasContainer() {
             const modelTransform = modelsTransforms[id] || {
               position: { x: 0, z: 0 },
               rotation: new THREE.Euler(0, 0, 0),
-            }; // performance issue 2/3
+            };
             return (
               <PivotControls
                 offset={[modelTransform.position.x, 0, modelTransform.position.z]}
@@ -395,14 +355,14 @@ export default function CanvasContainer() {
                 scale={selected_model_id === id ? 3 : 0}
                 lineWidth={0}
                 depthTest={false}
-                activeAxes={transform_model_axis === "XYZ" ? [true, true, true] : [true, false, true]}
+                activeAxes={model_pivot_axis === "XYZ" ? [true, true, true] : [true, false, true]}
                 axisColors={["orange", "yellow", "orange"]}
                 onDragStart={() => PivotDragStart(id)}
                 onDragEnd={() => PivotDragEnd()}
               >
                 <mesh
                   position={[modelTransform.position.x, 0, modelTransform.position.z]}
-                  rotation={modelTransform.rotation} // performance issue 3/3
+                  rotation={modelTransform.rotation}
                   key={id}
                   onPointerOver={() => MeshPointerOver(id)}
                   onPointerOut={() => MeshPointerOut(id)}
@@ -414,7 +374,7 @@ export default function CanvasContainer() {
               </PivotControls>
             );
           })}
-          {model_creation_state && (
+          {model_creation_state && page_mode === "edit" && (
             <Box position={[mouse_canvas_x_coordinate, 0, mouse_canvas_z_coordinate]} scale={[2, 0.01, 2]}>
               <meshStandardMaterial transparent opacity={1} color={"#59d0ff"} />
             </Box>
@@ -445,7 +405,7 @@ export default function CanvasContainer() {
               <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
             </button>
             <div className="object_rotation_container">
-              <button onClick={() => rotateObject(selected_model_id)} className="rotation_left">
+              <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_left">
                 <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
               </button>
               <div className="model_rotation_wheel">
@@ -455,7 +415,7 @@ export default function CanvasContainer() {
                 </button>
                 <div className="model_rotation_next">{next_model_rotation_degree}°</div>
               </div>
-              <button onClick={() => rotateObject(selected_model_id)} className="rotation_right">
+              <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_right">
                 <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
               </button>
             </div>

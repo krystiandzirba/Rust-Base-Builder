@@ -6,7 +6,7 @@ import { GLTF } from "three-stdlib";
 import { useDispatch } from "react-redux";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
-import { set_transform_model_axis } from "../../Store.tsx";
+import { set_model_pivot_axis } from "../../Store.tsx";
 import { set_cursor_type } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
@@ -30,7 +30,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   function ModelOnClick() {
     if (page_mode === "edit") {
-      dispatch(set_transform_model_axis("XYZ"));
+      dispatch(set_model_pivot_axis("XYZ"));
       set_model_selected(true);
       dispatch(set_cursor_type("grab"));
     }

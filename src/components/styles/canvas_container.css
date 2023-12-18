@@ -32,16 +32,6 @@
   background-color: rgb(191, 191, 191);
 }
 
-.rotate_selected_object {
-  width: 7.5vw;
-  height: 5vh;
-  position: absolute;
-  top: 11.5vh;
-  left: 66.5%;
-  z-index: 10;
-  background-color: rgb(191, 191, 191);
-}
-
 .object_manipulation_container {
   width: 15vw;
   height: 7vh;
@@ -85,7 +75,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 30%;
+  width: 35%;
   text-align: center;
   padding: 0.5vh;
 }
@@ -107,6 +97,7 @@
   font-weight: 300;
   color: #bbbbbb;
   border: none;
+  text-align: center;
 }
 
 .rotation_left:hover,

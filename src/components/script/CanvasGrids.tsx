@@ -3,18 +3,16 @@ import { useSelector } from "react-redux";
 import { Box, Grid } from "@react-three/drei";
 
 export default function CanvasGrids() {
-  const ortographic_camera_direction = useSelector(
-    (state: RootState) => state.ortographicCameraDirection.ortographic_camera_direction
-  );
+  const camera_2d_direction = useSelector((state: RootState) => state.camera2DDirection.camera_2d_direction);
 
   return (
     <>
       <Box
         scale={
-          ortographic_camera_direction === "front" ||
-          ortographic_camera_direction === "back" ||
-          ortographic_camera_direction === "top" ||
-          ortographic_camera_direction === "bottom"
+          camera_2d_direction === "front" ||
+          camera_2d_direction === "back" ||
+          camera_2d_direction === "top" ||
+          camera_2d_direction === "bottom"
             ? [101, 0.1, 0.08]
             : [0, 0, 0]
         }
@@ -22,10 +20,10 @@ export default function CanvasGrids() {
       />
       <Box
         scale={
-          ortographic_camera_direction === "left" ||
-          ortographic_camera_direction === "right" ||
-          ortographic_camera_direction === "top" ||
-          ortographic_camera_direction === "bottom"
+          camera_2d_direction === "left" ||
+          camera_2d_direction === "right" ||
+          camera_2d_direction === "top" ||
+          camera_2d_direction === "bottom"
             ? [0.08, 0.1, 101]
             : [0, 0, 0]
         }
@@ -33,20 +31,20 @@ export default function CanvasGrids() {
       />
       <Box
         scale={
-          ortographic_camera_direction === "left" ||
-          ortographic_camera_direction === "right" ||
-          ortographic_camera_direction === "front" ||
-          ortographic_camera_direction === "back"
+          camera_2d_direction === "left" ||
+          camera_2d_direction === "right" ||
+          camera_2d_direction === "front" ||
+          camera_2d_direction === "back"
             ? [0.1, 101, 0.08]
             : [0, 0, 0]
         }
         material-color="#70ff77"
       />
-      {ortographic_camera_direction !== "bottom" && (
+      {camera_2d_direction !== "bottom" && (
         <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"white"} />
       )}
       {/* prettier-ignore */}
-      {ortographic_camera_direction === "front" && (
+      {camera_2d_direction === "front" && (
         <Grid
           cellSize={3}
           infiniteGrid={true}
@@ -57,7 +55,7 @@ export default function CanvasGrids() {
         />
       )}
       {/* prettier-ignore */}
-      {ortographic_camera_direction === "back" && (
+      {camera_2d_direction === "back" && (
         <Grid
           cellSize={3}
           infiniteGrid={true}
@@ -68,7 +66,7 @@ export default function CanvasGrids() {
         />
       )}
       {/* prettier-ignore */}
-      {ortographic_camera_direction === "left" && (
+      {camera_2d_direction === "left" && (
         <Grid
           cellSize={3}
           infiniteGrid={true}
@@ -79,7 +77,7 @@ export default function CanvasGrids() {
         />
       )}
       {/* prettier-ignore */}
-      {ortographic_camera_direction === "right" && (
+      {camera_2d_direction === "right" && (
         <Grid
           cellSize={3}
           infiniteGrid={true}
@@ -89,7 +87,7 @@ export default function CanvasGrids() {
           rotation={[Math.PI / 2, Math.PI, Math.PI / 2]}
         />
       )}
-      {ortographic_camera_direction === "bottom" && (
+      {camera_2d_direction === "bottom" && (
         <Grid
           cellSize={3}
           infiniteGrid={true}
