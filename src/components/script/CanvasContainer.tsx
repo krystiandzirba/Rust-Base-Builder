@@ -80,8 +80,12 @@ export default function CanvasContainer() {
 
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
+  const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
+
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
-    setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
+    if (prevent_actions_after_canvas_drag === "allow") {
+      setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
+    }
   };
 
   const RemoveSelectedModel = (id: string) => {
@@ -158,6 +162,7 @@ export default function CanvasContainer() {
   };
 
   function CanvasPointerDown(event: any) {
+    set_prevent_actions_after_canvas_drag("mouse_down");
     if (event.button === 0) {
       dispatch(set_cursor_type("crosshair"));
     } else if (event.button === 2) {
@@ -166,6 +171,10 @@ export default function CanvasContainer() {
   }
 
   function CanvasPointerUp(event: any) {
+    if (prevent_actions_after_canvas_drag === "mouse_down") {
+      set_prevent_actions_after_canvas_drag("allow");
+    } else set_prevent_actions_after_canvas_drag("deny");
+
     if (event.button === 0) {
       dispatch(set_cursor_type("default"));
     } else if (event.button === 2) {
@@ -235,6 +244,12 @@ export default function CanvasContainer() {
     }
   }
 
+  function CaptureMouseCanvasDrag(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event.buttons === 1) {
+      set_prevent_actions_after_canvas_drag("canvas_drag");
+    }
+  }
+
   const RotateSelectedObject = (objectId: string) => {
     setModelsTransforms((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
@@ -294,7 +309,9 @@ export default function CanvasContainer() {
         <Canvas
           onPointerDown={(event) => CanvasPointerDown(event)}
           onPointerUp={(event) => CanvasPointerUp(event)}
-          onMouseMove={(event) => CanvasMouseOverIntersectionCoordinates(event)}
+          onMouseMove={(event) => {
+            CanvasMouseOverIntersectionCoordinates(event), CaptureMouseCanvasDrag(event);
+          }}
           onClick={(event) => {
             CanvasMouseClickIntersectionCoordinates(event), CanvasOnClick();
           }}
