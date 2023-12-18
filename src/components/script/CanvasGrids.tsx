@@ -9,10 +9,7 @@ export default function CanvasGrids() {
     <>
       <Box
         scale={
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "back" ||
-          camera_2d_direction === "top" ||
-          camera_2d_direction === "bottom"
+          camera_2d_direction === "front" || camera_2d_direction === "back" || camera_2d_direction === "top"
             ? [101, 0.1, 0.08]
             : [0, 0, 0]
         }
@@ -20,10 +17,7 @@ export default function CanvasGrids() {
       />
       <Box
         scale={
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "top" ||
-          camera_2d_direction === "bottom"
+          camera_2d_direction === "left" || camera_2d_direction === "right" || camera_2d_direction === "top"
             ? [0.08, 0.1, 101]
             : [0, 0, 0]
         }
@@ -40,9 +34,8 @@ export default function CanvasGrids() {
         }
         material-color="#70ff77"
       />
-      {camera_2d_direction !== "bottom" && (
-        <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"white"} />
-      )}
+
+      <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"white"} />
       {/* prettier-ignore */}
       {camera_2d_direction === "front" && (
         <Grid
@@ -85,16 +78,6 @@ export default function CanvasGrids() {
           sectionColor={"white"}
           position={[-50, 0, 0]}
           rotation={[Math.PI / 2, Math.PI, Math.PI / 2]}
-        />
-      )}
-      {camera_2d_direction === "bottom" && (
-        <Grid
-          cellSize={3}
-          infiniteGrid={true}
-          fadeStrength={2}
-          sectionColor={"white"}
-          position={[0, 50, 0]}
-          rotation={[Math.PI / 2, Math.PI / 2, Math.PI / 2]}
         />
       )}
     </>

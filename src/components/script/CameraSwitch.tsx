@@ -11,14 +11,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCamera,
-  faUpLong,
-  faRightLong,
-  faDownLong,
-  faLeftLong,
-  faCameraRotate,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faUpLong, faRightLong, faLeftLong, faCameraRotate } from "@fortawesome/free-solid-svg-icons";
 
 export default function CameraType() {
   const dispatch = useDispatch();
@@ -31,7 +24,6 @@ export default function CameraType() {
   const [camera_switch_button_hover, set_camera_switch_button_hover] = useState<boolean>(false);
   const [camera_2d_top_hover, set_camera_2d_top_hover] = useState<boolean>(false);
   const [camera_2d_right_hover, set_camera_2d_right_hover] = useState<boolean>(false);
-  const [camera_2d_down_hover, set_camera_2d_down_hover] = useState<boolean>(false);
   const [camera_2d_left_hover, set_camera_2d_left_hover] = useState<boolean>(false);
   const [camera_3d_reset_hover, set_camera_3d_reset_hover] = useState<boolean>(false);
 
@@ -134,16 +126,6 @@ export default function CameraType() {
       dispatch(set_camera_2d_direction("top"));
     }
   }
-
-  function CameraBottomView() {
-    if (camera_type === "camera_2d") {
-      const new_camera_position = [0, -45, 0];
-      set_camera_switch_button_text("2D bottom");
-      dispatch(setOrtographicCameraPosition(new_camera_position));
-      dispatch(set_camera_2d_direction("bottom"));
-    }
-  }
-
   function ResetPerspectiveCamera() {
     if (camera_type === "camera_3d") {
       dispatch(set_camera_3d_reset(!camera_3d_reset));
@@ -201,16 +183,6 @@ export default function CameraType() {
         }}
       >
         <FontAwesomeIcon icon={faRightLong} size="2xl" style={CameraButtonsColorChange(camera_2d_right_hover)} />
-      </button>
-      <button
-        className="camera_button_switch switch_bottom"
-        onClick={() => {
-          CameraBottomView();
-        }}
-        onMouseEnter={() => set_camera_2d_down_hover(true)}
-        onMouseLeave={() => set_camera_2d_down_hover(false)}
-      >
-        <FontAwesomeIcon icon={faDownLong} size="2xl" style={CameraButtonsColorChange(camera_2d_down_hover)} />
       </button>
       <button
         className="camera_button_switch switch_left"
