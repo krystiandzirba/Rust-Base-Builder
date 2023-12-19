@@ -109,7 +109,6 @@
   border: none;
   position: absolute;
   z-index: 15;
-  border: none;
   background-color: rgba(0, 0, 0, 0);
 }
 
@@ -141,6 +140,26 @@
 .object_move_down_button {
   left: 43.5%;
   top: 91.5%;
+}
+
+.object_movement_multiplier {
+  width: 6vw;
+  height: 4vh;
+  position: absolute;
+  z-index: 15;
+  left: 52%;
+  top: 92.5%;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 1vh;
+}
+
+.multiplier_active {
+  background-color: #a8a8a8;
+}
+
+.multiplier_inactive {
+  background-color: rgba(91, 91, 91, 0.3);
 }
 
 /* OBJECT MANIPULATION ( MOVE / ROTATE )*/

@@ -94,6 +94,9 @@ export default function CanvasContainer() {
 
   const [move_selected_object_x_direction, set_move_selected_object_x_direction] = useState<string>("none");
 
+  const [object_transform_multiplier_active, set_object_transform_multiplier_active] = useState<boolean>(false);
+  const [object_transform_multiplier_amount, set_object_transform_multiplier_amount] = useState<number>(1);
+
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
       setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
@@ -325,7 +328,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition.x += direction;
+        newPosition.x += direction * object_transform_multiplier_amount;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -344,7 +347,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition.z += direction;
+        newPosition.z += direction * object_transform_multiplier_amount;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -363,7 +366,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition.y += direction;
+        newPosition.y += direction * object_transform_multiplier_amount;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -513,6 +516,22 @@ export default function CanvasContainer() {
           </button>
           <button onClick={() => moveSelectedObjectY(-1)} className="object_move_button object_move_down_button">
             <FontAwesomeIcon icon={faCircleDown} size="3x" style={{ color: "#a8a8a8" }} />
+          </button>
+
+          <button
+            onClick={() => {
+              {
+                set_object_transform_multiplier_active(!object_transform_multiplier_active),
+                  set_object_transform_multiplier_amount(object_transform_multiplier_amount === 1 ? 5 : 1);
+              }
+            }}
+            className={
+              object_transform_multiplier_active
+                ? "object_movement_multiplier multiplier_active"
+                : "object_movement_multiplier multiplier_inactive"
+            }
+          >
+            unit multiplier 5
           </button>
 
           <div className="object_rotation_container">

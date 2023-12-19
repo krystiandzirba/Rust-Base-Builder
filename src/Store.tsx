@@ -112,6 +112,25 @@ const objectListModelCreatorSlice = createSlice({
   },
 });
 
+const modelsDataSlice = createSlice({
+  name: "models data",
+  initialState: {
+    object_selected: "false",
+    selected_model_id: "empty",
+    previous_model_rotation_degree: "",
+    current_model_rotation_degree: "",
+    next_model_rotation_degree: "",
+  },
+  reducers: {
+    set_object_selected: (state, action) => {
+      return { ...state, object_selected: action.payload };
+    },
+    set_selected_model_id: (state, action) => {
+      return { ...state, selected_model_id: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 export const { set_model_pivot_axis } = modelPivotAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
