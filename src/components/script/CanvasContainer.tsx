@@ -15,7 +15,15 @@ import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCanArrowUp, faArrowRotateRight, faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashCanArrowUp,
+  faArrowRotateRight,
+  faArrowRotateLeft,
+  faArrowUp,
+  faArrowRight,
+  faArrowDown,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 interface CanvasModelsListProps {
   models: ModelType[];
 }
@@ -412,31 +420,43 @@ export default function CanvasContainer() {
           >
             remove all models
           </button>
-          <div className="object_manipulation_container">
-            <button
-              className="remove_selected_model"
-              onClick={() => {
-                RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
-              }}
-            >
-              <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
+
+          <button
+            className="remove_selected_model"
+            onClick={() => {
+              RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+            }}
+          >
+            <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
+          </button>
+          <button className="object_move_button object_move_top_button">
+            <FontAwesomeIcon icon={faArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
+          </button>
+          <button className="object_move_button object_move_right_button">
+            <FontAwesomeIcon icon={faArrowRight} size="2xl" style={{ color: "#a8a8a8" }} />
+          </button>
+          <button className="object_move_button object_move_bottom_button">
+            <FontAwesomeIcon icon={faArrowDown} size="2xl" style={{ color: "#a8a8a8" }} />
+          </button>
+          <button className="object_move_button object_move_left_button">
+            <FontAwesomeIcon icon={faArrowLeft} size="2xl" style={{ color: "#a8a8a8" }} />
+          </button>
+          <div className="object_rotation_container">
+            <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_left">
+              <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
             </button>
-            <div className="object_rotation_container">
-              <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_left">
-                <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
+            <div className="model_rotation_wheel">
+              <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
+              <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
+                -{model_rotation_degree}°-
               </button>
-              <div className="model_rotation_wheel">
-                <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
-                <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
-                  -{model_rotation_degree}°-
-                </button>
-                <div className="model_rotation_next">{next_model_rotation_degree}°</div>
-              </div>
-              <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_right">
-                <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
-              </button>
+              <div className="model_rotation_next">{next_model_rotation_degree}°</div>
             </div>
+            <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_right">
+              <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
+            </button>
           </div>
+          <button className="test_button">test</button>
         </>
       )}
 

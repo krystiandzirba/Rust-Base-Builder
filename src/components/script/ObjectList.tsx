@@ -24,7 +24,6 @@ export default function ObjectList() {
     {
       name: "stone foundation square (mid)",
       thumbnail: "",
-      id: "FM2",
       onClick: () => {
         dispatch(set_model_type_to_create("StoneFoundationSquareMid"));
       },
@@ -33,7 +32,6 @@ export default function ObjectList() {
     {
       name: "stone foundation square (high)",
       thumbnail: "",
-      id: "FH2",
       onClick: () => {
         dispatch(set_model_type_to_create("StoneFoundationSquareHigh"));
       },
@@ -56,7 +54,6 @@ export default function ObjectList() {
     {
       name: "stone wall (high)",
       thumbnail: "",
-      id: "WH2",
       onClick: () => {
         dispatch(set_model_type_to_create("StoneWallHigh"));
       },

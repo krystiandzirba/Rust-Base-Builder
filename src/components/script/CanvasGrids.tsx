@@ -35,7 +35,7 @@ export default function CanvasGrids() {
         material-color="#70ff77"
       />
 
-      <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"white"} />
+      <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"grey"} />
       {/* prettier-ignore */}
       {camera_2d_direction === "front" && (
         <Grid
