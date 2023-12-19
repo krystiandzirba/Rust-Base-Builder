@@ -113,7 +113,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.object_move_top_button {
+.object_move_front_button {
   left: 48.5%;
   top: 78%;
 }
@@ -123,7 +123,7 @@
   top: 85%;
 }
 
-.object_move_bottom_button {
+.object_move_back_button {
   left: 48.5%;
   top: 92%;
 }
@@ -131,6 +131,16 @@
 .object_move_left_button {
   left: 42%;
   top: 85%;
+}
+
+.object_move_up_button {
+  left: 43.5%;
+  top: 78.5%;
+}
+
+.object_move_down_button {
+  left: 43.5%;
+  top: 91.5%;
 }
 
 /* OBJECT MANIPULATION ( MOVE / ROTATE )*/
