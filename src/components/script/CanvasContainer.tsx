@@ -335,6 +335,25 @@ export default function CanvasContainer() {
     });
   };
 
+  const moveSelectedObjectZ = (direction: number) => {
+    setModelsTransforms((prevTransforms) => {
+      const updatedModelTransforms = { ...prevTransforms };
+
+      if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
+        const newPosition = { ...updatedModelTransforms[selected_model_id].position };
+
+        newPosition.z += direction;
+
+        updatedModelTransforms[selected_model_id] = {
+          ...updatedModelTransforms[selected_model_id],
+          position: newPosition,
+        };
+      }
+
+      return updatedModelTransforms;
+    });
+  };
+
   return (
     <>
       <div className="canvas_container">
@@ -454,14 +473,14 @@ export default function CanvasContainer() {
             <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
 
-          <button className="object_move_button object_move_top_button">
+          <button onClick={() => moveSelectedObjectZ(-1)} className="object_move_button object_move_top_button">
             <FontAwesomeIcon icon={faArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
           {/* prettier-ignore */}
           <button onClick={() => moveSelectedObjectX(1)} className="object_move_button object_move_right_button">
             <FontAwesomeIcon icon={faArrowRight} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
-          <button className="object_move_button object_move_bottom_button">
+          <button onClick={() => moveSelectedObjectZ(1)} className="object_move_button object_move_bottom_button">
             <FontAwesomeIcon icon={faArrowDown} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
           <button onClick={() => moveSelectedObjectX(-1)} className="object_move_button object_move_left_button">
