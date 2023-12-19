@@ -21,7 +21,7 @@ type GLTFResult = GLTF & {
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
 
-  const { nodes, materials } = useGLTF("./stone_foundation_square_high.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./models/stone_foundation_square_high.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
 

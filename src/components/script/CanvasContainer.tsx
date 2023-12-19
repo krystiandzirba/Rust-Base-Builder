@@ -78,7 +78,7 @@ export default function CanvasContainer() {
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
 
   const [modelsTransforms, setModelsTransforms] = useState<{
-    [id: string]: { position: { x: number; z: number }; rotation: THREE.Euler };
+    [id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler };
   }>({});
 
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
@@ -89,6 +89,8 @@ export default function CanvasContainer() {
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
+
+  const [move_selected_object_x_direction, set_move_selected_object_x_direction] = useState<string>("none");
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -138,28 +140,28 @@ export default function CanvasContainer() {
   const MeshPointerOver = (selected_object_id: string) => {
     if (page_mode === "edit") {
       set_model_hover_id(selected_object_id);
-      console.log("meshover", model_hover_id);
+      // console.log("meshover", model_hover_id);
     }
   };
 
   const MeshPointerOut = (selected_object_id: string) => {
     if (page_mode === "edit") {
       set_model_hover_id(selected_object_id);
-      console.log("meshout", model_hover_id);
+      //  console.log("meshout", model_hover_id);
     }
   };
 
   function MeshOnClick(selected_object_id: string) {
     if (page_mode === "edit") {
       set_selected_model_id(selected_object_id);
-      console.log("meshclick", selected_object_id);
+      // console.log("meshclick", selected_object_id);
     }
   }
 
   function MeshOnMissed(selected_object_id: string) {
     if (page_mode === "edit") {
       set_selected_model_id(selected_object_id);
-      console.log("meshmiss", selected_object_id);
+      // console.log("meshmiss", selected_object_id);
     }
   }
 
@@ -227,7 +229,10 @@ export default function CanvasContainer() {
 
         setModelsTransforms((prevTransforms) => ({
           ...prevTransforms,
-          [generated_id]: { position: { x: rounded_x, z: rounded_z }, rotation: new THREE.Euler(0, 0, 0) },
+          [generated_id]: {
+            position: { x: rounded_x, z: rounded_z, y: 0 },
+            rotation: new THREE.Euler(0, 0, 0),
+          },
         }));
       }
     }
@@ -311,6 +316,25 @@ export default function CanvasContainer() {
     }
   }, [models]);
 
+  const moveSelectedObjectX = (direction: number) => {
+    setModelsTransforms((prevTransforms) => {
+      const updatedModelTransforms = { ...prevTransforms };
+
+      if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
+        const newPosition = { ...updatedModelTransforms[selected_model_id].position };
+
+        newPosition.x += direction;
+
+        updatedModelTransforms[selected_model_id] = {
+          ...updatedModelTransforms[selected_model_id],
+          position: newPosition,
+        };
+      }
+
+      return updatedModelTransforms;
+    });
+  };
+
   return (
     <>
       <div className="canvas_container">
@@ -368,12 +392,12 @@ export default function CanvasContainer() {
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
             const modelTransform = modelsTransforms[id] || {
-              position: { x: 0, z: 0 },
+              position: { x: 0, z: 0, y: 0 },
               rotation: new THREE.Euler(0, 0, 0),
             };
             return (
               <PivotControls
-                offset={[modelTransform.position.x, 0, modelTransform.position.z]}
+                offset={[modelTransform.position.x, modelTransform.position.y, modelTransform.position.z]}
                 rotation={modelTransform.rotation.toArray().map(Number) as [number, number, number]}
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
@@ -386,7 +410,7 @@ export default function CanvasContainer() {
                 onDragEnd={() => PivotDragEnd()}
               >
                 <mesh
-                  position={[modelTransform.position.x, 0, modelTransform.position.z]}
+                  position={[modelTransform.position.x, modelTransform.position.y, modelTransform.position.z]}
                   rotation={modelTransform.rotation}
                   key={id}
                   onPointerOver={() => MeshPointerOver(id)}
@@ -429,18 +453,21 @@ export default function CanvasContainer() {
           >
             <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
+
           <button className="object_move_button object_move_top_button">
             <FontAwesomeIcon icon={faArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
-          <button className="object_move_button object_move_right_button">
+          {/* prettier-ignore */}
+          <button onClick={() => moveSelectedObjectX(1)} className="object_move_button object_move_right_button">
             <FontAwesomeIcon icon={faArrowRight} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
           <button className="object_move_button object_move_bottom_button">
             <FontAwesomeIcon icon={faArrowDown} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
-          <button className="object_move_button object_move_left_button">
+          <button onClick={() => moveSelectedObjectX(-1)} className="object_move_button object_move_left_button">
             <FontAwesomeIcon icon={faArrowLeft} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
+
           <div className="object_rotation_container">
             <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_left">
               <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
@@ -456,7 +483,9 @@ export default function CanvasContainer() {
               <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
             </button>
           </div>
-          <button className="test_button">test</button>
+          <button className="test_button" onClick={() => {}}>
+            test
+          </button>
         </>
       )}
 
