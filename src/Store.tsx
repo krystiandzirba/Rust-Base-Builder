@@ -131,6 +131,26 @@ const modelsDataSlice = createSlice({
   },
 });
 
+const controlsInputSlice = createSlice({
+  name: "keyboard input",
+  initialState: {
+    keyboard_input: "",
+    object_distance_multiplier: 1,
+    key_press_trigger: 0,
+  },
+  reducers: {
+    set_keyboard_input: (state, action) => {
+      return { ...state, keyboard_input: action.payload };
+    },
+    set_object_distance_multiplier: (state, action) => {
+      return { ...state, object_distance_multiplier: action.payload };
+    },
+    set_key_press_trigger: (state, action) => {
+      return { ...state, key_press_trigger: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 export const { set_model_pivot_axis } = modelPivotAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
@@ -140,6 +160,7 @@ export const { set_camera_3d_reset } = camera3DResetSlice.actions;
 export const { set_cursor_type } = cursorTypeSlice.actions;
 export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
 export const { set_model_type_to_create, set_model_creation_state } = objectListModelCreatorSlice.actions;
+export const { set_keyboard_input, set_object_distance_multiplier, set_key_press_trigger } = controlsInputSlice.actions;
 
 export const store = configureStore({
   reducer: {
@@ -152,6 +173,7 @@ export const store = configureStore({
     cursorType: cursorTypeSlice.reducer,
     canvasModelsArray: canvasModelsArraySlice.reducer,
     modelTypeToCreate: objectListModelCreatorSlice.reducer,
+    controlsInput: controlsInputSlice.reducer,
   },
 });
 

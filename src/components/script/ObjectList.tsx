@@ -58,15 +58,6 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("StoneWallHigh"));
       },
     },
-
-    {
-      name: "test",
-
-      onClick: () => {
-        {
-        }
-      },
-    },
   ];
 
   return (

@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type, set_canvas_models_array } from "../../Store.tsx";
+import { set_cursor_type, set_canvas_models_array, set_object_distance_multiplier } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -64,6 +64,10 @@ export default function CanvasContainer() {
   const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
 
+  const keyboard_input = useSelector((state: RootState) => state.controlsInput.keyboard_input);
+  const object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
+  const key_press_trigger = useSelector((state: RootState) => state.controlsInput.key_press_trigger);
+
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
   const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
@@ -91,11 +95,6 @@ export default function CanvasContainer() {
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
-
-  const [move_selected_object_x_direction, set_move_selected_object_x_direction] = useState<string>("none");
-
-  const [object_transform_multiplier_active, set_object_transform_multiplier_active] = useState<boolean>(false);
-  const [object_transform_multiplier_amount, set_object_transform_multiplier_amount] = useState<number>(1);
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -309,18 +308,6 @@ export default function CanvasContainer() {
     }
   }
 
-  document.body.style.cursor = cursor_type;
-
-  useEffect(() => {
-    PerspectiveCameraReset();
-  }, [camera_3d_reset]);
-
-  useEffect(() => {
-    {
-      dispatch(set_canvas_models_array(storeCanvasModelsNames(models)));
-    }
-  }, [models]);
-
   const moveSelectedObjectX = (direction: number) => {
     setModelsTransforms((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
@@ -328,7 +315,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition.x += direction * object_transform_multiplier_amount;
+        newPosition.x += direction * object_distance_multiplier;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -347,7 +334,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition.z += direction * object_transform_multiplier_amount;
+        newPosition.z += direction * object_distance_multiplier;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -366,7 +353,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition.y += direction * object_transform_multiplier_amount;
+        newPosition.y += direction * object_distance_multiplier;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -377,6 +364,46 @@ export default function CanvasContainer() {
       return updatedModelTransforms;
     });
   };
+
+  document.body.style.cursor = cursor_type;
+
+  useEffect(() => {
+    PerspectiveCameraReset();
+  }, [camera_3d_reset]);
+
+  useEffect(() => {
+    {
+      dispatch(set_canvas_models_array(storeCanvasModelsNames(models)));
+    }
+  }, [models]);
+
+  useEffect(() => {
+    {
+      if (keyboard_input === "Q" || keyboard_input === "E") {
+        RotateSelectedObject(selected_model_id);
+      }
+      if (keyboard_input === "W") {
+        moveSelectedObjectZ(-1);
+      }
+      if (keyboard_input === "A") {
+        moveSelectedObjectX(-1);
+      }
+      if (keyboard_input === "S") {
+        moveSelectedObjectZ(+1);
+      }
+      if (keyboard_input === "D") {
+        moveSelectedObjectX(+1);
+      }
+
+      if (keyboard_input === "SPACE") {
+        moveSelectedObjectY(+1);
+      }
+
+      if (keyboard_input === "CTRL") {
+        moveSelectedObjectY(-1);
+      }
+    }
+  }, [key_press_trigger]);
 
   return (
     <>
@@ -520,18 +547,19 @@ export default function CanvasContainer() {
 
           <button
             onClick={() => {
-              {
-                set_object_transform_multiplier_active(!object_transform_multiplier_active),
-                  set_object_transform_multiplier_amount(object_transform_multiplier_amount === 1 ? 5 : 1);
+              if (object_distance_multiplier === 5) {
+                dispatch(set_object_distance_multiplier(1));
+              } else if (object_distance_multiplier === 1) {
+                dispatch(set_object_distance_multiplier(5));
               }
             }}
             className={
-              object_transform_multiplier_active
+              object_distance_multiplier === 5
                 ? "object_movement_multiplier multiplier_active"
                 : "object_movement_multiplier multiplier_inactive"
             }
           >
-            unit multiplier 5
+            distance * 5
           </button>
 
           <div className="object_rotation_container">
@@ -549,7 +577,12 @@ export default function CanvasContainer() {
               <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
             </button>
           </div>
-          <button className="test_button" onClick={() => {}}>
+          <button
+            className="test_button"
+            onClick={() => {
+              console.log(object_distance_multiplier);
+            }}
+          >
             test
           </button>
         </>
