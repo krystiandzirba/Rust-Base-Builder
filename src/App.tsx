@@ -40,7 +40,6 @@ export default App;
 // performance settings
 // make a separate component for different light setups
 // list of active canvas 3d objects (editable)
-// object move type: mouse-follow, gizmo
 // object copy: "C"
 // object delete: "del"
 // controls menu (mouse + keyboard)
@@ -56,7 +55,6 @@ export default App;
 // toggle system stats ( fps, mem, cpu)
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
 // enable-disable a controls hints, a few currently available shortcuts on screen
-// object clicked -> display options above mouse position (delete selected object, rotate -90d, +90d square foundations, -45d, +45d for everything else)
 // make a separate resource counter function for miscs (crates, rugs ...) so it wont interfere the structure upkeep cost rampup
 // if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
 // performance mode (simple boxes, no textures just colors)

@@ -90,7 +90,6 @@ export default function CanvasContainer() {
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
   const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(22.5);
-  const [model_rotation_direction, set_model_rotation_direction] = useState<string>("+");
 
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
@@ -267,11 +266,11 @@ export default function CanvasContainer() {
     }
   }
 
-  const RotateSelectedObject = (objectId: string) => {
+  const RotateSelectedObject = (objectId: string, direction: string) => {
     setModelsTransforms((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
 
-      const rotationDirection = model_rotation_direction === "+" ? -1 : 1;
+      const rotationDirection = direction === "left" ? -1 : 1;
 
       if (updatedModelTransforms[objectId]) {
         const newRotation = updatedModelTransforms[objectId].rotation.clone();
@@ -379,8 +378,11 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     {
-      if (keyboard_input === "Q" || keyboard_input === "E") {
-        RotateSelectedObject(selected_model_id);
+      if (keyboard_input === "Q") {
+        RotateSelectedObject(selected_model_id, "left");
+      }
+      if (keyboard_input === "E") {
+        RotateSelectedObject(selected_model_id, "right");
       }
       if (keyboard_input === "W") {
         moveSelectedObjectZ(-1);
@@ -563,7 +565,7 @@ export default function CanvasContainer() {
           </button>
 
           <div className="object_rotation_container">
-            <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_left">
+            <button onClick={() => RotateSelectedObject(selected_model_id, "left")} className="rotation_left">
               <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
             </button>
             <div className="model_rotation_wheel">
@@ -573,7 +575,7 @@ export default function CanvasContainer() {
               </button>
               <div className="model_rotation_next">{next_model_rotation_degree}°</div>
             </div>
-            <button onClick={() => RotateSelectedObject(selected_model_id)} className="rotation_right">
+            <button onClick={() => RotateSelectedObject(selected_model_id, "right")} className="rotation_right">
               <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
             </button>
           </div>
