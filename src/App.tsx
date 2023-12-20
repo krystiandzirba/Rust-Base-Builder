@@ -6,6 +6,7 @@ import CameraType from "./components/script/CameraSwitch.tsx";
 import ResourceCounter from "./components/script/ResourceCounter.tsx";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import ObjectList from "./components/script/ObjectList.tsx";
+import KeyboardInput from "./components/script/KeyboardInput.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -20,6 +21,7 @@ import "./components/styles/object_list.css";
 function App() {
   return (
     <div>
+      <KeyboardInput />
       <Toolbar />
       <Presets />
       <Sidebar />
