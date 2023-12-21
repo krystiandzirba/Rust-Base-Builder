@@ -6,8 +6,8 @@ import { set_model_type_to_create, set_model_creation_state } from "../../Store.
 
 export default function ObjectList() {
   const dispatch = useDispatch();
-
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+
   const [selected_object_list, set_selected_object_list] = useState<number>(-1);
 
   const object_list = [

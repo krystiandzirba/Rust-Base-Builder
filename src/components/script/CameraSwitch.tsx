@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
-import { set_camera_type } from "../../Store.tsx";
-import { set_camera_3d_reset } from "../../Store.tsx";
-import { set_camera_2d_position } from "../../Store.tsx";
-import { set_camera_2d_direction } from "../../Store.tsx";
-import { set_cursor_type } from "../../Store.tsx";
+import {
+  set_camera_type,
+  set_camera_3d_reset,
+  set_camera_2d_position,
+  set_camera_2d_direction,
+  set_cursor_type,
+} from "../../Store.tsx";
 
 import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
@@ -16,16 +18,20 @@ import { faCamera, faUpLong, faRightLong, faLeftLong, faCameraRotate } from "@fo
 export default function CameraType() {
   const dispatch = useDispatch();
 
-  const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
-  //prettier-ignore
+  const camera_type = useSelector((state: RootState) => state.cameraType.camera_type); //prettier-ignore
   const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset);
-  const [camera_switch_button_text, set_camera_switch_button_text] = useState<string>("3D 360°");
+  const camera_2d_position = useSelector((state: RootState) => state.camera2D.camera_2d_position);
 
+  const [camera_switch_button_text, set_camera_switch_button_text] = useState<string>("3D 360°");
   const [camera_switch_button_hover, set_camera_switch_button_hover] = useState<boolean>(false);
   const [camera_2d_top_hover, set_camera_2d_top_hover] = useState<boolean>(false);
   const [camera_2d_right_hover, set_camera_2d_right_hover] = useState<boolean>(false);
   const [camera_2d_left_hover, set_camera_2d_left_hover] = useState<boolean>(false);
   const [camera_3d_reset_hover, set_camera_3d_reset_hover] = useState<boolean>(false);
+
+  const setOrtographicCameraPosition = (position: number[]) => {
+    return set_camera_2d_position(position);
+  };
 
   function CameraButtonsColorChange(button: boolean) {
     if (camera_type === "camera_2d") {
@@ -50,12 +56,6 @@ export default function CameraType() {
       };
     }
   }
-
-  const camera_2d_position = useSelector((state: RootState) => state.camera2DPosition.camera_2d_position);
-
-  const setOrtographicCameraPosition = (position: number[]) => {
-    return set_camera_2d_position(position);
-  };
 
   function CameraLeftView() {
     if (camera_type === "camera_2d") {

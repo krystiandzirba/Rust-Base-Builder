@@ -28,9 +28,7 @@ import {
 
 export default function ControlsInput() {
   const dispatch = useDispatch();
-
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-
   let object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
   const key_press_trigger = useSelector((state: RootState) => state.controlsInput.key_press_trigger);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);

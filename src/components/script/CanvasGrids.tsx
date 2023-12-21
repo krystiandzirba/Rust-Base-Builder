@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Box, Grid } from "@react-three/drei";
 
 export default function CanvasGrids() {
-  const camera_2d_direction = useSelector((state: RootState) => state.camera2DDirection.camera_2d_direction);
+  const camera_2d_direction = useSelector((state: RootState) => state.camera2D.camera_2d_direction);
 
   return (
     <>
@@ -42,7 +42,7 @@ export default function CanvasGrids() {
           cellSize={3}
           infiniteGrid={true}
           fadeStrength={2}
-          sectionColor={"white"}
+          sectionColor={"grey"}
           position={[0, 0, -50]}
           rotation={[Math.PI / 2, 0, 0]}
         />
@@ -53,7 +53,7 @@ export default function CanvasGrids() {
           cellSize={3}
           infiniteGrid={true}
           fadeStrength={2}
-          sectionColor={"white"}
+          sectionColor={"grey"}
           position={[0, 0, 50]}
           rotation={[Math.PI / 2, 0, Math.PI]}
         />
@@ -64,7 +64,7 @@ export default function CanvasGrids() {
           cellSize={3}
           infiniteGrid={true}
           fadeStrength={2}
-          sectionColor={"white"}
+          sectionColor={"grey"}
           position={[50, 0, 0]}
           rotation={[Math.PI / 2, 0, Math.PI / 2]}
         />
@@ -75,7 +75,7 @@ export default function CanvasGrids() {
           cellSize={3}
           infiniteGrid={true}
           fadeStrength={2}
-          sectionColor={"white"}
+          sectionColor={"grey"}
           position={[-50, 0, 0]}
           rotation={[Math.PI / 2, Math.PI, Math.PI / 2]}
         />

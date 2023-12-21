@@ -4,14 +4,13 @@ import { RootState } from "../../Store";
 
 export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
+
   const [build_cost, set_build_cost] = useState([{ wood: 0 }, { stone: 0 }, { metal: 0 }, { armored: 0 }]);
   const [total_upkeep_percentile_rampup, set_total_upkeep_percentile_rampup] = useState(0);
-
   const [wood_upkeep_cost, set_wood_upkeep_cost] = useState<number>(0);
   const [stone_upkeep_cost, set_stone_upkeep_cost] = useState<number>(0);
   const [metal_upkeep_cost, set_metal_upkeep_cost] = useState<number>(0);
   const [hqm_upkeep_cost, set_hqm_upkeep_cost] = useState<number>(0);
-
   const [upkeep_cost_text, set_upkeep_cost_text] = useState<string>("");
 
   function CountBuildCost(models: string[]) {
@@ -289,8 +288,7 @@ models.filter(
       stage_0_count = 15;
       stage_1_count = total_object_count - 15;
 
-      //prettier-ignore
-      stage_1_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15) / total_object_count
+      stage_1_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15) / total_object_count //prettier-ignore
       set_total_upkeep_percentile_rampup(parseFloat(stage_1_count_rampup.toFixed(4)));
       set_upkeep_cost_text("upkeep cost (estimated ramp-up scaling)");
     }
@@ -300,8 +298,7 @@ models.filter(
       stage_1_count = 100 - stage_0_count;
       stage_2_count = total_object_count - 100;
 
-      //prettier-ignore
-      stage_2_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15 + stage_2_count * 0.2) / total_object_count
+      stage_2_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15 + stage_2_count * 0.2) / total_object_count //prettier-ignore
       set_total_upkeep_percentile_rampup(parseFloat(stage_2_count_rampup.toFixed(4)));
       set_upkeep_cost_text("upkeep cost (estimated ramp-up scaling)");
     }
@@ -312,12 +309,10 @@ models.filter(
       stage_2_count = 175 - 100;
       stage_3_count = total_object_count - 175;
 
-      //prettier-ignore
-      stage_3_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15 + stage_2_count * 0.2 + stage_3_count * 0.33) / total_object_count
+      stage_3_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15 + stage_2_count * 0.2 + stage_3_count * 0.33) / total_object_count //prettier-ignore
       set_total_upkeep_percentile_rampup(parseFloat(stage_3_count_rampup.toFixed(4)));
       set_upkeep_cost_text("upkeep cost (estimated ramp-up scaling)");
     }
-    // console.log("%", (total_upkeep_percentile_rampup * 100).toFixed(2));
   }
 
   function DisplayCountedUpkeep() {

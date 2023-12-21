@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
@@ -20,13 +20,12 @@ type GLTFResult = GLTF & {
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
+  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+  const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
 
   const { nodes, materials } = useGLTF("./models/stone_foundation_square_high.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
-
-  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
 
   function ModelOnClick() {
     if (page_mode === "edit") {

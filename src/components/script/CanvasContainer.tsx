@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type, set_canvas_models_array } from "../../Store.tsx";
+import { set_cursor_type, set_canvas_models_array, set_selected_model_id } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -43,7 +43,7 @@ export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const model_pivot_axis = useSelector((state: RootState) => state.modelPivotAxis.model_pivot_axis);
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
-  const camera_2d_position = useSelector((state: RootState) => state.camera2DPosition.camera_2d_position); // prettier-ignore
+  const camera_2d_position = useSelector((state: RootState) => state.camera2D.camera_2d_position); // prettier-ignore
   const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset); // prettier-ignore
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
@@ -57,6 +57,8 @@ export default function CanvasContainer() {
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
 
+  const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
+
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
   const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
@@ -68,7 +70,6 @@ export default function CanvasContainer() {
   const mouse_window_click = new THREE.Vector2();
 
   const [models, setModels] = useState<ModelType[]>([]);
-  const [selected_model_id, set_selected_model_id] = useState<string>("empty");
   const [model_hover_id, set_model_hover_id] = useState<string>("empty");
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
 
@@ -112,7 +113,7 @@ export default function CanvasContainer() {
 
   function PivotDragStart(index: string) {
     if (page_mode === "edit") {
-      set_selected_model_id(index);
+      dispatch(set_selected_model_id(index));
       set_camera_rotation(false);
       dispatch(set_cursor_type("grab"));
     }
@@ -121,35 +122,35 @@ export default function CanvasContainer() {
   function PivotDragEnd() {
     if (page_mode === "edit") {
       set_camera_rotation(true);
-      set_selected_model_id("empty");
+      dispatch(set_selected_model_id("empty"));
     }
   }
 
   const MeshPointerOver = (selected_object_id: string) => {
     if (page_mode === "edit") {
       set_model_hover_id(selected_object_id);
-      // console.log("meshover", model_hover_id);
+      console.log("meshover", model_hover_id);
     }
   };
 
   const MeshPointerOut = (selected_object_id: string) => {
     if (page_mode === "edit") {
       set_model_hover_id(selected_object_id);
-      //  console.log("meshout", model_hover_id);
+      console.log("meshout", model_hover_id);
     }
   };
 
   function MeshOnClick(selected_object_id: string) {
     if (page_mode === "edit") {
-      set_selected_model_id(selected_object_id);
-      // console.log("meshclick", selected_object_id);
+      dispatch(set_selected_model_id(selected_object_id));
+      console.log("meshclick", selected_object_id);
     }
   }
 
   function MeshOnMissed(selected_object_id: string) {
     if (page_mode === "edit") {
-      set_selected_model_id(selected_object_id);
-      // console.log("meshmiss", selected_object_id);
+      dispatch(set_selected_model_id(selected_object_id));
+      console.log("meshmiss", selected_object_id);
     }
   }
 
@@ -397,12 +398,14 @@ export default function CanvasContainer() {
   useEffect(() => {
     {
       if (delete_object_mode === "delete_selected_object") {
-        RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+        RemoveSelectedModel(selected_model_id);
       } else if (keyboard_input === "DELETE") {
-        RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+        RemoveSelectedModel(selected_model_id);
       } else if (delete_object_mode === "delete_all_object") {
-        RemoveAllModels(), set_selected_model_id("empty");
+        RemoveAllModels();
       }
+
+      dispatch(set_selected_model_id("empty"));
     }
   }, [delete_object_trigger]);
 

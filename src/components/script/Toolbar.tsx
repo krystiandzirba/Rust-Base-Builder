@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const Toolbar = () => {
   const dispatch = useDispatch();
-
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
 
   return (
