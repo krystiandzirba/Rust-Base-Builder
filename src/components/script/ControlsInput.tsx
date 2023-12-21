@@ -50,22 +50,22 @@ export default function ControlsInput() {
       dispatch(set_keyboard_input("E"));
       dispatch(set_key_press_trigger(key_press_trigger + 1));
     }
-    if (event.key === "w" || event.key === "W") {
+    if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
       console.log("W key pressed");
       dispatch(set_keyboard_input("W"));
       dispatch(set_key_press_trigger(key_press_trigger + 1));
     }
-    if (event.key === "a" || event.key === "A") {
+    if (event.key === "a" || event.key === "A" || event.key === "ArrowLeft") {
       console.log("A key pressed");
       dispatch(set_keyboard_input("A"));
       dispatch(set_key_press_trigger(key_press_trigger + 1));
     }
-    if (event.key === "s" || event.key === "S") {
+    if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
       console.log("S key pressed");
       dispatch(set_keyboard_input("S"));
       dispatch(set_key_press_trigger(key_press_trigger + 1));
     }
-    if (event.key === "d" || event.key === "D") {
+    if (event.key === "d" || event.key === "D" || event.key === "ArrowRight") {
       console.log("D key pressed");
       dispatch(set_keyboard_input("D"));
       dispatch(set_key_press_trigger(key_press_trigger + 1));
