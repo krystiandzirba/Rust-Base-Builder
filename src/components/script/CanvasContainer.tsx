@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type, set_canvas_models_array, set_selected_model_id } from "../../Store.tsx";
+import { set_cursor_type, set_canvas_models_array, set_object_selected, set_selected_model_id } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -56,7 +56,6 @@ export default function CanvasContainer() {
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
-
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
@@ -114,6 +113,7 @@ export default function CanvasContainer() {
   function PivotDragStart(index: string) {
     if (page_mode === "edit") {
       dispatch(set_selected_model_id(index));
+      dispatch(set_object_selected(true));
       set_camera_rotation(false);
       dispatch(set_cursor_type("grab"));
     }
@@ -123,34 +123,37 @@ export default function CanvasContainer() {
     if (page_mode === "edit") {
       set_camera_rotation(true);
       dispatch(set_selected_model_id("empty"));
+      dispatch(set_object_selected(false));
     }
   }
 
   const MeshPointerOver = (selected_object_id: string) => {
     if (page_mode === "edit") {
       set_model_hover_id(selected_object_id);
-      console.log("meshover", model_hover_id);
+      //  console.log("meshover", model_hover_id);
     }
   };
 
   const MeshPointerOut = (selected_object_id: string) => {
     if (page_mode === "edit") {
       set_model_hover_id(selected_object_id);
-      console.log("meshout", model_hover_id);
+      // console.log("meshout", model_hover_id);
     }
   };
 
   function MeshOnClick(selected_object_id: string) {
     if (page_mode === "edit") {
       dispatch(set_selected_model_id(selected_object_id));
-      console.log("meshclick", selected_object_id);
+      dispatch(set_object_selected(true));
+      // console.log("meshclick", selected_object_id);
     }
   }
 
-  function MeshOnMissed(selected_object_id: string) {
+  function MeshOnMissed() {
     if (page_mode === "edit") {
-      dispatch(set_selected_model_id(selected_object_id));
-      console.log("meshmiss", selected_object_id);
+      dispatch(set_selected_model_id("empty"));
+      dispatch(set_object_selected(false));
+      // console.log("meshmiss");
     }
   }
 
@@ -406,6 +409,7 @@ export default function CanvasContainer() {
       }
 
       dispatch(set_selected_model_id("empty"));
+      dispatch(set_object_selected(false));
     }
   }, [delete_object_trigger]);
 
@@ -490,7 +494,7 @@ export default function CanvasContainer() {
                   onPointerOver={() => MeshPointerOver(id)}
                   onPointerOut={() => MeshPointerOut(id)}
                   onClick={() => MeshOnClick(id)}
-                  onPointerMissed={() => MeshOnMissed("empty")}
+                  onPointerMissed={() => MeshOnMissed()}
                 >
                   <ModelComponent />
                 </mesh>

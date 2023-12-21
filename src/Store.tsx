@@ -151,7 +151,7 @@ const controlsInputSlice = createSlice({
 const modelsDataSlice = createSlice({
   name: "models data",
   initialState: {
-    object_selected: "false",
+    object_selected: false,
     selected_model_id: "empty",
   },
   reducers: {

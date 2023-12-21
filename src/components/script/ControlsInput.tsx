@@ -34,6 +34,7 @@ export default function ControlsInput() {
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
+  const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
 
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
@@ -183,22 +184,46 @@ export default function ControlsInput() {
       {page_mode === "edit" && (
         <>
           <button onClick={() => ObjectMoveButtonFront()} className="object_move_button object_move_front_button">
-            <FontAwesomeIcon icon={faArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              size="2xl"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
           <button onClick={() => ObjectMoveButtonRight()} className="object_move_button object_move_right_button">
-            <FontAwesomeIcon icon={faArrowRight} size="2xl" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              size="2xl"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
           <button onClick={() => ObjectMoveButtonBack()} className="object_move_button object_move_back_button">
-            <FontAwesomeIcon icon={faArrowDown} size="2xl" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              size="2xl"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
           <button onClick={() => ObjectMoveButtonLeft()} className="object_move_button object_move_left_button">
-            <FontAwesomeIcon icon={faArrowLeft} size="2xl" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              size="2xl"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
           <button onClick={() => ObjectMoveButtonUp()} className="object_move_button object_move_up_button">
-            <FontAwesomeIcon icon={faCircleUp} size="3x" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faCircleUp}
+              size="3x"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
           <button onClick={() => ObjectMoveButtonDown()} className="object_move_button object_move_down_button">
-            <FontAwesomeIcon icon={faCircleDown} size="3x" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faCircleDown}
+              size="3x"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
           <button
             onClick={() => {
@@ -218,7 +243,11 @@ export default function ControlsInput() {
           </button>
           <div className="object_rotation_container">
             <button onClick={() => ObjectRotateButtonLeft()} className="rotation_left">
-              <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
+              <FontAwesomeIcon
+                icon={faArrowRotateRight}
+                size="2xl"
+                style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+              />
             </button>
             <div className="model_rotation_wheel">
               <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
@@ -228,7 +257,11 @@ export default function ControlsInput() {
               <div className="model_rotation_next">{next_model_rotation_degree}°</div>
             </div>
             <button onClick={() => ObjectRotateButtonRight()} className="rotation_right">
-              <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
+              <FontAwesomeIcon
+                icon={faArrowRotateLeft}
+                size="2xl"
+                style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+              />
             </button>
           </div>
           <button
@@ -239,14 +272,16 @@ export default function ControlsInput() {
           >
             <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
-          <button
-            className="remove_all_models"
-            onClick={() => {
-              DeleteAllObjects();
-            }}
-          >
-            remove all models
-          </button>
+          {object_selected && (
+            <button
+              className="remove_all_models"
+              onClick={() => {
+                DeleteAllObjects();
+              }}
+            >
+              remove all models
+            </button>
+          )}
         </>
       )}
     </>
