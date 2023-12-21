@@ -398,6 +398,8 @@ export default function CanvasContainer() {
     {
       if (delete_object_mode === "delete_selected_object") {
         RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+      } else if (keyboard_input === "DELETE") {
+        RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
       } else if (delete_object_mode === "delete_all_object") {
         RemoveAllModels(), set_selected_model_id("empty");
       }

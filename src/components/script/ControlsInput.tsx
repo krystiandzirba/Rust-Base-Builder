@@ -82,6 +82,10 @@ export default function ControlsInput() {
       dispatch(set_keyboard_input("CTRL"));
       dispatch(set_key_press_trigger(key_press_trigger + 1));
     }
+    if (event.key === "Delete" || event.key === "Backspace") {
+      dispatch(set_keyboard_input("DELETE"));
+      dispatch(set_delete_object_trigger(delete_object_trigger + 1));
+    }
 
     if (event.key === "Shift") {
       if (object_distance_multiplier === 5) {
@@ -174,7 +178,7 @@ export default function ControlsInput() {
     return () => {
       window.removeEventListener("keydown", KeypressEvent);
     };
-  }, [key_press_trigger, object_distance_multiplier]);
+  }, [key_press_trigger, delete_object_trigger, object_distance_multiplier]);
 
   return (
     <>

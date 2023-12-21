@@ -42,7 +42,6 @@ export default App;
 // make a separate component for different light setups
 // list of active canvas 3d objects (editable)
 // object copy: "C"
-// object delete: "del"
 // controls menu (mouse + keyboard)
 // raid cost
 // different "save files / base plans"
