@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type, set_canvas_models_array, set_object_distance_multiplier } from "../../Store.tsx";
+import { set_cursor_type, set_canvas_models_array } from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
@@ -13,19 +13,6 @@ import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrashCanArrowUp,
-  faArrowRotateRight,
-  faArrowRotateLeft,
-  faArrowUp,
-  faArrowRight,
-  faArrowDown,
-  faArrowLeft,
-  faCircleUp,
-  faCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
 interface CanvasModelsListProps {
   models: ModelType[];
 }
@@ -56,17 +43,19 @@ export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const model_pivot_axis = useSelector((state: RootState) => state.modelPivotAxis.model_pivot_axis);
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
-  // prettier-ignore
-  const camera_2d_position = useSelector((state: RootState) => state.camera2DPosition.camera_2d_position);
-  // prettier-ignore
-  const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset);
+  const camera_2d_position = useSelector((state: RootState) => state.camera2DPosition.camera_2d_position); // prettier-ignore
+  const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset); // prettier-ignore
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
-
   const keyboard_input = useSelector((state: RootState) => state.controlsInput.keyboard_input);
   const object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
   const key_press_trigger = useSelector((state: RootState) => state.controlsInput.key_press_trigger);
+  const button_input = useSelector((state: RootState) => state.controlsInput.button_input);
+  const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
+  const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
+  const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
+  const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -86,10 +75,6 @@ export default function CanvasContainer() {
   const [modelsTransforms, setModelsTransforms] = useState<{
     [id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler };
   }>({});
-
-  const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
-  const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
-  const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(22.5);
 
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
@@ -275,7 +260,7 @@ export default function CanvasContainer() {
       if (updatedModelTransforms[objectId]) {
         const newRotation = updatedModelTransforms[objectId].rotation.clone();
 
-        newRotation.y += THREE.MathUtils.degToRad(model_rotation_degree * rotationDirection);
+        newRotation.y += THREE.MathUtils.degToRad(object_rotation_degree * rotationDirection);
 
         updatedModelTransforms[objectId] = {
           ...updatedModelTransforms[objectId],
@@ -286,26 +271,6 @@ export default function CanvasContainer() {
       return updatedModelTransforms;
     });
   };
-
-  function ChangeRotationDegree() {
-    if (model_rotation_degree === 90) {
-      set_previous_model_rotation_degree(22.5);
-      set_model_rotation_degree(45);
-      set_next_model_rotation_degree(90);
-    }
-
-    if (model_rotation_degree === 45) {
-      set_previous_model_rotation_degree(90);
-      set_model_rotation_degree(22.5);
-      set_next_model_rotation_degree(45);
-    }
-
-    if (model_rotation_degree === 22.5) {
-      set_previous_model_rotation_degree(45);
-      set_model_rotation_degree(90);
-      set_next_model_rotation_degree(22.5);
-    }
-  }
 
   const moveSelectedObjectX = (direction: number) => {
     setModelsTransforms((prevTransforms) => {
@@ -407,6 +372,38 @@ export default function CanvasContainer() {
     }
   }, [key_press_trigger]);
 
+  useEffect(() => {
+    {
+      if (button_input === "move_left") {
+        moveSelectedObjectX(-1);
+      } else if (button_input === "move_front") {
+        moveSelectedObjectZ(-1);
+      } else if (button_input === "move_right") {
+        moveSelectedObjectX(+1);
+      } else if (button_input === "move_back") {
+        moveSelectedObjectZ(+1);
+      } else if (button_input === "move_up") {
+        moveSelectedObjectY(+1);
+      } else if (button_input === "move_down") {
+        moveSelectedObjectY(-1);
+      } else if (button_input === "rotate_left") {
+        RotateSelectedObject(selected_model_id, "left");
+      } else if (button_input === "rotate_right") {
+        RotateSelectedObject(selected_model_id, "right");
+      }
+    }
+  }, [button_trigger]);
+
+  useEffect(() => {
+    {
+      if (delete_object_mode === "delete_selected_object") {
+        RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
+      } else if (delete_object_mode === "delete_all_object") {
+        RemoveAllModels(), set_selected_model_id("empty");
+      }
+    }
+  }, [delete_object_trigger]);
+
   return (
     <>
       <div className="canvas_container">
@@ -504,93 +501,14 @@ export default function CanvasContainer() {
       </div>
       <CanvasModelsList models={models} />
 
-      {/* OBJECT MANIPULATION ( DELETE / ROTATE ) */}
-
-      {page_mode === "edit" && (
-        <>
-          <button
-            className="remove_all_models"
-            onClick={() => {
-              RemoveAllModels(), set_selected_model_id("empty");
-            }}
-          >
-            remove all models
-          </button>
-
-          <button
-            className="remove_selected_model"
-            onClick={() => {
-              RemoveSelectedModel(selected_model_id), set_selected_model_id("empty");
-            }}
-          >
-            <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
-          </button>
-
-          <button onClick={() => moveSelectedObjectZ(-1)} className="object_move_button object_move_front_button">
-            <FontAwesomeIcon icon={faArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
-          </button>
-          {/* prettier-ignore */}
-          <button onClick={() => moveSelectedObjectX(+1)} className="object_move_button object_move_right_button">
-            <FontAwesomeIcon icon={faArrowRight} size="2xl" style={{ color: "#a8a8a8" }} />
-          </button>
-          <button onClick={() => moveSelectedObjectZ(+1)} className="object_move_button object_move_back_button">
-            <FontAwesomeIcon icon={faArrowDown} size="2xl" style={{ color: "#a8a8a8" }} />
-          </button>
-          <button onClick={() => moveSelectedObjectX(-1)} className="object_move_button object_move_left_button">
-            <FontAwesomeIcon icon={faArrowLeft} size="2xl" style={{ color: "#a8a8a8" }} />
-          </button>
-
-          <button onClick={() => moveSelectedObjectY(+1)} className="object_move_button object_move_up_button">
-            <FontAwesomeIcon icon={faCircleUp} size="3x" style={{ color: "#a8a8a8" }} />
-          </button>
-          <button onClick={() => moveSelectedObjectY(-1)} className="object_move_button object_move_down_button">
-            <FontAwesomeIcon icon={faCircleDown} size="3x" style={{ color: "#a8a8a8" }} />
-          </button>
-
-          <button
-            onClick={() => {
-              if (object_distance_multiplier === 5) {
-                dispatch(set_object_distance_multiplier(1));
-              } else if (object_distance_multiplier === 1) {
-                dispatch(set_object_distance_multiplier(5));
-              }
-            }}
-            className={
-              object_distance_multiplier === 5
-                ? "object_movement_multiplier multiplier_active"
-                : "object_movement_multiplier multiplier_inactive"
-            }
-          >
-            distance * 5
-          </button>
-
-          <div className="object_rotation_container">
-            <button onClick={() => RotateSelectedObject(selected_model_id, "left")} className="rotation_left">
-              <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: "#a8a8a8" }} />
-            </button>
-            <div className="model_rotation_wheel">
-              <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
-              <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
-                -{model_rotation_degree}°-
-              </button>
-              <div className="model_rotation_next">{next_model_rotation_degree}°</div>
-            </div>
-            <button onClick={() => RotateSelectedObject(selected_model_id, "right")} className="rotation_right">
-              <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: "#a8a8a8" }} />
-            </button>
-          </div>
-          <button
-            className="test_button"
-            onClick={() => {
-              console.log(object_distance_multiplier);
-            }}
-          >
-            test
-          </button>
-        </>
-      )}
-
-      {/* OBJECT MANIPULATION ( DELETE / ROTATE ) */}
+      <button
+        className="test_button"
+        onClick={() => {
+          console.log(object_distance_multiplier);
+        }}
+      >
+        test
+      </button>
     </>
   );
 }

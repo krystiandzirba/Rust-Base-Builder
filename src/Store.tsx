@@ -117,9 +117,6 @@ const modelsDataSlice = createSlice({
   initialState: {
     object_selected: "false",
     selected_model_id: "empty",
-    previous_model_rotation_degree: "",
-    current_model_rotation_degree: "",
-    next_model_rotation_degree: "",
   },
   reducers: {
     set_object_selected: (state, action) => {
@@ -137,6 +134,13 @@ const controlsInputSlice = createSlice({
     keyboard_input: "",
     object_distance_multiplier: 1,
     key_press_trigger: 0,
+
+    button_input: "",
+    button_trigger: 0,
+    object_rotation_degree: 90,
+
+    delete_object_mode: "none",
+    delete_object_trigger: 0,
   },
   reducers: {
     set_keyboard_input: (state, action) => {
@@ -147,6 +151,23 @@ const controlsInputSlice = createSlice({
     },
     set_key_press_trigger: (state, action) => {
       return { ...state, key_press_trigger: action.payload };
+    },
+
+    set_button_input: (state, action) => {
+      return { ...state, button_input: action.payload };
+    },
+    set_button_trigger: (state, action) => {
+      return { ...state, button_trigger: action.payload };
+    },
+    set_object_rotation_degree: (state, action) => {
+      return { ...state, object_rotation_degree: action.payload };
+    },
+
+    set_delete_object_mode: (state, action) => {
+      return { ...state, delete_object_mode: action.payload };
+    },
+    set_delete_object_trigger: (state, action) => {
+      return { ...state, delete_object_trigger: action.payload };
     },
   },
 });
@@ -160,7 +181,16 @@ export const { set_camera_3d_reset } = camera3DResetSlice.actions;
 export const { set_cursor_type } = cursorTypeSlice.actions;
 export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
 export const { set_model_type_to_create, set_model_creation_state } = objectListModelCreatorSlice.actions;
-export const { set_keyboard_input, set_object_distance_multiplier, set_key_press_trigger } = controlsInputSlice.actions;
+export const {
+  set_keyboard_input,
+  set_object_distance_multiplier,
+  set_key_press_trigger,
+  set_button_input,
+  set_button_trigger,
+  set_object_rotation_degree,
+  set_delete_object_mode,
+  set_delete_object_trigger,
+} = controlsInputSlice.actions;
 
 export const store = configureStore({
   reducer: {
