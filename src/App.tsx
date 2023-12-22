@@ -7,6 +7,7 @@ import ResourceCounter from "./components/script/ResourceCounter.tsx";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import ObjectList from "./components/script/ObjectList.tsx";
 import ControlsInput from "./components/script/ControlsInput.tsx";
+import Hints from "./components/script/Hints.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -18,6 +19,7 @@ import "./components/styles/canvas_container.css";
 import "./components/styles/resource_counter.css";
 import "./components/styles/object_list.css";
 import "./components/styles/controls_input.css";
+import "./components/styles/hints.css";
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
       <ResourceCounter />
       <CanvasContainer />
       <ObjectList />
+      <Hints />
     </div>
   );
 }

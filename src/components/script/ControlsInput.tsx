@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faDumpster,
   faTrashCanArrowUp,
   faArrowRotateRight,
   faArrowRotateLeft,
@@ -270,18 +271,21 @@ export default function ControlsInput() {
               DeleteSelectedObjectButton();
             }}
           >
-            <FontAwesomeIcon icon={faTrashCanArrowUp} size="2xl" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon
+              icon={faTrashCanArrowUp}
+              size="2xl"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            />
           </button>
-          {object_selected && (
-            <button
-              className="remove_all_models"
-              onClick={() => {
-                DeleteAllObjects();
-              }}
-            >
-              remove all models
-            </button>
-          )}
+
+          <button
+            className="remove_all_models"
+            onClick={() => {
+              DeleteAllObjects();
+            }}
+          >
+            <FontAwesomeIcon icon={faDumpster} size="2xl" style={{ color: "#a8a8a8" }} />
+          </button>
         </>
       )}
     </>
