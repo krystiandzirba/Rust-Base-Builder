@@ -1,6 +1,5 @@
 import Toolbar from "./components/script/Toolbar.tsx";
 import Presets from "./components/script/Presets.tsx";
-import Sidebar from "./components/script/Sidebar.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
 import ResourceCounter from "./components/script/ResourceCounter.tsx";
@@ -8,11 +7,11 @@ import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import ObjectList from "./components/script/ObjectList.tsx";
 import ControlsInput from "./components/script/ControlsInput.tsx";
 import Hints from "./components/script/Hints.tsx";
+import Settings from "./components/script/Settings.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
 import "./components/styles/presets.css";
-import "./components/styles/sidebar.css";
 import "./components/styles/version.css";
 import "./components/styles/camera_switch.css";
 import "./components/styles/canvas_container.css";
@@ -20,6 +19,7 @@ import "./components/styles/resource_counter.css";
 import "./components/styles/object_list.css";
 import "./components/styles/controls_input.css";
 import "./components/styles/hints.css";
+import "./components/styles/settings.css";
 
 function App() {
   return (
@@ -27,13 +27,13 @@ function App() {
       <ControlsInput />
       <Toolbar />
       <Presets />
-      <Sidebar />
       <Version />
       <CameraType />
       <ResourceCounter />
       <CanvasContainer />
       <ObjectList />
       <Hints />
+      <Settings />
     </div>
   );
 }

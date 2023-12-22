@@ -1,0 +1,38 @@
+.settings_container {
+  width: 32vw;
+  height: 100vh;
+  position: absolute;
+  left: 68vw;
+  z-index: 25;
+  background-color: rgb(131, 131, 131);
+  transition: transform 0.1s ease-in-out;
+}
+
+.settings_container_displayed {
+  transform: translateX(0);
+}
+
+.settings_container_hidden {
+  transform: translateX(100%);
+}
+
+.settings_button_container {
+  width: 4vw;
+  height: 7.5vh;
+  position: absolute;
+  top: 2.5vh;
+  left: 26.5vw;
+  z-index: 25;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.settings_button {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+}
