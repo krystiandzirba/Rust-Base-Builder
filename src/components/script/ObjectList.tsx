@@ -11,16 +11,6 @@ export default function ObjectList() {
   const [selected_object_list, set_selected_object_list] = useState<number>(-1);
 
   const object_list = [
-    // { name: "twig_foundation_low", thumbnail: "", id: "FL0" },
-    // { name: "twig_foundation_mid", thumbnail: "", id: "FM0" },
-    // { name: "twig_foundation_high", thumbnail: "", id: "FH0" },
-
-    // { name: "wooden_foundation_low", thumbnail: "", id: "FL1" },
-    // { name: "wooden_foundation_mid", thumbnail: "", id: "FM1" },
-    // { name: "wooden_foundation_high", thumbnail: "", id: "FH1" },
-
-    // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
-
     {
       name: "stone foundation square (high)",
       thumbnail: "",
@@ -45,19 +35,29 @@ export default function ObjectList() {
       },
     },
 
-    // { name: "metal_foundation_low", thumbnail: "", id: "FL3" },
-    // { name: "metal_foundation_mid", thumbnail: "", id: "FM3" },
-    // { name: "metal_foundation_high", thumbnail: "", id: "FH3" },
+    {
+      name: "stone foundation triangle (high)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneFoundationTriangleHigh"));
+      },
+    },
 
-    // { name: "armored_foundation_low", thumbnail: "", id: "FL4" },
-    // { name: "armored_foundation_mid", thumbnail: "", id: "FM4" },
-    // { name: "armored_foundation_high", thumbnail: "", id: "FH4" },
+    {
+      name: "stone foundation triangle (mid)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneFoundationTriangleMid"));
+      },
+    },
 
-    // { name: "twig_wall", thumbnail: "", id: "W0" },
-    // { name: "wooden_wall", thumbnail: "", id: "W1" },
-    // { name: "stone_wall", thumbnail: "", id: "W2" },
-    // { name: "metal_wall", thumbnail: "", id: "W3" },
-    // { name: "armored_wall", thumbnail: "", id: "W4" },
+    {
+      name: "stone foundation triangle (low)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneFoundationTriangleLow"));
+      },
+    },
 
     {
       name: "stone wall (high)",

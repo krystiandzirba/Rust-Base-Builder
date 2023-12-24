@@ -10,6 +10,10 @@ import { set_cursor_type, set_canvas_models_array, set_object_selected, set_sele
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareLow } from "../models/StoneFoundationSquareLow.tsx";
+import { Model as StoneFoundationTriangleHigh } from "../models/StoneFoundationTriangleHigh.tsx";
+import { Model as StoneFoundationTriangleMid } from "../models/StoneFoundationTriangleMid.tsx";
+import { Model as StoneFoundationTriangleLow } from "../models/StoneFoundationTriangleLow.tsx";
+
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
@@ -246,6 +250,21 @@ export default function CanvasContainer() {
       if (model_type_to_create === "StoneFoundationSquareLow" && model_creation_state) {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareLow, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneFoundationTriangleHigh" && model_creation_state) {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationTriangleHigh, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneFoundationTriangleMid" && model_creation_state) {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationTriangleMid, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneFoundationTriangleLow" && model_creation_state) {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationTriangleLow, generated_id, default_object_rotation);
       }
 
       if (model_type_to_create === "StoneWallHigh" && model_creation_state) {
