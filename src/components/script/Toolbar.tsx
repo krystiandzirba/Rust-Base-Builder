@@ -4,6 +4,7 @@ import { set_page_mode } from "../../Store.tsx";
 import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
+import { set_object_selected } from "../../Store.tsx";
 
 const Toolbar = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Toolbar = () => {
         <div
           className={page_mode === "overview" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
-            dispatch(set_page_mode("overview")), console.log(store.getState());
+            dispatch(set_page_mode("overview")), dispatch(set_object_selected(false)), console.log(store.getState());
           }}
         >
           overview
@@ -23,7 +24,7 @@ const Toolbar = () => {
         <div
           className={page_mode === "edit" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
-            dispatch(set_page_mode("edit")), console.log(store.getState());
+            dispatch(set_page_mode("edit")), dispatch(set_object_selected(false)), console.log(store.getState());
           }}
         >
           edit
@@ -31,7 +32,7 @@ const Toolbar = () => {
         <div
           className={page_mode === "raid" ? "toolbar_button active" : "toolbar_button inactive"}
           onClick={() => {
-            dispatch(set_page_mode("raid")), console.log(store.getState());
+            dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), console.log(store.getState());
           }}
         >
           raid
