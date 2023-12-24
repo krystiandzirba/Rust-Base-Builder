@@ -7,8 +7,9 @@ import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 import { set_cursor_type, set_canvas_models_array, set_object_selected, set_selected_model_id } from "../../Store.tsx";
 
-import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
+import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
+import { Model as StoneFoundationSquareLow } from "../models/StoneFoundationSquareLow.tsx";
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
@@ -242,6 +243,11 @@ export default function CanvasContainer() {
         addModel(StoneFoundationSquareMid, generated_id, default_object_rotation);
       }
 
+      if (model_type_to_create === "StoneFoundationSquareLow" && model_creation_state) {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFoundationSquareLow, generated_id, default_object_rotation);
+      }
+
       if (model_type_to_create === "StoneWallHigh" && model_creation_state) {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallHigh, generated_id, default_object_rotation);
@@ -412,6 +418,27 @@ export default function CanvasContainer() {
       dispatch(set_object_selected(false));
     }
   }, [delete_object_trigger]);
+
+  // const logCameraControlsRotation = () => {
+  //   if (perspectiveCameraControlsRef.current) {
+  //     const { camera } = perspectiveCameraControlsRef.current;
+
+  //     if (camera && camera.rotation) {
+  //       const camera_rotation = camera.rotation.toArray();
+
+  //       if (typeof camera_rotation[1] === "number") {
+  //         console.log("Camera Controls Rotation:", camera_rotation);
+
+  //         if (camera_rotation[1] > 0.5) {
+  //         }
+  //       } else {
+  //         console.error("Invalid type for camera_rotation[1]");
+  //       }
+  //     } else {
+  //       console.error("Camera or camera.rotation is undefined");
+  //     }
+  //   }
+  // };
 
   return (
     <>

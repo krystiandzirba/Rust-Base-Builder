@@ -22,6 +22,14 @@ export default function ObjectList() {
     // { name: "stone_foundation_low", thumbnail: "", id: "FL2" },
 
     {
+      name: "stone foundation square (high)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneFoundationSquareHigh"));
+      },
+    },
+
+    {
       name: "stone foundation square (mid)",
       thumbnail: "",
       onClick: () => {
@@ -30,10 +38,10 @@ export default function ObjectList() {
     },
 
     {
-      name: "stone foundation square (high)",
+      name: "stone foundation square (low)",
       thumbnail: "",
       onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationSquareHigh"));
+        dispatch(set_model_type_to_create("StoneFoundationSquareLow"));
       },
     },
 

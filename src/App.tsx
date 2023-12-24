@@ -62,6 +62,8 @@ export default App;
 // if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
 // performance mode (simple boxes, no textures just colors)
 // add a fov slider
+// move every canvas item configs (position, rotation ...) to separate file
+// add custom rotation angle and distance unit to transform the object
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
