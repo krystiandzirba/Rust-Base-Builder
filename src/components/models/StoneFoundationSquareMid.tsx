@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
     Cube: THREE.Mesh;
   };
   materials: {
-    Material: THREE.MeshStandardMaterial;
+    ["Material.002"]: THREE.MeshStandardMaterial;
   };
 };
 
@@ -23,7 +23,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
 
-  const { nodes, materials } = useGLTF("./models/stone_foundation_square_mid.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./models/stone_foundation_square_mid_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
 
@@ -52,33 +52,30 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     }
   }
 
-  function ModelColorChange(): THREE.MeshStandardMaterialParameters {
-    const base_color = page_mode === "edit" && model_hover ? "lightblue" : "#bbbbbb";
-    const opacity = page_mode === "edit" && model_hover ? 0.8 : 1;
-
-    return {
-      transparent: true,
-      opacity: model_selected && page_mode === "edit" ? 1 : opacity,
-      color: model_selected && page_mode === "edit" ? "#3672ff" : base_color,
-    };
-  }
-
   return (
     <group {...props} dispose={null}>
       <mesh
         geometry={nodes.Cube.geometry}
-        material={materials.Material}
+        // material={materials.Material}
+        material={materials["Material.002"]}
         onClick={() => ModelOnClick()}
         onPointerOver={() => ModelOnPointerOver()}
         onPointerOut={() => ModelOnPointerOut()}
         onPointerMissed={() => ModelMissedClick()}
       >
-        <meshStandardMaterial {...ModelColorChange()} />
+        {page_mode === "edit" && (
+          <meshStandardMaterial
+            transparent={true}
+            opacity={model_selected ? 1 : model_hover ? 0.8 : 1}
+            color={model_selected  ? "#3672ff" : ( model_hover ? "lightblue" : "#bbbbbb")} //prettier-ignore
+            // wireframe={true}
+          />
+        )}
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload("./stone_foundation_square_mid.glb");
+useGLTF.preload("./stone_foundation_square_mid_textured.glb");
 
 Model.displayName = "StoneFoundationSquareMid";
