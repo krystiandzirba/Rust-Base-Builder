@@ -66,6 +66,20 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("StoneWallHigh"));
       },
     },
+    {
+      name: "stone wall (third)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWallThird"));
+      },
+    },
+    {
+      name: "stone wall (mid)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWallMid"));
+      },
+    },
   ];
 
   return (

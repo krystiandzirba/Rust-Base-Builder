@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
     Cube002: THREE.Mesh;
   };
   materials: {
-    ["Material.010"]: THREE.MeshStandardMaterial;
+    ["Material.011"]: THREE.MeshStandardMaterial;
   };
 };
 
@@ -23,7 +23,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
 
-  const { nodes, materials } = useGLTF("./models/stone_wall_high_textured.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./models/stone_wall_mid_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
 
@@ -57,7 +57,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Cube002.geometry}
         // material={materials.Material}
-        material={materials["Material.010"]}
+        material={materials["Material.011"]}
         onClick={() => ModelOnClick()}
         onPointerOver={() => ModelOnPointerOver()}
         onPointerOut={() => ModelOnPointerOut()}
@@ -76,6 +76,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./stone_wall_high_textured.glb");
+useGLTF.preload("./stone_wall_mid_textured.glb");
 
-Model.displayName = "StoneWallHigh";
+Model.displayName = "StoneWallMid";

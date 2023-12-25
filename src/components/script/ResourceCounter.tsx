@@ -115,6 +115,7 @@ models.filter(
           model === "StoneFoundationSquareLow" ||
           model === "StoneWallHigh" ||
           model === "StoneWallMid" ||
+          model === "StoneWallThird" ||
           model === "StoneStairs" ||
           model === "StoneRoof"
       ).length * 300;
