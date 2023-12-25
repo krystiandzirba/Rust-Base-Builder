@@ -76,6 +76,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./metal_foundation_square_low_textured.glb");
+useGLTF.preload("./models/metal_foundation_square_low_textured.glb");
 
 Model.displayName = "MetalFoundationSquareLow";

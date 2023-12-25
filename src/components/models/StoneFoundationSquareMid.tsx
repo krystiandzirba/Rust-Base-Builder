@@ -76,6 +76,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./stone_foundation_square_mid_textured.glb");
+useGLTF.preload("./models/stone_foundation_square_mid_textured.glb");
 
 Model.displayName = "StoneFoundationSquareMid";

@@ -76,6 +76,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./stone_foundation_triangle_high_textured.glb");
+useGLTF.preload("./models/stone_foundation_triangle_high_textured.glb");
 
 Model.displayName = "StoneFoundationTriangleHigh";

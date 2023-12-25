@@ -29,7 +29,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   function ModelOnClick() {
     if (page_mode === "edit") {
-      dispatch(set_model_pivot_axis("XZ"));
+      dispatch(set_model_pivot_axis("XYZ"));
       set_model_selected(true);
       dispatch(set_cursor_type("grab"));
     }
@@ -76,6 +76,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./metal_wall_high_textured.glb");
+useGLTF.preload("./models/metal_wall_high_textured.glb");
 
 Model.displayName = "MetalWallHigh";
