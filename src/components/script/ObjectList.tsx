@@ -154,6 +154,30 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("MetalWallLow"));
       },
     },
+
+    {
+      name: "metal doorway",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalDoorway"));
+      },
+    },
+
+    {
+      name: "metal wall frame",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWallFrame"));
+      },
+    },
+
+    {
+      name: "metal window",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWindow"));
+      },
+    },
   ];
 
   return (

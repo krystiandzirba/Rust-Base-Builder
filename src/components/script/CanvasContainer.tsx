@@ -26,6 +26,9 @@ import { Model as MetalFoundationTriangleLow } from "../models/MetalFoundationTr
 import { Model as MetalWallHigh } from "../models/MetalWallHigh.tsx";
 import { Model as MetalWallMid } from "../models/MetalWallMid.tsx";
 import { Model as MetalWallLow } from "../models/MetalWallLow.tsx";
+import { Model as MetalDoorway } from "../models/MetalDoorway.tsx";
+import { Model as MetalWallFrame } from "../models/MetalWallFrame.tsx";
+import { Model as MetalWindow } from "../models/MetalWindow.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
@@ -253,42 +256,42 @@ export default function CanvasContainer() {
         addModel(StoneFoundationSquareHigh, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneFoundationSquareMid" && model_creation_state) {
+      if (model_type_to_create === "StoneFoundationSquareMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareMid, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneFoundationSquareLow" && model_creation_state) {
+      if (model_type_to_create === "StoneFoundationSquareLow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareLow, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneFoundationTriangleHigh" && model_creation_state) {
+      if (model_type_to_create === "StoneFoundationTriangleHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationTriangleHigh, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneFoundationTriangleMid" && model_creation_state) {
+      if (model_type_to_create === "StoneFoundationTriangleMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationTriangleMid, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneFoundationTriangleLow" && model_creation_state) {
+      if (model_type_to_create === "StoneFoundationTriangleLow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationTriangleLow, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneWallHigh" && model_creation_state) {
+      if (model_type_to_create === "StoneWallHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallHigh, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneWallThird" && model_creation_state) {
+      if (model_type_to_create === "StoneWallThird") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallThird, generated_id, default_object_rotation);
       }
 
-      if (model_type_to_create === "StoneWallMid" && model_creation_state) {
+      if (model_type_to_create === "StoneWallMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallMid, generated_id, default_object_rotation);
       }
@@ -336,6 +339,19 @@ export default function CanvasContainer() {
       if (model_type_to_create === "MetalWallLow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWallLow, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalDoorway") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalDoorway, generated_id, default_object_rotation);
+      }
+      if (model_type_to_create === "MetalWallFrame") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalWallFrame, generated_id, default_object_rotation);
+      }
+      if (model_type_to_create === "MetalWindow") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalWindow, generated_id, default_object_rotation);
       }
     }
   }
