@@ -106,6 +106,30 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("MetalFoundationSquareLow"));
       },
     },
+
+    {
+      name: "metal foundation triangle (high)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFoundationTriangleHigh"));
+      },
+    },
+
+    {
+      name: "metal foundation triangle (mid)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFoundationTriangleMid"));
+      },
+    },
+
+    {
+      name: "metal foundation triangle (low)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFoundationTriangleLow"));
+      },
+    },
   ];
 
   return (
