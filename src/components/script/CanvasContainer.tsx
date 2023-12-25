@@ -23,6 +23,9 @@ import { Model as MetalFoundationSquareLow } from "../models/MetalFoundationSqua
 import { Model as MetalFoundationTriangleHigh } from "../models/MetalFoundationTriangleHigh.tsx";
 import { Model as MetalFoundationTriangleMid } from "../models/MetalFoundationTriangleMid.tsx";
 import { Model as MetalFoundationTriangleLow } from "../models/MetalFoundationTriangleLow.tsx";
+import { Model as MetalWallHigh } from "../models/MetalWallHigh.tsx";
+import { Model as MetalWallMid } from "../models/MetalWallMid.tsx";
+import { Model as MetalWallLow } from "../models/MetalWallLow.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
@@ -320,6 +323,19 @@ export default function CanvasContainer() {
       if (model_type_to_create === "MetalFoundationTriangleLow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationTriangleLow, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalWallHigh") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalWallHigh, generated_id, default_object_rotation);
+      }
+      if (model_type_to_create === "MetalWallMid") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalWallMid, generated_id, default_object_rotation);
+      }
+      if (model_type_to_create === "MetalWallLow") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalWallLow, generated_id, default_object_rotation);
       }
     }
   }

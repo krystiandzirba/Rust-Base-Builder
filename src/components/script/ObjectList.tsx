@@ -130,6 +130,30 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("MetalFoundationTriangleLow"));
       },
     },
+
+    {
+      name: "metal wall (high)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWallHigh"));
+      },
+    },
+
+    {
+      name: "metal wall (mid)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWallMid"));
+      },
+    },
+
+    {
+      name: "metal wall (low)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWallLow"));
+      },
+    },
   ];
 
   return (
