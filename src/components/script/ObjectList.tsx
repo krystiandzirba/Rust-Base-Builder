@@ -80,6 +80,32 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("StoneWallMid"));
       },
     },
+
+    // metal
+
+    {
+      name: "metal foundation square (high)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFoundationSquareHigh"));
+      },
+    },
+
+    {
+      name: "metal foundation square (mid)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFoundationSquareMid"));
+      },
+    },
+
+    {
+      name: "metal foundation square (low)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFoundationSquareLow"));
+      },
+    },
   ];
 
   return (

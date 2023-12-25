@@ -17,6 +17,10 @@ import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 import { Model as StoneWallThird } from "../models/StoneWallThird.tsx";
 import { Model as StoneWallMid } from "../models/StoneWallMid.tsx";
 
+import { Model as MetalFoundationSquareHigh } from "../models/MetalFoundationSquareHigh.tsx";
+import { Model as MetalFoundationSquareMid } from "../models/MetalFoundationSquareMid.tsx";
+import { Model as MetalFoundationSquareLow } from "../models/MetalFoundationSquareLow.tsx";
+
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 interface CanvasModelsListProps {
@@ -282,6 +286,23 @@ export default function CanvasContainer() {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallMid, generated_id, default_object_rotation);
       }
+
+      // metal
+
+      if (model_type_to_create === "MetalFoundationSquareHigh") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalFoundationSquareHigh, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalFoundationSquareMid") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalFoundationSquareMid, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalFoundationSquareLow") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalFoundationSquareLow, generated_id, default_object_rotation);
+      }
     }
   }
 
@@ -484,6 +505,7 @@ export default function CanvasContainer() {
           }}
         >
           <PerformanceStats />
+          <ambientLight />
           <ambientLight />
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
