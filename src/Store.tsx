@@ -153,6 +153,7 @@ const modelsDataSlice = createSlice({
   initialState: {
     object_selected: false,
     selected_model_id: "empty",
+    selected_object_list: -1,
   },
   reducers: {
     set_object_selected: (state, action) => {
@@ -160,6 +161,9 @@ const modelsDataSlice = createSlice({
     },
     set_selected_model_id: (state, action) => {
       return { ...state, selected_model_id: action.payload };
+    },
+    set_selected_object_list: (state, action) => {
+      return { ...state, selected_object_list: action.payload };
     },
   },
 });
@@ -184,7 +188,7 @@ export const {
   set_delete_object_mode,
   set_delete_object_trigger,
 } = controlsInputSlice.actions;
-export const { set_object_selected, set_selected_model_id } = modelsDataSlice.actions;
+export const { set_object_selected, set_selected_model_id, set_selected_object_list } = modelsDataSlice.actions;
 
 export const store = configureStore({
   reducer: {

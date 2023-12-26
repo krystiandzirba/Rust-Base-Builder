@@ -1,14 +1,12 @@
-import { useState } from "react";
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 
-import { set_model_type_to_create, set_model_creation_state } from "../../Store.tsx";
+import { set_model_type_to_create, set_model_creation_state, set_selected_object_list } from "../../Store.tsx";
 
 export default function ObjectList() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-
-  const [selected_object_list, set_selected_object_list] = useState<number>(-1);
+  const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
 
   const object_list = [
     {
@@ -196,10 +194,10 @@ export default function ObjectList() {
               className={selected_object_list === index ? "object object_selected" : "object object_deselected"}
               onClick={() => {
                 if (selected_object_list === index) {
-                  set_selected_object_list(-1);
+                  dispatch(set_selected_object_list(-1));
                   dispatch(set_model_creation_state(false));
                 } else {
-                  set_selected_object_list(index);
+                  dispatch(set_selected_object_list(index));
                   dispatch(set_model_creation_state(true));
                 }
                 item.onClick?.();
