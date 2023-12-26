@@ -89,13 +89,11 @@ export default function ControlsInput() {
 
     if (event.key === "Shift") {
       if (object_distance_multiplier === 5) {
-        object_distance_multiplier = 1;
+        dispatch(set_object_distance_multiplier(0.133));
+      } else if (object_distance_multiplier === 0.133) {
         dispatch(set_object_distance_multiplier(1));
-        console.log("shift key disabled");
       } else if (object_distance_multiplier === 1) {
-        object_distance_multiplier = 5;
         dispatch(set_object_distance_multiplier(5));
-        console.log("shift key enabled");
       }
     }
   };
@@ -173,6 +171,18 @@ export default function ControlsInput() {
     dispatch(set_delete_object_trigger(delete_object_trigger + 1));
   }
 
+  function DecrementUnitButtonClick() {
+    dispatch(set_object_distance_multiplier(0.133));
+  }
+
+  function DefaultUnitButtonClick() {
+    dispatch(set_object_distance_multiplier(1));
+  }
+
+  function IncrementUnitButtonClick() {
+    dispatch(set_object_distance_multiplier(5));
+  }
+
   useEffect(() => {
     window.addEventListener("keydown", KeypressEvent);
     return () => {
@@ -226,22 +236,39 @@ export default function ControlsInput() {
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             />
           </button>
-          <button
-            onClick={() => {
-              if (object_distance_multiplier === 5) {
-                dispatch(set_object_distance_multiplier(1));
-              } else if (object_distance_multiplier === 1) {
-                dispatch(set_object_distance_multiplier(5));
+          <span className="distance_unit_description"> change distance units</span>
+          <div className="change_distance_unit_container">
+            <button
+              className={
+                object_distance_multiplier === 0.133
+                  ? "object_movement_multiplier movement_multiplier_left multiplier_active"
+                  : "object_movement_multiplier movement_multiplier_left multiplier_inactive"
               }
-            }}
-            className={
-              object_distance_multiplier === 5
-                ? "object_movement_multiplier multiplier_active"
-                : "object_movement_multiplier multiplier_inactive"
-            }
-          >
-            distance * 5
-          </button>
+              onClick={() => DecrementUnitButtonClick()}
+            >
+              x0.133
+            </button>
+            <button
+              className={
+                object_distance_multiplier === 1
+                  ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
+                  : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
+              }
+              onClick={() => DefaultUnitButtonClick()}
+            >
+              x1
+            </button>
+            <button
+              className={
+                object_distance_multiplier === 5
+                  ? "object_movement_multiplier movement_multiplier_right multiplier_active"
+                  : "object_movement_multiplier movement_multiplier_right multiplier_inactive"
+              }
+              onClick={() => IncrementUnitButtonClick()}
+            >
+              x5
+            </button>
+          </div>
           <div className="object_rotation_container">
             <button onClick={() => ObjectRotateButtonLeft()} className="rotation_left">
               <FontAwesomeIcon

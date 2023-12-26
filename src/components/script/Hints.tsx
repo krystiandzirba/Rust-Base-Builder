@@ -31,7 +31,7 @@ export default function Hints() {
           </div>
           <div className="hint_part"> Q/E - rotate </div>
           <div className="hint_part"> SPACE/CTRL - move up/down</div>
-          <div className="hint_part"> SHIFT - increment unit</div>
+          <div className="hint_part"> SHIFT - change unit</div>
           <div className="hint_part"> DEL - delete </div>
         </div>
       )}

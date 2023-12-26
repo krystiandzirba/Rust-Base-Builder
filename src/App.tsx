@@ -64,6 +64,7 @@ export default App;
 // add a fov slider
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
+// add multiple models of same type on mouse drag on canvas (like painting)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

@@ -98,16 +98,46 @@
   top: 92.5%;
 }
 
-.object_movement_multiplier {
-  width: 6vw;
+.distance_unit_description {
+  width: 12vw;
+  height: 5vh;
+  position: absolute;
+  z-index: 55;
+  left: 56.5%;
+  top: 91.5%;
+  background-color: transparent;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  color: #bbbbbb;
+}
+
+.change_distance_unit_container {
+  width: 12vw;
   height: 4vh;
   position: absolute;
-  z-index: 15;
-  left: 52%;
-  top: 93.5%;
+  z-index: 55;
+  left: 55%;
+  top: 94%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.object_movement_multiplier {
+  width: 30%;
+  height: 100%;
   color: rgb(0, 0, 0);
   border: none;
-  border-radius: 1vh;
+}
+
+.movement_multiplier_left {
+  border-radius: 1vh 0 0 1vh;
+}
+
+.movement_multiplier_right {
+  border-radius: 0 1vh 1vh 0;
 }
 
 .multiplier_active {
