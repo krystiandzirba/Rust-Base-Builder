@@ -176,6 +176,21 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("MetalWindow"));
       },
     },
+
+    {
+      name: "metal stairs (L shape)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalStairsLShape"));
+      },
+    },
+    {
+      name: "metal stairs (U shape)",
+      thumbnail: "",
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalStairsUShape"));
+      },
+    },
   ];
 
   return (

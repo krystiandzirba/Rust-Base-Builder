@@ -29,6 +29,8 @@ import { Model as MetalWallLow } from "../models/MetalWallLow.tsx";
 import { Model as MetalDoorway } from "../models/MetalDoorway.tsx";
 import { Model as MetalWallFrame } from "../models/MetalWallFrame.tsx";
 import { Model as MetalWindow } from "../models/MetalWindow.tsx";
+import { Model as MetalStairsLShape } from "../models/MetalStairsLShape.tsx";
+import { Model as MetalStairsUShape } from "../models/MetalStairsUShape.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
@@ -352,6 +354,16 @@ export default function CanvasContainer() {
       if (model_type_to_create === "MetalWindow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWindow, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalStairsLShape") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalStairsLShape, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalStairsUShape") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalStairsUShape, generated_id, default_object_rotation);
       }
     }
   }

@@ -164,7 +164,8 @@ models.filter(
           model === "MetalFoundationStairs" ||
           model === "MetalWallHigh" ||
           model === "MetalWallMid" ||
-          model === "MetalStairs" ||
+          model === "MetalStairsUshape" ||
+          model === "MetalStairsLshape" ||
           model === "MetalRoof"
       ).length * 200;
 
