@@ -4,6 +4,21 @@ import React, { useState } from "react";
 
 import { set_model_type_to_create, set_model_creation_state, set_selected_object_list } from "../../Store.tsx";
 
+import metalFoundationSquareHighThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_high_thumbnail.png";
+import metalFoundationSquareMidThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_mid_thumbnail.png";
+import metalFoundationSquareLowThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_low_thumbnail.png";
+import metalFoundationTriangleHighThumbnail from "../images/ObjectListThumbnails/metal_foundation_triangle_high_thumbnail.png";
+import metalFoundationTriangleMidThumbnail from "../images/ObjectListThumbnails/metal_foundation_triangle_mid_thumbnail.png";
+import metalFoundationTriangleLowThumbnail from "../images/ObjectListThumbnails/metal_foundation_triangle_low_thumbnail.png";
+import metalWallHighThumbnail from "../images/ObjectListThumbnails/metal_wall_high_thumbnail.png";
+import metalWallMidThumbnail from "../images/ObjectListThumbnails/metal_wall_mid_thumbnail.png";
+import metalWallLowThumbnail from "../images/ObjectListThumbnails/metal_wall_low_thumbnail.png";
+import metalDoorwayThumbnail from "../images/ObjectListThumbnails/metal_doorway_thumbnail.png";
+import metalWallFrameThumbnail from "../images/ObjectListThumbnails/metal_wall_frame_thumbnail.png";
+import metalWindowThumbnail from "../images/ObjectListThumbnails/metal_window_thumbnail.png";
+import metalStairsLShapeThumbnail from "../images/ObjectListThumbnails/metal_stairs_l_shape_thumbnail.png";
+import metalStairsUShapeThumbnail from "../images/ObjectListThumbnails/metal_stairs_u_shape_thumbnail.png";
+
 export default function ObjectList() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
@@ -159,7 +174,7 @@ export default function ObjectList() {
 
     {
       name: "metal foundation square (high)",
-      thumbnail: "",
+      thumbnail: metalFoundationSquareHighThumbnail,
       keywords: [
         "metal",
         "foundation",
@@ -179,7 +194,7 @@ export default function ObjectList() {
 
     {
       name: "metal foundation square (mid)",
-      thumbnail: "",
+      thumbnail: metalFoundationSquareMidThumbnail,
       keywords: [
         "metal",
         "foundation",
@@ -199,7 +214,7 @@ export default function ObjectList() {
 
     {
       name: "metal foundation square (low)",
-      thumbnail: "",
+      thumbnail: metalFoundationSquareLowThumbnail,
       keywords: [
         "metal",
         "foundation",
@@ -219,7 +234,7 @@ export default function ObjectList() {
 
     {
       name: "metal foundation triangle (high)",
-      thumbnail: "",
+      thumbnail: metalFoundationTriangleHighThumbnail,
       keywords: [
         "metal",
         "foundation",
@@ -239,7 +254,7 @@ export default function ObjectList() {
 
     {
       name: "metal foundation triangle (mid)",
-      thumbnail: "",
+      thumbnail: metalFoundationTriangleMidThumbnail,
       keywords: [
         "metal",
         "foundation",
@@ -259,7 +274,7 @@ export default function ObjectList() {
 
     {
       name: "metal foundation triangle (low)",
-      thumbnail: "",
+      thumbnail: metalFoundationTriangleLowThumbnail,
       keywords: [
         "metal",
         "foundation",
@@ -279,7 +294,7 @@ export default function ObjectList() {
 
     {
       name: "metal wall (high)",
-      thumbnail: "",
+      thumbnail: metalWallHighThumbnail,
       keywords: ["metal", "wall", "high", "metal wall", "metal high", "wall high"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalWallHigh"));
@@ -288,7 +303,7 @@ export default function ObjectList() {
 
     {
       name: "metal wall (mid)",
-      thumbnail: "",
+      thumbnail: metalWallMidThumbnail,
       keywords: ["metal", "wall", "mid", "metal wall", "metal mid", "wall mid"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalWallMid"));
@@ -297,7 +312,7 @@ export default function ObjectList() {
 
     {
       name: "metal wall (low)",
-      thumbnail: "",
+      thumbnail: metalWallLowThumbnail,
       keywords: ["metal", "wall", "low", "metal wall", "metal low", "wall low"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalWallLow"));
@@ -306,7 +321,7 @@ export default function ObjectList() {
 
     {
       name: "metal doorway",
-      thumbnail: "",
+      thumbnail: metalDoorwayThumbnail,
       keywords: ["metal", "wall", "doorway", "metal wall", "metal doorway", "wall doorway"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalDoorway"));
@@ -315,7 +330,7 @@ export default function ObjectList() {
 
     {
       name: "metal wall frame",
-      thumbnail: "",
+      thumbnail: metalWallFrameThumbnail,
       keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalWallFrame"));
@@ -324,7 +339,7 @@ export default function ObjectList() {
 
     {
       name: "metal window",
-      thumbnail: "",
+      thumbnail: metalWindowThumbnail,
       keywords: ["metal", "wall", "window", "metal wall", "metal window", "wall window"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalWindow"));
@@ -333,7 +348,7 @@ export default function ObjectList() {
 
     {
       name: "metal stairs (L shape)",
-      thumbnail: "",
+      thumbnail: metalStairsLShapeThumbnail,
       keywords: ["metal", "stairs", "metal stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalStairsLShape"));
@@ -341,7 +356,7 @@ export default function ObjectList() {
     },
     {
       name: "metal stairs (U shape)",
-      thumbnail: "",
+      thumbnail: metalStairsUShapeThumbnail,
       keywords: ["metal", "stairs", "metal stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalStairsUShape"));
@@ -387,6 +402,7 @@ export default function ObjectList() {
                 }
                 item.onClick?.();
               }}
+              style={{ backgroundImage: `url(${item.thumbnail})` }}
             >
               {item.name}
             </button>

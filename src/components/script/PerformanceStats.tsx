@@ -4,13 +4,13 @@ import { Perf } from "r3f-perf";
 export default function PerformanceStats() {
   return (
     <>
-      <Stats showPanel={2} />
+      {/* <Stats showPanel={2} /> */}
 
       <Perf
         style={{
           position: "absolute",
           top: "0vh",
-          left: "4vw",
+          left: "0vw",
           width: "20vw",
         }}
         logsPerSecond={3}

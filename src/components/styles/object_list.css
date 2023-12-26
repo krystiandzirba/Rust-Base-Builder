@@ -24,7 +24,7 @@
   left: 25%;
   top: 14%;
   text-align: center;
-  color: #bbbbbb;
+  color: black;
   font-size: 0.8vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
@@ -51,6 +51,12 @@
 
   margin-bottom: 1vh;
   word-wrap: break-word;
+  background-size: cover; /* Set background size to cover */
+  background-position: center;
+  padding-top: 73%;
+  font-size: 0.6vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
 }
 
 .object_deselected {
