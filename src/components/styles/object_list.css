@@ -17,16 +17,30 @@
   transform: translateX(-110%);
 }
 
+.search_bar {
+  width: 50%;
+  height: 2.5%;
+  position: absolute;
+  left: 25%;
+  top: 14%;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
 .object_list {
   width: 95%;
   height: 80%;
   position: absolute;
-  top: 15%;
+  top: 17%;
   left: 0%;
   background-color: rgb(155, 64, 64);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
   grid-gap: 1vh;
+  grid-auto-rows: 15vh;
   overflow-y: auto;
   margin: 1vh;
 }

@@ -2,12 +2,12 @@
   width: 10vw;
   height: 2.5vh;
   position: absolute;
-  top: 97.5vh;
+  top: 98.25vh;
   left: 0.5vw;
   z-index: 999;
 
   color: #bbbbbb;
-  font-size: 0.75vw;
+  font-size: 0.6vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
 }
