@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
     Circle: THREE.Mesh;
   };
   materials: {
-    ["Material.010"]: THREE.MeshStandardMaterial;
+    ["Material.020"]: THREE.MeshStandardMaterial;
   };
 };
 
@@ -57,7 +57,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       <mesh
         geometry={nodes.Circle.geometry}
         // material={materials.Material}
-        material={materials["Material.010"]}
+        material={materials["Material.020"]}
         onClick={() => ModelOnClick()}
         onPointerOver={() => ModelOnPointerOver()}
         onPointerOut={() => ModelOnPointerOut()}
