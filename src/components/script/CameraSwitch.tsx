@@ -19,7 +19,7 @@ export default function CameraType() {
   const dispatch = useDispatch();
 
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type); //prettier-ignore
-  const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset);
+  const camera_3d_reset = useSelector((state: RootState) => state.camera3D.camera_3d_reset);
   const camera_2d_position = useSelector((state: RootState) => state.camera2D.camera_2d_position);
 
   const [camera_switch_button_text, set_camera_switch_button_text] = useState<string>("3D 360°");

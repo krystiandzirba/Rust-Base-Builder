@@ -5,7 +5,13 @@ import * as THREE from "three";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type, set_canvas_models_array, set_object_selected, set_selected_model_id } from "../../Store.tsx";
+import {
+  set_cursor_type,
+  set_canvas_models_array,
+  set_object_selected,
+  set_selected_model_id,
+  set_camera_3d_direction,
+} from "../../Store.tsx";
 
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
@@ -69,8 +75,8 @@ export default function CanvasContainer() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const model_pivot_axis = useSelector((state: RootState) => state.modelPivotAxis.model_pivot_axis);
   const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
-  const camera_2d_position = useSelector((state: RootState) => state.camera2D.camera_2d_position); // prettier-ignore
-  const camera_3d_reset = useSelector((state: RootState) => state.camera3DReset.camera_3d_reset); // prettier-ignore
+  const camera_2d_position = useSelector((state: RootState) => state.camera2D.camera_2d_position);
+  const camera_3d_reset = useSelector((state: RootState) => state.camera3D.camera_3d_reset);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
@@ -83,6 +89,7 @@ export default function CanvasContainer() {
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
+  const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -105,6 +112,8 @@ export default function CanvasContainer() {
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
+
+  //  const [camera_3d_direction, set_camera_3d_direction] = useState<string>("north");
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -503,16 +512,48 @@ export default function CanvasContainer() {
         RotateSelectedObject(selected_model_id, "right");
       }
       if (keyboard_input === "W") {
-        moveSelectedObjectZ(-1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectZ(-1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectZ(+1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectX(+1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectX(-1);
+        }
       }
       if (keyboard_input === "A") {
-        moveSelectedObjectX(-1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectX(-1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectX(+1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectZ(-1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectZ(+1);
+        }
       }
       if (keyboard_input === "S") {
-        moveSelectedObjectZ(+1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectZ(+1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectZ(-1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectX(-1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectX(+1);
+        }
       }
       if (keyboard_input === "D") {
-        moveSelectedObjectX(+1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectX(+1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectX(-1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectZ(+1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectZ(-1);
+        }
       }
 
       if (keyboard_input === "SPACE") {
@@ -528,13 +569,45 @@ export default function CanvasContainer() {
   useEffect(() => {
     {
       if (button_input === "move_left") {
-        moveSelectedObjectX(-1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectX(-1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectX(+1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectZ(-1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectZ(+1);
+        }
       } else if (button_input === "move_front") {
-        moveSelectedObjectZ(-1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectZ(-1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectZ(+1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectX(+1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectX(-1);
+        }
       } else if (button_input === "move_right") {
-        moveSelectedObjectX(+1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectX(+1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectX(-1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectZ(+1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectZ(-1);
+        }
       } else if (button_input === "move_back") {
-        moveSelectedObjectZ(+1);
+        if (camera_3d_direction === "north") {
+          moveSelectedObjectZ(+1);
+        } else if (camera_3d_direction === "south") {
+          moveSelectedObjectZ(-1);
+        } else if (camera_3d_direction === "east") {
+          moveSelectedObjectX(-1);
+        } else if (camera_3d_direction === "west") {
+          moveSelectedObjectX(+1);
+        }
       } else if (button_input === "move_up") {
         moveSelectedObjectY(+1);
       } else if (button_input === "move_down") {
@@ -562,26 +635,32 @@ export default function CanvasContainer() {
     }
   }, [delete_object_trigger]);
 
-  // const logCameraControlsRotation = () => {
-  //   if (perspectiveCameraControlsRef.current) {
-  //     const { camera } = perspectiveCameraControlsRef.current;
+  const Camera3DDirection = () => {
+    if (perspectiveCameraControlsRef.current) {
+      const { camera } = perspectiveCameraControlsRef.current;
 
-  //     if (camera && camera.rotation) {
-  //       const camera_rotation = camera.rotation.toArray();
+      if (camera && camera.rotation) {
+        const camera_rotation = camera.rotation.toArray();
 
-  //       if (typeof camera_rotation[1] === "number") {
-  //         console.log("Camera Controls Rotation:", camera_rotation);
+        if (typeof camera_rotation[2] === "number") {
+          // console.log("Camera Controls Rotation:", camera_rotation[2].toFixed(2));
 
-  //         if (camera_rotation[1] > 0.5) {
-  //         }
-  //       } else {
-  //         console.error("Invalid type for camera_rotation[1]");
-  //       }
-  //     } else {
-  //       console.error("Camera or camera.rotation is undefined");
-  //     }
-  //   }
-  // };
+          if (camera_rotation[2] > -0.4 && camera_rotation[2] < 0.45) {
+            dispatch(set_camera_3d_direction("north"));
+          } else if (
+            (camera_rotation[2] > 2.65 && camera_rotation[2] < 3.14) ||
+            (camera_rotation[2] < -2.65 && camera_rotation[2] > -3.14)
+          ) {
+            dispatch(set_camera_3d_direction("south"));
+          } else if (camera_rotation[2] < -0.4 && camera_rotation[2] > -2.65) {
+            dispatch(set_camera_3d_direction("east"));
+          } else if (camera_rotation[2] < 2.65 && camera_rotation[2] > 0.45) {
+            dispatch(set_camera_3d_direction("west"));
+          }
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -595,6 +674,7 @@ export default function CanvasContainer() {
           onClick={(event) => {
             CanvasMouseClickIntersectionCoordinates(event), CanvasOnClick();
           }}
+          onMouseUp={() => Camera3DDirection()}
         >
           <PerformanceStats />
           <ambientLight />

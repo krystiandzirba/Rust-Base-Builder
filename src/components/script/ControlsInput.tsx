@@ -36,6 +36,7 @@ export default function ControlsInput() {
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
+  const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
 
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
@@ -194,6 +195,17 @@ export default function ControlsInput() {
     <>
       {page_mode === "edit" && (
         <>
+          <div className="camera_direction_indicator indicator_top">
+            {camera_3d_direction === "north"
+              ? "north"
+              : camera_3d_direction === "east"
+              ? "east"
+              : camera_3d_direction === "west"
+              ? "west"
+              : camera_3d_direction === "south"
+              ? "south"
+              : "unknown"}
+          </div>
           <button onClick={() => ObjectMoveButtonFront()} className="object_move_button object_move_front_button">
             <FontAwesomeIcon
               icon={faArrowUp}
@@ -201,6 +213,17 @@ export default function ControlsInput() {
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             />
           </button>
+          <div className="camera_direction_indicator indicator_right">
+            {camera_3d_direction === "north"
+              ? "east"
+              : camera_3d_direction === "east"
+              ? "south"
+              : camera_3d_direction === "west"
+              ? "north"
+              : camera_3d_direction === "south"
+              ? "west"
+              : "unknown"}
+          </div>
           <button onClick={() => ObjectMoveButtonRight()} className="object_move_button object_move_right_button">
             <FontAwesomeIcon
               icon={faArrowRight}
@@ -208,6 +231,17 @@ export default function ControlsInput() {
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             />
           </button>
+          <div className="camera_direction_indicator indicator_bottom">
+            {camera_3d_direction === "north"
+              ? "south"
+              : camera_3d_direction === "east"
+              ? "west"
+              : camera_3d_direction === "west"
+              ? "east"
+              : camera_3d_direction === "south"
+              ? "north"
+              : "unknown"}
+          </div>
           <button onClick={() => ObjectMoveButtonBack()} className="object_move_button object_move_back_button">
             <FontAwesomeIcon
               icon={faArrowDown}
@@ -215,6 +249,17 @@ export default function ControlsInput() {
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             />
           </button>
+          <div className="camera_direction_indicator indicator_left">
+            {camera_3d_direction === "north"
+              ? "west"
+              : camera_3d_direction === "east"
+              ? "north"
+              : camera_3d_direction === "west"
+              ? "south"
+              : camera_3d_direction === "south"
+              ? "east"
+              : "unknown"}
+          </div>
           <button onClick={() => ObjectMoveButtonLeft()} className="object_move_button object_move_left_button">
             <FontAwesomeIcon
               icon={faArrowLeft}

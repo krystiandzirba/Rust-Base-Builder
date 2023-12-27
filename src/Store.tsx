@@ -56,10 +56,14 @@ const camera3DResetSlice = createSlice({
   name: "3d camera reset",
   initialState: {
     camera_3d_reset: false,
+    camera_3d_direction: "north",
   },
   reducers: {
     set_camera_3d_reset: (state, action) => {
       return { ...state, camera_3d_reset: action.payload };
+    },
+    set_camera_3d_direction: (state, action) => {
+      return { ...state, camera_3d_direction: action.payload };
     },
   },
 });
@@ -174,7 +178,7 @@ export const { set_camera_type } = cameraTypeSlice.actions;
 
 export const { set_camera_2d_position, set_camera_2d_direction } = camera2DSlice.actions;
 
-export const { set_camera_3d_reset } = camera3DResetSlice.actions;
+export const { set_camera_3d_reset, set_camera_3d_direction } = camera3DResetSlice.actions;
 export const { set_cursor_type } = cursorTypeSlice.actions;
 export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
 export const { set_model_type_to_create, set_model_creation_state } = objectListModelCreatorSlice.actions;
@@ -196,7 +200,7 @@ export const store = configureStore({
     modelPivotAxis: modelPivotAxisSlice.reducer,
     cameraType: cameraTypeSlice.reducer,
     camera2D: camera2DSlice.reducer,
-    camera3DReset: camera3DResetSlice.reducer,
+    camera3D: camera3DResetSlice.reducer,
     cursorType: cursorTypeSlice.reducer,
     canvasModelsArray: canvasModelsArraySlice.reducer,
     modelTypeToCreate: objectListModelCreatorSlice.reducer,

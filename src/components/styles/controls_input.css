@@ -50,6 +50,39 @@
   text-align: center;
 }
 
+.camera_direction_indicator {
+  width: 3vw;
+  height: 2vh;
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+  font-size: 0.9vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  color: #bbbbbb;
+  text-align: center;
+}
+
+.indicator_top {
+  left: 48.5%;
+  top: 77.5%;
+}
+
+.indicator_right {
+  left: 57.5%;
+  top: 87.5%;
+}
+
+.indicator_bottom {
+  left: 48.5%;
+  top: 97.5%;
+}
+
+.indicator_left {
+  left: 39.5%;
+  top: 87.5%;
+}
+
 .object_move_button:hover,
 .rotation_left:hover,
 .rotation_right:hover,
