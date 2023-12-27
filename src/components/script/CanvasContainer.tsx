@@ -19,6 +19,8 @@ import { Model as StoneWallMid } from "../models/StoneWallMid.tsx";
 import { Model as StoneDoorway } from "../models/StoneDoorway.tsx";
 import { Model as StoneWallFrame } from "../models/StoneWallFrame.tsx";
 import { Model as StoneWindow } from "../models/StoneWindow.tsx";
+import { Model as StoneStairsLShape } from "../models/StoneStairsLShape.tsx";
+import { Model as StoneStairsUShape } from "../models/StoneStairsUShape.tsx";
 
 import { Model as MetalFoundationSquareHigh } from "../models/MetalFoundationSquareHigh.tsx";
 import { Model as MetalFoundationSquareMid } from "../models/MetalFoundationSquareMid.tsx";
@@ -314,6 +316,16 @@ export default function CanvasContainer() {
       if (model_type_to_create === "StoneWindow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWindow, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneStairsLShape") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneStairsLShape, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneStairsUShape") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneStairsUShape, generated_id, default_object_rotation);
       }
 
       // metal

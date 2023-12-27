@@ -197,6 +197,23 @@ export default function ObjectList() {
       },
     },
 
+    {
+      name: "stone stairs (L shape)",
+      thumbnail: "",
+      keywords: ["stone", "stairs", "stone stairs"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneStairsLShape"));
+      },
+    },
+    {
+      name: "stone stairs (U shape)",
+      thumbnail: "",
+      keywords: ["stone", "stairs", "stone stairs"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneStairsUShape"));
+      },
+    },
+
     // metal
 
     {
