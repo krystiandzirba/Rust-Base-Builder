@@ -158,7 +158,7 @@ export default function ObjectList() {
       thumbnail: "",
       keywords: ["stone", "wall", "low", "stone wall", "stone low", "wall low"],
       onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallThird"));
+        dispatch(set_model_type_to_create("StoneWallLow"));
       },
     },
     {
