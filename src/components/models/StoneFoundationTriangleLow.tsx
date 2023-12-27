@@ -11,7 +11,7 @@ import { set_cursor_type } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Cube001: THREE.Mesh;
+    Circle: THREE.Mesh;
   };
   materials: {
     ["Material.007"]: THREE.MeshStandardMaterial;
@@ -55,7 +55,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Cube001.geometry}
+        geometry={nodes.Circle.geometry}
         // material={materials.Material}
         material={materials["Material.007"]}
         onClick={() => ModelOnClick()}
