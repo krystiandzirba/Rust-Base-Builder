@@ -38,9 +38,9 @@ export default function ControlsInput() {
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
 
-  const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(45);
+  const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(60);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
-  const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(22.5);
+  const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(15);
 
   const KeypressEvent = (event: KeyboardEvent) => {
     if (event.key === "q" || event.key === "Q") {
@@ -90,8 +90,8 @@ export default function ControlsInput() {
 
     if (event.key === "Shift") {
       if (object_distance_multiplier === 5) {
-        dispatch(set_object_distance_multiplier(0.133));
-      } else if (object_distance_multiplier === 0.133) {
+        dispatch(set_object_distance_multiplier(0.13));
+      } else if (object_distance_multiplier === 0.13) {
         dispatch(set_object_distance_multiplier(1));
       } else if (object_distance_multiplier === 1) {
         dispatch(set_object_distance_multiplier(5));
@@ -101,23 +101,30 @@ export default function ControlsInput() {
 
   function ChangeRotationDegree() {
     if (object_rotation_degree === 90) {
-      set_previous_model_rotation_degree(22.5);
-      set_model_rotation_degree(45);
-      set_next_model_rotation_degree(90);
-      dispatch(set_object_rotation_degree(45));
-    }
-
-    if (object_rotation_degree === 45) {
       set_previous_model_rotation_degree(90);
-      set_model_rotation_degree(22.5);
-      set_next_model_rotation_degree(45);
-      dispatch(set_object_rotation_degree(22.5));
+      set_model_rotation_degree(15);
+      set_next_model_rotation_degree(30);
+      dispatch(set_object_rotation_degree(15));
     }
 
-    if (object_rotation_degree === 22.5) {
-      set_previous_model_rotation_degree(45);
+    if (object_rotation_degree === 15) {
+      set_previous_model_rotation_degree(15);
+      set_model_rotation_degree(30);
+      set_next_model_rotation_degree(60);
+      dispatch(set_object_rotation_degree(30));
+    }
+
+    if (object_rotation_degree === 30) {
+      set_previous_model_rotation_degree(30);
+      set_model_rotation_degree(60);
+      set_next_model_rotation_degree(90);
+      dispatch(set_object_rotation_degree(60));
+    }
+
+    if (object_rotation_degree === 60) {
+      set_previous_model_rotation_degree(60);
       set_model_rotation_degree(90);
-      set_next_model_rotation_degree(22.5);
+      set_next_model_rotation_degree(15);
       dispatch(set_object_rotation_degree(90));
     }
   }

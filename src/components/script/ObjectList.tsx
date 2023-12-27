@@ -197,15 +197,6 @@ export default function ObjectList() {
     },
 
     {
-      name: "stone wall frame",
-      thumbnail: stoneWallFrameThumbnail,
-      keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallFrame"));
-      },
-    },
-
-    {
       name: "stone window",
       thumbnail: stoneWindowThumbnail,
       keywords: ["stone", "wall", "window", "stone wall", "stone window", "wall window"],
@@ -228,6 +219,33 @@ export default function ObjectList() {
       keywords: ["stone", "stairs", "stone stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneStairsUShape"));
+      },
+    },
+
+    {
+      name: "stone wall frame",
+      thumbnail: stoneWallFrameThumbnail,
+      keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWallFrame"));
+      },
+    },
+
+    {
+      name: "stone square frame",
+      thumbnail: "",
+      keywords: [],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneSquareFrame"));
+      },
+    },
+
+    {
+      name: "stone triangle frame",
+      thumbnail: "",
+      keywords: [],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneTriangleFrame"));
       },
     },
 
@@ -390,15 +408,6 @@ export default function ObjectList() {
     },
 
     {
-      name: "metal wall frame",
-      thumbnail: metalWallFrameThumbnail,
-      keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWallFrame"));
-      },
-    },
-
-    {
       name: "metal window",
       thumbnail: metalWindowThumbnail,
       keywords: ["metal", "wall", "window", "metal wall", "metal window", "wall window"],
@@ -421,6 +430,15 @@ export default function ObjectList() {
       keywords: ["metal", "stairs", "metal stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalStairsUShape"));
+      },
+    },
+
+    {
+      name: "metal wall frame",
+      thumbnail: metalWallFrameThumbnail,
+      keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWallFrame"));
       },
     },
   ];
