@@ -4,6 +4,21 @@ import React, { useState } from "react";
 
 import { set_model_type_to_create, set_model_creation_state, set_selected_object_list } from "../../Store.tsx";
 
+import stoneFoundationSquareHighThumbnail from "../images/ObjectListThumbnails/stone_foundation_square_high_thumbnail.png";
+import stoneFoundationSquareMidThumbnail from "../images/ObjectListThumbnails/stone_foundation_square_mid_thumbnail.png";
+import stoneFoundationSquareLowThumbnail from "../images/ObjectListThumbnails/stone_foundation_square_low_thumbnail.png";
+import stoneFoundationTriangleHighThumbnail from "../images/ObjectListThumbnails/stone_foundation_triangle_high_thumbnail.png";
+import stoneFoundationTriangleMidThumbnail from "../images/ObjectListThumbnails/stone_foundation_triangle_mid_thumbnail.png";
+import stoneFoundationTriangleLowThumbnail from "../images/ObjectListThumbnails/stone_foundation_triangle_low_thumbnail.png";
+import stoneWallHighThumbnail from "../images/ObjectListThumbnails/stone_wall_high_thumbnail.png";
+import stoneWallMidThumbnail from "../images/ObjectListThumbnails/stone_wall_mid_thumbnail.png";
+import stoneWallLowThumbnail from "../images/ObjectListThumbnails/stone_wall_low_thumbnail.png";
+import stoneDoorwayThumbnail from "../images/ObjectListThumbnails/stone_doorway_thumbnail.png";
+import stoneWallFrameThumbnail from "../images/ObjectListThumbnails/stone_wall_frame_thumbnail.png";
+import stoneWindowThumbnail from "../images/ObjectListThumbnails/stone_window_thumbnail.png";
+import stoneStairsLShapeThumbnail from "../images/ObjectListThumbnails/stone_stairs_l_shape_thumbnail.png";
+import stoneStairsUShapeThumbnail from "../images/ObjectListThumbnails/stone_stairs_u_shape_thumbnail.png";
+
 import metalFoundationSquareHighThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_high_thumbnail.png";
 import metalFoundationSquareMidThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_mid_thumbnail.png";
 import metalFoundationSquareLowThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_low_thumbnail.png";
@@ -27,7 +42,7 @@ export default function ObjectList() {
   const object_list = [
     {
       name: "stone foundation square (high)",
-      thumbnail: "",
+      thumbnail: stoneFoundationSquareHighThumbnail,
       keywords: [
         "stone",
         "foundation",
@@ -47,7 +62,7 @@ export default function ObjectList() {
 
     {
       name: "stone foundation square (mid)",
-      thumbnail: "",
+      thumbnail: stoneFoundationSquareMidThumbnail,
       keywords: [
         "stone",
         "foundation",
@@ -67,7 +82,7 @@ export default function ObjectList() {
 
     {
       name: "stone foundation square (low)",
-      thumbnail: "",
+      thumbnail: stoneFoundationSquareLowThumbnail,
       keywords: [
         "stone",
         "foundation",
@@ -87,7 +102,7 @@ export default function ObjectList() {
 
     {
       name: "stone foundation triangle (high)",
-      thumbnail: "",
+      thumbnail: stoneFoundationTriangleHighThumbnail,
       keywords: [
         "stone",
         "foundation",
@@ -107,7 +122,7 @@ export default function ObjectList() {
 
     {
       name: "stone foundation triangle (mid)",
-      thumbnail: "",
+      thumbnail: stoneFoundationTriangleMidThumbnail,
       keywords: [
         "stone",
         "foundation",
@@ -127,7 +142,7 @@ export default function ObjectList() {
 
     {
       name: "stone foundation triangle (low)",
-      thumbnail: "",
+      thumbnail: stoneFoundationTriangleLowThumbnail,
       keywords: [
         "stone",
         "foundation",
@@ -147,23 +162,16 @@ export default function ObjectList() {
 
     {
       name: "stone wall (high)",
-      thumbnail: "",
+      thumbnail: stoneWallHighThumbnail,
       keywords: ["stone", "wall", "high", "stone wall", "stone high", "wall high"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneWallHigh"));
       },
     },
-    {
-      name: "stone wall (third)",
-      thumbnail: "",
-      keywords: ["stone", "wall", "low", "stone wall", "stone low", "wall low"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallLow"));
-      },
-    },
+
     {
       name: "stone wall (mid)",
-      thumbnail: "",
+      thumbnail: stoneWallMidThumbnail,
       keywords: ["stone", "wall", "mid", "stone wall", "stone mid", "wall mid"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneWallMid"));
@@ -171,8 +179,17 @@ export default function ObjectList() {
     },
 
     {
+      name: "stone wall (third)",
+      thumbnail: stoneWallLowThumbnail,
+      keywords: ["stone", "wall", "low", "stone wall", "stone low", "wall low"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWallLow"));
+      },
+    },
+
+    {
       name: "stone doorway",
-      thumbnail: "",
+      thumbnail: stoneDoorwayThumbnail,
       keywords: ["stone", "doorway", "stone doorway"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneDoorway"));
@@ -181,7 +198,7 @@ export default function ObjectList() {
 
     {
       name: "stone wall frame",
-      thumbnail: "",
+      thumbnail: stoneWallFrameThumbnail,
       keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneWallFrame"));
@@ -190,8 +207,8 @@ export default function ObjectList() {
 
     {
       name: "stone window",
-      thumbnail: "",
-      keywords: ["stone", "window", "stone window"],
+      thumbnail: stoneWindowThumbnail,
+      keywords: ["stone", "wall", "window", "stone wall", "stone window", "wall window"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneWindow"));
       },
@@ -199,7 +216,7 @@ export default function ObjectList() {
 
     {
       name: "stone stairs (L shape)",
-      thumbnail: "",
+      thumbnail: stoneStairsLShapeThumbnail,
       keywords: ["stone", "stairs", "stone stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneStairsLShape"));
@@ -207,7 +224,7 @@ export default function ObjectList() {
     },
     {
       name: "stone stairs (U shape)",
-      thumbnail: "",
+      thumbnail: stoneStairsUShapeThumbnail,
       keywords: ["stone", "stairs", "stone stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneStairsUShape"));
