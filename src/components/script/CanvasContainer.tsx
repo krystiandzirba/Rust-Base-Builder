@@ -16,6 +16,9 @@ import { Model as StoneFoundationTriangleLow } from "../models/StoneFoundationTr
 import { Model as StoneWallHigh } from "../models/StoneWallHigh.tsx";
 import { Model as StoneWallThird } from "../models/StoneWallThird.tsx";
 import { Model as StoneWallMid } from "../models/StoneWallMid.tsx";
+import { Model as StoneDoorway } from "../models/StoneDoorway.tsx";
+import { Model as StoneWallFrame } from "../models/StoneWallFrame.tsx";
+import { Model as StoneWindow } from "../models/StoneWindow.tsx";
 
 import { Model as MetalFoundationSquareHigh } from "../models/MetalFoundationSquareHigh.tsx";
 import { Model as MetalFoundationSquareMid } from "../models/MetalFoundationSquareMid.tsx";
@@ -296,6 +299,21 @@ export default function CanvasContainer() {
       if (model_type_to_create === "StoneWallMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallMid, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneDoorway") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneDoorway, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneWallFrame") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneWallFrame, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "StoneWindow") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneWindow, generated_id, default_object_rotation);
       }
 
       // metal

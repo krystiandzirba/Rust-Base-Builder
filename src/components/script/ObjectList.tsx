@@ -170,6 +170,33 @@ export default function ObjectList() {
       },
     },
 
+    {
+      name: "stone doorway",
+      thumbnail: "",
+      keywords: ["stone", "doorway", "stone doorway"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneDoorway"));
+      },
+    },
+
+    {
+      name: "stone wall frame",
+      thumbnail: "",
+      keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWallFrame"));
+      },
+    },
+
+    {
+      name: "stone window",
+      thumbnail: "",
+      keywords: ["stone", "window", "stone window"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWindow"));
+      },
+    },
+
     // metal
 
     {
