@@ -135,7 +135,7 @@ models.filter(
           model === "StoneFoundationTriangleMid" ||
           model === "StoneFoundationTriangleLow" ||
           model === "StoneFoundationStairs" ||
-          model === "StoneSquareFloor" ||
+          model === "StoneFloorSquare" ||
           model === "StoneFoundationTriangleLow" ||
           model === "StoneWallLow" ||
           model === "StoneWallFrame" ||
@@ -146,7 +146,7 @@ models.filter(
     let stone_build_cost_75 =
      models.filter(
         (model) =>
-        model === "StoneTriangleFloor"
+        model === "StoneFloorTriangle"
     ).length * 75;
 
     let total_stone_build_cost =
@@ -183,7 +183,7 @@ models.filter(
           model === "MetalFoundationTriangleHigh" ||
           model === "MetalFoundationTriangleMid" ||
           model === "MetalFoundationTriangleLow" ||
-          model === "MetalSquareFloor" ||
+          model === "MetalFloorSquare" ||
           model === "MetalWallLow" ||
           model === "MetalWallFrame" ||
           model === "MetalFloorFrame"
@@ -193,7 +193,7 @@ models.filter(
     let metal_build_cost_50 =
         models.filter(
             (model) =>
-            model === "MetalTriangleFloor"
+            model === "MetalFloorTriangle"
   ).length * 50;
 
     let total_metal_build_cost =
