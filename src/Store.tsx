@@ -158,6 +158,14 @@ const modelsDataSlice = createSlice({
     object_selected: false,
     selected_model_id: "empty",
     selected_object_list: -1,
+    foundations_active: true,
+    walls_active: true,
+    floors_active: true,
+    stairs_active: true,
+    doors_active: true,
+    frames_active: true,
+    roofs_active: true,
+    miscs_active: true,
   },
   reducers: {
     set_object_selected: (state, action) => {
@@ -168,6 +176,31 @@ const modelsDataSlice = createSlice({
     },
     set_selected_object_list: (state, action) => {
       return { ...state, selected_object_list: action.payload };
+    },
+
+    set_foundations_active: (state, action) => {
+      return { ...state, foundations_active: action.payload };
+    },
+    set_walls_active: (state, action) => {
+      return { ...state, walls_active: action.payload };
+    },
+    set_floors_active: (state, action) => {
+      return { ...state, floors_active: action.payload };
+    },
+    set_stairs_active: (state, action) => {
+      return { ...state, stairs_active: action.payload };
+    },
+    set_doors_active: (state, action) => {
+      return { ...state, doors_active: action.payload };
+    },
+    set_frames_active: (state, action) => {
+      return { ...state, frames_active: action.payload };
+    },
+    set_roofs_active: (state, action) => {
+      return { ...state, roofs_active: action.payload };
+    },
+    set_miscs_active: (state, action) => {
+      return { ...state, miscs_active: action.payload };
     },
   },
 });
@@ -192,7 +225,19 @@ export const {
   set_delete_object_mode,
   set_delete_object_trigger,
 } = controlsInputSlice.actions;
-export const { set_object_selected, set_selected_model_id, set_selected_object_list } = modelsDataSlice.actions;
+export const {
+  set_object_selected,
+  set_selected_model_id,
+  set_selected_object_list,
+  set_foundations_active,
+  set_walls_active,
+  set_floors_active,
+  set_stairs_active,
+  set_doors_active,
+  set_frames_active,
+  set_roofs_active,
+  set_miscs_active,
+} = modelsDataSlice.actions;
 
 export const store = configureStore({
   reducer: {

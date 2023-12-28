@@ -22,6 +22,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
+  const foundations_active = useSelector((state: RootState) => state.modelsData.foundations_active);
 
   const { nodes, materials } = useGLTF("./models/metal_foundation_triangle_low_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
@@ -54,24 +55,26 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Circle001.geometry}
-        // material={materials.Material}
-        material={materials["Material.018"]}
-        onClick={() => ModelOnClick()}
-        onPointerOver={() => ModelOnPointerOver()}
-        onPointerOut={() => ModelOnPointerOut()}
-        onPointerMissed={() => ModelMissedClick()}
-      >
-        {page_mode === "edit" && (
-          <meshStandardMaterial
-            transparent={true}
-            opacity={model_selected ? 1 : model_hover ? 0.8 : 1}
-            color={model_selected  ? "#3672ff" : ( model_hover ? "lightblue" : "#bbbbbb")} //prettier-ignore
-            // wireframe={true}
-          />
-        )}
-      </mesh>
+      {foundations_active && (
+        <mesh
+          geometry={nodes.Circle001.geometry}
+          // material={materials.Material}
+          material={materials["Material.018"]}
+          onClick={() => ModelOnClick()}
+          onPointerOver={() => ModelOnPointerOver()}
+          onPointerOut={() => ModelOnPointerOut()}
+          onPointerMissed={() => ModelMissedClick()}
+        >
+          {page_mode === "edit" && (
+            <meshStandardMaterial
+              transparent={true}
+              opacity={model_selected ? 1 : model_hover ? 0.8 : 1}
+              color={model_selected  ? "#3672ff" : ( model_hover ? "lightblue" : "#bbbbbb")} //prettier-ignore
+              // wireframe={true}
+            />
+          )}
+        </mesh>
+      )}
     </group>
   );
 }

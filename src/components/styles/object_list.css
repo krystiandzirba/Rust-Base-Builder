@@ -48,13 +48,12 @@
 .object {
   width: 100%;
   height: 15vh;
-
   margin-bottom: 1vh;
   word-wrap: break-word;
-  background-size: cover; /* Set background size to cover */
+  background-size: cover;
   background-position: center;
   padding-top: 73%;
-  font-size: 0.6vw;
+  font-size: 0.65vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
 }

@@ -8,6 +8,7 @@ import ObjectList from "./components/script/ObjectList.tsx";
 import ControlsInput from "./components/script/ControlsInput.tsx";
 import Hints from "./components/script/Hints.tsx";
 import Settings from "./components/script/Settings.tsx";
+import StructureVisibilityMode from "./components/script/StructureVisibilityMode.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -20,6 +21,7 @@ import "./components/styles/object_list.css";
 import "./components/styles/controls_input.css";
 import "./components/styles/hints.css";
 import "./components/styles/settings.css";
+import "./components/styles/structure_visibility_mode.css";
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
       <ObjectList />
       <Hints />
       <Settings />
+      <StructureVisibilityMode />
     </div>
   );
 }
@@ -52,7 +55,6 @@ export default App;
 // add selective visibility options (toggle off, foundations, walls, miscs ... visibility) ( conditional meshStandardMaterial rendering)
 // add wireframe, solid and textured look
 // add object list filters (walls / foundations / stairs / roofs / miscs )
-// add search bar to object list
 // "overview" - more rendered look textured objects, more lights and so on / "edit" - more raw look, objects with simple colors
 // 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
 // toggle system stats ( fps, mem, cpu)
@@ -65,6 +67,8 @@ export default App;
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
 // add multiple models of same type on mouse drag on canvas (like painting)
+// add placing sound
+// add creation mode hints, placing objects, multiple placing*,
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

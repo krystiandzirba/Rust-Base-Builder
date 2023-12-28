@@ -11,7 +11,7 @@ export default function CanvasGrids() {
         scale={
           camera_2d_direction === "front" || camera_2d_direction === "back" || camera_2d_direction === "top"
             ? [101, 0.1, 0.08]
-            : [0, 0, 0]
+            : [101, 0.01, 0.01]
         }
         material-color="#ff6e52"
       />
@@ -19,7 +19,7 @@ export default function CanvasGrids() {
         scale={
           camera_2d_direction === "left" || camera_2d_direction === "right" || camera_2d_direction === "top"
             ? [0.08, 0.1, 101]
-            : [0, 0, 0]
+            : [0.01, 0.01, 101]
         }
         material-color="#69b1ff"
       />

@@ -101,30 +101,30 @@ export default function ControlsInput() {
 
   function ChangeRotationDegree() {
     if (object_rotation_degree === 90) {
-      set_previous_model_rotation_degree(90);
-      set_model_rotation_degree(15);
       set_next_model_rotation_degree(30);
+      set_model_rotation_degree(15);
+      set_previous_model_rotation_degree(90);
       dispatch(set_object_rotation_degree(15));
     }
 
     if (object_rotation_degree === 15) {
-      set_previous_model_rotation_degree(15);
-      set_model_rotation_degree(30);
       set_next_model_rotation_degree(60);
+      set_model_rotation_degree(30);
+      set_previous_model_rotation_degree(15);
       dispatch(set_object_rotation_degree(30));
     }
 
     if (object_rotation_degree === 30) {
-      set_previous_model_rotation_degree(30);
-      set_model_rotation_degree(60);
       set_next_model_rotation_degree(90);
+      set_model_rotation_degree(60);
+      set_previous_model_rotation_degree(30);
       dispatch(set_object_rotation_degree(60));
     }
 
     if (object_rotation_degree === 60) {
-      set_previous_model_rotation_degree(60);
-      set_model_rotation_degree(90);
       set_next_model_rotation_degree(15);
+      set_model_rotation_degree(90);
+      set_previous_model_rotation_degree(60);
       dispatch(set_object_rotation_degree(90));
     }
   }
@@ -330,11 +330,11 @@ export default function ControlsInput() {
               />
             </button>
             <div className="model_rotation_wheel">
-              <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
+              <div className="model_rotation_next">{next_model_rotation_degree}°</div>
               <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
                 -{model_rotation_degree}°-
               </button>
-              <div className="model_rotation_next">{next_model_rotation_degree}°</div>
+              <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
             </div>
             <button onClick={() => ObjectRotateButtonRight()} className="rotation_right">
               <FontAwesomeIcon
