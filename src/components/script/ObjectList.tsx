@@ -18,6 +18,7 @@ import stoneWallFrameThumbnail from "../images/ObjectListThumbnails/stone_wall_f
 import stoneWindowThumbnail from "../images/ObjectListThumbnails/stone_window_thumbnail.png";
 import stoneStairsLShapeThumbnail from "../images/ObjectListThumbnails/stone_stairs_l_shape_thumbnail.png";
 import stoneStairsUShapeThumbnail from "../images/ObjectListThumbnails/stone_stairs_u_shape_thumbnail.png";
+import stoneFloorSquareThumbnail from "../images/ObjectListThumbnails/stone_floor_square_thumbnail.png";
 import stoneFloorTriangleThumbnail from "../images/ObjectListThumbnails/stone_floor_triangle_thumbnail.png";
 
 import metalFoundationSquareHighThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_high_thumbnail.png";
@@ -34,6 +35,7 @@ import metalWallFrameThumbnail from "../images/ObjectListThumbnails/metal_wall_f
 import metalWindowThumbnail from "../images/ObjectListThumbnails/metal_window_thumbnail.png";
 import metalStairsLShapeThumbnail from "../images/ObjectListThumbnails/metal_stairs_l_shape_thumbnail.png";
 import metalStairsUShapeThumbnail from "../images/ObjectListThumbnails/metal_stairs_u_shape_thumbnail.png";
+import metalFloorSquareThumbnail from "../images/ObjectListThumbnails/metal_floor_square_thumbnail.png";
 import metalFloorTriangleThumbnail from "../images/ObjectListThumbnails/metal_floor_triangle_thumbnail.png";
 
 export default function ObjectList() {
@@ -252,6 +254,15 @@ export default function ObjectList() {
     // },
 
     {
+      name: "stone floor square",
+      thumbnail: stoneFloorSquareThumbnail,
+      keywords: ["stone", "floor", "square", "stone floor", "stone square", "floor square"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneFloorSquare"));
+      },
+    },
+
+    {
       name: "stone floor triangle",
       thumbnail: stoneFloorTriangleThumbnail,
       keywords: ["stone", "floor", "triangle", "stone floor", "stone triangle", "floor triangle"],
@@ -449,6 +460,15 @@ export default function ObjectList() {
       keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalWallFrame"));
+      },
+    },
+
+    {
+      name: "metal floor square",
+      thumbnail: metalFloorSquareThumbnail,
+      keywords: ["metal", "floor", "square", "metal floor", "metal square", "floor square"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFloorSquare"));
       },
     },
 
