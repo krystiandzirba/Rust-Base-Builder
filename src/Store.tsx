@@ -158,6 +158,9 @@ const modelsDataSlice = createSlice({
     object_selected: false,
     selected_model_id: "empty",
     selected_object_list: -1,
+
+    models_xray_active: false,
+
     foundations_active: true,
     walls_active: true,
     floors_active: true,
@@ -177,7 +180,9 @@ const modelsDataSlice = createSlice({
     set_selected_object_list: (state, action) => {
       return { ...state, selected_object_list: action.payload };
     },
-
+    set_models_xray_active: (state, action) => {
+      return { ...state, models_xray_active: action.payload };
+    },
     set_foundations_active: (state, action) => {
       return { ...state, foundations_active: action.payload };
     },
@@ -229,6 +234,7 @@ export const {
   set_object_selected,
   set_selected_model_id,
   set_selected_object_list,
+  set_models_xray_active,
   set_foundations_active,
   set_walls_active,
   set_floors_active,

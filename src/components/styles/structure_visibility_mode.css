@@ -8,11 +8,32 @@
   background-color: transparent;
 }
 
-.visibility_switch_container,
-.visibility_type_container {
+.visibility_switch_container {
   width: 100%;
   height: 80%;
   background-color: transparent;
+}
+
+.visibility_type_container {
+  width: 100%;
+  height: 20%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  color: #bbbbbb;
+}
+
+.type_switch_button {
+  width: 30%;
+  height: 40%;
+  align-items: center;
+  background-color: transparent;
+  border: none;
 }
 
 .visibility_switch_element {

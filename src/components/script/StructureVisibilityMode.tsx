@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import {
+  set_models_xray_active,
   set_foundations_active,
   set_walls_active,
   set_floors_active,
@@ -16,6 +17,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function StructureVisibilityMode() {
   const dispatch = useDispatch();
+  const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active);
   const foundations_active = useSelector((state: RootState) => state.modelsData.foundations_active);
   const walls_active = useSelector((state: RootState) => state.modelsData.walls_active);
   const floors_active = useSelector((state: RootState) => state.modelsData.floors_active);
@@ -27,11 +29,21 @@ export default function StructureVisibilityMode() {
 
   return (
     <div className="structure_visibility_container">
-      {/* <div className="visibility_type_container">
-        <button>solid</button>
-        <button>xray</button>
-        <button>none</button>
-      </div> */}
+      <div className="visibility_type_container">
+        <button
+          onClick={() => {
+            dispatch(set_models_xray_active(!models_xray_active));
+          }}
+          className="type_switch_button"
+        >
+          {!models_xray_active ? (
+            <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+          ) : (
+            <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
+          )}
+        </button>
+        <span>xray</span>
+      </div>
       <div className="visibility_switch_container">
         <div className="visibility_switch_row">
           <div className="visibility_switch_element">

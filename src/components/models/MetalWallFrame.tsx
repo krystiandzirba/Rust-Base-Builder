@@ -22,6 +22,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
+  const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active);
   const frames_active = useSelector((state: RootState) => state.modelsData.frames_active);
 
   const { nodes, materials } = useGLTF("./models/metal_wall_frame_textured.glb") as GLTFResult;
@@ -70,7 +71,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
               transparent={true}
               opacity={model_selected ? 1 : model_hover ? 0.8 : 1}
               color={model_selected  ? "#3672ff" : ( model_hover ? "lightblue" : "#bbbbbb")} //prettier-ignore
-              // wireframe={true}
+              wireframe={models_xray_active ? true : false}
             />
           )}
         </mesh>
