@@ -27,6 +27,7 @@ import { Model as StoneWallFrame } from "../models/StoneWallFrame.tsx";
 import { Model as StoneWindow } from "../models/StoneWindow.tsx";
 import { Model as StoneStairsLShape } from "../models/StoneStairsLShape.tsx";
 import { Model as StoneStairsUShape } from "../models/StoneStairsUShape.tsx";
+import { Model as StoneFloorTriangle } from "../models/StoneFloorTriangle.tsx";
 
 import { Model as MetalFoundationSquareHigh } from "../models/MetalFoundationSquareHigh.tsx";
 import { Model as MetalFoundationSquareMid } from "../models/MetalFoundationSquareMid.tsx";
@@ -42,6 +43,7 @@ import { Model as MetalWallFrame } from "../models/MetalWallFrame.tsx";
 import { Model as MetalWindow } from "../models/MetalWindow.tsx";
 import { Model as MetalStairsLShape } from "../models/MetalStairsLShape.tsx";
 import { Model as MetalStairsUShape } from "../models/MetalStairsUShape.tsx";
+import { Model as MetalFloorTriangle } from "../models/MetalFloorTriangle.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
@@ -337,6 +339,11 @@ export default function CanvasContainer() {
         addModel(StoneStairsUShape, generated_id, default_object_rotation);
       }
 
+      if (model_type_to_create === "StoneFloorTriangle") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFloorTriangle, generated_id, default_object_rotation);
+      }
+
       // metal
 
       if (model_type_to_create === "MetalFoundationSquareHigh") {
@@ -403,6 +410,11 @@ export default function CanvasContainer() {
       if (model_type_to_create === "MetalStairsUShape") {
         set_generated_id(randomIdGenerator());
         addModel(MetalStairsUShape, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalFloorTriangle") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalFloorTriangle, generated_id, default_object_rotation);
       }
     }
   }
