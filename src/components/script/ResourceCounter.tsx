@@ -386,6 +386,43 @@ models.filter(
           <div>{hqm_upkeep_cost.toFixed(0)}</div>
         </div>
       </div>
+      <span>misc cost (boxes, furnaces ... )</span>
+      <div className="misc_cost_container">
+        <div className="build_cost_wood">
+          <span>wood</span>
+          <div>0</div>
+        </div>
+        <div className="build_cost_stone">
+          <span>stone</span>
+          <div>0</div>
+        </div>
+        <div className="build_cost_metal">
+          <span>metal</span>
+          <div>0</div>
+        </div>
+        <div className="build_cost_hq_metal">
+          <span>hq metal</span>
+          <div>0</div>
+        </div>
+      </div>
+      <div className="misc_cost_container">
+        <div className="build_cost_scrap">
+          <span>scrap</span>
+          <div>0</div>
+        </div>
+        <div className="build_cost_gear">
+          <span>gear</span>
+          <div>0</div>
+        </div>
+        <div className="build_cost_sewing_kit">
+          <span>sewing kit</span>
+          <div>0</div>
+        </div>
+        <div className="build_cost_lg_fuel">
+          <span>lg fuel</span>
+          <div>0</div>
+        </div>
+      </div>
     </div>
   );
 }

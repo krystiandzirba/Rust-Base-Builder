@@ -13,7 +13,7 @@ import {
 } from "../../Store.tsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCube, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function StructureVisibilityMode() {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export default function StructureVisibilityMode() {
           className="type_switch_button"
         >
           {!models_xray_active ? (
-            <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+            <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
           ) : (
             <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
           )}
@@ -54,7 +54,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {foundations_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -69,7 +69,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {walls_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -87,7 +87,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {floors_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -102,7 +102,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {stairs_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -119,7 +119,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {doors_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -134,7 +134,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {frames_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -151,7 +151,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {roofs_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
@@ -166,7 +166,7 @@ export default function StructureVisibilityMode() {
               className={"visibility_switch_button"}
             >
               {miscs_active ? (
-                <FontAwesomeIcon icon={faEye} size="xl" style={{ color: "#d4d4d4" }} />
+                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
               ) : (
                 <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
               )}
