@@ -37,6 +37,7 @@ import metalStairsLShapeThumbnail from "../images/ObjectListThumbnails/metal_sta
 import metalStairsUShapeThumbnail from "../images/ObjectListThumbnails/metal_stairs_u_shape_thumbnail.png";
 import metalFloorSquareThumbnail from "../images/ObjectListThumbnails/metal_floor_square_thumbnail.png";
 import metalFloorTriangleThumbnail from "../images/ObjectListThumbnails/metal_floor_triangle_thumbnail.png";
+import metalDoorThumbnail from "../images/ObjectListThumbnails/metal_door_thumbnail.png";
 
 export default function ObjectList() {
   const dispatch = useDispatch();
@@ -478,6 +479,15 @@ export default function ObjectList() {
       keywords: ["metal", "floor", "triangle", "metal floor", "metal triangle", "floor triangle"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalFloorTriangle"));
+      },
+    },
+
+    {
+      name: "metal door",
+      thumbnail: metalDoorThumbnail,
+      keywords: ["metal", "door", "metal door"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalDoor"));
       },
     },
   ];
