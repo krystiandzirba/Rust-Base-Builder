@@ -117,6 +117,7 @@ export default function CanvasContainer() {
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
+  const [default_model_hight_position, set_default_model_hight_position] = useState<number>(0);
 
   //  const [camera_3d_direction, set_camera_3d_direction] = useState<string>("north");
 
@@ -262,7 +263,7 @@ export default function CanvasContainer() {
         setModelsTransforms((prevTransforms) => ({
           ...prevTransforms,
           [generated_id]: {
-            position: { x: rounded_x, z: rounded_z, y: 0 },
+            position: { x: rounded_x, z: rounded_z, y: default_model_hight_position },
             rotation: new THREE.Euler(0, 0, 0),
           },
         }));
@@ -665,6 +666,30 @@ export default function CanvasContainer() {
     }
   }, [delete_object_trigger]);
 
+  useEffect(() => {
+    if (
+      model_type_to_create &&
+      [
+        "StoneFoundationSquareHigh",
+        "StoneFoundationSquareMid",
+        "StoneFoundationSquareLow",
+        "StoneFoundationTriangleHigh",
+        "StoneFoundationTriangleMid",
+        "StoneFoundationTriangleLow",
+        "MetalFoundationSquareHigh",
+        "MetalFoundationSquareMid",
+        "MetalFoundationSquareLow",
+        "MetalFoundationTriangleHigh",
+        "MetalFoundationTriangleMid",
+        "MetalFoundationTriangleLow",
+      ].includes(model_type_to_create)
+    ) {
+      set_default_model_hight_position(0);
+    } else {
+      set_default_model_hight_position(0.05);
+    }
+  }, [model_type_to_create]);
+
   const Camera3DDirection = () => {
     if (perspectiveCameraControlsRef.current) {
       const { camera } = perspectiveCameraControlsRef.current;
@@ -673,8 +698,6 @@ export default function CanvasContainer() {
         const camera_rotation = camera.rotation.toArray();
 
         if (typeof camera_rotation[2] === "number") {
-          // console.log("Camera Controls Rotation:", camera_rotation[2].toFixed(2));
-
           if (camera_rotation[2] > -0.4 && camera_rotation[2] < 0.45) {
             dispatch(set_camera_3d_direction("north"));
           } else if (
