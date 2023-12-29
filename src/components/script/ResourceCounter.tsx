@@ -139,7 +139,8 @@ models.filter(
           model === "StoneFoundationTriangleLow" ||
           model === "StoneWallLow" ||
           model === "StoneWallFrame" ||
-          model === "StoneFloorFrame"
+          model === "StoneFloorFrameSquare" ||
+          model === "StoneFloorFrameTriangle"
       ).length * 150;
 
     // prettier-ignore
@@ -186,7 +187,8 @@ models.filter(
           model === "MetalFloorSquare" ||
           model === "MetalWallLow" ||
           model === "MetalWallFrame" ||
-          model === "MetalFloorFrame"
+          model === "MetalFloorFrameSquare" ||
+          model === "MetalFloorFrameTriangle"
       ).length * 100;
 
     //prettier-ignore
@@ -386,7 +388,7 @@ models.filter(
           <div>{hqm_upkeep_cost.toFixed(0)}</div>
         </div>
       </div>
-      <span>misc cost (boxes, furnaces ... )</span>
+      <span>misc cost (T.CB, WB, Box, Furnace ... )</span>
       <div className="misc_cost_container">
         <div className="build_cost_wood">
           <span>wood</span>

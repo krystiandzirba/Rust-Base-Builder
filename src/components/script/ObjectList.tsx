@@ -20,6 +20,7 @@ import stoneStairsLShapeThumbnail from "../images/ObjectListThumbnails/stone_sta
 import stoneStairsUShapeThumbnail from "../images/ObjectListThumbnails/stone_stairs_u_shape_thumbnail.png";
 import stoneFloorSquareThumbnail from "../images/ObjectListThumbnails/stone_floor_square_thumbnail.png";
 import stoneFloorTriangleThumbnail from "../images/ObjectListThumbnails/stone_floor_triangle_thumbnail.png";
+import stoneFloorFrameTriangleThumbnail from "../images/ObjectListThumbnails/stone_floor_frame_triangle_thumbnail.png";
 
 import metalFoundationSquareHighThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_high_thumbnail.png";
 import metalFoundationSquareMidThumbnail from "../images/ObjectListThumbnails/metal_foundation_square_mid_thumbnail.png";
@@ -37,6 +38,7 @@ import metalStairsLShapeThumbnail from "../images/ObjectListThumbnails/metal_sta
 import metalStairsUShapeThumbnail from "../images/ObjectListThumbnails/metal_stairs_u_shape_thumbnail.png";
 import metalFloorSquareThumbnail from "../images/ObjectListThumbnails/metal_floor_square_thumbnail.png";
 import metalFloorTriangleThumbnail from "../images/ObjectListThumbnails/metal_floor_triangle_thumbnail.png";
+import metalFloorFrameTriangleThumbnail from "../images/ObjectListThumbnails/metal_floor_frame_triangle_thumbnail.png";
 import metalDoorThumbnail from "../images/ObjectListThumbnails/metal_door_thumbnail.png";
 
 export default function ObjectList() {
@@ -271,6 +273,27 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("StoneFloorTriangle"));
       },
     },
+
+    {
+      name: "stone floor frame (triangle)",
+      thumbnail: stoneFloorFrameTriangleThumbnail,
+      keywords: [
+        "stone",
+        "floor",
+        "frame",
+        "triangle",
+        "stone floor",
+        "stone frame",
+        "stone triangle",
+        "floor frame",
+        "floor triangle",
+        "frame triangle",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneFloorFrameTriangle"));
+      },
+    },
+
     // metal
 
     {
@@ -479,6 +502,26 @@ export default function ObjectList() {
       keywords: ["metal", "floor", "triangle", "metal floor", "metal triangle", "floor triangle"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalFloorTriangle"));
+      },
+    },
+
+    {
+      name: "metal floor frame (triangle)",
+      thumbnail: metalFloorFrameTriangleThumbnail,
+      keywords: [
+        "metal",
+        "floor",
+        "frame",
+        "triangle",
+        "metal floor",
+        "metal frame",
+        "metal triangle",
+        "floor frame",
+        "floor triangle",
+        "frame triangle",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalFloorFrameTriangle"));
       },
     },
 

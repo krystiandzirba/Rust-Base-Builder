@@ -29,6 +29,7 @@ import { Model as StoneStairsLShape } from "../models/StoneStairsLShape.tsx";
 import { Model as StoneStairsUShape } from "../models/StoneStairsUShape.tsx";
 import { Model as StoneFloorSquare } from "../models/StoneFloorSquare.tsx";
 import { Model as StoneFloorTriangle } from "../models/StoneFloorTriangle.tsx";
+import { Model as StoneFloorFrameTriangle } from "../models/StoneFloorFrameTriangle.tsx";
 
 import { Model as MetalFoundationSquareHigh } from "../models/MetalFoundationSquareHigh.tsx";
 import { Model as MetalFoundationSquareMid } from "../models/MetalFoundationSquareMid.tsx";
@@ -46,6 +47,7 @@ import { Model as MetalStairsLShape } from "../models/MetalStairsLShape.tsx";
 import { Model as MetalStairsUShape } from "../models/MetalStairsUShape.tsx";
 import { Model as MetalFloorSquare } from "../models/MetalFloorSquare.tsx";
 import { Model as MetalFloorTriangle } from "../models/MetalFloorTriangle.tsx";
+import { Model as MetalFloorFrameTriangle } from "../models/MetalFloorFrameTriangle.tsx";
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
@@ -353,6 +355,11 @@ export default function CanvasContainer() {
         addModel(StoneFloorTriangle, generated_id, default_object_rotation);
       }
 
+      if (model_type_to_create === "StoneFloorFrameTriangle") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneFloorFrameTriangle, generated_id, default_object_rotation);
+      }
+
       // metal
 
       if (model_type_to_create === "MetalFoundationSquareHigh") {
@@ -429,6 +436,11 @@ export default function CanvasContainer() {
       if (model_type_to_create === "MetalFloorTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFloorTriangle, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "MetalFloorFrameTriangle") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalFloorFrameTriangle, generated_id, default_object_rotation);
       }
 
       if (model_type_to_create === "MetalDoor") {
