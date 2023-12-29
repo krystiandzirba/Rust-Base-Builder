@@ -90,8 +90,8 @@ export default function ControlsInput() {
 
     if (event.key === "Shift") {
       if (object_distance_multiplier === 5) {
-        dispatch(set_object_distance_multiplier(0.13));
-      } else if (object_distance_multiplier === 0.13) {
+        dispatch(set_object_distance_multiplier(0.125));
+      } else if (object_distance_multiplier === 0.125) {
         dispatch(set_object_distance_multiplier(1));
       } else if (object_distance_multiplier === 1) {
         dispatch(set_object_distance_multiplier(5));
@@ -180,7 +180,7 @@ export default function ControlsInput() {
   }
 
   function DecrementUnitButtonClick() {
-    dispatch(set_object_distance_multiplier(0.133));
+    dispatch(set_object_distance_multiplier(0.125));
   }
 
   function DefaultUnitButtonClick() {
@@ -292,13 +292,13 @@ export default function ControlsInput() {
           <div className="change_distance_unit_container">
             <button
               className={
-                object_distance_multiplier === 0.133
+                object_distance_multiplier === 0.125
                   ? "object_movement_multiplier movement_multiplier_left multiplier_active"
                   : "object_movement_multiplier movement_multiplier_left multiplier_inactive"
               }
               onClick={() => DecrementUnitButtonClick()}
             >
-              x0.133
+              x0.125
             </button>
             <button
               className={
