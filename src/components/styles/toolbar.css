@@ -1,23 +1,47 @@
 .toolbar_container {
-  width: 35vw;
-  height: 7.5vh;
+  width: 25vw;
+  height: 12vh;
   position: absolute;
-  top: 2.5vh;
-  left: 32.5vw;
+  left: 37.5vw;
   z-index: 5;
   background-color: rgb(131, 131, 131);
   display: flex;
   justify-content: space-around;
 }
 
+.overview_container,
+.edit_container,
+.raid_container {
+  height: 85%;
+  width: 20%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vh;
+  border: solid black 1px;
+}
+
 .toolbar_button {
-  height: 90%;
-  width: 30%;
+  height: 85%;
+  width: 70%;
   text-align: center;
+  background-color: transparent;
+}
+
+.toolbar_text {
+  background-color: transparent;
+  height: 15%;
+  color: black;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  padding-bottom: 0.5vh;
 }
 
 .active {
-  background-color: white;
+  background-color: rgb(201, 201, 201);
 }
 
 .unactive {
