@@ -43,6 +43,9 @@ import metalFloorFrameSquareThumbnail from "../images/ObjectListThumbnails/metal
 import metalFloorFrameTriangleThumbnail from "../images/ObjectListThumbnails/metal_floor_frame_triangle_thumbnail.png";
 import metalDoorThumbnail from "../images/ObjectListThumbnails/metal_door_thumbnail.png";
 
+import woodStorageBoxThumbnail from "../images/ObjectListThumbnails/wood_storage_box_thumbnail.png";
+import largeWoodBoxThumbnail from "../images/ObjectListThumbnails/large_wood_box_thumbnail.png";
+
 export default function ObjectList() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
@@ -573,6 +576,26 @@ export default function ObjectList() {
       keywords: ["metal", "door", "metal door"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalDoor"));
+      },
+    },
+
+    // miscs
+
+    {
+      name: "wood storage box",
+      thumbnail: woodStorageBoxThumbnail,
+      keywords: ["wood", "storage", "box", "wood storage", "wood box", "storage box"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("WoodStorageBox"));
+      },
+    },
+
+    {
+      name: "large wood box",
+      thumbnail: largeWoodBoxThumbnail,
+      keywords: ["large", "wood", "box", "large wood", "large box", "wood box"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("LargeWoodBox"));
       },
     },
   ];
