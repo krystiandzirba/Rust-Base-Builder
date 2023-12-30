@@ -43,6 +43,7 @@ import metalFloorFrameSquareThumbnail from "../images/ObjectListThumbnails/metal
 import metalFloorFrameTriangleThumbnail from "../images/ObjectListThumbnails/metal_floor_frame_triangle_thumbnail.png";
 import metalDoorThumbnail from "../images/ObjectListThumbnails/metal_door_thumbnail.png";
 
+import toolCupboardThumbnail from "../images/ObjectListThumbnails/tool_cupboard_thumbnail.png";
 import woodStorageBoxThumbnail from "../images/ObjectListThumbnails/wood_storage_box_thumbnail.png";
 import largeWoodBoxThumbnail from "../images/ObjectListThumbnails/large_wood_box_thumbnail.png";
 
@@ -580,6 +581,15 @@ export default function ObjectList() {
     },
 
     // miscs
+
+    {
+      name: "tool cupboard",
+      thumbnail: toolCupboardThumbnail,
+      keywords: ["tool", "cup", "board", "cupboard", "tool cupboard"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ToolCupboard"));
+      },
+    },
 
     {
       name: "wood storage box",

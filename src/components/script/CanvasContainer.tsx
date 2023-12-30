@@ -54,6 +54,7 @@ import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 
 import { Model as WoodStorageBox } from "../models/WoodStorageBox.tsx";
 import { Model as LargeWoodBox } from "../models/LargeWoodBox.tsx";
+import { Model as ToolCupboard } from "../models/ToolCupboard.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
@@ -464,6 +465,11 @@ export default function CanvasContainer() {
       }
 
       //miscs
+
+      if (model_type_to_create === "ToolCupboard") {
+        set_generated_id(randomIdGenerator());
+        addModel(ToolCupboard, generated_id, default_object_rotation);
+      }
 
       if (model_type_to_create === "WoodStorageBox") {
         set_generated_id(randomIdGenerator());
