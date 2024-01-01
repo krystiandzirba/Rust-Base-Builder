@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { set_page_mode } from "../../Store.tsx";
 
-import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 import {
@@ -11,13 +10,13 @@ import {
   set_model_creation_state,
 } from "../../Store.tsx";
 
-import overviewRgbThumbnail from "../icons/overview_rgb_thumbnail.png";
-import editRgbThumbnail from "../icons/hammer_rgb_thumbnail.png";
-import raidRgbThumbnail from "../icons/raid_rgb_thumbnail.png";
+import overviewRgbThumbnail from "../../icons/overview_rgb_thumbnail.png";
+import editRgbThumbnail from "../../icons/hammer_rgb_thumbnail.png";
+import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
 
-import overviewBwThumbnail from "../icons/overview_bw_thumbnail.png";
-import editBwThumbnail from "../icons/hammer_bw_thumbnail.png";
-import raidBwThumbnail from "../icons/raid_bw_thumbnail.png";
+import overviewBwThumbnail from "../../icons/overview_bw_thumbnail.png";
+import editBwThumbnail from "../../icons/hammer_bw_thumbnail.png";
+import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
 
 const Toolbar = () => {
   const dispatch = useDispatch();
