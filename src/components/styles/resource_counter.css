@@ -5,7 +5,12 @@
   top: 58.5vh;
   left: 79vw;
   z-index: 10;
-  background-color: rgb(191, 191, 191);
+  color: #bbbbbb;
+  background-color: black;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
