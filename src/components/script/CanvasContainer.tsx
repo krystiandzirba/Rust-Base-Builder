@@ -51,6 +51,7 @@ import { Model as MetalFloorTriangle } from "../models/MetalFloorTriangle.tsx";
 import { Model as MetalFloorFrameSquare } from "../models/MetalFloorFrameSquare.tsx";
 import { Model as MetalFloorFrameTriangle } from "../models/MetalFloorFrameTriangle.tsx";
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
+import { Model as GarageDoor } from "../models/GarageDoor.tsx";
 
 import { Model as WoodStorageBox } from "../models/WoodStorageBox.tsx";
 import { Model as LargeWoodBox } from "../models/LargeWoodBox.tsx";
@@ -462,6 +463,11 @@ export default function CanvasContainer() {
       if (model_type_to_create === "MetalDoor") {
         set_generated_id(randomIdGenerator());
         addModel(MetalDoor, generated_id, default_object_rotation);
+      }
+
+      if (model_type_to_create === "GarageDoor") {
+        set_generated_id(randomIdGenerator());
+        addModel(GarageDoor, generated_id, default_object_rotation);
       }
 
       //miscs

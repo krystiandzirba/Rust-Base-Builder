@@ -42,6 +42,7 @@ import metalFloorTriangleThumbnail from "../../object_list_thumbnails/metal_floo
 import metalFloorFrameSquareThumbnail from "../../object_list_thumbnails/metal_floor_frame_square_thumbnail.png";
 import metalFloorFrameTriangleThumbnail from "../../object_list_thumbnails/metal_floor_frame_triangle_thumbnail.png";
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
+import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
 
 import toolCupboardThumbnail from "../../object_list_thumbnails/tool_cupboard_thumbnail.png";
 import woodStorageBoxThumbnail from "../../object_list_thumbnails/wood_storage_box_thumbnail.png";
@@ -577,6 +578,15 @@ export default function ObjectList() {
       keywords: ["metal", "door", "metal door"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalDoor"));
+      },
+    },
+
+    {
+      name: "garage door",
+      thumbnail: garageDoorThumbnail,
+      keywords: ["garage", "door", "garage door"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("GarageDoor"));
       },
     },
 
