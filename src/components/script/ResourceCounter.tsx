@@ -6,6 +6,7 @@ export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
 
   const [build_cost, set_build_cost] = useState([{ wood: 0 }, { stone: 0 }, { metal: 0 }, { armored: 0 }]);
+  const [misc_cost, set_misc_cost] = useState([{ wood: 0}, {stone:0}, {metal: 0}, {hq_metal: 0}, {scrap:0}, {gear:0}, {sewing_kit: 0}, {lq_fuel:0}]); //prettier-ignore
   const [total_upkeep_percentile_rampup, set_total_upkeep_percentile_rampup] = useState(0);
   const [wood_upkeep_cost, set_wood_upkeep_cost] = useState<number>(0);
   const [stone_upkeep_cost, set_stone_upkeep_cost] = useState<number>(0);
@@ -337,8 +338,39 @@ models.filter(
     }
   }
 
+  function CountMiscCost(models: string[]) {
+    let wood_build_cost_1000 = models.filter((model) => model === "ToolCupboard").length * 1000;
+
+    let wood_build_cost_250 = models.filter((model) => model === "LargeWoodBox").length * 250;
+
+    let wood_build_cost_100 = models.filter((model) => model === "WoodStorageBox").length * 100;
+
+    let total_wood_misc_cost = wood_build_cost_1000 + wood_build_cost_250 + wood_build_cost_100;
+
+    // metal
+
+    let metal_build_cost_50 = models.filter((model) => model === "LargeWoodBox").length * 50;
+
+    let total_metal_misc_cost = metal_build_cost_50;
+
+    // hq metal
+    // display
+
+    set_misc_cost([
+      { wood: total_wood_misc_cost },
+      { stone: 0 },
+      { metal: total_metal_misc_cost },
+      { hq_metal: 0 },
+      { scrap: 0 },
+      { gear: 0 },
+      { sewing_kit: 0 },
+      { lq_fuel: 0 },
+    ]);
+  }
+
   useEffect(() => {
     CountBuildCost(canvas_models_array);
+    CountMiscCost(canvas_models_array);
     CountUpkeepPercentileRampup(canvas_models_array);
   }, [canvas_models_array]);
 
@@ -392,37 +424,37 @@ models.filter(
       <div className="misc_cost_container">
         <div className="build_cost_wood">
           <span>wood</span>
-          <div>0</div>
+          <div>{misc_cost[0].wood}</div>
         </div>
         <div className="build_cost_stone">
           <span>stone</span>
-          <div>0</div>
+          <div>{misc_cost[1].stone}</div>
         </div>
         <div className="build_cost_metal">
           <span>metal</span>
-          <div>0</div>
+          <div>{misc_cost[2].metal}</div>
         </div>
         <div className="build_cost_hq_metal">
           <span>hq metal</span>
-          <div>0</div>
+          <div>{misc_cost[3].hq_metal}</div>
         </div>
       </div>
       <div className="misc_cost_container">
         <div className="build_cost_scrap">
           <span>scrap</span>
-          <div>0</div>
+          <div>{misc_cost[4].scrap}</div>
         </div>
         <div className="build_cost_gear">
           <span>gear</span>
-          <div>0</div>
+          <div>{misc_cost[5].gear}</div>
         </div>
         <div className="build_cost_sewing_kit">
           <span>sewing kit</span>
-          <div>0</div>
+          <div>{misc_cost[6].sewing_kit}</div>
         </div>
         <div className="build_cost_lg_fuel">
-          <span>lg fuel</span>
-          <div>0</div>
+          <span>lq fuel</span>
+          <div>{misc_cost[7].lq_fuel}</div>
         </div>
       </div>
     </div>
