@@ -23,7 +23,8 @@ export default function ResourceCounter() {
           model === "TwigFoundationSquareLow" ||
           model === "TwigWallHigh" ||
           model === "TwigWallMid" ||
-          model === "TwigStairs" ||
+          model === "TwigStairsLShape" ||
+          model === "TwigStairsUShape" ||
           model === "TwigRoof"
       ).length * 50;
 
@@ -63,7 +64,8 @@ export default function ResourceCounter() {
           model === "WoodenFoundationSquareLow" ||
           model === "WoodenWallHigh" ||
           model === "WoodenWallMid" ||
-          model === "WoodenStairs" ||
+          model === "WoodenStairsLShape" ||
+          model === "WoodenStairsUShape" ||
           model === "WoodenRoof"
       ).length * 200;
 
@@ -117,7 +119,8 @@ models.filter(
           model === "StoneWallHigh" ||
           model === "StoneWallMid" ||
           model === "StoneWallThird" ||
-          model === "StoneStairs" ||
+          model === "StoneStairsLShape" ||
+          model === "StoneStairsUShape" ||
           model === "StoneRoof"
       ).length * 300;
 
@@ -166,8 +169,8 @@ models.filter(
           model === "MetalFoundationStairs" ||
           model === "MetalWallHigh" ||
           model === "MetalWallMid" ||
-          model === "MetalStairsUshape" ||
-          model === "MetalStairsLshape" ||
+          model === "MetalStairsUShape" ||
+          model === "MetalStairsLShape" ||
           model === "MetalRoof"
       ).length * 200;
 
