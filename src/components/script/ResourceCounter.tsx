@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store";
 
+import woodThumbnail from "../../icons/wood_thumbnail.png";
+
 export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
 
@@ -382,10 +384,12 @@ models.filter(
   }, [build_cost, total_upkeep_percentile_rampup]);
 
   return (
+    // style={{ backgroundImage: `url(${woodThumbnail})`, backgroundSize: "cover" }}
+
     <div className="resources_container">
       <span>build cost</span>
       <div className="build_cost_container">
-        <div className="build_cost_wood">
+        <div className="build_cost_wood" style={{ backgroundImage: `url(${woodThumbnail})`, backgroundSize: "cover" }}>
           <span>wood</span>
           <div>{build_cost[0].wood}</div>
         </div>
