@@ -4,9 +4,10 @@
   position: absolute;
   left: 37.5vw;
   z-index: 5;
-  background-color: rgb(131, 131, 131);
+  background-color: transparent;
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1vh;
 }
 
 .overview_container,
@@ -23,27 +24,24 @@
   border: solid black 1px;
 }
 
-.toolbar_button {
-  height: 85%;
-  width: 70%;
-  text-align: center;
-  background-color: transparent;
-}
-
-.toolbar_text {
-  background-color: transparent;
-  height: 15%;
-  color: black;
-  font-size: 0.8vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  padding-bottom: 0.5vh;
-}
-
 .active {
   background-color: rgb(201, 201, 201);
 }
 
 .unactive {
   background-color: rgb(52, 52, 52);
+}
+
+.toolbar_description {
+  position: absolute;
+  height: 10%;
+  width: 20.5%;
+  color: #bbbbbb;
+  background-color: black;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  padding-bottom: 0.5vh;
+  top: 83%;
 }

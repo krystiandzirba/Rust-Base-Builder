@@ -13,7 +13,6 @@ import {
 import overviewRgbThumbnail from "../../icons/overview_rgb_thumbnail.png";
 import editRgbThumbnail from "../../icons/hammer_rgb_thumbnail.png";
 import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
-
 import overviewBwThumbnail from "../../icons/overview_bw_thumbnail.png";
 import editBwThumbnail from "../../icons/hammer_bw_thumbnail.png";
 import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
@@ -35,47 +34,44 @@ const Toolbar = () => {
   }
 
   function PageModeRaid() {
-    dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
+    // dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
   }
 
   return (
     <>
       <div className="toolbar_container">
-        <div className={page_mode === "overview" ? "overview_container active" : "overview_container inactive"}>
-          <span className="toolbar_text">overview</span>
-          <div
-            className="toolbar_button"
-            onClick={() => PageModeOverview()}
-            style={
-              page_mode === "overview"
-                ? { backgroundImage: `url(${overviewRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${overviewBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+        <div
+          onClick={() => PageModeOverview()}
+          className={page_mode === "overview" ? "overview_container active" : "overview_container inactive"}
+          style={
+            page_mode === "overview"
+              ? { backgroundImage: `url(${overviewRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${overviewBwThumbnail})`, backgroundSize: "cover" }
+          }
+        >
+          <span className="toolbar_description">overview</span>
         </div>
-        <div className={page_mode === "edit" ? "edit_container active" : "edit_container inactive"}>
-          <span className="toolbar_text">edit</span>
-          <div
-            className="toolbar_button"
-            onClick={() => PageModeEdit()}
-            style={
-              page_mode === "edit"
-                ? { backgroundImage: `url(${editRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${editBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+        <div
+          onClick={() => PageModeEdit()}
+          className={page_mode === "edit" ? "edit_container active" : "edit_container inactive"}
+          style={
+            page_mode === "edit"
+              ? { backgroundImage: `url(${editRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${editBwThumbnail})`, backgroundSize: "cover" }
+          }
+        >
+          <span className="toolbar_description">edit</span>
         </div>
-        <div className={page_mode === "raid" ? "raid_container active" : "raid_container inactive"}>
-          <span className="toolbar_text">raid</span>
-          <div
-            className="toolbar_button"
-            onClick={() => PageModeRaid()}
-            style={
-              page_mode === "raid"
-                ? { backgroundImage: `url(${raidRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${raidBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+        <div
+          onClick={() => PageModeRaid()}
+          className={page_mode === "raid" ? "raid_container active" : "raid_container inactive"}
+          style={
+            page_mode === "raid"
+              ? { backgroundImage: `url(${raidRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${raidBwThumbnail})`, backgroundSize: "cover" }
+          }
+        >
+          <span className="toolbar_description">raid**</span>
         </div>
       </div>
     </>

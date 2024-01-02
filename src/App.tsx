@@ -64,6 +64,7 @@ export default App;
 // add multiple models of same type on mouse drag on canvas (like painting)
 // add placing sound
 // add creation mode hints, placing objects, multiple placing*,
+// prebuild base setups selector
 
 // list of active canvas 3d objects (editable)
 // 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
