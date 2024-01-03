@@ -1,6 +1,6 @@
 .presets_container {
   width: 17.5vw;
-  height: 7.5vh;
+  height: 8.5vh;
   position: absolute;
   top: 2.5vh;
   left: 70vw;
@@ -14,12 +14,21 @@
   width: 17.5%;
   text-align: center;
   color: #bbbbbb;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
 }
 
 .preset_button {
-  height: 65%;
+  height: 85%;
   width: 100%;
   text-align: center;
-  background-color: rgb(131, 131, 131);
+  background-color: transparent;
   border: none;
+}
+
+.preset_inactive {
+  color: rgba(255, 255, 255, 0.1);
 }
