@@ -13,26 +13,52 @@ export default function Hints() {
     <div className="hint_container_bottom">
       {camera_type === "camera_3d" && !object_selected && (
         <div className="hint_default_3d">
-          <div className="hint_part"> LMB | MB1 - rotate camera</div>
-          <div className="hint_part"> RMB | MB2 - move camera</div>
-          <div className="hint_part"> mouse scroll - zoom in-out</div>
+          <div className="hint_part">
+            <span className="orange_theme_color">LMB | MB1</span> - rotate camera
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">RMB | MB2</span> - move camera
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">mouse scroll</span> - zoom in-out
+          </div>
         </div>
       )}
       {camera_type === "camera_2d" && !object_selected && (
         <div className="hint_default_2d">
-          <div className="hint_part"> LMB | MB1 | RMB | MB2 - move camera</div>
-          <div className="hint_part"> mouse scroll - zoom in-out</div>
+          <div className="hint_part">
+            <span className="orange_theme_color">LMB | MB1 | RMB | MB2</span> - move camera
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">mouse scroll</span> - zoom in-out
+          </div>
         </div>
       )}
       {object_selected && (
         <div className="hint_object_selected">
           <div className="hint_part">
-            <FontAwesomeIcon icon={faUpDownLeftRight} size="lg" style={{ color: "rgb(90, 90, 90)" }} /> | W/A/S/D - move
+            <FontAwesomeIcon icon={faUpDownLeftRight} size="lg" style={{ color: "#f5b784" }} />
+            <span className="orange_theme_color">| W/A/S/D</span> - move
           </div>
-          <div className="hint_part"> Q/E - rotate </div>
-          <div className="hint_part"> SPACE/CTRL - move up/down</div>
-          <div className="hint_part"> SHIFT - change unit</div>
-          <div className="hint_part"> DEL - delete </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">Q/E</span> - rotate
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">SPACE/CTRL</span> - move up/down
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">SHIFT</span> - change unit
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">DEL</span> - delete
+          </div>
         </div>
       )}
     </div>

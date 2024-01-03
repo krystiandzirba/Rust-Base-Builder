@@ -5,7 +5,7 @@
   top: 0vh;
   left: 0vw;
   z-index: 10;
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(73, 73, 73);
   transition: transform 0.1s ease-in-out;
 }
 
@@ -22,7 +22,7 @@
   height: 2.5%;
   position: absolute;
   left: 25%;
-  top: 14%;
+  top: 4%;
   text-align: center;
   color: black;
   font-size: 0.8vw;
@@ -32,11 +32,11 @@
 
 .object_list {
   width: 95%;
-  height: 80%;
+  height: 87.5%;
   position: absolute;
-  top: 17%;
+  top: 9.5%;
   left: 0%;
-  background-color: rgb(155, 64, 64);
+  background-color: transparent;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
   grid-gap: 1vh;
@@ -46,7 +46,7 @@
 }
 
 .object {
-  width: 100%;
+  width: calc(100% - 1vh);
   height: 15vh;
   margin-bottom: 1vh;
   word-wrap: break-word;
@@ -57,10 +57,11 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   border: none;
+  margin: 0.5vh;
 }
 
 .object_list_description {
-  width: 109%;
+  width: 109.75%;
   height: 100%;
   margin-left: -0.625vh;
   margin-top: 0.3vh;
@@ -75,11 +76,16 @@
 }
 
 .object_deselected {
-  background-color: rgba(15, 16, 26, 0.4);
+  background-color: rgb(201, 201, 201);
+  border: 1px solid black;
 }
 
 .object_selected {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffcea6;
+}
+
+.hovered_object {
+  background-color: #ffe9d6;
 }
 
 ::-webkit-scrollbar {

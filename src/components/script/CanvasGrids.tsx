@@ -21,7 +21,7 @@ export default function CanvasGrids() {
             ? [0.08, 0.1, 101]
             : [0.01, 0.01, 101]
         }
-        material-color="#69b1ff"
+        material-color="#f5b784"
       />
       <Box
         scale={
@@ -32,7 +32,7 @@ export default function CanvasGrids() {
             ? [0.1, 101, 0.08]
             : [0, 0, 0]
         }
-        material-color="#70ff77"
+        material-color="rgb(246, 177, 122)"
       />
 
       <Grid cellSize={3} infiniteGrid={true} fadeStrength={2} sectionColor={"grey"} />

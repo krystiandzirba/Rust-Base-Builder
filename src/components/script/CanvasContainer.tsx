@@ -858,7 +858,7 @@ export default function CanvasContainer() {
           })}
           {model_creation_state && page_mode === "edit" && (
             <Box position={[mouse_canvas_x_coordinate, 0, mouse_canvas_z_coordinate]} scale={[2, 0.01, 2]}>
-              <meshStandardMaterial transparent opacity={1} color={"#59d0ff"} />
+              <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
             </Box>
           )}
         </Canvas>

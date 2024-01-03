@@ -6,3 +6,7 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+.orange_theme_color {
+  color: #ffcea6;
+}

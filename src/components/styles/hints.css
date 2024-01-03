@@ -4,7 +4,7 @@
   width: 50vw;
   height: 4vh;
   left: 25vw;
-  top: 12vh;
+  top: 12.5vh;
   background-color: transparent;
   display: flex;
   justify-content: center;
@@ -34,9 +34,8 @@
 
 .hint_part {
   margin: auto;
-  font-size: 0.7vw;
+  font-size: 0.6vw;
   font-family: "Quicksand", sans-serif;
-  font-weight: 300;
   color: rgb(106, 106, 106);
   text-align: center;
 }

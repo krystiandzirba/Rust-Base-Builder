@@ -53,6 +53,8 @@ export default function ObjectList() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
 
+  const [hovered_object_list, set_hovered_object_list] = useState<number>(-1);
+
   const object_list = [
     {
       name: "stone foundation square (high)",
@@ -647,7 +649,13 @@ export default function ObjectList() {
           {filteredObjectList.map((item, index) => (
             <button
               key={index}
-              className={selected_object_list === index ? "object object_selected" : "object object_deselected"}
+              className={
+                selected_object_list === index
+                  ? "object object_selected"
+                  : hovered_object_list === index
+                  ? "object hovered_object"
+                  : "object object_deselected"
+              }
               onClick={() => {
                 if (selected_object_list === index) {
                   dispatch(set_selected_object_list(-1));
@@ -657,6 +665,12 @@ export default function ObjectList() {
                   dispatch(set_model_creation_state(true));
                 }
                 item.onClick?.();
+              }}
+              onMouseOver={() => {
+                set_hovered_object_list(index);
+              }}
+              onMouseLeave={() => {
+                set_hovered_object_list(-1);
               }}
               style={{ backgroundImage: `url(${item.thumbnail})` }}
             >
