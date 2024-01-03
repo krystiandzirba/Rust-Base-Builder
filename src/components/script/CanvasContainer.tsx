@@ -870,9 +870,7 @@ export default function CanvasContainer() {
         onClick={() => {
           console.log(object_distance_multiplier);
         }}
-      >
-        test
-      </button>
+      ></button>
     </>
   );
 }

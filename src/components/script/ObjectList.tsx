@@ -660,7 +660,7 @@ export default function ObjectList() {
               }}
               style={{ backgroundImage: `url(${item.thumbnail})` }}
             >
-              {item.name}
+              <div className="object_list_description">{item.name}</div>
             </button>
           ))}
         </div>

@@ -1,5 +1,5 @@
 .objects_container {
-  width: 22.5vw;
+  width: 25vw;
   height: 100vh;
   position: absolute;
   top: 0vh;
@@ -56,12 +56,45 @@
   font-size: 0.65vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  border: none;
+}
+
+.object_list_description {
+  width: 109%;
+  height: 100%;
+  margin-left: -0.625vh;
+  margin-top: 0.3vh;
+  color: #bbbbbb;
+  background-color: black;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .object_deselected {
-  background-color: rgb(184, 184, 184);
+  background-color: rgba(15, 16, 26, 0.4);
 }
 
 .object_selected {
   background-color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
 }
