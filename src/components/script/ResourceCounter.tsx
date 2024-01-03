@@ -4,6 +4,8 @@ import { RootState } from "../../Store";
 
 import woodThumbnail from "../../icons/wood_thumbnail.png";
 import stoneThumbnail from "../../icons/stone_thumbnail.png";
+import metalThumbnail from "../../icons/metal_thumbnail.png";
+import hq_metalThumbnail from "../../icons/hq_metal_thumbnail.png";
 
 export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
@@ -422,12 +424,9 @@ models.filter(
             </div>
           </div>
           <div className="build_cost_metal_container">
-            <div
-              className="cost_cell"
-              // style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}
-            >
+            <div className="cost_cell" style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}>
               <div className="build_cost_display">
-                <div>metal</div>
+                <div>metal f.</div>
                 <div>{build_cost[2].metal}</div>
               </div>
             </div>
@@ -435,7 +434,7 @@ models.filter(
           <div className="build_cost_hq_metal_container">
             <div
               className="cost_cell"
-              // style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
+              style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
             >
               <div className="build_cost_display">
                 <div>hq metal</div>
@@ -484,12 +483,9 @@ models.filter(
             </div>
           </div>
           <div className="build_cost_metal_container">
-            <div
-              className="cost_cell"
-              // style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}
-            >
+            <div className="cost_cell" style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}>
               <div className="build_cost_display">
-                <div>metal</div>
+                <div>metal f.</div>
                 <div>{metal_upkeep_cost.toFixed(0)}</div>
               </div>
             </div>
@@ -497,7 +493,7 @@ models.filter(
           <div className="build_cost_hq_metal_container">
             <div
               className="cost_cell"
-              // style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
+              style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
             >
               <div className="build_cost_display">
                 <div>hq metal</div>
