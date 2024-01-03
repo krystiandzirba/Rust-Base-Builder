@@ -1,56 +1,94 @@
-.resources_container {
+.main_container {
   width: 20vw;
-  height: 40vh;
+  height: 15vh;
   position: absolute;
-  top: 58.5vh;
-  left: 79vw;
+  left: 79.5vw;
   z-index: 10;
   color: #bbbbbb;
+  background-color: rgba(15, 16, 26, 0.4);
+}
+
+.build_cost_main_container {
+  top: 52.5vh;
+}
+
+.upkeep_cost_main_container {
+  top: 68.25vh;
+}
+
+.main_misc_cost_container {
+  top: 84vh;
+}
+
+.cost_description {
+  width: 100%;
+  height: 15%;
   background-color: black;
-  font-size: 0.75vw;
+  color: #bbbbbb;
+  font-size: 0.8vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .build_cost_container,
 .upkeep_cost_container {
-  width: 100%;
-  height: 75%;
-  background-color: rgb(137, 137, 137);
+  height: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: row;
+}
+
+.build_cost_wood_container,
+.build_cost_stone_container,
+.build_cost_metal_container,
+.build_cost_hq_metal_container {
+  width: 25%;
+  height: 62.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 6vh;
+  border: black 1px solid;
+}
+
+.cost_cell {
+  width: 100%;
+  height: 100%;
   text-align: center;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.build_cost_display {
+  position: absolute;
+  background-color: black;
+  width: 25%;
+  height: 20%;
+  top: 79%;
+  color: #bbbbbb;
+  font-size: 0.65vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .misc_cost_container {
   width: 100%;
-  height: 30%;
-  background-color: rgb(137, 137, 137);
+  height: 42.5%;
+  background-color: transparent;
   display: flex;
-  justify-content: center;
   flex-direction: row;
-  text-align: center;
-}
-
-.build_cost_wood,
-.build_cost_stone,
-.build_cost_metal,
-.build_cost_hq_metal,
-.upkeep_cost_wood,
-.upkeep_cost_stone,
-.upkeep_cost_metal,
-.upkeep_cost_hq_metal,
-.build_cost_scrap,
-.build_cost_gear,
-.build_cost_sewing_kit,
-.build_cost_lg_fuel {
-  width: 25%;
-  height: 80%;
-  background-color: rgb(137, 137, 137);
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 0.5vh;
 }

@@ -385,87 +385,168 @@ models.filter(
   }, [build_cost, total_upkeep_percentile_rampup]);
 
   return (
-    <div className="resources_container">
-      <span>build cost</span>
-      <div className="build_cost_container">
-        <div className="build_cost_wood" style={{ backgroundImage: `url(${woodThumbnail})`, backgroundSize: "cover" }}>
-          <span>wood</span>
-          <div>{build_cost[0].wood}</div>
-        </div>
-        <div
-          className="build_cost_stone"
-          style={{ backgroundImage: `url(${stoneThumbnail})`, backgroundSize: "cover" }}
-        >
-          <span>stone</span>
-          <div>{build_cost[1].stone}</div>
-        </div>
-        <div className="build_cost_metal">
-          <span>metal</span>
-          <div>{build_cost[2].metal}</div>
-        </div>
-        <div className="build_cost_hq_metal">
-          <span>hq metal</span>
-          <div>{build_cost[3].armored}</div>
-        </div>
-      </div>
-      <span>
-        {upkeep_cost_text} {(total_upkeep_percentile_rampup * 100).toFixed(2)}%
-      </span>
-      <div className="upkeep_cost_container">
-        <div className="upkeep_cost_wood">
-          <span>wood</span>
-          <div>{wood_upkeep_cost.toFixed(0)}</div>
-        </div>
-        <div className="upkeep_cost_stone">
-          <span>stone</span>
-          <div>{stone_upkeep_cost.toFixed(0)}</div>
-        </div>
-        <div className="upkeep_cost_metal">
-          <span>metal</span>
-          <div>{metal_upkeep_cost.toFixed(0)}</div>
-        </div>
-        <div className="upkeep_cost_hq_metal">
-          <span>hq metal</span>
-          <div>{hqm_upkeep_cost.toFixed(0)}</div>
-        </div>
-      </div>
-      <span>misc cost (T.CB, WB, Box, Furnace ... )</span>
-      <div className="misc_cost_container">
-        <div className="build_cost_wood">
-          <span>wood</span>
-          <div>{misc_cost[0].wood}</div>
-        </div>
-        <div className="build_cost_stone">
-          <span>stone</span>
-          <div>{misc_cost[1].stone}</div>
-        </div>
-        <div className="build_cost_metal">
-          <span>metal</span>
-          <div>{misc_cost[2].metal}</div>
-        </div>
-        <div className="build_cost_hq_metal">
-          <span>hq metal</span>
-          <div>{misc_cost[3].hq_metal}</div>
+    <>
+      <div className="main_container build_cost_main_container">
+        <div className="cost_description">build cost</div>
+        <div className="build_cost_container">
+          <div className="build_cost_wood_container">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${woodThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display">
+                <div>wood</div>
+                <div>{build_cost[0].wood}</div>
+              </div>
+            </div>
+          </div>
+          <div className="build_cost_stone_container">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${stoneThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display">
+                <div>stone</div>
+                <div>{build_cost[1].stone}</div>
+              </div>
+            </div>
+          </div>
+          <div className="build_cost_metal_container">
+            <div
+              className="cost_cell"
+              // style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display">
+                <div>metal</div>
+                <div>{build_cost[2].metal}</div>
+              </div>
+            </div>
+          </div>
+          <div className="build_cost_hq_metal_container">
+            <div
+              className="cost_cell"
+              // style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display">
+                <div>hq metal</div>
+                <div>{build_cost[3].armored}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="misc_cost_container">
-        <div className="build_cost_scrap">
-          <span>scrap</span>
-          <div>{misc_cost[4].scrap}</div>
+
+      <div className="main_container upkeep_cost_main_container">
+        <div className="cost_description">
+          {upkeep_cost_text} {(total_upkeep_percentile_rampup * 100).toFixed(2)}%
         </div>
-        <div className="build_cost_gear">
-          <span>gear</span>
-          <div>{misc_cost[5].gear}</div>
-        </div>
-        <div className="build_cost_sewing_kit">
-          <span>sewing kit</span>
-          <div>{misc_cost[6].sewing_kit}</div>
-        </div>
-        <div className="build_cost_lg_fuel">
-          <span>lq fuel</span>
-          <div>{misc_cost[7].lq_fuel}</div>
+        <div className="upkeep_cost_container">
+          <div className="build_cost_wood_container">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${woodThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display">
+                <div>wood</div>
+                <div>{wood_upkeep_cost.toFixed(0)}</div>
+              </div>
+            </div>
+          </div>
+          <div className="build_cost_stone_container">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${stoneThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display">
+                <div>stone</div>
+                <div>{stone_upkeep_cost.toFixed(0)}</div>
+              </div>
+            </div>
+          </div>
+          <div className="build_cost_metal_container">
+            <div
+              className="cost_cell"
+              // style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display">
+                <div>metal</div>
+                <div>{metal_upkeep_cost.toFixed(0)}</div>
+              </div>
+            </div>
+          </div>
+          <div className="build_cost_hq_metal_container">
+            <div
+              className="cost_cell"
+              // style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display">
+                <div>hq metal</div>
+                <div>{hqm_upkeep_cost.toFixed(0)}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      <div className="main_container main_misc_cost_container">
+        <div className="cost_description">misc cost (T.CB, WB, Box, Furnace ... )</div>
+        <div className="misc_cost_container">
+          <div className="cost_cell">
+            <span>wood</span>
+            <div>{misc_cost[0].wood}</div>
+          </div>
+          <div className="cost_cell">
+            <span>stone</span>
+            <div>{misc_cost[1].stone}</div>
+          </div>
+          <div className="cost_cell">
+            <span>metal</span>
+            <div>{misc_cost[2].metal}</div>
+          </div>
+          <div className="cost_cell">
+            <span>hq metal</span>
+            <div>{misc_cost[3].hq_metal}</div>
+          </div>
+        </div>
+        <div className="misc_cost_container">
+          <div className="cost_cell">
+            <span>scrap</span>
+            <div>{misc_cost[4].scrap}</div>
+          </div>
+          <div className="cost_cell">
+            <span>gear</span>
+            <div>{misc_cost[5].gear}</div>
+          </div>
+          <div className="cost_cell">
+            <span>sewing kit</span>
+            <div>{misc_cost[6].sewing_kit}</div>
+          </div>
+          <div className="cost_cell">
+            <span>lq fuel</span>
+            <div>{misc_cost[7].lq_fuel}</div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
