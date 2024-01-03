@@ -1,39 +1,11 @@
 .structure_visibility_container {
   width: 8vw;
-  height: 35vh;
+  height: 30vh;
   position: absolute;
   top: 16.5vh;
   left: 91.5vw;
   z-index: 30;
   background-color: transparent;
-}
-
-.visibility_switch_container {
-  width: 100%;
-  height: 80%;
-  background-color: transparent;
-}
-
-.visibility_type_container {
-  width: 100%;
-  height: 20%;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.7vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  color: #bbbbbb;
-}
-
-.type_switch_button {
-  width: 30%;
-  height: 40%;
-  align-items: center;
-  background-color: transparent;
-  border: none;
 }
 
 .visibility_switch_element {
@@ -52,14 +24,23 @@
 }
 
 .visibility_switch_button {
-  width: 45%;
-  height: 50%;
+  width: 90%;
+  height: 40%;
   margin: auto;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
+}
+
+.visibility_switch_button_enabled {
+  background-color: black;
+  color: #bbbbbb;
+}
+
+.visibility_switch_button_disabled {
+  background-color: rgba(15, 16, 26, 0.4);
+  color: #bbbbbb6a;
 }
 
 .visibility_switch_row {

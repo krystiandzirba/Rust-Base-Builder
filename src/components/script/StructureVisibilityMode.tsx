@@ -29,150 +29,106 @@ export default function StructureVisibilityMode() {
 
   return (
     <div className="structure_visibility_container">
-      <div className="visibility_type_container">
-        <button
-          onClick={() => {
-            dispatch(set_models_xray_active(!models_xray_active));
-          }}
-          className="type_switch_button"
-        >
-          {!models_xray_active ? (
-            <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-          )}
-        </button>
-        <span>xray</span>
+      <div className="visibility_switch_row">
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_models_xray_active(!models_xray_active));
+            }}
+            className={!models_xray_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            xray
+          </button>
+        </div>
       </div>
-      <div className="visibility_switch_container">
-        <div className="visibility_switch_row">
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_foundations_active(!foundations_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {foundations_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>found.</span>
-          </div>
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_walls_active(!walls_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {walls_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>walls</span>
-          </div>
-        </div>
 
-        <div className="visibility_switch_row">
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_floors_active(!floors_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {floors_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>floors</span>
-          </div>
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_stairs_active(!stairs_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {stairs_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>stairs</span>
-          </div>
+      <div className="visibility_switch_row">
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_foundations_active(!foundations_active));
+            }}
+            className={foundations_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            found.
+          </button>
         </div>
-        <div className="visibility_switch_row">
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_doors_active(!doors_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {doors_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>doors</span>
-          </div>
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_frames_active(!frames_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {frames_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>frames</span>
-          </div>
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_walls_active(!walls_active));
+            }}
+            className={walls_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            walls
+          </button>
         </div>
-        <div className="visibility_switch_row">
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_roofs_active(!roofs_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {roofs_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>roofs</span>
-          </div>
-          <div className="visibility_switch_element">
-            <button
-              onClick={() => {
-                dispatch(set_miscs_active(!miscs_active));
-              }}
-              className={"visibility_switch_button"}
-            >
-              {miscs_active ? (
-                <FontAwesomeIcon icon={faCube} size="xl" style={{ color: "#d4d4d4" }} />
-              ) : (
-                <FontAwesomeIcon icon={faEyeSlash} size="xl" style={{ color: "#a8a8a8" }} />
-              )}
-            </button>
-            <span>miscs</span>
-          </div>
+      </div>
+
+      <div className="visibility_switch_row">
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_floors_active(!floors_active));
+            }}
+            className={floors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            floors
+          </button>
+        </div>
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_stairs_active(!stairs_active));
+            }}
+            className={stairs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            stairs
+          </button>
+        </div>
+      </div>
+      <div className="visibility_switch_row">
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_doors_active(!doors_active));
+            }}
+            className={doors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            doors
+          </button>
+        </div>
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_frames_active(!frames_active));
+            }}
+            className={frames_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            frames
+          </button>
+        </div>
+      </div>
+      <div className="visibility_switch_row">
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_roofs_active(!roofs_active));
+            }}
+            className={roofs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            roofs
+          </button>
+        </div>
+        <div className="visibility_switch_element">
+          <button
+            onClick={() => {
+              dispatch(set_miscs_active(!miscs_active));
+            }}
+            className={miscs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+          >
+            miscs
+          </button>
         </div>
       </div>
     </div>
