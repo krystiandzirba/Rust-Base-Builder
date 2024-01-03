@@ -23,20 +23,30 @@ import "./components/styles/hints.css";
 import "./components/styles/settings.css";
 import "./components/styles/structure_visibility_mode.css";
 
+import { RootState } from "./Store";
+import { useSelector } from "react-redux";
+
 function App() {
+  const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
+  const enable_presets = useSelector((state: RootState) => state.pageSettings.enable_presets);
+  const enable_cameras = useSelector((state: RootState) => state.pageSettings.enable_cameras);
+  const enable_structures_visibility = useSelector((state: RootState) => state.pageSettings.enable_structures_visibility); //prettier-ignore
+  const enable_resource_container = useSelector((state: RootState) => state.pageSettings.enable_resource_container);
+  const model_transform_controls = useSelector((state: RootState) => state.pageSettings.enable_model_transform_controls); //prettier-ignore
+
   return (
     <div>
-      <ControlsInput />
+      {model_transform_controls && <ControlsInput />}
       <Toolbar />
-      <Presets />
+      {enable_presets && <Presets />}
       <Version />
-      <CameraType />
-      <ResourceCounter />
+      {enable_cameras && <CameraType />}
+      {enable_resource_container && <ResourceCounter />}
       <CanvasContainer />
       <ObjectList />
-      <Hints />
+      {enable_hints && <Hints />}
       <Settings />
-      <StructureVisibilityMode />
+      {enable_structures_visibility && <StructureVisibilityMode />}
     </div>
   );
 }
@@ -54,8 +64,6 @@ export default App;
 // "overview" - more rendered look textured objects, more lights and so on / "edit" - more raw look, objects with simple colors
 // toggle system stats ( fps, mem, cpu)
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
-// enable-disable a controls hints, a few currently available shortcuts on screen
-// make a separate resource counter function for miscs (crates, rugs ...) so it wont interfere the structure upkeep cost rampup
 // if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
 // performance mode (simple boxes, no textures just colors)
 // add a fov slider

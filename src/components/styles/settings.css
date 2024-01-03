@@ -3,9 +3,11 @@
   height: 100vh;
   position: absolute;
   left: 68vw;
-  z-index: 25;
+  z-index: 35;
   background-color: rgb(131, 131, 131);
   transition: transform 0.1s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings_container_displayed {
@@ -14,6 +16,21 @@
 
 .settings_container_hidden {
   transform: translateX(100%);
+}
+
+.settings_segment_title {
+  height: 5%;
+  width: 100%;
+  background-color: rgb(197, 125, 125);
+}
+
+.settings_segment {
+  background-color: rgb(90, 90, 152);
+  width: 100%;
+}
+
+.settings_ui_segment {
+  height: 30%;
 }
 
 .settings_button_container {

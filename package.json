@@ -14,9 +14,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/material": "^5.15.3",
     "@react-three/drei": "^9.89.0",
     "@react-three/fiber": "^8.15.11",
     "@reduxjs/toolkit": "^2.0.1",

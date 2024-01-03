@@ -210,6 +210,38 @@ const modelsDataSlice = createSlice({
   },
 });
 
+const pageSettingsSlice = createSlice({
+  name: "page settings",
+  initialState: {
+    enable_hints: true,
+    enable_presets: true,
+    enable_cameras: true,
+    enable_structures_visibility: true,
+    enable_resource_container: true,
+    enable_model_transform_controls: true,
+  },
+  reducers: {
+    set_enable_hints: (state, action) => {
+      return { ...state, enable_hints: action.payload };
+    },
+    set_enable_presets: (state, action) => {
+      return { ...state, enable_presets: action.payload };
+    },
+    set_enable_cameras: (state, action) => {
+      return { ...state, enable_cameras: action.payload };
+    },
+    set_enable_structures_visibility: (state, action) => {
+      return { ...state, enable_structures_visibility: action.payload };
+    },
+    set_enable_resource_container: (state, action) => {
+      return { ...state, enable_resource_container: action.payload };
+    },
+    set_enable_model_transform_controls: (state, action) => {
+      return { ...state, enable_model_transform_controls: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 export const { set_model_pivot_axis } = modelPivotAxisSlice.actions;
 export const { set_camera_type } = cameraTypeSlice.actions;
@@ -245,6 +277,15 @@ export const {
   set_miscs_active,
 } = modelsDataSlice.actions;
 
+export const {
+  set_enable_hints,
+  set_enable_presets,
+  set_enable_cameras,
+  set_enable_structures_visibility,
+  set_enable_resource_container,
+  set_enable_model_transform_controls,
+} = pageSettingsSlice.actions;
+
 export const store = configureStore({
   reducer: {
     pageMode: pageModeSlice.reducer,
@@ -257,6 +298,7 @@ export const store = configureStore({
     modelTypeToCreate: objectListModelCreatorSlice.reducer,
     controlsInput: controlsInputSlice.reducer,
     modelsData: modelsDataSlice.reducer,
+    pageSettings: pageSettingsSlice.reducer,
   },
 });
 
