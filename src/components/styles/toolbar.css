@@ -31,6 +31,7 @@
 
 .inactive {
   background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
 }
 
 .toolbar_description_container {
