@@ -54,28 +54,52 @@ const Settings = () => {
     set_settings_button_hover(false);
   }
 
-  function HandleHintsSwitch() {
-    dispatch(set_enable_hints(!enable_hints));
+  function HandleHintsSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_enable_hints(true));
+    } else if (!toggle) {
+      dispatch(set_enable_hints(false));
+    }
   }
 
-  function HandlePresetsSwitch() {
-    dispatch(set_enable_presets(!enable_presets));
+  function HandlePresetsSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_enable_presets(true));
+    } else if (!toggle) {
+      dispatch(set_enable_presets(false));
+    }
   }
 
-  function HandleCamerasSwitch() {
-    dispatch(set_enable_cameras(!enable_cameras));
+  function HandleCamerasSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_enable_cameras(true));
+    } else if (!toggle) {
+      dispatch(set_enable_cameras(false));
+    }
   }
 
-  function HandleStructuresVisibilitySwitch() {
-    dispatch(set_enable_structures_visibility(!enable_structures_visibility));
+  function HandleStructuresVisibilitySwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_enable_structures_visibility(true));
+    } else if (!toggle) {
+      dispatch(set_enable_structures_visibility(false));
+    }
   }
 
-  function HandleResourceCounterSwitch() {
-    dispatch(set_enable_resource_container(!enable_resource_container));
+  function HandleResourceCounterSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_enable_resource_container(true));
+    } else if (!toggle) {
+      dispatch(set_enable_resource_container(false));
+    }
   }
 
-  function HandleModelControlsSwitch() {
-    dispatch(set_enable_model_transform_controls(!model_transform_controls));
+  function HandleModelControlsSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_enable_model_transform_controls(true));
+    } else if (!toggle) {
+      dispatch(set_enable_model_transform_controls(false));
+    }
   }
 
   function HandlePerformanceMonitorStateSwitch(toggle: boolean) {
@@ -131,64 +155,117 @@ const Settings = () => {
             : "settings_container settings_container_hidden"
         }
       >
-        <div className="settings_segment_title"> UI settings</div>
+        <div className="settings_segment_title">UI settings</div>
         <div className="settings_segment settings_ui_segment">
-          <div>
-            <FormControlLabel
-              onChange={() => {
-                HandleHintsSwitch();
-              }}
-              control={<Checkbox />}
-              label="disable hints"
-            />
+          <div className="settings_element">
+            <div className="settings_element_description">disable hints</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleHintsSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleHintsSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
           </div>
-          <div>
-            <FormControlLabel
-              onChange={() => {
-                HandlePresetsSwitch();
-              }}
-              control={<Checkbox />}
-              label="disable presets"
-            />
+
+          <div className="settings_element">
+            <div className="settings_element_description">disable presets</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandlePresetsSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandlePresetsSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
           </div>
-          <div>
-            <FormControlLabel
-              onChange={() => {
-                HandleCamerasSwitch();
-              }}
-              control={<Checkbox />}
-              label="disable cameras"
-            />
+
+          <div className="settings_element">
+            <div className="settings_element_description">disable cameras</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleCamerasSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleCamerasSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
           </div>
-          <div>
-            <FormControlLabel
-              onChange={() => {
-                HandleStructuresVisibilitySwitch();
-              }}
-              control={<Checkbox />}
-              label="disable structures visibility"
-            />
+
+          <div className="settings_element">
+            <div className="settings_element_description">disable structure visibility type</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleStructuresVisibilitySwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleStructuresVisibilitySwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
           </div>
-          <div>
-            <FormControlLabel
-              onChange={() => {
-                HandleResourceCounterSwitch();
-              }}
-              control={<Checkbox />}
-              label="disable resource counter"
-            />
+
+          <div className="settings_element">
+            <div className="settings_element_description">resource counter</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleResourceCounterSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleResourceCounterSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
           </div>
-          <div>
-            <FormControlLabel
-              onChange={() => {
-                HandleModelControlsSwitch();
-              }}
-              control={<Checkbox />}
-              label="disable mouse model controls"
-            />
+
+          <div className="settings_element">
+            <div className="settings_element_description">mouse model controls</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleModelControlsSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleModelControlsSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
           </div>
-          {/* <div className="">disable active models</div> */}
         </div>
+
         <div className="settings_segment_title">performace / system</div>
         <div className="settings_segment settings_performance_segment">
           <div className="settings_element">

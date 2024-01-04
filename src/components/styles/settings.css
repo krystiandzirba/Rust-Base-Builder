@@ -30,7 +30,7 @@
 }
 
 .settings_ui_segment {
-  height: 30%;
+  height: 40%;
 }
 
 .settings_performance_segment {
@@ -38,10 +38,11 @@
 }
 
 .settings_element {
-  width: 100%;
+  width: 95%;
   background-color: green;
-  height: 30%;
+  height: 5vh;
   display: flex;
+  margin: 1vh;
   flex-direction: row;
 }
 
