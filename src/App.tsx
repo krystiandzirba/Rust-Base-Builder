@@ -54,19 +54,14 @@ function App() {
 export default App;
 
 // dark-light theme
-// performance settings
 // make a separate component for different light setups
 // object copy: "C"
 // controls menu (mouse + keyboard)
 // raid cost
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
-// "overview" - more rendered look textured objects, more lights and so on / "edit" - more raw look, objects with simple colors
-// toggle system stats ( fps, mem, cpu)
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
 // if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
-// performance mode (simple boxes, no textures just colors)
-// add a fov slider
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
 // add multiple models of same type on mouse drag on canvas (like painting)

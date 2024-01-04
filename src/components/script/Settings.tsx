@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 import Checkbox from "@mui/material/Checkbox";
-import { FormControlLabel } from "@mui/material";
+import { FormControlLabel, Slider } from "@mui/material";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,12 @@ import {
   set_enable_structures_visibility,
   set_enable_resource_container,
   set_enable_model_transform_controls,
+  set_performance_monitor_state,
+  set_model_textures_state,
+  set_model_hover_color_state,
+  set_model_click_color_state,
+  set_active_models_state,
+  set_camera_fov,
 } from "../../Store.tsx";
 
 const Settings = () => {
@@ -25,6 +31,13 @@ const Settings = () => {
   const enable_structures_visibility = useSelector((state: RootState) => state.pageSettings.enable_structures_visibility); //prettier-ignore
   const enable_resource_container = useSelector((state: RootState) => state.pageSettings.enable_resource_container);
   const model_transform_controls = useSelector((state: RootState) => state.pageSettings.enable_model_transform_controls); //prettier-ignore
+
+  const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
+  const model_textures_state = useSelector((state: RootState) => state.pageSettings.model_textures_state); //prettier-ignore
+  const model_hover_color_state = useSelector((state: RootState) => state.pageSettings.model_hover_color_state); //prettier-ignore
+  const model_click_color_state = useSelector((state: RootState) => state.pageSettings.model_click_color_state); //prettier-ignore
+  const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
+  const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
 
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
   const [settings_button_hover, set_settings_button_hover] = useState<boolean>(false);
@@ -64,6 +77,50 @@ const Settings = () => {
   function HandleModelControlsSwitch() {
     dispatch(set_enable_model_transform_controls(!model_transform_controls));
   }
+
+  function HandlePerformanceMonitorStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_performance_monitor_state(true));
+    } else if (!toggle) {
+      dispatch(set_performance_monitor_state(false));
+    }
+  }
+
+  function HandleModelTexturesStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_model_textures_state(true));
+    } else if (!toggle) {
+      dispatch(set_model_textures_state(false));
+    }
+  }
+
+  function HandleModelHoverColorStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_model_hover_color_state(true));
+    } else if (!toggle) {
+      dispatch(set_model_hover_color_state(false));
+    }
+  }
+
+  function HandleModelClickColorStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_model_hover_color_state(true));
+    } else if (!toggle) {
+      dispatch(set_model_hover_color_state(false));
+    }
+  }
+
+  function HandleActiveModelsStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_active_models_state(true));
+    } else if (!toggle) {
+      dispatch(set_active_models_state(false));
+    }
+  }
+
+  const HandleCameraFovChange = (_event: Event, newValue: number | number[]) => {
+    dispatch(set_camera_fov(newValue as number));
+  };
 
   return (
     <>
@@ -131,6 +188,109 @@ const Settings = () => {
             />
           </div>
           {/* <div className="">disable active models</div> */}
+        </div>
+        <div className="settings_segment_title">performace / system</div>
+        <div className="settings_segment settings_performance_segment">
+          <div className="settings_element">
+            <div className="settings_element_description">enable performance monitor</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandlePerformanceMonitorStateSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandlePerformanceMonitorStateSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
+          </div>
+          {/* <div className="settings_element">
+            <div className="settings_element_description">disable model textures in overview mode</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleModelTexturesStateSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleModelTexturesStateSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
+          </div> */}
+
+          {/* <div className="settings_element">
+            <div className="settings_element_description">disable model color on mouse hover</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleModelHoverColorStateSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleModelHoverColorStateSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
+          </div> */}
+
+          {/* <div className="settings_element">
+            <div className="settings_element_description">disable model color on mouse click</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleModelClickColorStateSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleModelClickColorStateSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
+          </div> */}
+
+          <div className="settings_element">
+            <div className="settings_element_description">disable active models</div>
+            <div className="settings_element_buttons_container">
+              <div
+                onClick={() => HandleActiveModelsStateSwitch(true)}
+                className="settings_element_buttons settings_element_buttons_enable"
+              >
+                enable
+              </div>
+              <div
+                onClick={() => HandleActiveModelsStateSwitch(false)}
+                className="settings_element_buttons settings_element_buttons_disable"
+              >
+                disable
+              </div>
+            </div>
+          </div>
+
+          <div className="settings_element">
+            <div className="settings_element_description">3d camera fov slider</div>
+            <Slider
+              aria-label="Volume"
+              value={camera_fov}
+              min={60}
+              max={120}
+              step={5}
+              onChange={HandleCameraFovChange}
+            />
+          </div>
         </div>
       </div>
 

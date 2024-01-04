@@ -105,6 +105,10 @@ export default function CanvasContainer() {
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
   const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
 
+  const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
+  const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
+  const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
+
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
   const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
@@ -780,7 +784,7 @@ export default function CanvasContainer() {
           }}
           onMouseUp={() => Camera3DDirection()}
         >
-          <PerformanceStats />
+          {performance_monitor_state && <PerformanceStats />}
           <ambientLight />
           <ambientLight />
           <directionalLight />
@@ -792,7 +796,7 @@ export default function CanvasContainer() {
               {/* prettier-ignore */}
               <PerspectiveCamera 
               makeDefault 
-              fov={90} 
+              fov={camera_fov} 
               position={[0, 15, 15]} 
               near={0.1} 
               far={100} 
@@ -863,7 +867,7 @@ export default function CanvasContainer() {
           )}
         </Canvas>
       </div>
-      <CanvasModelsList models={models} />
+      {active_models_state && <CanvasModelsList models={models} />}
 
       <button
         className="test_button"

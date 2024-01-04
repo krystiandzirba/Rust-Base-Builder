@@ -33,6 +33,33 @@
   height: 30%;
 }
 
+.settings_performance_segment {
+  height: 30%;
+}
+
+.settings_element {
+  width: 100%;
+  background-color: green;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+}
+
+.settings_element_buttons_container {
+  width: 40%;
+  height: 80%;
+  background-color: pink;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.settings_element_buttons {
+  width: 45%;
+  height: 100%;
+  background-color: rgb(153, 153, 255);
+}
+
 .settings_button_container {
   width: 4vw;
   height: 7.5vh;
