@@ -71,16 +71,18 @@ type ModelType = {
 
 const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
   return (
-    <div className="canvas_models_list">
-      <h3>active models:</h3>
-      <ul>
-        {models.map(({ id, component: ModelComponent }, index) => (
-          <li key={id}>
-            name: {ModelComponent.displayName} id: {id} in: {index}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="canvas_models_list_title">active models:</div>
+      <div className="canvas_models_list_container">
+        <div>
+          {models.map(({ id, component: ModelComponent }, index) => (
+            <div key={id} className="canvas_model_list_element">
+              {ModelComponent.displayName} id: {id} in: {index}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
