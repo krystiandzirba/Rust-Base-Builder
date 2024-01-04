@@ -1,6 +1,6 @@
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { set_model_type_to_create, set_model_creation_state, set_selected_object_list } from "../../Store.tsx";
 
@@ -47,6 +47,8 @@ import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbn
 import toolCupboardThumbnail from "../../object_list_thumbnails/tool_cupboard_thumbnail.png";
 import woodStorageBoxThumbnail from "../../object_list_thumbnails/wood_storage_box_thumbnail.png";
 import largeWoodBoxThumbnail from "../../object_list_thumbnails/large_wood_box_thumbnail.png";
+import { TextField } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function ObjectList() {
   const dispatch = useDispatch();
@@ -628,6 +630,17 @@ export default function ObjectList() {
     item.keywords.some((keyword) => keyword.includes(searchQuery.toLowerCase()))
   );
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#ffcea6",
+      },
+      secondary: {
+        main: "#e57373",
+      },
+    },
+  });
+
   return (
     <>
       <div
@@ -637,14 +650,16 @@ export default function ObjectList() {
             : "objects_container objects_container_hidden"
         }
       >
-        <input
-          className="search_bar"
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-
+        <ThemeProvider theme={theme}>
+          <TextField
+            id="outlined-search"
+            className="search_bar"
+            label="Search..."
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </ThemeProvider>
         <div className="object_list">
           {filteredObjectList.map((item, index) => (
             <button

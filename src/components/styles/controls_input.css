@@ -45,7 +45,7 @@
   font-size: 0.9vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
-  color: #ffcea6;
+  color: #ffd5b3;
   border: none;
   text-align: center;
 }
@@ -174,7 +174,7 @@
 }
 
 .multiplier_active {
-  background-color: #ffcea6;
+  background-color: #ffd5b3;
 }
 
 .multiplier_inactive {
