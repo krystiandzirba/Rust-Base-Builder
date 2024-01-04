@@ -3,7 +3,7 @@
   height: 7vh;
   position: absolute;
   left: 45%;
-  top: 85%;
+  top: 83.5%;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
   display: flex;
@@ -65,22 +65,22 @@
 
 .indicator_top {
   left: 48.5%;
-  top: 77.5%;
+  top: 76%;
 }
 
 .indicator_right {
   left: 57.5%;
-  top: 87.5%;
+  top: 86%;
 }
 
 .indicator_bottom {
   left: 48.5%;
-  top: 97.5%;
+  top: 95%;
 }
 
 .indicator_left {
   left: 39.5%;
-  top: 87.5%;
+  top: 86%;
 }
 
 .object_move_button:hover,
@@ -103,32 +103,32 @@
 
 .object_move_front_button {
   left: 48.5%;
-  top: 79%;
+  top: 77.5%;
 }
 
 .object_move_right_button {
   left: 55%;
-  top: 86%;
+  top: 84.5%;
 }
 
 .object_move_back_button {
   left: 48.5%;
-  top: 93%;
+  top: 90.5%;
 }
 
 .object_move_left_button {
   left: 42%;
-  top: 86%;
+  top: 84.5%;
 }
 
 .object_move_up_button {
   left: 43.5%;
-  top: 79.5%;
+  top: 78%;
 }
 
 .object_move_down_button {
   left: 43.5%;
-  top: 92.5%;
+  top: 91%;
 }
 
 .distance_unit_description {
@@ -137,7 +137,7 @@
   position: absolute;
   z-index: 55;
   left: 56.5%;
-  top: 91.5%;
+  top: 90%;
   background-color: transparent;
   font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
@@ -151,7 +151,7 @@
   position: absolute;
   z-index: 55;
   left: 55%;
-  top: 94%;
+  top: 92.5%;
   background-color: transparent;
   border: none;
   display: flex;
@@ -185,7 +185,7 @@
   width: 7.5vw;
   height: 5vh;
   position: absolute;
-  top: 93.5vh;
+  top: 92vh;
   left: 66%;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
@@ -197,7 +197,7 @@
   width: 2vw;
   height: 5vh;
   left: 72.5vw;
-  top: 93.5vh;
+  top: 92vh;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   z-index: 15;

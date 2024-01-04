@@ -1,8 +1,8 @@
 .toolbar_container {
-  width: 25vw;
-  height: 12vh;
+  width: 22vw;
+  height: 16.75vh;
   position: absolute;
-  left: 37.5vw;
+  left: 40vw;
   z-index: 5;
   background-color: transparent;
   display: flex;
@@ -14,12 +14,13 @@
 .edit_container,
 .raid_container {
   height: 85%;
-  width: 20%;
+  width: 32%;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 0.5vh;
   margin: 0.5vh;
   border: solid black 1px;
 }
@@ -28,20 +29,44 @@
   background-color: rgb(201, 201, 201);
 }
 
-.unactive {
-  background-color: rgb(52, 52, 52);
+.inactive {
+  background-color: rgba(15, 16, 26, 0.4);
+}
+
+.toolbar_description_container {
+  width: 22vw;
+  height: 2.25vh;
+  position: absolute;
+  left: 40vw;
+  z-index: 5;
+  top: 12.9%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .toolbar_description {
-  position: absolute;
-  height: 10%;
-  width: 20.5%;
-  color: #bbbbbb;
   background-color: black;
-  font-size: 0.75vw;
+  width: 31.5%;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.9vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+}
+
+.raid_unavailable {
+  position: absolute;
+  width: 6.95%;
+  height: 1.4%;
+  top: 15.25%;
+  left: 54.85%;
+  background-color: black;
+  z-index: 5;
+
   text-align: center;
-  padding-bottom: 0.5vh;
-  top: 83%;
+  color: #bbbbbb;
+  font-size: 0.55vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
 }

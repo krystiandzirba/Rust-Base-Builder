@@ -34,7 +34,7 @@ const Toolbar = () => {
   }
 
   function PageModeRaid() {
-    // dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
+    dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
   }
 
   return (
@@ -48,9 +48,7 @@ const Toolbar = () => {
               ? { backgroundImage: `url(${overviewRgbThumbnail})`, backgroundSize: "cover" }
               : { backgroundImage: `url(${overviewBwThumbnail})`, backgroundSize: "cover" }
           }
-        >
-          <span className="toolbar_description">overview</span>
-        </div>
+        ></div>
         <div
           onClick={() => PageModeEdit()}
           className={page_mode === "edit" ? "edit_container active" : "edit_container inactive"}
@@ -59,9 +57,7 @@ const Toolbar = () => {
               ? { backgroundImage: `url(${editRgbThumbnail})`, backgroundSize: "cover" }
               : { backgroundImage: `url(${editBwThumbnail})`, backgroundSize: "cover" }
           }
-        >
-          <span className="toolbar_description">edit</span>
-        </div>
+        ></div>
         <div
           onClick={() => PageModeRaid()}
           className={page_mode === "raid" ? "raid_container active" : "raid_container inactive"}
@@ -70,10 +66,14 @@ const Toolbar = () => {
               ? { backgroundImage: `url(${raidRgbThumbnail})`, backgroundSize: "cover" }
               : { backgroundImage: `url(${raidBwThumbnail})`, backgroundSize: "cover" }
           }
-        >
-          <span className="toolbar_description">raid**</span>
-        </div>
+        ></div>
       </div>
+      <div className="toolbar_description_container">
+        <div className="toolbar_description">overview</div>
+        <div className="toolbar_description">edit</div>
+        <div className="toolbar_description">raid</div>
+      </div>
+      <div className="raid_unavailable">not yet available</div>
     </>
   );
 };

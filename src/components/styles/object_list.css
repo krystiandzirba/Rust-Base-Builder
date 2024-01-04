@@ -20,7 +20,7 @@
 .search_bar {
   position: absolute;
   left: 25%;
-  top: 4%;
+  top: 2.5%;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
