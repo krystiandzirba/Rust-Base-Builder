@@ -79,3 +79,5 @@ export default App;
 // - (multiple objects on canvas, hovering over any object causes frames to drop)
 // - rotate the model pivot together with the model itself
 // performance fix: disable mesh-mouse input (on miss / on click) outside the edit mode
+
+///// make ma bledner 1:0 button on-off instead of toolbar hide-display icon

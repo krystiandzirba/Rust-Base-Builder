@@ -109,7 +109,11 @@ const Toolbar = () => {
           ToggleToolbar();
         }}
       >
-        <FontAwesomeIcon icon={toolbar_enabled ? faCaretUp : faCaretDown} size="xl" style={{ color: "black" }} />
+        <FontAwesomeIcon
+          icon={toolbar_enabled ? faCaretUp : faCaretDown}
+          size="xl"
+          style={{ color: toolbar_enabled ? "black" : "#a8a8a8" }}
+        />
       </div>
     </>
   );

@@ -28,109 +28,112 @@ export default function StructureVisibilityMode() {
   const miscs_active = useSelector((state: RootState) => state.modelsData.miscs_active);
 
   return (
-    <div className="structure_visibility_container">
-      <div className="visibility_switch_row">
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_models_xray_active(!models_xray_active));
-            }}
-            className={!models_xray_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            xray
-          </button>
+    <>
+      <div className="structure_visibility_container_description">Objects visibility</div>
+      <div className="structure_visibility_container">
+        <div className="visibility_switch_row">
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_models_xray_active(!models_xray_active));
+              }}
+              className={!models_xray_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              xray
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="visibility_switch_row">
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_foundations_active(!foundations_active));
-            }}
-            className={foundations_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            found.
-          </button>
+        <div className="visibility_switch_row">
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_foundations_active(!foundations_active));
+              }}
+              className={foundations_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              found.
+            </div>
+          </div>
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_walls_active(!walls_active));
+              }}
+              className={walls_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              walls
+            </div>
+          </div>
         </div>
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_walls_active(!walls_active));
-            }}
-            className={walls_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            walls
-          </button>
-        </div>
-      </div>
 
-      <div className="visibility_switch_row">
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_floors_active(!floors_active));
-            }}
-            className={floors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            floors
-          </button>
+        <div className="visibility_switch_row">
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_floors_active(!floors_active));
+              }}
+              className={floors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              floors
+            </div>
+          </div>
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_stairs_active(!stairs_active));
+              }}
+              className={stairs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              stairs
+            </div>
+          </div>
         </div>
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_stairs_active(!stairs_active));
-            }}
-            className={stairs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            stairs
-          </button>
+        <div className="visibility_switch_row">
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_doors_active(!doors_active));
+              }}
+              className={doors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              doors
+            </div>
+          </div>
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_frames_active(!frames_active));
+              }}
+              className={frames_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              frames
+            </div>
+          </div>
+        </div>
+        <div className="visibility_switch_row">
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_roofs_active(!roofs_active));
+              }}
+              className={roofs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              roofs
+            </div>
+          </div>
+          <div className="visibility_switch_element">
+            <div
+              onClick={() => {
+                dispatch(set_miscs_active(!miscs_active));
+              }}
+              className={miscs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            >
+              miscs
+            </div>
+          </div>
         </div>
       </div>
-      <div className="visibility_switch_row">
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_doors_active(!doors_active));
-            }}
-            className={doors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            doors
-          </button>
-        </div>
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_frames_active(!frames_active));
-            }}
-            className={frames_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            frames
-          </button>
-        </div>
-      </div>
-      <div className="visibility_switch_row">
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_roofs_active(!roofs_active));
-            }}
-            className={roofs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            roofs
-          </button>
-        </div>
-        <div className="visibility_switch_element">
-          <button
-            onClick={() => {
-              dispatch(set_miscs_active(!miscs_active));
-            }}
-            className={miscs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
-          >
-            miscs
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

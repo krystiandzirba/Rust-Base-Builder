@@ -188,8 +188,8 @@
   width: 7.5vw;
   height: 5vh;
   position: absolute;
-  top: 2.75vh;
-  left: 24vw;
+  top: 92.25vh;
+  left: 66.5vw;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -199,8 +199,8 @@
   position: absolute;
   width: 2vw;
   height: 5vh;
-  left: 34vw;
-  top: 2.75vh;
+  left: 74vw;
+  top: 92.25vh;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   z-index: 15;
