@@ -8,6 +8,15 @@
   display: flex;
   justify-content: space-around;
   padding-bottom: 1vh;
+  transition: transform 0.1s ease-in-out;
+}
+
+.toolbar_container_displayed {
+  transform: translateX(0);
+}
+
+.toolbar_container_hidden {
+  transform: translateY(-100%);
 }
 
 .overview_container,
@@ -44,6 +53,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  transition: transform 0.1s ease-in-out;
+}
+
+.toolbar_description_displayed {
+  transform: translateX(0);
+}
+
+.toolbar_description_hidden {
+  transform: translateY(-700%);
 }
 
 .toolbar_description {
@@ -64,10 +82,29 @@
   left: 54.85%;
   background-color: black;
   z-index: 5;
-
   text-align: center;
   color: #bbbbbb;
   font-size: 0.55vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  transition: transform 0.1s ease-in-out;
+}
+
+.raid_unavailable_displayed {
+  transform: translateX(0);
+}
+
+.raid_unavailable_hidden {
+  transform: translateY(-1200%);
+}
+
+.toolbar_display_trigger {
+  position: absolute;
+  width: 1.25vw;
+  height: 2.25vh;
+  top: 0.25vh;
+  left: 38.5vw;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
 }

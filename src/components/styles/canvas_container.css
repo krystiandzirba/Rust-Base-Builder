@@ -12,7 +12,7 @@
   width: 18.5vw;
   height: 27.5vh;
   position: absolute;
-  top: 2.5vh;
+  top: 72.5vh;
   z-index: 5;
   background-color: rgba(15, 16, 26, 0.4);
   backdrop-filter: blur(2px);
@@ -30,7 +30,8 @@
   width: 18.5vw;
   background-color: black;
   color: #bbbbbb;
-  font-size: 1vw;
+  font-size: 0.8vw;
+  top: 70.5vh;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;

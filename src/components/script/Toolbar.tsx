@@ -16,10 +16,16 @@ import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
 import overviewBwThumbnail from "../../icons/overview_bw_thumbnail.png";
 import editBwThumbnail from "../../icons/hammer_bw_thumbnail.png";
 import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
+import { useState } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const Toolbar = () => {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+
+  const [toolbar_enabled, set_toolbar_enabled] = useState<boolean>(true);
 
   function PageModeOverview() {
     dispatch(set_page_mode("overview")),
@@ -37,9 +43,19 @@ const Toolbar = () => {
     dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
   }
 
+  function ToggleToolbar() {
+    set_toolbar_enabled(!toolbar_enabled);
+  }
+
   return (
     <>
-      <div className="toolbar_container">
+      <div
+        className={
+          toolbar_enabled
+            ? "toolbar_container toolbar_container_displayed"
+            : "toolbar_container toolbar_container_hidden"
+        }
+      >
         <div
           onClick={() => PageModeOverview()}
           className={page_mode === "overview" ? "overview_container active" : "overview_container inactive"}
@@ -68,12 +84,33 @@ const Toolbar = () => {
           }
         ></div>
       </div>
-      <div className="toolbar_description_container">
+      <div
+        className={
+          toolbar_enabled
+            ? "toolbar_description_container toolbar_description_displayed"
+            : "toolbar_description_container toolbar_description_hidden"
+        }
+      >
         <div className="toolbar_description">overview</div>
         <div className="toolbar_description">edit</div>
         <div className="toolbar_description">raid</div>
       </div>
-      <div className="raid_unavailable">not yet available</div>
+      <div
+        className={
+          toolbar_enabled ? "raid_unavailable raid_unavailable_displayed" : "raid_unavailable raid_unavailable_hidden"
+        }
+      >
+        not yet available
+      </div>
+
+      <div
+        className="toolbar_display_trigger"
+        onClick={() => {
+          ToggleToolbar();
+        }}
+      >
+        <FontAwesomeIcon icon={toolbar_enabled ? faCaretUp : faCaretDown} size="xl" style={{ color: "black" }} />
+      </div>
     </>
   );
 };

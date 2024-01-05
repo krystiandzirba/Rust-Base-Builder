@@ -221,7 +221,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!enable_hints ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandleHintsSwitch(false)}
@@ -231,7 +231,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {enable_hints ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -247,7 +247,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!enable_presets ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandlePresetsSwitch(false)}
@@ -257,7 +257,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {enable_presets ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -273,7 +273,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!enable_cameras ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandleCamerasSwitch(false)}
@@ -283,7 +283,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {enable_cameras ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -299,7 +299,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!enable_structures_visibility ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandleStructuresVisibilitySwitch(false)}
@@ -309,7 +309,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {enable_structures_visibility ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -325,7 +325,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!enable_resource_container ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandleResourceCounterSwitch(false)}
@@ -335,7 +335,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {enable_resource_container ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -351,7 +351,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!model_transform_controls ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandleModelControlsSwitch(false)}
@@ -361,7 +361,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {model_transform_controls ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -377,7 +377,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!active_models_state ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandleActiveModelsStateSwitch(false)}
@@ -387,7 +387,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {active_models_state ? "disable" : "disabled"}
               </div>
             </div>
           </div>
@@ -406,7 +406,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                 }
               >
-                enable
+                {!performance_monitor_state ? "enable" : "enabled"}
               </div>
               <div
                 onClick={() => HandlePerformanceMonitorStateSwitch(false)}
@@ -416,7 +416,7 @@ const Settings = () => {
                     : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
                 }
               >
-                disable
+                {performance_monitor_state ? "disable" : "disabled"}
               </div>
             </div>
           </div>
