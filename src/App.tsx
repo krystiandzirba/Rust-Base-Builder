@@ -67,12 +67,8 @@ export default App;
 // add placing sound
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
-// settings: disable model pivot controls
 // settings: dark-light mode
 // settings: controls section (keyboard / mouse shortcuts ...)
-
-// list of active canvas 3d objects (editable)
-// 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
@@ -80,4 +76,4 @@ export default App;
 // - rotate the model pivot together with the model itself
 // performance fix: disable mesh-mouse input (on miss / on click) outside the edit mode
 
-///// make ma bledner 1:0 button on-off instead of toolbar hide-display icon
+///// make a bledner 1:0 button on-off instead of toolbar hide-display icon

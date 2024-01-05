@@ -226,6 +226,8 @@ const pageSettingsSlice = createSlice({
     model_click_color_state: true,
     active_models_state: false,
     camera_fov: 90,
+
+    pivot_controls_state: false,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -264,6 +266,10 @@ const pageSettingsSlice = createSlice({
     },
     set_camera_fov: (state, action) => {
       return { ...state, camera_fov: action.payload };
+    },
+
+    set_pivot_controls_state: (state, action) => {
+      return { ...state, pivot_controls_state: action.payload };
     },
   },
 });
@@ -317,6 +323,8 @@ export const {
   set_model_click_color_state,
   set_active_models_state,
   set_camera_fov,
+
+  set_pivot_controls_state,
 } = pageSettingsSlice.actions;
 
 export const store = configureStore({

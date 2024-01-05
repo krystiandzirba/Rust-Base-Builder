@@ -110,6 +110,7 @@ export default function CanvasContainer() {
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
+  const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -840,7 +841,7 @@ export default function CanvasContainer() {
                 rotation={modelTransform.rotation.toArray().map(Number) as [number, number, number]}
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
-                scale={selected_model_id === id ? 3 : 0}
+                scale={selected_model_id === id && pivot_controls_state ? 3 : 0}
                 lineWidth={0}
                 depthTest={false}
                 activeAxes={model_pivot_axis === "XYZ" ? [true, true, true] : [true, false, true]}
