@@ -40,7 +40,7 @@ export default function Hints() {
       {object_selected && (
         <div className="hint_object_selected">
           <div className="hint_part">
-            <FontAwesomeIcon icon={faUpDownLeftRight} size="lg" style={{ color: "#f5b784" }} />
+            <FontAwesomeIcon icon={faUpDownLeftRight} size="lg" style={{ color: "#ffd5b3" }} />
             <span className="orange_theme_color">| W/A/S/D</span> - move
           </div>
 

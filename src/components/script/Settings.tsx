@@ -44,6 +44,9 @@ const Settings = () => {
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
   const [settings_button_hover, set_settings_button_hover] = useState<boolean>(false);
 
+  const [controls_button_click, set_controls_button_click] = useState<boolean>(false);
+  const [controls_button_hover, set_controls_button_hover] = useState<boolean>(false);
+
   const theme = createTheme({
     components: {
       MuiSlider: {
@@ -99,6 +102,7 @@ const Settings = () => {
 
   function SettingsButtonClick() {
     set_settings_button_click(!settings_button_click);
+    set_controls_button_click(false);
   }
 
   function SettingsButtonEnter() {
@@ -107,6 +111,19 @@ const Settings = () => {
 
   function SettingsButtonLeave() {
     set_settings_button_hover(false);
+  }
+
+  function ControlsButtonClick() {
+    set_controls_button_click(!controls_button_click);
+    set_settings_button_click(false);
+  }
+
+  function ControlsButtonEnter() {
+    set_controls_button_hover(true);
+  }
+
+  function ControlsButtonLeave() {
+    set_controls_button_hover(false);
   }
 
   function HandleHintsSwitch(toggle: boolean) {
@@ -478,9 +495,9 @@ const Settings = () => {
           onMouseEnter={() => SettingsButtonEnter()}
           onMouseLeave={() => SettingsButtonLeave()}
         >
-          {!settings_button_click && <FontAwesomeIcon icon={faGear} size="4x" style={{ color: "#a8a8a8" }} />}
+          {!settings_button_click && <FontAwesomeIcon icon={faGear} size="3x" style={{ color: "#a8a8a8" }} />}
           {
-            settings_button_click && <FontAwesomeIcon icon={faGear} spin size="4x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
+            settings_button_click && <FontAwesomeIcon icon={faGear} spin size="3x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
           }
         </button>
       </div>
@@ -488,12 +505,87 @@ const Settings = () => {
       <div className="controls_button_container">
         <button
           className="settings_button"
-          // onClick={() => SettingsButtonClick()}
-          //onMouseEnter={() => SettingsButtonEnter()}
-          //onMouseLeave={() => SettingsButtonLeave()}
+          onClick={() => ControlsButtonClick()}
+          onMouseEnter={() => ControlsButtonEnter()}
+          onMouseLeave={() => ControlsButtonLeave()}
         >
-          <FontAwesomeIcon icon={faGamepad} size="4x" style={{ color: "#a8a8a8" }} />
+          {!controls_button_click && <FontAwesomeIcon icon={faGamepad} size="3x" style={{ color: "#a8a8a8" }} />}
+          {
+            controls_button_click && <FontAwesomeIcon icon={faGamepad} beat size="3x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
+          }
         </button>
+      </div>
+
+      <div
+        className={
+          controls_button_click
+            ? "controls_container controls_container_displayed"
+            : "controls_container controls_container_hidden"
+        }
+      >
+        <div className="settings_segment_title">Mouse controls 3D mode</div>
+        <div className="settings_element">
+          <div className="settings_element_description">MB1 | LMB (left mouse button)</div>
+          <div className="controls_element">rotate camera</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">MB2 | RMB (right mouse button)</div>
+          <div className="controls_element">move camera</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">Mouse wheel | scroll </div>
+          <div className="controls_element">zoom in-out camera</div>
+        </div>
+        <div className="settings_segment_title">Mouse controls 2D mode</div>
+        <div className="settings_element">
+          <div className="settings_element_description"> MB1 | MB2 | LMB | RMB </div>
+          <div className="controls_element">move camera</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">Mouse wheel | scroll </div>
+          <div className="controls_element">zoom in-out camera</div>
+        </div>
+        <div className="settings_segment_title">Keyboard controls ( when model is selected)</div>
+        <div className="settings_element">
+          <div className="settings_element_description">W | ⇧</div>
+          <div className="controls_element">move selected object forward</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">D | ⇨</div>
+          <div className="controls_element">move selected object right</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">S | ⇩</div>
+          <div className="controls_element">move selected object down</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">A | ⇦</div>
+          <div className="controls_element">move selected object left</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">Q</div>
+          <div className="controls_element">rotate selected object counter clockwise</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">E</div>
+          <div className="controls_element">rotate selected object clockwise</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">SPACE</div>
+          <div className="controls_element">move selected object up (height)</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">CTRL</div>
+          <div className="controls_element">move selected object down (height)</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">SHIFT</div>
+          <div className="controls_element">change the object (moving) distance unit</div>
+        </div>
+        <div className="settings_element">
+          <div className="settings_element_description">DEL | BACKSPACE</div>
+          <div className="controls_element">delete selected model</div>
+        </div>
       </div>
     </>
   );
