@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel, Slider, ThemeProvider, createTheme } from "@mui/material";
@@ -482,6 +482,17 @@ const Settings = () => {
           {
             settings_button_click && <FontAwesomeIcon icon={faGear} spin size="4x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
           }
+        </button>
+      </div>
+
+      <div className="controls_button_container">
+        <button
+          className="settings_button"
+          // onClick={() => SettingsButtonClick()}
+          //onMouseEnter={() => SettingsButtonEnter()}
+          //onMouseLeave={() => SettingsButtonLeave()}
+        >
+          <FontAwesomeIcon icon={faGamepad} size="4x" style={{ color: "#a8a8a8" }} />
         </button>
       </div>
     </>

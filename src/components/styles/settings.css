@@ -111,6 +111,19 @@
   justify-content: space-between;
 }
 
+.controls_button_container {
+  width: 4vw;
+  height: 7.5vh;
+  position: absolute;
+  top: 2.5vh;
+  left: 34vw;
+  z-index: 25;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .settings_button {
   height: 100%;
   width: 100%;
