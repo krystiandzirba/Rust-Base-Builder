@@ -219,315 +219,257 @@ const Settings = () => {
         }
       >
         <div className="settings_segment_title">UI settings</div>
-        <div className="settings_segment settings_ui_segment">
-          <div className="settings_element">
-            <div className="settings_element_description">display control hints:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleHintsSwitch(true)}
-                className={
-                  enable_hints
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!enable_hints ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandleHintsSwitch(false)}
-                className={
-                  !enable_hints
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {enable_hints ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display control hints:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleHintsSwitch(true)}
+              className={
+                enable_hints
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!enable_hints ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleHintsSwitch(false)}
+              className={
+                !enable_hints
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {enable_hints ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">display base presets:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandlePresetsSwitch(true)}
-                className={
-                  enable_presets
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!enable_presets ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandlePresetsSwitch(false)}
-                className={
-                  !enable_presets
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {enable_presets ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display base presets:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandlePresetsSwitch(true)}
+              className={
+                enable_presets
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!enable_presets ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandlePresetsSwitch(false)}
+              className={
+                !enable_presets
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {enable_presets ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">display 2D | D3 cameras switch:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleCamerasSwitch(true)}
-                className={
-                  enable_cameras
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!enable_cameras ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandleCamerasSwitch(false)}
-                className={
-                  !enable_cameras
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {enable_cameras ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display 2D | D3 cameras switch:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleCamerasSwitch(true)}
+              className={
+                enable_cameras
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!enable_cameras ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleCamerasSwitch(false)}
+              className={
+                !enable_cameras
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {enable_cameras ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">display structure visibility type switch:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleStructuresVisibilitySwitch(true)}
-                className={
-                  enable_structures_visibility
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!enable_structures_visibility ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandleStructuresVisibilitySwitch(false)}
-                className={
-                  !enable_structures_visibility
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {enable_structures_visibility ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display structure visibility type switch:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleStructuresVisibilitySwitch(true)}
+              className={
+                enable_structures_visibility
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!enable_structures_visibility ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleStructuresVisibilitySwitch(false)}
+              className={
+                !enable_structures_visibility
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {enable_structures_visibility ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">display resource counter:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleResourceCounterSwitch(true)}
-                className={
-                  enable_resource_container
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!enable_resource_container ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandleResourceCounterSwitch(false)}
-                className={
-                  !enable_resource_container
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {enable_resource_container ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display resource counter:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleResourceCounterSwitch(true)}
+              className={
+                enable_resource_container
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!enable_resource_container ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleResourceCounterSwitch(false)}
+              className={
+                !enable_resource_container
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {enable_resource_container ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">display mouse model controls:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleModelControlsSwitch(true)}
-                className={
-                  model_transform_controls
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!model_transform_controls ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandleModelControlsSwitch(false)}
-                className={
-                  !model_transform_controls
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {model_transform_controls ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display mouse model controls:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleModelControlsSwitch(true)}
+              className={
+                model_transform_controls
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!model_transform_controls ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleModelControlsSwitch(false)}
+              className={
+                !model_transform_controls
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {model_transform_controls ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">display active models:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleActiveModelsStateSwitch(true)}
-                className={
-                  active_models_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!active_models_state ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandleActiveModelsStateSwitch(false)}
-                className={
-                  !active_models_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {active_models_state ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display active models:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleActiveModelsStateSwitch(true)}
+              className={
+                active_models_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!active_models_state ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleActiveModelsStateSwitch(false)}
+              className={
+                !active_models_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {active_models_state ? "disable" : "disabled"}
             </div>
           </div>
+        </div>
 
-          <div className="settings_element">
-            <div className="settings_element_description">model pivot controls:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandlePivotControlsSwitch(true)}
-                className={
-                  pivot_controls_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!pivot_controls_state ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandlePivotControlsSwitch(false)}
-                className={
-                  !pivot_controls_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {pivot_controls_state ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">model pivot controls:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandlePivotControlsSwitch(true)}
+              className={
+                pivot_controls_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!pivot_controls_state ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandlePivotControlsSwitch(false)}
+              className={
+                !pivot_controls_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {pivot_controls_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>
 
         <div className="settings_segment_title">performace | system</div>
-        <div className="settings_segment settings_performance_segment">
-          <div className="settings_element">
-            <div className="settings_element_description">display performance monitor:</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandlePerformanceMonitorStateSwitch(true)}
-                className={
-                  performance_monitor_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-                }
-              >
-                {!performance_monitor_state ? "enable" : "enabled"}
-              </div>
-              <div
-                onClick={() => HandlePerformanceMonitorStateSwitch(false)}
-                className={
-                  !performance_monitor_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                }
-              >
-                {performance_monitor_state ? "disable" : "disabled"}
-              </div>
+        <div className="settings_element">
+          <div className="settings_element_description">display performance monitor:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandlePerformanceMonitorStateSwitch(true)}
+              className={
+                performance_monitor_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!performance_monitor_state ? "enable" : "enabled"}
             </div>
-          </div>
-
-          <div className="settings_element">
-            <div className="settings_element_description">3d camera fov:</div>
-            <ThemeProvider theme={theme}>
-              <Slider
-                aria-label="Volume"
-                value={camera_fov}
-                min={60}
-                max={120}
-                step={10}
-                marks={marks}
-                style={{ width: "40%" }}
-                onChange={HandleCameraFovChange}
-              />
-            </ThemeProvider>
+            <div
+              onClick={() => HandlePerformanceMonitorStateSwitch(false)}
+              className={
+                !performance_monitor_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {performance_monitor_state ? "disable" : "disabled"}
+            </div>
           </div>
         </div>
+
+        <div className="settings_element">
+          <div className="settings_element_description">3d camera fov:</div>
+          <ThemeProvider theme={theme}>
+            <Slider
+              aria-label="Volume"
+              value={camera_fov}
+              min={60}
+              max={120}
+              step={10}
+              marks={marks}
+              style={{ width: "40%" }}
+              onChange={HandleCameraFovChange}
+            />
+          </ThemeProvider>
+        </div>
       </div>
-
-      {/* <div className="settings_element">
-            <div className="settings_element_description">disable model textures in overview mode</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleModelTexturesStateSwitch(true)}
-                className="settings_element_buttons settings_element_buttons_enable"
-              >
-                enable
-              </div>
-              <div
-                onClick={() => HandleModelTexturesStateSwitch(false)}
-                className="settings_element_buttons settings_element_buttons_disable"
-              >
-                disable
-              </div>
-            </div>
-          </div> */}
-
-      {/* <div className="settings_element">
-            <div className="settings_element_description">disable model color on mouse hover</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleModelHoverColorStateSwitch(true)}
-                className="settings_element_buttons settings_element_buttons_enable"
-              >
-                enable
-              </div>
-              <div
-                onClick={() => HandleModelHoverColorStateSwitch(false)}
-                className="settings_element_buttons settings_element_buttons_disable"
-              >
-                disable
-              </div>
-            </div>
-          </div> */}
-
-      {/* <div className="settings_element">
-            <div className="settings_element_description">disable model color on mouse click</div>
-            <div className="settings_element_buttons_container">
-              <div
-                onClick={() => HandleModelClickColorStateSwitch(true)}
-                className="settings_element_buttons settings_element_buttons_enable"
-              >
-                enable
-              </div>
-              <div
-                onClick={() => HandleModelClickColorStateSwitch(false)}
-                className="settings_element_buttons settings_element_buttons_disable"
-              >
-                disable
-              </div>
-            </div>
-          </div> */}
 
       <div className="settings_button_container">
         <button
