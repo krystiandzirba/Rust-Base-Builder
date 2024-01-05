@@ -9,7 +9,7 @@ const Preset = () => {
           <button className="preset_button preset_a">
             <FontAwesomeIcon icon={faPlaceOfWorship} size="2xl" style={{ color: "#a8a8a8" }} />
           </button>
-          <span className="preset_name_text">base</span>
+          <span className="preset_name_text">preset</span>
           <span className="preset_name_text">a</span>
         </div>
 
@@ -17,7 +17,7 @@ const Preset = () => {
           <button className="preset_button preset_b">
             <FontAwesomeIcon icon={faPlaceOfWorship} size="2xl" style={{ color: "rgba(255, 255, 255, 0.1)" }} />
           </button>
-          <span className="preset_name_text">base</span>
+          <span className="preset_name_text">preset</span>
           <span className="preset_name_text">b</span>
         </div>
 
@@ -25,7 +25,7 @@ const Preset = () => {
           <button className="preset_button preset_c">
             <FontAwesomeIcon icon={faPlaceOfWorship} size="2xl" style={{ color: "rgba(255, 255, 255, 0.1)" }} />
           </button>
-          <span className="preset_name_text">base</span>
+          <span className="preset_name_text">preset</span>
           <span className="preset_name_text">c</span>
         </div>
 
@@ -33,7 +33,7 @@ const Preset = () => {
           <button className="preset_button preset_d">
             <FontAwesomeIcon icon={faPlaceOfWorship} size="2xl" style={{ color: "rgba(255, 255, 255, 0.1)" }} />
           </button>
-          <span className="preset_name_text">base</span>
+          <span className="preset_name_text">preset</span>
           <span className="preset_name_text">d</span>
         </div>
 
@@ -41,7 +41,7 @@ const Preset = () => {
           <button className="preset_button preset_e">
             <FontAwesomeIcon icon={faPlaceOfWorship} size="2xl" style={{ color: "rgba(255, 255, 255, 0.1)" }} />
           </button>
-          <span className="preset_name_text">base</span>
+          <span className="preset_name_text">preset</span>
           <span className="preset_name_text">e</span>
         </div>
       </div>

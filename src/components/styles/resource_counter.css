@@ -6,7 +6,7 @@
   z-index: 10;
   color: #bbbbbb;
   background-color: rgba(15, 16, 26, 0.4);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
 }
 
 .build_cost_main_container {

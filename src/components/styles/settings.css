@@ -1,14 +1,17 @@
 .settings_container {
   width: 32vw;
-  height: 100vh;
+  height: 80vh;
   position: absolute;
-  left: 68vw;
-  z-index: 35;
+  left: 34vw;
+  top: 20vh;
+  z-index: 55;
   background-color: rgba(15, 16, 26, 0.4);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
   transition: transform 0.1s ease-in-out;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  align-items: center;
 }
 
 .settings_container_displayed {
@@ -16,7 +19,7 @@
 }
 
 .settings_container_hidden {
-  transform: translateX(100%);
+  transform: translateY(100%);
 }
 
 .settings_segment_title {
@@ -24,7 +27,7 @@
   width: 100%;
   background-color: rgb(0, 0, 0);
   color: #bbbbbb;
-  font-size: 1vw;
+  font-size: 1.15vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
@@ -35,10 +38,13 @@
 
 .settings_segment {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .settings_ui_segment {
-  height: 44.5%;
+  height: 56%;
 }
 
 .settings_performance_segment {
@@ -49,7 +55,7 @@
   width: 95%;
   height: 5vh;
   display: flex;
-  margin: 1vh;
+  margin-top: 1vh;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -60,7 +66,7 @@
   width: 55%;
   height: 80%;
   color: #bbbbbb;
-  font-size: 0.8vw;
+  font-size: 0.875vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
@@ -81,7 +87,7 @@
   width: 50%;
   height: 100%;
   color: #bbbbbb;
-  font-size: 0.8vw;
+  font-size: 0.875vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
@@ -113,7 +119,7 @@
   height: 7.5vh;
   position: absolute;
   top: 2.5vh;
-  left: 26.5vw;
+  left: 63.5vw;
   z-index: 25;
   background-color: transparent;
   display: flex;

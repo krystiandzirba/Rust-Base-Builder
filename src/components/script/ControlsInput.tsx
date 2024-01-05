@@ -352,7 +352,7 @@ export default function ControlsInput() {
           >
             <FontAwesomeIcon
               icon={faTrashCanArrowUp}
-              size="2xl"
+              size="3x"
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             />
           </button>
@@ -363,7 +363,7 @@ export default function ControlsInput() {
               DeleteAllObjects();
             }}
           >
-            <FontAwesomeIcon icon={faDumpster} size="2xl" style={{ color: "#a8a8a8" }} />
+            <FontAwesomeIcon icon={faDumpster} size="3x" style={{ color: "#a8a8a8" }} />
           </button>
         </>
       )}

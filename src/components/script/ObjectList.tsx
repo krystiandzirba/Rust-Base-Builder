@@ -48,7 +48,41 @@ import toolCupboardThumbnail from "../../object_list_thumbnails/tool_cupboard_th
 import woodStorageBoxThumbnail from "../../object_list_thumbnails/wood_storage_box_thumbnail.png";
 import largeWoodBoxThumbnail from "../../object_list_thumbnails/large_wood_box_thumbnail.png";
 import { TextField } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
+
+const SearchBarField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#ffcea6",
+  },
+  "& label": {
+    color: "#bbbbbb",
+  },
+  "& input": {
+    color: "#bbbbbb",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#ffcea6",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "white",
+    },
+    "&:hover fieldset": {
+      borderColor: "#ffe9d6",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#ffcea6",
+    },
+  },
+});
+interface SearchBarProps {
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
+  return <SearchBarField className="search_bar" label="Search..." type="search" value={value} onChange={onChange} />;
+};
 
 export default function ObjectList() {
   const dispatch = useDispatch();
@@ -630,17 +664,6 @@ export default function ObjectList() {
     item.keywords.some((keyword) => keyword.includes(searchQuery.toLowerCase()))
   );
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#ffcea6",
-      },
-      secondary: {
-        main: "#e57373",
-      },
-    },
-  });
-
   return (
     <>
       <div
@@ -650,16 +673,7 @@ export default function ObjectList() {
             : "objects_container objects_container_hidden"
         }
       >
-        <ThemeProvider theme={theme}>
-          <TextField
-            id="outlined-search"
-            className="search_bar"
-            label="Search..."
-            type="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </ThemeProvider>
+        <SearchBar value={searchQuery} onChange={(event: any) => setSearchQuery(event.target.value)} />
         <div className="object_list">
           {filteredObjectList.map((item, index) => (
             <button

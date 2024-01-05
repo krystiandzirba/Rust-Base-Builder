@@ -45,14 +45,3 @@
   width: 100%;
   margin: 5px 0;
 }
-
-.test_button {
-  position: absolute;
-  width: 1vw;
-  height: 1vh;
-  left: 5vw;
-  top: 98.5vh;
-  background-color: rgb(16, 16, 16);
-  z-index: 999;
-  border: none;
-}

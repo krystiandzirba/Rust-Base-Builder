@@ -500,9 +500,9 @@ const Settings = () => {
           onMouseEnter={() => SettingsButtonEnter()}
           onMouseLeave={() => SettingsButtonLeave()}
         >
-          {!settings_button_click && <FontAwesomeIcon icon={faGear} size="3x" style={{ color: "#a8a8a8" }} />}
+          {!settings_button_click && <FontAwesomeIcon icon={faGear} size="4x" style={{ color: "#a8a8a8" }} />}
           {
-            settings_button_click && <FontAwesomeIcon icon={faGear} spin size="3x" style={{ color: "#d4d4d4" }}/> //prettier-ignore
+            settings_button_click && <FontAwesomeIcon icon={faGear} spin size="4x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
           }
         </button>
       </div>

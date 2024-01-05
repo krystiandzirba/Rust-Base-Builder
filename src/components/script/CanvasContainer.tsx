@@ -870,13 +870,6 @@ export default function CanvasContainer() {
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}
-
-      <button
-        className="test_button"
-        onClick={() => {
-          console.log(object_distance_multiplier);
-        }}
-      ></button>
     </>
   );
 }

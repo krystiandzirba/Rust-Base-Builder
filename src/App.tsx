@@ -53,7 +53,6 @@ function App() {
 
 export default App;
 
-// dark-light theme
 // make a separate component for different light setups
 // object copy: "C"
 // controls menu (mouse + keyboard)
@@ -68,6 +67,9 @@ export default App;
 // add placing sound
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
+// settings: disable model pivot controls
+// settings: dark-light mode
+// settings: controls section (keyboard / mouse shortcuts ...)
 
 // list of active canvas 3d objects (editable)
 // 2 types of building (freebuild - without snapping and restrictions, with rust rules - with snapping and restrictions)
