@@ -12,7 +12,7 @@ export default function CanvasLights() {
       {better_lighting_state && <directionalLight />}
       {better_lighting_state && <pointLight position={[10, 10, 10]} />}
       {better_lighting_state && (
-        <group rotation={[Math.PI / 16, 0, Math.PI / 2]}>
+        <group rotation={[Math.PI / 16, 3, Math.PI / 2]}>
           <spotLight position={[155, 15, 14]} penumbra={1} decay={0} intensity={5} />
         </group>
       )}

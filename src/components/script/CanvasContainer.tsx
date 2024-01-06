@@ -13,9 +13,6 @@ import {
   set_camera_3d_direction,
 } from "../../Store.tsx";
 
-import { Bloom, EffectComposer, SSAO } from "@react-three/postprocessing";
-import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing";
-
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareLow } from "../models/StoneFoundationSquareLow.tsx";
@@ -63,6 +60,8 @@ import { Model as ToolCupboard } from "../models/ToolCupboard.tsx";
 import CanvasGrids from "./CanvasGrids.tsx";
 import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
+import Postprocessing from "./Postprocessing.tsx";
+
 interface CanvasModelsListProps {
   models: ModelType[];
 }
@@ -871,15 +870,7 @@ export default function CanvasContainer() {
               <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
             </Box>
           )}
-          <EffectComposer>
-            <Bloom
-              intensity={bloom_state ? 0.8 : 0}
-              luminanceThreshold={0.6}
-              luminanceSmoothing={1}
-              mipmapBlur={true}
-              radius={0.4}
-            />
-          </EffectComposer>
+          <Postprocessing />
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}

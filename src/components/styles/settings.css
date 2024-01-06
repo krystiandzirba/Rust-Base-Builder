@@ -43,7 +43,7 @@
   margin-top: 0.5vh;
   margin-bottom: 0.5vh;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   border: 1px solid black;
   margin-left: 2.5%;

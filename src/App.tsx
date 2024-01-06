@@ -53,9 +53,7 @@ function App() {
 
 export default App;
 
-// make a separate component for different light setups
 // object copy: "C"
-// controls menu (mouse + keyboard)
 // raid cost
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
@@ -68,7 +66,6 @@ export default App;
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
 // settings: dark-light mode
-// settings: controls section (keyboard / mouse shortcuts ...)
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
