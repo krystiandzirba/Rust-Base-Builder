@@ -231,28 +231,32 @@ export default function CanvasContainer() {
   };
 
   function CanvasPointerDown(event: any) {
-    set_prevent_actions_after_canvas_drag("mouse_down");
-    if (event.button === 0) {
-      dispatch(set_cursor_type("crosshair"));
-    } else if (event.button === 2) {
-      dispatch(set_cursor_type("move"));
+    if (page_mode === "edit" && model_creation_state) {
+      set_prevent_actions_after_canvas_drag("mouse_down");
+      if (event.button === 0) {
+        dispatch(set_cursor_type("crosshair"));
+      } else if (event.button === 2) {
+        dispatch(set_cursor_type("move"));
+      }
     }
   }
 
   function CanvasPointerUp(event: any) {
-    if (prevent_actions_after_canvas_drag === "mouse_down") {
-      set_prevent_actions_after_canvas_drag("allow");
-    } else set_prevent_actions_after_canvas_drag("deny");
+    if (page_mode === "edit" && model_creation_state) {
+      if (prevent_actions_after_canvas_drag === "mouse_down") {
+        set_prevent_actions_after_canvas_drag("allow");
+      } else set_prevent_actions_after_canvas_drag("deny");
 
-    if (event.button === 0) {
-      dispatch(set_cursor_type("default"));
-    } else if (event.button === 2) {
-      dispatch(set_cursor_type("default"));
+      if (event.button === 0) {
+        dispatch(set_cursor_type("default"));
+      } else if (event.button === 2) {
+        dispatch(set_cursor_type("default"));
+      }
     }
   }
 
   function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    if (page_mode === "edit" && camera_type === "camera_3d") {
+    if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
       mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
