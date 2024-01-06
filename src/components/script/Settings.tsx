@@ -25,6 +25,7 @@ import {
   set_bloom_state,
   set_better_lighting_state,
   set_ssao_state,
+  set_antialiasing_state,
 } from "../../Store.tsx";
 
 const Settings = () => {
@@ -47,6 +48,7 @@ const Settings = () => {
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const better_lighting_state = useSelector((state: RootState) => state.pageSettings.better_lighting_state); //prettier-ignore
   const ssao_state = useSelector((state: RootState) => state.pageSettings.ssao_state); //prettier-ignore
+  const antialiasing_state = useSelector((state: RootState) => state.pageSettings.antialiasing_state); //prettier-ignore
 
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
   const [settings_button_hover, set_settings_button_hover] = useState<boolean>(false);
@@ -250,6 +252,14 @@ const Settings = () => {
       dispatch(set_ssao_state(true));
     } else if (!toggle) {
       dispatch(set_ssao_state(false));
+    }
+  }
+
+  function HandleAntialiasingStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_antialiasing_state(true));
+    } else if (!toggle) {
+      dispatch(set_antialiasing_state(false));
     }
   }
 
@@ -592,6 +602,32 @@ const Settings = () => {
               }
             >
               {ssao_state ? "disable" : "disabled"}
+            </div>
+          </div>
+        </div>
+
+        <div className="settings_element">
+          <div className="settings_element_description">antialiasing:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleAntialiasingStateSwitch(true)}
+              className={
+                antialiasing_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              SMAA
+            </div>
+            <div
+              onClick={() => HandleAntialiasingStateSwitch(false)}
+              className={
+                !antialiasing_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {antialiasing_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>
