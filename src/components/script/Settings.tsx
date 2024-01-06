@@ -236,8 +236,18 @@ const Settings = () => {
   function HandlePerformanceModeSwitch(toggle: boolean) {
     if (toggle) {
       dispatch(set_performance_mode(true));
+
+      dispatch(set_bloom_state(false));
+      dispatch(set_better_lighting_state(false));
+      dispatch(set_ssao_state(false));
+      dispatch(set_antialiasing_state(false));
     } else if (!toggle) {
       dispatch(set_performance_mode(false));
+
+      dispatch(set_bloom_state(true));
+      dispatch(set_better_lighting_state(true));
+      dispatch(set_ssao_state(false));
+      dispatch(set_antialiasing_state(true));
     }
   }
 
@@ -579,100 +589,84 @@ const Settings = () => {
             <div
               onClick={() => HandleBloomStateSwitch(true)}
               className={
-                !performance_mode
-                  ? bloom_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+                bloom_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
-              {performance_mode ? "enable" : !bloom_state ? "enable" : "enabled"}
+              {!bloom_state ? "enable" : "enabled"}
             </div>
             <div
               onClick={() => HandleBloomStateSwitch(false)}
               className={
-                !performance_mode
-                  ? bloom_state
-                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !bloom_state && !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {performance_mode ? "disabled" : !bloom_state ? "disabled" : "disable"}
+              {bloom_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>
-
         <div className="settings_element">
           <div className="settings_element_description">better lighting:</div>
           <div className="settings_element_buttons_container">
             <div
               onClick={() => HandleBetterLightingStateSwitch(true)}
               className={
-                !performance_mode
-                  ? better_lighting_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+                better_lighting_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
-              {performance_mode ? "enable" : !better_lighting_state ? "enable" : "enabled"}
+              {!better_lighting_state ? "enable" : "enabled"}
             </div>
             <div
               onClick={() => HandleBetterLightingStateSwitch(false)}
               className={
-                !performance_mode
-                  ? better_lighting_state
-                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !better_lighting_state && !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {performance_mode ? "disabled" : !better_lighting_state ? "disabled" : "disable"}
+              {better_lighting_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>
 
         <div className="settings_element">
-          <div className="settings_element_description">SSAO (high performance impact):</div>
+          <div className="settings_element_description">SSAO (screen space ambient occlusion):</div>
           <div className="settings_element_buttons_container">
             <div
               onClick={() => HandleSSAOStateSwitch(true)}
               className={
-                !performance_mode
-                  ? ssao_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+                ssao_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
-              {performance_mode ? "enable" : !ssao_state ? "enable" : "enabled"}
+              {!ssao_state ? "enable" : "enabled"}
             </div>
             <div
               onClick={() => HandleSSAOStateSwitch(false)}
               className={
-                !performance_mode
-                  ? ssao_state
-                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !ssao_state && !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {performance_mode ? "disabled" : !ssao_state ? "disabled" : "disable"}
+              {ssao_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>
-
         <div className="settings_element">
           <div className="settings_element_description">antialiasing:</div>
           <div className="settings_element_buttons_container">
             <div
               onClick={() => HandleAntialiasingStateSwitch(true)}
               className={
-                !performance_mode
-                  ? antialiasing_state
-                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+                antialiasing_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
@@ -681,14 +675,12 @@ const Settings = () => {
             <div
               onClick={() => HandleAntialiasingStateSwitch(false)}
               className={
-                !performance_mode
-                  ? antialiasing_state
-                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !antialiasing_state && !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {performance_mode ? "disabled" : !antialiasing_state ? "disabled" : "disable"}
+              {antialiasing_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>

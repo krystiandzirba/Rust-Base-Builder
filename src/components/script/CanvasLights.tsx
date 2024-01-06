@@ -7,19 +7,15 @@ export default function CanvasLights() {
 
   return (
     <>
-      {!performance_mode ? (
-        <>
-          <ambientLight intensity={1} />
-          {better_lighting_state && <directionalLight />}
-          {better_lighting_state && <pointLight position={[10, 10, 10]} />}
-          {better_lighting_state && (
-            <group rotation={[Math.PI / 16, 3, Math.PI / 2]}>
-              <spotLight position={[155, 15, 14]} penumbra={1} decay={0} intensity={5} />
-            </group>
-          )}
-        </>
-      ) : (
-        better_lighting_state && <ambientLight intensity={2} />
+      {better_lighting_state && <ambientLight intensity={0.4} />}
+      {!better_lighting_state && <ambientLight />}
+      {!better_lighting_state && <directionalLight />}
+      {better_lighting_state && <directionalLight />}
+      {better_lighting_state && <pointLight position={[10, 10, 10]} />}
+      {better_lighting_state && (
+        <group rotation={[Math.PI / 16, 3, Math.PI / 2]}>
+          <spotLight position={[155, 15, 14]} penumbra={1} decay={0} intensity={5} />
+        </group>
       )}
     </>
   );

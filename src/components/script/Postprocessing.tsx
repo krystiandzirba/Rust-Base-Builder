@@ -1,7 +1,7 @@
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Bloom, EffectComposer, SMAA, SSAO } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, SMAA, SSAO, Pixelation } from "@react-three/postprocessing";
 import { BlurPass, Resizer, KernelSize, Resolution, BlendFunction, SMAAPreset } from "postprocessing";
 import { Suspense } from "react";
 
