@@ -228,6 +228,8 @@ const pageSettingsSlice = createSlice({
     camera_fov: 90,
 
     pivot_controls_state: false,
+
+    bloom_state: true,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -270,6 +272,10 @@ const pageSettingsSlice = createSlice({
 
     set_pivot_controls_state: (state, action) => {
       return { ...state, pivot_controls_state: action.payload };
+    },
+
+    set_bloom_state: (state, action) => {
+      return { ...state, bloom_state: action.payload };
     },
   },
 });
@@ -325,6 +331,8 @@ export const {
   set_camera_fov,
 
   set_pivot_controls_state,
+
+  set_bloom_state,
 } = pageSettingsSlice.actions;
 
 export const store = configureStore({

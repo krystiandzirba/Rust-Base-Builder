@@ -22,6 +22,7 @@ import {
   set_active_models_state,
   set_camera_fov,
   set_pivot_controls_state,
+  set_bloom_state,
 } from "../../Store.tsx";
 
 const Settings = () => {
@@ -40,6 +41,8 @@ const Settings = () => {
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
+
+  const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
 
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
   const [settings_button_hover, set_settings_button_hover] = useState<boolean>(false);
@@ -219,6 +222,14 @@ const Settings = () => {
       dispatch(set_performance_monitor_state(true));
     } else if (!toggle) {
       dispatch(set_performance_monitor_state(false));
+    }
+  }
+
+  function HandleBloomStateSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_bloom_state(true));
+    } else if (!toggle) {
+      dispatch(set_bloom_state(false));
     }
   }
 
@@ -485,6 +496,32 @@ const Settings = () => {
               onChange={HandleCameraFovChange}
             />
           </ThemeProvider>
+        </div>
+        <div className="settings_segment_title">postprocessing</div>
+        <div className="settings_element">
+          <div className="settings_element_description">bloom:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleBloomStateSwitch(true)}
+              className={
+                bloom_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!bloom_state ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleBloomStateSwitch(false)}
+              className={
+                !bloom_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {bloom_state ? "disable" : "disabled"}
+            </div>
+          </div>
         </div>
       </div>
 

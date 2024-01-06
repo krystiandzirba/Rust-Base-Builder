@@ -13,7 +13,7 @@ export default function CanvasGrids() {
             ? [101, 0.1, 0.08]
             : [101, 0.01, 0.01]
         }
-        material-color="#ff6e52"
+        material-color="#f5e684"
       />
       <Box
         scale={

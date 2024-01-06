@@ -13,6 +13,9 @@ import {
   set_camera_3d_direction,
 } from "../../Store.tsx";
 
+import { Bloom, EffectComposer, SSAO } from "@react-three/postprocessing";
+import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing";
+
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareLow } from "../models/StoneFoundationSquareLow.tsx";
@@ -111,6 +114,8 @@ export default function CanvasContainer() {
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
+
+  const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -868,6 +873,15 @@ export default function CanvasContainer() {
               <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
             </Box>
           )}
+          <EffectComposer>
+            <Bloom
+              intensity={bloom_state ? 10.0 : 0}
+              luminanceThreshold={0.5}
+              luminanceSmoothing={1}
+              mipmapBlur={true}
+              radius={0.7}
+            />
+          </EffectComposer>
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}
