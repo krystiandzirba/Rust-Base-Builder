@@ -61,6 +61,7 @@ import { Model as LargeWoodBox } from "../models/LargeWoodBox.tsx";
 import { Model as ToolCupboard } from "../models/ToolCupboard.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
+import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 interface CanvasModelsListProps {
   models: ModelType[];
@@ -793,10 +794,7 @@ export default function CanvasContainer() {
           onMouseUp={() => Camera3DDirection()}
         >
           {performance_monitor_state && <PerformanceStats />}
-          <ambientLight />
-          <ambientLight />
-          <directionalLight />
-          <pointLight position={[10, 10, 10]} />
+          <CanvasLights />
           <CanvasGrids />
 
           {camera_type === "camera_3d" && (
@@ -875,11 +873,11 @@ export default function CanvasContainer() {
           )}
           <EffectComposer>
             <Bloom
-              intensity={bloom_state ? 10.0 : 0}
-              luminanceThreshold={0.5}
+              intensity={bloom_state ? 0.8 : 0}
+              luminanceThreshold={0.6}
               luminanceSmoothing={1}
               mipmapBlur={true}
-              radius={0.7}
+              radius={0.4}
             />
           </EffectComposer>
         </Canvas>

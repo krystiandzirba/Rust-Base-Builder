@@ -230,6 +230,7 @@ const pageSettingsSlice = createSlice({
     pivot_controls_state: false,
 
     bloom_state: true,
+    better_lighting_state: true,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -276,6 +277,9 @@ const pageSettingsSlice = createSlice({
 
     set_bloom_state: (state, action) => {
       return { ...state, bloom_state: action.payload };
+    },
+    set_better_lighting_state: (state, action) => {
+      return { ...state, better_lighting_state: action.payload };
     },
   },
 });
@@ -333,6 +337,7 @@ export const {
   set_pivot_controls_state,
 
   set_bloom_state,
+  set_better_lighting_state,
 } = pageSettingsSlice.actions;
 
 export const store = configureStore({

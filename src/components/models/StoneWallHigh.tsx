@@ -69,8 +69,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           {page_mode === "edit" && (
             <meshStandardMaterial
               transparent={true}
-              opacity={model_selected ? 1 : model_hover ? 0.8 : 1}
-              color={model_selected  ? "#f5b784" : ( model_hover ? "#f5b784" : "#bbbbbb")} //prettier-ignore
+              opacity={model_selected ? 1 : model_hover ? 0.6 : 1}
+              color={model_selected  ? "#f5b784" : ( model_hover ? "#ffdaba" : "#bbbbbb")} //prettier-ignore
               wireframe={models_xray_active ? true : false}
             />
           )}
