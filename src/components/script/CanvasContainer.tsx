@@ -110,6 +110,9 @@ export default function CanvasContainer() {
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
   const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
 
+  const object_selected = useSelector((state: RootState) => state.modelsData.object_selected); //prettier-ignore
+
+  const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
@@ -190,32 +193,34 @@ export default function CanvasContainer() {
   }
 
   const MeshPointerOver = (selected_object_id: string) => {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && !model_creation_state) {
       set_model_hover_id(selected_object_id);
-      //  console.log("meshover", model_hover_id);
+      dispatch(set_cursor_type("pointer"));
     }
   };
 
   const MeshPointerOut = (selected_object_id: string) => {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && !model_creation_state) {
       set_model_hover_id(selected_object_id);
-      // console.log("meshout", model_hover_id);
+      if (cursor_type === "pointer") {
+        dispatch(set_cursor_type("default"));
+      }
     }
   };
 
   function MeshOnClick(selected_object_id: string) {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && !model_creation_state) {
       dispatch(set_selected_model_id(selected_object_id));
       dispatch(set_object_selected(true));
-      // console.log("meshclick", selected_object_id);
+      dispatch(set_cursor_type("grab"));
     }
   }
 
   function MeshOnMissed() {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && !model_creation_state) {
       dispatch(set_selected_model_id("empty"));
       dispatch(set_object_selected(false));
-      // console.log("meshmiss");
+      dispatch(set_cursor_type("default"));
     }
   }
 
@@ -870,7 +875,7 @@ export default function CanvasContainer() {
               <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
             </Box>
           )}
-          <Postprocessing />
+          {!performance_mode && <Postprocessing />}
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}

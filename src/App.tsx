@@ -74,3 +74,4 @@ export default App;
 // performance fix: disable mesh-mouse input (on miss / on click) outside the edit mode
 
 ///// make a bledner 1:0 button on-off instead of toolbar hide-display icon
+// if performance issue = canvas lighting + postprocessing + click events

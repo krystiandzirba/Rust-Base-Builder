@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
 import { set_model_pivot_axis } from "../../Store.tsx";
-import { set_cursor_type } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -21,36 +20,37 @@ type GLTFResult = GLTF & {
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active);
   const walls_active = useSelector((state: RootState) => state.modelsData.walls_active);
+
+  const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
 
   const { nodes, materials } = useGLTF("./models/metal_doorway_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
 
   function ModelOnClick() {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && !model_creation_state) {
       dispatch(set_model_pivot_axis("XYZ"));
       set_model_selected(true);
-      dispatch(set_cursor_type("grab"));
     }
   }
 
   function ModelMissedClick() {
-    set_model_selected(false);
-    dispatch(set_cursor_type("default"));
+    if (!model_creation_state) {
+      set_model_selected(false);
+    }
   }
 
   function ModelOnPointerOver() {
-    set_model_hover(true);
-    dispatch(set_cursor_type("pointer"));
+    if (!model_creation_state) {
+      set_model_hover(true);
+    }
   }
 
   function ModelOnPointerOut() {
-    set_model_hover(false);
-    if (cursor_type === "pointer") {
-      dispatch(set_cursor_type("default"));
+    if (!model_creation_state) {
+      set_model_hover(false);
     }
   }
 
@@ -59,7 +59,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       {walls_active && (
         <mesh
           geometry={nodes.Cube002.geometry}
-          // material={materials.Material}
           material={materials["Material.010"]}
           onClick={() => ModelOnClick()}
           onPointerOver={() => ModelOnPointerOver()}
@@ -70,7 +69,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             <meshStandardMaterial
               transparent={true}
               opacity={model_selected ? 1 : model_hover ? 0.6 : 1}
-              color={model_selected  ? "#f5b784" : ( model_hover ? "#ffdaba" : "#bbbbbb")} //prettier-ignore
+              color={model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb"}
               wireframe={models_xray_active ? true : false}
             />
           )}

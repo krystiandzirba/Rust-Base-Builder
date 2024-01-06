@@ -220,6 +220,7 @@ const pageSettingsSlice = createSlice({
     enable_resource_container: true,
     enable_model_transform_controls: true,
 
+    performance_mode: false,
     performance_monitor_state: false,
     model_textures_state: true,
     model_hover_color_state: true,
@@ -231,7 +232,7 @@ const pageSettingsSlice = createSlice({
 
     bloom_state: true,
     better_lighting_state: true,
-    ssao_state: true,
+    ssao_state: false,
     antialiasing_state: true,
   },
   reducers: {
@@ -254,6 +255,9 @@ const pageSettingsSlice = createSlice({
       return { ...state, enable_model_transform_controls: action.payload };
     },
 
+    set_performance_mode: (state, action) => {
+      return { ...state, performance_mode: action.payload };
+    },
     set_performance_monitor_state: (state, action) => {
       return { ...state, performance_monitor_state: action.payload };
     },
@@ -335,6 +339,7 @@ export const {
   set_enable_resource_container,
   set_enable_model_transform_controls,
 
+  set_performance_mode,
   set_performance_monitor_state,
   set_model_textures_state,
   set_model_hover_color_state,

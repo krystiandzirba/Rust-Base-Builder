@@ -15,6 +15,7 @@ import {
   set_enable_structures_visibility,
   set_enable_resource_container,
   set_enable_model_transform_controls,
+  set_performance_mode,
   set_performance_monitor_state,
   set_model_textures_state,
   set_model_hover_color_state,
@@ -37,6 +38,7 @@ const Settings = () => {
   const enable_resource_container = useSelector((state: RootState) => state.pageSettings.enable_resource_container);
   const model_transform_controls = useSelector((state: RootState) => state.pageSettings.enable_model_transform_controls); //prettier-ignore
 
+  const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const model_textures_state = useSelector((state: RootState) => state.pageSettings.model_textures_state); //prettier-ignore
   const model_hover_color_state = useSelector((state: RootState) => state.pageSettings.model_hover_color_state); //prettier-ignore
@@ -231,35 +233,51 @@ const Settings = () => {
     }
   }
 
-  function HandleBloomStateSwitch(toggle: boolean) {
+  function HandlePerformanceModeSwitch(toggle: boolean) {
     if (toggle) {
-      dispatch(set_bloom_state(true));
+      dispatch(set_performance_mode(true));
     } else if (!toggle) {
-      dispatch(set_bloom_state(false));
+      dispatch(set_performance_mode(false));
+    }
+  }
+
+  function HandleBloomStateSwitch(toggle: boolean) {
+    if (!performance_mode) {
+      if (toggle) {
+        dispatch(set_bloom_state(true));
+      } else if (!toggle) {
+        dispatch(set_bloom_state(false));
+      }
     }
   }
 
   function HandleBetterLightingStateSwitch(toggle: boolean) {
-    if (toggle) {
-      dispatch(set_better_lighting_state(true));
-    } else if (!toggle) {
-      dispatch(set_better_lighting_state(false));
+    if (!performance_mode) {
+      if (toggle) {
+        dispatch(set_better_lighting_state(true));
+      } else if (!toggle) {
+        dispatch(set_better_lighting_state(false));
+      }
     }
   }
 
   function HandleSSAOStateSwitch(toggle: boolean) {
-    if (toggle) {
-      dispatch(set_ssao_state(true));
-    } else if (!toggle) {
-      dispatch(set_ssao_state(false));
+    if (!performance_mode) {
+      if (toggle) {
+        dispatch(set_ssao_state(true));
+      } else if (!toggle) {
+        dispatch(set_ssao_state(false));
+      }
     }
   }
 
   function HandleAntialiasingStateSwitch(toggle: boolean) {
-    if (toggle) {
-      dispatch(set_antialiasing_state(true));
-    } else if (!toggle) {
-      dispatch(set_antialiasing_state(false));
+    if (!performance_mode) {
+      if (toggle) {
+        dispatch(set_antialiasing_state(true));
+      } else if (!toggle) {
+        dispatch(set_antialiasing_state(false));
+      }
     }
   }
 
@@ -486,6 +504,33 @@ const Settings = () => {
         </div>
 
         <div className="settings_segment_title">performace | system</div>
+
+        <div className="settings_element">
+          <div className="settings_element_description">performance mode:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandlePerformanceModeSwitch(true)}
+              className={
+                performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              performance
+            </div>
+            <div
+              onClick={() => HandlePerformanceModeSwitch(false)}
+              className={
+                !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              quality
+            </div>
+          </div>
+        </div>
+
         <div className="settings_element">
           <div className="settings_element_description">display performance monitor:</div>
           <div className="settings_element_buttons_container">
@@ -534,22 +579,26 @@ const Settings = () => {
             <div
               onClick={() => HandleBloomStateSwitch(true)}
               className={
-                bloom_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                !performance_mode
+                  ? bloom_state
+                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
-              {!bloom_state ? "enable" : "enabled"}
+              {performance_mode ? "enable" : !bloom_state ? "enable" : "enabled"}
             </div>
             <div
               onClick={() => HandleBloomStateSwitch(false)}
               className={
-                !bloom_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !performance_mode
+                  ? bloom_state
+                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {bloom_state ? "disable" : "disabled"}
+              {performance_mode ? "disabled" : !bloom_state ? "disabled" : "disable"}
             </div>
           </div>
         </div>
@@ -560,48 +609,56 @@ const Settings = () => {
             <div
               onClick={() => HandleBetterLightingStateSwitch(true)}
               className={
-                better_lighting_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                !performance_mode
+                  ? better_lighting_state
+                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
-              {!better_lighting_state ? "enable" : "enabled"}
+              {performance_mode ? "enable" : !better_lighting_state ? "enable" : "enabled"}
             </div>
             <div
               onClick={() => HandleBetterLightingStateSwitch(false)}
               className={
-                !better_lighting_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !performance_mode
+                  ? better_lighting_state
+                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {better_lighting_state ? "disable" : "disabled"}
+              {performance_mode ? "disabled" : !better_lighting_state ? "disabled" : "disable"}
             </div>
           </div>
         </div>
 
         <div className="settings_element">
-          <div className="settings_element_description">SSAO (screen space ambient occlusion):</div>
+          <div className="settings_element_description">SSAO (high performance impact):</div>
           <div className="settings_element_buttons_container">
             <div
               onClick={() => HandleSSAOStateSwitch(true)}
               className={
-                ssao_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                !performance_mode
+                  ? ssao_state
+                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
-              {!ssao_state ? "enable" : "enabled"}
+              {performance_mode ? "enable" : !ssao_state ? "enable" : "enabled"}
             </div>
             <div
               onClick={() => HandleSSAOStateSwitch(false)}
               className={
-                !ssao_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !performance_mode
+                  ? ssao_state
+                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {ssao_state ? "disable" : "disabled"}
+              {performance_mode ? "disabled" : !ssao_state ? "disabled" : "disable"}
             </div>
           </div>
         </div>
@@ -612,8 +669,10 @@ const Settings = () => {
             <div
               onClick={() => HandleAntialiasingStateSwitch(true)}
               className={
-                antialiasing_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                !performance_mode
+                  ? antialiasing_state
+                    ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                    : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
               }
             >
@@ -622,12 +681,14 @@ const Settings = () => {
             <div
               onClick={() => HandleAntialiasingStateSwitch(false)}
               className={
-                !antialiasing_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                !performance_mode
+                  ? antialiasing_state
+                    ? "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+                    : "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
             >
-              {antialiasing_state ? "disable" : "disabled"}
+              {performance_mode ? "disabled" : !antialiasing_state ? "disabled" : "disable"}
             </div>
           </div>
         </div>
