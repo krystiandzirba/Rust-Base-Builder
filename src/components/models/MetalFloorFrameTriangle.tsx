@@ -62,7 +62,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           // material={materials.Material}
           material={materials["Material"]}
           onClick={() => ModelOnClick()}
-          onPointerOver={() => ModelOnPointerOver()}
+          onPointerOver={(e) => {
+            e.stopPropagation(), ModelOnPointerOver();
+          }}
           onPointerOut={() => ModelOnPointerOut()}
           onPointerMissed={() => ModelMissedClick()}
         >

@@ -866,7 +866,9 @@ export default function CanvasContainer() {
                   key={id}
                   onPointerOver={() => MeshPointerOver(id)}
                   onPointerOut={() => MeshPointerOut(id)}
-                  onClick={() => MeshOnClick(id)}
+                  onClick={(e) => {
+                    e.stopPropagation(), MeshOnClick(id);
+                  }}
                   onPointerMissed={() => MeshOnMissed()}
                 >
                   <ModelComponent />
