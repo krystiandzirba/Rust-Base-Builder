@@ -170,6 +170,13 @@ models.filter(
     // stone
     // metal
 
+    // prettier-ignore
+    let metal_build_cost_300 =
+        models.filter(
+          (model) =>
+            model === "GarageDoor"
+        ).length * 300;
+
     let metal_build_cost_200 =
       models.filter(
         (model) =>
@@ -183,6 +190,13 @@ models.filter(
           model === "MetalStairsLShape" ||
           model === "MetalRoof"
       ).length * 200;
+
+    // prettier-ignore
+    let metal_build_cost_150 =
+      models.filter(
+        (model) =>
+          model === "MetalDoor"
+      ).length * 150;
 
     // prettier-ignore
     let metal_build_cost_140 =
@@ -213,7 +227,12 @@ models.filter(
   ).length * 50;
 
     let total_metal_build_cost =
-      metal_build_cost_200 + metal_build_cost_140 + metal_build_cost_100 + metal_build_cost_50;
+      metal_build_cost_300 +
+      metal_build_cost_200 +
+      metal_build_cost_150 +
+      metal_build_cost_140 +
+      metal_build_cost_100 +
+      metal_build_cost_50;
 
     // metal
     // hqm
@@ -367,6 +386,13 @@ models.filter(
     let total_metal_misc_cost = metal_build_cost_50;
 
     // hq metal
+
+    // gear
+
+    let gear_build_cost_2 = models.filter((model) => model === "GarageDoor").length * 2;
+
+    let total_gear_misc_cost = gear_build_cost_2;
+
     // display
 
     set_misc_cost([
@@ -375,7 +401,7 @@ models.filter(
       { metal: total_metal_misc_cost },
       { hq_metal: 0 },
       { scrap: 0 },
-      { gear: 0 },
+      { gear: total_gear_misc_cost },
       { sewing_kit: 0 },
       { lq_fuel: 0 },
     ]);
