@@ -37,7 +37,7 @@ export default function StructureVisibilityMode() {
               onClick={() => {
                 dispatch(set_models_xray_active(!models_xray_active));
               }}
-              className={!models_xray_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
+              className={!models_xray_active ? "xray_switch_button visibility_switch_button_enabled" : "xray_switch_button visibility_switch_button_disabled"} // prettier-ignore
             >
               xray
             </div>
@@ -65,9 +65,7 @@ export default function StructureVisibilityMode() {
               walls
             </div>
           </div>
-        </div>
 
-        <div className="visibility_switch_row">
           <div className="visibility_switch_element">
             <div
               onClick={() => {
@@ -78,6 +76,7 @@ export default function StructureVisibilityMode() {
               floors
             </div>
           </div>
+
           <div className="visibility_switch_element">
             <div
               onClick={() => {
@@ -89,6 +88,7 @@ export default function StructureVisibilityMode() {
             </div>
           </div>
         </div>
+
         <div className="visibility_switch_row">
           <div className="visibility_switch_element">
             <div
@@ -110,8 +110,6 @@ export default function StructureVisibilityMode() {
               frames
             </div>
           </div>
-        </div>
-        <div className="visibility_switch_row">
           <div className="visibility_switch_element">
             <div
               onClick={() => {
@@ -122,6 +120,7 @@ export default function StructureVisibilityMode() {
               roofs
             </div>
           </div>
+
           <div className="visibility_switch_element">
             <div
               onClick={() => {

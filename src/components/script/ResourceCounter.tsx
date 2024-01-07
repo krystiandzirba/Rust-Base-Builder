@@ -7,6 +7,11 @@ import stoneThumbnail from "../../icons/stone_thumbnail.png";
 import metalThumbnail from "../../icons/metal_thumbnail.png";
 import hq_metalThumbnail from "../../icons/hq_metal_thumbnail.png";
 
+import scrapThumbnail from "../../icons/scrap_thumbnail.png";
+import gearThumbnail from "../../icons/gear_thumbnail.png";
+import sewing_kitThumbnail from "../../icons/sewing_kit_thumbnail.png";
+import lq_fuel_kitThumbnail from "../../icons/lq_fuel_thumbnail.png";
+
 export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
 
@@ -504,42 +509,118 @@ models.filter(
         </div>
       </div>
 
-      <div className="main_container main_misc_cost_container">
+      <div className="main_container misc_cost_main_container_a">
         <div className="cost_description">misc cost (T.CB, WB, Box, Furnace ... )</div>
-        <div className="misc_cost_container">
-          <div className="cost_cell">
-            <span>wood</span>
-            <div>{misc_cost[0].wood}</div>
+        <div className="upkeep_cost_container">
+          <div className="build_cost_wood_container">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${woodThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display">
+                <div>wood</div>
+                <div>{misc_cost[0].wood}</div>
+              </div>
+            </div>
           </div>
-          <div className="cost_cell">
-            <span>stone</span>
-            <div>{misc_cost[1].stone}</div>
+          <div className="build_cost_stone_container">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${stoneThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display">
+                <div>stone</div>
+                <div>{misc_cost[1].stone}</div>
+              </div>
+            </div>
           </div>
-          <div className="cost_cell">
-            <span>metal</span>
-            <div>{misc_cost[2].metal}</div>
+          <div className="build_cost_metal_container">
+            <div className="cost_cell" style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}>
+              <div className="build_cost_display">
+                <div>metal f.</div>
+                <div>{misc_cost[2].metal}</div>
+              </div>
+            </div>
           </div>
-          <div className="cost_cell">
-            <span>hq metal</span>
-            <div>{misc_cost[3].hq_metal}</div>
+          <div className="build_cost_hq_metal_container">
+            <div
+              className="cost_cell"
+              style={{ backgroundImage: `url(${hq_metalThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display">
+                <div>hq metal</div>
+                <div>{misc_cost[3].hq_metal}</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="misc_cost_container">
-          <div className="cost_cell">
-            <span>scrap</span>
-            <div>{misc_cost[4].scrap}</div>
+      </div>
+
+      <div className="main_container_b misc_cost_main_container_b">
+        <div className="upkeep_cost_container">
+          <div className="misc_const_container_b">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${scrapThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display_b">
+                <div>scrap</div>
+                <div>{misc_cost[4].scrap}</div>
+              </div>
+            </div>
           </div>
-          <div className="cost_cell">
-            <span>gear</span>
-            <div>{misc_cost[5].gear}</div>
+          <div className="misc_const_container_b">
+            <div
+              className="cost_cell"
+              style={{
+                backgroundImage: `url(${gearThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="build_cost_display_b">
+                <div>gear</div>
+                <div>{misc_cost[5].gear}</div>
+              </div>
+            </div>
           </div>
-          <div className="cost_cell">
-            <span>sewing kit</span>
-            <div>{misc_cost[6].sewing_kit}</div>
+          <div className="misc_const_container_b">
+            <div
+              className="cost_cell"
+              style={{ backgroundImage: `url(${sewing_kitThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display_b">
+                <div>sewing kit</div>
+                <div>{misc_cost[6].sewing_kit}</div>
+              </div>
+            </div>
           </div>
-          <div className="cost_cell">
-            <span>lq fuel</span>
-            <div>{misc_cost[7].lq_fuel}</div>
+          <div className="misc_const_container_b">
+            <div
+              className="cost_cell"
+              style={{ backgroundImage: `url(${lq_fuel_kitThumbnail})`, backgroundSize: "cover" }}
+            >
+              <div className="build_cost_display_b">
+                <div>lq. fuel</div>
+                <div>{misc_cost[7].lq_fuel}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

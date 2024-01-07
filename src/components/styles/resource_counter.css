@@ -1,6 +1,6 @@
-.main_container {
+.main_container,
+.main_container_b {
   width: 20vw;
-  height: 15vh;
   position: absolute;
   left: 79.5vw;
   z-index: 10;
@@ -9,16 +9,14 @@
   backdrop-filter: blur(3px);
 }
 
-.build_cost_main_container {
-  top: 52.5vh;
+.main_container {
+  height: 15vh;
+  top: 40vh;
 }
 
-.upkeep_cost_main_container {
-  top: 68.25vh;
-}
-
-.main_misc_cost_container {
-  top: 84vh;
+.main_container_b {
+  height: 12vh;
+  top: 86.5vh;
 }
 
 .cost_description {
@@ -37,7 +35,9 @@
 }
 
 .build_cost_container,
-.upkeep_cost_container {
+.upkeep_cost_container,
+.misc_cost_container_a,
+.misc_cost_container_b {
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -46,7 +46,8 @@
 .build_cost_wood_container,
 .build_cost_stone_container,
 .build_cost_metal_container,
-.build_cost_hq_metal_container {
+.build_cost_hq_metal_container,
+.misc_const_container_b {
   width: 25%;
   height: 62.5%;
   display: flex;
@@ -66,7 +67,9 @@
   font-weight: 300;
 }
 
-.build_cost_display {
+.build_cost_display,
+.build_cost_display_b,
+.misc_cost_display {
   position: absolute;
   background-color: black;
   width: 25%;
@@ -83,13 +86,26 @@
   justify-content: center;
 }
 
-.misc_cost_container {
-  width: 100%;
-  height: 42.5%;
-  background-color: transparent;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding-top: 0.5vh;
+.build_cost_display_b {
+  height: 26%;
+}
+
+.misc_cost_container_a {
+  top: 71.7vh;
+}
+
+.upkeep_cost_main_container {
+  top: 55.9vh;
+}
+
+.misc_cost_main_container_a {
+  top: 71.7vh;
+}
+
+.misc_cost_main_container_b {
+  top: 86.5vh;
+}
+
+.misc_const_container_b {
+  height: 80%;
 }
