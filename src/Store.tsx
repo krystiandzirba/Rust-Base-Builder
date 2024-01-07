@@ -234,6 +234,7 @@ const pageSettingsSlice = createSlice({
     better_lighting_state: true,
     ssao_state: false,
     antialiasing_state: true,
+    HDR_state: false,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -292,6 +293,9 @@ const pageSettingsSlice = createSlice({
     },
     set_antialiasing_state: (state, action) => {
       return { ...state, antialiasing_state: action.payload };
+    },
+    set_HDR_state: (state, action) => {
+      return { ...state, HDR_state: action.payload };
     },
   },
 });
@@ -353,6 +357,7 @@ export const {
   set_better_lighting_state,
   set_ssao_state,
   set_antialiasing_state,
+  set_HDR_state,
 } = pageSettingsSlice.actions;
 
 export const store = configureStore({

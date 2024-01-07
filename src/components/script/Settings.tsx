@@ -27,6 +27,7 @@ import {
   set_better_lighting_state,
   set_ssao_state,
   set_antialiasing_state,
+  set_HDR_state,
 } from "../../Store.tsx";
 
 const Settings = () => {
@@ -51,6 +52,7 @@ const Settings = () => {
   const better_lighting_state = useSelector((state: RootState) => state.pageSettings.better_lighting_state); //prettier-ignore
   const ssao_state = useSelector((state: RootState) => state.pageSettings.ssao_state); //prettier-ignore
   const antialiasing_state = useSelector((state: RootState) => state.pageSettings.antialiasing_state); //prettier-ignore
+  const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
 
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
   const [settings_button_hover, set_settings_button_hover] = useState<boolean>(false);
@@ -241,6 +243,7 @@ const Settings = () => {
       dispatch(set_better_lighting_state(false));
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(false));
+      dispatch(set_HDR_state(false));
     } else if (!toggle) {
       dispatch(set_performance_mode(false));
 
@@ -248,6 +251,7 @@ const Settings = () => {
       dispatch(set_better_lighting_state(true));
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(true));
+      dispatch(set_HDR_state(false));
     }
   }
 
@@ -287,6 +291,16 @@ const Settings = () => {
         dispatch(set_antialiasing_state(true));
       } else if (!toggle) {
         dispatch(set_antialiasing_state(false));
+      }
+    }
+  }
+
+  function HandleHDRStateSwitch(toggle: boolean) {
+    if (!performance_mode) {
+      if (toggle) {
+        dispatch(set_HDR_state(true));
+      } else if (!toggle) {
+        dispatch(set_HDR_state(false));
       }
     }
   }
@@ -582,7 +596,7 @@ const Settings = () => {
             />
           </ThemeProvider>
         </div>
-        <div className="settings_segment_title">postprocessing</div>
+        <div className="settings_segment_title">postprocessing | visuals</div>
         <div className="settings_element">
           <div className="settings_element_description">bloom:</div>
           <div className="settings_element_buttons_container">
@@ -681,6 +695,32 @@ const Settings = () => {
               }
             >
               {antialiasing_state ? "disable" : "disabled"}
+            </div>
+          </div>
+        </div>
+
+        <div className="settings_element">
+          <div className="settings_element_description">HDR background:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleHDRStateSwitch(true)}
+              className={
+                HDR_state
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {HDR_state ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleHDRStateSwitch(false)}
+              className={
+                !HDR_state && !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {HDR_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>

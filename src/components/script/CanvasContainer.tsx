@@ -1,6 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, OrthographicCamera, CameraControls, PivotControls, Box } from "@react-three/drei";
+import {
+  PerspectiveCamera,
+  OrthographicCamera,
+  CameraControls,
+  PivotControls,
+  Box,
+  Environment,
+} from "@react-three/drei";
 import * as THREE from "three";
 
 import { RootState } from "../../Store";
@@ -119,6 +126,7 @@ export default function CanvasContainer() {
   const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
 
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
+  const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -882,6 +890,7 @@ export default function CanvasContainer() {
             </Box>
           )}
           {!performance_mode && <Postprocessing />}
+          {HDR_state && <Environment files="./hdr/HDR2k.hdr" background blur={0} />}
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}
