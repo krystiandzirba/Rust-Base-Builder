@@ -69,8 +69,6 @@ export default App;
 // add 1st person walking in overview and raid mode
 
 //errors?
-// - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color
-// - (multiple objects on canvas, hovering over any object causes frames to drop)
 // - rotate the model pivot together with the model itself
 // performance fix: disable mesh-mouse input (on miss / on click) outside the edit mode
 

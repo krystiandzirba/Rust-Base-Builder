@@ -331,7 +331,7 @@ models.filter(
 
       stage_1_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15) / total_object_count //prettier-ignore
       set_total_upkeep_percentile_rampup(parseFloat(stage_1_count_rampup.toFixed(4)));
-      set_upkeep_cost_text("upkeep cost (estimated ramp-up scaling)");
+      set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
 
     if (total_object_count > 100 && total_object_count <= 175) {
@@ -341,7 +341,7 @@ models.filter(
 
       stage_2_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15 + stage_2_count * 0.2) / total_object_count //prettier-ignore
       set_total_upkeep_percentile_rampup(parseFloat(stage_2_count_rampup.toFixed(4)));
-      set_upkeep_cost_text("upkeep cost (estimated ramp-up scaling)");
+      set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
 
     if (total_object_count > 175) {
@@ -352,7 +352,7 @@ models.filter(
 
       stage_3_count_rampup = (stage_0_count * 0.1 + stage_1_count * 0.15 + stage_2_count * 0.2 + stage_3_count * 0.33) / total_object_count //prettier-ignore
       set_total_upkeep_percentile_rampup(parseFloat(stage_3_count_rampup.toFixed(4)));
-      set_upkeep_cost_text("upkeep cost (estimated ramp-up scaling)");
+      set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
   }
 
