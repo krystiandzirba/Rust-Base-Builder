@@ -26,6 +26,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
 
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures);
+  const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/metal_wall_frame_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
@@ -56,6 +57,26 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     }
   }
 
+  const ModelMaterialOpacity = () => {
+    if (enable_model_material) {
+      return model_selected ? 1 : model_hover ? 0.6 : 1;
+    } else return 1;
+  };
+
+  const ModelMaterialColor = () => {
+    if (enable_model_material) {
+      return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb";
+    } else if (model_selected) {
+      return "#f5b784";
+    } else if (!model_selected) {
+      return "#bbbbbb";
+    }
+  };
+
+  const ModelMaterialWireframe = () => {
+    return models_xray_active ? true : false;
+  };
+
   return (
     <>
       {frames_active && (
@@ -85,9 +106,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             >
               <meshStandardMaterial
                 transparent={true}
-                opacity={model_selected ? 1 : model_hover ? 0.6 : 1}
-                color={model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb"}
-                wireframe={models_xray_active ? true : false}
+                opacity={ModelMaterialOpacity()}
+                color={ModelMaterialColor()}
+                wireframe={ModelMaterialWireframe()}
               />
             </mesh>
           )}

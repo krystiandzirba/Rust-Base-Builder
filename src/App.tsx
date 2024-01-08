@@ -66,6 +66,7 @@ export default App;
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
 // settings: dark-light mode
+// add 1st person walking in overview and raid mode
 
 //errors?
 // - if 2 or more models are in the cursor line, the last one is selected on click, not the first one, both aquire hover color

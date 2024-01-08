@@ -222,19 +222,18 @@ const pageSettingsSlice = createSlice({
 
     performance_mode: false,
     performance_monitor_state: false,
-    model_hover_color_state: true,
-    model_click_color_state: true,
     active_models_state: false,
     camera_fov: 90,
 
     pivot_controls_state: false,
 
+    enable_model_textures: true,
+    enable_model_material: true,
     bloom_state: true,
     better_lighting_state: true,
     ssao_state: false,
     antialiasing_state: true,
     HDR_state: false,
-    enable_model_textures: true,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -261,12 +260,6 @@ const pageSettingsSlice = createSlice({
     },
     set_performance_monitor_state: (state, action) => {
       return { ...state, performance_monitor_state: action.payload };
-    },
-    set_model_hover_color_state: (state, action) => {
-      return { ...state, model_hover_color_state: action.payload };
-    },
-    set_model_click_color_state: (state, action) => {
-      return { ...state, model_click_color_state: action.payload };
     },
     set_active_models_state: (state, action) => {
       return { ...state, active_models_state: action.payload };
@@ -296,6 +289,10 @@ const pageSettingsSlice = createSlice({
     },
     set_enable_model_textures: (state, action) => {
       return { ...state, enable_model_textures: action.payload };
+    },
+
+    set_enable_model_material: (state, action) => {
+      return { ...state, enable_model_material: action.payload };
     },
   },
 });
@@ -345,8 +342,6 @@ export const {
 
   set_performance_mode,
   set_performance_monitor_state,
-  set_model_hover_color_state,
-  set_model_click_color_state,
   set_active_models_state,
   set_camera_fov,
 
@@ -358,6 +353,7 @@ export const {
   set_antialiasing_state,
   set_HDR_state,
   set_enable_model_textures,
+  set_enable_model_material,
 } = pageSettingsSlice.actions;
 
 export const store = configureStore({
