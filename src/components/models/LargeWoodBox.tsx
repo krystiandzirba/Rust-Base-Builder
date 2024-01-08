@@ -25,6 +25,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
 
+  const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures);
+
   const { nodes, materials } = useGLTF("./models/large_wood_box_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
@@ -53,31 +55,44 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       set_model_hover(false);
     }
   }
-
   return (
-    <group {...props} dispose={null}>
+    <>
       {miscs_active && (
-        <mesh
-          geometry={nodes.Cube004.geometry}
-          material={materials["Material.003"]}
-          onClick={() => ModelOnClick()}
-          onPointerOver={(e) => {
-            e.stopPropagation(), ModelOnPointerOver();
-          }}
-          onPointerOut={() => ModelOnPointerOut()}
-          onPointerMissed={() => ModelMissedClick()}
-        >
-          {page_mode === "edit" && (
-            <meshStandardMaterial
-              transparent={true}
-              opacity={model_selected ? 1 : model_hover ? 0.6 : 1}
-              color={model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb"}
-              wireframe={models_xray_active ? true : false}
-            />
+        <group {...props} dispose={null}>
+          {page_mode !== "edit" && enable_model_textures ? (
+            <mesh
+              key="textured"
+              geometry={nodes.Cube004.geometry}
+              material={materials["Material.003"]}
+              onClick={() => ModelOnClick()}
+              onPointerOver={(e) => {
+                e.stopPropagation(), ModelOnPointerOver();
+              }}
+              onPointerOut={() => ModelOnPointerOut()}
+              onPointerMissed={() => ModelMissedClick()}
+            ></mesh>
+          ) : (
+            <mesh
+              key="not-textured"
+              geometry={nodes.Cube004.geometry}
+              onClick={() => ModelOnClick()}
+              onPointerOver={(e) => {
+                e.stopPropagation(), ModelOnPointerOver();
+              }}
+              onPointerOut={() => ModelOnPointerOut()}
+              onPointerMissed={() => ModelMissedClick()}
+            >
+              <meshStandardMaterial
+                transparent={true}
+                opacity={model_selected ? 1 : model_hover ? 0.6 : 1}
+                color={model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb"}
+                wireframe={models_xray_active ? true : false}
+              />
+            </mesh>
           )}
-        </mesh>
+        </group>
       )}
-    </group>
+    </>
   );
 }
 

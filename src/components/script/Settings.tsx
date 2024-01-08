@@ -17,7 +17,6 @@ import {
   set_enable_model_transform_controls,
   set_performance_mode,
   set_performance_monitor_state,
-  set_model_textures_state,
   set_model_hover_color_state,
   set_model_click_color_state,
   set_active_models_state,
@@ -28,6 +27,7 @@ import {
   set_ssao_state,
   set_antialiasing_state,
   set_HDR_state,
+  set_enable_model_textures,
 } from "../../Store.tsx";
 
 const Settings = () => {
@@ -41,7 +41,7 @@ const Settings = () => {
 
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
-  const model_textures_state = useSelector((state: RootState) => state.pageSettings.model_textures_state); //prettier-ignore
+  const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); //prettier-ignore
   const model_hover_color_state = useSelector((state: RootState) => state.pageSettings.model_hover_color_state); //prettier-ignore
   const model_click_color_state = useSelector((state: RootState) => state.pageSettings.model_click_color_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
@@ -203,11 +203,11 @@ const Settings = () => {
     }
   }
 
-  function HandleModelTexturesStateSwitch(toggle: boolean) {
+  function HandleEnableModelTexturesSwitch(toggle: boolean) {
     if (toggle) {
-      dispatch(set_model_textures_state(true));
+      dispatch(set_enable_model_textures(true));
     } else if (!toggle) {
-      dispatch(set_model_textures_state(false));
+      dispatch(set_enable_model_textures(false));
     }
   }
 
@@ -244,6 +244,7 @@ const Settings = () => {
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(false));
       dispatch(set_HDR_state(false));
+      dispatch(set_enable_model_textures(false));
     } else if (!toggle) {
       dispatch(set_performance_mode(false));
 
@@ -252,6 +253,7 @@ const Settings = () => {
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(true));
       dispatch(set_HDR_state(false));
+      dispatch(set_enable_model_textures(true));
     }
   }
 
@@ -597,6 +599,33 @@ const Settings = () => {
           </ThemeProvider>
         </div>
         <div className="settings_segment_title">postprocessing | visuals</div>
+
+        <div className="settings_element">
+          <div className="settings_element_description">model textures:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleEnableModelTexturesSwitch(true)}
+              className={
+                enable_model_textures
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!enable_model_textures ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleEnableModelTexturesSwitch(false)}
+              className={
+                !enable_model_textures && !performance_mode
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {enable_model_textures ? "disable" : "disabled"}
+            </div>
+          </div>
+        </div>
+
         <div className="settings_element">
           <div className="settings_element_description">bloom:</div>
           <div className="settings_element_buttons_container">

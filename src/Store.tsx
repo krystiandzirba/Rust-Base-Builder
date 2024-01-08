@@ -222,7 +222,6 @@ const pageSettingsSlice = createSlice({
 
     performance_mode: false,
     performance_monitor_state: false,
-    model_textures_state: true,
     model_hover_color_state: true,
     model_click_color_state: true,
     active_models_state: false,
@@ -235,6 +234,7 @@ const pageSettingsSlice = createSlice({
     ssao_state: false,
     antialiasing_state: true,
     HDR_state: false,
+    enable_model_textures: true,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -261,9 +261,6 @@ const pageSettingsSlice = createSlice({
     },
     set_performance_monitor_state: (state, action) => {
       return { ...state, performance_monitor_state: action.payload };
-    },
-    set_model_textures_state: (state, action) => {
-      return { ...state, model_textures_state: action.payload };
     },
     set_model_hover_color_state: (state, action) => {
       return { ...state, model_hover_color_state: action.payload };
@@ -296,6 +293,9 @@ const pageSettingsSlice = createSlice({
     },
     set_HDR_state: (state, action) => {
       return { ...state, HDR_state: action.payload };
+    },
+    set_enable_model_textures: (state, action) => {
+      return { ...state, enable_model_textures: action.payload };
     },
   },
 });
@@ -345,7 +345,6 @@ export const {
 
   set_performance_mode,
   set_performance_monitor_state,
-  set_model_textures_state,
   set_model_hover_color_state,
   set_model_click_color_state,
   set_active_models_state,
@@ -358,6 +357,7 @@ export const {
   set_ssao_state,
   set_antialiasing_state,
   set_HDR_state,
+  set_enable_model_textures,
 } = pageSettingsSlice.actions;
 
 export const store = configureStore({
