@@ -102,16 +102,29 @@
 }
 
 .settings_button_container {
-  width: 4vw;
-  height: 7.5vh;
+  width: 3.15vw;
+  height: 6.6vh;
   position: absolute;
-  top: 0.5vh;
-  left: 32.5vw;
+  top: 2vh;
+  left: 35.75vw;
   z-index: 25;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.settings_button_container_spin {
+  animation: spin 5s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .controls_button_container {

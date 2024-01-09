@@ -3,8 +3,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 
-import Checkbox from "@mui/material/Checkbox";
-import { FormControlLabel, Slider, ThemeProvider, createTheme } from "@mui/material";
+import { Slider, ThemeProvider, createTheme } from "@mui/material";
+
+import settings_bw_Thumbnail from "../../icons/settings_thumbnail_bw.png";
+import settings_rgb_Thumbnail from "../../icons/settings_thumbnail_rgb.png";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -53,10 +55,7 @@ const Settings = () => {
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
 
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
-  const [settings_button_hover, set_settings_button_hover] = useState<boolean>(false);
-
   const [controls_button_click, set_controls_button_click] = useState<boolean>(false);
-  const [controls_button_hover, set_controls_button_hover] = useState<boolean>(false);
 
   const theme = createTheme({
     components: {
@@ -116,25 +115,9 @@ const Settings = () => {
     set_controls_button_click(false);
   }
 
-  function SettingsButtonEnter() {
-    set_settings_button_hover(true);
-  }
-
-  function SettingsButtonLeave() {
-    set_settings_button_hover(false);
-  }
-
   function ControlsButtonClick() {
     set_controls_button_click(!controls_button_click);
     set_settings_button_click(false);
-  }
-
-  function ControlsButtonEnter() {
-    set_controls_button_hover(true);
-  }
-
-  function ControlsButtonLeave() {
-    set_controls_button_hover(false);
   }
 
   function HandleHintsSwitch(toggle: boolean) {
@@ -777,27 +760,22 @@ const Settings = () => {
         </div>
       </div>
 
-      <div className="settings_button_container">
-        <button
-          className="settings_button"
-          onClick={() => SettingsButtonClick()}
-          onMouseEnter={() => SettingsButtonEnter()}
-          onMouseLeave={() => SettingsButtonLeave()}
-        >
-          {!settings_button_click && <FontAwesomeIcon icon={faGear} size="3x" style={{ color: "#a8a8a8" }} />}
-          {
-            settings_button_click && <FontAwesomeIcon icon={faGear} spin size="3x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
-          }
-        </button>
+      <div
+        className={
+          settings_button_click
+            ? "settings_button_container settings_button_container_spin"
+            : "settings_button_container"
+        }
+        style={{
+          backgroundImage: `url(${settings_button_click ? settings_rgb_Thumbnail : settings_bw_Thumbnail})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <button className="settings_button" onClick={() => SettingsButtonClick()}></button>
       </div>
 
       <div className="controls_button_container">
-        <button
-          className="settings_button"
-          onClick={() => ControlsButtonClick()}
-          onMouseEnter={() => ControlsButtonEnter()}
-          onMouseLeave={() => ControlsButtonLeave()}
-        >
+        <button className="settings_button" onClick={() => ControlsButtonClick()}>
           {!controls_button_click && <FontAwesomeIcon icon={faGamepad} size="3x" style={{ color: "#a8a8a8" }} />}
           {
             controls_button_click && <FontAwesomeIcon icon={faGamepad} beat size="3x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
