@@ -1,5 +1,4 @@
-.main_container,
-.main_container_b {
+.main_container {
   width: 20vw;
   position: absolute;
   left: 79.5vw;
@@ -7,16 +6,54 @@
   color: #bbbbbb;
   background-color: rgba(15, 16, 26, 0.4);
   backdrop-filter: blur(3px);
-}
-
-.main_container {
   height: 15vh;
-  top: 40vh;
 }
 
-.main_container_b {
-  height: 12vh;
-  top: 86.5vh;
+.build_cost_main_container {
+  top: 53vh;
+}
+
+.upkeep_cost_main_container {
+  top: 68.5vh;
+}
+
+.components_cost_main_container {
+  top: 84vh;
+}
+
+.misc_cost_checkbox {
+  position: absolute;
+  width: 20vw;
+  height: 2.4vh;
+  background-color: black;
+  top: 51vh;
+  left: 79.5vw;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  z-index: 40;
+}
+
+.misc_count_description {
+  height: 15%;
+  background-color: black;
+  color: #bbbbbb;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+.misc_count_description label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="checkbox"] {
+  accent-color: #fdc89d;
 }
 
 .cost_description {
@@ -43,11 +80,14 @@
   flex-direction: row;
 }
 
-.build_cost_wood_container,
-.build_cost_stone_container,
-.build_cost_metal_container,
-.build_cost_hq_metal_container,
-.misc_const_container_b {
+.wood_container,
+.stone_container,
+.metal_container,
+.hq_metal_container,
+.scrap_container,
+.gears_container,
+.sewing_kit_container,
+.lq_fuel_container {
   width: 25%;
   height: 62.5%;
   display: flex;
@@ -67,9 +107,7 @@
   font-weight: 300;
 }
 
-.build_cost_display,
-.build_cost_display_b,
-.misc_cost_display {
+.build_cost_display {
   position: absolute;
   background-color: black;
   width: 25%;
@@ -84,28 +122,4 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.build_cost_display_b {
-  height: 26%;
-}
-
-.misc_cost_container_a {
-  top: 71.7vh;
-}
-
-.upkeep_cost_main_container {
-  top: 55.9vh;
-}
-
-.misc_cost_main_container_a {
-  top: 71.7vh;
-}
-
-.misc_cost_main_container_b {
-  top: 86.5vh;
-}
-
-.misc_const_container_b {
-  height: 80%;
 }

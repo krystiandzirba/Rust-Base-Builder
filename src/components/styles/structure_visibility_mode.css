@@ -3,7 +3,7 @@
   width: 15vw;
   left: 84.5vw;
   height: 2.5vh;
-  top: 24vh;
+  top: 35vh;
   background-color: rgb(0, 0, 0);
   z-index: 30;
   font-size: 0.85vw;
@@ -17,7 +17,7 @@
   width: 15vw;
   height: 13vh;
   position: absolute;
-  top: 26.5vh;
+  top: 37.5vh;
   left: 84.5vw;
   z-index: 30;
   background-color: rgba(15, 16, 26, 0.4);
