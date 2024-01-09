@@ -5,8 +5,11 @@ import { faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 
 import { Slider, ThemeProvider, createTheme } from "@mui/material";
 
-import settings_bw_Thumbnail from "../../icons/settings_thumbnail_bw.png";
-import settings_rgb_Thumbnail from "../../icons/settings_thumbnail_rgb.png";
+import controls_a_Thumbnail from "../../icons/controls_a_thumbnail.png";
+import controls_b_Thumbnail from "../../icons/controls_b_thumbnail.png";
+
+import settings_a_Thumbnail from "../../icons/settings_a_thumbnail.png";
+import settings_b_Thumbnail from "../../icons/settings_b_thumbnail.png";
 
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -761,26 +764,27 @@ const Settings = () => {
       </div>
 
       <div
+        className="controls_button_container"
+        style={{
+          backgroundImage: `url(${!controls_button_click ? controls_a_Thumbnail : controls_b_Thumbnail})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <button className="settings_button" onClick={() => ControlsButtonClick()}></button>
+      </div>
+
+      <div
         className={
           settings_button_click
             ? "settings_button_container settings_button_container_spin"
             : "settings_button_container"
         }
         style={{
-          backgroundImage: `url(${settings_button_click ? settings_rgb_Thumbnail : settings_bw_Thumbnail})`,
+          backgroundImage: `url(${!settings_button_click ? settings_a_Thumbnail : settings_b_Thumbnail})`,
           backgroundSize: "cover",
         }}
       >
         <button className="settings_button" onClick={() => SettingsButtonClick()}></button>
-      </div>
-
-      <div className="controls_button_container">
-        <button className="settings_button" onClick={() => ControlsButtonClick()}>
-          {!controls_button_click && <FontAwesomeIcon icon={faGamepad} size="3x" style={{ color: "#a8a8a8" }} />}
-          {
-            controls_button_click && <FontAwesomeIcon icon={faGamepad} beat size="3x" style={{ color: "#ffd5b3" }}/> //prettier-ignore
-          }
-        </button>
       </div>
 
       <div
@@ -853,6 +857,11 @@ const Settings = () => {
           <div className="settings_element_description">DEL | BACKSPACE</div>
           <div className="controls_element">delete selected model</div>
         </div>
+      </div>
+
+      <div className="controls_settings_description_container">
+        <div className="controls_settings_description_container_text">controls</div>
+        <div className="controls_settings_description_container_text">settings</div>
       </div>
     </>
   );

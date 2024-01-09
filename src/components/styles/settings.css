@@ -102,11 +102,11 @@
 }
 
 .settings_button_container {
-  width: 3.15vw;
-  height: 6.6vh;
+  width: 3.5vw;
+  height: 7.1vh;
   position: absolute;
-  top: 2vh;
-  left: 35.75vw;
+  top: 1vh;
+  left: 34vw;
   z-index: 25;
   background-color: transparent;
   display: flex;
@@ -128,16 +128,36 @@
 }
 
 .controls_button_container {
-  width: 4vw;
-  height: 7.5vh;
+  width: 4.5vw;
+  height: 8vh;
   position: absolute;
-  top: 0.5vh;
-  left: 26.5vw;
+  top: 0vh;
+  left: 26.25vw;
   z-index: 25;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.controls_settings_description_container {
+  position: absolute;
+  width: 14.25vw;
+  height: 2.5vh;
+  left: 25.1vw;
+  top: 8.75vh;
+  z-index: 40;
+  display: flex;
+  flex-direction: row;
+  color: #bbbbbb;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.controls_settings_description_container_text {
+  width: 50%;
+  text-align: center;
 }
 
 .settings_button {
