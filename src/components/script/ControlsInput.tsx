@@ -36,8 +36,8 @@ export default function ControlsInput() {
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
-  const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
-  const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
+  const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
+  const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
 
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(60);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
@@ -198,13 +198,13 @@ export default function ControlsInput() {
           {camera_type === "camera_3d" && (
             <div className="camera_direction_indicator indicator_top">
               {camera_3d_direction === "north"
-                ? "north"
+                ? "N"
                 : camera_3d_direction === "east"
-                ? "east"
+                ? "E"
                 : camera_3d_direction === "west"
-                ? "west"
+                ? "W"
                 : camera_3d_direction === "south"
-                ? "south"
+                ? "S"
                 : "unknown"}
             </div>
           )}
@@ -218,13 +218,13 @@ export default function ControlsInput() {
           {camera_type === "camera_3d" && (
             <div className="camera_direction_indicator indicator_right">
               {camera_3d_direction === "north"
-                ? "east"
+                ? "E"
                 : camera_3d_direction === "east"
-                ? "south"
+                ? "S"
                 : camera_3d_direction === "west"
-                ? "north"
+                ? "N"
                 : camera_3d_direction === "south"
-                ? "west"
+                ? "W"
                 : "unknown"}
             </div>
           )}
@@ -238,13 +238,13 @@ export default function ControlsInput() {
           {camera_type === "camera_3d" && (
             <div className="camera_direction_indicator indicator_bottom">
               {camera_3d_direction === "north"
-                ? "south"
+                ? "S"
                 : camera_3d_direction === "east"
-                ? "west"
+                ? "W"
                 : camera_3d_direction === "west"
-                ? "east"
+                ? "E"
                 : camera_3d_direction === "south"
-                ? "north"
+                ? "N"
                 : "unknown"}
             </div>
           )}
@@ -258,13 +258,13 @@ export default function ControlsInput() {
           {camera_type === "camera_3d" && (
             <div className="camera_direction_indicator indicator_left">
               {camera_3d_direction === "north"
-                ? "west"
+                ? "W"
                 : camera_3d_direction === "east"
-                ? "north"
+                ? "N"
                 : camera_3d_direction === "west"
-                ? "south"
+                ? "S"
                 : camera_3d_direction === "south"
-                ? "east"
+                ? "E"
                 : "unknown"}
             </div>
           )}

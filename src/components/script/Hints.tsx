@@ -7,7 +7,7 @@ import { faUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
 export default function Hints() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
-  const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
+  const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
 
   return (
     <div className="hint_container_bottom">

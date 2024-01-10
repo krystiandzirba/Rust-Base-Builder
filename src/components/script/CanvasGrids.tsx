@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Box, Grid } from "@react-three/drei";
 
 export default function CanvasGrids() {
-  const camera_2d_direction = useSelector((state: RootState) => state.camera2D.camera_2d_direction);
+  const camera_2d_direction = useSelector((state: RootState) => state.camerasSettings.camera_2d_direction);
 
   return (
     <>

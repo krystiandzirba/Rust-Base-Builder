@@ -2,7 +2,7 @@ import Toolbar from "./components/script/Toolbar.tsx";
 import Presets from "./components/script/Presets.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
-import ResourceCounter from "./components/script/ResourceCounter.tsx";
+import ResourceCalculator from "./components/script/ResourceCalculator.tsx";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import ObjectList from "./components/script/ObjectList.tsx";
 import ControlsInput from "./components/script/ControlsInput.tsx";
@@ -41,7 +41,7 @@ function App() {
       {enable_presets && <Presets />}
       <Version />
       {enable_cameras && <CameraType />}
-      {enable_resource_container && <ResourceCounter />}
+      {enable_resource_container && <ResourceCalculator />}
       <CanvasContainer />
       <ObjectList />
       {enable_hints && <Hints />}

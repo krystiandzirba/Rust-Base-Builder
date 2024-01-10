@@ -23,11 +23,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active);
   const stairs_active = useSelector((state: RootState) => state.modelsData.stairs_active);
 
-  const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
+  const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
 
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures);
   const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
-  
+
   const { nodes, materials } = useGLTF("./models/metal_stairs_l_shape_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);

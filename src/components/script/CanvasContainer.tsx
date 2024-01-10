@@ -99,14 +99,15 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 export default function CanvasContainer() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const model_pivot_axis = useSelector((state: RootState) => state.modelPivotAxis.model_pivot_axis);
-  const camera_type = useSelector((state: RootState) => state.cameraType.camera_type);
-  const camera_2d_position = useSelector((state: RootState) => state.camera2D.camera_2d_position);
-  const camera_2d_direction = useSelector((state: RootState) => state.camera2D.camera_2d_direction);
-  const camera_3d_reset = useSelector((state: RootState) => state.camera3D.camera_3d_reset);
+  const model_pivot_axis = useSelector((state: RootState) => state.modelsData.model_pivot_axis);
+  const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
+  const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
+  const camera_3d_reset = useSelector((state: RootState) => state.camerasSettings.camera_3d_reset);
+  const camera_2d_position = useSelector((state: RootState) => state.camerasSettings.camera_2d_position);
+  const camera_2d_direction = useSelector((state: RootState) => state.camerasSettings.camera_2d_direction);
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
-  const model_type_to_create = useSelector((state: RootState) => state.modelTypeToCreate.model_type_to_create);
-  const model_creation_state = useSelector((state: RootState) => state.modelTypeToCreate.model_creation_state);
+  const model_type_to_create = useSelector((state: RootState) => state.modelsData.model_type_to_create);
+  const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
   const keyboard_input = useSelector((state: RootState) => state.controlsInput.keyboard_input);
   const object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
   const key_press_trigger = useSelector((state: RootState) => state.controlsInput.key_press_trigger);
@@ -116,7 +117,6 @@ export default function CanvasContainer() {
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
-  const camera_3d_direction = useSelector((state: RootState) => state.camera3D.camera_3d_direction);
 
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected); //prettier-ignore
 

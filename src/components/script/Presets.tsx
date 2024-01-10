@@ -28,22 +28,6 @@ const Preset = () => {
           <span className="preset_name_text">layout</span>
           <span className="preset_name_text">c</span>
         </div>
-
-        {/* <div className="preset preset_d preset_inactive">
-          <button className="preset_button preset_d">
-            <FontAwesomeIcon icon={faVectorSquare} size="2xl" style={{ color: "rgba(255, 255, 255, 0.1)" }} />
-          </button>
-          <span className="preset_name_text">preset</span>
-          <span className="preset_name_text">d</span>
-        </div>
-
-        <div className="preset preset_e preset_inactive">
-          <button className="preset_button preset_e">
-            <FontAwesomeIcon icon={faVectorSquare} size="2xl" style={{ color: "rgba(255, 255, 255, 0.1)" }} />
-          </button>
-          <span className="preset_name_text">preset</span>
-          <span className="preset_name_text">e</span>
-        </div> */}
       </div>
     </>
   );
