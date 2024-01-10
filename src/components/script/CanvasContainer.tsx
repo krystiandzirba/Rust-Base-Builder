@@ -631,19 +631,6 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectX(-1);
         }
-
-        if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
-          moveSelectedObjectY(+1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(-1);
-        }
       }
       if (keyboard_input === "A") {
         if (camera_3d_direction === "north") {
@@ -654,24 +641,6 @@ export default function CanvasContainer() {
           moveSelectedObjectZ(-1);
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectZ(+1);
-        }
-
-        if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(-1);
-        }
-        if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(+1);
-        }
-
-        if (camera_2d_direction === "front") {
-          moveSelectedObjectX(-1);
-        }
-        if (camera_2d_direction === "back") {
-          moveSelectedObjectX(+1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectX(-1);
         }
       }
       if (keyboard_input === "S") {
@@ -684,19 +653,6 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectX(+1);
         }
-
-        if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
-          moveSelectedObjectY(-1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(+1);
-        }
       }
       if (keyboard_input === "D") {
         if (camera_3d_direction === "north") {
@@ -707,24 +663,6 @@ export default function CanvasContainer() {
           moveSelectedObjectZ(+1);
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectZ(-1);
-        }
-
-        if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(+1);
-        }
-        if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(-1);
-        }
-
-        if (camera_2d_direction === "front") {
-          moveSelectedObjectX(+1);
-        }
-        if (camera_2d_direction === "back") {
-          moveSelectedObjectX(-1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectX(+1);
         }
       }
 
@@ -750,24 +688,6 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectZ(+1);
         }
-
-        if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(-1);
-        }
-        if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(+1);
-        }
-
-        if (camera_2d_direction === "front") {
-          moveSelectedObjectX(-1);
-        }
-        if (camera_2d_direction === "back") {
-          moveSelectedObjectX(+1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectX(-1);
-        }
       } else if (button_input === "move_front") {
         if (camera_3d_direction === "north") {
           moveSelectedObjectZ(-1);
@@ -777,19 +697,6 @@ export default function CanvasContainer() {
           moveSelectedObjectX(+1);
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectX(-1);
-        }
-
-        if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
-          moveSelectedObjectY(+1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(-1);
         }
       } else if (button_input === "move_right") {
         if (camera_3d_direction === "north") {
@@ -801,24 +708,6 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectZ(-1);
         }
-
-        if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(+1);
-        }
-        if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(-1);
-        }
-
-        if (camera_2d_direction === "front") {
-          moveSelectedObjectX(+1);
-        }
-        if (camera_2d_direction === "back") {
-          moveSelectedObjectX(-1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectX(+1);
-        }
       } else if (button_input === "move_back") {
         if (camera_3d_direction === "north") {
           moveSelectedObjectZ(+1);
@@ -828,19 +717,6 @@ export default function CanvasContainer() {
           moveSelectedObjectX(-1);
         } else if (camera_3d_direction === "west") {
           moveSelectedObjectX(+1);
-        }
-
-        if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
-          moveSelectedObjectY(-1);
-        }
-
-        if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(+1);
         }
       } else if (button_input === "move_up") {
         moveSelectedObjectY(+1);
