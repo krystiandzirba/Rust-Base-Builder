@@ -71,6 +71,7 @@ export default App;
 //errors?
 // - rotate the model pivot together with the model itself
 // performance fix: disable mesh-mouse input (on miss / on click) outside the edit mode
+// previously selected objects remain selected in creation mode
 
 ///// make a bledner 1:0 button on-off instead of toolbar hide-display icon
 // if performance issue = canvas lighting + postprocessing + click events

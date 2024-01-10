@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import {
   set_camera_type,
   set_camera_3d_reset,
+  set_camera_3d_direction,
   set_camera_2d_position,
   set_camera_2d_direction,
   set_cursor_type,
@@ -139,17 +140,19 @@ export default function CameraType() {
         className="camera_switch_button"
         onClick={() => {
           if (camera_type === "camera_3d") {
-            dispatch(set_camera_type("camera_2d")), console.log(store.getState());
+            dispatch(set_camera_type("camera_2d"));
             dispatch(set_cursor_type("move"));
             const new_camera_position = [0, 0, 45];
             dispatch(setOrtographicCameraPosition(new_camera_position));
             set_camera_switch_button_text("2D front");
             dispatch(set_camera_2d_direction("front"));
+            dispatch(set_camera_3d_direction(""));
           } else if (camera_type === "camera_2d") {
-            dispatch(set_camera_type("camera_3d")), console.log(store.getState());
+            dispatch(set_camera_type("camera_3d"));
             dispatch(set_cursor_type("default"));
             set_camera_switch_button_text("3D 360°");
             dispatch(set_camera_2d_direction(""));
+            dispatch(set_camera_3d_direction("north"));
           }
         }}
         onMouseEnter={() => set_camera_switch_button_hover(true)}
