@@ -9,15 +9,18 @@
   height: 15vh;
 }
 
-.build_cost_main_container {
+.build_cost_main_container,
+.raid_tools_cost_main_container {
   top: 53vh;
 }
 
-.upkeep_cost_main_container {
+.upkeep_cost_main_container,
+.raid_components_cost_main_container_a {
   top: 68.5vh;
 }
 
-.components_cost_main_container {
+.components_cost_main_container,
+.raid_components_cost_main_container_b {
   top: 84vh;
 }
 
@@ -74,7 +77,8 @@ input[type="checkbox"] {
 .build_cost_container,
 .upkeep_cost_container,
 .misc_cost_container_a,
-.misc_cost_container_b {
+.misc_cost_container_b,
+.raid_cost_container {
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -87,7 +91,17 @@ input[type="checkbox"] {
 .scrap_container,
 .gears_container,
 .sewing_kit_container,
-.lq_fuel_container {
+.lq_fuel_container,
+.rocket_container,
+.explosives_container,
+.ammo_container,
+.satchel_container,
+.sulfur_container,
+.gunpowder_container,
+.charcoal_container,
+.metal_pipe_container,
+.cloth_container,
+.tech_trash_container {
   width: 25%;
   height: 62.5%;
   display: flex;
@@ -107,7 +121,8 @@ input[type="checkbox"] {
   font-weight: 300;
 }
 
-.build_cost_display {
+.build_cost_display,
+.raid_cost_display {
   position: absolute;
   background-color: black;
   width: 25%;

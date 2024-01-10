@@ -2,7 +2,8 @@ import Toolbar from "./components/script/Toolbar.tsx";
 import Presets from "./components/script/Presets.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
-import ResourceCalculator from "./components/script/ResourceCalculator.tsx";
+import BuildCalculator from "./components/script/BuildCalculator.tsx";
+import RaidCalculator from "./components/script/RaidCalculator.tsx";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import ObjectList from "./components/script/ObjectList.tsx";
 import ControlsInput from "./components/script/ControlsInput.tsx";
@@ -16,7 +17,8 @@ import "./components/styles/presets.css";
 import "./components/styles/version.css";
 import "./components/styles/camera_switch.css";
 import "./components/styles/canvas_container.css";
-import "./components/styles/resource_counter.css";
+import "./components/styles/resource_calculator.css";
+import "./components/styles/raid_calculator.css";
 import "./components/styles/object_list.css";
 import "./components/styles/controls_input.css";
 import "./components/styles/hints.css";
@@ -27,6 +29,8 @@ import { RootState } from "./Store";
 import { useSelector } from "react-redux";
 
 function App() {
+  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
   const enable_presets = useSelector((state: RootState) => state.pageSettings.enable_presets);
   const enable_cameras = useSelector((state: RootState) => state.pageSettings.enable_cameras);
@@ -41,7 +45,8 @@ function App() {
       {enable_presets && <Presets />}
       <Version />
       {enable_cameras && <CameraType />}
-      {enable_resource_container && <ResourceCalculator />}
+      {enable_resource_container && page_mode !== "raid" && <BuildCalculator />}
+      {page_mode === "raid" && <RaidCalculator />}
       <CanvasContainer />
       <ObjectList />
       {enable_hints && <Hints />}

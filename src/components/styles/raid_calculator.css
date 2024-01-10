@@ -1,0 +1,25 @@
+.raid_type_main_container {
+  position: absolute;
+  width: 30vw;
+  height: 11.5vh;
+  top: 83.5vh;
+  left: 35vw;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  z-index: 40;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.raid_type_button {
+  height: 100%;
+  width: 20%;
+  background-color: rgba(0, 128, 0, 0);
+  border: 1px black solid;
+}

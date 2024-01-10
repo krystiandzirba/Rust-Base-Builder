@@ -522,8 +522,6 @@ models.filter(
         </div>
       </div>
 
-      {/* aaaaa */}
-
       <div className="main_container components_cost_main_container">
         <div className="cost_description">components cost</div>
         <div className="upkeep_cost_container">
