@@ -37,7 +37,8 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: transparent;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
-  grid-gap: 1.5vh;
+  grid-column-gap: 1.5vh;
+  grid-row-gap: 3vh;
   grid-auto-rows: 17vh;
   overflow-y: auto;
   margin: 1vh;
@@ -45,7 +46,8 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .object {
   width: calc(100% - 1vh);
-  height: 15vh;
+  height: 13.7vh;
+  width: 6.5vw;
   word-wrap: break-word;
   background-size: cover;
   background-position: center;
@@ -56,9 +58,9 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .object_list_description {
   width: 112.5%;
-  height: 100%;
+  height: 130%;
   margin-left: -0.675vh;
-  margin-top: 0.3vh;
+  margin-top: 3.25vh;
   color: #bbbbbb;
   background-color: black;
   font-size: 0.75vw;
