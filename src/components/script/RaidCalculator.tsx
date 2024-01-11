@@ -1,6 +1,23 @@
+import { useDispatch } from "react-redux";
+import { RootState } from "../../Store.tsx";
+import { useSelector } from "react-redux";
+import { set_reset_raid_models } from "../../Store.tsx";
+
 export default function RaidCalculator() {
+  const dispatch = useDispatch();
+
+  const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
+
+  function ResetRaid() {
+    dispatch(set_reset_raid_models(!reset_raid_models));
+  }
+
   return (
     <>
+      <div className="raid_reset_button" onClick={ResetRaid}>
+        reset raid
+      </div>
+
       <div className="raid_type_main_container">
         <div className="raid_type_button">most efficient (automatic)</div>
         <div className="raid_type_button">rocket</div>

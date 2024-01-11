@@ -23,3 +23,19 @@
   background-color: rgba(0, 128, 0, 0);
   border: 1px black solid;
 }
+
+.raid_reset_button {
+  position: absolute;
+  width: 5vw;
+  height: 5vh;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  z-index: 40;
+  top: 90vh;
+  left: 70vw;
+}

@@ -8,6 +8,7 @@ import {
   set_selected_model_id,
   set_selected_object_list,
   set_model_creation_state,
+  set_reset_raid_models,
 } from "../../Store.tsx";
 
 import overviewRgbThumbnail from "../../icons/overview_rgb_thumbnail.png";
@@ -24,6 +25,7 @@ import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 const Toolbar = () => {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
+  const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
 
   const [toolbar_enabled, set_toolbar_enabled] = useState<boolean>(true);
 
@@ -33,14 +35,19 @@ const Toolbar = () => {
       dispatch(set_selected_model_id("empty")),
       dispatch(set_selected_object_list(-1));
     dispatch(set_model_creation_state(false));
+    dispatch(set_reset_raid_models(!reset_raid_models));
   }
 
   function PageModeEdit() {
-    dispatch(set_page_mode("edit")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
+    dispatch(set_page_mode("edit")),
+      dispatch(set_object_selected(false)),
+      dispatch(set_selected_model_id("empty"), dispatch(set_reset_raid_models(!reset_raid_models)));
   }
 
   function PageModeRaid() {
-    dispatch(set_page_mode("raid")), dispatch(set_object_selected(false)), dispatch(set_selected_model_id("empty"));
+    dispatch(set_page_mode("raid")),
+      dispatch(set_object_selected(false)),
+      dispatch(set_selected_model_id("empty"), dispatch(set_reset_raid_models(!reset_raid_models)));
   }
 
   function ToggleToolbar() {

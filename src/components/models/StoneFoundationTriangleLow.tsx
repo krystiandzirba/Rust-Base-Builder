@@ -1,12 +1,17 @@
 import * as THREE from "three";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import { useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
-import { set_model_pivot_axis } from "../../Store.tsx";
+import {
+  set_model_pivot_axis,
+  set_model_to_destroy,
+  set_model_destroy_trigger,
+  set_reset_raid_models,
+} from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -19,40 +24,47 @@ type GLTFResult = GLTF & {
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
+
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active);
   const foundations_active = useSelector((state: RootState) => state.modelsData.foundations_active);
-
   const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
-
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures);
   const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
+  const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
+  const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/stone_foundation_triangle_low_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
+  const [model_destroyed, set_model_destroyed] = useState<boolean>(false);
 
   function ModelOnClick() {
-    if (page_mode === "edit" && !model_creation_state) {
+    if (page_mode === "edit") {
       dispatch(set_model_pivot_axis("XZ"));
       set_model_selected(true);
+    } else if (page_mode === "raid") {
+      set_model_selected(true);
+      dispatch(set_model_to_destroy(Model.displayName));
+      set_model_destroyed(true);
+      dispatch(set_model_destroy_trigger(model_destroy_tigger + 1));
     }
   }
 
   function ModelMissedClick() {
-    if (!model_creation_state) {
+    if (!model_creation_state && page_mode !== "overview") {
       set_model_selected(false);
     }
   }
 
   function ModelOnPointerOver() {
-    if (!model_creation_state) {
+    if (!model_creation_state && page_mode !== "overview") {
       set_model_hover(true);
     }
   }
 
   function ModelOnPointerOut() {
-    if (!model_creation_state) {
+    if (!model_creation_state && page_mode !== "overview") {
       set_model_hover(false);
     }
   }
@@ -65,11 +77,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   const ModelMaterialColor = () => {
     if (enable_model_material) {
-      return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb";
-    } else if (model_selected) {
-      return "#f5b784";
-    } else if (!model_selected) {
-      return "#bbbbbb";
+      if (page_mode === "edit") {
+        return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb";
+      } else if (page_mode === "raid") {
+        return model_hover ? "red" : "#bbbbbb";
+      }
     }
   };
 
@@ -77,11 +89,26 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     return models_xray_active ? true : false;
   };
 
+  useEffect(() => {
+    {
+      set_model_destroyed(false);
+      set_model_hover(false);
+      set_model_selected(false);
+    }
+  }, [reset_raid_models]);
+
+  useEffect(() => {
+    {
+      set_model_hover(false);
+      set_model_selected(false);
+    }
+  }, [page_mode]);
+
   return (
     <>
-      {foundations_active && (
+      {foundations_active && !model_destroyed && (
         <group {...props} dispose={null}>
-          {page_mode !== "edit" && enable_model_textures ? (
+          {enable_model_textures && !model_hover && (page_mode === "overview" || page_mode === "raid") ? (
             <mesh
               key="textured"
               geometry={nodes.Circle.geometry}

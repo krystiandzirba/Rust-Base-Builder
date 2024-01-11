@@ -12,18 +12,6 @@ const pageModeSlice = createSlice({
   },
 });
 
-// const modelPivotAxisSlice = createSlice({
-//   name: "transform axis",
-//   initialState: {
-//     model_pivot_axis: null,
-//   },
-//   reducers: {
-//     set_model_pivot_axis: (state, action) => {
-//       return { ...state, model_pivot_axis: action.payload };
-//     },
-//   },
-// });
-
 const camerasSettingsSlice = createSlice({
   name: "camera type",
   initialState: {
@@ -56,50 +44,6 @@ const camerasSettingsSlice = createSlice({
   },
 });
 
-// const cameraTypeSlice = createSlice({
-//   name: "camera type",
-//   initialState: {
-//     camera_type: "camera_3d",
-//   },
-//   reducers: {
-//     set_camera_type: (state, action) => {
-//       return { ...state, camera_type: action.payload };
-//     },
-//   },
-// });
-
-// const camera2DSlice = createSlice({
-//   name: "2d camera",
-//   initialState: {
-//     camera_2d_direction: "",
-//     camera_2d_position: [0, 0, 45],
-//   },
-//   reducers: {
-//     set_camera_2d_direction: (state, action) => {
-//       return { ...state, camera_2d_direction: action.payload };
-//     },
-//     set_camera_2d_position: (state, action) => {
-//       return { ...state, camera_2d_position: action.payload };
-//     },
-//   },
-// });
-
-// const camera3DResetSlice = createSlice({
-//   name: "3d camera reset",
-//   initialState: {
-//     camera_3d_reset: false,
-//     camera_3d_direction: "north",
-//   },
-//   reducers: {
-//     set_camera_3d_reset: (state, action) => {
-//       return { ...state, camera_3d_reset: action.payload };
-//     },
-//     set_camera_3d_direction: (state, action) => {
-//       return { ...state, camera_3d_direction: action.payload };
-//     },
-//   },
-// });
-
 const cursorTypeSlice = createSlice({
   name: "cursor type",
   initialState: {
@@ -123,22 +67,6 @@ const canvasModelsArraySlice = createSlice({
     },
   },
 });
-
-// const objectListModelCreatorSlice = createSlice({
-//   name: "object list models creator",
-//   initialState: {
-//     model_type_to_create: "",
-//     model_creation_state: false,
-//   },
-//   reducers: {
-//     set_model_type_to_create: (state, action) => {
-//       return { ...state, model_type_to_create: action.payload };
-//     },
-//     set_model_creation_state: (state, action) => {
-//       return { ...state, model_creation_state: action.payload };
-//     },
-//   },
-// });
 
 const controlsInputSlice = createSlice({
   name: "keyboard input",
@@ -206,6 +134,10 @@ const modelsDataSlice = createSlice({
     frames_active: true,
     roofs_active: true,
     miscs_active: true,
+
+    model_to_destroy: "none",
+    model_destroy_trigger: 0,
+    reset_raid_models: false,
   },
   reducers: {
     set_model_pivot_axis: (state, action) => {
@@ -256,6 +188,16 @@ const modelsDataSlice = createSlice({
     },
     set_miscs_active: (state, action) => {
       return { ...state, miscs_active: action.payload };
+    },
+
+    set_model_to_destroy: (state, action) => {
+      return { ...state, model_to_destroy: action.payload };
+    },
+    set_model_destroy_trigger: (state, action) => {
+      return { ...state, model_destroy_trigger: action.payload };
+    },
+    set_reset_raid_models: (state, action) => {
+      return { ...state, reset_raid_models: action.payload };
     },
   },
 });
@@ -385,6 +327,9 @@ export const {
   set_frames_active,
   set_roofs_active,
   set_miscs_active,
+  set_model_to_destroy,
+  set_model_destroy_trigger,
+  set_reset_raid_models,
 } = modelsDataSlice.actions;
 
 export const {
