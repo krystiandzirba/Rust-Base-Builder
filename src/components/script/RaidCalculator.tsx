@@ -12,13 +12,14 @@ export default function RaidCalculator() {
   const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
   const model_to_destroy = useSelector((state: RootState) => state.modelsData.model_to_destroy); //prettier-ignore
 
-  const [raid_tool, set_raid_tool] = useState<string>("efficiency");
-  const [rocket_cost, set_rocket_cost] = useState<number>(0);
+  const [raid_type, set_raid_type] = useState<string>("efficiency");
+  const [rockets_cost, set_rockets_cost] = useState<number>(0);
+  const [explosives_cost, set_explosives_cost] = useState<number>(0);
 
   function ResetRaid() {
     dispatch(set_reset_raid_models(!reset_raid_models));
-
-    set_rocket_cost(0);
+    set_rockets_cost(0);
+    set_explosives_cost(0);
   }
 
   function CalculateRocketCost() {
@@ -42,7 +43,7 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneFloorFrameSquare" ||
       model_to_destroy === "StoneFloorFrameTriangle"
     ) {
-      set_rocket_cost(rocket_cost + 2);
+      set_rockets_cost(rockets_cost + 4);
     } else if (
       model_to_destroy === "MetalFoundationSquareHigh" ||
       model_to_destroy === "MetalFoundationSquareMid" ||
@@ -63,19 +64,74 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalFloorFrameSquare" ||
       model_to_destroy === "MetalFloorFrameTriangle"
     ) {
-      set_rocket_cost(rocket_cost + 4);
+      set_rockets_cost(rockets_cost + 8);
     }
+  }
+
+  function CalculateExplosivesCost() {
+    if (
+      model_to_destroy === "StoneFoundationSquareHigh" ||
+      model_to_destroy === "StoneFoundationSquareMid" ||
+      model_to_destroy === "StoneFoundationSquareLow" ||
+      model_to_destroy === "StoneFoundationTriangleHigh" ||
+      model_to_destroy === "StoneFoundationTriangleMid" ||
+      model_to_destroy === "StoneFoundationTriangleLow" ||
+      model_to_destroy === "StoneWallHigh" ||
+      model_to_destroy === "StoneWallMid" ||
+      model_to_destroy === "StoneWallLow" ||
+      model_to_destroy === "StoneDoorway" ||
+      model_to_destroy === "StoneWindow" ||
+      model_to_destroy === "StoneStairsLShape" ||
+      model_to_destroy === "StoneStairsUShape" ||
+      model_to_destroy === "StoneWallFrame" ||
+      model_to_destroy === "StoneFloorSquare" ||
+      model_to_destroy === "StoneFloorTriangle" ||
+      model_to_destroy === "StoneFloorFrameSquare" ||
+      model_to_destroy === "StoneFloorFrameTriangle"
+    ) {
+      set_explosives_cost(explosives_cost + 2);
+    } else if (
+      model_to_destroy === "MetalFoundationSquareHigh" ||
+      model_to_destroy === "MetalFoundationSquareMid" ||
+      model_to_destroy === "MetalFoundationSquareLow" ||
+      model_to_destroy === "MetalFoundationTriangleHigh" ||
+      model_to_destroy === "MetalFoundationTriangleMid" ||
+      model_to_destroy === "MetalFoundationTriangleLow" ||
+      model_to_destroy === "MetalWallHigh" ||
+      model_to_destroy === "MetalWallMid" ||
+      model_to_destroy === "MetalWallLow" ||
+      model_to_destroy === "MetalDoorway" ||
+      model_to_destroy === "MetalWindow" ||
+      model_to_destroy === "MetalStairsLShape" ||
+      model_to_destroy === "MetalStairsUShape" ||
+      model_to_destroy === "MetalWallFrame" ||
+      model_to_destroy === "MetalFloorSquare" ||
+      model_to_destroy === "MetalFloorTriangle" ||
+      model_to_destroy === "MetalFloorFrameSquare" ||
+      model_to_destroy === "MetalFloorFrameTriangle"
+    ) {
+      set_explosives_cost(explosives_cost + 4);
+    }
+  }
+
+  function ChangeRaidType(type: string) {
+    set_raid_type(type);
   }
 
   useEffect(() => {
     {
-      CalculateRocketCost();
+      if (raid_type === "rockets") {
+        CalculateRocketCost();
+      } else if (raid_type === "explosives") {
+        CalculateExplosivesCost();
+      }
     }
   }, [model_destroy_tigger]);
 
   useEffect(() => {
     {
-      set_rocket_cost(0);
+      set_rockets_cost(0);
+      set_explosives_cost(0);
     }
   }, [page_mode]);
 
@@ -86,11 +142,56 @@ export default function RaidCalculator() {
       </div>
 
       <div className="raid_type_main_container">
-        <div className="raid_type_button">most efficient (automatic)</div>
-        <div className="raid_type_button">rocket</div>
-        <div className="raid_type_button">explosives</div>
-        <div className="raid_type_button">exp. 5.56</div>
-        <div className="raid_type_button">satchel</div>
+        <div
+          className={"raid_type_button"}
+          onClick={() => ChangeRaidType("efficiency")}
+          style={{
+            backgroundColor: raid_type === "efficiency" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
+            color: raid_type === "efficiency" ? "black" : "white",
+          }}
+        >
+          most efficient (automatic)
+        </div>
+        <div
+          className={"raid_type_button"}
+          onClick={() => ChangeRaidType("rockets")}
+          style={{
+            backgroundColor: raid_type === "rockets" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
+            color: raid_type === "rockets" ? "black" : "white",
+          }}
+        >
+          rockets
+        </div>
+        <div
+          className={"raid_type_button"}
+          onClick={() => ChangeRaidType("explosives")}
+          style={{
+            backgroundColor: raid_type === "explosives" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
+            color: raid_type === "explosives" ? "black" : "white",
+          }}
+        >
+          explosives
+        </div>
+        <div
+          className={"raid_type_button"}
+          onClick={() => ChangeRaidType("ammo")}
+          style={{
+            backgroundColor: raid_type === "ammo" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
+            color: raid_type === "ammo" ? "black" : "white",
+          }}
+        >
+          exp. 5.56
+        </div>
+        <div
+          className={"raid_type_button"}
+          onClick={() => ChangeRaidType("satchel")}
+          style={{
+            backgroundColor: raid_type === "satchel" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
+            color: raid_type === "satchel" ? "black" : "white",
+          }}
+        >
+          satchel
+        </div>
       </div>
 
       <div className="main_container raid_tools_cost_main_container">
@@ -108,7 +209,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>rocket</div>
-                <div>{rocket_cost}</div>
+                <div>{rockets_cost}</div>
               </div>
             </div>
           </div>
@@ -122,7 +223,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>explosives</div>
-                <div>0</div>
+                <div>{explosives_cost}</div>
               </div>
             </div>
           </div>

@@ -4,9 +4,6 @@
   height: 11.5vh;
   top: 83.5vh;
   left: 35vw;
-  background-color: rgba(15, 16, 26, 0.4);
-  backdrop-filter: blur(3px);
-  color: #bbbbbb;
   font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
