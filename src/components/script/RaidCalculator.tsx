@@ -15,15 +15,21 @@ export default function RaidCalculator() {
   const [raid_type, set_raid_type] = useState<string>("efficiency");
   const [rockets_cost, set_rockets_cost] = useState<number>(0);
   const [explosives_cost, set_explosives_cost] = useState<number>(0);
+  const [ammo_cost, set_ammo_cost] = useState<number>(0);
 
   function ResetRaid() {
     dispatch(set_reset_raid_models(!reset_raid_models));
     set_rockets_cost(0);
     set_explosives_cost(0);
+    set_ammo_cost(0);
   }
 
   function CalculateRocketCost() {
-    if (
+    if (model_to_destroy === "MetalDoor") {
+      set_rockets_cost(rockets_cost + 2);
+    } else if (model_to_destroy === "GarageDoor") {
+      set_rockets_cost(rockets_cost + 3);
+    } else if (
       model_to_destroy === "StoneFoundationSquareHigh" ||
       model_to_destroy === "StoneFoundationSquareMid" ||
       model_to_destroy === "StoneFoundationSquareLow" ||
@@ -69,7 +75,11 @@ export default function RaidCalculator() {
   }
 
   function CalculateExplosivesCost() {
-    if (
+    if (model_to_destroy === "MetalDoor") {
+      set_explosives_cost(explosives_cost + 1);
+    } else if (model_to_destroy === "GarageDoor") {
+      set_explosives_cost(explosives_cost + 2);
+    } else if (
       model_to_destroy === "StoneFoundationSquareHigh" ||
       model_to_destroy === "StoneFoundationSquareMid" ||
       model_to_destroy === "StoneFoundationSquareLow" ||
@@ -114,6 +124,60 @@ export default function RaidCalculator() {
     }
   }
 
+  function CalculateAmmoCost() {
+    if (model_to_destroy === "MetalDoor") {
+      set_ammo_cost(ammo_cost + 63);
+    } else if (model_to_destroy === "GarageDoor") {
+      set_ammo_cost(ammo_cost + 150);
+    } else if (model_to_destroy === "StoneStairsLShape" || model_to_destroy === "StoneStairsUShape") {
+      set_ammo_cost(ammo_cost + 173);
+    } else if (
+      model_to_destroy === "StoneFoundationSquareHigh" ||
+      model_to_destroy === "StoneFoundationSquareMid" ||
+      model_to_destroy === "StoneFoundationSquareLow" ||
+      model_to_destroy === "StoneFoundationTriangleHigh" ||
+      model_to_destroy === "StoneFoundationTriangleMid" ||
+      model_to_destroy === "StoneFoundationTriangleLow" ||
+      model_to_destroy === "StoneWallHigh" ||
+      model_to_destroy === "StoneWallMid" ||
+      model_to_destroy === "StoneWallLow" ||
+      model_to_destroy === "StoneDoorway" ||
+      model_to_destroy === "StoneWindow" ||
+      model_to_destroy === "StoneWallFrame" ||
+      model_to_destroy === "StoneFloorSquare" ||
+      model_to_destroy === "StoneFloorTriangle" ||
+      model_to_destroy === "StoneFloorFrameSquare" ||
+      model_to_destroy === "StoneFloorFrameTriangle"
+    ) {
+      set_ammo_cost(ammo_cost + 185);
+    } else if (model_to_destroy === "MetalStairsLShape" || model_to_destroy === "MetalStairsUShape") {
+      set_ammo_cost(ammo_cost + 399);
+    } else if (
+      model_to_destroy === "MetalWallHigh" ||
+      model_to_destroy === "MetalWallMid" ||
+      model_to_destroy === "MetalWallLow" ||
+      model_to_destroy === "MetalDoorway" ||
+      model_to_destroy === "MetalWindow" ||
+      model_to_destroy === "MetalWallFrame" ||
+      model_to_destroy === "MetalFloorSquare" ||
+      model_to_destroy === "MetalFloorFrameSquare" ||
+      model_to_destroy === "MetalFloorFrameTriangle"
+    ) {
+      set_ammo_cost(ammo_cost + 400);
+    } else if (model_to_destroy === "MetalFloorTriangle") {
+      set_ammo_cost(ammo_cost + 413);
+    } else if (
+      model_to_destroy === "MetalFoundationSquareHigh" ||
+      model_to_destroy === "MetalFoundationSquareMid" ||
+      model_to_destroy === "MetalFoundationSquareLow" ||
+      model_to_destroy === "MetalFoundationTriangleHigh" ||
+      model_to_destroy === "MetalFoundationTriangleMid" ||
+      model_to_destroy === "MetalFoundationTriangleLow"
+    ) {
+      set_ammo_cost(ammo_cost + 461);
+    }
+  }
+
   function ChangeRaidType(type: string) {
     set_raid_type(type);
   }
@@ -124,6 +188,8 @@ export default function RaidCalculator() {
         CalculateRocketCost();
       } else if (raid_type === "explosives") {
         CalculateExplosivesCost();
+      } else if (raid_type === "ammo") {
+        CalculateAmmoCost();
       }
     }
   }, [model_destroy_tigger]);
@@ -132,6 +198,7 @@ export default function RaidCalculator() {
     {
       set_rockets_cost(0);
       set_explosives_cost(0);
+      set_ammo_cost(0);
     }
   }, [page_mode]);
 
@@ -239,7 +306,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>exp. 5.56</div>
-                <div>0</div>
+                <div>{ammo_cost}</div>
               </div>
             </div>
           </div>
