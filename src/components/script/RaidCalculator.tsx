@@ -26,6 +26,51 @@ export default function RaidCalculator() {
     set_satchel_cost(0);
   }
 
+  function CalculateEfficiencyCost() {
+    if (
+      model_to_destroy === "StoneFoundationSquareHigh" ||
+      model_to_destroy === "StoneFoundationSquareMid" ||
+      model_to_destroy === "StoneFoundationSquareLow" ||
+      model_to_destroy === "StoneFoundationTriangleHigh" ||
+      model_to_destroy === "StoneFoundationTriangleMid" ||
+      model_to_destroy === "StoneFoundationTriangleLow" ||
+      model_to_destroy === "StoneWallHigh" ||
+      model_to_destroy === "StoneWallMid" ||
+      model_to_destroy === "StoneWallLow" ||
+      model_to_destroy === "StoneDoorway" ||
+      model_to_destroy === "StoneWindow" ||
+      model_to_destroy === "StoneWallFrame" ||
+      model_to_destroy === "StoneFloorTriangle" ||
+      model_to_destroy === "StoneFloorFrameSquare" ||
+      model_to_destroy === "StoneFloorFrameTriangle"
+    ) {
+      set_explosives_cost(explosives_cost + 2);
+    } else if (model_to_destroy === "StoneStairsLShape" || model_to_destroy === "StoneStairsUShape") {
+      set_ammo_cost(ammo_cost + 173);
+    } else if (
+      model_to_destroy === "MetalFoundationSquareHigh" ||
+      model_to_destroy === "MetalFoundationSquareMid" ||
+      model_to_destroy === "MetalFoundationSquareLow" ||
+      model_to_destroy === "MetalWallHigh" ||
+      model_to_destroy === "MetalWallMid" ||
+      model_to_destroy === "MetalWallLow" ||
+      model_to_destroy === "MetalDoorway" ||
+      model_to_destroy === "MetalWindow" ||
+      model_to_destroy === "MetalStairsLShape" ||
+      model_to_destroy === "MetalStairsUShape" ||
+      model_to_destroy === "MetalWallFrame" ||
+      model_to_destroy === "MetalFloorTriangle" ||
+      model_to_destroy === "MetalFloorFrameSquare" ||
+      model_to_destroy === "MetalFloorFrameTriangle"
+    ) {
+      set_explosives_cost(explosives_cost + 4);
+    } else if (model_to_destroy === "MetalDoor") {
+      set_ammo_cost(ammo_cost + 63);
+    } else if (model_to_destroy === "GarageDoor") {
+      set_ammo_cost(ammo_cost + 150);
+    }
+  }
+
   function CalculateRocketCost() {
     if (model_to_destroy === "MetalDoor") {
       set_rockets_cost(rockets_cost + 2);
@@ -244,6 +289,8 @@ export default function RaidCalculator() {
         CalculateAmmoCost();
       } else if (raid_type === "satchel") {
         CalculateSatchelsCost();
+      } else if (raid_type === "efficiency") {
+        CalculateEfficiencyCost();
       }
     }
   }, [model_destroy_tigger]);
