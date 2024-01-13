@@ -3,7 +3,7 @@
   position: absolute;
   width: 30vw;
   height: 2.5vh;
-  top: 78.5vh;
+  top: 81.5vh;
   left: 35vw;
   z-index: 40;
   background-color: black;
@@ -22,7 +22,7 @@
   position: absolute;
   width: 30vw;
   height: 2.5vh;
-  top: 93.5vh;
+  top: 96.5vh;
   left: 35vw;
   z-index: 40;
   background-color: black;
@@ -46,7 +46,7 @@
   position: absolute;
   width: 30vw;
   height: 11.5vh;
-  top: 81vh;
+  top: 84vh;
   left: 35vw;
   font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
@@ -85,7 +85,7 @@
   font-weight: 300;
   text-align: center;
   z-index: 40;
-  top: 89vh;
+  top: 91.5vh;
   left: 70.5vw;
 }
 
@@ -100,6 +100,6 @@
   color: #bbbbbb;
   text-align: center;
   z-index: 40;
-  top: 94.5vh;
+  top: 97vh;
   left: 69.5vw;
 }

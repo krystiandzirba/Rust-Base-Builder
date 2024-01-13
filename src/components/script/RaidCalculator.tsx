@@ -394,13 +394,13 @@ export default function RaidCalculator() {
       </div>
 
       <div className="main_container raid_tools_cost_main_container">
-        <div className="cost_description">raid cost - hard side (type)</div>
+        <div className="cost_description">raid cost (tool - hard side)</div>
         <div className="raid_cost_container">
           <div className="rocket_container">
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${woodThumbnail})`,
+                backgroundImage: `url(${raidRgbThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -416,7 +416,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${metalThumbnail})`,
+                backgroundImage: `url(${explosivesRgbThumbnail})`,
                 backgroundSize: "cover",
               }}
             >
@@ -430,7 +430,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${stoneThumbnail})`,
+                backgroundImage: `url(${ammoRgbThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -446,7 +446,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${hq_metalThumbnail})`,
+                backgroundImage: `url(${satchelRgbThumbnail})`,
                 backgroundSize: "cover",
               }}
             >
