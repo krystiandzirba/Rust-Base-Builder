@@ -4,6 +4,18 @@ import { useSelector } from "react-redux";
 import { set_reset_raid_models } from "../../Store.tsx";
 import { useEffect, useState } from "react";
 
+import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
+import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
+
+import explosivesRgbThumbnail from "../../icons/explosives_rgb_thumbnail.png";
+import explosivesBwThumbnail from "../../icons/explosives_bw_thumbnail.png";
+
+import ammoRgbThumbnail from "../../icons/ammo_rgb_thumbnail.png";
+import ammoBwThumbnail from "../../icons/ammo_bw_thumbnail.png";
+
+import satchelRgbThumbnail from "../../icons/satchel_rgb_thumbnail.png";
+import satchelBwThumbnail from "../../icons/satchel_bw_thumbnail.png";
+
 export default function RaidCalculator() {
   const dispatch = useDispatch();
 
@@ -324,43 +336,39 @@ export default function RaidCalculator() {
         <div
           className={"raid_type_button"}
           onClick={() => ChangeRaidType("rockets")}
-          style={{
-            backgroundColor: raid_type === "rockets" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
-            color: raid_type === "rockets" ? "black" : "white",
-          }}
-        >
-          rockets
-        </div>
+          style={
+            raid_type === "rockets"
+              ? { backgroundImage: `url(${raidRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${raidBwThumbnail})`, backgroundSize: "cover" }
+          }
+        ></div>
         <div
           className={"raid_type_button"}
           onClick={() => ChangeRaidType("explosives")}
-          style={{
-            backgroundColor: raid_type === "explosives" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
-            color: raid_type === "explosives" ? "black" : "white",
-          }}
-        >
-          explosives
-        </div>
+          style={
+            raid_type === "explosives"
+              ? { backgroundImage: `url(${explosivesRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${explosivesBwThumbnail})`, backgroundSize: "cover" }
+          }
+        ></div>
         <div
           className={"raid_type_button"}
           onClick={() => ChangeRaidType("ammo")}
-          style={{
-            backgroundColor: raid_type === "ammo" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
-            color: raid_type === "ammo" ? "black" : "white",
-          }}
-        >
-          exp. 5.56
-        </div>
+          style={
+            raid_type === "ammo"
+              ? { backgroundImage: `url(${ammoRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${ammoBwThumbnail})`, backgroundSize: "cover" }
+          }
+        ></div>
         <div
           className={"raid_type_button"}
           onClick={() => ChangeRaidType("satchel")}
-          style={{
-            backgroundColor: raid_type === "satchel" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
-            color: raid_type === "satchel" ? "black" : "white",
-          }}
-        >
-          satchel
-        </div>
+          style={
+            raid_type === "satchel"
+              ? { backgroundImage: `url(${satchelRgbThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${satchelBwThumbnail})`, backgroundSize: "cover" }
+          }
+        ></div>
       </div>
 
       <div className="main_container raid_tools_cost_main_container">
