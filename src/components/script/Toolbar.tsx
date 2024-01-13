@@ -17,7 +17,7 @@ import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
 import overviewBwThumbnail from "../../icons/overview_bw_thumbnail.png";
 import editBwThumbnail from "../../icons/hammer_bw_thumbnail.png";
 import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -53,6 +53,13 @@ const Toolbar = () => {
   function ToggleToolbar() {
     set_toolbar_enabled(!toolbar_enabled);
   }
+
+  useEffect(() => {
+    {
+      dispatch(set_selected_object_list(-1));
+      dispatch(set_model_creation_state(false));
+    }
+  }, [page_mode]);
 
   return (
     <>

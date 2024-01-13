@@ -1,27 +1,27 @@
 .main_container {
   width: 20vw;
   position: absolute;
-  left: 79.5vw;
+  left: 79.75vw;
   z-index: 10;
   color: #bbbbbb;
   background-color: rgba(15, 16, 26, 0.4);
   backdrop-filter: blur(3px);
-  height: 15vh;
+  height: 17.5vh;
 }
 
 .build_cost_main_container,
 .raid_tools_cost_main_container {
-  top: 53vh;
+  top: 46vh;
 }
 
 .upkeep_cost_main_container,
 .raid_components_cost_main_container_a {
-  top: 68.5vh;
+  top: 64vh;
 }
 
 .components_cost_main_container,
 .raid_components_cost_main_container_b {
-  top: 84vh;
+  top: 82vh;
 }
 
 .misc_cost_checkbox {
@@ -29,8 +29,8 @@
   width: 20vw;
   height: 2.4vh;
   background-color: black;
-  top: 51vh;
-  left: 79.5vw;
+  top: 44vh;
+  left: 79.75vw;
   color: #bbbbbb;
   font-size: 0.8vw;
   text-align: center;
@@ -126,10 +126,10 @@ input[type="checkbox"] {
   position: absolute;
   background-color: black;
   width: 25%;
-  height: 20%;
-  top: 79%;
+  height: 22%;
+  top: 78.75%;
   color: #bbbbbb;
-  font-size: 0.65vw;
+  font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;

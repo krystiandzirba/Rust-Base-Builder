@@ -1,9 +1,9 @@
 .structure_visibility_container_description {
   position: absolute;
   width: 15vw;
-  left: 84.5vw;
+  left: 84.75vw;
   height: 2.5vh;
-  top: 35vh;
+  top: 28vh;
   background-color: rgb(0, 0, 0);
   z-index: 30;
   font-size: 0.85vw;
@@ -17,8 +17,8 @@
   width: 15vw;
   height: 13vh;
   position: absolute;
-  top: 37.5vh;
-  left: 84.5vw;
+  top: 30.5vh;
+  left: 84.75vw;
   z-index: 30;
   background-color: rgba(15, 16, 26, 0.4);
   backdrop-filter: blur(3px);
