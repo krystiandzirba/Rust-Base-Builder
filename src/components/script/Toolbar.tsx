@@ -109,13 +109,6 @@ const Toolbar = () => {
         <div className="toolbar_description">edit</div>
         <div className="toolbar_description">raid</div>
       </div>
-      <div
-        className={
-          toolbar_enabled ? "raid_unavailable raid_unavailable_displayed" : "raid_unavailable raid_unavailable_hidden"
-        }
-      >
-        not yet available
-      </div>
 
       <div
         className="toolbar_display_trigger"

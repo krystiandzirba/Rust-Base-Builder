@@ -74,30 +74,6 @@
   font-weight: 300;
 }
 
-.raid_unavailable {
-  position: absolute;
-  width: 6.95%;
-  height: 1.4%;
-  top: 15.25%;
-  left: 54.85%;
-  background-color: black;
-  z-index: 5;
-  text-align: center;
-  color: #bbbbbb;
-  font-size: 0.55vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  transition: transform 0.1s ease-in-out;
-}
-
-.raid_unavailable_displayed {
-  transform: translateX(0);
-}
-
-.raid_unavailable_hidden {
-  transform: translateY(-1200%);
-}
-
 .toolbar_display_trigger {
   position: absolute;
   width: 1.25vw;

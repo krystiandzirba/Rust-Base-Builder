@@ -15,6 +15,8 @@ import ammoBwThumbnail from "../../icons/ammo_bw_thumbnail.png";
 
 import satchelRgbThumbnail from "../../icons/satchel_rgb_thumbnail.png";
 import satchelBwThumbnail from "../../icons/satchel_bw_thumbnail.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
 export default function RaidCalculator() {
   const dispatch = useDispatch();
@@ -318,23 +320,31 @@ export default function RaidCalculator() {
 
   return (
     <>
-      <div className="raid_reset_button" onClick={ResetRaid}>
-        reset raid
+      <div className="raid_type_name">raid with:</div>
+
+      <div className="raid_type_description">
+        <div className="raid_type_description_cell">most efficient</div>
+        <div className="raid_type_description_cell">rockets</div>
+        <div className="raid_type_description_cell">C4's</div>
+        <div className="raid_type_description_cell">EXP. 5.56</div>
+        <div className="raid_type_description_cell">satchels</div>
       </div>
 
       <div className="raid_type_main_container">
         <div
-          className={"raid_type_button"}
+          className={
+            raid_type === "efficiency"
+              ? "raid_type_button raid_type_button_active"
+              : "raid_type_button raid_type_button_inactive"
+          }
           onClick={() => ChangeRaidType("efficiency")}
-          style={{
-            backgroundColor: raid_type === "efficiency" ? "rgb(201, 201, 201)" : "rgba(15, 16, 26, 0.4)",
-            color: raid_type === "efficiency" ? "black" : "white",
-          }}
-        >
-          most efficient (automatic)
-        </div>
+        ></div>
         <div
-          className={"raid_type_button"}
+          className={
+            raid_type === "rockets"
+              ? "raid_type_button raid_type_button_active"
+              : "raid_type_button raid_type_button_inactive"
+          }
           onClick={() => ChangeRaidType("rockets")}
           style={
             raid_type === "rockets"
@@ -343,7 +353,11 @@ export default function RaidCalculator() {
           }
         ></div>
         <div
-          className={"raid_type_button"}
+          className={
+            raid_type === "explosives"
+              ? "raid_type_button raid_type_button_active"
+              : "raid_type_button raid_type_button_inactive"
+          }
           onClick={() => ChangeRaidType("explosives")}
           style={
             raid_type === "explosives"
@@ -352,7 +366,11 @@ export default function RaidCalculator() {
           }
         ></div>
         <div
-          className={"raid_type_button"}
+          className={
+            raid_type === "ammo"
+              ? "raid_type_button raid_type_button_active"
+              : "raid_type_button raid_type_button_inactive"
+          }
           onClick={() => ChangeRaidType("ammo")}
           style={
             raid_type === "ammo"
@@ -361,7 +379,11 @@ export default function RaidCalculator() {
           }
         ></div>
         <div
-          className={"raid_type_button"}
+          className={
+            raid_type === "satchel"
+              ? "raid_type_button raid_type_button_active"
+              : "raid_type_button raid_type_button_inactive"
+          }
           onClick={() => ChangeRaidType("satchel")}
           style={
             raid_type === "satchel"
@@ -568,6 +590,12 @@ export default function RaidCalculator() {
           </div>
         </div>
       </div>
+
+      <div className="raid_reset_button" onClick={ResetRaid}>
+        <FontAwesomeIcon icon={faArrowsRotate} size="3x" style={{ color: "#a8a8a8" }} />
+      </div>
+
+      <div className="raid_reset_button_descripton">reset raid</div>
     </>
   );
 }
