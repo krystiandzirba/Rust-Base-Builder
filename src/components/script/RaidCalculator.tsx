@@ -32,12 +32,32 @@ export default function RaidCalculator() {
   const [ammo_cost, set_ammo_cost] = useState<number>(0);
   const [satchel_cost, set_satchel_cost] = useState<number>(0);
 
+  const [count_sub_ingredients, set_count_sub_ingredients] = useState(false);
+
+  const [sulfur_cost, set_sulfur_cost] = useState<number>(0);
+  const [gunpowder_cost, set_gunpowder_cost] = useState<number>(0);
+  const [charcoal_cost, set_charcoal_cost] = useState<number>(0);
+  const [metal_fragments_cost, set_metal_fragments_cost] = useState<number>(0);
+  const [metal_pipe_cost, set_metal_pipe_cost] = useState<number>(0);
+  const [lq_fuel_cost, set_lq_fuel_cost] = useState<number>(0);
+  const [cloth_cost, set_cloth_cost] = useState<number>(0);
+  const [tech_trash_cost, set_tech_trash_cost] = useState<number>(0);
+  const [hq_metal_cost, set_hq_metal_cost] = useState<number>(0);
+  const [scrap_cost, set_scrap_cost] = useState<number>(0);
+  const [animal_fat_cost, set_animal_fat_cost] = useState<number>(0);
+  const [rope_cost, set_rope_cost] = useState<number>(0);
+
   function ResetRaid() {
     dispatch(set_reset_raid_models(!reset_raid_models));
     set_rockets_cost(0);
     set_explosives_cost(0);
     set_ammo_cost(0);
     set_satchel_cost(0);
+
+    set_sulfur_cost(0);
+    set_gunpowder_cost(0);
+    set_charcoal_cost(0);
+    set_metal_fragments_cost(0);
   }
 
   function CalculateEfficiencyCost() {
@@ -289,6 +309,66 @@ export default function RaidCalculator() {
     }
   }
 
+  function CalculateSulfurCost() {
+    const sulfur_cost_rocket = rockets_cost * 1400;
+    const sulfur_cost_explosives = explosives_cost * 2200;
+    const sulfur_cost_ammo = ammo_cost * 25;
+    const sulfur_cost_satchel = satchel_cost * 480;
+
+    set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
+  }
+
+  function CalculateGunpowderCost() {
+    // const gunpowder_cost_rocket = rockets_cost * 1400;
+    // const gunpowder_cost_explosives = explosives_cost * 2200;
+    // const gunpowder_cost_ammo = ammo_cost * 25;
+    // const gunpowder_cost_satchel = satchel_cost * 480;
+    // set_gunpowder_cost(
+    //   gunpowder_cost_rocket + gunpowder_cost_explosives + gunpowder_cost_ammo + gunpowder_cost_satchel
+    // );
+  }
+
+  function CalculateCharcoalCost() {}
+
+  function CalculateMetalFragmentsCost() {
+    const metal_fragments_cost_rocket = rockets_cost * 100;
+    const metal_fragments_cost_explosives = explosives_cost * 200;
+    const metal_fragments_cost_ammo = ammo_cost * 5;
+    const metal_fragments_cost_satchel = satchel_cost * 80;
+
+    set_metal_fragments_cost(
+      metal_fragments_cost_rocket +
+        metal_fragments_cost_explosives +
+        metal_fragments_cost_ammo +
+        metal_fragments_cost_satchel
+    );
+  }
+
+  function CalculateMetalPipesCost() {
+    const metal_pipes_cost_rocket = rockets_cost * 2;
+
+    set_metal_pipe_cost(metal_pipes_cost_rocket);
+  }
+
+  function CalculateLqFuelCost() {
+    const lq_fuel_cost_rocket = rockets_cost * 30;
+    const lq_fuel_cost_explosives = explosives_cost * 60;
+
+    set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
+  }
+
+  function CalculateTechTrashCost() {
+    const tech_trash_cost_explosives = explosives_cost * 2;
+
+    set_tech_trash_cost(tech_trash_cost_explosives);
+  }
+
+  function CalculateRRopeCost() {
+    const rope_cost_satchel = satchel_cost * 1;
+
+    set_rope_cost(rope_cost_satchel);
+  }
+
   function ChangeRaidType(type: string) {
     set_raid_type(type);
   }
@@ -309,17 +389,39 @@ export default function RaidCalculator() {
     }
   }, [model_destroy_tigger]);
 
+  const HandleAdvancedResourceCountingState = () => {
+    set_count_sub_ingredients(!count_sub_ingredients);
+  };
+
+  useEffect(() => {
+    {
+      CalculateSulfurCost();
+      CalculateMetalFragmentsCost();
+      CalculateMetalPipesCost();
+      CalculateLqFuelCost();
+      CalculateTechTrashCost();
+
+      CalculateRRopeCost();
+    }
+  }, [rockets_cost, explosives_cost, ammo_cost, satchel_cost]);
+
   useEffect(() => {
     {
       set_rockets_cost(0);
       set_explosives_cost(0);
       set_ammo_cost(0);
       set_satchel_cost(0);
+
+      set_sulfur_cost(0);
+      set_gunpowder_cost(0);
+      set_charcoal_cost(0);
+      set_metal_fragments_cost(0);
     }
   }, [page_mode]);
 
   return (
     <>
+      <div className="misc_cost_checkbox checkbox_raid">raid cost (resources)</div>
       <div className="raid_type_name">raid with:</div>
 
       <div className="raid_type_description">
@@ -460,7 +562,13 @@ export default function RaidCalculator() {
       </div>
 
       <div className="main_container raid_components_cost_main_container_a">
-        <div className="cost_description">raid cost (resources)</div>
+        {/* <div className="cost_description">raid cost (resources)</div> */}
+        <div className="misc_count_description">
+          <label>
+            <input type="checkbox" checked={count_sub_ingredients} onChange={HandleAdvancedResourceCountingState} />
+            count sub ingredients
+          </label>
+        </div>
         <div className="raid_cost_container">
           <div className="sulfur_container">
             <div
@@ -474,11 +582,13 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>sulfur</div>
-                <div>0</div>
+                <div>{sulfur_cost}</div>
               </div>
             </div>
           </div>
-          <div className="gunpowder_container">
+          <div
+            className={!count_sub_ingredients ? "gunpowder_container main_container_inactive" : "gunpowder_container"}
+          >
             <div
               className="cost_cell"
               style={{
@@ -492,7 +602,7 @@ export default function RaidCalculator() {
               </div>
             </div>
           </div>
-          <div className="charcoal_container">
+          <div className={!count_sub_ingredients ? "charcoal_container main_container_inactive" : "charcoal_container"}>
             <div
               className="cost_cell"
               style={{
@@ -518,7 +628,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>metal</div>
-                <div>0</div>
+                <div>{metal_fragments_cost}</div>
               </div>
             </div>
           </div>
@@ -540,7 +650,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>metal pipe</div>
-                <div>0</div>
+                <div>{metal_pipe_cost}</div>
               </div>
             </div>
           </div>
@@ -554,11 +664,11 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>lq. fuel</div>
-                <div>0</div>
+                <div>{lq_fuel_cost}</div>
               </div>
             </div>
           </div>
-          <div className="cloth_container">
+          <div className={!count_sub_ingredients ? "cloth_container main_container_inactive" : "cloth_container"}>
             <div
               className="cost_cell"
               style={{
@@ -584,7 +694,75 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>tech trash</div>
+                <div>{tech_trash_cost}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="main_container raid_components_cost_main_container_c">
+        <div className="cost_description"></div>
+        <div className="raid_cost_container">
+          <div className={!count_sub_ingredients ? "metal_container main_container_inactive" : "metal_container"}>
+            <div
+              className="cost_cell"
+              style={{
+                //  backgroundImage: `url(${woodThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="raid_cost_display">
+                <div>hq metal</div>
                 <div>0</div>
+              </div>
+            </div>
+          </div>
+          <div className={!count_sub_ingredients ? "scrap_container main_container_inactive" : "scrap_container"}>
+            <div
+              className="cost_cell"
+              style={{
+                //  backgroundImage: `url(${metalThumbnail})`,
+                backgroundSize: "cover",
+              }}
+            >
+              <div className="raid_cost_display">
+                <div>scrap</div>
+                <div>0</div>
+              </div>
+            </div>
+          </div>
+          <div
+            className={!count_sub_ingredients ? "animal_fat_container main_container_inactive" : "animal_fat_container"}
+          >
+            <div
+              className="cost_cell"
+              style={{
+                //  backgroundImage: `url(${stoneThumbnail})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+              }}
+            >
+              <div className="raid_cost_display">
+                <div>animal fat</div>
+                <div>0</div>
+              </div>
+            </div>
+          </div>
+          <div className="rope_container">
+            <div
+              className="cost_cell"
+              style={{
+                //  backgroundImage: `url(${hq_metalThumbnail})`,
+                backgroundSize: "cover",
+              }}
+            >
+              <div className="raid_cost_display">
+                <div>rope</div>
+                <div>{rope_cost}</div>
               </div>
             </div>
           </div>

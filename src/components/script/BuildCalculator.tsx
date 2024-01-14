@@ -399,7 +399,7 @@ models.filter(
 
   return (
     <>
-      <div className="misc_cost_checkbox">build cost</div>
+      <div className="misc_cost_checkbox checkbox_edit">build cost</div>
 
       <div className="main_container build_cost_main_container">
         <div className="misc_count_description">

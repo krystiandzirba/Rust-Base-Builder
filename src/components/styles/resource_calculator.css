@@ -9,18 +9,37 @@
   height: 17.5vh;
 }
 
-.build_cost_main_container,
-.raid_tools_cost_main_container {
+.main_container_inactive {
+  background-color: rgb(105, 105, 105);
+}
+
+.build_cost_main_container {
   top: 46vh;
 }
 
-.upkeep_cost_main_container,
-.raid_components_cost_main_container_a {
+.raid_tools_cost_main_container {
+  top: 33vh;
+}
+
+.upkeep_cost_main_container {
   top: 64vh;
 }
 
-.components_cost_main_container,
+.components_cost_main_container {
+  top: 82vh;
+}
+
+.raid_components_cost_main_container_a {
+  top: 53.25vh;
+  z-index: 55;
+}
+
 .raid_components_cost_main_container_b {
+  top: 68vh;
+  z-index: 50;
+}
+
+.raid_components_cost_main_container_c {
   top: 82vh;
 }
 
@@ -38,6 +57,13 @@
   font-weight: 300;
   z-index: 40;
 }
+.checkbox_edit {
+  top: 44vh;
+}
+
+.checkbox_raid {
+  top: 51vh;
+}
 
 .misc_count_description {
   height: 15%;
@@ -47,6 +73,9 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .misc_count_description label {
@@ -101,7 +130,9 @@ input[type="checkbox"] {
 .charcoal_container,
 .metal_pipe_container,
 .cloth_container,
-.tech_trash_container {
+.tech_trash_container,
+.animal_fat_container,
+.rope_container {
   width: 25%;
   height: 62.5%;
   display: flex;
