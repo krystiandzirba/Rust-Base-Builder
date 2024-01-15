@@ -310,25 +310,55 @@ export default function RaidCalculator() {
   }
 
   function CalculateSulfurCost() {
-    const sulfur_cost_rocket = rockets_cost * 1400;
-    const sulfur_cost_explosives = explosives_cost * 2200;
-    const sulfur_cost_ammo = ammo_cost * 25;
-    const sulfur_cost_satchel = satchel_cost * 480;
+    if (!count_sub_ingredients) {
+      const sulfur_cost_rocket = rockets_cost * 1400;
+      const sulfur_cost_explosives = explosives_cost * 2200;
+      const sulfur_cost_ammo = ammo_cost * 25;
+      const sulfur_cost_satchel = satchel_cost * 480;
 
-    set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
+      set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
+    } else if (count_sub_ingredients) {
+      const sulfur_cost_rocket = rockets_cost * 100;
+      const sulfur_cost_explosives = explosives_cost * 100;
+      const sulfur_cost_ammo = ammo_cost * 5;
+      const sulfur_cost_satchel = satchel_cost * 0;
+
+      set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
+    }
   }
 
   function CalculateGunpowderCost() {
-    // const gunpowder_cost_rocket = rockets_cost * 1400;
-    // const gunpowder_cost_explosives = explosives_cost * 2200;
-    // const gunpowder_cost_ammo = ammo_cost * 25;
-    // const gunpowder_cost_satchel = satchel_cost * 480;
-    // set_gunpowder_cost(
-    //   gunpowder_cost_rocket + gunpowder_cost_explosives + gunpowder_cost_ammo + gunpowder_cost_satchel
-    // );
+    if (!count_sub_ingredients) {
+      const gunpowder_cost_explosives = explosives_cost * 0;
+      const gunpowder_cost_ammo = ammo_cost * 0;
+
+      set_gunpowder_cost(gunpowder_cost_explosives + gunpowder_cost_ammo);
+    } else if (count_sub_ingredients) {
+      const gunpowder_cost_rocket = rockets_cost * 650;
+      const gunpowder_cost_explosives = explosives_cost * 1000;
+      const gunpowder_cost_ammo = ammo_cost * 10;
+      const gunpowder_cost_satchel = satchel_cost * 240;
+      set_gunpowder_cost(
+        gunpowder_cost_rocket + gunpowder_cost_explosives + gunpowder_cost_ammo + gunpowder_cost_satchel
+      );
+    }
   }
 
-  function CalculateCharcoalCost() {}
+  function CalculateCharcoalCost() {
+    if (!count_sub_ingredients) {
+      const charcoal_cost_rocket = rockets_cost * 1950;
+      const charcoal_cost_explosives = explosives_cost * 3000;
+      const charcoal_cost_ammo = ammo_cost * 30;
+      const charcoal_cost_satchel = satchel_cost * 720;
+      set_charcoal_cost(charcoal_cost_rocket + charcoal_cost_explosives + charcoal_cost_ammo + charcoal_cost_satchel);
+    } else if (count_sub_ingredients) {
+      const charcoal_cost_rocket = rockets_cost * 1950;
+      const charcoal_cost_explosives = explosives_cost * 3000;
+      const charcoal_cost_ammo = ammo_cost * 30;
+      const charcoal_cost_satchel = satchel_cost * 720;
+      set_charcoal_cost(charcoal_cost_rocket + charcoal_cost_explosives + charcoal_cost_ammo + charcoal_cost_satchel);
+    }
+  }
 
   function CalculateMetalFragmentsCost() {
     const metal_fragments_cost_rocket = rockets_cost * 100;
@@ -345,22 +375,79 @@ export default function RaidCalculator() {
   }
 
   function CalculateMetalPipesCost() {
-    const metal_pipes_cost_rocket = rockets_cost * 2;
+    if (!count_sub_ingredients) {
+      const metal_pipes_cost_rocket = rockets_cost * 2;
 
-    set_metal_pipe_cost(metal_pipes_cost_rocket);
+      set_metal_pipe_cost(metal_pipes_cost_rocket);
+    } else if (count_sub_ingredients) {
+      const metal_pipes_cost_rocket = rockets_cost * 0;
+
+      set_metal_pipe_cost(metal_pipes_cost_rocket);
+    }
   }
 
   function CalculateLqFuelCost() {
-    const lq_fuel_cost_rocket = rockets_cost * 30;
-    const lq_fuel_cost_explosives = explosives_cost * 60;
+    if (!count_sub_ingredients) {
+      const lq_fuel_cost_rocket = rockets_cost * 30;
+      const lq_fuel_cost_explosives = explosives_cost * 60;
 
-    set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
+      set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
+    } else if (count_sub_ingredients) {
+      const lq_fuel_cost_rocket = rockets_cost * 0;
+      const lq_fuel_cost_explosives = explosives_cost * 0;
+
+      set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
+    }
+  }
+
+  function CalculateClothCost() {
+    if (!count_sub_ingredients) {
+      const cloth_cost_explosives = explosives_cost * 5;
+      const cloth_cost_satchel = satchel_cost * 10;
+
+      set_cloth_cost(cloth_cost_explosives + cloth_cost_satchel);
+    } else if (count_sub_ingredients) {
+      const cloth_cost_rocket = rockets_cost * 8;
+      const cloth_cost_explosives = explosives_cost * 20;
+      const cloth_cost_satchel = satchel_cost * 10;
+
+      set_cloth_cost(cloth_cost_rocket + cloth_cost_explosives + cloth_cost_satchel);
+    }
   }
 
   function CalculateTechTrashCost() {
     const tech_trash_cost_explosives = explosives_cost * 2;
 
     set_tech_trash_cost(tech_trash_cost_explosives);
+  }
+
+  function CalculateHqMetalCost() {
+    if (count_sub_ingredients) {
+      const hq_metal_cost_explosives = rockets_cost * 4;
+
+      set_hq_metal_cost(hq_metal_cost_explosives);
+    }
+  }
+
+  function CalculateScrapCost() {
+    if (count_sub_ingredients) {
+      const scrap_cost_rocket = rockets_cost * 40;
+
+      set_scrap_cost(scrap_cost_rocket);
+    }
+  }
+
+  function CalculateAnimalFatCost() {
+    if (count_sub_ingredients) {
+      const animal_fat_cost_rocket = rockets_cost * 24;
+      const animal_fat_cost_explosives = explosives_cost * 45;
+
+      set_animal_fat_cost(animal_fat_cost_rocket + animal_fat_cost_explosives);
+    } else if (!count_sub_ingredients) {
+      const animal_fat_cost_explosives = explosives_cost * 0;
+
+      set_animal_fat_cost(animal_fat_cost_explosives);
+    }
   }
 
   function CalculateRRopeCost() {
@@ -396,14 +483,19 @@ export default function RaidCalculator() {
   useEffect(() => {
     {
       CalculateSulfurCost();
+      CalculateGunpowderCost();
+      CalculateCharcoalCost();
       CalculateMetalFragmentsCost();
       CalculateMetalPipesCost();
       CalculateLqFuelCost();
+      CalculateClothCost();
       CalculateTechTrashCost();
-
+      CalculateHqMetalCost();
+      CalculateScrapCost();
+      CalculateAnimalFatCost();
       CalculateRRopeCost();
     }
-  }, [rockets_cost, explosives_cost, ammo_cost, satchel_cost]);
+  }, [rockets_cost, explosives_cost, ammo_cost, satchel_cost, count_sub_ingredients]);
 
   useEffect(() => {
     {
@@ -566,7 +658,7 @@ export default function RaidCalculator() {
         <div className="misc_count_description">
           <label>
             <input type="checkbox" checked={count_sub_ingredients} onChange={HandleAdvancedResourceCountingState} />
-            count sub ingredients
+            gunpowder + sub ingredients
           </label>
         </div>
         <div className="raid_cost_container">
@@ -598,11 +690,11 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>gunpowder</div>
-                <div>0</div>
+                <div>{gunpowder_cost}</div>
               </div>
             </div>
           </div>
-          <div className={!count_sub_ingredients ? "charcoal_container main_container_inactive" : "charcoal_container"}>
+          <div className="charcoal_container">
             <div
               className="cost_cell"
               style={{
@@ -614,7 +706,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>charcoal</div>
-                <div>0</div>
+                <div>{charcoal_cost}</div>
               </div>
             </div>
           </div>
@@ -668,7 +760,7 @@ export default function RaidCalculator() {
               </div>
             </div>
           </div>
-          <div className={!count_sub_ingredients ? "cloth_container main_container_inactive" : "cloth_container"}>
+          <div className="cloth_container">
             <div
               className="cost_cell"
               style={{
@@ -680,7 +772,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>cloth</div>
-                <div>0</div>
+                <div>{cloth_cost}</div>
               </div>
             </div>
           </div>
@@ -716,7 +808,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>hq metal</div>
-                <div>0</div>
+                <div>{hq_metal_cost}</div>
               </div>
             </div>
           </div>
@@ -730,7 +822,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>scrap</div>
-                <div>0</div>
+                <div>{scrap_cost}</div>
               </div>
             </div>
           </div>
@@ -748,7 +840,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>animal fat</div>
-                <div>0</div>
+                <div>{animal_fat_cost}</div>
               </div>
             </div>
           </div>

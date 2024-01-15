@@ -10,7 +10,13 @@
 }
 
 .main_container_inactive {
-  background-color: rgb(105, 105, 105);
+  background: repeating-linear-gradient(
+    45deg,
+    transparent -7.5px,
+    transparent 6px,
+    rgba(105, 105, 105, 0.3) 0px,
+    rgba(105, 105, 105, 0.3) 15px
+  );
 }
 
 .build_cost_main_container {
