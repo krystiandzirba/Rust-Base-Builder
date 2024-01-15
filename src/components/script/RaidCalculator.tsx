@@ -15,6 +15,12 @@ import ammoBwThumbnail from "../../icons/ammo_bw_thumbnail.png";
 
 import satchelRgbThumbnail from "../../icons/satchel_rgb_thumbnail.png";
 import satchelBwThumbnail from "../../icons/satchel_bw_thumbnail.png";
+
+import sulfurThumbnail from "../../icons/sulfur_thumbnail.png";
+import gunpowderThumbnail from "../../icons/gunpowder_thumbnail.png";
+import charcoalThumbnail from "../../icons/charcoal_thumbnail.png";
+import metalThumbnail from "../../icons/metal_thumbnail.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
@@ -666,7 +672,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${woodThumbnail})`,
+                backgroundImage: `url(${sulfurThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -684,7 +690,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${metalThumbnail})`,
+                backgroundImage: `url(${gunpowderThumbnail})`,
                 backgroundSize: "cover",
               }}
             >
@@ -698,7 +704,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${stoneThumbnail})`,
+                backgroundImage: `url(${charcoalThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -714,7 +720,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${hq_metalThumbnail})`,
+                backgroundImage: `url(${metalThumbnail})`,
                 backgroundSize: "cover",
               }}
             >

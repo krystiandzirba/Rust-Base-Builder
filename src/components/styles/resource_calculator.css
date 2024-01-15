@@ -1,7 +1,7 @@
 .main_container {
-  width: 20vw;
+  width: 21vw;
   position: absolute;
-  left: 79.75vw;
+  left: 78.75vw;
   z-index: 10;
   color: #bbbbbb;
   background-color: rgba(15, 16, 26, 0.4);
@@ -12,7 +12,7 @@
 .main_container_inactive {
   background: repeating-linear-gradient(
     45deg,
-    transparent -7.5px,
+    transparent -8.5px,
     transparent 6px,
     rgba(105, 105, 105, 0.3) 0px,
     rgba(105, 105, 105, 0.3) 15px
@@ -51,11 +51,11 @@
 
 .misc_cost_checkbox {
   position: absolute;
-  width: 20vw;
+  width: 21vw;
   height: 2.4vh;
   background-color: black;
   top: 44vh;
-  left: 79.75vw;
+  left: 78.75vw;
   color: #bbbbbb;
   font-size: 0.8vw;
   text-align: center;
