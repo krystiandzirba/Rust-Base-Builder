@@ -629,7 +629,7 @@ export default function RaidCalculator() {
               }}
             >
               <div className="raid_cost_display">
-                <div>explosives</div>
+                <div>C4</div>
                 <div>{explosives_cost}</div>
               </div>
             </div>
