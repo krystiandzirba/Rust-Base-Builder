@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import { set_reset_raid_models } from "../../Store.tsx";
 import { useEffect, useState } from "react";
 
+import efficiencyWhiteThumbnail from "../../icons/efficiency_white_thumbnail.png";
+import efficiencyBlackThumbnail from "../../icons/efficiency_black_thumbnail.png";
+
 import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
 import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
 
@@ -538,6 +541,11 @@ export default function RaidCalculator() {
               : "raid_type_button raid_type_button_inactive"
           }
           onClick={() => ChangeRaidType("efficiency")}
+          style={
+            raid_type === "efficiency"
+              ? { backgroundImage: `url(${efficiencyBlackThumbnail})`, backgroundSize: "cover" }
+              : { backgroundImage: `url(${efficiencyWhiteThumbnail})`, backgroundSize: "cover" }
+          }
         ></div>
         <div
           className={
