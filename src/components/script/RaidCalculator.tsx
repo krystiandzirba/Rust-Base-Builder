@@ -23,6 +23,10 @@ import sulfurThumbnail from "../../icons/sulfur_thumbnail.png";
 import gunpowderThumbnail from "../../icons/gunpowder_thumbnail.png";
 import charcoalThumbnail from "../../icons/charcoal_thumbnail.png";
 import metalThumbnail from "../../icons/metal_thumbnail.png";
+import metalPipeThumbnail from "../../icons/metal_pipe_thumbnail.png";
+import lqFuelThumbnail from "../../icons/lq_fuel_thumbnail.png";
+import clothThumbnail from "../../icons/cloth_thumbnail.png";
+import techTrashThumbnail from "../../icons/tech_trash_thumbnail.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
@@ -748,7 +752,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${woodThumbnail})`,
+                backgroundImage: `url(${metalPipeThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -764,7 +768,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${metalThumbnail})`,
+                backgroundImage: `url(${lqFuelThumbnail})`,
                 backgroundSize: "cover",
               }}
             >
@@ -778,7 +782,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${stoneThumbnail})`,
+                backgroundImage: `url(${clothThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -794,7 +798,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${hq_metalThumbnail})`,
+                backgroundImage: `url(${techTrashThumbnail})`,
                 backgroundSize: "cover",
               }}
             >

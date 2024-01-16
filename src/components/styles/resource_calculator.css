@@ -17,6 +17,7 @@
     rgba(105, 105, 105, 0.3) 0px,
     rgba(105, 105, 105, 0.3) 15px
   );
+  z-index: 50;
 }
 
 .build_cost_main_container {
@@ -139,6 +140,7 @@ input[type="checkbox"] {
 .tech_trash_container,
 .animal_fat_container,
 .rope_container {
+  z-index: 40;
   width: 25%;
   height: 62.5%;
   display: flex;
