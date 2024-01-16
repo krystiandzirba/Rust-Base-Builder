@@ -27,6 +27,10 @@ import metalPipeThumbnail from "../../icons/metal_pipe_thumbnail.png";
 import lqFuelThumbnail from "../../icons/lq_fuel_thumbnail.png";
 import clothThumbnail from "../../icons/cloth_thumbnail.png";
 import techTrashThumbnail from "../../icons/tech_trash_thumbnail.png";
+import hqMetalThumbnail from "../../icons/hq_metal_thumbnail.png";
+import scrapThumbnail from "../../icons/scrap_thumbnail.png";
+import animalFatThumbnail from "../../icons/animal_fat_thumbnail.png";
+import ropeThumbnail from "../../icons/rope_thumbnail.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
@@ -818,7 +822,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${woodThumbnail})`,
+                backgroundImage: `url(${hqMetalThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -834,7 +838,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${metalThumbnail})`,
+                backgroundImage: `url(${scrapThumbnail})`,
                 backgroundSize: "cover",
               }}
             >
@@ -850,7 +854,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${stoneThumbnail})`,
+                backgroundImage: `url(${animalFatThumbnail})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center center",
@@ -866,7 +870,7 @@ export default function RaidCalculator() {
             <div
               className="cost_cell"
               style={{
-                //  backgroundImage: `url(${hq_metalThumbnail})`,
+                backgroundImage: `url(${ropeThumbnail})`,
                 backgroundSize: "cover",
               }}
             >
