@@ -78,9 +78,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const ModelMaterialColor = () => {
     if (enable_model_material) {
       if (page_mode === "edit") {
-        return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb";
+        return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#7d3823";
       } else if (page_mode === "raid") {
-        return model_hover ? "red" : "#bbbbbb";
+        return model_hover ? "red" : "#7d3823";
       }
     }
   };

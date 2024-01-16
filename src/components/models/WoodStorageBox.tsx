@@ -65,11 +65,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   const ModelMaterialColor = () => {
     if (enable_model_material) {
-      return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#bbbbbb";
+      return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#9c754f";
     } else if (model_selected) {
       return "#f5b784";
     } else if (!model_selected) {
-      return "#bbbbbb";
+      return "#9c754f";
     }
   };
 
