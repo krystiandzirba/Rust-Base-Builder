@@ -1,3 +1,5 @@
+/* BOTH */
+
 .main_container {
   width: 21vw;
   position: absolute;
@@ -17,37 +19,6 @@
     rgba(105, 105, 105, 0.3) 0px,
     rgba(105, 105, 105, 0.3) 15px
   );
-  z-index: 50;
-}
-
-.build_cost_main_container {
-  top: 46vh;
-}
-
-.raid_tools_cost_main_container {
-  top: 33vh;
-}
-
-.upkeep_cost_main_container {
-  top: 64vh;
-}
-
-.components_cost_main_container {
-  top: 82vh;
-}
-
-.raid_components_cost_main_container_a {
-  top: 53.25vh;
-  z-index: 55;
-}
-
-.raid_components_cost_main_container_b {
-  top: 68vh;
-  z-index: 50;
-}
-
-.raid_components_cost_main_container_c {
-  top: 82vh;
 }
 
 .misc_cost_checkbox {
@@ -68,15 +39,11 @@
   top: 44vh;
 }
 
-.checkbox_raid {
-  top: 51vh;
-}
-
 .misc_count_description {
   height: 15%;
   background-color: black;
   color: #bbbbbb;
-  font-size: 0.7vw;
+  font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
@@ -142,12 +109,19 @@ input[type="checkbox"] {
 .rope_container {
   z-index: 40;
   width: 25%;
-  height: 62.5%;
+  height: 63%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 6vh;
   border: black 1px solid;
+}
+
+.gunpowder_container,
+.hq_metal_container,
+.scrap_container,
+.animal_fat_container {
+  z-index: 1;
 }
 
 .cost_cell {
@@ -158,6 +132,7 @@ input[type="checkbox"] {
   font-size: 0.8vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  z-index: 10;
 }
 
 .build_cost_display,
@@ -176,4 +151,148 @@ input[type="checkbox"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+/* BUILD */
+
+.build_cost_main_container {
+  top: 46vh;
+}
+
+.upkeep_cost_main_container {
+  top: 64vh;
+}
+
+.components_cost_main_container {
+  top: 82vh;
+}
+
+/* RAID */
+
+.raid_tools_cost_main_container {
+  top: 31.75vh;
+}
+
+.raid_components_cost_main_container_a {
+  top: 52vh;
+  z-index: 55;
+}
+
+.raid_components_cost_main_container_b {
+  top: 67vh;
+  z-index: 50;
+}
+
+.raid_components_cost_main_container_c {
+  top: 82vh;
+}
+
+.checkbox_raid {
+  top: 49.75vh;
+}
+
+.raid_type_name {
+  position: absolute;
+  position: absolute;
+  width: 30vw;
+  height: 2.5vh;
+  top: 81.5vh;
+  left: 35vw;
+  z-index: 40;
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.9vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.raid_type_description {
+  position: absolute;
+  position: absolute;
+  width: 30vw;
+  height: 2.5vh;
+  top: 96.5vh;
+  left: 35vw;
+  z-index: 40;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.raid_type_description_cell {
+  text-align: center;
+  width: 20%;
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.raid_type_main_container {
+  position: absolute;
+  width: 30vw;
+  height: 11.5vh;
+  top: 84vh;
+  left: 35vw;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  z-index: 40;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.raid_type_button {
+  height: 107.5%;
+  width: 20%;
+  background-color: rgba(0, 128, 0, 0);
+  border: 1px black solid;
+}
+
+.raid_type_button_active {
+  background-color: rgb(201, 201, 201);
+}
+
+.raid_type_button_inactive {
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.raid_reset_button {
+  position: absolute;
+  width: 3vw;
+  height: 5vh;
+  background-color: rgba(0, 0, 0, 0);
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  z-index: 40;
+  top: 91.5vh;
+  left: 70.5vw;
+}
+
+.raid_reset_button_descripton {
+  position: absolute;
+  width: 5vw;
+  height: 5vh;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  color: #bbbbbb;
+  text-align: center;
+  z-index: 40;
+  top: 97vh;
+  left: 69.5vw;
 }

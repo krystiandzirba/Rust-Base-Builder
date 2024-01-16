@@ -18,7 +18,6 @@ import "./components/styles/version.css";
 import "./components/styles/camera_switch.css";
 import "./components/styles/canvas_container.css";
 import "./components/styles/resource_calculator.css";
-import "./components/styles/raid_calculator.css";
 import "./components/styles/object_list.css";
 import "./components/styles/controls_input.css";
 import "./components/styles/hints.css";
@@ -59,7 +58,6 @@ function App() {
 export default App;
 
 // object copy: "C"
-// raid cost
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
 // adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
