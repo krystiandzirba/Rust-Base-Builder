@@ -63,6 +63,7 @@ import { Model as GarageDoor } from "../models/GarageDoor.tsx";
 import { Model as WoodStorageBox } from "../models/WoodStorageBox.tsx";
 import { Model as LargeWoodBox } from "../models/LargeWoodBox.tsx";
 import { Model as ToolCupboard } from "../models/ToolCupboard.tsx";
+import { Model as Furnace } from "../models/Furnace.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import CanvasLights from "./CanvasLights.tsx";
@@ -313,206 +314,135 @@ export default function CanvasContainer() {
       if (model_type_to_create === "StoneFoundationSquareHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareHigh, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFoundationSquareMid") {
+      } else if (model_type_to_create === "StoneFoundationSquareMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareMid, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFoundationSquareLow") {
+      } else if (model_type_to_create === "StoneFoundationSquareLow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationSquareLow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFoundationTriangleHigh") {
+      } else if (model_type_to_create === "StoneFoundationTriangleHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationTriangleHigh, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFoundationTriangleMid") {
+      } else if (model_type_to_create === "StoneFoundationTriangleMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationTriangleMid, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFoundationTriangleLow") {
+      } else if (model_type_to_create === "StoneFoundationTriangleLow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFoundationTriangleLow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneWallHigh") {
+      } else if (model_type_to_create === "StoneWallHigh") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallHigh, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneWallMid") {
+      } else if (model_type_to_create === "StoneWallMid") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallMid, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneWallLow") {
+      } else if (model_type_to_create === "StoneWallLow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallLow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneDoorway") {
+      } else if (model_type_to_create === "StoneDoorway") {
         set_generated_id(randomIdGenerator());
         addModel(StoneDoorway, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneWallFrame") {
+      } else if (model_type_to_create === "StoneWallFrame") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWallFrame, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneWindow") {
+      } else if (model_type_to_create === "StoneWindow") {
         set_generated_id(randomIdGenerator());
         addModel(StoneWindow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneStairsLShape") {
+      } else if (model_type_to_create === "StoneStairsLShape") {
         set_generated_id(randomIdGenerator());
         addModel(StoneStairsLShape, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneStairsUShape") {
+      } else if (model_type_to_create === "StoneStairsUShape") {
         set_generated_id(randomIdGenerator());
         addModel(StoneStairsUShape, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFloorSquare") {
+      } else if (model_type_to_create === "StoneFloorSquare") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFloorSquare, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFloorTriangle") {
+      } else if (model_type_to_create === "StoneFloorTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFloorTriangle, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFloorFrameSquare") {
+      } else if (model_type_to_create === "StoneFloorFrameSquare") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFloorFrameSquare, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "StoneFloorFrameTriangle") {
+      } else if (model_type_to_create === "StoneFloorFrameTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFloorFrameTriangle, generated_id, default_object_rotation);
       }
 
       // metal
-
-      if (model_type_to_create === "MetalFoundationSquareHigh") {
+      else if (model_type_to_create === "MetalFoundationSquareHigh") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationSquareHigh, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFoundationSquareMid") {
+      } else if (model_type_to_create === "MetalFoundationSquareMid") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationSquareMid, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFoundationSquareLow") {
+      } else if (model_type_to_create === "MetalFoundationSquareLow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationSquareLow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFoundationTriangleHigh") {
+      } else if (model_type_to_create === "MetalFoundationTriangleHigh") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationTriangleHigh, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFoundationTriangleMid") {
+      } else if (model_type_to_create === "MetalFoundationTriangleMid") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationTriangleMid, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFoundationTriangleLow") {
+      } else if (model_type_to_create === "MetalFoundationTriangleLow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFoundationTriangleLow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalWallHigh") {
+      } else if (model_type_to_create === "MetalWallHigh") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWallHigh, generated_id, default_object_rotation);
-      }
-      if (model_type_to_create === "MetalWallMid") {
+      } else if (model_type_to_create === "MetalWallMid") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWallMid, generated_id, default_object_rotation);
-      }
-      if (model_type_to_create === "MetalWallLow") {
+      } else if (model_type_to_create === "MetalWallLow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWallLow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalDoorway") {
+      } else if (model_type_to_create === "MetalDoorway") {
         set_generated_id(randomIdGenerator());
         addModel(MetalDoorway, generated_id, default_object_rotation);
-      }
-      if (model_type_to_create === "MetalWallFrame") {
+      } else if (model_type_to_create === "MetalWallFrame") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWallFrame, generated_id, default_object_rotation);
-      }
-      if (model_type_to_create === "MetalWindow") {
+      } else if (model_type_to_create === "MetalWindow") {
         set_generated_id(randomIdGenerator());
         addModel(MetalWindow, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalStairsLShape") {
+      } else if (model_type_to_create === "MetalStairsLShape") {
         set_generated_id(randomIdGenerator());
         addModel(MetalStairsLShape, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalStairsUShape") {
+      } else if (model_type_to_create === "MetalStairsUShape") {
         set_generated_id(randomIdGenerator());
         addModel(MetalStairsUShape, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFloorSquare") {
+      } else if (model_type_to_create === "MetalFloorSquare") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFloorSquare, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFloorTriangle") {
+      } else if (model_type_to_create === "MetalFloorTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFloorTriangle, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFloorFrameSquare") {
+      } else if (model_type_to_create === "MetalFloorFrameSquare") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFloorFrameSquare, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalFloorFrameTriangle") {
+      } else if (model_type_to_create === "MetalFloorFrameTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFloorFrameTriangle, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "MetalDoor") {
+      } else if (model_type_to_create === "MetalDoor") {
         set_generated_id(randomIdGenerator());
         addModel(MetalDoor, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "GarageDoor") {
+      } else if (model_type_to_create === "GarageDoor") {
         set_generated_id(randomIdGenerator());
         addModel(GarageDoor, generated_id, default_object_rotation);
       }
 
       //miscs
-
-      if (model_type_to_create === "ToolCupboard") {
+      else if (model_type_to_create === "ToolCupboard") {
         set_generated_id(randomIdGenerator());
         addModel(ToolCupboard, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "WoodStorageBox") {
+      } else if (model_type_to_create === "WoodStorageBox") {
         set_generated_id(randomIdGenerator());
         addModel(WoodStorageBox, generated_id, default_object_rotation);
-      }
-
-      if (model_type_to_create === "LargeWoodBox") {
+      } else if (model_type_to_create === "LargeWoodBox") {
         set_generated_id(randomIdGenerator());
         addModel(LargeWoodBox, generated_id, default_object_rotation);
+      } else if (model_type_to_create === "Furnace") {
+        set_generated_id(randomIdGenerator());
+        addModel(Furnace, generated_id, default_object_rotation);
       }
     }
   }

@@ -47,6 +47,7 @@ import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbn
 import toolCupboardThumbnail from "../../object_list_thumbnails/tool_cupboard_thumbnail.png";
 import woodStorageBoxThumbnail from "../../object_list_thumbnails/wood_storage_box_thumbnail.png";
 import largeWoodBoxThumbnail from "../../object_list_thumbnails/large_wood_box_thumbnail.png";
+import furnaceThumbnail from "../../object_list_thumbnails/furnace_thumbnail.png";
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -654,6 +655,15 @@ export default function ObjectList() {
       keywords: ["large", "wood", "box", "large wood", "large box", "wood box"],
       onClick: () => {
         dispatch(set_model_type_to_create("LargeWoodBox"));
+      },
+    },
+
+    {
+      name: "furnace",
+      thumbnail: furnaceThumbnail,
+      keywords: ["furnace"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("Furnace"));
       },
     },
   ];
