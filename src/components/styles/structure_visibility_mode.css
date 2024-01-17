@@ -12,12 +12,16 @@
   text-align: center;
 }
 
+.structure_visibility_container_description_overview {
+  top: 88vh;
+}
+
 .structure_visibility_container_description_edit {
-  top: 30vh;
+  top: 32vh;
 }
 
 .structure_visibility_container_description_raid {
-  top: 17.5vh;
+  top: 19.75vh;
 }
 
 .structure_visibility_container {
@@ -32,20 +36,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 0.5vh;
+  padding-top: 0.25vh;
   padding-bottom: 1.25vh;
 }
 
+.structure_visibility_container_overview {
+  top: 90.5vh;
+}
+
 .structure_visibility_container_edit {
-  top: 32.5vh;
+  top: 34.5vh;
 }
 
 .structure_visibility_container_raid {
-  top: 20vh;
+  top: 22.25vh;
 }
 
 .visibility_switch_row {
-  margin-top: 0.5vh;
+  margin-top: 1vh;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -59,7 +67,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.85vw;
+  font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   color: #bbbbbb;
@@ -72,7 +80,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.85vw;
+  font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   color: #bbbbbb;

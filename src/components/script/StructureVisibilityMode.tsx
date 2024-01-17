@@ -29,18 +29,22 @@ export default function StructureVisibilityMode() {
     <>
       <div
         className={
-          page_mode === "raid"
-            ? "structure_visibility_container_description structure_visibility_container_description_raid"
-            : "structure_visibility_container_description structure_visibility_container_description_edit"
+          page_mode === "overview"
+            ? "structure_visibility_container_description structure_visibility_container_description_overview"
+            : page_mode === "edit"
+            ? "structure_visibility_container_description structure_visibility_container_description_edit"
+            : "structure_visibility_container_description structure_visibility_container_description_raid"
         }
       >
         Objects visibility
       </div>
       <div
         className={
-          page_mode === "raid"
-            ? "structure_visibility_container structure_visibility_container_raid"
-            : "structure_visibility_container structure_visibility_container_edit"
+          page_mode === "overview"
+            ? "structure_visibility_container structure_visibility_container_overview"
+            : page_mode === "edit"
+            ? "structure_visibility_container structure_visibility_container_edit"
+            : "structure_visibility_container structure_visibility_container_raid"
         }
       >
         <div className="visibility_switch_row">
