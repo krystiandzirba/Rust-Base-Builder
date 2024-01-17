@@ -40,55 +40,44 @@ export default function ResourceCounter() {
     let wood_misc_wood_storage_box_count = models.filter((model) => model === "WoodStorageBox").length;
     let wood_misc_furnace_count = models.filter((model) => model === "Furnace").length;
 
-    // let metal_misc_large_wood_box_count = models.filter((model) => model === "LargeWoodBox").length; //counted in the wood section already
-
-    let total_wood_misc_count =
+    set_total_misc_count(
       wood_misc_tool_cupboard_count +
-      wood_misc_large_wood_box_count +
-      wood_misc_wood_storage_box_count +
-      wood_misc_furnace_count;
+        wood_misc_large_wood_box_count +
+        wood_misc_wood_storage_box_count +
+        wood_misc_furnace_count
+    );
 
     // - - - - - - - - - - - wood - - - - - - - - - -
 
-    let wood_misc_cost_1000 = models.filter((model) => model === "ToolCupboard").length * 1000;
+    let wood_misc_cost_1000 = wood_misc_tool_cupboard_count * 1000;
 
-    let wood_misc_cost_250 = models.filter((model) => model === "LargeWoodBox").length * 250;
+    let wood_misc_cost_250 = wood_misc_large_wood_box_count * 250;
 
-    let wood_misc_cost_100 = models.filter((model) => model === "WoodStorageBox" || model === "Furnace").length * 100;
+    let wood_misc_cost_100 = (wood_misc_large_wood_box_count + wood_misc_furnace_count) * 100;
 
     set_total_wood_misc_cost(wood_misc_cost_1000 + wood_misc_cost_250 + wood_misc_cost_100);
 
     // - - - - - - - - - - - stone - - - - - - - - - -
 
-    let stone_furnace_cost_200 = models.filter((model) => model === "Furnace").length * 200;
-    set_total_stone_misc_cost(stone_furnace_cost_200);
+    let stone_misc_cost_200 = wood_misc_furnace_count * 200;
+    set_total_stone_misc_cost(stone_misc_cost_200);
 
     // - - - - - - - - - - - metal - - - - - - - - - -
 
-    let metal_misc_cost_50 = models.filter((model) => model === "LargeWoodBox").length * 50;
-
+    let metal_misc_cost_50 = wood_misc_large_wood_box_count * 50;
     set_total_metal_misc_cost(metal_misc_cost_50);
-
-    let total_metal_misc_count = 0;
 
     // - - - - - - - - - - - gear - - - - - - - - - -
 
     let gear_misc_cost_2 = models.filter((model) => model === "GarageDoor").length * 2;
-    // let gear_misc_garage_door_count = models.filter((model) => model === "GarageDoor").length;
-
     let total_gear_misc_cost = gear_misc_cost_2;
-
-    let total_gear_misc_count = 0;
 
     // - - - - - - - - - - - lq fuel - - - - - - - - - -
 
     let lq_fuel_misc_cost_50 = models.filter((model) => model === "Furnace").length * 50;
-
     let total_lq_fuel_misc_cost = lq_fuel_misc_cost_50;
 
     // - - - - - - - - - - - display - - - - - - - - - -
-
-    set_total_misc_count(total_wood_misc_count);
 
     set_components_cost([
       { scrap: 0 },
@@ -310,7 +299,7 @@ models.filter(
     if (count_miscs_cost) {
       set_build_cost([
         { wood: total_wood_build_cost + total_wood_misc_cost },
-        { stone: total_stone_build_cost },
+        { stone: total_stone_build_cost + total_stone_misc_cost },
         { metal: total_metal_build_cost + total_metal_misc_cost },
         { armored: total_hqm_build_cost },
       ]);
@@ -393,7 +382,9 @@ models.filter(
       set_wood_upkeep_cost(build_cost[0].wood * total_upkeep_percentile_rampup);
     }
 
-    if (build_cost && build_cost[1] && build_cost[1].stone !== undefined) {
+    if (build_cost && build_cost[1] && build_cost[1].stone !== undefined && count_miscs_cost) {
+      set_stone_upkeep_cost((build_cost[1].stone - total_stone_misc_cost) * total_upkeep_percentile_rampup);
+    } else if (build_cost && build_cost[1] && build_cost[1].stone !== undefined) {
       set_stone_upkeep_cost(build_cost[1].stone * total_upkeep_percentile_rampup);
     }
 
