@@ -136,7 +136,7 @@
   height: 5vh;
   position: absolute;
   z-index: 55;
-  left: 56.5%;
+  left: 57%;
   top: 90%;
   background-color: transparent;
   font-size: 0.7vw;
@@ -163,7 +163,7 @@
   height: 100%;
   color: rgb(0, 0, 0);
   border: none;
-  font-size: 0.8vw;
+  font-size: 0.9vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
 }

@@ -69,6 +69,8 @@ import CanvasGrids from "./CanvasGrids.tsx";
 import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface CanvasModelsListProps {
   models: ModelType[];
@@ -151,6 +153,7 @@ export default function CanvasContainer() {
   const default_object_rotation = new THREE.Euler(0, 0, 0);
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
+  const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
   const [default_model_hight_position, set_default_model_hight_position] = useState<number>(0);
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
@@ -301,7 +304,7 @@ export default function CanvasContainer() {
         setModelsTransforms((prevTransforms) => ({
           ...prevTransforms,
           [generated_id]: {
-            position: { x: rounded_x, z: rounded_z, y: default_model_hight_position },
+            position: { x: rounded_x, z: rounded_z, y: default_model_hight_position + model_foundation_elevation },
             rotation: new THREE.Euler(0, 0, 0),
           },
         }));
@@ -769,9 +772,9 @@ export default function CanvasContainer() {
         "MetalFoundationTriangleLow",
       ].includes(model_type_to_create)
     ) {
-      set_default_model_hight_position(0);
+      set_model_foundation_elevation(0);
     } else {
-      set_default_model_hight_position(0.05);
+      set_model_foundation_elevation(0.05);
     }
   }, [model_type_to_create]);
 
@@ -800,8 +803,27 @@ export default function CanvasContainer() {
     }
   };
 
+  function ChangeModelElevationValue(value: number) {
+    set_default_model_hight_position(default_model_hight_position + value);
+  }
+
   return (
     <>
+      {page_mode === "edit" && (
+        <>
+          <div className="object_elevation_container_description">building height:</div>
+          <div className="object_elevation_container">
+            <div className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
+              <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "rgb(201, 201, 201)" }} />
+            </div>
+            <div className="elevation_input_field">{default_model_hight_position / 2}</div>
+
+            <div className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+2)}>
+              <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "rgb(201, 201, 201)" }} />
+            </div>
+          </div>
+        </>
+      )}
       <div className="canvas_container">
         <Canvas
           onPointerDown={(event) => CanvasPointerDown(event)}
@@ -890,7 +912,10 @@ export default function CanvasContainer() {
             );
           })}
           {model_creation_state && page_mode === "edit" && (
-            <Box position={[mouse_canvas_x_coordinate, 0, mouse_canvas_z_coordinate]} scale={[2, 0.01, 2]}>
+            <Box
+              position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+              scale={[2, 0.01, 2]}
+            >
               <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
             </Box>
           )}
