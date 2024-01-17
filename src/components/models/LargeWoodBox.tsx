@@ -58,13 +58,13 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   }
 
   const ModelMaterialOpacity = () => {
-    if (enable_model_material) {
+    if (!model_creation_state && enable_model_material) {
       return model_selected ? 1 : model_hover ? 0.6 : 1;
     } else return 1;
   };
 
   const ModelMaterialColor = () => {
-    if (enable_model_material) {
+    if (!model_creation_state && enable_model_material) {
       return model_selected ? "#f5b784" : model_hover ? "#ffdaba" : "#9c754f";
     } else if (model_selected) {
       return "#f5b784";
