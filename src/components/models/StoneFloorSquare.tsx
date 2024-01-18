@@ -40,7 +40,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const [model_destroyed, set_model_destroyed] = useState<boolean>(false);
 
   function ModelOnClick() {
-    if (page_mode === "edit") {
+    if (page_mode === "edit" && !model_creation_state) {
       dispatch(set_model_pivot_axis("XYZ"));
       set_model_selected(true);
     } else if (page_mode === "raid") {
