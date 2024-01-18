@@ -51,7 +51,7 @@
   position: absolute;
   width: 11vw;
   height: 3vh;
-  left: 26.15vw;
+  left: 32.65vw;
   top: 90vh;
   z-index: 40;
   color: #bbbbbb;
@@ -64,7 +64,7 @@
 .object_elevation_container {
   position: absolute;
   top: 92.5vh;
-  left: 27.5vw;
+  left: 34vw;
   width: 8vw;
   height: 4vh;
   z-index: 45;
@@ -79,6 +79,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
 }
 
 .elevation_button_left {
@@ -108,4 +109,61 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.pivot_controls_container_description {
+  position: absolute;
+  left: 24vw;
+  width: 8vw;
+  height: 2vh;
+  top: 90vh;
+  z-index: 45;
+  color: #bbbbbb;
+  font-size: 0.65vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+.pivot_controls_container {
+  position: absolute;
+  left: 24vw;
+  width: 8vw;
+  height: 4vh;
+  top: 92.5vh;
+  background-color: transparent;
+  z-index: 40;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pivot_controls_button {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 0.9vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  background-color: rgba(120, 120, 120, 0.5);
+}
+
+.pivot_controls_button_active {
+  background-color: #bbbbbb;
+}
+
+.pivot_controls_button_enabled {
+  background-color: #ffd5b3;
+}
+
+.pivot_controls_left {
+  border-radius: 1vh 0 0 1vh;
+}
+
+.pivot_controls_right {
+  border-radius: 0 1vh 1vh 0;
 }

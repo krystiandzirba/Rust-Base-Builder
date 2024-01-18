@@ -6,7 +6,6 @@ import { GLTF } from "three-stdlib";
 import { useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
-import { set_model_pivot_axis } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -34,7 +33,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   function ModelOnClick() {
     if (page_mode === "edit" && !model_creation_state) {
-      dispatch(set_model_pivot_axis("XYZ"));
       set_model_selected(true);
     }
   }

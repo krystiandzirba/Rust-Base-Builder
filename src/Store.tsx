@@ -115,8 +115,6 @@ const controlsInputSlice = createSlice({
 const modelsDataSlice = createSlice({
   name: "models data",
   initialState: {
-    model_pivot_axis: null,
-
     model_type_to_create: "",
     model_creation_state: false,
 
@@ -140,10 +138,6 @@ const modelsDataSlice = createSlice({
     reset_raid_models: false,
   },
   reducers: {
-    set_model_pivot_axis: (state, action) => {
-      return { ...state, model_pivot_axis: action.payload };
-    },
-
     set_model_type_to_create: (state, action) => {
       return { ...state, model_type_to_create: action.payload };
     },
@@ -217,8 +211,6 @@ const pageSettingsSlice = createSlice({
     active_models_state: false,
     camera_fov: 90,
 
-    pivot_controls_state: false,
-
     enable_model_textures: true,
     enable_model_material: true,
     bloom_state: true,
@@ -258,10 +250,6 @@ const pageSettingsSlice = createSlice({
     },
     set_camera_fov: (state, action) => {
       return { ...state, camera_fov: action.payload };
-    },
-
-    set_pivot_controls_state: (state, action) => {
-      return { ...state, pivot_controls_state: action.payload };
     },
 
     set_bloom_state: (state, action) => {
@@ -312,7 +300,6 @@ export const {
   set_delete_object_trigger,
 } = controlsInputSlice.actions;
 export const {
-  set_model_pivot_axis,
   set_model_type_to_create,
   set_model_creation_state,
   set_object_selected,
@@ -344,8 +331,6 @@ export const {
   set_performance_monitor_state,
   set_active_models_state,
   set_camera_fov,
-
-  set_pivot_controls_state,
 
   set_bloom_state,
   set_better_lighting_state,

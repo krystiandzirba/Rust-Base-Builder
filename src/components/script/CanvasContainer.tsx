@@ -72,7 +72,7 @@ import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
 
 interface CanvasModelsListProps {
   models: ModelType[];
@@ -104,7 +104,6 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 export default function CanvasContainer() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const model_pivot_axis = useSelector((state: RootState) => state.modelsData.model_pivot_axis);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
   const camera_3d_reset = useSelector((state: RootState) => state.camerasSettings.camera_3d_reset);
@@ -127,7 +126,6 @@ export default function CanvasContainer() {
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
-  const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
 
   const [camera_rotation, set_camera_rotation] = useState(true);
@@ -155,6 +153,11 @@ export default function CanvasContainer() {
   const [default_model_hight_position, set_default_model_hight_position] = useState<number>(0);
 
   const [model_prop, set_model_prop] = useState<string>("none");
+
+  const [pivot_controls_state, set_pivot_controls_state] = useState<boolean>(false);
+  const [pivot_x_axis_state, set_pivot_x_axis_state] = useState<boolean>(false);
+  const [pivot_y_axis_state, set_pivot_y_axis_state] = useState<boolean>(false);
+  const [pivot_z_axis_state, set_pivot_z_axis_state] = useState<boolean>(false);
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -864,20 +867,95 @@ export default function CanvasContainer() {
     set_default_model_hight_position(default_model_hight_position + value);
   }
 
+  function HandlePivotStateSwitch() {
+    set_pivot_controls_state(!pivot_controls_state);
+  }
+
+  function HandlePivotXAxisStateSwitch() {
+    if (pivot_controls_state) {
+      set_pivot_x_axis_state(!pivot_x_axis_state);
+    }
+  }
+
+  function HandlePivotYAxisStateSwitch() {
+    if (pivot_controls_state) {
+      set_pivot_y_axis_state(!pivot_y_axis_state);
+    }
+  }
+
+  function HandlePivotZAxisStateSwitch() {
+    if (pivot_controls_state) {
+      set_pivot_z_axis_state(!pivot_z_axis_state);
+    }
+  }
+
   return (
     <>
       {page_mode === "edit" && (
         <>
+          <div className="pivot_controls_container_description">
+            pivot controls {pivot_controls_state ? "(enabled)" : "(disabled)"}
+          </div>
+          <div className="pivot_controls_container">
+            <div className="pivot_controls_button pivot_controls_left" onClick={HandlePivotStateSwitch}>
+              <FontAwesomeIcon
+                icon={faUpDownLeftRight}
+                size="xl"
+                style={{ color: !pivot_controls_state ? "#bbbbbb" : "#ffd5b3" }}
+              />
+            </div>
+            <button
+              className={
+                !pivot_controls_state
+                  ? "pivot_controls_button"
+                  : pivot_x_axis_state
+                  ? "pivot_controls_button pivot_controls_button_enabled"
+                  : "pivot_controls_button pivot_controls_button_active"
+              }
+              onClick={HandlePivotXAxisStateSwitch}
+            >
+              X
+            </button>
+            <button
+              className={
+                !pivot_controls_state
+                  ? "pivot_controls_button"
+                  : pivot_y_axis_state
+                  ? "pivot_controls_button pivot_controls_button_enabled"
+                  : "pivot_controls_button pivot_controls_button_active"
+              }
+              onClick={HandlePivotYAxisStateSwitch}
+            >
+              Y
+            </button>
+            <button
+              className={
+                !pivot_controls_state
+                  ? "pivot_controls_button pivot_controls_right"
+                  : pivot_z_axis_state
+                  ? "pivot_controls_button pivot_controls_button_enabled pivot_controls_right"
+                  : "pivot_controls_button pivot_controls_button_active pivot_controls_right"
+              }
+              onClick={HandlePivotZAxisStateSwitch}
+            >
+              Z
+            </button>
+          </div>
+        </>
+      )}
+
+      {page_mode === "edit" && (
+        <>
           <div className="object_elevation_container_description">building height:</div>
           <div className="object_elevation_container">
-            <div className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
+            <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
               <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "black" }} />
-            </div>
+            </button>
             <div className="elevation_input_field">{default_model_hight_position / 2}</div>
 
-            <div className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+2)}>
+            <button className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+2)}>
               <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
-            </div>
+            </button>
           </div>
         </>
       )}
@@ -942,13 +1020,12 @@ export default function CanvasContainer() {
             return (
               <PivotControls
                 offset={[modelTransform.position.x, modelTransform.position.y, modelTransform.position.z]}
-                rotation={modelTransform.rotation.toArray().map(Number) as [number, number, number]}
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
-                scale={selected_model_id === id && pivot_controls_state ? 3 : 0}
+                scale={selected_model_id === id && pivot_controls_state && pivot_controls_state ? 3 : 0}
                 lineWidth={0}
                 depthTest={false}
-                activeAxes={model_pivot_axis === "XYZ" ? [true, true, true] : [true, false, true]}
+                activeAxes={[pivot_x_axis_state, pivot_y_axis_state, pivot_z_axis_state]}
                 axisColors={["orange", "yellow", "orange"]}
                 onDragStart={() => PivotDragStart(id)}
                 onDragEnd={() => PivotDragEnd()}

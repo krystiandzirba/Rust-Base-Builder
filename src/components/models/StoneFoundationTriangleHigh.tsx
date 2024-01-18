@@ -6,12 +6,7 @@ import { GLTF } from "three-stdlib";
 import { useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
-import {
-  set_model_pivot_axis,
-  set_model_to_destroy,
-  set_model_destroy_trigger,
-  set_reset_raid_models,
-} from "../../Store.tsx";
+import { set_model_to_destroy, set_model_destroy_trigger, set_reset_raid_models } from "../../Store.tsx";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -41,7 +36,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   function ModelOnClick() {
     if (page_mode === "edit" && !model_creation_state) {
-      dispatch(set_model_pivot_axis("XZ"));
       set_model_selected(true);
     } else if (page_mode === "raid") {
       set_model_selected(true);

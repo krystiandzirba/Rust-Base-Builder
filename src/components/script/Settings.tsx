@@ -24,7 +24,6 @@ import {
   set_performance_monitor_state,
   set_active_models_state,
   set_camera_fov,
-  set_pivot_controls_state,
   set_enable_model_textures,
   set_enable_model_material,
   set_bloom_state,
@@ -49,7 +48,6 @@ const Settings = () => {
   const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
-  const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
 
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const better_lighting_state = useSelector((state: RootState) => state.pageSettings.better_lighting_state); //prettier-ignore
@@ -176,14 +174,6 @@ const Settings = () => {
       dispatch(set_active_models_state(true));
     } else if (!toggle) {
       dispatch(set_active_models_state(false));
-    }
-  }
-
-  function HandlePivotControlsSwitch(toggle: boolean) {
-    if (toggle) {
-      dispatch(set_pivot_controls_state(true));
-    } else if (!toggle) {
-      dispatch(set_pivot_controls_state(false));
     }
   }
 
@@ -481,32 +471,6 @@ const Settings = () => {
               }
             >
               {active_models_state ? "disable" : "disabled"}
-            </div>
-          </div>
-        </div>
-
-        <div className="settings_element">
-          <div className="settings_element_description">model pivot controls:</div>
-          <div className="settings_element_buttons_container">
-            <div
-              onClick={() => HandlePivotControlsSwitch(true)}
-              className={
-                pivot_controls_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-              }
-            >
-              {!pivot_controls_state ? "enable" : "enabled"}
-            </div>
-            <div
-              onClick={() => HandlePivotControlsSwitch(false)}
-              className={
-                !pivot_controls_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-              }
-            >
-              {pivot_controls_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>
