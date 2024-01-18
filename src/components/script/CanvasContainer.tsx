@@ -20,6 +20,8 @@ import {
   set_camera_3d_direction,
 } from "../../Store.tsx";
 
+import { Model as TriangleProp } from "../models/TriangleProp.tsx";
+
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareLow } from "../models/StoneFoundationSquareLow.tsx";
@@ -120,16 +122,12 @@ export default function CanvasContainer() {
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
-
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected); //prettier-ignore
-
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const pivot_controls_state = useSelector((state: RootState) => state.pageSettings.pivot_controls_state); //prettier-ignore
-
-  const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
 
   const [camera_rotation, set_camera_rotation] = useState(true);
@@ -155,6 +153,8 @@ export default function CanvasContainer() {
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
   const [default_model_hight_position, set_default_model_hight_position] = useState<number>(0);
+
+  const [model_prop, set_model_prop] = useState<string>("none");
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -778,6 +778,62 @@ export default function CanvasContainer() {
     }
   }, [model_type_to_create]);
 
+  useEffect(() => {
+    if (
+      model_type_to_create === "StoneFoundationSquareHigh" ||
+      model_type_to_create === "StoneFoundationSquareMid" ||
+      model_type_to_create === "StoneFoundationSquareLow" ||
+      model_type_to_create === "MetalFoundationSquareHigh" ||
+      model_type_to_create === "MetalFoundationSquareMid" ||
+      model_type_to_create === "MetalFoundationSquareLow" ||
+      model_type_to_create === "StoneFloorSquare" ||
+      model_type_to_create === "StoneFloorFrameSquare" ||
+      model_type_to_create === "MetalFloorSquare" ||
+      model_type_to_create === "MetalFloorFrameSquare" ||
+      model_type_to_create === "StoneStairsLShape" ||
+      model_type_to_create === "StoneStairsUShape" ||
+      model_type_to_create === "MetalStairsLShape" ||
+      model_type_to_create === "MetalStairsUShape"
+    ) {
+      set_model_prop("square_foundation_prop");
+    } else if (
+      model_type_to_create === "StoneFoundationTriangleHigh" ||
+      model_type_to_create === "StoneFoundationTriangleMid" ||
+      model_type_to_create === "StoneFoundationTriangleLow" ||
+      model_type_to_create === "MetalFoundationTriangleHigh" ||
+      model_type_to_create === "MetalFoundationTriangleMid" ||
+      model_type_to_create === "MetalFoundationTriangleLow" ||
+      model_type_to_create === "StoneFloorTriangle" ||
+      model_type_to_create === "StoneFloorFrameTriangle" ||
+      model_type_to_create === "MetalFloorTriangle" ||
+      model_type_to_create === "MetalFloorFrameTriangle"
+    ) {
+      set_model_prop("triangle_foundation_prop");
+    } else if (
+      model_type_to_create === "StoneWallHigh" ||
+      model_type_to_create === "StoneWallMid" ||
+      model_type_to_create === "StoneWallLow" ||
+      model_type_to_create === "StoneDoorway" ||
+      model_type_to_create === "StoneWindow" ||
+      model_type_to_create === "MetalWallHigh" ||
+      model_type_to_create === "MetalWallMid" ||
+      model_type_to_create === "MetalWallLow" ||
+      model_type_to_create === "MetalDoorway" ||
+      model_type_to_create === "MetalWindow" ||
+      model_type_to_create === "StoneWallFrame" ||
+      model_type_to_create === "MetalWallFrame" ||
+      model_type_to_create === "GarageDoor"
+    ) {
+      set_model_prop("wall_prop");
+    } else if (model_type_to_create === "MetalDoor") {
+      set_model_prop("door_prop");
+    } else if (model_type_to_create === "ToolCupboard" || model_type_to_create === "Furnace") {
+      set_model_prop("tool_cupboard_prop");
+    } else if (model_type_to_create === "WoodStorageBox" || model_type_to_create === "LargeWoodBox") {
+      set_model_prop("storage_prop");
+    }
+  }, [model_type_to_create]);
+
   const Camera3DDirection = () => {
     if (perspectiveCameraControlsRef.current) {
       const { camera } = perspectiveCameraControlsRef.current;
@@ -814,12 +870,12 @@ export default function CanvasContainer() {
           <div className="object_elevation_container_description">building height:</div>
           <div className="object_elevation_container">
             <div className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
-              <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "rgb(201, 201, 201)" }} />
+              <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "black" }} />
             </div>
             <div className="elevation_input_field">{default_model_hight_position / 2}</div>
 
             <div className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+2)}>
-              <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "rgb(201, 201, 201)" }} />
+              <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
             </div>
           </div>
         </>
@@ -875,6 +931,7 @@ export default function CanvasContainer() {
           <Box ref={raycasterBoxIntersector} scale={[100, 0.1, 100]} position={[0, -0.5, 0]}>
             <meshStandardMaterial transparent opacity={0} />
           </Box>
+
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
             const modelTransform = modelsTransforms[id] || {
@@ -911,13 +968,46 @@ export default function CanvasContainer() {
               </PivotControls>
             );
           })}
-          {model_creation_state && page_mode === "edit" && (
-            <Box
-              position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
-              scale={[2, 0.01, 2]}
-            >
-              <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
-            </Box>
+          {page_mode === "edit" && model_creation_state && (
+            <>
+              {model_prop === "square_foundation_prop" && (
+                <Box
+                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                  scale={[2, 0.01, 2]}
+                >
+                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                </Box>
+              )}
+              {model_prop === "triangle_foundation_prop" && (
+                <TriangleProp
+                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                ></TriangleProp>
+              )}
+              {model_prop === "wall_prop" && (
+                <Box
+                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                  scale={[2, 0.01, 0.1]}
+                >
+                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                </Box>
+              )}
+              {model_prop === "storage_prop" && (
+                <Box
+                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                  scale={[0.75, 0.01, 1.25]}
+                >
+                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                </Box>
+              )}
+              {model_prop === "tool_cupboard_prop" && (
+                <Box
+                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                  scale={[0.75, 0.01, 0.75]}
+                >
+                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                </Box>
+              )}
+            </>
           )}
           {!performance_mode && <Postprocessing />}
           {HDR_state && <Environment files="./hdr/HDR2k.hdr" background blur={0} />}

@@ -60,8 +60,6 @@ export default App;
 // object copy: "C"
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
-// adjust the pivot controls according to ortographic camera (eg. front: move only up-down/side (walls) left-right(foundation), disable the common pivot and camera axis)
-// if possible change the model name from (high-mid-low) foundations of every type without the height prefix, ex. "StoneFoundationSquare" (later)
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
 // add multiple models of same type on mouse drag on canvas (like painting)
