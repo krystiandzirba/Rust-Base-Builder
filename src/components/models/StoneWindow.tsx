@@ -15,7 +15,7 @@ import {
 
 type GLTFResult = GLTF & {
   nodes: {
-    Cube001: THREE.Mesh;
+    Cube002: THREE.Mesh;
   };
   materials: {
     ["Material.012"]: THREE.MeshStandardMaterial;
@@ -111,7 +111,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           {enable_model_textures && !model_hover && (page_mode === "overview" || page_mode === "raid") ? (
             <mesh
               key="textured"
-              geometry={nodes.Cube001.geometry}
+              geometry={nodes.Cube002.geometry}
               material={materials["Material.012"]}
               onClick={() => ModelOnClick()}
               onPointerOver={(e) => {
@@ -123,7 +123,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           ) : (
             <mesh
               key="not-textured"
-              geometry={nodes.Cube001.geometry}
+              geometry={nodes.Cube002.geometry}
               onClick={() => ModelOnClick()}
               onPointerOver={(e) => {
                 e.stopPropagation(), ModelOnPointerOver();
