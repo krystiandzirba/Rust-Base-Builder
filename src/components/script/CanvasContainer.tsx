@@ -547,194 +547,195 @@ export default function CanvasContainer() {
   }, [models]);
 
   useEffect(() => {
-    {
+    if (page_mode === "edit" && !model_creation_state) {
+      {
+        if (keyboard_input === "W") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectX(+1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectX(-1);
+          } else if (
+            camera_2d_direction === "front" ||
+            camera_2d_direction === "left" ||
+            camera_2d_direction === "right" ||
+            camera_2d_direction === "back"
+          ) {
+            moveSelectedObjectY(+1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectZ(-1);
+          }
+        } else if (keyboard_input === "A") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectX(-1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectX(+1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_2d_direction === "left") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_2d_direction === "right") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_2d_direction === "front") {
+            moveSelectedObjectX(-1);
+          } else if (camera_2d_direction === "back") {
+            moveSelectedObjectX(+1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectX(-1);
+          }
+        } else if (keyboard_input === "S") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectX(-1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectX(+1);
+          } else if (
+            camera_2d_direction === "front" ||
+            camera_2d_direction === "left" ||
+            camera_2d_direction === "right" ||
+            camera_2d_direction === "back"
+          ) {
+            moveSelectedObjectY(-1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectZ(+1);
+          }
+        } else if (keyboard_input === "D") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectX(+1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectX(-1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_2d_direction === "left") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_2d_direction === "right") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_2d_direction === "front") {
+            moveSelectedObjectX(+1);
+          } else if (camera_2d_direction === "back") {
+            moveSelectedObjectX(-1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectX(+1);
+          }
+        } else if (keyboard_input === "Q") {
+          RotateSelectedObject(selected_model_id, "left");
+        } else if (keyboard_input === "E") {
+          RotateSelectedObject(selected_model_id, "right");
+        } else if (keyboard_input === "SPACE") {
+          moveSelectedObjectY(+1);
+        } else if (keyboard_input === "CTRL") {
+          moveSelectedObjectY(-1);
+        }
+      }
+    } else if (page_mode === "edit" && model_creation_state) {
       if (keyboard_input === "Q") {
         RotateSelectedObject(selected_model_id, "left");
-      }
-      if (keyboard_input === "E") {
+      } else if (keyboard_input === "E") {
         RotateSelectedObject(selected_model_id, "right");
-      }
-      if (keyboard_input === "W") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectX(+1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectX(-1);
-        } else if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
-          moveSelectedObjectY(+1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(-1);
-        }
-      }
-      if (keyboard_input === "A") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectX(-1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectX(+1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_2d_direction === "front") {
-          moveSelectedObjectX(-1);
-        } else if (camera_2d_direction === "back") {
-          moveSelectedObjectX(+1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectX(-1);
-        }
-      }
-      if (keyboard_input === "S") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectX(-1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectX(+1);
-        } else if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
-          moveSelectedObjectY(-1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(+1);
-        }
-      }
-      if (keyboard_input === "D") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectX(+1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectX(-1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_2d_direction === "front") {
-          moveSelectedObjectX(+1);
-        } else if (camera_2d_direction === "back") {
-          moveSelectedObjectX(-1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectX(+1);
-        }
-      }
-
-      if (keyboard_input === "SPACE") {
-        moveSelectedObjectY(+1);
-      }
-
-      if (keyboard_input === "CTRL") {
-        moveSelectedObjectY(-1);
       }
     }
   }, [key_press_trigger]);
 
   useEffect(() => {
-    {
-      if (button_input === "move_left") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectX(-1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectX(+1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_2d_direction === "front") {
-          moveSelectedObjectX(-1);
-        } else if (camera_2d_direction === "back") {
-          moveSelectedObjectX(+1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectX(-1);
-        }
-      } else if (button_input === "move_front") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectX(+1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectX(-1);
-        } else if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
+    if (page_mode === "edit" && !model_creation_state) {
+      {
+        if (button_input === "move_left") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectX(-1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectX(+1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_2d_direction === "left") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_2d_direction === "right") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_2d_direction === "front") {
+            moveSelectedObjectX(-1);
+          } else if (camera_2d_direction === "back") {
+            moveSelectedObjectX(+1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectX(-1);
+          }
+        } else if (button_input === "move_front") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectX(+1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectX(-1);
+          } else if (
+            camera_2d_direction === "front" ||
+            camera_2d_direction === "left" ||
+            camera_2d_direction === "right" ||
+            camera_2d_direction === "back"
+          ) {
+            moveSelectedObjectY(+1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectZ(-1);
+          }
+        } else if (button_input === "move_right") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectX(+1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectX(-1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_2d_direction === "left") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_2d_direction === "right") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_2d_direction === "front") {
+            moveSelectedObjectX(+1);
+          } else if (camera_2d_direction === "back") {
+            moveSelectedObjectX(-1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectX(+1);
+          }
+        } else if (button_input === "move_back") {
+          if (camera_3d_direction === "north") {
+            moveSelectedObjectZ(+1);
+          } else if (camera_3d_direction === "south") {
+            moveSelectedObjectZ(-1);
+          } else if (camera_3d_direction === "east") {
+            moveSelectedObjectX(-1);
+          } else if (camera_3d_direction === "west") {
+            moveSelectedObjectX(+1);
+          } else if (
+            camera_2d_direction === "front" ||
+            camera_2d_direction === "left" ||
+            camera_2d_direction === "right" ||
+            camera_2d_direction === "back"
+          ) {
+            moveSelectedObjectY(-1);
+          } else if (camera_2d_direction === "top") {
+            moveSelectedObjectZ(+1);
+          }
+        } else if (button_input === "move_up") {
           moveSelectedObjectY(+1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(-1);
-        }
-      } else if (button_input === "move_right") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectX(+1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectX(-1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_2d_direction === "left") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_2d_direction === "right") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_2d_direction === "front") {
-          moveSelectedObjectX(+1);
-        } else if (camera_2d_direction === "back") {
-          moveSelectedObjectX(-1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectX(+1);
-        }
-      } else if (button_input === "move_back") {
-        if (camera_3d_direction === "north") {
-          moveSelectedObjectZ(+1);
-        } else if (camera_3d_direction === "south") {
-          moveSelectedObjectZ(-1);
-        } else if (camera_3d_direction === "east") {
-          moveSelectedObjectX(-1);
-        } else if (camera_3d_direction === "west") {
-          moveSelectedObjectX(+1);
-        } else if (
-          camera_2d_direction === "front" ||
-          camera_2d_direction === "left" ||
-          camera_2d_direction === "right" ||
-          camera_2d_direction === "back"
-        ) {
+        } else if (button_input === "move_down") {
           moveSelectedObjectY(-1);
-        } else if (camera_2d_direction === "top") {
-          moveSelectedObjectZ(+1);
+        } else if (button_input === "rotate_left") {
+          RotateSelectedObject(selected_model_id, "left");
+        } else if (button_input === "rotate_right") {
+          RotateSelectedObject(selected_model_id, "right");
         }
-      } else if (button_input === "move_up") {
-        moveSelectedObjectY(+1);
-      } else if (button_input === "move_down") {
-        moveSelectedObjectY(-1);
-      } else if (button_input === "rotate_left") {
-        RotateSelectedObject(selected_model_id, "left");
-      } else if (button_input === "rotate_right") {
-        RotateSelectedObject(selected_model_id, "right");
       }
     }
   }, [button_trigger]);
@@ -975,7 +976,11 @@ export default function CanvasContainer() {
                   position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
                   scale={[2, 0.01, 2]}
                 >
-                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                  <meshStandardMaterial
+                    color={"rgb(255, 206, 166)"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={5}
+                  />
                 </Box>
               )}
               {model_prop === "triangle_foundation_prop" && (
@@ -988,7 +993,27 @@ export default function CanvasContainer() {
                   position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
                   scale={[2, 0.01, 0.1]}
                 >
-                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                  <meshStandardMaterial
+                    transparent
+                    opacity={1}
+                    color={"rgb(255, 206, 166)"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={5}
+                  />
+                </Box>
+              )}
+              {model_prop === "door_prop" && (
+                <Box
+                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                  scale={[1, 0.01, 0.1]}
+                >
+                  <meshStandardMaterial
+                    transparent
+                    opacity={1}
+                    color={"rgb(255, 206, 166)"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={5}
+                  />
                 </Box>
               )}
               {model_prop === "storage_prop" && (
@@ -996,7 +1021,13 @@ export default function CanvasContainer() {
                   position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
                   scale={[0.75, 0.01, 1.25]}
                 >
-                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                  <meshStandardMaterial
+                    transparent
+                    opacity={1}
+                    color={"rgb(255, 206, 166)"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={5}
+                  />
                 </Box>
               )}
               {model_prop === "tool_cupboard_prop" && (
@@ -1004,7 +1035,13 @@ export default function CanvasContainer() {
                   position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
                   scale={[0.75, 0.01, 0.75]}
                 >
-                  <meshStandardMaterial transparent opacity={1} color={"rgb(255, 206, 166)"} />
+                  <meshStandardMaterial
+                    transparent
+                    opacity={1}
+                    color={"rgb(255, 206, 166)"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={5}
+                  />
                 </Box>
               )}
             </>

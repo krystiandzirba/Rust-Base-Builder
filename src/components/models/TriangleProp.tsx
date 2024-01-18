@@ -17,7 +17,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   return (
     <group {...props}>
       <mesh geometry={nodes.Circle001.geometry}>
-        <meshStandardMaterial color={"rgb(255, 206, 166)"} />
+        <meshStandardMaterial color={"rgb(255, 206, 166)"} emissive={"rgb(255, 206, 166)"} emissiveIntensity={5} />
       </mesh>
     </group>
   );

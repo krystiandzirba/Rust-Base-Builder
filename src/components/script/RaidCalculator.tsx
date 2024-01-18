@@ -332,14 +332,12 @@ export default function RaidCalculator() {
       const sulfur_cost_explosives = explosives_cost * 2200;
       const sulfur_cost_ammo = ammo_cost * 25;
       const sulfur_cost_satchel = satchel_cost * 480;
-
       set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
     } else if (count_sub_ingredients) {
       const sulfur_cost_rocket = rockets_cost * 100;
       const sulfur_cost_explosives = explosives_cost * 100;
       const sulfur_cost_ammo = ammo_cost * 5;
       const sulfur_cost_satchel = satchel_cost * 0;
-
       set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
     }
   }
@@ -382,7 +380,6 @@ export default function RaidCalculator() {
     const metal_fragments_cost_explosives = explosives_cost * 200;
     const metal_fragments_cost_ammo = ammo_cost * 5;
     const metal_fragments_cost_satchel = satchel_cost * 80;
-
     set_metal_fragments_cost(
       metal_fragments_cost_rocket +
         metal_fragments_cost_explosives +
@@ -394,11 +391,9 @@ export default function RaidCalculator() {
   function CalculateMetalPipesCost() {
     if (!count_sub_ingredients) {
       const metal_pipes_cost_rocket = rockets_cost * 2;
-
       set_metal_pipe_cost(metal_pipes_cost_rocket);
     } else if (count_sub_ingredients) {
       const metal_pipes_cost_rocket = rockets_cost * 0;
-
       set_metal_pipe_cost(metal_pipes_cost_rocket);
     }
   }
@@ -407,12 +402,10 @@ export default function RaidCalculator() {
     if (!count_sub_ingredients) {
       const lq_fuel_cost_rocket = rockets_cost * 30;
       const lq_fuel_cost_explosives = explosives_cost * 60;
-
       set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
     } else if (count_sub_ingredients) {
       const lq_fuel_cost_rocket = rockets_cost * 0;
       const lq_fuel_cost_explosives = explosives_cost * 0;
-
       set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
     }
   }
@@ -421,27 +414,23 @@ export default function RaidCalculator() {
     if (!count_sub_ingredients) {
       const cloth_cost_explosives = explosives_cost * 5;
       const cloth_cost_satchel = satchel_cost * 10;
-
       set_cloth_cost(cloth_cost_explosives + cloth_cost_satchel);
     } else if (count_sub_ingredients) {
       const cloth_cost_rocket = rockets_cost * 8;
       const cloth_cost_explosives = explosives_cost * 20;
       const cloth_cost_satchel = satchel_cost * 10;
-
       set_cloth_cost(cloth_cost_rocket + cloth_cost_explosives + cloth_cost_satchel);
     }
   }
 
   function CalculateTechTrashCost() {
     const tech_trash_cost_explosives = explosives_cost * 2;
-
     set_tech_trash_cost(tech_trash_cost_explosives);
   }
 
   function CalculateHqMetalCost() {
     if (count_sub_ingredients) {
       const hq_metal_cost_explosives = rockets_cost * 4;
-
       set_hq_metal_cost(hq_metal_cost_explosives);
     }
   }
@@ -449,7 +438,6 @@ export default function RaidCalculator() {
   function CalculateScrapCost() {
     if (count_sub_ingredients) {
       const scrap_cost_rocket = rockets_cost * 40;
-
       set_scrap_cost(scrap_cost_rocket);
     }
   }
@@ -458,18 +446,15 @@ export default function RaidCalculator() {
     if (count_sub_ingredients) {
       const animal_fat_cost_rocket = rockets_cost * 24;
       const animal_fat_cost_explosives = explosives_cost * 45;
-
       set_animal_fat_cost(animal_fat_cost_rocket + animal_fat_cost_explosives);
     } else if (!count_sub_ingredients) {
       const animal_fat_cost_explosives = explosives_cost * 0;
-
       set_animal_fat_cost(animal_fat_cost_explosives);
     }
   }
 
   function CalculateRRopeCost() {
     const rope_cost_satchel = satchel_cost * 1;
-
     set_rope_cost(rope_cost_satchel);
   }
 
