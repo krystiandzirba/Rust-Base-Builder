@@ -21,6 +21,7 @@ import {
 } from "../../Store.tsx";
 
 import { Model as TriangleProp } from "../models/TriangleProp.tsx";
+import { Model as ArrowProp } from "../models/ArrowProp.tsx";
 
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
@@ -158,6 +159,8 @@ export default function CanvasContainer() {
   const [pivot_x_axis_state, set_pivot_x_axis_state] = useState<boolean>(false);
   const [pivot_y_axis_state, set_pivot_y_axis_state] = useState<boolean>(false);
   const [pivot_z_axis_state, set_pivot_z_axis_state] = useState<boolean>(false);
+
+  const [default_model_rotation, set_default_model_rotation] = useState<number>(0);
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -308,7 +311,7 @@ export default function CanvasContainer() {
           ...prevTransforms,
           [generated_id]: {
             position: { x: rounded_x, z: rounded_z, y: default_model_hight_position + model_foundation_elevation },
-            rotation: new THREE.Euler(0, 0, 0),
+            rotation: new THREE.Euler(0, default_model_rotation, 0, "XYZ"),
           },
         }));
       }
@@ -642,8 +645,10 @@ export default function CanvasContainer() {
       }
     } else if (page_mode === "edit" && model_creation_state) {
       if (keyboard_input === "Q") {
+        ChangeDefaultModelRotationLeft();
         RotateSelectedObject(selected_model_id, "left");
       } else if (keyboard_input === "E") {
+        ChangeDefaultModelRotationRight();
         RotateSelectedObject(selected_model_id, "right");
       }
     }
@@ -889,6 +894,16 @@ export default function CanvasContainer() {
     }
   }
 
+  function ChangeDefaultModelRotationRight() {
+    const newRotation = (default_model_rotation - Math.PI / 2 + 2 * Math.PI) % (Math.PI * 2);
+    set_default_model_rotation(newRotation);
+  }
+
+  function ChangeDefaultModelRotationLeft() {
+    const newRotation = (default_model_rotation + Math.PI / 2) % (Math.PI * 2);
+    set_default_model_rotation(newRotation);
+  }
+
   return (
     <>
       {page_mode === "edit" && (
@@ -1066,33 +1081,48 @@ export default function CanvasContainer() {
                 ></TriangleProp>
               )}
               {model_prop === "wall_prop" && (
-                <Box
-                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
-                  scale={[2, 0.01, 0.1]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"rgb(255, 206, 166)"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={5}
-                  />
-                </Box>
+                <>
+                  <Box
+                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    rotation={[0, default_model_rotation, 0]}
+                    scale={[2, 0.01, 0.1]}
+                  >
+                    <meshStandardMaterial
+                      transparent
+                      opacity={1}
+                      color={"rgb(255, 206, 166)"}
+                      emissive={"rgb(255, 206, 166)"}
+                      emissiveIntensity={5}
+                    />
+                  </Box>
+                  <ArrowProp
+                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    rotation={[0, default_model_rotation, 0]}
+                  ></ArrowProp>
+                </>
               )}
               {model_prop === "door_prop" && (
-                <Box
-                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
-                  scale={[1, 0.01, 0.1]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"rgb(255, 206, 166)"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={5}
-                  />
-                </Box>
+                <>
+                  <Box
+                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    rotation={[0, default_model_rotation, 0]}
+                    scale={[1, 0.01, 0.1]}
+                  >
+                    <meshStandardMaterial
+                      transparent
+                      opacity={1}
+                      color={"rgb(255, 206, 166)"}
+                      emissive={"rgb(255, 206, 166)"}
+                      emissiveIntensity={5}
+                    />
+                  </Box>
+                  <ArrowProp
+                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    rotation={[0, default_model_rotation, 0]}
+                  ></ArrowProp>
+                </>
               )}
+
               {model_prop === "storage_prop" && (
                 <Box
                   position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}

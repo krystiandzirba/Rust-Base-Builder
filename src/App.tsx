@@ -62,17 +62,14 @@ export default App;
 // add object list filters (walls / foundations / stairs / roofs / miscs )
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
-// add multiple models of same type on mouse drag on canvas (like painting)
 // add placing sound
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
 // settings: dark-light mode
 // add 1st person walking in overview and raid mode
 
-//errors?
-// - rotate the model pivot together with the model itself
-// performance fix: disable mesh-mouse input (on miss / on click) outside the edit mode
-// previously selected objects remain selected in creation mode
+// errors
+// -
 
 ///// make a bledner 1:0 button on-off instead of toolbar hide-display icon
 // if performance issue = canvas lighting + postprocessing + click events
