@@ -51,11 +51,11 @@
   position: absolute;
   width: 11vw;
   height: 3vh;
-  left: 32.65vw;
-  top: 90vh;
+  left: 21.5vw;
+  top: 72vh;
   z-index: 40;
   color: #bbbbbb;
-  font-size: 0.65vw;
+  font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
@@ -63,13 +63,14 @@
 
 .object_elevation_container {
   position: absolute;
-  top: 92.5vh;
-  left: 34vw;
+  top: 75vh;
+  left: 23vw;
   width: 8vw;
   height: 4vh;
   z-index: 45;
   display: flex;
   flex-direction: row;
+  backdrop-filter: blur(2px);
 }
 
 .elevation_button {
@@ -113,13 +114,13 @@ input::-webkit-inner-spin-button {
 
 .pivot_controls_container_description {
   position: absolute;
-  left: 24vw;
-  width: 8vw;
+  left: 22.75vw;
+  width: 9vw;
   height: 2vh;
-  top: 90vh;
+  top: 82vh;
   z-index: 45;
   color: #bbbbbb;
-  font-size: 0.65vw;
+  font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
@@ -127,15 +128,16 @@ input::-webkit-inner-spin-button {
 
 .pivot_controls_container {
   position: absolute;
-  left: 24vw;
+  left: 23vw;
   width: 8vw;
   height: 4vh;
-  top: 92.5vh;
+  top: 84.5vh;
   background-color: transparent;
   z-index: 40;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  backdrop-filter: blur(2px);
 }
 
 .pivot_controls_button {

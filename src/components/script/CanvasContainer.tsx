@@ -954,7 +954,7 @@ export default function CanvasContainer() {
 
       {page_mode === "edit" && (
         <>
-          <div className="object_elevation_container_description">building height:</div>
+          <div className="object_elevation_container_description">build on height level:</div>
           <div className="object_elevation_container">
             <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
               <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "black" }} />

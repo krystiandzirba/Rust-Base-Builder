@@ -70,7 +70,7 @@
 
 .indicator_right {
   left: 57%;
-  top: 86%;
+  top: 85.75%;
 }
 
 .indicator_bottom {
@@ -80,7 +80,7 @@
 
 .indicator_left {
   left: 40%;
-  top: 86%;
+  top: 85.75%;
 }
 
 .object_move_button:hover,
@@ -123,12 +123,12 @@
 
 .object_move_up_button {
   left: 43.5%;
-  top: 78%;
+  top: 77%;
 }
 
 .object_move_down_button {
   left: 43.5%;
-  top: 91%;
+  top: 92%;
 }
 
 .distance_unit_description {
@@ -136,8 +136,8 @@
   height: 5vh;
   position: absolute;
   z-index: 55;
-  left: 57%;
-  top: 90%;
+  left: 23.25vw;
+  top: 91.5vh;
   background-color: transparent;
   font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
@@ -146,20 +146,21 @@
 }
 
 .change_distance_unit_container {
-  width: 12vw;
+  width: 11vw;
   height: 4vh;
   position: absolute;
   z-index: 55;
-  left: 55%;
-  top: 92.5%;
+  left: 23vw;
+  top: 94vh;
   background-color: transparent;
   border: none;
   display: flex;
   flex-direction: row;
+  backdrop-filter: blur(2px);
 }
 
 .object_movement_multiplier {
-  width: 30%;
+  width: 34%;
   height: 100%;
   color: rgb(0, 0, 0);
   border: none;

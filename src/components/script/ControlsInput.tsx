@@ -196,7 +196,10 @@ export default function ControlsInput() {
       {page_mode === "edit" && (
         <>
           {camera_type === "camera_3d" && (
-            <div className="camera_direction_indicator indicator_top">
+            <div
+              className="camera_direction_indicator indicator_top"
+              style={{ color: camera_3d_direction === "north" ? "#ffd5b3" : "#bbbbbb" }}
+            >
               {camera_3d_direction === "north"
                 ? "N"
                 : camera_3d_direction === "east"
@@ -216,7 +219,10 @@ export default function ControlsInput() {
             />
           </button>
           {camera_type === "camera_3d" && (
-            <div className="camera_direction_indicator indicator_right">
+            <div
+              className="camera_direction_indicator indicator_right"
+              style={{ color: camera_3d_direction === "west" ? "#ffd5b3" : "#bbbbbb" }}
+            >
               {camera_3d_direction === "north"
                 ? "E"
                 : camera_3d_direction === "east"
@@ -236,7 +242,10 @@ export default function ControlsInput() {
             />
           </button>
           {camera_type === "camera_3d" && (
-            <div className="camera_direction_indicator indicator_bottom">
+            <div
+              className="camera_direction_indicator indicator_bottom"
+              style={{ color: camera_3d_direction === "south" ? "#ffd5b3" : "#bbbbbb" }}
+            >
               {camera_3d_direction === "north"
                 ? "S"
                 : camera_3d_direction === "east"
@@ -256,7 +265,10 @@ export default function ControlsInput() {
             />
           </button>
           {camera_type === "camera_3d" && (
-            <div className="camera_direction_indicator indicator_left">
+            <div
+              className="camera_direction_indicator indicator_left"
+              style={{ color: camera_3d_direction === "east" ? "#ffd5b3" : "#bbbbbb" }}
+            >
               {camera_3d_direction === "north"
                 ? "W"
                 : camera_3d_direction === "east"
