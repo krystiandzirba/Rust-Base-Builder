@@ -122,45 +122,39 @@ export default function CanvasContainer() {
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
-  const object_selected = useSelector((state: RootState) => state.modelsData.object_selected); //prettier-ignore
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
 
-  const [camera_rotation, set_camera_rotation] = useState(true);
-  const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
-  const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
-
-  const perspectiveCameraControlsRef = useRef<CameraControls>(null);
-  const raycasterBoxIntersector = useRef(null);
-
-  const raycaster = new THREE.Raycaster();
-  const mouse_window_click = new THREE.Vector2();
-
   const [models, setModels] = useState<ModelType[]>([]);
-  const [model_hover_id, set_model_hover_id] = useState<string>("empty");
+  const [modelsTransforms, setModelsTransforms] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
-
-  const [modelsTransforms, setModelsTransforms] = useState<{
-    [id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler };
-  }>({});
-
-  const default_object_rotation = new THREE.Euler(0, 0, 0);
-
-  const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
-  const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
-  const [default_model_height_position, set_default_model_height_position] = useState<number>(0);
-
   const [model_prop, set_model_prop] = useState<string>("none");
 
+  const default_object_rotation = new THREE.Euler(0, 0, 0);
+  const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
+  const [default_model_height_position, set_default_model_height_position] = useState<number>(0);
   const [pivot_controls_state, set_pivot_controls_state] = useState<boolean>(false);
   const [pivot_x_axis_state, set_pivot_x_axis_state] = useState<boolean>(false);
   const [pivot_y_axis_state, set_pivot_y_axis_state] = useState<boolean>(false);
   const [pivot_z_axis_state, set_pivot_z_axis_state] = useState<boolean>(false);
-
   const [default_model_rotation, set_default_model_rotation] = useState<number>(0);
+
+  const mouse_window_click = new THREE.Vector2();
+  const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
+  const [mouse_canvas_z_coordinate, set_mouse_canvas_z_coordinate] = useState<number>(0);
+
+  const [camera_rotation, set_camera_rotation] = useState(true);
+  const perspectiveCameraControlsRef = useRef<CameraControls>(null);
+  const ortographicCameraControlsRef = useRef<CameraControls>(null);
+  const raycasterBoxIntersector = useRef(null);
+  const raycaster = new THREE.Raycaster();
+
+  const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
+  let canvas_mouse_over_last_execution_time = 0;
+  let canvas_mouse_drag_last_execution_time = 0;
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -208,22 +202,6 @@ export default function CanvasContainer() {
       dispatch(set_object_selected(false));
     }
   }
-
-  const MeshPointerOver = (selected_object_id: string) => {
-    if (page_mode === "edit" && !model_creation_state) {
-      set_model_hover_id(selected_object_id);
-      dispatch(set_cursor_type("pointer"));
-    }
-  };
-
-  const MeshPointerOut = (selected_object_id: string) => {
-    if (page_mode === "edit" && !model_creation_state) {
-      set_model_hover_id(selected_object_id);
-      if (cursor_type === "pointer") {
-        dispatch(set_cursor_type("default"));
-      }
-    }
-  };
 
   function MeshOnClick(selected_object_id: string) {
     if (page_mode === "edit" && !model_creation_state) {
@@ -273,7 +251,17 @@ export default function CanvasContainer() {
   }
 
   function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
+    const currentTimestamp = Date.now();
+    const time_since_last_execution = currentTimestamp - canvas_mouse_over_last_execution_time;
+
+    if (
+      page_mode === "edit" &&
+      camera_type === "camera_3d" &&
+      model_creation_state &&
+      time_since_last_execution >= 30
+    ) {
+      canvas_mouse_over_last_execution_time = currentTimestamp;
+
       mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -289,7 +277,7 @@ export default function CanvasContainer() {
         set_mouse_canvas_x_coordinate(rounded_x);
         set_mouse_canvas_z_coordinate(rounded_z);
       }
-    }
+    } else return;
   }
 
   function CanvasMouseClickIntersectionCoordinates(event: { clientX: number; clientY: number }) {
@@ -457,7 +445,12 @@ export default function CanvasContainer() {
   }
 
   function CaptureMouseCanvasDrag(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    if (event.buttons === 1) {
+    const currentTimestamp = Date.now();
+    const time_since_last_execution = currentTimestamp - canvas_mouse_drag_last_execution_time;
+
+    canvas_mouse_drag_last_execution_time = currentTimestamp;
+
+    if (event.buttons === 1 && time_since_last_execution >= 30) {
       set_prevent_actions_after_canvas_drag("canvas_drag");
     }
   }
@@ -539,6 +532,67 @@ export default function CanvasContainer() {
       return updatedModelTransforms;
     });
   };
+
+  const Camera3DDirection = () => {
+    if (perspectiveCameraControlsRef.current) {
+      const { camera } = perspectiveCameraControlsRef.current;
+
+      if (camera && camera.rotation) {
+        const camera_rotation = camera.rotation.toArray();
+
+        if (typeof camera_rotation[2] === "number") {
+          if (camera_rotation[2] > -0.4 && camera_rotation[2] < 0.45) {
+            dispatch(set_camera_3d_direction("north"));
+          } else if (
+            (camera_rotation[2] > 2.65 && camera_rotation[2] < 3.14) ||
+            (camera_rotation[2] < -2.65 && camera_rotation[2] > -3.14)
+          ) {
+            dispatch(set_camera_3d_direction("south"));
+          } else if (camera_rotation[2] < -0.4 && camera_rotation[2] > -2.65) {
+            dispatch(set_camera_3d_direction("east"));
+          } else if (camera_rotation[2] < 2.65 && camera_rotation[2] > 0.45) {
+            dispatch(set_camera_3d_direction("west"));
+          }
+        }
+      }
+    }
+  };
+
+  function ChangeModelElevationValue(value: number) {
+    set_default_model_height_position(default_model_height_position + value);
+  }
+
+  function HandlePivotStateSwitch() {
+    set_pivot_controls_state(!pivot_controls_state);
+  }
+
+  function HandlePivotXAxisStateSwitch() {
+    if (pivot_controls_state) {
+      set_pivot_x_axis_state(!pivot_x_axis_state);
+    }
+  }
+
+  function HandlePivotYAxisStateSwitch() {
+    if (pivot_controls_state) {
+      set_pivot_y_axis_state(!pivot_y_axis_state);
+    }
+  }
+
+  function HandlePivotZAxisStateSwitch() {
+    if (pivot_controls_state) {
+      set_pivot_z_axis_state(!pivot_z_axis_state);
+    }
+  }
+
+  function ChangeDefaultModelRotationRight() {
+    const newRotation = (default_model_rotation - Math.PI / 2 + 2 * Math.PI) % (Math.PI * 2);
+    set_default_model_rotation(newRotation);
+  }
+
+  function ChangeDefaultModelRotationLeft() {
+    const newRotation = (default_model_rotation + Math.PI / 2) % (Math.PI * 2);
+    set_default_model_rotation(newRotation);
+  }
 
   document.body.style.cursor = cursor_type;
 
@@ -843,67 +897,6 @@ export default function CanvasContainer() {
     }
   }, [model_type_to_create]);
 
-  const Camera3DDirection = () => {
-    if (perspectiveCameraControlsRef.current) {
-      const { camera } = perspectiveCameraControlsRef.current;
-
-      if (camera && camera.rotation) {
-        const camera_rotation = camera.rotation.toArray();
-
-        if (typeof camera_rotation[2] === "number") {
-          if (camera_rotation[2] > -0.4 && camera_rotation[2] < 0.45) {
-            dispatch(set_camera_3d_direction("north"));
-          } else if (
-            (camera_rotation[2] > 2.65 && camera_rotation[2] < 3.14) ||
-            (camera_rotation[2] < -2.65 && camera_rotation[2] > -3.14)
-          ) {
-            dispatch(set_camera_3d_direction("south"));
-          } else if (camera_rotation[2] < -0.4 && camera_rotation[2] > -2.65) {
-            dispatch(set_camera_3d_direction("east"));
-          } else if (camera_rotation[2] < 2.65 && camera_rotation[2] > 0.45) {
-            dispatch(set_camera_3d_direction("west"));
-          }
-        }
-      }
-    }
-  };
-
-  function ChangeModelElevationValue(value: number) {
-    set_default_model_height_position(default_model_height_position + value);
-  }
-
-  function HandlePivotStateSwitch() {
-    set_pivot_controls_state(!pivot_controls_state);
-  }
-
-  function HandlePivotXAxisStateSwitch() {
-    if (pivot_controls_state) {
-      set_pivot_x_axis_state(!pivot_x_axis_state);
-    }
-  }
-
-  function HandlePivotYAxisStateSwitch() {
-    if (pivot_controls_state) {
-      set_pivot_y_axis_state(!pivot_y_axis_state);
-    }
-  }
-
-  function HandlePivotZAxisStateSwitch() {
-    if (pivot_controls_state) {
-      set_pivot_z_axis_state(!pivot_z_axis_state);
-    }
-  }
-
-  function ChangeDefaultModelRotationRight() {
-    const newRotation = (default_model_rotation - Math.PI / 2 + 2 * Math.PI) % (Math.PI * 2);
-    set_default_model_rotation(newRotation);
-  }
-
-  function ChangeDefaultModelRotationLeft() {
-    const newRotation = (default_model_rotation + Math.PI / 2) % (Math.PI * 2);
-    set_default_model_rotation(newRotation);
-  }
-
   return (
     <>
       {page_mode === "edit" && (
@@ -1049,8 +1042,6 @@ export default function CanvasContainer() {
                   position={[modelTransform.position.x, modelTransform.position.y, modelTransform.position.z]}
                   rotation={modelTransform.rotation}
                   key={id}
-                  onPointerOver={() => MeshPointerOver(id)}
-                  onPointerOut={() => MeshPointerOut(id)}
                   onClick={(e) => {
                     e.stopPropagation(), MeshOnClick(id);
                   }}
