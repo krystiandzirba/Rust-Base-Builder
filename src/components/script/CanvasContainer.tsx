@@ -151,7 +151,7 @@ export default function CanvasContainer() {
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
-  const [default_model_hight_position, set_default_model_hight_position] = useState<number>(0);
+  const [default_model_height_position, set_default_model_height_position] = useState<number>(0);
 
   const [model_prop, set_model_prop] = useState<string>("none");
 
@@ -310,7 +310,7 @@ export default function CanvasContainer() {
         setModelsTransforms((prevTransforms) => ({
           ...prevTransforms,
           [generated_id]: {
-            position: { x: rounded_x, z: rounded_z, y: default_model_hight_position + model_foundation_elevation },
+            position: { x: rounded_x, z: rounded_z, y: default_model_height_position + model_foundation_elevation },
             rotation: new THREE.Euler(0, default_model_rotation, 0, "XYZ"),
           },
         }));
@@ -869,7 +869,7 @@ export default function CanvasContainer() {
   };
 
   function ChangeModelElevationValue(value: number) {
-    set_default_model_hight_position(default_model_hight_position + value);
+    set_default_model_height_position(default_model_height_position + value);
   }
 
   function HandlePivotStateSwitch() {
@@ -966,7 +966,7 @@ export default function CanvasContainer() {
             <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
               <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "black" }} />
             </button>
-            <div className="elevation_input_field">{default_model_hight_position / 2}</div>
+            <div className="elevation_input_field">{default_model_height_position / 2}</div>
 
             <button className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+2)}>
               <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
@@ -1065,8 +1065,8 @@ export default function CanvasContainer() {
             <>
               {model_prop === "square_foundation_prop" && (
                 <Box
-                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
-                  scale={[2, 0.01, 2]}
+                  position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                  scale={[2, default_model_height_position, 2]}
                 >
                   <meshStandardMaterial
                     color={"rgb(255, 206, 166)"}
@@ -1077,15 +1077,16 @@ export default function CanvasContainer() {
               )}
               {model_prop === "triangle_foundation_prop" && (
                 <TriangleProp
-                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                  position={[mouse_canvas_x_coordinate, default_model_height_position / 100, mouse_canvas_z_coordinate]}
+                  scale={[1, default_model_height_position * 100, 1]}
                 ></TriangleProp>
               )}
               {model_prop === "wall_prop" && (
                 <>
                   <Box
-                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation, 0]}
-                    scale={[2, 0.01, 0.1]}
+                    scale={[2, default_model_height_position + 0.01, 0.1]}
                   >
                     <meshStandardMaterial
                       transparent
@@ -1096,7 +1097,7 @@ export default function CanvasContainer() {
                     />
                   </Box>
                   <ArrowProp
-                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation, 0]}
                   ></ArrowProp>
                 </>
@@ -1104,9 +1105,9 @@ export default function CanvasContainer() {
               {model_prop === "door_prop" && (
                 <>
                   <Box
-                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation, 0]}
-                    scale={[1, 0.01, 0.1]}
+                    scale={[1, default_model_height_position + 0.01, 0.1]}
                   >
                     <meshStandardMaterial
                       transparent
@@ -1117,7 +1118,7 @@ export default function CanvasContainer() {
                     />
                   </Box>
                   <ArrowProp
-                    position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
+                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation, 0]}
                   ></ArrowProp>
                 </>
@@ -1125,8 +1126,8 @@ export default function CanvasContainer() {
 
               {model_prop === "storage_prop" && (
                 <Box
-                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
-                  scale={[0.75, 0.01, 1.25]}
+                  position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                  scale={[0.75, default_model_height_position + 0.01, 1.25]}
                 >
                   <meshStandardMaterial
                     transparent
@@ -1139,8 +1140,8 @@ export default function CanvasContainer() {
               )}
               {model_prop === "tool_cupboard_prop" && (
                 <Box
-                  position={[mouse_canvas_x_coordinate, default_model_hight_position, mouse_canvas_z_coordinate]}
-                  scale={[0.75, 0.01, 0.75]}
+                  position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                  scale={[0.75, default_model_height_position + 0.01, 0.75]}
                 >
                   <meshStandardMaterial
                     transparent
