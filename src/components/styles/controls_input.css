@@ -86,9 +86,7 @@
 .object_move_button:hover,
 .rotation_left:hover,
 .rotation_right:hover,
-.rotation_change_button:hover,
-.remove_selected_model:hover,
-.remove_all_models:hover {
+.rotation_change_button:hover {
   transform: scale(1.2);
 }
 
@@ -185,24 +183,108 @@
   background-color: rgba(120, 120, 120, 0.5);
 }
 
-.remove_all_models {
-  width: 7.5vw;
-  height: 5vh;
+.remove_all_model_description {
   position: absolute;
-  top: 92.25vh;
-  left: 66.5vw;
+  width: 5vw;
+  height: 2vh;
+  left: 63.75vw;
+  top: 97vh;
+  z-index: 45;
+  text-align: center;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.remove_all_models {
+  width: 6vw;
+  height: 12.5vh;
+  position: absolute;
+  top: 83.25vh;
+  left: 63.25vw;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+
+.remove_selected_model_description {
+  position: absolute;
+  width: 5vw;
+  height: 2vh;
+  left: 71.5vw;
+  top: 97vh;
+  z-index: 45;
+  text-align: center;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
 }
 
 .remove_selected_model {
   position: absolute;
-  width: 2vw;
-  height: 5vh;
-  left: 74vw;
-  top: 92.25vh;
+  width: 5vw;
+  height: 10.5vh;
+  left: 71.5vw;
+  top: 85.5vh;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   z-index: 15;
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+
+.remove_selected_model:hover,
+.remove_all_models:hover {
+  transform: scale(1.1);
+}
+
+.delete_all_question_container {
+  width: 25vw;
+  height: 12.5vh;
+  position: absolute;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 45;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  color: #bbbbbb;
+  font-size: 1.2vw;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete_all_question_buttons_container {
+  width: 25vw;
+  height: 4vh;
+  position: absolute;
+  background-color: black;
+  z-index: 45;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.delete_all_question_button {
+  width: 30%;
+  height: 80%;
+  border: none;
+  background-color: transparent;
+  color: #bbbbbb;
+  font-size: 1.2vw;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  margin-bottom: 0.6vh;
 }

@@ -2,7 +2,7 @@
   width: 22vw;
   height: 16.75vh;
   position: absolute;
-  left: 40vw;
+  left: 39vw;
   z-index: 5;
   background-color: transparent;
   display: flex;
@@ -47,7 +47,7 @@
   width: 22vw;
   height: 2.25vh;
   position: absolute;
-  left: 40vw;
+  left: 39vw;
   z-index: 5;
   top: 12.9%;
   display: flex;
@@ -79,7 +79,7 @@
   width: 1.25vw;
   height: 2.25vh;
   top: 0.25vh;
-  left: 62vw;
+  left: 61vw;
   z-index: 40;
   display: flex;
   justify-content: center;

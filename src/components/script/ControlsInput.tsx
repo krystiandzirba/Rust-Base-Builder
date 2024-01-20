@@ -15,8 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDumpster,
-  faTrashCanArrowUp,
   faArrowRotateRight,
   faArrowRotateLeft,
   faArrowUp,
@@ -26,6 +24,13 @@ import {
   faCircleUp,
   faCircleDown,
 } from "@fortawesome/free-solid-svg-icons";
+
+import dumpsterClosed from "../../icons/dumpster_closed_bw.png";
+import dumpsterOpened from "../../icons/dumpster_opened.png";
+
+import trashCanClosedBw from "../../icons/trash_can_closed_bw.png";
+import trashCanClosed from "../../icons/trash_can_closed.png";
+import trashCanOpened from "../../icons/trash_can_opened.png";
 
 export default function ControlsInput() {
   const dispatch = useDispatch();
@@ -42,6 +47,13 @@ export default function ControlsInput() {
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(60);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
   const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(15);
+
+  const [trash_can_hovered, set_trash_can_hovered] = useState<boolean>(false);
+  const [dumpster_hovered, set_dumpster_hovered] = useState<boolean>(false);
+
+  const [display_remove_all_models_question, set_display_remove_all_models_question] = useState<boolean>(false);
+  const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
+  const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
 
   const KeypressEvent = (event: KeyboardEvent) => {
     if (event.key === "q" || event.key === "Q") {
@@ -165,6 +177,22 @@ export default function ControlsInput() {
   function DeleteSelectedObjectButton() {
     dispatch(set_delete_object_mode("delete_selected_object"));
     dispatch(set_delete_object_trigger(delete_object_trigger + 1));
+  }
+
+  function DumpsterMouseEnter() {
+    set_dumpster_hovered(true);
+  }
+
+  function DumpsterMouseLeave() {
+    set_dumpster_hovered(false);
+  }
+
+  function TrashCanMouseEnter() {
+    set_trash_can_hovered(true);
+  }
+
+  function TrashCanMouseLeave() {
+    set_trash_can_hovered(false);
   }
 
   function DeleteAllObjects() {
@@ -361,27 +389,76 @@ export default function ControlsInput() {
               />
             </button>
           </div>
+          <div className="remove_selected_model_description" style={{ color: object_selected ? "#ffd5b3" : "#bbbbbb" }}>
+            selected
+          </div>
           <button
             className="remove_selected_model"
-            onClick={() => {
-              DeleteSelectedObjectButton();
+            style={{
+              backgroundImage: `url(${
+                trash_can_hovered && object_selected
+                  ? trashCanOpened
+                  : object_selected
+                  ? trashCanClosed
+                  : trashCanClosedBw
+              })`,
+              backgroundSize: "cover",
             }}
-          >
-            <FontAwesomeIcon
-              icon={faTrashCanArrowUp}
-              size="3x"
-              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-            />
-          </button>
+            onClick={() => {
+              set_display_remove_all_models_question(true);
+            }}
+            onMouseEnter={TrashCanMouseEnter}
+            onMouseLeave={TrashCanMouseLeave}
+          ></button>
+
+          <div className="remove_all_model_description" style={{ color: dumpster_hovered ? "#ffd5b3" : "#bbbbbb" }}>
+            delete all
+          </div>
 
           <button
             className="remove_all_models"
-            onClick={() => {
-              DeleteAllObjects();
+            style={{
+              backgroundImage: `url(${dumpster_hovered ? dumpsterOpened : dumpsterClosed})`,
+              backgroundSize: "cover",
             }}
-          >
-            <FontAwesomeIcon icon={faDumpster} size="3x" style={{ color: "#a8a8a8" }} />
-          </button>
+            onClick={() => {
+              set_display_remove_all_models_question(true);
+            }}
+            onMouseEnter={DumpsterMouseEnter}
+            onMouseLeave={DumpsterMouseLeave}
+          ></button>
+          {display_remove_all_models_question && (
+            <div className="delete_all_question_container">
+              are you sure you want to delete all the objects? This process is irreversible.
+            </div>
+          )}
+          {display_remove_all_models_question && (
+            <div className="delete_all_question_buttons_container">
+              <button
+                className="delete_all_question_button"
+                onClick={() => {
+                  DeleteAllObjects();
+                  set_display_remove_all_models_question(false);
+                }}
+                onMouseEnter={() => set_yes_answer_hovered(true)}
+                onMouseLeave={() => set_yes_answer_hovered(false)}
+                style={{ color: yes_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
+              >
+                yes
+              </button>
+              <button
+                className="delete_all_question_button"
+                onClick={() => {
+                  set_display_remove_all_models_question(false);
+                }}
+                onMouseEnter={() => set_no_answer_hovered(true)}
+                onMouseLeave={() => set_no_answer_hovered(false)}
+                style={{ color: no_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
+              >
+                no
+              </button>
+            </div>
+          )}
         </>
       )}
     </>
