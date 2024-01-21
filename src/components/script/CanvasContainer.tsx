@@ -148,7 +148,6 @@ export default function CanvasContainer() {
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const perspectiveCameraControlsRef = useRef<CameraControls>(null);
-  const ortographicCameraControlsRef = useRef<CameraControls>(null);
   const raycasterBoxIntersector = useRef(null);
   const raycaster = new THREE.Raycaster();
 
@@ -156,10 +155,16 @@ export default function CanvasContainer() {
   let canvas_mouse_over_last_execution_time = 0;
   let canvas_mouse_drag_last_execution_time = 0;
 
+  const prebuild_created = useRef(false);
+
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
       setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
     }
+  };
+
+  const addPrebuild = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
+    setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
   };
 
   const RemoveSelectedModel = (id: string) => {
@@ -896,6 +901,727 @@ export default function CanvasContainer() {
       set_model_prop("storage_prop");
     }
   }, [model_type_to_create]);
+
+  function CreatePrebuildBase() {
+    const rotation_30deg = THREE.MathUtils.degToRad(30);
+    const rotation_60deg = THREE.MathUtils.degToRad(60);
+    const rotation_120deg = THREE.MathUtils.degToRad(120);
+    const rotation_150deg = THREE.MathUtils.degToRad(150);
+    const rotation_210deg = THREE.MathUtils.degToRad(210);
+    const rotation_240deg = THREE.MathUtils.degToRad(240);
+    const rotation_300deg = THREE.MathUtils.degToRad(300);
+    const rotation_330deg = THREE.MathUtils.degToRad(330);
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T1"]: {
+        position: { x: -1, z: 1, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+
+    addPrebuild(StoneFoundationSquareMid, "T1", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T2"]: {
+        position: { x: 1, z: 1, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationSquareMid, "T2", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T3"]: {
+        position: { x: -1, z: 3, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationSquareMid, "T3", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T4"]: {
+        position: { x: 1, z: 3, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationSquareMid, "T4", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T5"]: {
+        position: { x: 1, z: 4, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T5", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T6"]: {
+        position: { x: -1, z: 4, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T6", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T7"]: {
+        position: { x: 0, z: 5.725, y: 0 },
+        rotation: new THREE.Euler(0, (Math.PI / 2) * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T7", new THREE.Euler(0, (Math.PI / 2) * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T8"]: {
+        position: { x: 0, z: -1.725, y: 0 },
+        rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T8", new THREE.Euler(0, 0, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T9"]: {
+        position: { x: -1, z: 0, y: 0 },
+        rotation: new THREE.Euler(0, (Math.PI / 2) * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T9", new THREE.Euler(0, (Math.PI / 2) * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T10"]: {
+        position: { x: 1, z: 0, y: 0 },
+        rotation: new THREE.Euler(0, (Math.PI / 2) * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T10", new THREE.Euler(0, (Math.PI / 2) * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T11"]: {
+        position: { x: 2, z: 3, y: 0 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T11", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T12"]: {
+        position: { x: 2, z: 1, y: 0 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T12", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T13"]: {
+        position: { x: 3.725, z: 2, y: 0 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T13", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T14"]: {
+        position: { x: -2, z: 1, y: 0 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T14", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T15"]: {
+        position: { x: -2, z: 1, y: 0 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T15", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T16"]: {
+        position: { x: -2, z: 3, y: 0 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T16", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T17"]: {
+        position: { x: -3.725, z: 2, y: 0 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneFoundationTriangleMid, "T17", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T18"]: {
+        position: { x: -2, z: 1, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T18", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T19"]: {
+        position: { x: -2, z: 3, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T19", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T20"]: {
+        position: { x: 1, z: 4, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T20", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T21"]: {
+        position: { x: -1, z: 4, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneDoorway, "T21", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T22"]: {
+        position: { x: 2, z: 3, y: 1 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T22", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T23"]: {
+        position: { x: 2, z: 1, y: 1 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T23", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T24"]: {
+        position: { x: -1, z: 0, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T24", new THREE.Euler(0, Math.PI * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T25"]: {
+        position: { x: 1, z: 0, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T25", new THREE.Euler(0, Math.PI * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T26"]: {
+        position: { x: -1, z: 2, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallFrame, "T26", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T27"]: {
+        position: { x: 1, z: 2, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallFrame, "T27", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T28"]: {
+        position: { x: 0, z: 1, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T28", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T29"]: {
+        position: { x: 0, z: 3, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallFrame, "T29", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T30"]: {
+        position: { x: 0, z: 3, y: 1 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(GarageDoor, "T30", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T31"]: {
+        position: { x: -1.5, z: 4.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_120deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T31", new THREE.Euler(0, rotation_120deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T32"]: {
+        position: { x: -0.55, z: 4.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_240deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneDoorway, "T32", new THREE.Euler(0, rotation_240deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T33"]: {
+        position: { x: 0, z: 5.725, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWindow, "T33", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T34"]: {
+        position: { x: 1.5, z: 4.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_240deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneDoorway, "T34", new THREE.Euler(0, rotation_240deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T35"]: {
+        position: { x: 1.5, z: 4.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_240deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(MetalDoor, "T35", new THREE.Euler(0, rotation_240deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T36"]: {
+        position: { x: -0.55, z: 4.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_240deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(MetalDoor, "T36", new THREE.Euler(0, rotation_240deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T37"]: {
+        position: { x: -1, z: 4, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(MetalDoor, "T37", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T38"]: {
+        position: { x: -1, z: 2, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(GarageDoor, "T38", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T39"]: {
+        position: { x: 1, z: 2, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(GarageDoor, "T39", new THREE.Euler(0, Math.PI * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T40"]: {
+        position: { x: -1.5, z: -0.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_60deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T40", new THREE.Euler(0, rotation_60deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T41"]: {
+        position: { x: 1.5, z: -0.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_300deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T41", new THREE.Euler(0, rotation_300deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T42"]: {
+        position: { x: 0.55, z: -0.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_60deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T42", new THREE.Euler(0, rotation_60deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T43"]: {
+        position: { x: -0.55, z: -0.85, y: 1 },
+        rotation: new THREE.Euler(0, rotation_300deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T43", new THREE.Euler(0, rotation_300deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T44"]: {
+        position: { x: 0, z: -1.725, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T44", new THREE.Euler(0, Math.PI * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T45"]: {
+        position: { x: 3.725, z: 2, y: 1 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T45", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T46"]: {
+        position: { x: 2.825, z: 2.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_330deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T46", new THREE.Euler(0, rotation_330deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T47"]: {
+        position: { x: 2.825, z: 0.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_330deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T47", new THREE.Euler(0, rotation_330deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T48"]: {
+        position: { x: 2.825, z: 3.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_210deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T48", new THREE.Euler(0, rotation_210deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T49"]: {
+        position: { x: 2.825, z: 1.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_210deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T49", new THREE.Euler(0, rotation_210deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T50"]: {
+        position: { x: -2.85, z: 0.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_30deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T50", new THREE.Euler(0, rotation_30deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T51"]: {
+        position: { x: -2.85, z: 2.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_30deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T51", new THREE.Euler(0, rotation_30deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T52"]: {
+        position: { x: -2.85, z: 3.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_150deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T52", new THREE.Euler(0, rotation_150deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T53"]: {
+        position: { x: -2.85, z: 1.5, y: 1 },
+        rotation: new THREE.Euler(0, rotation_150deg, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T53", new THREE.Euler(0, rotation_150deg, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T54"]: {
+        position: { x: -3.725, z: 2, y: 1 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(StoneWallHigh, "T54", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T55"]: {
+        position: { x: 0.35, z: 1.3, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(LargeWoodBox, "T55", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T56"]: {
+        position: { x: 0.4, z: 0.35, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI * 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(ToolCupboard, "T56", new THREE.Euler(0, Math.PI * 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T57"]: {
+        position: { x: 1.6, z: 0.7, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(LargeWoodBox, "T57", new THREE.Euler(0, Math.PI, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T58"]: {
+        position: { x: 1.35, z: 1.675, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(LargeWoodBox, "T58", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T59"]: {
+        position: { x: 1.6, z: 2.4, y: 1.05 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(Furnace, "T59", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T60"]: {
+        position: { x: 1.6, z: 3.1, y: 1.05 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(Furnace, "T60", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T61"]: {
+        position: { x: 1.6, z: 3.7, y: 1.05 },
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(WoodStorageBox, "T61", new THREE.Euler(0, -Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T62"]: {
+        position: { x: -1.65, z: 0.325, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(WoodStorageBox, "T62", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T63"]: {
+        position: { x: -1, z: 0.325, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(WoodStorageBox, "T63", new THREE.Euler(0, Math.PI / 2, 0));
+
+    ///
+
+    setModelsTransforms((prevTransforms) => ({
+      ...prevTransforms,
+      ["T64"]: {
+        position: { x: -0.35, z: 0.325, y: 1.05 },
+        rotation: new THREE.Euler(0, Math.PI / 2, 0, "XYZ"),
+      },
+    }));
+    addPrebuild(WoodStorageBox, "T64", new THREE.Euler(0, Math.PI / 2, 0));
+  }
+
+  useEffect(() => {
+    if (!prebuild_created.current) {
+      CreatePrebuildBase();
+      prebuild_created.current = true;
+    }
+  }, []);
 
   return (
     <>

@@ -73,3 +73,5 @@ export default App;
 
 ///// make a bledner 1:0 button on-off instead of toolbar hide-display icon
 // if performance issue = canvas lighting + postprocessing + click events
+
+// when creating stone and metal structures, add a "pre upgraded" twig wood cost
