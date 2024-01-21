@@ -32,6 +32,8 @@ export default function ResourceCounter() {
   const [total_stone_misc_cost, set_total_stone_misc_cost] = useState<number>(0);
   const [total_metal_misc_cost, set_total_metal_misc_cost] = useState<number>(0);
 
+  const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>();
+
   function CountMiscsCost(models: string[]) {
     // - - - - - - - - - - - misc count - - - - - - - - - -
 
@@ -294,6 +296,64 @@ models.filter(
     let total_hqm_build_cost = hqm_build_cost_25 + hqm_build_cost_18 + hqm_build_cost_13 + hqm_build_cost_7;
 
     // - - - - - - - - - - - hqm - - - - - - - - - -
+    // - - - - - - - - - - - wood needed to upgrade from twig to higher quality  - - - - - - - - - -
+
+    let twig_wood_upgrade_50 =
+      models.filter(
+        (model) =>
+          model === "StoneFoundationSquareHigh" ||
+          model === "StoneFoundationSquareMid" ||
+          model === "StoneFoundationSquareLow" ||
+          model === "MetalFoundationSquareHigh" ||
+          model === "MetalFoundationSquareMid" ||
+          model === "MetalFoundationSquareLow" ||
+          model === "StoneStairsLShape" ||
+          model === "StoneStairsUShape" ||
+          model === "MetalStairsLShape" ||
+          model === "MetalStairsUShape" ||
+          model === "StoneWallHigh" ||
+          model === "StoneWallMid" ||
+          model === "MetalWallHigh" ||
+          model === "MetalWallMid" ||
+          model === "StoneRoof" ||
+          model === "MetalRoof"
+      ).length * 50;
+
+    let twig_wood_upgrade_35 =
+      models.filter(
+        (model) =>
+          model === "StoneDoorway" || model === "MetalDoorway" || model === "StoneWindow" || model === "MetalWindow"
+      ).length * 35;
+
+    let twig_wood_upgrade_25 =
+      models.filter(
+        (model) =>
+          model === "StoneFoundationTriangleHigh" ||
+          model === "StoneFoundationTriangleMid" ||
+          model === "StoneFoundationTriangleLow" ||
+          model === "MetalFoundationTriangleHigh" ||
+          model === "MetalFoundationTriangleMid" ||
+          model === "MetalFoundationTriangleLow" ||
+          model === "StoneWallLow" ||
+          model === "MetalWallLow" ||
+          model === "StoneFloorSquare" ||
+          model === "MetalFloorSquare" ||
+          model === "StoneWallFrame" ||
+          model === "MetalWallFrame" ||
+          model === "StoneFloorFrameSquare" ||
+          model === "MetaFloorFrameSquare" ||
+          model === "StoneFloorFrameTriangle" ||
+          model === "MetalFloorFrameTriangle"
+      ).length * 25;
+
+    let twig_wood_upgrade_13 =
+      models.filter((model) => model === "StoneFloorTriangle" || model === "MetalFloorTriangle").length * 13;
+
+    set_twig_upgrade_wood_cost(
+      twig_wood_upgrade_50 + twig_wood_upgrade_35 + twig_wood_upgrade_25 + twig_wood_upgrade_13
+    );
+
+    // - - - - - - - - - - - wood needed to upgrade from twig to higher quality  - - - - - - - - - -
     // - - - - - - - - - - - display - - - - - - - - - -
 
     if (count_miscs_cost) {
@@ -437,7 +497,7 @@ models.filter(
             >
               <div className="build_cost_display">
                 <div>wood</div>
-                <div>{build_cost[0].wood}</div>
+                <div>{Number(build_cost[0].wood) + Number(twig_upgrade_wood_cost)}</div>
               </div>
             </div>
           </div>
