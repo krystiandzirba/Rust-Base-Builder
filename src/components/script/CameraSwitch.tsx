@@ -8,13 +8,15 @@ import {
   set_cursor_type,
 } from "../../Store.tsx";
 
-import { store } from "../../Store.tsx";
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faUpLong, faRightLong, faLeftLong, faCameraRotate } from "@fortawesome/free-solid-svg-icons";
+import { faUpLong, faRightLong, faLeftLong, faCameraRotate } from "@fortawesome/free-solid-svg-icons";
+
+import camera2dThumbnail from "../../icons/camera_2d.png";
+import camera3dThumbnail from "../../icons/camera_3d.png";
 
 export default function CameraType() {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ export default function CameraType() {
   const camera_3d_reset = useSelector((state: RootState) => state.camerasSettings.camera_3d_reset);
   const camera_2d_position = useSelector((state: RootState) => state.camerasSettings.camera_2d_position);
 
-  const [camera_switch_button_text, set_camera_switch_button_text] = useState<string>("3D 360°");
+  const [camera_switch_button_text, set_camera_switch_button_text] = useState<string>("3D");
   const [camera_switch_button_hover, set_camera_switch_button_hover] = useState<boolean>(false);
   const [camera_2d_top_hover, set_camera_2d_top_hover] = useState<boolean>(false);
   const [camera_2d_right_hover, set_camera_2d_right_hover] = useState<boolean>(false);
@@ -150,21 +152,21 @@ export default function CameraType() {
           } else if (camera_type === "camera_2d") {
             dispatch(set_camera_type("camera_3d"));
             dispatch(set_cursor_type("default"));
-            set_camera_switch_button_text("3D 360°");
+            set_camera_switch_button_text("3D");
             dispatch(set_camera_2d_direction(""));
             dispatch(set_camera_3d_direction("north"));
           }
         }}
         onMouseEnter={() => set_camera_switch_button_hover(true)}
         onMouseLeave={() => set_camera_switch_button_hover(false)}
+        style={{
+          backgroundImage: `url(${camera_type === "camera_3d" ? camera3dThumbnail : camera2dThumbnail})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+        }}
       >
-        <div>
-          <FontAwesomeIcon
-            icon={faCamera}
-            size="3x"
-            style={{ color: camera_switch_button_hover ? "#d4d4d4" : "#a8a8a8" }}
-          />
-        </div>
+        <div></div>
         <div className={"camera_text"}>{camera_switch_button_text}</div>
       </button>
       <button
