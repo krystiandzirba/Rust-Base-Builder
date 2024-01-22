@@ -64,6 +64,7 @@ import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
 
 import { Model as MetalVerticalEmbrasure } from "../models/MetalVerticalEmbrasure.tsx";
+import { Model as StrenghtenedGlassWindow } from "../models/StrenghtenedGlassWindow.tsx";
 
 import { Model as ToolCupboard } from "../models/ToolCupboard.tsx";
 import { Model as WoodStorageBox } from "../models/WoodStorageBox.tsx";
@@ -439,6 +440,9 @@ export default function CanvasContainer() {
       else if (model_type_to_create === "MetalVerticalEmbrasure") {
         set_generated_id(randomIdGenerator());
         addModel(MetalVerticalEmbrasure, generated_id, default_object_rotation);
+      } else if (model_type_to_create === "StrenghtenedGlassWindow") {
+        set_generated_id(randomIdGenerator());
+        addModel(StrenghtenedGlassWindow, generated_id, default_object_rotation);
       }
 
       //miscs
@@ -903,7 +907,8 @@ export default function CanvasContainer() {
       model_type_to_create === "StoneWallFrame" ||
       model_type_to_create === "MetalWallFrame" ||
       model_type_to_create === "GarageDoor" ||
-      model_type_to_create === "MetalVerticalEmbrasure"
+      model_type_to_create === "MetalVerticalEmbrasure" ||
+      model_type_to_create === "StrenghtenedGlassWindow"
     ) {
       set_model_prop("wall_prop");
     } else if (model_type_to_create === "MetalDoor") {

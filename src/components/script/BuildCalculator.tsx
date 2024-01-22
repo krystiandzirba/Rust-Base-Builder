@@ -255,7 +255,8 @@ models.filter(
     let metal_build_cost_50 =
         models.filter(
             (model) =>
-            model === "MetalFloorTriangle"
+            model === "MetalFloorTriangle" ||
+            model === "StrenghtenedGlassWindow"
   ).length * 50;
 
     let total_metal_build_cost =

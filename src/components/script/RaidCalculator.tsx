@@ -123,13 +123,15 @@ export default function RaidCalculator() {
       set_ammo_cost(ammo_cost + 63);
     } else if (model_to_destroy === "GarageDoor") {
       set_ammo_cost(ammo_cost + 150);
+    } else if (model_to_destroy === "StrenghtenedGlassWindow") {
+      set_ammo_cost(ammo_cost + 140);
     }
   }
 
   function CalculateRocketCost() {
     if (model_to_destroy === "MetalDoor") {
       set_rockets_cost(rockets_cost + 2);
-    } else if (model_to_destroy === "GarageDoor") {
+    } else if (model_to_destroy === "GarageDoor" || model_to_destroy === "StrenghtenedGlassWindow") {
       set_rockets_cost(rockets_cost + 3);
     } else if (
       model_to_destroy === "StoneFoundationSquareHigh" ||
@@ -180,7 +182,7 @@ export default function RaidCalculator() {
   function CalculateExplosivesCost() {
     if (model_to_destroy === "MetalDoor") {
       set_explosives_cost(explosives_cost + 1);
-    } else if (model_to_destroy === "GarageDoor") {
+    } else if (model_to_destroy === "GarageDoor" || model_to_destroy === "StrenghtenedGlassWindow") {
       set_explosives_cost(explosives_cost + 2);
     } else if (
       model_to_destroy === "StoneFoundationSquareHigh" ||
@@ -231,6 +233,8 @@ export default function RaidCalculator() {
   function CalculateAmmoCost() {
     if (model_to_destroy === "MetalDoor") {
       set_ammo_cost(ammo_cost + 63);
+    } else if (model_to_destroy === "StrenghtenedGlassWindow") {
+      set_ammo_cost(ammo_cost + 140);
     } else if (model_to_destroy === "GarageDoor") {
       set_ammo_cost(ammo_cost + 150);
     } else if (
@@ -289,7 +293,7 @@ export default function RaidCalculator() {
   function CalculateSatchelsCost() {
     if (model_to_destroy === "MetalDoor") {
       set_satchel_cost(satchel_cost + 4);
-    } else if (model_to_destroy === "GarageDoor") {
+    } else if (model_to_destroy === "GarageDoor" || model_to_destroy === "StrenghtenedGlassWindow") {
       set_satchel_cost(satchel_cost + 9);
     } else if (
       model_to_destroy === "StoneFoundationSquareHigh" ||

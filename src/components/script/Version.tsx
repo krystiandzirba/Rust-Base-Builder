@@ -1,3 +1,3 @@
 export default function Version() {
-  return <div className="version">RBB v.2.21.0</div>;
+  return <div className="version">RBB v.2.22.0</div>;
 }

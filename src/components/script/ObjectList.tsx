@@ -45,6 +45,7 @@ import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnai
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
 
 import metalVerticalEmbrasureThumbnail from "../../object_list_thumbnails/metal_vertical_embrasure_thumbnail.png";
+import strenghtenedGlassWindowThumbnail from "../../object_list_thumbnails/strenghtened_glass_window_thumbnail.png";
 
 import toolCupboardThumbnail from "../../object_list_thumbnails/tool_cupboard_thumbnail.png";
 import woodStorageBoxThumbnail from "../../object_list_thumbnails/wood_storage_box_thumbnail.png";
@@ -641,6 +642,15 @@ export default function ObjectList() {
       keywords: ["metal", "vertical", "embrasure", "metal vertical embrasure", "window", "metal window"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalVerticalEmbrasure"));
+      },
+    },
+
+    {
+      name: "strenghtened glass window",
+      thumbnail: strenghtenedGlassWindowThumbnail,
+      keywords: ["strenghtened", "glass", "window", "strenghtened glass window", "window"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StrenghtenedGlassWindow"));
       },
     },
 
