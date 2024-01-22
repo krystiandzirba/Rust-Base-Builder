@@ -31,43 +31,57 @@ export default function ResourceCounter() {
   const [total_wood_misc_cost, set_total_wood_misc_cost] = useState<number>(0);
   const [total_stone_misc_cost, set_total_stone_misc_cost] = useState<number>(0);
   const [total_metal_misc_cost, set_total_metal_misc_cost] = useState<number>(0);
+  const [total_hq_metal_misc_cost, set_total_hq_metal_misc_cost] = useState<number>(0);
 
   const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>();
 
   function CountMiscsCost(models: string[]) {
     // - - - - - - - - - - - misc count - - - - - - - - - -
 
-    let wood_misc_tool_cupboard_count = models.filter((model) => model === "ToolCupboard").length;
-    let wood_misc_large_wood_box_count = models.filter((model) => model === "LargeWoodBox").length;
-    let wood_misc_wood_storage_box_count = models.filter((model) => model === "WoodStorageBox").length;
-    let wood_misc_furnace_count = models.filter((model) => model === "Furnace").length;
+    let misc_tool_cupboard_count = models.filter((model) => model === "ToolCupboard").length;
+    let misc_large_wood_box_count = models.filter((model) => model === "LargeWoodBox").length;
+    let misc_wood_storage_box_count = models.filter((model) => model === "WoodStorageBox").length;
+    let misc_furnace_count = models.filter((model) => model === "Furnace").length;
+    let misc_workbench_t3_count = models.filter((model) => model === "WorkbenchT3").length;
 
     set_total_misc_count(
-      wood_misc_tool_cupboard_count +
-        wood_misc_large_wood_box_count +
-        wood_misc_wood_storage_box_count +
-        wood_misc_furnace_count
+      misc_tool_cupboard_count +
+        misc_large_wood_box_count +
+        misc_wood_storage_box_count +
+        misc_furnace_count +
+        misc_workbench_t3_count
     );
 
     // - - - - - - - - - - - wood - - - - - - - - - -
 
-    let wood_misc_cost_1000 = wood_misc_tool_cupboard_count * 1000;
+    let wood_misc_cost_1000 = misc_tool_cupboard_count * 1000;
 
-    let wood_misc_cost_250 = wood_misc_large_wood_box_count * 250;
+    let wood_misc_cost_250 = misc_large_wood_box_count * 250;
 
-    let wood_misc_cost_100 = (wood_misc_large_wood_box_count + wood_misc_furnace_count) * 100;
+    let wood_misc_cost_100 = (misc_large_wood_box_count + misc_furnace_count) * 100;
 
     set_total_wood_misc_cost(wood_misc_cost_1000 + wood_misc_cost_250 + wood_misc_cost_100);
 
     // - - - - - - - - - - - stone - - - - - - - - - -
 
-    let stone_misc_cost_200 = wood_misc_furnace_count * 200;
+    let stone_misc_cost_200 = misc_furnace_count * 200;
     set_total_stone_misc_cost(stone_misc_cost_200);
 
     // - - - - - - - - - - - metal - - - - - - - - - -
 
-    let metal_misc_cost_50 = wood_misc_large_wood_box_count * 50;
-    set_total_metal_misc_cost(metal_misc_cost_50);
+    let metal_misc_cost_1000 = misc_workbench_t3_count * 1000;
+    let metal_misc_cost_50 = misc_large_wood_box_count * 50;
+    set_total_metal_misc_cost(metal_misc_cost_1000 + metal_misc_cost_50);
+
+    // - - - - - - - - - - - hq metal - - - - - - - - - -
+
+    let hq_metal_misc_cost_100 = misc_workbench_t3_count * 100;
+    set_total_hq_metal_misc_cost(hq_metal_misc_cost_100);
+
+    // - - - - - - - - - - - scrap - - - - - - - - - -
+
+    let scrap_misc_cost_1250 = misc_workbench_t3_count * 1250;
+    let total_scrap_misc_cost = scrap_misc_cost_1250;
 
     // - - - - - - - - - - - gear - - - - - - - - - -
 
@@ -82,7 +96,7 @@ export default function ResourceCounter() {
     // - - - - - - - - - - - display - - - - - - - - - -
 
     set_components_cost([
-      { scrap: 0 },
+      { scrap: total_scrap_misc_cost },
       { gear: total_gear_misc_cost },
       { sewing_kit: 0 },
       { lq_fuel: total_lq_fuel_misc_cost },
@@ -361,7 +375,7 @@ models.filter(
         { wood: total_wood_build_cost + total_wood_misc_cost },
         { stone: total_stone_build_cost + total_stone_misc_cost },
         { metal: total_metal_build_cost + total_metal_misc_cost },
-        { armored: total_hqm_build_cost },
+        { armored: total_hqm_build_cost + total_hq_metal_misc_cost },
       ]);
     } else if (!count_miscs_cost) {
       set_build_cost([
@@ -454,7 +468,9 @@ models.filter(
       set_metal_upkeep_cost(build_cost[2].metal * total_upkeep_percentile_rampup);
     }
 
-    if (build_cost && build_cost[3] && build_cost[3].armored !== undefined) {
+    if (build_cost && build_cost[3] && build_cost[3].armored !== undefined && count_miscs_cost) {
+      set_hqm_upkeep_cost((build_cost[3].armored - total_hq_metal_misc_cost) * total_upkeep_percentile_rampup);
+    } else if (build_cost && build_cost[3] && build_cost[3].armored !== undefined && !count_miscs_cost) {
       set_hqm_upkeep_cost(build_cost[3].armored * total_upkeep_percentile_rampup);
     }
   }

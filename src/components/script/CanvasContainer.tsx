@@ -67,6 +67,7 @@ import { Model as WoodStorageBox } from "../models/WoodStorageBox.tsx";
 import { Model as LargeWoodBox } from "../models/LargeWoodBox.tsx";
 import { Model as ToolCupboard } from "../models/ToolCupboard.tsx";
 import { Model as Furnace } from "../models/Furnace.tsx";
+import { Model as WorkbenchT3 } from "../models/WorkbenchT3.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import CanvasLights from "./CanvasLights.tsx";
@@ -445,6 +446,9 @@ export default function CanvasContainer() {
       } else if (model_type_to_create === "Furnace") {
         set_generated_id(randomIdGenerator());
         addModel(Furnace, generated_id, default_object_rotation);
+      } else if (model_type_to_create === "WorkbenchT3") {
+        set_generated_id(randomIdGenerator());
+        addModel(WorkbenchT3, generated_id, default_object_rotation);
       }
     }
   }
@@ -897,7 +901,11 @@ export default function CanvasContainer() {
       set_model_prop("door_prop");
     } else if (model_type_to_create === "ToolCupboard" || model_type_to_create === "Furnace") {
       set_model_prop("tool_cupboard_prop");
-    } else if (model_type_to_create === "WoodStorageBox" || model_type_to_create === "LargeWoodBox") {
+    } else if (
+      model_type_to_create === "WoodStorageBox" ||
+      model_type_to_create === "LargeWoodBox" ||
+      model_type_to_create === "WorkbenchT3"
+    ) {
       set_model_prop("storage_prop");
     }
   }, [model_type_to_create]);

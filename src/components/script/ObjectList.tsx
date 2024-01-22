@@ -48,6 +48,8 @@ import toolCupboardThumbnail from "../../object_list_thumbnails/tool_cupboard_th
 import woodStorageBoxThumbnail from "../../object_list_thumbnails/wood_storage_box_thumbnail.png";
 import largeWoodBoxThumbnail from "../../object_list_thumbnails/large_wood_box_thumbnail.png";
 import furnaceThumbnail from "../../object_list_thumbnails/furnace_thumbnail.png";
+import workbench_t3_Thumbnail from "../../object_list_thumbnails/workbench_3_thumbnail.png";
+
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -664,6 +666,15 @@ export default function ObjectList() {
       keywords: ["furnace"],
       onClick: () => {
         dispatch(set_model_type_to_create("Furnace"));
+      },
+    },
+
+    {
+      name: "workbench T3",
+      thumbnail: workbench_t3_Thumbnail,
+      keywords: ["workbench", "work", "bench", "t3", "3", "workbench t3"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("WorkbenchT3"));
       },
     },
   ];
