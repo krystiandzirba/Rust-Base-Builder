@@ -73,5 +73,3 @@ export default App;
 
 ///// make a bledner 1:0 button on-off instead of toolbar hide-display icon
 // if performance issue = canvas lighting + postprocessing + click events
-
-// workbench, large box, wood box, ujednolicić default rotation w blenderze, dodać do nich strzałki i sterowanie przy budowaniu misców

@@ -1850,32 +1850,44 @@ export default function CanvasContainer() {
               )}
 
               {model_prop === "storage_prop" && (
-                <Box
-                  position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
-                  scale={[0.75, default_model_height_position + 0.01, 1.25]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"rgb(255, 206, 166)"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={5}
-                  />
-                </Box>
+                <>
+                  <Box
+                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                    scale={[1.25, default_model_height_position + 0.01, 0.75]}
+                  >
+                    <meshStandardMaterial
+                      transparent
+                      opacity={1}
+                      color={"rgb(255, 206, 166)"}
+                      emissive={"rgb(255, 206, 166)"}
+                      emissiveIntensity={5}
+                    />
+                  </Box>
+                  <ArrowProp
+                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                    rotation={[0, default_model_rotation + Math.PI, 0]}
+                  ></ArrowProp>
+                </>
               )}
               {model_prop === "tool_cupboard_prop" && (
-                <Box
-                  position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
-                  scale={[0.75, default_model_height_position + 0.01, 0.75]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"rgb(255, 206, 166)"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={5}
-                  />
-                </Box>
+                <>
+                  <Box
+                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                    scale={[0.75, default_model_height_position + 0.01, 0.75]}
+                  >
+                    <meshStandardMaterial
+                      transparent
+                      opacity={1}
+                      color={"rgb(255, 206, 166)"}
+                      emissive={"rgb(255, 206, 166)"}
+                      emissiveIntensity={5}
+                    />
+                  </Box>
+                  <ArrowProp
+                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                    rotation={[0, default_model_rotation + Math.PI, 0]}
+                  ></ArrowProp>
+                </>
               )}
             </>
           )}
