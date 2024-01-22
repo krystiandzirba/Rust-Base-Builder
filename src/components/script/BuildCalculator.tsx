@@ -104,6 +104,7 @@ export default function ResourceCounter() {
   }
 
   function CountBuildCost(models: string[]) {
+    // - - - - - - - - - - - wood - - - - - - - - - -
     let wood_build_cost_200 =
       models.filter(
         (model) =>
@@ -197,8 +198,8 @@ models.filter(
     let total_stone_build_cost =
       stone_build_cost_300 + stone_build_cost_210 + stone_build_cost_150 + stone_build_cost_75;
 
-    ////////// stone
-    ////////// metal
+    // - - - - - - - - - - - stone - - - - - - - - - -
+    // - - - - - - - - - - - metal - - - - - - - - - -
 
     // prettier-ignore
     let metal_build_cost_300 =
@@ -246,7 +247,8 @@ models.filter(
           model === "MetalWallLow" ||
           model === "MetalWallFrame" ||
           model === "MetalFloorFrameSquare" ||
-          model === "MetalFloorFrameTriangle"
+          model === "MetalFloorFrameTriangle" ||
+          model === "MetalVerticalEmbrasure"
       ).length * 100;
 
     //prettier-ignore
