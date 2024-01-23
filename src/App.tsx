@@ -10,6 +10,7 @@ import ControlsInput from "./components/script/ControlsInput.tsx";
 import Hints from "./components/script/Hints.tsx";
 import Settings from "./components/script/Settings.tsx";
 import StructureVisibilityMode from "./components/script/StructureVisibilityMode.tsx";
+import Github from "./components/script/Github.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -23,6 +24,7 @@ import "./components/styles/controls_input.css";
 import "./components/styles/hints.css";
 import "./components/styles/settings.css";
 import "./components/styles/structure_visibility_mode.css";
+import "./components/styles/github.css";
 
 import { RootState } from "./Store";
 import { useSelector } from "react-redux";
@@ -51,6 +53,7 @@ function App() {
       {enable_hints && <Hints />}
       <Settings />
       {enable_structures_visibility && <StructureVisibilityMode />}
+      <Github />
     </div>
   );
 }
@@ -66,6 +69,7 @@ export default App;
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
 // add 1st person walking in overview and raid mode
+// add new keyboard controls diescription - 2d camera (moving the objects) + creation mode
 
 // errors
 // -

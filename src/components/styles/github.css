@@ -1,0 +1,13 @@
+.github {
+  position: absolute;
+  width: 2vw;
+  height: 5vh;
+  z-index: 45;
+  left: 86.25vw;
+  top: 2.5vh;
+  transition: transform 0.2s ease;
+}
+
+.github:hover {
+  transform: scale(1.075);
+}
