@@ -93,7 +93,8 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneWallFrame" ||
       model_to_destroy === "StoneFloorTriangle" ||
       model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle"
+      model_to_destroy === "StoneFloorFrameTriangle" ||
+      model_to_destroy === "StoneRoofSquare"
     ) {
       set_explosives_cost(explosives_cost + 2);
     } else if (
@@ -116,7 +117,8 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalWallFrame" ||
       model_to_destroy === "MetalFloorTriangle" ||
       model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle"
+      model_to_destroy === "MetalFloorFrameTriangle" ||
+      model_to_destroy === "MetalRoofSquare"
     ) {
       set_explosives_cost(explosives_cost + 4);
     } else if (model_to_destroy === "MetalDoor") {
@@ -152,7 +154,8 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneFloorTriangle" ||
       model_to_destroy === "StoneFloorFrameSquare" ||
       model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "MetalVerticalEmbrasure"
+      model_to_destroy === "MetalVerticalEmbrasure" ||
+      model_to_destroy === "StoneRoofSquare"
     ) {
       set_rockets_cost(rockets_cost + 4);
     } else if (
@@ -173,7 +176,8 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalFloorSquare" ||
       model_to_destroy === "MetalFloorTriangle" ||
       model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle"
+      model_to_destroy === "MetalFloorFrameTriangle" ||
+      model_to_destroy === "MetalRoofSquare"
     ) {
       set_rockets_cost(rockets_cost + 8);
     }
@@ -203,7 +207,8 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneFloorTriangle" ||
       model_to_destroy === "StoneFloorFrameSquare" ||
       model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "MetalVerticalEmbrasure"
+      model_to_destroy === "MetalVerticalEmbrasure" ||
+      model_to_destroy === "StoneRoofSquare"
     ) {
       set_explosives_cost(explosives_cost + 2);
     } else if (
@@ -224,7 +229,8 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalFloorSquare" ||
       model_to_destroy === "MetalFloorTriangle" ||
       model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle"
+      model_to_destroy === "MetalFloorFrameTriangle" ||
+      model_to_destroy === "MetalRoofSquare"
     ) {
       set_explosives_cost(explosives_cost + 4);
     }
@@ -259,7 +265,8 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneFloorSquare" ||
       model_to_destroy === "StoneFloorTriangle" ||
       model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle"
+      model_to_destroy === "StoneFloorFrameTriangle" ||
+      model_to_destroy === "StoneRoofSquare"
     ) {
       set_ammo_cost(ammo_cost + 185);
     } else if (model_to_destroy === "MetalStairsLShape" || model_to_destroy === "MetalStairsUShape") {
@@ -273,7 +280,8 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalWallFrame" ||
       model_to_destroy === "MetalFloorSquare" ||
       model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle"
+      model_to_destroy === "MetalFloorFrameTriangle" ||
+      model_to_destroy === "MetalRoofSquare"
     ) {
       set_ammo_cost(ammo_cost + 400);
     } else if (model_to_destroy === "MetalFloorTriangle") {
@@ -313,7 +321,8 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneFloorSquare" ||
       model_to_destroy === "StoneFloorTriangle" ||
       model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle"
+      model_to_destroy === "StoneFloorFrameTriangle" ||
+      model_to_destroy === "StoneRoofSquare"
     ) {
       set_satchel_cost(satchel_cost + 10);
     } else if (model_to_destroy === "MetalVerticalEmbrasure") {
@@ -336,7 +345,8 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalFloorSquare" ||
       model_to_destroy === "MetalFloorTriangle" ||
       model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle"
+      model_to_destroy === "MetalFloorFrameTriangle" ||
+      model_to_destroy === "MetalRoofSquare"
     ) {
       set_satchel_cost(satchel_cost + 23);
     }

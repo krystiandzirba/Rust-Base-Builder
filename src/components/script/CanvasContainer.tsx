@@ -41,6 +41,7 @@ import { Model as StoneFloorSquare } from "../models/StoneFloorSquare.tsx";
 import { Model as StoneFloorTriangle } from "../models/StoneFloorTriangle.tsx";
 import { Model as StoneFloorFrameSquare } from "../models/StoneFloorFrameSquare.tsx";
 import { Model as StoneFloorFrameTriangle } from "../models/StoneFloorFrameTriangle.tsx";
+import { Model as StoneRoofSquare } from "../models/StoneRoofSquare.tsx";
 
 import { Model as MetalFoundationSquareHigh } from "../models/MetalFoundationSquareHigh.tsx";
 import { Model as MetalFoundationSquareMid } from "../models/MetalFoundationSquareMid.tsx";
@@ -60,6 +61,8 @@ import { Model as MetalFloorSquare } from "../models/MetalFloorSquare.tsx";
 import { Model as MetalFloorTriangle } from "../models/MetalFloorTriangle.tsx";
 import { Model as MetalFloorFrameSquare } from "../models/MetalFloorFrameSquare.tsx";
 import { Model as MetalFloorFrameTriangle } from "../models/MetalFloorFrameTriangle.tsx";
+import { Model as MetalRoofSquare } from "../models/MetalRoofSquare.tsx";
+
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
 
@@ -371,6 +374,9 @@ export default function CanvasContainer() {
       } else if (model_type_to_create === "StoneFloorFrameTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(StoneFloorFrameTriangle, generated_id, default_object_rotation);
+      } else if (model_type_to_create === "StoneRoofSquare") {
+        set_generated_id(randomIdGenerator());
+        addModel(StoneRoofSquare, generated_id, default_object_rotation);
       }
 
       // metal
@@ -428,6 +434,9 @@ export default function CanvasContainer() {
       } else if (model_type_to_create === "MetalFloorFrameTriangle") {
         set_generated_id(randomIdGenerator());
         addModel(MetalFloorFrameTriangle, generated_id, default_object_rotation);
+      } else if (model_type_to_create === "MetalRoofSquare") {
+        set_generated_id(randomIdGenerator());
+        addModel(MetalRoofSquare, generated_id, default_object_rotation);
       } else if (model_type_to_create === "MetalDoor") {
         set_generated_id(randomIdGenerator());
         addModel(MetalDoor, generated_id, default_object_rotation);
@@ -899,6 +908,7 @@ export default function CanvasContainer() {
       model_type_to_create === "StoneWallLow" ||
       model_type_to_create === "StoneDoorway" ||
       model_type_to_create === "StoneWindow" ||
+      model_type_to_create === "StoneRoofSquare" ||
       model_type_to_create === "MetalWallHigh" ||
       model_type_to_create === "MetalWallMid" ||
       model_type_to_create === "MetalWallLow" ||
@@ -906,6 +916,7 @@ export default function CanvasContainer() {
       model_type_to_create === "MetalWindow" ||
       model_type_to_create === "StoneWallFrame" ||
       model_type_to_create === "MetalWallFrame" ||
+      model_type_to_create === "MetalRoofSquare" ||
       model_type_to_create === "GarageDoor" ||
       model_type_to_create === "MetalVerticalEmbrasure" ||
       model_type_to_create === "StrenghtenedGlassWindow"

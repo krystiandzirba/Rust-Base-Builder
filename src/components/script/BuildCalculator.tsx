@@ -185,7 +185,8 @@ models.filter(
           model === "StoneWallLow" ||
           model === "StoneWallFrame" ||
           model === "StoneFloorFrameSquare" ||
-          model === "StoneFloorFrameTriangle"
+          model === "StoneFloorFrameTriangle" ||
+          model === "StoneRoofSquare"
       ).length * 150;
 
     // prettier-ignore
@@ -218,15 +219,14 @@ models.filter(
           model === "MetalWallHigh" ||
           model === "MetalWallMid" ||
           model === "MetalStairsUShape" ||
-          model === "MetalStairsLShape" ||
-          model === "MetalRoof"
+          model === "MetalStairsLShape"
       ).length * 200;
 
     // prettier-ignore
     let metal_build_cost_150 =
       models.filter(
         (model) =>
-          model === "MetalDoor"
+          model === "MetalDoor" 
       ).length * 150;
 
     // prettier-ignore
@@ -248,7 +248,8 @@ models.filter(
           model === "MetalWallFrame" ||
           model === "MetalFloorFrameSquare" ||
           model === "MetalFloorFrameTriangle" ||
-          model === "MetalVerticalEmbrasure"
+          model === "MetalVerticalEmbrasure" ||
+          model === "MetalRoofSquare"
       ).length * 100;
 
     //prettier-ignore
@@ -360,7 +361,9 @@ models.filter(
           model === "StoneFloorFrameSquare" ||
           model === "MetaFloorFrameSquare" ||
           model === "StoneFloorFrameTriangle" ||
-          model === "MetalFloorFrameTriangle"
+          model === "MetalFloorFrameTriangle" ||
+          model === "StoneRoofSquare" ||
+          model === "MetalRoofSquare"
       ).length * 25;
 
     let twig_wood_upgrade_13 =
