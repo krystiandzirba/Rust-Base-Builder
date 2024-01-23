@@ -8,10 +8,11 @@ export default function Hints() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
+  const model_cretion_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
 
   return (
     <div className="hint_container_bottom">
-      {camera_type === "camera_3d" && !object_selected && (
+      {camera_type === "camera_3d" && !object_selected && !model_cretion_state && (
         <div className="hint_default_3d">
           <div className="hint_part">
             <span className="orange_theme_color">LMB | MB1</span> - rotate camera
@@ -58,6 +59,21 @@ export default function Hints() {
 
           <div className="hint_part">
             <span className="orange_theme_color">DEL</span> - delete
+          </div>
+        </div>
+      )}
+      {model_cretion_state && (
+        <div className="hint_creaton_state">
+          <div className="hint_part">
+            <span className="orange_theme_color">LMB | MB1</span> - place object
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">RMB | MB2</span> - rotate camera
+          </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">Q | E</span> - rotate
           </div>
         </div>
       )}
