@@ -23,6 +23,7 @@ import stoneFloorTriangleThumbnail from "../../object_list_thumbnails/stone_floo
 import stoneFloorFrameSquareThumbnail from "../../object_list_thumbnails/stone_floor_frame_square_thumbnail.png";
 import stoneFloorFrameTriangleThumbnail from "../../object_list_thumbnails/stone_floor_frame_triangle_thumbnail.png";
 import stoneRoofSquareThumbnail from "../../object_list_thumbnails/stone_roof_square_thumbnail.png";
+import stoneRoofTriangleThumbnail from "../../object_list_thumbnails/stone_roof_triangle_thumbnail.png";
 
 import metalFoundationSquareHighThumbnail from "../../object_list_thumbnails/metal_foundation_square_high_thumbnail.png";
 import metalFoundationSquareMidThumbnail from "../../object_list_thumbnails/metal_foundation_square_mid_thumbnail.png";
@@ -43,6 +44,7 @@ import metalFloorTriangleThumbnail from "../../object_list_thumbnails/metal_floo
 import metalFloorFrameSquareThumbnail from "../../object_list_thumbnails/metal_floor_frame_square_thumbnail.png";
 import metalFloorFrameTriangleThumbnail from "../../object_list_thumbnails/metal_floor_frame_triangle_thumbnail.png";
 import metalRoofSquareThumbnail from "../../object_list_thumbnails/metal_roof_square_thumbnail.png";
+import metalRoofTriangleThumbnail from "../../object_list_thumbnails/metal_roof_triangle_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -377,6 +379,15 @@ export default function ObjectList() {
       },
     },
 
+    {
+      name: "stone roof (triangle)",
+      thumbnail: stoneRoofTriangleThumbnail,
+      keywords: ["stone", "roof", "triangle", "stone roof", "stone triangle", "roof triangle"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneRoofTriangle"));
+      },
+    },
+
     // metal
 
     {
@@ -634,6 +645,15 @@ export default function ObjectList() {
       keywords: ["metal", "roof", "square", "metal roof", "metal square", "roof square"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalRoofSquare"));
+      },
+    },
+
+    {
+      name: "metal roof (triangle)",
+      thumbnail: metalRoofTriangleThumbnail,
+      keywords: ["metal", "roof", "triangle", "metal roof", "metal triangle", "roof triangle"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalRoofTriangle"));
       },
     },
 

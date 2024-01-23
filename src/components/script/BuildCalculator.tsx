@@ -114,8 +114,7 @@ export default function ResourceCounter() {
           model === "WoodenWallHigh" ||
           model === "WoodenWallMid" ||
           model === "WoodenStairsLShape" ||
-          model === "WoodenStairsUShape" ||
-          model === "WoodenRoof"
+          model === "WoodenStairsUShape"
       ).length * 200;
 
     //prettier-ignore
@@ -161,8 +160,7 @@ models.filter(
           model === "StoneWallMid" ||
           model === "StoneWallThird" ||
           model === "StoneStairsLShape" ||
-          model === "StoneStairsUShape" ||
-          model === "StoneRoof"
+          model === "StoneStairsUShape"
       ).length * 300;
 
     // prettier-ignore
@@ -186,7 +184,8 @@ models.filter(
           model === "StoneWallFrame" ||
           model === "StoneFloorFrameSquare" ||
           model === "StoneFloorFrameTriangle" ||
-          model === "StoneRoofSquare"
+          model === "StoneRoofSquare" ||
+          model === "StoneRoofTriangle"
       ).length * 150;
 
     // prettier-ignore
@@ -249,7 +248,8 @@ models.filter(
           model === "MetalFloorFrameSquare" ||
           model === "MetalFloorFrameTriangle" ||
           model === "MetalVerticalEmbrasure" ||
-          model === "MetalRoofSquare"
+          model === "MetalRoofSquare" ||
+          model === "MetalRoofTriangle"
       ).length * 100;
 
     //prettier-ignore
@@ -280,8 +280,7 @@ models.filter(
           model === "ArmoredFoundationStairs" ||
           model === "ArmoredWallHigh" ||
           model === "ArmoredWallMid" ||
-          model === "ArmoredStairs" ||
-          model === "ArmoredRoof"
+          model === "ArmoredStairs"
       ).length * 25;
 
     // prettier-ignore
@@ -332,9 +331,7 @@ models.filter(
           model === "StoneWallHigh" ||
           model === "StoneWallMid" ||
           model === "MetalWallHigh" ||
-          model === "MetalWallMid" ||
-          model === "StoneRoof" ||
-          model === "MetalRoof"
+          model === "MetalWallMid"
       ).length * 50;
 
     let twig_wood_upgrade_35 =
@@ -363,7 +360,9 @@ models.filter(
           model === "StoneFloorFrameTriangle" ||
           model === "MetalFloorFrameTriangle" ||
           model === "StoneRoofSquare" ||
-          model === "MetalRoofSquare"
+          model === "StoneRoofTriangle" ||
+          model === "MetalRoofSquare" ||
+          model === "MetalRoofTriangle"
       ).length * 25;
 
     let twig_wood_upgrade_13 =

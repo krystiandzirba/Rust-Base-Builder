@@ -65,7 +65,6 @@ export default App;
 // add placing sound
 // add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
-// settings: dark-light mode
 // add 1st person walking in overview and raid mode
 
 // errors
