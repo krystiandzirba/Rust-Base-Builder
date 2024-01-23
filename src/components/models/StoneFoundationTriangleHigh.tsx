@@ -76,6 +76,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       } else if (page_mode === "raid") {
         return model_hover ? "red" : "#bbbbbb";
       }
+    } else if (!model_creation_state && !enable_model_material) {
+      return model_selected ? "#f5b784" : "#bbbbbb";
     }
   };
 
