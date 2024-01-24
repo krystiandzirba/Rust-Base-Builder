@@ -11,7 +11,7 @@ App that lets you create any rust base, simulate a raid and calculate all the bu
 <p align="center">
 You can build your base from scratch, view and modify it.
 Choose any object from the list on the left side and start placing it on the grid. <br>
-Before you place any object, you can rotate it with "Q" and "E" buttons, change the building height.
+Before you place any object, you can rotate it with "Q" and "E" buttons and change the building height level.
 </p>
   
 ![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/91596376-1acd-44e1-ba2a-bd11b95eee7b)
@@ -26,7 +26,28 @@ tier 4: 33% for any object above 175th<br>
 </p>
 
 <p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/043df059-48fa-4fdd-8753-3c8718356b1d" alt="Image">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/9903ac00-1015-442d-b83b-5b7146883983" alt="Image">
+  </p>
+
+<h3 align="center">Modifying the base</h3>
+
+<p align="center">
+You can modify your base only in the edit mode, here you can select any placed object and interact with it.<br>
+  
+***(when any object is selected):***
+  
+- WSAD -  move the selected object in 4 directions across the grid.
+- SHIFT - change the distance unit of transformed object.
+- SPACE - move object up by (distance unit)
+- CTRL - move object down by (distance unit)
+</p>
+
+<p align="center">
+you can also manipulate the objects using the control buttons at the bottom of the page:
+</p>
+
+<p align="center">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/0f837ddc-573b-4440-b091-45d761ef20da" alt="Image">
   </p>
 
 <h2 align="center">Raid Simulator</h2>
@@ -55,4 +76,11 @@ If you want to start the raid again, or reset it, use the "reset raid" button.
   <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/4d42e948-9afc-4f48-9eca-8a22dbc84b02" alt="Image">
 </p>
 
+<p align="center">
+All of the raid cost will be displayed on the right side, divided on the type and on all of the required resources.<br>
+You can also enable the sub-ingredients and gunpowder calculator.
+</p>
 
+<p align="center">
+  <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/ee37694b-59c8-49d6-927b-c634457c39eb" alt="Image">
+</p>
