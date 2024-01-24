@@ -136,6 +136,7 @@ export default function CanvasContainer() {
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
+  const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [modelsTransforms, setModelsTransforms] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
@@ -1935,61 +1936,82 @@ export default function CanvasContainer() {
             <>
               {model_prop === "square_foundation_prop" && (
                 <Box
-                  position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
-                  scale={[2, default_model_height_position, 2]}
+                  position={[
+                    mouse_canvas_x_coordinate,
+                    default_model_height_position / 2 + 0.0425,
+                    mouse_canvas_z_coordinate,
+                  ]}
+                  scale={[2, default_model_height_position + 0.08, 2]}
                 >
                   <meshStandardMaterial
-                    color={"rgb(255, 206, 166)"}
+                    color={"#ffa463"}
                     emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={5}
+                    emissiveIntensity={bloom_state ? 3 : 0}
                   />
                 </Box>
               )}
               {model_prop === "triangle_foundation_prop" && (
-                <TriangleProp
-                  position={[mouse_canvas_x_coordinate, default_model_height_position / 100, mouse_canvas_z_coordinate]}
-                  scale={[1, default_model_height_position * 100, 1]}
-                ></TriangleProp>
+                <>
+                  <TriangleProp
+                    position={[
+                      mouse_canvas_x_coordinate,
+                      default_model_height_position / 100,
+                      mouse_canvas_z_coordinate,
+                    ]}
+                    rotation={[0, default_model_rotation, 0]}
+                    scale={[1, default_model_height_position * 100 + 10, 1]}
+                  ></TriangleProp>
+                </>
               )}
               {model_prop === "wall_prop" && (
                 <>
                   <Box
-                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                    position={[
+                      mouse_canvas_x_coordinate,
+                      default_model_height_position / 2 + 0.04,
+                      mouse_canvas_z_coordinate,
+                    ]}
                     rotation={[0, default_model_rotation, 0]}
-                    scale={[2, default_model_height_position + 0.01, 0.1]}
+                    scale={[2, default_model_height_position + 0.08, 0.1]}
                   >
                     <meshStandardMaterial
                       transparent
                       opacity={1}
-                      color={"rgb(255, 206, 166)"}
+                      color={"#ffa463"}
                       emissive={"rgb(255, 206, 166)"}
-                      emissiveIntensity={5}
+                      emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
                   <ArrowProp
                     position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation, 0]}
+                    scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>
               )}
               {model_prop === "door_prop" && (
                 <>
                   <Box
-                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
+                    position={[
+                      mouse_canvas_x_coordinate,
+                      default_model_height_position / 2 + 0.04,
+                      mouse_canvas_z_coordinate,
+                    ]}
                     rotation={[0, default_model_rotation, 0]}
-                    scale={[1, default_model_height_position + 0.01, 0.1]}
+                    scale={[1, default_model_height_position + 0.08, 0.1]}
                   >
                     <meshStandardMaterial
                       transparent
                       opacity={1}
-                      color={"rgb(255, 206, 166)"}
+                      color={"#ffa463"}
                       emissive={"rgb(255, 206, 166)"}
-                      emissiveIntensity={5}
+                      emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
                   <ArrowProp
                     position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation, 0]}
+                    scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>
               )}
@@ -1997,40 +2019,50 @@ export default function CanvasContainer() {
               {model_prop === "storage_prop" && (
                 <>
                   <Box
-                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
-                    scale={[1.25, default_model_height_position + 0.01, 0.75]}
+                    position={[
+                      mouse_canvas_x_coordinate,
+                      default_model_height_position / 2 + 0.04,
+                      mouse_canvas_z_coordinate,
+                    ]}
+                    scale={[1.25, default_model_height_position + 0.08, 0.75]}
                   >
                     <meshStandardMaterial
                       transparent
                       opacity={1}
-                      color={"rgb(255, 206, 166)"}
+                      color={"#ffa463"}
                       emissive={"rgb(255, 206, 166)"}
-                      emissiveIntensity={5}
+                      emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
                   <ArrowProp
                     position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation + Math.PI, 0]}
+                    scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>
               )}
               {model_prop === "tool_cupboard_prop" && (
                 <>
                   <Box
-                    position={[mouse_canvas_x_coordinate, default_model_height_position / 2, mouse_canvas_z_coordinate]}
-                    scale={[0.75, default_model_height_position + 0.01, 0.75]}
+                    position={[
+                      mouse_canvas_x_coordinate,
+                      default_model_height_position / 2 + 0.04,
+                      mouse_canvas_z_coordinate,
+                    ]}
+                    scale={[0.75, default_model_height_position + 0.08, 0.75]}
                   >
                     <meshStandardMaterial
                       transparent
                       opacity={1}
-                      color={"rgb(255, 206, 166)"}
+                      color={"#ffa463"}
                       emissive={"rgb(255, 206, 166)"}
-                      emissiveIntensity={5}
+                      emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
                   <ArrowProp
                     position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
                     rotation={[0, default_model_rotation + Math.PI, 0]}
+                    scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>
               )}

@@ -17,7 +17,7 @@ export default function Postprocessing() {
       <Suspense fallback={null}>
         <EffectComposer multisampling={antialiasing_state ? 3 : 0}>
           <Bloom
-            intensity={bloom_state ? 0.6 : 0}
+            intensity={bloom_state ? 0.5 : 0}
             luminanceThreshold={0.6}
             luminanceSmoothing={1}
             mipmapBlur={true}

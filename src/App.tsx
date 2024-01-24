@@ -78,3 +78,4 @@ export default App;
 // if performance issue = canvas lighting + postprocessing + click events
 
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
+// change the building height level incrementation from 1 to 0.5
