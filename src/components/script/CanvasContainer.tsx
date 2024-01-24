@@ -1836,12 +1836,12 @@ export default function CanvasContainer() {
         <>
           <div className="object_elevation_container_description">build on height level:</div>
           <div className="object_elevation_container">
-            <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-2)}>
+            <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-1)}>
               <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "black" }} />
             </button>
             <div className="elevation_input_field">{default_model_height_position / 2}</div>
 
-            <button className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+2)}>
+            <button className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+1)}>
               <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
             </button>
           </div>
