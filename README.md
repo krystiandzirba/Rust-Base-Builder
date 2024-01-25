@@ -84,3 +84,26 @@ You can also enable the sub-ingredients and gunpowder calculator.
 <p align="center">
   <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/ee37694b-59c8-49d6-927b-c634457c39eb" alt="Image">
 </p>
+
+
+<h1 align="center">Future updates:</h1>
+
+<p align="center">
+- Add Armored structures tier<br>
+- Add External walls<br>
+- Add the most important of the remaining "misc" objects such as beds, fences, shelves, research table, large furnace, repair bench...<br>
+- Add Twig and Wood structures tiers (if needed)<br>
+- First person mode (depends on performance impact)<br>
+- Rust-like object snapping (depends on performance impact)<br>
+- Most popular base prebuilds in a single button click<br>
+- Faster building<br>
+- Object copy + paste<br>
+- Placing + Destroying sounds<br>
+- Bases saved in browser memory<br>
+- Different switchable layouts<br>
+- Performance Improvements<br>
+- UI | UX tweaking<br>
+- Object brush: instead of "click to place", add optional "click and hold to place multiple objects"<br>
+</p>
+
+_<h3 align="center">Please note that this app is GPU and Memory heavy, if you experience any performance issues, try using the ***Performance Mode*** available in the settings.</h3>_
