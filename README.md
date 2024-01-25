@@ -4,6 +4,8 @@
 App that lets you create any rust base, simulate a raid and calculate all the building + upkeep cost.
 </p>
 
+![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/6851219d-808d-477e-9f78-c22a2eff6962)
+
 <h1 align="center">Key Features:</h1>
 
 <h2 align="center">Base Editor | Edit Mode</h2>
@@ -17,7 +19,7 @@ Before you place any object, you can rotate it with "Q" and "E" buttons and chan
 ![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/91596376-1acd-44e1-ba2a-bd11b95eee7b)
 
 <p align="center">
-All the build cost will be displayed on the right side along with the upkeep scaling tiers:<br>
+All the build cost will be displayed on the right side along with the upkeep cost (scaling tiers):<br>
 tier 1: 10% for the first 15 objects<br>
 tier 2: 15% for next 75 objects<br>
 tier 3: 20% for another 75 objects<br>
@@ -57,14 +59,14 @@ you can also manipulate the objects using the control buttons at the bottom of t
 Simulate an raid attack on your own base to test its weaknesses.
 </p>
 
-<p align="center">
-First, choose what type of "tool" you want to raid with:<br>
+First, choose what do you want to raid with:<br>
 - rockets <br> 
 - C4s <br> 
 - EXP. 5.56 ammo<br>
 - satchel charges<br> 
 - "most efficient" to automatically calculate the most efficient way to destroy the selected structure.<br>
 <br>
+<p align="center">
 Once you've selected the type, you can start destroying the objects with mouse click. <br>
 If you want to start the raid again, or reset it, use the "reset raid" button.
 </p>
@@ -130,6 +132,7 @@ You can also enable the sub-ingredients and gunpowder calculator.
 - Most popular base prebuilds in a single button click<br>
 - Faster building<br>
 - Object copy + paste<br>
+- Undo button<br>
 - Placing + Destroying sounds<br>
 - Bases saved in browser memory<br>
 - Different switchable layouts<br>
