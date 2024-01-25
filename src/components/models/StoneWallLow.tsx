@@ -94,11 +94,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   }, [reset_raid_models]);
 
   useEffect(() => {
-    {
-      set_model_hover(false);
-      set_model_selected(false);
-    }
-  }, [page_mode]);
+    set_model_hover(false);
+    set_model_selected(false);
+  }, [page_mode, model_creation_state]);
 
   return (
     <>

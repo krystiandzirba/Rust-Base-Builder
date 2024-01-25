@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
@@ -74,6 +74,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const ModelMaterialWireframe = () => {
     return models_xray_active ? true : false;
   };
+
+  useEffect(() => {
+    set_model_hover(false);
+    set_model_selected(false);
+  }, [page_mode, model_creation_state]);
 
   return (
     <>

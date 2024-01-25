@@ -727,9 +727,9 @@ export default function CanvasContainer() {
             moveSelectedObjectX(+1);
           }
         } else if (keyboard_input === "Q") {
-          RotateSelectedObject(selected_model_id, "left");
-        } else if (keyboard_input === "E") {
           RotateSelectedObject(selected_model_id, "right");
+        } else if (keyboard_input === "E") {
+          RotateSelectedObject(selected_model_id, "left");
         } else if (keyboard_input === "SPACE") {
           moveSelectedObjectY(+1);
         } else if (keyboard_input === "CTRL") {
@@ -1776,6 +1776,10 @@ export default function CanvasContainer() {
       prebuild_created.current = true;
     }
   }, []);
+
+  useEffect(() => {
+    dispatch(set_selected_model_id(""));
+  }, [model_creation_state]);
 
   return (
     <>
