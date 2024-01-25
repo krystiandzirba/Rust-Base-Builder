@@ -1,7 +1,7 @@
 <h1 align="center">Rust Base Builder</h1>
 
 <p align="center">
-App that lets you create any rust base, simulate a raid and calculate all the building + upkeep cost.
+App for the Rust game, that lets you create any base, simulate a raid and calculate all the building + upkeep cost.
 </p>
 
 ![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/6851219d-808d-477e-9f78-c22a2eff6962)
@@ -15,8 +15,8 @@ You can build your base from scratch, view and modify it.
 Choose any object from the list on the left side and start placing it on the grid. <br>
 Before you place any object, you can rotate it with "Q" and "E" buttons and change the building height level.
 </p>
-  
-![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/91596376-1acd-44e1-ba2a-bd11b95eee7b)
+
+https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/24f7fa9e-e143-4573-802c-e2f3de5e4fcd
 
 <p align="center">
 All the build cost will be displayed on the right side along with the upkeep cost (scaling tiers):<br>
@@ -53,6 +53,30 @@ you can also manipulate the objects using the control buttons at the bottom of t
     <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/0f837ddc-573b-4440-b091-45d761ef20da" alt="Image">
   </p>
 
+<p align="center">
+    This button lets you change the rotation degree of the objects in the edit mode.
+  </p>
+
+<p align="center">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/332822fa-6a77-47a0-90cf-8d764abd96eb" alt="Image">
+  </p>
+
+  <h2 align="center">Modifying the base | triangle foundation, honeycomb and walls</h2>
+
+
+<p align="center">Currently the fastest and the easiest way to wall the honeycomb is to place the walls around and then edit it with the 0.125 distance unit + rotate it with either 30° or 60°</p>
+
+  _<p align="center">(however this design is not optimal and will change in the near future, example below)</p>_
+
+<p align="center">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/b466c334-6525-4d29-a755-b2aea56cd72d" alt="Image">
+  </p>
+
+<p align="center">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/1c6d74e8-3131-4f51-b8ac-bb2b04871389" alt="Image">
+  </p>
+
+
 <h2 align="center">Raid Simulator</h2>
 
 <p align="center">
@@ -74,10 +98,8 @@ If you want to start the raid again, or reset it, use the "reset raid" button.
 <p align="center">
     <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/9b614b4e-ca3d-43f1-b00b-5c3b356c9492" alt="Image">
   </p>
-  
-<p align="center">
-  <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/4d42e948-9afc-4f48-9eca-8a22dbc84b02" alt="Image">
-</p>
+
+https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/0b9ffa6a-8598-4c80-9306-65a5f21b2922
 
 <p align="center">
 All of the raid cost will be displayed on the right side, divided on the type and on all of the required resources.<br>
@@ -93,7 +115,7 @@ You can also enable the sub-ingredients and gunpowder calculator.
 <h2 align="center">Object visibility</h2>
 
 <p align="center">
-  This feature allows you to disable-enable the visibility of specific structures type and the xray mode (only in edit mode)
+  This feature allows you to disable-enable the visibility of specific structures type and the xray (only in edit mode)
 </p>
 
 <p align="center">
