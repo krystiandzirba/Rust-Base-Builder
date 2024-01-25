@@ -213,7 +213,7 @@ const pageSettingsSlice = createSlice({
 
     enable_model_textures: true,
     enable_model_material: true,
-    bloom_state: false,
+    bloom_state: true,
     better_lighting_state: true,
     ssao_state: false,
     antialiasing_state: false,

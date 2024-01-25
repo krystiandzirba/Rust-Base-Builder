@@ -405,7 +405,7 @@ export default function ControlsInput() {
               backgroundSize: "cover",
             }}
             onClick={() => {
-              set_display_remove_all_models_question(true);
+              DeleteSelectedObjectButton();
             }}
             onMouseEnter={TrashCanMouseEnter}
             onMouseLeave={TrashCanMouseLeave}

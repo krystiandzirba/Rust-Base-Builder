@@ -78,5 +78,5 @@ export default App;
 // if performance issue = canvas lighting + postprocessing + click events
 
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
-// change the lighting in the edit mode, enable bloom by default, tweak the emission and colors
 // fix the camera NSEW position, it is incorrectly calculated
+// merge the degree change from model creation and edit mode (make the control button degree affect the object creation)
