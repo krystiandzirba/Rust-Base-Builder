@@ -40,6 +40,7 @@ You can modify your base only in the edit mode, here you can select any placed o
 - SHIFT - change the distance unit of transformed object.
 - SPACE - move object up by (distance unit)
 - CTRL - move object down by (distance unit)
+- DEL | BACKSPACE - delete selected object
 </p>
 
 <p align="center">
@@ -85,6 +86,37 @@ You can also enable the sub-ingredients and gunpowder calculator.
   <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/ee37694b-59c8-49d6-927b-c634457c39eb" alt="Image">
 </p>
 
+<h1 align="center">Other:</h1>
+
+<h2 align="center">Object visibility</h2>
+
+<p align="center">
+  This feature allows you to disable-enable the visibility of specific structures type and the xray mode (only in edit mode)
+</p>
+
+<p align="center">
+  <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/48b8c0bc-7600-4012-b02f-e7faafe03b68" alt="Image">
+</p>
+
+<h2 align="center">Cameras</h2>
+
+<p align="center">
+  Here you can change the type of the camera 2D-3D
+</p>
+
+<p align="center">
+  <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/ecdc0522-13a1-4147-bd65-57fade4b8585" alt="Image">
+</p>
+
+<h2 align="center">Delete objects (edit mode)</h2>
+
+<p align="center">
+  Allows to delete either all of the objects or only the selected one form the grid.
+</p>
+
+<p align="center">
+  <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/3c6b99d8-df03-47f3-a890-0d03031c795c" alt="Image">
+</p>
 
 <h1 align="center">Future updates:</h1>
 
