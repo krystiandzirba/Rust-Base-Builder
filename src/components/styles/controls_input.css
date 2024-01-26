@@ -248,7 +248,7 @@
   backdrop-filter: blur(3px);
   z-index: 45;
   left: 50%;
-  top: 30%;
+  top: 26%;
   transform: translate(-50%, -50%);
   color: #bbbbbb;
   font-size: 1.2vw;
@@ -268,7 +268,7 @@
   background-color: black;
   z-index: 45;
   left: 50%;
-  top: 38%;
+  top: 34%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;

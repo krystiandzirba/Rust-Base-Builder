@@ -624,12 +624,12 @@ export default function CanvasContainer() {
   }
 
   function ChangeDefaultModelRotationRight() {
-    const newRotation = (default_model_rotation - Math.PI / 2 + 2 * Math.PI) % (Math.PI * 2);
+    const newRotation = default_model_rotation - object_rotation_degree * (Math.PI / 180);
     set_default_model_rotation(newRotation);
   }
 
   function ChangeDefaultModelRotationLeft() {
-    const newRotation = (default_model_rotation + Math.PI / 2) % (Math.PI * 2);
+    const newRotation = default_model_rotation + object_rotation_degree * (Math.PI / 180);
     set_default_model_rotation(newRotation);
   }
 

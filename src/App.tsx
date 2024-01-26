@@ -66,7 +66,6 @@ export default App;
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
 // add placing sound
-// add creation mode hints, placing objects, multiple placing*,
 // prebuild base setups selector
 // add 1st person walking in overview and raid mode
 // add new keyboard controls diescription - 2d camera (moving the objects) + creation mode
@@ -79,4 +78,3 @@ export default App;
 
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
 // fix the camera NSEW position, it is incorrectly calculated
-// merge the degree change from model creation and edit mode (make the control button degree affect the object creation)
