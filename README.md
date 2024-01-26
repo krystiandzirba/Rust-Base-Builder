@@ -51,6 +51,8 @@ You can modify your base only in the edit mode, here you can select any placed o
 - "Q" | "E" - rotate selected object right | left
 </p>
 
+https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/0bda418a-99f1-408e-ab8a-1632e128a12e
+
 <p align="center">
 you can also manipulate the objects using the control buttons at the bottom of the page:
 </p>
