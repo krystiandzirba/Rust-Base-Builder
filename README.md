@@ -13,8 +13,13 @@ App for the Rust game, that lets you create any base, simulate a raid and calcul
 <p align="center">
 You can build your base from scratch, view and modify it.
 Choose any object from the list on the left side and start placing it on the grid. <br>
-Before you place any object, you can rotate it with "Q" and "E" buttons and change the building height level.
+Before you place any object, you can rotate it with "Q" and "E" buttons and change the building height level.<br>
+  (you can change the rotation degree with the button at the bottom)
 </p>
+
+<p align="center">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/332822fa-6a77-47a0-90cf-8d764abd96eb" alt="Image">
+  </p>
 
 https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/24f7fa9e-e143-4573-802c-e2f3de5e4fcd
 
@@ -43,6 +48,7 @@ You can modify your base only in the edit mode, here you can select any placed o
 - SPACE - move object up by (distance unit)
 - CTRL - move object down by (distance unit)
 - DEL | BACKSPACE - delete selected object
+- "Q" | "E" - rotate selected object right | left
 </p>
 
 <p align="center">
@@ -53,27 +59,23 @@ you can also manipulate the objects using the control buttons at the bottom of t
     <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/0f837ddc-573b-4440-b091-45d761ef20da" alt="Image">
   </p>
 
-<p align="center">
-    This button lets you change the rotation degree of the objects in the edit mode.
-  </p>
-
-<p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/332822fa-6a77-47a0-90cf-8d764abd96eb" alt="Image">
-  </p>
-
   <h2 align="center">Modifying the base | triangle foundation, honeycomb and walls</h2>
 
 
-<p align="center">Currently the fastest and the easiest way to wall the honeycomb is to place the walls around and then edit it with the 0.125 distance unit + rotate it with either 30° or 60°</p>
+<p align="center">Currently the fastest and the easiest way to make triangle honeycomb is to place all the walls around it and then edit it with the 0.125 distance unit</p>
 
   _<p align="center">(however this design is not optimal and will change in the near future, example below)</p>_
 
 <p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/b466c334-6525-4d29-a755-b2aea56cd72d" alt="Image">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/41531f1b-2d5f-4bb6-8333-f36a1cb20235" alt="Image">
   </p>
 
 <p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/1c6d74e8-3131-4f51-b8ac-bb2b04871389" alt="Image">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/2d335b82-c4b2-41b4-a477-385098327562" alt="Image">
+  </p>
+
+<p align="center">
+    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/a979c2a8-1d32-4fca-a2e4-005612428900" alt="Image">
   </p>
 
 
