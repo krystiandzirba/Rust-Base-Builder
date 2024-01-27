@@ -78,3 +78,4 @@ export default App;
 
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
 // fix the camera NSEW position, it is incorrectly calculated
+// fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
