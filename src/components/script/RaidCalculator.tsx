@@ -35,6 +35,14 @@ import ropeThumbnail from "../../icons/rope_thumbnail.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import menu_sound from "../../audio/menu_sound.mp3";
+import buttons_sound from "../../audio/buttons_sound.mp3";
+import rocket_sound from "../../audio/rocket_sound.mp3";
+import charge_sound from "../../audio/charge_sound.mp3";
+import ammo_sound from "../../audio/ammo_sound2.mp3";
+import satchel_sound from "../../audio/satchel_sound.mp3";
+
 export default function RaidCalculator() {
   const dispatch = useDispatch();
 
@@ -42,6 +50,7 @@ export default function RaidCalculator() {
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
   const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
   const model_to_destroy = useSelector((state: RootState) => state.modelsData.model_to_destroy); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [raid_type, set_raid_type] = useState<string>("efficiency");
   const [rockets_cost, set_rockets_cost] = useState<number>(0);
@@ -496,6 +505,25 @@ export default function RaidCalculator() {
 
   function ChangeRaidType(type: string) {
     set_raid_type(type);
+
+    if (audio) {
+      if (type === "efficiency") {
+        AudioPlayer(menu_sound);
+      }
+
+      if (type === "rockets") {
+        AudioPlayer(rocket_sound);
+      }
+      if (type === "explosives") {
+        AudioPlayer(charge_sound);
+      }
+      if (type === "ammo") {
+        AudioPlayer(ammo_sound);
+      }
+      if (type === "satchel") {
+        AudioPlayer(satchel_sound);
+      }
+    }
   }
 
   useEffect(() => {
@@ -516,6 +544,9 @@ export default function RaidCalculator() {
 
   const HandleAdvancedResourceCountingState = () => {
     set_count_sub_ingredients(!count_sub_ingredients);
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   };
 
   useEffect(() => {

@@ -34,6 +34,9 @@ import {
   set_audio,
 } from "../../Store.tsx";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import menu_sound from "../../audio/menu_sound.mp3";
+
 const Settings = () => {
   const dispatch = useDispatch();
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
@@ -116,11 +119,17 @@ const Settings = () => {
   function SettingsButtonClick() {
     set_settings_button_click(!settings_button_click);
     set_controls_button_click(false);
+    if (audio) {
+      AudioPlayer(menu_sound);
+    }
   }
 
   function ControlsButtonClick() {
     set_controls_button_click(!controls_button_click);
     set_settings_button_click(false);
+    if (audio) {
+      AudioPlayer(menu_sound);
+    }
   }
 
   function HandleHintsSwitch(toggle: boolean) {

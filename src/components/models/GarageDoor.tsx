@@ -9,7 +9,8 @@ import { useSelector } from "react-redux";
 import { set_model_to_destroy, set_model_destroy_trigger } from "../../Store.tsx";
 
 import { AudioPlayer } from "../script/AudioPlayer.tsx";
-import raid_sound from "../../../public/audio/raid_sound.mp3";
+import raid_sound from "../../audio/raid_sound.mp3";
+import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -41,6 +42,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   function ModelOnClick() {
     if (page_mode === "edit" && !model_creation_state) {
       set_model_selected(true);
+      if (audio) {
+        AudioPlayer(object_selecting_sound);
+      }
     } else if (page_mode === "raid") {
       set_model_selected(true);
       dispatch(set_model_to_destroy(Model.displayName));

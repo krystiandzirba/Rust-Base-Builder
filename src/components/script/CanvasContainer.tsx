@@ -24,8 +24,10 @@ import { Model as TriangleProp } from "../models/TriangleProp.tsx";
 import { Model as ArrowProp } from "../models/ArrowProp.tsx";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
-import build_sound from "../../../public/audio/build_sound.mp3";
-import controls_sound from "../../../public/audio/controls_sound.mp3";
+import build_sound from "../../audio/build_sound.mp3";
+import controls_sound from "../../audio/controls_sound.mp3";
+import rotation_sound from "../../audio/rotation_sound.mp3";
+import buttons_sound from "../../audio/buttons_sound.mp3";
 
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
@@ -607,6 +609,9 @@ export default function CanvasContainer() {
 
   function ChangeModelElevationValue(value: number) {
     set_default_model_height_position(default_model_height_position + value);
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandlePivotStateSwitch() {
@@ -739,8 +744,14 @@ export default function CanvasContainer() {
           }
         } else if (keyboard_input === "Q") {
           RotateSelectedObject(selected_model_id, "right");
+          if (audio) {
+            AudioPlayer(rotation_sound);
+          }
         } else if (keyboard_input === "E") {
           RotateSelectedObject(selected_model_id, "left");
+          if (audio) {
+            AudioPlayer(rotation_sound);
+          }
         } else if (keyboard_input === "SPACE") {
           moveSelectedObjectY(+1);
         } else if (keyboard_input === "CTRL") {
@@ -749,7 +760,7 @@ export default function CanvasContainer() {
       }
     } else if (page_mode === "edit" && model_creation_state) {
       if ((audio && selected_model_id !== "empty") || model_creation_state) {
-        AudioPlayer(controls_sound);
+        AudioPlayer(rotation_sound);
       }
       if (keyboard_input === "Q") {
         ChangeDefaultModelRotationLeft();

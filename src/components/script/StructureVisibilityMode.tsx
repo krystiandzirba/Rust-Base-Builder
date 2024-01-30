@@ -12,6 +12,9 @@ import {
   set_miscs_active,
 } from "../../Store.tsx";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import buttons_sound from "../../audio/buttons_sound.mp3";
+
 export default function StructureVisibilityMode() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
@@ -24,6 +27,7 @@ export default function StructureVisibilityMode() {
   const frames_active = useSelector((state: RootState) => state.modelsData.frames_active);
   const roofs_active = useSelector((state: RootState) => state.modelsData.roofs_active);
   const miscs_active = useSelector((state: RootState) => state.modelsData.miscs_active);
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   return (
     <>
@@ -51,6 +55,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_models_xray_active(!models_xray_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={!models_xray_active ? "xray_switch_button visibility_switch_button_enabled" : "xray_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -62,6 +69,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_foundations_active(!foundations_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={foundations_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -70,6 +80,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_walls_active(!walls_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={walls_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -79,6 +92,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_floors_active(!floors_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={floors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -88,6 +104,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_stairs_active(!stairs_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={stairs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -99,6 +118,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_doors_active(!doors_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={doors_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -108,6 +130,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_frames_active(!frames_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={frames_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -117,6 +142,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_roofs_active(!roofs_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={roofs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
@@ -126,6 +154,9 @@ export default function StructureVisibilityMode() {
           <div
             onClick={() => {
               dispatch(set_miscs_active(!miscs_active));
+              if (audio) {
+                AudioPlayer(buttons_sound);
+              }
             }}
             className={miscs_active ? "visibility_switch_button visibility_switch_button_enabled" : "visibility_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >

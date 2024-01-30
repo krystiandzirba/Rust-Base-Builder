@@ -25,6 +25,9 @@ import {
   faCircleDown,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import buttons_sound from "../../audio/buttons_sound.mp3";
+
 import dumpsterClosed from "../../icons/dumpster_closed_bw.png";
 import dumpsterOpened from "../../icons/dumpster_opened.png";
 
@@ -43,6 +46,7 @@ export default function ControlsInput() {
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(60);
   const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
@@ -105,6 +109,9 @@ export default function ControlsInput() {
   };
 
   function ChangeRotationDegree() {
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
     if (object_rotation_degree === 90) {
       set_next_model_rotation_degree(30);
       set_model_rotation_degree(15);

@@ -22,10 +22,14 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import menu_sound from "../../audio/menu_sound.mp3";
+
 const Toolbar = () => {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [toolbar_enabled, set_toolbar_enabled] = useState<boolean>(true);
 
@@ -36,18 +40,27 @@ const Toolbar = () => {
       dispatch(set_selected_object_list(-1));
     dispatch(set_model_creation_state(false));
     dispatch(set_reset_raid_models(!reset_raid_models));
+    if (audio) {
+      AudioPlayer(menu_sound);
+    }
   }
 
   function PageModeEdit() {
     dispatch(set_page_mode("edit")),
       dispatch(set_object_selected(false)),
       dispatch(set_selected_model_id("empty"), dispatch(set_reset_raid_models(!reset_raid_models)));
+    if (audio) {
+      AudioPlayer(menu_sound);
+    }
   }
 
   function PageModeRaid() {
     dispatch(set_page_mode("raid")),
       dispatch(set_object_selected(false)),
       dispatch(set_selected_model_id("empty"), dispatch(set_reset_raid_models(!reset_raid_models)));
+    if (audio) {
+      AudioPlayer(menu_sound);
+    }
   }
 
   function ToggleToolbar() {

@@ -65,10 +65,10 @@ export default App;
 // add object list filters (walls / foundations / stairs / roofs / miscs )
 // move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
-// add placing sound
 // prebuild base setups selector
 // add 1st person walking in overview and raid mode
 // add new keyboard controls diescription - 2d camera (moving the objects) + creation mode
+// base share as a link
 
 // errors
 // -

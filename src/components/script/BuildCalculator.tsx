@@ -12,8 +12,12 @@ import gearThumbnail from "../../icons/gear_thumbnail.png";
 import sewing_kitThumbnail from "../../icons/sewing_kit_thumbnail.png";
 import lq_fuelThumbnail from "../../icons/lq_fuel_thumbnail.png";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import buttons_sound from "../../audio/buttons_sound.mp3";
+
 export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [build_cost, set_build_cost] = useState([{ wood: 0 }, { stone: 0 }, { metal: 0 }, { armored: 0 }]);
   const [components_cost, set_components_cost] = useState([{scrap:0}, {gear:0}, {sewing_kit: 0}, {lq_fuel:0}]); //prettier-ignore
@@ -482,6 +486,9 @@ models.filter(
 
   const HandleMiscCostState = () => {
     set_count_miscs_cost(!count_miscs_cost);
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   };
 
   useEffect(() => {

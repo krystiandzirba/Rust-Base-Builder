@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
 
+import { AudioPlayer } from "../script/AudioPlayer.tsx";
+import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
+
 type GLTFResult = GLTF & {
   nodes: {
     Plane002: THREE.Mesh;
@@ -26,6 +29,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures);
   const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/furnace_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
@@ -34,6 +38,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   function ModelOnClick() {
     if (page_mode === "edit" && !model_creation_state) {
       set_model_selected(true);
+      if (audio) {
+        AudioPlayer(object_selecting_sound);
+      }
     }
   }
 

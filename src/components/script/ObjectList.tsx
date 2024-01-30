@@ -62,8 +62,8 @@ import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
-import object_selecting_sound from "../../../public/audio/object_selecting_sound.mp3";
-import object_hover_sound from "../../../public/audio/object_hover_sound.mp3";
+import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
+import object_hover_sound from "../../audio/object_hover_sound.mp3";
 
 const SearchBarField = styled(TextField)({
   "& label.Mui-focused": {
