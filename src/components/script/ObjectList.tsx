@@ -61,6 +61,10 @@ import workbench_t3_Thumbnail from "../../object_list_thumbnails/workbench_3_thu
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import object_selecting_sound from "../../../public/audio/object_selecting_sound.mp3";
+import object_hover_sound from "../../../public/audio/object_hover_sound.mp3";
+
 const SearchBarField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#ffcea6",
@@ -99,6 +103,7 @@ export default function ObjectList() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [hovered_object_list, set_hovered_object_list] = useState<number>(-1);
 
@@ -293,24 +298,6 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("StoneWallFrame"));
       },
     },
-
-    // {
-    //   name: "stone square frame",
-    //   thumbnail: "",
-    //   keywords: ["stone", "square", "frame", "stone square", "stone frame", "square frame"],
-    //   onClick: () => {
-    //     dispatch(set_model_type_to_create("StoneSquareFrame"));
-    //   },
-    // },
-
-    // {
-    //   name: "stone triangle frame",
-    //   thumbnail: "",
-    //   keywords: ["stone", "triangle", "frame", "stone triangle", "stone frame", "triangle frame"],
-    //   onClick: () => {
-    //     dispatch(set_model_type_to_create("StoneTriangleFrame"));
-    //   },
-    // },
 
     {
       name: "stone floor square",
@@ -771,6 +758,9 @@ export default function ObjectList() {
                   : "object object_deselected"
               }
               onClick={() => {
+                if (audio) {
+                  AudioPlayer(object_selecting_sound);
+                }
                 if (selected_object_list === index) {
                   dispatch(set_selected_object_list(-1));
                   dispatch(set_model_creation_state(false));
@@ -782,6 +772,9 @@ export default function ObjectList() {
               }}
               onMouseOver={() => {
                 set_hovered_object_list(index);
+                if (audio) {
+                  AudioPlayer(object_hover_sound);
+                }
               }}
               onMouseLeave={() => {
                 set_hovered_object_list(-1);

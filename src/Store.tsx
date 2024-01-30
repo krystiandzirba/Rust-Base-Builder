@@ -218,6 +218,8 @@ const pageSettingsSlice = createSlice({
     ssao_state: false,
     antialiasing_state: false,
     HDR_state: false,
+
+    audio: true,
   },
   reducers: {
     set_enable_hints: (state, action) => {
@@ -273,6 +275,10 @@ const pageSettingsSlice = createSlice({
 
     set_enable_model_material: (state, action) => {
       return { ...state, enable_model_material: action.payload };
+    },
+
+    set_audio: (state, action) => {
+      return { ...state, audio: action.payload };
     },
   },
 });
@@ -339,6 +345,7 @@ export const {
   set_HDR_state,
   set_enable_model_textures,
   set_enable_model_material,
+  set_audio,
 } = pageSettingsSlice.actions;
 
 export const { set_cursor_type } = cursorTypeSlice.actions;

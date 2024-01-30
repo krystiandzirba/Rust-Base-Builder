@@ -31,6 +31,7 @@ import {
   set_ssao_state,
   set_antialiasing_state,
   set_HDR_state,
+  set_audio,
 } from "../../Store.tsx";
 
 const Settings = () => {
@@ -54,6 +55,7 @@ const Settings = () => {
   const ssao_state = useSelector((state: RootState) => state.pageSettings.ssao_state); //prettier-ignore
   const antialiasing_state = useSelector((state: RootState) => state.pageSettings.antialiasing_state); //prettier-ignore
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [settings_button_click, set_settings_button_click] = useState<boolean>(false);
   const [controls_button_click, set_controls_button_click] = useState<boolean>(false);
@@ -194,6 +196,14 @@ const Settings = () => {
       } else if (!toggle) {
         dispatch(set_enable_model_material(false));
       }
+    }
+  }
+
+  function HandleAudioSwitch(toggle: boolean) {
+    if (toggle) {
+      dispatch(set_audio(true));
+    } else if (!toggle) {
+      dispatch(set_audio(false));
     }
   }
 
@@ -474,8 +484,35 @@ const Settings = () => {
             </div>
           </div>
         </div>
+        <div className="settings_segment_title">audio:</div>
 
-        <div className="settings_segment_title">performace | system</div>
+        <div className="settings_element">
+          <div className="settings_element_description">audio:</div>
+          <div className="settings_element_buttons_container">
+            <div
+              onClick={() => HandleAudioSwitch(true)}
+              className={
+                audio
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
+              }
+            >
+              {!audio ? "enable" : "enabled"}
+            </div>
+            <div
+              onClick={() => HandleAudioSwitch(false)}
+              className={
+                !audio
+                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
+                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
+              }
+            >
+              {audio ? "disable" : "disabled"}
+            </div>
+          </div>
+        </div>
+
+        <div className="settings_segment_title">performance | system</div>
 
         <div className="settings_element">
           <div className="settings_element_description">performance mode:</div>

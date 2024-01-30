@@ -23,6 +23,10 @@ import {
 import { Model as TriangleProp } from "../models/TriangleProp.tsx";
 import { Model as ArrowProp } from "../models/ArrowProp.tsx";
 
+import { AudioPlayer } from "./AudioPlayer.tsx";
+import build_sound from "../../../public/audio/build_sound.mp3";
+import controls_sound from "../../../public/audio/controls_sound.mp3";
+
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareLow } from "../models/StoneFoundationSquareLow.tsx";
@@ -137,6 +141,7 @@ export default function CanvasContainer() {
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [modelsTransforms, setModelsTransforms] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
@@ -170,6 +175,9 @@ export default function CanvasContainer() {
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
       setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
+      if (audio) {
+        AudioPlayer(build_sound);
+      }
     }
   };
 
@@ -647,6 +655,9 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
+      if ((audio && selected_model_id !== "empty") || model_creation_state) {
+        AudioPlayer(controls_sound);
+      }
       {
         if (keyboard_input === "W") {
           if (camera_3d_direction === "north") {
@@ -737,6 +748,9 @@ export default function CanvasContainer() {
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
+      if ((audio && selected_model_id !== "empty") || model_creation_state) {
+        AudioPlayer(controls_sound);
+      }
       if (keyboard_input === "Q") {
         ChangeDefaultModelRotationLeft();
         RotateSelectedObject(selected_model_id, "left");
@@ -749,6 +763,9 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
+      if ((audio && selected_model_id !== "empty") || model_creation_state) {
+        AudioPlayer(controls_sound);
+      }
       {
         if (button_input === "move_left") {
           if (camera_3d_direction === "north") {
@@ -1778,7 +1795,7 @@ export default function CanvasContainer() {
   }, []);
 
   useEffect(() => {
-    dispatch(set_selected_model_id(""));
+    dispatch(set_selected_model_id("empty"));
   }, [model_creation_state]);
 
   return (

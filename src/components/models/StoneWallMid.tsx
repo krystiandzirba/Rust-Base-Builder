@@ -6,7 +6,10 @@ import { GLTF } from "three-stdlib";
 import { useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
 import { useSelector } from "react-redux";
-import { set_model_to_destroy, set_model_destroy_trigger, set_reset_raid_models } from "../../Store.tsx";
+import { set_model_to_destroy, set_model_destroy_trigger } from "../../Store.tsx";
+
+import { AudioPlayer } from "../script/AudioPlayer.tsx";
+import raid_sound from "../../../public/audio/raid_sound.mp3";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -28,6 +31,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
   const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/stone_wall_mid_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
@@ -42,6 +46,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       dispatch(set_model_to_destroy(Model.displayName));
       set_model_destroyed(true);
       dispatch(set_model_destroy_trigger(model_destroy_tigger + 1));
+      if (audio) {
+        AudioPlayer(raid_sound);
+      }
     }
   }
 
