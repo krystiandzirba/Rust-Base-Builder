@@ -159,7 +159,7 @@ You can also enable the sub-ingredients and gunpowder calculator.
 - Faster building<br>
 - Object copy + paste<br>
 - Undo button<br>
-- Placing + Destroying sounds<br>
+- Base share via link<br>
 - Bases saved in browser memory<br>
 - Different switchable layouts<br>
 - Performance Improvements<br>
