@@ -27,6 +27,8 @@ import {
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import buttons_sound from "../../audio/buttons_sound.mp3";
+import menu_sound from "../../audio/menu_sound.mp3";
+import delete_sound from "../../audio/delete_sound.mp3";
 
 import dumpsterClosed from "../../icons/dumpster_closed_bw.png";
 import dumpsterOpened from "../../icons/dumpster_opened.png";
@@ -48,9 +50,8 @@ export default function ControlsInput() {
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
-  const [previous_model_rotation_degree, set_previous_model_rotation_degree] = useState<number>(60);
-  const [model_rotation_degree, set_model_rotation_degree] = useState<number>(90);
-  const [next_model_rotation_degree, set_next_model_rotation_degree] = useState<number>(15);
+  const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
+  const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
 
   const [trash_can_hovered, set_trash_can_hovered] = useState<boolean>(false);
   const [dumpster_hovered, set_dumpster_hovered] = useState<boolean>(false);
@@ -113,30 +114,26 @@ export default function ControlsInput() {
       AudioPlayer(buttons_sound);
     }
     if (object_rotation_degree === 90) {
-      set_next_model_rotation_degree(30);
-      set_model_rotation_degree(15);
-      set_previous_model_rotation_degree(90);
+      set_next_object_rotation_degree(30);
+      set_previous_object_rotation_degree(90);
       dispatch(set_object_rotation_degree(15));
     }
 
     if (object_rotation_degree === 15) {
-      set_next_model_rotation_degree(60);
-      set_model_rotation_degree(30);
-      set_previous_model_rotation_degree(15);
+      set_next_object_rotation_degree(60);
+      set_previous_object_rotation_degree(15);
       dispatch(set_object_rotation_degree(30));
     }
 
     if (object_rotation_degree === 30) {
-      set_next_model_rotation_degree(90);
-      set_model_rotation_degree(60);
-      set_previous_model_rotation_degree(30);
+      set_next_object_rotation_degree(90);
+      set_previous_object_rotation_degree(30);
       dispatch(set_object_rotation_degree(60));
     }
 
     if (object_rotation_degree === 60) {
-      set_next_model_rotation_degree(15);
-      set_model_rotation_degree(90);
-      set_previous_model_rotation_degree(60);
+      set_next_object_rotation_degree(15);
+      set_previous_object_rotation_degree(60);
       dispatch(set_object_rotation_degree(90));
     }
   }
@@ -207,16 +204,11 @@ export default function ControlsInput() {
     dispatch(set_delete_object_trigger(delete_object_trigger + 1));
   }
 
-  function DecrementUnitButtonClick() {
-    dispatch(set_object_distance_multiplier(0.125));
-  }
-
-  function DefaultUnitButtonClick() {
-    dispatch(set_object_distance_multiplier(1));
-  }
-
-  function IncrementUnitButtonClick() {
-    dispatch(set_object_distance_multiplier(5));
+  function ChangeDistanceUnitButton(distance: number) {
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
+    dispatch(set_object_distance_multiplier(distance));
   }
 
   useEffect(() => {
@@ -348,7 +340,7 @@ export default function ControlsInput() {
                   ? "object_movement_multiplier movement_multiplier_left multiplier_active"
                   : "object_movement_multiplier movement_multiplier_left multiplier_inactive"
               }
-              onClick={() => DecrementUnitButtonClick()}
+              onClick={() => ChangeDistanceUnitButton(0.125)}
             >
               x0.125
             </button>
@@ -358,7 +350,7 @@ export default function ControlsInput() {
                   ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
                   : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
               }
-              onClick={() => DefaultUnitButtonClick()}
+              onClick={() => ChangeDistanceUnitButton(1)}
             >
               x1
             </button>
@@ -368,7 +360,7 @@ export default function ControlsInput() {
                   ? "object_movement_multiplier movement_multiplier_right multiplier_active"
                   : "object_movement_multiplier movement_multiplier_right multiplier_inactive"
               }
-              onClick={() => IncrementUnitButtonClick()}
+              onClick={() => ChangeDistanceUnitButton(5)}
             >
               x5
             </button>
@@ -382,11 +374,11 @@ export default function ControlsInput() {
               />
             </button>
             <div className="model_rotation_wheel">
-              <div className="model_rotation_next">{next_model_rotation_degree}°</div>
+              <div className="model_rotation_next">{next_object_rotation_degree}°</div>
               <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
-                -{model_rotation_degree}°-
+                -{object_rotation_degree}°-
               </button>
-              <div className="model_rotation_previous">{previous_model_rotation_degree}°</div>
+              <div className="model_rotation_previous">{previous_object_rotation_degree}°</div>
             </div>
             <button onClick={() => ObjectRotateButtonRight()} className="rotation_right">
               <FontAwesomeIcon
@@ -413,6 +405,9 @@ export default function ControlsInput() {
             }}
             onClick={() => {
               DeleteSelectedObjectButton();
+              if (audio) {
+                AudioPlayer(delete_sound);
+              }
             }}
             onMouseEnter={TrashCanMouseEnter}
             onMouseLeave={TrashCanMouseLeave}
@@ -430,6 +425,9 @@ export default function ControlsInput() {
             }}
             onClick={() => {
               set_display_remove_all_models_question(true);
+              if (audio) {
+                AudioPlayer(menu_sound);
+              }
             }}
             onMouseEnter={DumpsterMouseEnter}
             onMouseLeave={DumpsterMouseLeave}
@@ -446,6 +444,9 @@ export default function ControlsInput() {
                 onClick={() => {
                   DeleteAllObjects();
                   set_display_remove_all_models_question(false);
+                  if (audio) {
+                    AudioPlayer(delete_sound);
+                  }
                 }}
                 onMouseEnter={() => set_yes_answer_hovered(true)}
                 onMouseLeave={() => set_yes_answer_hovered(false)}
@@ -457,6 +458,9 @@ export default function ControlsInput() {
                 className="delete_all_question_button"
                 onClick={() => {
                   set_display_remove_all_models_question(false);
+                  if (audio) {
+                    AudioPlayer(menu_sound);
+                  }
                 }}
                 onMouseEnter={() => set_no_answer_hovered(true)}
                 onMouseLeave={() => set_no_answer_hovered(false)}

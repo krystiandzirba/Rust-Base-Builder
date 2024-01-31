@@ -73,7 +73,6 @@ export default App;
 // errors
 // -
 
-///// make a bledner 1:0 button on-off instead of toolbar hide-display icon
 // if performance issue = canvas lighting + postprocessing + click events
 
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)

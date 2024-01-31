@@ -2,7 +2,12 @@ import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 
-import { set_model_type_to_create, set_model_creation_state, set_selected_object_list } from "../../Store.tsx";
+import {
+  set_model_type_to_create,
+  set_model_creation_state,
+  set_selected_object_list,
+  set_object_rotation_degree,
+} from "../../Store.tsx";
 
 import stoneFoundationSquareHighThumbnail from "../../object_list_thumbnails/stone_foundation_square_high_thumbnail.png";
 import stoneFoundationSquareMidThumbnail from "../../object_list_thumbnails/stone_foundation_square_mid_thumbnail.png";
@@ -767,6 +772,7 @@ export default function ObjectList() {
                 } else {
                   dispatch(set_selected_object_list(index));
                   dispatch(set_model_creation_state(true));
+                  dispatch(set_object_rotation_degree(90));
                 }
                 item.onClick?.();
               }}

@@ -616,11 +616,17 @@ export default function CanvasContainer() {
 
   function HandlePivotStateSwitch() {
     set_pivot_controls_state(!pivot_controls_state);
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandlePivotXAxisStateSwitch() {
     if (pivot_controls_state) {
       set_pivot_x_axis_state(!pivot_x_axis_state);
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -628,11 +634,17 @@ export default function CanvasContainer() {
     if (pivot_controls_state) {
       set_pivot_y_axis_state(!pivot_y_axis_state);
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandlePivotZAxisStateSwitch() {
     if (pivot_controls_state) {
       set_pivot_z_axis_state(!pivot_z_axis_state);
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -1809,6 +1821,10 @@ export default function CanvasContainer() {
     dispatch(set_selected_model_id("empty"));
   }, [model_creation_state]);
 
+  useEffect(() => {
+    set_default_model_rotation(0);
+  }, [object_rotation_degree]);
+
   return (
     <>
       {page_mode === "edit" && (
@@ -1973,6 +1989,7 @@ export default function CanvasContainer() {
                     default_model_height_position / 2 + 0.0425,
                     mouse_canvas_z_coordinate,
                   ]}
+                  rotation={[0, default_model_rotation, 0]}
                   scale={[2, default_model_height_position + 0.08, 2]}
                 >
                   <meshStandardMaterial
@@ -2056,6 +2073,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.04,
                       mouse_canvas_z_coordinate,
                     ]}
+                    rotation={[0, default_model_rotation, 0]}
                     scale={[1.25, default_model_height_position + 0.08, 0.75]}
                   >
                     <meshStandardMaterial
@@ -2081,6 +2099,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.04,
                       mouse_canvas_z_coordinate,
                     ]}
+                    rotation={[0, default_model_rotation, 0]}
                     scale={[0.75, default_model_height_position + 0.08, 0.75]}
                   >
                     <meshStandardMaterial
