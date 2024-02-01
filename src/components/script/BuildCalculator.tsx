@@ -47,13 +47,15 @@ export default function ResourceCounter() {
     let misc_wood_storage_box_count = models.filter((model) => model === "WoodStorageBox").length;
     let misc_furnace_count = models.filter((model) => model === "Furnace").length;
     let misc_workbench_t3_count = models.filter((model) => model === "WorkbenchT3").length;
+    let misc_sleeping_bag_count = models.filter((model) => model === "SleepingBag").length;
 
     set_total_misc_count(
       misc_tool_cupboard_count +
         misc_large_wood_box_count +
         misc_wood_storage_box_count +
         misc_furnace_count +
-        misc_workbench_t3_count
+        misc_workbench_t3_count +
+        misc_sleeping_bag_count
     );
 
     // - - - - - - - - - - - wood - - - - - - - - - -

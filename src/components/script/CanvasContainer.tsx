@@ -82,6 +82,7 @@ import { Model as WoodStorageBox } from "../models/WoodStorageBox.tsx";
 import { Model as LargeWoodBox } from "../models/LargeWoodBox.tsx";
 import { Model as Furnace } from "../models/Furnace.tsx";
 import { Model as WorkbenchT3 } from "../models/WorkbenchT3.tsx";
+import { Model as SleepingBag } from "../models/SleepingBag.tsx";
 
 import CanvasGrids from "./CanvasGrids.tsx";
 import CanvasLights from "./CanvasLights.tsx";
@@ -489,6 +490,9 @@ export default function CanvasContainer() {
       } else if (model_type_to_create === "WorkbenchT3") {
         set_generated_id(randomIdGenerator());
         addModel(WorkbenchT3, generated_id, default_object_rotation);
+      } else if (model_type_to_create === "SleepingBag") {
+        set_generated_id(randomIdGenerator());
+        addModel(SleepingBag, generated_id, default_object_rotation);
       }
     }
   }
@@ -980,7 +984,8 @@ export default function CanvasContainer() {
     } else if (
       model_type_to_create === "WoodStorageBox" ||
       model_type_to_create === "LargeWoodBox" ||
-      model_type_to_create === "WorkbenchT3"
+      model_type_to_create === "WorkbenchT3" ||
+      model_type_to_create === "SleepingBag"
     ) {
       set_model_prop("storage_prop");
     }
@@ -2084,11 +2089,13 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
-                  <ArrowProp
-                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
-                    rotation={[0, default_model_rotation + Math.PI, 0]}
-                    scale={[2, 12, 1]}
-                  ></ArrowProp>
+                  {model_type_to_create !== "SleepingBag" && (
+                    <ArrowProp
+                      position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                      rotation={[0, default_model_rotation + Math.PI, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
                 </>
               )}
               {model_prop === "tool_cupboard_prop" && (
