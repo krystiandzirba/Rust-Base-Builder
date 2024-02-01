@@ -84,6 +84,9 @@ export default function RaidCalculator() {
     set_gunpowder_cost(0);
     set_charcoal_cost(0);
     set_metal_fragments_cost(0);
+    if (audio) {
+      AudioPlayer(menu_sound);
+    }
   }
 
   function CalculateEfficiencyCost() {

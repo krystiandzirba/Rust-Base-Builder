@@ -69,6 +69,7 @@ export default App;
 // add 1st person walking in overview and raid mode
 // add new keyboard controls diescription - 2d camera (moving the objects) + creation mode
 // base share as a link
+// creating an object > WASD (offset by 0.125 on every click) -> model placed + offset reset for future models
 
 // errors
 // -

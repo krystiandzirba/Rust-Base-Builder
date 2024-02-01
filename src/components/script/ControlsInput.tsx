@@ -405,7 +405,7 @@ export default function ControlsInput() {
             }}
             onClick={() => {
               DeleteSelectedObjectButton();
-              if (audio) {
+              if (audio && object_selected) {
                 AudioPlayer(delete_sound);
               }
             }}
