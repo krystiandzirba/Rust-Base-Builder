@@ -149,6 +149,7 @@ You can also enable the sub-ingredients and gunpowder calculator.
 <h1 align="center">Future updates:</h1>
 
 <p align="center">
+- Phone version<br>  
 - Add Armored structures tier<br>
 - Add External walls<br>
 - Add the most important of the remaining "misc" objects such as beds, fences, shelves, research table, large furnace, repair bench...<br>
