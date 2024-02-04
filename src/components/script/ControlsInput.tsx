@@ -228,13 +228,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "north" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "N"
+                ? "N (+Z)"
                 : camera_3d_direction === "east"
-                ? "E"
+                ? "E (+X)"
                 : camera_3d_direction === "west"
-                ? "W"
+                ? "W (-X)"
                 : camera_3d_direction === "south"
-                ? "S"
+                ? "S (-Z)"
                 : "unknown"}
             </div>
           )}
@@ -251,13 +251,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "west" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "E"
+                ? "E (+X)"
                 : camera_3d_direction === "east"
-                ? "S"
+                ? "S (-Z)"
                 : camera_3d_direction === "west"
-                ? "N"
+                ? "N (+Z)"
                 : camera_3d_direction === "south"
-                ? "W"
+                ? "W (-X)"
                 : "unknown"}
             </div>
           )}
@@ -274,13 +274,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "south" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "S"
+                ? "S (-Z)"
                 : camera_3d_direction === "east"
-                ? "W"
+                ? "W (-X)"
                 : camera_3d_direction === "west"
-                ? "E"
+                ? "E (+X)"
                 : camera_3d_direction === "south"
-                ? "N"
+                ? "N (+Z)"
                 : "unknown"}
             </div>
           )}
@@ -297,13 +297,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "east" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "W"
+                ? "W (-X)"
                 : camera_3d_direction === "east"
-                ? "N"
+                ? "N (+Z)"
                 : camera_3d_direction === "west"
-                ? "S"
+                ? "S (-Z)"
                 : camera_3d_direction === "south"
-                ? "E"
+                ? "E (+X)"
                 : "unknown"}
             </div>
           )}

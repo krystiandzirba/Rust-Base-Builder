@@ -169,3 +169,32 @@ input::-webkit-inner-spin-button {
 .pivot_controls_right {
   border-radius: 0 1vh 1vh 0;
 }
+
+.offset_container_main {
+  position: absolute;
+  width: 12.5vw;
+  height: 2.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 19%;
+  z-index: 55;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.offset_container_sub {
+  width: 50%;
+  height: 100%;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}

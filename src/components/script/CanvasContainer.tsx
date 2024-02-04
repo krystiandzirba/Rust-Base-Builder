@@ -20,7 +20,8 @@ import {
   set_camera_3d_direction,
 } from "../../Store.tsx";
 
-import { Model as TriangleProp } from "../models/TriangleProp.tsx";
+import { Model as TrianglePropSolid } from "../models/TrianglePropSolid.tsx";
+import { Model as TrianglePropWireframe } from "../models/TrianglePropWireframe.tsx";
 import { Model as ArrowProp } from "../models/ArrowProp.tsx";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
@@ -138,6 +139,7 @@ export default function CanvasContainer() {
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
+  const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
@@ -159,6 +161,8 @@ export default function CanvasContainer() {
   const [pivot_y_axis_state, set_pivot_y_axis_state] = useState<boolean>(false);
   const [pivot_z_axis_state, set_pivot_z_axis_state] = useState<boolean>(false);
   const [default_model_rotation, set_default_model_rotation] = useState<number>(0);
+  const [model_x_position_offset, set_model_x_position_offset] = useState<number>(0);
+  const [model_z_position_offset, set_model_z_position_offset] = useState<number>(0);
 
   const mouse_window_click = new THREE.Vector2();
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -324,7 +328,11 @@ export default function CanvasContainer() {
         setModelsTransforms((prevTransforms) => ({
           ...prevTransforms,
           [generated_id]: {
-            position: { x: rounded_x, z: rounded_z, y: default_model_height_position + model_foundation_elevation },
+            position: {
+              x: rounded_x + model_x_position_offset,
+              z: rounded_z + model_z_position_offset,
+              y: default_model_height_position + model_foundation_elevation,
+            },
             rotation: new THREE.Euler(0, default_model_rotation, 0, "XYZ"),
           },
         }));
@@ -676,7 +684,7 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
-      if ((audio && selected_model_id !== "empty") || model_creation_state) {
+      if (audio && selected_model_id !== "empty") {
         AudioPlayer(controls_sound);
       }
       {
@@ -775,7 +783,7 @@ export default function CanvasContainer() {
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
-      if ((audio && selected_model_id !== "empty") || model_creation_state) {
+      if (audio && selected_model_id !== "empty") {
         AudioPlayer(rotation_sound);
       }
       if (keyboard_input === "Q") {
@@ -784,13 +792,53 @@ export default function CanvasContainer() {
       } else if (keyboard_input === "E") {
         ChangeDefaultModelRotationRight();
         RotateSelectedObject(selected_model_id, "right");
+      } else if (keyboard_input === "W") {
+        if (camera_3d_direction === "north") {
+          set_model_z_position_offset(model_z_position_offset - 0.125);
+        } else if (camera_3d_direction === "south") {
+          set_model_z_position_offset(model_z_position_offset + 0.125);
+        } else if (camera_3d_direction === "east") {
+          set_model_x_position_offset(model_x_position_offset + 0.125);
+        } else if (camera_3d_direction === "west") {
+          set_model_x_position_offset(model_x_position_offset - 0.125);
+        }
+      } else if (keyboard_input === "S") {
+        if (camera_3d_direction === "north") {
+          set_model_z_position_offset(model_z_position_offset + 0.125);
+        } else if (camera_3d_direction === "south") {
+          set_model_z_position_offset(model_z_position_offset - 0.125);
+        } else if (camera_3d_direction === "east") {
+          set_model_x_position_offset(model_x_position_offset - 0.125);
+        } else if (camera_3d_direction === "west") {
+          set_model_x_position_offset(model_x_position_offset + 0.125);
+        }
+      } else if (keyboard_input === "A") {
+        if (camera_3d_direction === "north") {
+          set_model_x_position_offset(model_x_position_offset - 0.125);
+        } else if (camera_3d_direction === "south") {
+          set_model_x_position_offset(model_x_position_offset + 0.125);
+        } else if (camera_3d_direction === "east") {
+          set_model_z_position_offset(model_z_position_offset - 0.125);
+        } else if (camera_3d_direction === "west") {
+          set_model_z_position_offset(model_z_position_offset + 0.125);
+        }
+      } else if (keyboard_input === "D") {
+        if (camera_3d_direction === "north") {
+          set_model_x_position_offset(model_x_position_offset + 0.125);
+        } else if (camera_3d_direction === "south") {
+          set_model_x_position_offset(model_x_position_offset - 0.125);
+        } else if (camera_3d_direction === "east") {
+          set_model_z_position_offset(model_z_position_offset + 0.125);
+        } else if (camera_3d_direction === "west") {
+          set_model_z_position_offset(model_z_position_offset - 0.125);
+        }
       }
     }
   }, [key_press_trigger]);
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
-      if ((audio && selected_model_id !== "empty") || model_creation_state) {
+      if (audio && selected_model_id !== "empty") {
         AudioPlayer(controls_sound);
       }
       {
@@ -1815,6 +1863,11 @@ export default function CanvasContainer() {
     addPrebuild(StoneFloorTriangle, "T75", new THREE.Euler(0, Math.PI, 0));
   }
 
+  function IsOffsetActive() {
+    if (model_x_position_offset) return true;
+    else if (model_z_position_offset) return true;
+  }
+
   useEffect(() => {
     if (!prebuild_created.current) {
       CreatePrebuildBase();
@@ -1829,6 +1882,11 @@ export default function CanvasContainer() {
   useEffect(() => {
     set_default_model_rotation(0);
   }, [object_rotation_degree]);
+
+  useEffect(() => {
+    set_model_x_position_offset(0);
+    set_model_z_position_offset(0);
+  }, [selected_object_list]);
 
   return (
     <>
@@ -1882,11 +1940,6 @@ export default function CanvasContainer() {
               Z
             </button>
           </div>
-        </>
-      )}
-
-      {page_mode === "edit" && (
-        <>
           <div className="object_elevation_container_description">build on height level:</div>
           <div className="object_elevation_container">
             <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-1)}>
@@ -1898,8 +1951,15 @@ export default function CanvasContainer() {
               <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
             </button>
           </div>
+          {model_creation_state && (
+            <div className="offset_container_main">
+              <div className="offset_container_sub offset_container_x">X offset: {model_x_position_offset}</div>
+              <div className="offset_container_sub offset_container_y">Z offset: {-model_z_position_offset}</div>
+            </div>
+          )}
         </>
       )}
+
       <div className="canvas_container">
         <Canvas
           onPointerDown={(event) => CanvasPointerDown(event)}
@@ -1988,42 +2048,76 @@ export default function CanvasContainer() {
           {page_mode === "edit" && model_creation_state && (
             <>
               {model_prop === "square_foundation_prop" && (
-                <Box
-                  position={[
-                    mouse_canvas_x_coordinate,
-                    default_model_height_position / 2 + 0.0425,
-                    mouse_canvas_z_coordinate,
-                  ]}
-                  rotation={[0, default_model_rotation, 0]}
-                  scale={[2, default_model_height_position + 0.08, 2]}
-                >
-                  <meshStandardMaterial
-                    color={"#ffa463"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={bloom_state ? 3 : 0}
-                  />
-                </Box>
+                <>
+                  <Box
+                    position={[
+                      mouse_canvas_x_coordinate + model_x_position_offset,
+                      default_model_height_position / 2 + 0.0425,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
+                    ]}
+                    rotation={[0, default_model_rotation, 0]}
+                    scale={[2, default_model_height_position + 0.08, 2]}
+                  >
+                    <meshStandardMaterial
+                      color={"#ffa463"}
+                      emissive={"rgb(255, 206, 166)"}
+                      emissiveIntensity={bloom_state ? 3 : 0}
+                    />
+                  </Box>
+
+                  {IsOffsetActive() && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate,
+                        default_model_height_position / 2 + 0.0425,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, default_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 2]}
+                    >
+                      <meshStandardMaterial
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                        opacity={0.2}
+                        wireframe={true}
+                      />
+                    </Box>
+                  )}
+                </>
               )}
               {model_prop === "triangle_foundation_prop" && (
                 <>
-                  <TriangleProp
+                  <TrianglePropSolid
                     position={[
-                      mouse_canvas_x_coordinate,
+                      mouse_canvas_x_coordinate + model_x_position_offset,
                       default_model_height_position / 100,
-                      mouse_canvas_z_coordinate,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[1, default_model_height_position * 100 + 10, 1]}
-                  ></TriangleProp>
+                  ></TrianglePropSolid>
+
+                  {IsOffsetActive() && (
+                    <TrianglePropWireframe
+                      position={[
+                        mouse_canvas_x_coordinate,
+                        default_model_height_position / 100,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, default_model_rotation, 0]}
+                      scale={[1, default_model_height_position * 100 + 10, 1]}
+                    ></TrianglePropWireframe>
+                  )}
                 </>
               )}
               {model_prop === "wall_prop" && (
                 <>
                   <Box
                     position={[
-                      mouse_canvas_x_coordinate,
+                      mouse_canvas_x_coordinate + model_x_position_offset,
                       default_model_height_position / 2 + 0.04,
-                      mouse_canvas_z_coordinate,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[2, default_model_height_position + 0.08, 0.1]}
@@ -2036,8 +2130,34 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
+
+                  {IsOffsetActive() && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, default_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                        wireframe={true}
+                      />
+                    </Box>
+                  )}
+
                   <ArrowProp
-                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                    position={[
+                      mouse_canvas_x_coordinate + model_x_position_offset,
+                      default_model_height_position,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
+                    ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
@@ -2047,9 +2167,9 @@ export default function CanvasContainer() {
                 <>
                   <Box
                     position={[
-                      mouse_canvas_x_coordinate,
+                      mouse_canvas_x_coordinate + model_x_position_offset,
                       default_model_height_position / 2 + 0.04,
-                      mouse_canvas_z_coordinate,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[1, default_model_height_position + 0.08, 0.1]}
@@ -2062,8 +2182,34 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
+
+                  {IsOffsetActive() && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, default_model_rotation, 0]}
+                      scale={[1, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                        wireframe={true}
+                      />
+                    </Box>
+                  )}
+
                   <ArrowProp
-                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                    position={[
+                      mouse_canvas_x_coordinate + model_x_position_offset,
+                      default_model_height_position,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
+                    ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
@@ -2074,9 +2220,9 @@ export default function CanvasContainer() {
                 <>
                   <Box
                     position={[
-                      mouse_canvas_x_coordinate,
+                      mouse_canvas_x_coordinate + model_x_position_offset,
                       default_model_height_position / 2 + 0.04,
-                      mouse_canvas_z_coordinate,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[1.25, default_model_height_position + 0.08, 0.75]}
@@ -2089,9 +2235,35 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
+
+                  {IsOffsetActive() && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, default_model_rotation, 0]}
+                      scale={[1.25, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                        wireframe={true}
+                      />
+                    </Box>
+                  )}
+
                   {model_type_to_create !== "SleepingBag" && (
                     <ArrowProp
-                      position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
                       rotation={[0, default_model_rotation + Math.PI, 0]}
                       scale={[2, 12, 1]}
                     ></ArrowProp>
@@ -2102,9 +2274,9 @@ export default function CanvasContainer() {
                 <>
                   <Box
                     position={[
-                      mouse_canvas_x_coordinate,
+                      mouse_canvas_x_coordinate + model_x_position_offset,
                       default_model_height_position / 2 + 0.04,
-                      mouse_canvas_z_coordinate,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
                     rotation={[0, default_model_rotation, 0]}
                     scale={[0.75, default_model_height_position + 0.08, 0.75]}
@@ -2117,8 +2289,34 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
+
+                  {IsOffsetActive() && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, default_model_rotation, 0]}
+                      scale={[0.75, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                        wireframe={true}
+                      />
+                    </Box>
+                  )}
+
                   <ArrowProp
-                    position={[mouse_canvas_x_coordinate, default_model_height_position, mouse_canvas_z_coordinate]}
+                    position={[
+                      mouse_canvas_x_coordinate + model_x_position_offset,
+                      default_model_height_position,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
+                    ]}
                     rotation={[0, default_model_rotation + Math.PI, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>

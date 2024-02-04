@@ -75,6 +75,10 @@ export default function Hints() {
           <div className="hint_part">
             <span className="orange_theme_color">Q | E</span> - rotate
           </div>
+
+          <div className="hint_part">
+            <span className="orange_theme_color">WASD</span> - change offset
+          </div>
         </div>
       )}
     </div>

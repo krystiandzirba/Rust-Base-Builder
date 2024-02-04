@@ -25,6 +25,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           color={"#ffa463"}
           emissive={"rgb(255, 206, 166)"}
           emissiveIntensity={bloom_state ? 3 : 0}
+          wireframe={true}
         />
       </mesh>
     </group>
@@ -32,5 +33,3 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
 }
 
 useGLTF.preload("./models/triangle_prop.glb");
-
-Model.displayName = "Trriangle";
