@@ -155,6 +155,7 @@ You can also enable the sub-ingredients and gunpowder calculator.
 - Add the most important of the remaining "misc" objects such as beds, fences, shelves, research table, large furnace, repair bench...<br>
 - Add Twig and Wood structures tiers (if needed)<br>
 - First person mode (depends on performance impact)<br>
+- Pixel gap structures building<br>
 - Rust-like object snapping (depends on performance impact)<br>
 - Most popular base prebuilds in a single button click<br>
 - Faster building<br>
