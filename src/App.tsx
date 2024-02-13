@@ -40,7 +40,7 @@ function App() {
   const model_transform_controls = useSelector((state: RootState) => state.pageSettings.enable_model_transform_controls); //prettier-ignore
 
   return (
-    <div>
+    <>
       {model_transform_controls && <ControlsInput />}
       <Toolbar />
       {enable_presets && <Presets />}
@@ -54,7 +54,7 @@ function App() {
       <Settings />
       {enable_structures_visibility && <StructureVisibilityMode />}
       <Github />
-    </div>
+    </>
   );
 }
 
