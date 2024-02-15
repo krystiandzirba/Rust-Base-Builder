@@ -341,166 +341,72 @@ export default function CanvasContainer() {
   }
 
   function CanvasOnClick() {
+    const modelTypeMap = {
+      // Stone models
+      StoneFoundationSquareHigh: StoneFoundationSquareHigh,
+      StoneFoundationSquareMid: StoneFoundationSquareMid,
+      StoneFoundationSquareLow: StoneFoundationSquareLow,
+      StoneFoundationTriangleHigh: StoneFoundationTriangleHigh,
+      StoneFoundationTriangleMid: StoneFoundationTriangleMid,
+      StoneFoundationTriangleLow: StoneFoundationTriangleLow,
+      StoneWallHigh: StoneWallHigh,
+      StoneWallMid: StoneWallMid,
+      StoneWallLow: StoneWallLow,
+      StoneDoorway: StoneDoorway,
+      StoneWallFrame: StoneWallFrame,
+      StoneWindow: StoneWindow,
+      StoneStairsLShape: StoneStairsLShape,
+      StoneStairsUShape: StoneStairsUShape,
+      StoneFloorSquare: StoneFloorSquare,
+      StoneFloorTriangle: StoneFloorTriangle,
+      StoneFloorFrameSquare: StoneFloorFrameSquare,
+      StoneFloorFrameTriangle: StoneFloorFrameTriangle,
+      StoneRoofSquare: StoneRoofSquare,
+      StoneRoofTriangle: StoneRoofTriangle,
+
+      // Metal models
+      MetalFoundationSquareHigh: MetalFoundationSquareHigh,
+      MetalFoundationSquareMid: MetalFoundationSquareMid,
+      MetalFoundationSquareLow: MetalFoundationSquareLow,
+      MetalFoundationTriangleHigh: MetalFoundationTriangleHigh,
+      MetalFoundationTriangleMid: MetalFoundationTriangleMid,
+      MetalFoundationTriangleLow: MetalFoundationTriangleLow,
+      MetalWallHigh: MetalWallHigh,
+      MetalWallMid: MetalWallMid,
+      MetalWallLow: MetalWallLow,
+      MetalDoorway: MetalDoorway,
+      MetalWallFrame: MetalWallFrame,
+      MetalWindow: MetalWindow,
+      MetalStairsLShape: MetalStairsLShape,
+      MetalStairsUShape: MetalStairsUShape,
+      MetalFloorSquare: MetalFloorSquare,
+      MetalFloorTriangle: MetalFloorTriangle,
+      MetalFloorFrameSquare: MetalFloorFrameSquare,
+      MetalFloorFrameTriangle: MetalFloorFrameTriangle,
+      MetalRoofSquare: MetalRoofSquare,
+      MetalRoofTriangle: MetalRoofTriangle,
+      MetalDoor: MetalDoor,
+      GarageDoor: GarageDoor,
+
+      // Windows
+      MetalVerticalEmbrasure: MetalVerticalEmbrasure,
+      StrengthenedGlassWindow: StrenghtenedGlassWindow,
+
+      // Miscs
+      ToolCupboard: ToolCupboard,
+      WoodStorageBox: WoodStorageBox,
+      LargeWoodBox: LargeWoodBox,
+      Furnace: Furnace,
+      WorkbenchT3: WorkbenchT3,
+      SleepingBag: SleepingBag,
+    };
+
     if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
-      if (model_type_to_create === "StoneFoundationSquareHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareHigh, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFoundationSquareMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareMid, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFoundationSquareLow") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationSquareLow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFoundationTriangleHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationTriangleHigh, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFoundationTriangleMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationTriangleMid, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFoundationTriangleLow") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFoundationTriangleLow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneWallHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneWallHigh, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneWallMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneWallMid, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneWallLow") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneWallLow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneDoorway") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneDoorway, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneWallFrame") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneWallFrame, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneWindow") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneWindow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneStairsLShape") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneStairsLShape, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneStairsUShape") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneStairsUShape, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFloorSquare") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFloorSquare, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFloorTriangle") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFloorTriangle, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFloorFrameSquare") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFloorFrameSquare, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneFloorFrameTriangle") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneFloorFrameTriangle, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneRoofSquare") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneRoofSquare, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StoneRoofTriangle") {
-        set_generated_id(randomIdGenerator());
-        addModel(StoneRoofTriangle, generated_id, default_object_rotation);
-      }
+      const modelClass = modelTypeMap[model_type_to_create as keyof typeof modelTypeMap];
 
-      // metal
-      else if (model_type_to_create === "MetalFoundationSquareHigh") {
+      if (modelClass) {
         set_generated_id(randomIdGenerator());
-        addModel(MetalFoundationSquareHigh, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFoundationSquareMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFoundationSquareMid, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFoundationSquareLow") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFoundationSquareLow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFoundationTriangleHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFoundationTriangleHigh, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFoundationTriangleMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFoundationTriangleMid, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFoundationTriangleLow") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFoundationTriangleLow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalWallHigh") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalWallHigh, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalWallMid") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalWallMid, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalWallLow") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalWallLow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalDoorway") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalDoorway, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalWallFrame") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalWallFrame, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalWindow") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalWindow, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalStairsLShape") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalStairsLShape, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalStairsUShape") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalStairsUShape, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFloorSquare") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFloorSquare, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFloorTriangle") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFloorTriangle, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFloorFrameSquare") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFloorFrameSquare, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalFloorFrameTriangle") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalFloorFrameTriangle, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalRoofSquare") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalRoofSquare, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalRoofTriangle") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalRoofTriangle, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "MetalDoor") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalDoor, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "GarageDoor") {
-        set_generated_id(randomIdGenerator());
-        addModel(GarageDoor, generated_id, default_object_rotation);
-      }
-
-      // windows
-      else if (model_type_to_create === "MetalVerticalEmbrasure") {
-        set_generated_id(randomIdGenerator());
-        addModel(MetalVerticalEmbrasure, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "StrenghtenedGlassWindow") {
-        set_generated_id(randomIdGenerator());
-        addModel(StrenghtenedGlassWindow, generated_id, default_object_rotation);
-      }
-
-      //miscs
-      else if (model_type_to_create === "ToolCupboard") {
-        set_generated_id(randomIdGenerator());
-        addModel(ToolCupboard, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "WoodStorageBox") {
-        set_generated_id(randomIdGenerator());
-        addModel(WoodStorageBox, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "LargeWoodBox") {
-        set_generated_id(randomIdGenerator());
-        addModel(LargeWoodBox, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "Furnace") {
-        set_generated_id(randomIdGenerator());
-        addModel(Furnace, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "WorkbenchT3") {
-        set_generated_id(randomIdGenerator());
-        addModel(WorkbenchT3, generated_id, default_object_rotation);
-      } else if (model_type_to_create === "SleepingBag") {
-        set_generated_id(randomIdGenerator());
-        addModel(SleepingBag, generated_id, default_object_rotation);
+        addModel(modelClass, generated_id, default_object_rotation);
       }
     }
   }
