@@ -149,18 +149,18 @@ export default function CanvasContainer() {
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
-  const [modelsTransforms, setModelsTransforms] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
+  const [modelsData, setModelsTransforms] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
   const [model_prop, set_model_prop] = useState<string>("none");
 
-  const default_object_rotation = new THREE.Euler(0, 0, 0);
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
   const [default_model_height_position, set_default_model_height_position] = useState<number>(0);
   const [pivot_controls_state, set_pivot_controls_state] = useState<boolean>(false);
   const [pivot_x_axis_state, set_pivot_x_axis_state] = useState<boolean>(false);
   const [pivot_y_axis_state, set_pivot_y_axis_state] = useState<boolean>(false);
   const [pivot_z_axis_state, set_pivot_z_axis_state] = useState<boolean>(false);
-  const [default_model_rotation, set_default_model_rotation] = useState<number>(0);
+  const default_object_rotation = new THREE.Euler(0, 0, 0);
+  const [modified_model_rotation, set_modified_model_rotation] = useState<number>(0);
   const [model_x_position_offset, set_model_x_position_offset] = useState<number>(0);
   const [model_z_position_offset, set_model_z_position_offset] = useState<number>(0);
 
@@ -333,7 +333,7 @@ export default function CanvasContainer() {
               z: rounded_z + model_z_position_offset,
               y: default_model_height_position + model_foundation_elevation,
             },
-            rotation: new THREE.Euler(0, default_model_rotation, 0, "XYZ"),
+            rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
           },
         }));
       }
@@ -567,13 +567,13 @@ export default function CanvasContainer() {
   }
 
   function ChangeDefaultModelRotationRight() {
-    const newRotation = default_model_rotation - object_rotation_degree * (Math.PI / 180);
-    set_default_model_rotation(newRotation);
+    const newRotation = modified_model_rotation - object_rotation_degree * (Math.PI / 180);
+    set_modified_model_rotation(newRotation);
   }
 
   function ChangeDefaultModelRotationLeft() {
-    const newRotation = default_model_rotation + object_rotation_degree * (Math.PI / 180);
-    set_default_model_rotation(newRotation);
+    const newRotation = modified_model_rotation + object_rotation_degree * (Math.PI / 180);
+    set_modified_model_rotation(newRotation);
   }
 
   // ------------------------- Prebuild Base -------------------------
@@ -1076,7 +1076,7 @@ export default function CanvasContainer() {
   }, [model_creation_state]);
 
   useEffect(() => {
-    set_default_model_rotation(0);
+    set_modified_model_rotation(0);
   }, [object_rotation_degree]);
 
   useEffect(() => {
@@ -1210,7 +1210,7 @@ export default function CanvasContainer() {
 
           {models.map((model) => {
             const { id, component: ModelComponent } = model;
-            const modelTransform = modelsTransforms[id] || {
+            const modelTransform = modelsData[id] || {
               position: { x: 0, z: 0, y: 0 },
               rotation: new THREE.Euler(0, 0, 0),
             };
@@ -1251,7 +1251,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.0425,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[2, default_model_height_position + 0.08, 2]}
                   >
                     <meshStandardMaterial
@@ -1268,7 +1268,7 @@ export default function CanvasContainer() {
                         default_model_height_position / 2 + 0.0425,
                         mouse_canvas_z_coordinate,
                       ]}
-                      rotation={[0, default_model_rotation, 0]}
+                      rotation={[0, modified_model_rotation, 0]}
                       scale={[2, default_model_height_position + 0.08, 2]}
                     >
                       <meshStandardMaterial
@@ -1290,7 +1290,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 100,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[1, default_model_height_position * 100 + 10, 1]}
                   ></TrianglePropSolid>
 
@@ -1301,7 +1301,7 @@ export default function CanvasContainer() {
                         default_model_height_position / 100,
                         mouse_canvas_z_coordinate,
                       ]}
-                      rotation={[0, default_model_rotation, 0]}
+                      rotation={[0, modified_model_rotation, 0]}
                       scale={[1, default_model_height_position * 100 + 10, 1]}
                     ></TrianglePropWireframe>
                   )}
@@ -1315,7 +1315,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.04,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[2, default_model_height_position + 0.08, 0.1]}
                   >
                     <meshStandardMaterial
@@ -1334,7 +1334,7 @@ export default function CanvasContainer() {
                         default_model_height_position / 2 + 0.04,
                         mouse_canvas_z_coordinate,
                       ]}
-                      rotation={[0, default_model_rotation, 0]}
+                      rotation={[0, modified_model_rotation, 0]}
                       scale={[2, default_model_height_position + 0.08, 0.1]}
                     >
                       <meshStandardMaterial
@@ -1354,7 +1354,7 @@ export default function CanvasContainer() {
                       default_model_height_position,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>
@@ -1367,7 +1367,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.04,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[1, default_model_height_position + 0.08, 0.1]}
                   >
                     <meshStandardMaterial
@@ -1386,7 +1386,7 @@ export default function CanvasContainer() {
                         default_model_height_position / 2 + 0.04,
                         mouse_canvas_z_coordinate,
                       ]}
-                      rotation={[0, default_model_rotation, 0]}
+                      rotation={[0, modified_model_rotation, 0]}
                       scale={[1, default_model_height_position + 0.08, 0.1]}
                     >
                       <meshStandardMaterial
@@ -1406,7 +1406,7 @@ export default function CanvasContainer() {
                       default_model_height_position,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>
@@ -1420,7 +1420,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.04,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[1.25, default_model_height_position + 0.08, 0.75]}
                   >
                     <meshStandardMaterial
@@ -1439,7 +1439,7 @@ export default function CanvasContainer() {
                         default_model_height_position / 2 + 0.04,
                         mouse_canvas_z_coordinate,
                       ]}
-                      rotation={[0, default_model_rotation, 0]}
+                      rotation={[0, modified_model_rotation, 0]}
                       scale={[1.25, default_model_height_position + 0.08, 0.75]}
                     >
                       <meshStandardMaterial
@@ -1460,7 +1460,7 @@ export default function CanvasContainer() {
                         default_model_height_position,
                         mouse_canvas_z_coordinate + model_z_position_offset,
                       ]}
-                      rotation={[0, default_model_rotation + Math.PI, 0]}
+                      rotation={[0, modified_model_rotation + Math.PI, 0]}
                       scale={[2, 12, 1]}
                     ></ArrowProp>
                   )}
@@ -1474,7 +1474,7 @@ export default function CanvasContainer() {
                       default_model_height_position / 2 + 0.04,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation, 0]}
+                    rotation={[0, modified_model_rotation, 0]}
                     scale={[0.75, default_model_height_position + 0.08, 0.75]}
                   >
                     <meshStandardMaterial
@@ -1493,7 +1493,7 @@ export default function CanvasContainer() {
                         default_model_height_position / 2 + 0.04,
                         mouse_canvas_z_coordinate,
                       ]}
-                      rotation={[0, default_model_rotation, 0]}
+                      rotation={[0, modified_model_rotation, 0]}
                       scale={[0.75, default_model_height_position + 0.08, 0.75]}
                     >
                       <meshStandardMaterial
@@ -1513,7 +1513,7 @@ export default function CanvasContainer() {
                       default_model_height_position,
                       mouse_canvas_z_coordinate + model_z_position_offset,
                     ]}
-                    rotation={[0, default_model_rotation + Math.PI, 0]}
+                    rotation={[0, modified_model_rotation + Math.PI, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
                 </>

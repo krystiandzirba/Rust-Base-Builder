@@ -507,24 +507,26 @@ export default function RaidCalculator() {
   }
 
   function ChangeRaidType(type: string) {
-    set_raid_type(type);
+    if (type !== raid_type) {
+      set_raid_type(type);
 
-    if (audio) {
-      if (type === "efficiency") {
-        AudioPlayer(menu_sound);
-      }
+      if (audio) {
+        if (type === "efficiency") {
+          AudioPlayer(menu_sound);
+        }
 
-      if (type === "rockets") {
-        AudioPlayer(rocket_sound);
-      }
-      if (type === "explosives") {
-        AudioPlayer(charge_sound);
-      }
-      if (type === "ammo") {
-        AudioPlayer(ammo_sound);
-      }
-      if (type === "satchel") {
-        AudioPlayer(satchel_sound);
+        if (type === "rockets") {
+          AudioPlayer(rocket_sound);
+        }
+        if (type === "explosives") {
+          AudioPlayer(charge_sound);
+        }
+        if (type === "ammo") {
+          AudioPlayer(ammo_sound);
+        }
+        if (type === "satchel") {
+          AudioPlayer(satchel_sound);
+        }
       }
     }
   }
