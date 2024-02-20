@@ -149,7 +149,10 @@ export default function CanvasContainer() {
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
-  const [modelsData, setModelsTransforms] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
+  const [modelsData, setModelsData] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
+  const [model_x_position, set_model_x_position] = useState<number>(0);
+  const [model_z_position, set_model_z_position] = useState<number>(0);
+  const [model_y_position, set_model_y_position] = useState<number>(0);
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
   const [model_prop, set_model_prop] = useState<string>("none");
 
@@ -306,6 +309,9 @@ export default function CanvasContainer() {
 
         set_mouse_canvas_x_coordinate(rounded_x);
         set_mouse_canvas_z_coordinate(rounded_z);
+        set_model_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
+        set_model_z_position(mouse_canvas_z_coordinate + model_z_position_offset);
+        set_model_y_position(default_model_height_position + model_foundation_elevation);
       }
     } else return;
   }
@@ -320,18 +326,13 @@ export default function CanvasContainer() {
       const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
 
       if (intersects.length > 0) {
-        const { x, z } = intersects[0].point;
-
-        const rounded_x = parseFloat(x.toFixed(0));
-        const rounded_z = parseFloat(z.toFixed(0));
-
-        setModelsTransforms((prevTransforms) => ({
+        setModelsData((prevTransforms) => ({
           ...prevTransforms,
           [generated_id]: {
             position: {
-              x: rounded_x + model_x_position_offset,
-              z: rounded_z + model_z_position_offset,
-              y: default_model_height_position + model_foundation_elevation,
+              x: model_x_position,
+              z: model_z_position,
+              y: model_y_position,
             },
             rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
           },
@@ -423,7 +424,7 @@ export default function CanvasContainer() {
   }
 
   const RotateSelectedObject = (objectId: string, direction: string) => {
-    setModelsTransforms((prevTransforms) => {
+    setModelsData((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
 
       const rotationDirection = direction === "left" ? -1 : 1;
@@ -444,7 +445,7 @@ export default function CanvasContainer() {
   };
 
   const moveSelectedObjectX = (direction: number) => {
-    setModelsTransforms((prevTransforms) => {
+    setModelsData((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
 
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
@@ -463,7 +464,7 @@ export default function CanvasContainer() {
   };
 
   const moveSelectedObjectZ = (direction: number) => {
-    setModelsTransforms((prevTransforms) => {
+    setModelsData((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
 
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
@@ -482,7 +483,7 @@ export default function CanvasContainer() {
   };
 
   const moveSelectedObjectY = (direction: number) => {
-    setModelsTransforms((prevTransforms) => {
+    setModelsData((prevTransforms) => {
       const updatedModelTransforms = { ...prevTransforms };
 
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
@@ -542,27 +543,27 @@ export default function CanvasContainer() {
   function HandlePivotXAxisStateSwitch() {
     if (pivot_controls_state) {
       set_pivot_x_axis_state(!pivot_x_axis_state);
-    }
-    if (audio) {
-      AudioPlayer(buttons_sound);
+      if (audio) {
+        AudioPlayer(buttons_sound);
+      }
     }
   }
 
   function HandlePivotYAxisStateSwitch() {
     if (pivot_controls_state) {
       set_pivot_y_axis_state(!pivot_y_axis_state);
-    }
-    if (audio) {
-      AudioPlayer(buttons_sound);
+      if (audio) {
+        AudioPlayer(buttons_sound);
+      }
     }
   }
 
   function HandlePivotZAxisStateSwitch() {
     if (pivot_controls_state) {
       set_pivot_z_axis_state(!pivot_z_axis_state);
-    }
-    if (audio) {
-      AudioPlayer(buttons_sound);
+      if (audio) {
+        AudioPlayer(buttons_sound);
+      }
     }
   }
 
@@ -667,7 +668,7 @@ export default function CanvasContainer() {
     ];
 
     for (const { name, position, rotation, model } of prebuildObjects) {
-      setModelsTransforms((prevTransforms) => ({
+      setModelsData((prevTransforms) => ({
         ...prevTransforms,
         [name]: { position, rotation: new THREE.Euler(0, rotation, 0, "XYZ") },
       }));
@@ -1092,13 +1093,13 @@ export default function CanvasContainer() {
             pivot controls {pivot_controls_state ? "(enabled)" : "(disabled)"}
           </div>
           <div className="pivot_controls_container">
-            <div className="pivot_controls_button pivot_controls_left" onClick={HandlePivotStateSwitch}>
+            <button className="pivot_controls_button pivot_controls_left" onClick={HandlePivotStateSwitch}>
               <FontAwesomeIcon
                 icon={faUpDownLeftRight}
                 size="xl"
                 style={{ color: !pivot_controls_state ? "#bbbbbb" : "#ffd5b3" }}
               />
-            </div>
+            </button>
             <button
               className={
                 !pivot_controls_state

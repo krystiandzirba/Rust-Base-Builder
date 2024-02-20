@@ -29,7 +29,7 @@ export default function ResourceCounter() {
   const [hqm_upkeep_cost, set_hqm_upkeep_cost] = useState<number>(0);
   const [upkeep_cost_text, set_upkeep_cost_text] = useState<string>("");
 
-  const [count_miscs_cost, set_count_miscs_cost] = useState(false);
+  const [count_miscs_cost, set_count_miscs_cost] = useState<boolean>(false);
   const [total_misc_count, set_total_misc_count] = useState<number>(0);
 
   const [total_wood_misc_cost, set_total_wood_misc_cost] = useState<number>(0);
