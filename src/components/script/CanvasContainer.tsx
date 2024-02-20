@@ -608,9 +608,14 @@ export default function CanvasContainer() {
   };
 
   function ChangeModelElevationValue(value: number) {
-    set_default_model_height_position(default_model_height_position + value);
-    if (audio) {
-      AudioPlayer(buttons_sound);
+    const new_default_model_height_position = default_model_height_position + value;
+
+    if (new_default_model_height_position >= 0) {
+      set_default_model_height_position(new_default_model_height_position);
+
+      if (audio) {
+        AudioPlayer(buttons_sound);
+      }
     }
   }
 

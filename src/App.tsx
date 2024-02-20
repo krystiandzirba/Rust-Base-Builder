@@ -80,6 +80,5 @@ export default App;
 // fix the camera NSEW position, it is incorrectly calculated
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
 // when object is deleted, remove related data in ModelsData
-// prevent building height level to go below 0
 // merge the CurrentTimestamp variable
 // merge props arrows into one (door, wall => one)
