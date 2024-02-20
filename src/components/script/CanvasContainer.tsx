@@ -153,7 +153,12 @@ export default function CanvasContainer() {
   const [model_x_position, set_model_x_position] = useState<number>(0);
   const [model_z_position, set_model_z_position] = useState<number>(0);
   const [model_y_position, set_model_y_position] = useState<number>(0);
+
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
+  const [mirror_x_generated_id, set_mirror_x_generated_id] = useState<string>(randomIdGenerator());
+  const [mirror_z_generated_id, set_mirror_z_generated_id] = useState<string>(randomIdGenerator());
+  const [mirror_xz_generated_id, set_mirror_xz_generated_id] = useState<string>(randomIdGenerator());
+
   const [model_prop, set_model_prop] = useState<string>("none");
 
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
@@ -166,6 +171,18 @@ export default function CanvasContainer() {
   const [modified_model_rotation, set_modified_model_rotation] = useState<number>(0);
   const [model_x_position_offset, set_model_x_position_offset] = useState<number>(0);
   const [model_z_position_offset, set_model_z_position_offset] = useState<number>(0);
+
+  const [model_x_mirror_x_position, set_model_x_mirror_x_position] = useState<number>(0);
+  const [model_x_mirror_z_position, set_model_x_mirror_z_position] = useState<number>(0);
+
+  const [model_z_mirror_x_position, set_model_z_mirror_x_position] = useState<number>(0);
+  const [model_z_mirror_z_position, set_model_z_mirror_z_position] = useState<number>(0);
+
+  const [model_xz_mirror_x_position, set_model_xz_mirror_x_position] = useState<number>(0);
+  const [model_xz_mirror_z_position, set_model_xz_mirror_z_position] = useState<number>(0);
+
+  const [symmetry_x_enabled, set_symmetry_x_enabled] = useState<boolean>(false);
+  const [symmetry_z_enabled, set_symmetry_z_enabled] = useState<boolean>(false);
 
   const mouse_window_click = new THREE.Vector2();
   const [mouse_canvas_x_coordinate, set_mouse_canvas_x_coordinate] = useState<number>(0);
@@ -283,15 +300,22 @@ export default function CanvasContainer() {
     }
   }
 
+  // ------------------------- Canvas grid coordinates + models position -------------------------
+
+  // calculating the mouse cursor and invisible grid floor intersection point
+  // to create a X+Z coordinates at which models will be placed
+
+  //
+
   function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
     const currentTimestamp = Date.now();
-    const time_since_last_execution = currentTimestamp - canvas_mouse_over_last_execution_time;
+    const canvas_mouse_drag_time_since_last_execution = currentTimestamp - canvas_mouse_over_last_execution_time;
 
     if (
       page_mode === "edit" &&
       camera_type === "camera_3d" &&
       model_creation_state &&
-      time_since_last_execution >= 30
+      canvas_mouse_drag_time_since_last_execution >= 30
     ) {
       canvas_mouse_over_last_execution_time = currentTimestamp;
 
@@ -312,36 +336,22 @@ export default function CanvasContainer() {
         set_model_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
         set_model_z_position(mouse_canvas_z_coordinate + model_z_position_offset);
         set_model_y_position(default_model_height_position + model_foundation_elevation);
+
+        set_model_x_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
+        set_model_x_mirror_z_position(mouse_canvas_z_coordinate + model_x_position_offset);
+
+        set_model_z_mirror_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
+        set_model_z_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
+
+        set_model_xz_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
+        set_model_xz_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
       }
     } else return;
   }
 
-  function CanvasMouseClickIntersectionCoordinates(event: { clientX: number; clientY: number }) {
-    if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
-      mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  // --------------------------------------------------
 
-      raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
-
-      const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
-
-      if (intersects.length > 0) {
-        setModelsData((prevTransforms) => ({
-          ...prevTransforms,
-          [generated_id]: {
-            position: {
-              x: model_x_position,
-              z: model_z_position,
-              y: model_y_position,
-            },
-            rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
-          },
-        }));
-      }
-    }
-  }
-
-  function CanvasOnClick() {
+  function AddCanvasModel() {
     const modelTypeMap = {
       // Stone models
       StoneFoundationSquareHigh: StoneFoundationSquareHigh,
@@ -406,19 +416,90 @@ export default function CanvasContainer() {
       const modelClass = modelTypeMap[model_type_to_create as keyof typeof modelTypeMap];
 
       if (modelClass) {
+        setModelsData((prevTransforms) => ({
+          ...prevTransforms,
+          [generated_id]: {
+            position: {
+              x: model_x_position,
+              z: model_z_position,
+              y: model_y_position,
+            },
+            rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+          },
+        }));
+
         set_generated_id(randomIdGenerator());
         addModel(modelClass, generated_id, default_object_rotation);
+
+        /////////////
+
+        if (symmetry_x_enabled) {
+          setTimeout(() => {
+            setModelsData((prevTransforms) => ({
+              ...prevTransforms,
+              [mirror_x_generated_id]: {
+                position: {
+                  x: model_x_mirror_x_position,
+                  z: model_x_mirror_z_position,
+                  y: model_y_position,
+                },
+                rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+              },
+            }));
+
+            set_mirror_x_generated_id(randomIdGenerator());
+            addModel(modelClass, mirror_x_generated_id, default_object_rotation);
+          }, 50);
+        }
+
+        if (symmetry_z_enabled) {
+          setTimeout(() => {
+            setModelsData((prevTransforms) => ({
+              ...prevTransforms,
+              [mirror_z_generated_id]: {
+                position: {
+                  x: model_z_mirror_x_position,
+                  z: model_z_mirror_z_position,
+                  y: model_y_position,
+                },
+                rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+              },
+            }));
+
+            set_mirror_z_generated_id(randomIdGenerator());
+            addModel(modelClass, mirror_z_generated_id, default_object_rotation);
+          }, 100);
+        }
+
+        if (symmetry_x_enabled && symmetry_z_enabled) {
+          setTimeout(() => {
+            setModelsData((prevTransforms) => ({
+              ...prevTransforms,
+              [mirror_xz_generated_id]: {
+                position: {
+                  x: model_xz_mirror_x_position,
+                  z: model_xz_mirror_z_position,
+                  y: model_y_position,
+                },
+                rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+              },
+            }));
+
+            set_mirror_xz_generated_id(randomIdGenerator());
+            addModel(modelClass, mirror_xz_generated_id, default_object_rotation);
+          }, 150);
+        }
       }
     }
   }
 
   function CaptureMouseCanvasDrag(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const currentTimestamp = Date.now();
-    const time_since_last_execution = currentTimestamp - canvas_mouse_drag_last_execution_time;
+    const canvas_mouse_drag_time_since_last_execution = currentTimestamp - canvas_mouse_drag_last_execution_time;
 
     canvas_mouse_drag_last_execution_time = currentTimestamp;
 
-    if (event.buttons === 1 && time_since_last_execution >= 30) {
+    if (event.buttons === 1 && canvas_mouse_drag_time_since_last_execution >= 30) {
       set_prevent_actions_after_canvas_drag("canvas_drag");
     }
   }
@@ -682,6 +763,20 @@ export default function CanvasContainer() {
   function IsOffsetActive() {
     if (model_x_position_offset) return true;
     else if (model_z_position_offset) return true;
+  }
+
+  function ChangeXSymmetryState() {
+    set_symmetry_x_enabled(!symmetry_x_enabled);
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
+  }
+
+  function ChangeZSymmetryState() {
+    set_symmetry_z_enabled(!symmetry_z_enabled);
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   document.body.style.cursor = cursor_type;
@@ -1148,6 +1243,32 @@ export default function CanvasContainer() {
               <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
             </button>
           </div>
+
+          <div className="object_mirror_container_description">symmetry:</div>
+          <div className="object_mirror_container">
+            <button
+              className={
+                symmetry_x_enabled
+                  ? "mirror_button mirror_button_left symmetry_button_enabled"
+                  : "mirror_button mirror_button_left"
+              }
+              onClick={() => ChangeXSymmetryState()}
+            >
+              X
+            </button>
+
+            <button
+              className={
+                symmetry_z_enabled
+                  ? "mirror_button mirror_button_right symmetry_button_enabled"
+                  : "mirror_button mirror_button_right"
+              }
+              onClick={() => ChangeZSymmetryState()}
+            >
+              Z
+            </button>
+          </div>
+
           {model_creation_state && (
             <div className="offset_container_main">
               <div className="offset_container_sub offset_container_x">X offset: {model_x_position_offset}</div>
@@ -1164,8 +1285,8 @@ export default function CanvasContainer() {
           onMouseMove={(event) => {
             CanvasMouseOverIntersectionCoordinates(event), CaptureMouseCanvasDrag(event);
           }}
-          onClick={(event) => {
-            CanvasMouseClickIntersectionCoordinates(event), CanvasOnClick();
+          onClick={() => {
+            AddCanvasModel();
           }}
           onMouseUp={() => Camera3DDirection()}
         >

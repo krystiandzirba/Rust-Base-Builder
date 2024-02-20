@@ -47,12 +47,11 @@
   margin: 5px 0;
 }
 
-.object_elevation_container_description {
+.object_elevation_container_description,
+.object_mirror_container_description {
   position: absolute;
   width: 11vw;
   height: 3vh;
-  left: 21.5vw;
-  top: 72vh;
   z-index: 40;
   color: #bbbbbb;
   font-size: 0.7vw;
@@ -61,11 +60,19 @@
   text-align: center;
 }
 
-.object_elevation_container {
+.object_mirror_container_description {
+  top: 62vh;
+  left: 20vw;
+}
+.object_elevation_container_description {
+  top: 72vh;
+  left: 21.5vw;
+}
+
+.object_elevation_container,
+.object_mirror_container {
   position: absolute;
-  top: 75vh;
   left: 23vw;
-  width: 8vw;
   height: 4vh;
   z-index: 45;
   display: flex;
@@ -73,7 +80,17 @@
   backdrop-filter: blur(2px);
 }
 
-.elevation_button {
+.object_mirror_container {
+  top: 65vh;
+  width: 5.5vw;
+}
+.object_elevation_container {
+  top: 75vh;
+  width: 8vw;
+}
+
+.elevation_button,
+.mirror_button {
   width: 33%;
   height: 100%;
   background-color: rgba(120, 120, 120, 0.5);
@@ -83,11 +100,21 @@
   border: none;
 }
 
-.elevation_button_left {
+.mirror_button {
+  width: 50%;
+}
+
+.elevation_button {
+  width: 33%;
+}
+
+.elevation_button_left,
+.mirror_button_left {
   border-radius: 1vh 0 0 1vh;
 }
 
-.elevation_button_right {
+.elevation_button_right,
+.mirror_button_right {
   border-radius: 0 1vh 1vh 0;
 }
 
@@ -159,7 +186,8 @@ input::-webkit-inner-spin-button {
   background-color: #bbbbbb;
 }
 
-.pivot_controls_button_enabled {
+.pivot_controls_button_enabled,
+.symmetry_button_enabled {
   background-color: #ffd5b3;
 }
 
