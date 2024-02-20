@@ -82,3 +82,4 @@ export default App;
 // when object is deleted, remove related data in ModelsData
 // prevent building height level to go below 0
 // merge the CurrentTimestamp variable
+// merge props arrows into one (door, wall => one)

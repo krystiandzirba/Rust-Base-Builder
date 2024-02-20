@@ -1383,6 +1383,60 @@ export default function CanvasContainer() {
                     />
                   </Box>
 
+                  {symmetry_x_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.0425,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 2]}
+                    >
+                      <meshStandardMaterial
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.0425,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 2]}
+                    >
+                      <meshStandardMaterial
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.0425,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 2]}
+                    >
+                      <meshStandardMaterial
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
                   {IsOffsetActive() && (
                     <Box
                       position={[
@@ -1415,6 +1469,42 @@ export default function CanvasContainer() {
                     rotation={[0, modified_model_rotation, 0]}
                     scale={[1, default_model_height_position * 100 + 10, 1]}
                   ></TrianglePropSolid>
+
+                  {symmetry_x_enabled && (
+                    <TrianglePropSolid
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 100,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position * 100 + 10, 1]}
+                    ></TrianglePropSolid>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <TrianglePropSolid
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 100,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position * 100 + 10, 1]}
+                    ></TrianglePropSolid>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <TrianglePropSolid
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 100,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position * 100 + 10, 1]}
+                    ></TrianglePropSolid>
+                  )}
 
                   {IsOffsetActive() && (
                     <TrianglePropWireframe
@@ -1449,6 +1539,66 @@ export default function CanvasContainer() {
                     />
                   </Box>
 
+                  {symmetry_x_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
                   {IsOffsetActive() && (
                     <Box
                       position={[
@@ -1479,6 +1629,42 @@ export default function CanvasContainer() {
                     rotation={[0, modified_model_rotation, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
+
+                  {symmetry_x_enabled && (
+                    <ArrowProp
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <ArrowProp
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <ArrowProp
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
                 </>
               )}
               {model_prop === "door_prop" && (
@@ -1500,6 +1686,66 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
+
+                  {symmetry_x_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position + 0.08, 0.1]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
 
                   {IsOffsetActive() && (
                     <Box
@@ -1531,6 +1777,42 @@ export default function CanvasContainer() {
                     rotation={[0, modified_model_rotation, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
+
+                  {symmetry_x_enabled && (
+                    <ArrowProp
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <ArrowProp
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <ArrowProp
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[2, 12, 1]}
+                    ></ArrowProp>
+                  )}
                 </>
               )}
 
@@ -1553,6 +1835,66 @@ export default function CanvasContainer() {
                       emissiveIntensity={bloom_state ? 3 : 0}
                     />
                   </Box>
+
+                  {symmetry_x_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1.25, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1.25, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1.25, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
 
                   {IsOffsetActive() && (
                     <Box
