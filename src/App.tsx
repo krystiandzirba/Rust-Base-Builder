@@ -82,3 +82,4 @@ export default App;
 // when object is deleted, remove related data in ModelsData
 // merge the CurrentTimestamp variable
 // merge props arrows into one (door, wall => one)
+// lower the execution rate of adding the models while symmetry is active (id overwrite)

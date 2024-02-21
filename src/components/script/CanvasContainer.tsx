@@ -304,8 +304,7 @@ export default function CanvasContainer() {
 
   // calculating the mouse cursor and invisible grid floor intersection point
   // to create a X+Z coordinates at which models will be placed
-
-  //
+  // assign a default, 3x mirrored values for symmetrical objects
 
   function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
     const currentTimestamp = Date.now();
@@ -333,8 +332,8 @@ export default function CanvasContainer() {
 
         set_mouse_canvas_x_coordinate(rounded_x);
         set_mouse_canvas_z_coordinate(rounded_z);
-        set_model_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
-        set_model_z_position(mouse_canvas_z_coordinate + model_z_position_offset);
+        set_model_x_position(mouse_canvas_x_coordinate);
+        set_model_z_position(mouse_canvas_z_coordinate);
         set_model_y_position(default_model_height_position + model_foundation_elevation);
 
         set_model_x_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
@@ -420,8 +419,8 @@ export default function CanvasContainer() {
           ...prevTransforms,
           [generated_id]: {
             position: {
-              x: model_x_position,
-              z: model_z_position,
+              x: model_x_position + model_x_position_offset,
+              z: model_z_position + model_z_position_offset,
               y: model_y_position,
             },
             rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
@@ -772,6 +771,8 @@ export default function CanvasContainer() {
 
   function ChangeXSymmetryState() {
     set_symmetry_x_enabled(!symmetry_x_enabled);
+    set_model_x_position_offset(0);
+    set_model_z_position_offset(0);
     if (audio) {
       AudioPlayer(buttons_sound);
     }
@@ -779,6 +780,8 @@ export default function CanvasContainer() {
 
   function ChangeZSymmetryState() {
     set_symmetry_z_enabled(!symmetry_z_enabled);
+    set_model_x_position_offset(0);
+    set_model_z_position_offset(0);
     if (audio) {
       AudioPlayer(buttons_sound);
     }
@@ -906,7 +909,7 @@ export default function CanvasContainer() {
       } else if (keyboard_input === "E") {
         ChangeDefaultModelRotationRight();
         RotateSelectedObject(selected_model_id, "right");
-      } else if (keyboard_input === "W") {
+      } else if (keyboard_input === "W" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (audio) {
           AudioPlayer(controls_sound);
         }
@@ -919,7 +922,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         }
-      } else if (keyboard_input === "S") {
+      } else if (keyboard_input === "S" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (audio) {
           AudioPlayer(controls_sound);
         }
@@ -932,7 +935,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         }
-      } else if (keyboard_input === "A") {
+      } else if (keyboard_input === "A" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (audio) {
           AudioPlayer(controls_sound);
         }
@@ -945,7 +948,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         }
-      } else if (keyboard_input === "D") {
+      } else if (keyboard_input === "D" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (audio) {
           AudioPlayer(controls_sound);
         }
