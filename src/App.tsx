@@ -79,6 +79,6 @@ export default App;
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
 // fix the camera NSEW position, it is incorrectly calculated
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
-// when object is deleted, remove related data in ModelsData
 // merge the CurrentTimestamp variable
 // lower the execution rate of adding the models while symmetry is active (id overwrite)
+// remove selected -> remove clicked object when active

@@ -222,6 +222,14 @@ export default function CanvasContainer() {
     dispatch(set_cursor_type("default"));
   };
 
+  const removeModelsDataObjectInfo = (id: string) => {
+    const updatedModelsData = { ...modelsData };
+    if (updatedModelsData[id]) {
+      delete updatedModelsData[id];
+      setModelsData(updatedModelsData);
+    }
+  };
+
   function storeCanvasModelsNames(models: any[]) {
     return models.map((model) => model.component.displayName);
   }
@@ -426,6 +434,8 @@ export default function CanvasContainer() {
             rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
           },
         }));
+
+        console.log(modelsData);
 
         set_generated_id(randomIdGenerator());
         addModel(modelClass, generated_id, default_object_rotation);
@@ -1065,12 +1075,12 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     {
-      if (delete_object_mode === "delete_selected_object") {
+      if (delete_object_mode === "delete_selected_object" || keyboard_input === "DELETE") {
         RemoveSelectedModel(selected_model_id);
-      } else if (keyboard_input === "DELETE") {
-        RemoveSelectedModel(selected_model_id);
+        removeModelsDataObjectInfo(selected_model_id);
       } else if (delete_object_mode === "delete_all_object") {
         RemoveAllModels();
+        setModelsData({});
       }
 
       dispatch(set_selected_model_id("empty"));
