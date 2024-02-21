@@ -81,5 +81,4 @@ export default App;
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
 // when object is deleted, remove related data in ModelsData
 // merge the CurrentTimestamp variable
-// merge props arrows into one (door, wall => one)
 // lower the execution rate of adding the models while symmetry is active (id overwrite)

@@ -885,12 +885,13 @@ export default function CanvasContainer() {
           }
         } else if (keyboard_input === "Q") {
           RotateSelectedObject(selected_model_id, "right");
+
           if (audio) {
             AudioPlayer(rotation_sound);
           }
         } else if (keyboard_input === "E") {
           RotateSelectedObject(selected_model_id, "left");
-          if (audio) {
+          if ((audio && model_creation_state) || selected_model_id !== "empty") {
             AudioPlayer(rotation_sound);
           }
         } else if (keyboard_input === "SPACE") {
@@ -900,7 +901,7 @@ export default function CanvasContainer() {
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
-      if (audio && selected_model_id !== "empty") {
+      if (audio) {
         AudioPlayer(rotation_sound);
       }
       if (keyboard_input === "Q") {
