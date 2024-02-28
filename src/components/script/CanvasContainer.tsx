@@ -204,12 +204,69 @@ export default function CanvasContainer() {
   const [key_press_trigger, set_key_press_trigger] = useState<number>(0);
   const [delete_object_trigger, set_delete_object_trigger] = useState<number>(0);
 
+  const modelTypeMap = {
+    // Stone models
+    StoneFoundationSquareHigh: StoneFoundationSquareHigh,
+    StoneFoundationSquareMid: StoneFoundationSquareMid,
+    StoneFoundationSquareLow: StoneFoundationSquareLow,
+    StoneFoundationTriangleHigh: StoneFoundationTriangleHigh,
+    StoneFoundationTriangleMid: StoneFoundationTriangleMid,
+    StoneFoundationTriangleLow: StoneFoundationTriangleLow,
+    StoneWallHigh: StoneWallHigh,
+    StoneWallMid: StoneWallMid,
+    StoneWallLow: StoneWallLow,
+    StoneDoorway: StoneDoorway,
+    StoneWallFrame: StoneWallFrame,
+    StoneWindow: StoneWindow,
+    StoneStairsLShape: StoneStairsLShape,
+    StoneStairsUShape: StoneStairsUShape,
+    StoneFloorSquare: StoneFloorSquare,
+    StoneFloorTriangle: StoneFloorTriangle,
+    StoneFloorFrameSquare: StoneFloorFrameSquare,
+    StoneFloorFrameTriangle: StoneFloorFrameTriangle,
+    StoneRoofSquare: StoneRoofSquare,
+    StoneRoofTriangle: StoneRoofTriangle,
+
+    // Metal models
+    MetalFoundationSquareHigh: MetalFoundationSquareHigh,
+    MetalFoundationSquareMid: MetalFoundationSquareMid,
+    MetalFoundationSquareLow: MetalFoundationSquareLow,
+    MetalFoundationTriangleHigh: MetalFoundationTriangleHigh,
+    MetalFoundationTriangleMid: MetalFoundationTriangleMid,
+    MetalFoundationTriangleLow: MetalFoundationTriangleLow,
+    MetalWallHigh: MetalWallHigh,
+    MetalWallMid: MetalWallMid,
+    MetalWallLow: MetalWallLow,
+    MetalDoorway: MetalDoorway,
+    MetalWallFrame: MetalWallFrame,
+    MetalWindow: MetalWindow,
+    MetalStairsLShape: MetalStairsLShape,
+    MetalStairsUShape: MetalStairsUShape,
+    MetalFloorSquare: MetalFloorSquare,
+    MetalFloorTriangle: MetalFloorTriangle,
+    MetalFloorFrameSquare: MetalFloorFrameSquare,
+    MetalFloorFrameTriangle: MetalFloorFrameTriangle,
+    MetalRoofSquare: MetalRoofSquare,
+    MetalRoofTriangle: MetalRoofTriangle,
+    MetalDoor: MetalDoor,
+    GarageDoor: GarageDoor,
+
+    // Windows
+    MetalVerticalEmbrasure: MetalVerticalEmbrasure,
+    StrengthenedGlassWindow: StrenghtenedGlassWindow,
+
+    // Miscs
+    ToolCupboard: ToolCupboard,
+    WoodStorageBox: WoodStorageBox,
+    LargeWoodBox: LargeWoodBox,
+    Furnace: Furnace,
+    WorkbenchT3: WorkbenchT3,
+    SleepingBag: SleepingBag,
+  };
+
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
       setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
-      if (audio) {
-        AudioPlayer(build_sound);
-      }
     }
   };
 
@@ -364,66 +421,6 @@ export default function CanvasContainer() {
   // --------------------------------------------------
 
   function AddCanvasModel() {
-    const modelTypeMap = {
-      // Stone models
-      StoneFoundationSquareHigh: StoneFoundationSquareHigh,
-      StoneFoundationSquareMid: StoneFoundationSquareMid,
-      StoneFoundationSquareLow: StoneFoundationSquareLow,
-      StoneFoundationTriangleHigh: StoneFoundationTriangleHigh,
-      StoneFoundationTriangleMid: StoneFoundationTriangleMid,
-      StoneFoundationTriangleLow: StoneFoundationTriangleLow,
-      StoneWallHigh: StoneWallHigh,
-      StoneWallMid: StoneWallMid,
-      StoneWallLow: StoneWallLow,
-      StoneDoorway: StoneDoorway,
-      StoneWallFrame: StoneWallFrame,
-      StoneWindow: StoneWindow,
-      StoneStairsLShape: StoneStairsLShape,
-      StoneStairsUShape: StoneStairsUShape,
-      StoneFloorSquare: StoneFloorSquare,
-      StoneFloorTriangle: StoneFloorTriangle,
-      StoneFloorFrameSquare: StoneFloorFrameSquare,
-      StoneFloorFrameTriangle: StoneFloorFrameTriangle,
-      StoneRoofSquare: StoneRoofSquare,
-      StoneRoofTriangle: StoneRoofTriangle,
-
-      // Metal models
-      MetalFoundationSquareHigh: MetalFoundationSquareHigh,
-      MetalFoundationSquareMid: MetalFoundationSquareMid,
-      MetalFoundationSquareLow: MetalFoundationSquareLow,
-      MetalFoundationTriangleHigh: MetalFoundationTriangleHigh,
-      MetalFoundationTriangleMid: MetalFoundationTriangleMid,
-      MetalFoundationTriangleLow: MetalFoundationTriangleLow,
-      MetalWallHigh: MetalWallHigh,
-      MetalWallMid: MetalWallMid,
-      MetalWallLow: MetalWallLow,
-      MetalDoorway: MetalDoorway,
-      MetalWallFrame: MetalWallFrame,
-      MetalWindow: MetalWindow,
-      MetalStairsLShape: MetalStairsLShape,
-      MetalStairsUShape: MetalStairsUShape,
-      MetalFloorSquare: MetalFloorSquare,
-      MetalFloorTriangle: MetalFloorTriangle,
-      MetalFloorFrameSquare: MetalFloorFrameSquare,
-      MetalFloorFrameTriangle: MetalFloorFrameTriangle,
-      MetalRoofSquare: MetalRoofSquare,
-      MetalRoofTriangle: MetalRoofTriangle,
-      MetalDoor: MetalDoor,
-      GarageDoor: GarageDoor,
-
-      // Windows
-      MetalVerticalEmbrasure: MetalVerticalEmbrasure,
-      StrengthenedGlassWindow: StrenghtenedGlassWindow,
-
-      // Miscs
-      ToolCupboard: ToolCupboard,
-      WoodStorageBox: WoodStorageBox,
-      LargeWoodBox: LargeWoodBox,
-      Furnace: Furnace,
-      WorkbenchT3: WorkbenchT3,
-      SleepingBag: SleepingBag,
-    };
-
     if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
       const modelClass = modelTypeMap[model_type_to_create as keyof typeof modelTypeMap];
 
@@ -443,61 +440,59 @@ export default function CanvasContainer() {
         set_generated_id(randomIdGenerator());
         addModel(modelClass, generated_id, default_object_rotation);
 
-        if (symmetry_x_enabled) {
-          setTimeout(() => {
-            setModelsData((prevTransforms) => ({
-              ...prevTransforms,
-              [mirror_x_generated_id]: {
-                position: {
-                  x: model_x_mirror_x_position,
-                  z: model_x_mirror_z_position,
-                  y: model_y_position,
-                },
-                rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
-              },
-            }));
+        if (audio) {
+          AudioPlayer(build_sound);
+        }
 
-            set_mirror_x_generated_id(randomIdGenerator());
-            addModel(modelClass, mirror_x_generated_id, default_object_rotation);
-          }, 15);
+        if (symmetry_x_enabled) {
+          setModelsData((prevTransforms) => ({
+            ...prevTransforms,
+            [mirror_x_generated_id]: {
+              position: {
+                x: model_x_mirror_x_position,
+                z: model_x_mirror_z_position,
+                y: model_y_position,
+              },
+              rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+            },
+          }));
+
+          set_mirror_x_generated_id(randomIdGenerator());
+          addModel(modelClass, mirror_x_generated_id, default_object_rotation);
         }
 
         if (symmetry_z_enabled) {
-          setTimeout(() => {
-            setModelsData((prevTransforms) => ({
-              ...prevTransforms,
-              [mirror_z_generated_id]: {
-                position: {
-                  x: model_z_mirror_x_position,
-                  z: model_z_mirror_z_position,
-                  y: model_y_position,
-                },
-                rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+          setModelsData((prevTransforms) => ({
+            ...prevTransforms,
+            [mirror_z_generated_id]: {
+              position: {
+                x: model_z_mirror_x_position,
+                z: model_z_mirror_z_position,
+                y: model_y_position,
               },
-            }));
+              rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+            },
+          }));
 
-            set_mirror_z_generated_id(randomIdGenerator());
-            addModel(modelClass, mirror_z_generated_id, default_object_rotation);
-          }, 30);
+          set_mirror_z_generated_id(randomIdGenerator());
+          addModel(modelClass, mirror_z_generated_id, default_object_rotation);
         }
 
         if (symmetry_x_enabled && symmetry_z_enabled) {
-          setTimeout(() => {
-            setModelsData((prevTransforms) => ({
-              ...prevTransforms,
-              [mirror_xz_generated_id]: {
-                position: {
-                  x: model_xz_mirror_x_position,
-                  z: model_xz_mirror_z_position,
-                  y: model_y_position,
-                },
-                rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+          setModelsData((prevTransforms) => ({
+            ...prevTransforms,
+            [mirror_xz_generated_id]: {
+              position: {
+                x: model_xz_mirror_x_position,
+                z: model_xz_mirror_z_position,
+                y: model_y_position,
               },
-            }));
+              rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+            },
+          }));
 
-            set_mirror_xz_generated_id(randomIdGenerator());
-            addModel(modelClass, mirror_xz_generated_id, default_object_rotation);
-          }, 45);
+          set_mirror_xz_generated_id(randomIdGenerator());
+          addModel(modelClass, mirror_xz_generated_id, default_object_rotation);
         }
       }
     }

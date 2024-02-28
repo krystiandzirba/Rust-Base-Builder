@@ -66,7 +66,7 @@ function App() {
 
 export default App;
 
-// object copy: "C"
+// object copy: "ctrl + C"
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
 // move every canvas item configs (position, rotation ...) to separate file
@@ -75,19 +75,11 @@ export default App;
 // add 1st person walking in overview and raid mode
 // add new keyboard controls diescription - 2d camera (moving the objects) + creation mode
 // base share as a link
-// creating an object > WASD (offset by 0.125 on every click) -> model placed + offset reset for future models
-
-// errors
-// -
 
 // if performance issue = canvas lighting + postprocessing + click events
-
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
 // fix the camera NSEW position, it is incorrectly calculated
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
-// merge the CurrentTimestamp variable
-// lower the execution rate of adding the models while symmetry is active (id overwrite)
 // remove selected -> remove clicked object when active
-// delete an object with DEL | BACKSPACE => unable to delete all models
 
 // react three fiber - pointer lock controls (first person camera control) + fps octree
