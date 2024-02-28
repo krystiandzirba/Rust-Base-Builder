@@ -6,7 +6,7 @@ import BuildCalculator from "./components/script/BuildCalculator.tsx";
 import RaidCalculator from "./components/script/RaidCalculator.tsx";
 import CanvasContainer from "./components/script/CanvasContainer.tsx";
 import ObjectList from "./components/script/ObjectList.tsx";
-import ControlsInput from "./components/script/ControlsInput.tsx";
+import ControlsInput from "./components/script/ModelControlsMouseInput.tsx";
 import Hints from "./components/script/Hints.tsx";
 import Settings from "./components/script/Settings.tsx";
 import StructureVisibilityMode from "./components/script/StructureVisibilityMode.tsx";
@@ -28,6 +28,8 @@ import "./components/styles/github.css";
 
 import { RootState } from "./Store";
 import { useSelector } from "react-redux";
+import { useMemo } from "react";
+import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
 
 function App() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
@@ -39,21 +41,25 @@ function App() {
   const enable_resource_container = useSelector((state: RootState) => state.pageSettings.enable_resource_container);
   const model_transform_controls = useSelector((state: RootState) => state.pageSettings.enable_model_transform_controls); //prettier-ignore
 
+  const map = useMemo<KeyboardControlsEntry[]>(() => [], []);
+
   return (
     <>
-      {model_transform_controls && <ControlsInput />}
-      <Toolbar />
-      {enable_presets && <Presets />}
-      <Version />
-      {enable_cameras && <CameraType />}
-      {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
-      {page_mode === "raid" && <RaidCalculator />}
-      <CanvasContainer />
-      <ObjectList />
-      {enable_hints && <Hints />}
-      <Settings />
-      {enable_structures_visibility && <StructureVisibilityMode />}
-      <Github />
+      <KeyboardControls map={map}>
+        {model_transform_controls && <ControlsInput />}
+        <Toolbar />
+        {enable_presets && <Presets />}
+        <Version />
+        {enable_cameras && <CameraType />}
+        {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
+        {page_mode === "raid" && <RaidCalculator />}
+        <CanvasContainer />
+        <ObjectList />
+        {enable_hints && <Hints />}
+        <Settings />
+        {enable_structures_visibility && <StructureVisibilityMode />}
+        <Github />
+      </KeyboardControls>
     </>
   );
 }
@@ -82,3 +88,6 @@ export default App;
 // merge the CurrentTimestamp variable
 // lower the execution rate of adding the models while symmetry is active (id overwrite)
 // remove selected -> remove clicked object when active
+// delete an object with DEL | BACKSPACE => unable to delete all models
+
+// react three fiber - pointer lock controls (first person camera control) + fps octree

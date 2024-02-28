@@ -7,6 +7,7 @@ import {
   PivotControls,
   Box,
   Environment,
+  KeyboardControls,
 } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -18,6 +19,7 @@ import {
   set_object_selected,
   set_selected_model_id,
   set_camera_3d_direction,
+  set_delete_object_mode,
 } from "../../Store.tsx";
 
 import { Model as TrianglePropSolid } from "../models/TrianglePropSolid.tsx";
@@ -29,6 +31,7 @@ import build_sound from "../../audio/build_sound.mp3";
 import controls_sound from "../../audio/controls_sound.mp3";
 import rotation_sound from "../../audio/rotation_sound.mp3";
 import buttons_sound from "../../audio/buttons_sound.mp3";
+import delete_sound from "../../audio/delete_sound.mp3";
 
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
@@ -130,14 +133,12 @@ export default function CanvasContainer() {
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const model_type_to_create = useSelector((state: RootState) => state.modelsData.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
-  const keyboard_input = useSelector((state: RootState) => state.controlsInput.keyboard_input);
   const object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
-  const key_press_trigger = useSelector((state: RootState) => state.controlsInput.key_press_trigger);
   const button_input = useSelector((state: RootState) => state.controlsInput.button_input);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
-  const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
+  const delete_object_mouse_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_mouse_trigger); //prettier-ignore
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
@@ -198,6 +199,10 @@ export default function CanvasContainer() {
   let canvas_mouse_drag_last_execution_time = 0;
 
   const prebuild_created = useRef(false);
+
+  const [keyboard_key, set_keyboard_key] = useState<string>("");
+  const [key_press_trigger, set_key_press_trigger] = useState<number>(0);
+  const [delete_object_trigger, set_delete_object_trigger] = useState<number>(0);
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     if (prevent_actions_after_canvas_drag === "allow") {
@@ -435,12 +440,8 @@ export default function CanvasContainer() {
           },
         }));
 
-        console.log(modelsData);
-
         set_generated_id(randomIdGenerator());
         addModel(modelClass, generated_id, default_object_rotation);
-
-        /////////////
 
         if (symmetry_x_enabled) {
           setTimeout(() => {
@@ -458,7 +459,7 @@ export default function CanvasContainer() {
 
             set_mirror_x_generated_id(randomIdGenerator());
             addModel(modelClass, mirror_x_generated_id, default_object_rotation);
-          }, 50);
+          }, 15);
         }
 
         if (symmetry_z_enabled) {
@@ -477,7 +478,7 @@ export default function CanvasContainer() {
 
             set_mirror_z_generated_id(randomIdGenerator());
             addModel(modelClass, mirror_z_generated_id, default_object_rotation);
-          }, 100);
+          }, 30);
         }
 
         if (symmetry_x_enabled && symmetry_z_enabled) {
@@ -496,7 +497,7 @@ export default function CanvasContainer() {
 
             set_mirror_xz_generated_id(randomIdGenerator());
             addModel(modelClass, mirror_xz_generated_id, default_object_rotation);
-          }, 150);
+          }, 45);
         }
       }
     }
@@ -811,11 +812,8 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
-      if (audio && selected_model_id !== "empty") {
-        AudioPlayer(controls_sound);
-      }
       {
-        if (keyboard_input === "W") {
+        if (keyboard_key === "KeyW" || keyboard_key === "ArrowUp") {
           if (camera_3d_direction === "north") {
             moveSelectedObjectZ(-1);
           } else if (camera_3d_direction === "south") {
@@ -834,7 +832,7 @@ export default function CanvasContainer() {
           } else if (camera_2d_direction === "top") {
             moveSelectedObjectZ(-1);
           }
-        } else if (keyboard_input === "A") {
+        } else if (keyboard_key === "KeyA" || keyboard_key === "ArrowLeft") {
           if (camera_3d_direction === "north") {
             moveSelectedObjectX(-1);
           } else if (camera_3d_direction === "south") {
@@ -854,7 +852,7 @@ export default function CanvasContainer() {
           } else if (camera_2d_direction === "top") {
             moveSelectedObjectX(-1);
           }
-        } else if (keyboard_input === "S") {
+        } else if (keyboard_key === "KeyS" || keyboard_key === "ArrowDown") {
           if (camera_3d_direction === "north") {
             moveSelectedObjectZ(+1);
           } else if (camera_3d_direction === "south") {
@@ -873,7 +871,7 @@ export default function CanvasContainer() {
           } else if (camera_2d_direction === "top") {
             moveSelectedObjectZ(+1);
           }
-        } else if (keyboard_input === "D") {
+        } else if (keyboard_key === "KeyD" || keyboard_key === "ArrowRight") {
           if (camera_3d_direction === "north") {
             moveSelectedObjectX(+1);
           } else if (camera_3d_direction === "south") {
@@ -893,37 +891,24 @@ export default function CanvasContainer() {
           } else if (camera_2d_direction === "top") {
             moveSelectedObjectX(+1);
           }
-        } else if (keyboard_input === "Q") {
+        } else if (keyboard_key === "KeyQ") {
           RotateSelectedObject(selected_model_id, "right");
-
-          if (audio) {
-            AudioPlayer(rotation_sound);
-          }
-        } else if (keyboard_input === "E") {
+        } else if (keyboard_key === "KeyE") {
           RotateSelectedObject(selected_model_id, "left");
-          if ((audio && model_creation_state) || selected_model_id !== "empty") {
-            AudioPlayer(rotation_sound);
-          }
-        } else if (keyboard_input === "SPACE") {
+        } else if (keyboard_key === "Space") {
           moveSelectedObjectY(+1);
-        } else if (keyboard_input === "CTRL") {
+        } else if (keyboard_key === "ControlLeft") {
           moveSelectedObjectY(-1);
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
-      if (audio) {
-        AudioPlayer(rotation_sound);
-      }
-      if (keyboard_input === "Q") {
+      if (keyboard_key === "KeyQ") {
         ChangeDefaultModelRotationLeft();
         RotateSelectedObject(selected_model_id, "left");
-      } else if (keyboard_input === "E") {
+      } else if (keyboard_key === "KeyE") {
         ChangeDefaultModelRotationRight();
         RotateSelectedObject(selected_model_id, "right");
-      } else if (keyboard_input === "W" && !symmetry_x_enabled && !symmetry_z_enabled) {
-        if (audio) {
-          AudioPlayer(controls_sound);
-        }
+      } else if (keyboard_key === "KeyW" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (camera_3d_direction === "north") {
           set_model_z_position_offset(model_z_position_offset - 0.125);
         } else if (camera_3d_direction === "south") {
@@ -933,10 +918,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         }
-      } else if (keyboard_input === "S" && !symmetry_x_enabled && !symmetry_z_enabled) {
-        if (audio) {
-          AudioPlayer(controls_sound);
-        }
+      } else if (keyboard_key === "KeyS" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (camera_3d_direction === "north") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         } else if (camera_3d_direction === "south") {
@@ -946,10 +928,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         }
-      } else if (keyboard_input === "A" && !symmetry_x_enabled && !symmetry_z_enabled) {
-        if (audio) {
-          AudioPlayer(controls_sound);
-        }
+      } else if (keyboard_key === "KeyA" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (camera_3d_direction === "north") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         } else if (camera_3d_direction === "south") {
@@ -959,10 +938,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         }
-      } else if (keyboard_input === "D" && !symmetry_x_enabled && !symmetry_z_enabled) {
-        if (audio) {
-          AudioPlayer(controls_sound);
-        }
+      } else if (keyboard_key === "KeyD" && !symmetry_x_enabled && !symmetry_z_enabled) {
         if (camera_3d_direction === "north") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1074,21 +1050,6 @@ export default function CanvasContainer() {
   }, [button_trigger]);
 
   useEffect(() => {
-    {
-      if (delete_object_mode === "delete_selected_object" || keyboard_input === "DELETE") {
-        RemoveSelectedModel(selected_model_id);
-        removeModelsDataObjectInfo(selected_model_id);
-      } else if (delete_object_mode === "delete_all_object") {
-        RemoveAllModels();
-        setModelsData({});
-      }
-
-      dispatch(set_selected_model_id("empty"));
-      dispatch(set_object_selected(false));
-    }
-  }, [delete_object_trigger]);
-
-  useEffect(() => {
     if (
       model_type_to_create &&
       [
@@ -1198,6 +1159,71 @@ export default function CanvasContainer() {
     set_model_x_position_offset(0);
     set_model_z_position_offset(0);
   }, [selected_object_list]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      set_keyboard_key(event.code);
+      set_key_press_trigger(key_press_trigger + 1);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    if ((audio && model_creation_state) || selected_model_id !== "empty") {
+      if (keyboard_key === "KeyE" || keyboard_key === "KeyQ") {
+        AudioPlayer(rotation_sound);
+      } else if (
+        keyboard_key === "KeyW" ||
+        keyboard_key === "KeyA" ||
+        keyboard_key === "KeyS" ||
+        keyboard_key === "KeyD" ||
+        keyboard_key === "Space" ||
+        keyboard_key === "ControlLeft" ||
+        keyboard_key === "ShiftLeft" ||
+        keyboard_key === "ArrowUp" ||
+        keyboard_key === "ArrowDown" ||
+        keyboard_key === "ArrowLeft" ||
+        keyboard_key === "ArrowRight"
+      ) {
+        AudioPlayer(controls_sound);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [key_press_trigger]);
+
+  useEffect(() => {
+    const handleDelete = (event: KeyboardEvent) => {
+      set_keyboard_key(event.code);
+      set_delete_object_trigger(delete_object_trigger + 1);
+    };
+    window.addEventListener("keydown", handleDelete);
+
+    if (delete_object_mode === "delete_selected_object" || keyboard_key === "Backspace" || keyboard_key === "Delete") {
+      if (audio && selected_model_id !== "empty") {
+        AudioPlayer(delete_sound);
+      }
+      RemoveSelectedModel(selected_model_id);
+      removeModelsDataObjectInfo(selected_model_id);
+      dispatch(set_selected_model_id("empty"));
+      dispatch(set_delete_object_mode("none"));
+      dispatch(set_object_selected(false));
+    }
+    if (delete_object_mode === "delete_all_object") {
+      RemoveAllModels();
+      setModelsData({});
+      dispatch(set_selected_model_id("empty"));
+      dispatch(set_delete_object_mode("none"));
+      dispatch(set_object_selected(false));
+      if (audio) {
+        AudioPlayer(delete_sound);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleDelete);
+    };
+  }, [delete_object_trigger, delete_object_mouse_trigger]);
 
   return (
     <>

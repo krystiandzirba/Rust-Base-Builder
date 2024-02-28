@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 
 import { RootState } from "../../Store.tsx";
 import {
-  set_keyboard_input,
   set_object_distance_multiplier,
-  set_key_press_trigger,
   set_button_input,
   set_button_trigger,
   set_object_rotation_degree,
   set_delete_object_mode,
-  set_delete_object_trigger,
+  set_delete_object_mouse_trigger,
 } from "../../Store.tsx";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -28,7 +26,6 @@ import {
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import buttons_sound from "../../audio/buttons_sound.mp3";
 import menu_sound from "../../audio/menu_sound.mp3";
-import delete_sound from "../../audio/delete_sound.mp3";
 
 import dumpsterClosed from "../../icons/dumpster_closed_bw.png";
 import dumpsterOpened from "../../icons/dumpster_opened.png";
@@ -41,10 +38,9 @@ export default function ControlsInput() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   let object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
-  const key_press_trigger = useSelector((state: RootState) => state.controlsInput.key_press_trigger);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
-  const delete_object_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_trigger);
+  const delete_object_mouse_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_mouse_trigger); //prettier-ignore
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
@@ -59,55 +55,6 @@ export default function ControlsInput() {
   const [display_remove_all_models_question, set_display_remove_all_models_question] = useState<boolean>(false);
   const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
   const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
-
-  const KeypressEvent = (event: KeyboardEvent) => {
-    if (event.key === "q" || event.key === "Q") {
-      dispatch(set_keyboard_input("Q"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "e" || event.key === "E") {
-      dispatch(set_keyboard_input("E"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
-      dispatch(set_keyboard_input("W"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "a" || event.key === "A" || event.key === "ArrowLeft") {
-      dispatch(set_keyboard_input("A"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
-      dispatch(set_keyboard_input("S"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "d" || event.key === "D" || event.key === "ArrowRight") {
-      dispatch(set_keyboard_input("D"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === " " && camera_type === "camera_3d") {
-      dispatch(set_keyboard_input("SPACE"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "Control" && camera_type === "camera_3d") {
-      dispatch(set_keyboard_input("CTRL"));
-      dispatch(set_key_press_trigger(key_press_trigger + 1));
-    }
-    if (event.key === "Delete" || event.key === "Backspace") {
-      dispatch(set_keyboard_input("DELETE"));
-      dispatch(set_delete_object_trigger(delete_object_trigger + 1));
-    }
-
-    if (event.key === "Shift") {
-      if (object_distance_multiplier === 5) {
-        dispatch(set_object_distance_multiplier(0.125));
-      } else if (object_distance_multiplier === 0.125) {
-        dispatch(set_object_distance_multiplier(1));
-      } else if (object_distance_multiplier === 1) {
-        dispatch(set_object_distance_multiplier(5));
-      }
-    }
-  };
 
   function ChangeRotationDegree() {
     if (audio) {
@@ -180,7 +127,7 @@ export default function ControlsInput() {
 
   function DeleteSelectedObjectButton() {
     dispatch(set_delete_object_mode("delete_selected_object"));
-    dispatch(set_delete_object_trigger(delete_object_trigger + 1));
+    dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
   }
 
   function DumpsterMouseEnter() {
@@ -201,7 +148,7 @@ export default function ControlsInput() {
 
   function DeleteAllObjects() {
     dispatch(set_delete_object_mode("delete_all_object"));
-    dispatch(set_delete_object_trigger(delete_object_trigger + 1));
+    dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
   }
 
   function ChangeDistanceUnitButton(distance: number) {
@@ -210,13 +157,6 @@ export default function ControlsInput() {
     }
     dispatch(set_object_distance_multiplier(distance));
   }
-
-  useEffect(() => {
-    window.addEventListener("keydown", KeypressEvent);
-    return () => {
-      window.removeEventListener("keydown", KeypressEvent);
-    };
-  }, [key_press_trigger, delete_object_trigger, object_distance_multiplier]);
 
   return (
     <>
@@ -405,9 +345,9 @@ export default function ControlsInput() {
             }}
             onClick={() => {
               DeleteSelectedObjectButton();
-              if (audio && object_selected) {
-                AudioPlayer(delete_sound);
-              }
+              // if (audio && object_selected) {
+              //   AudioPlayer(delete_sound);
+              // }
             }}
             onMouseEnter={TrashCanMouseEnter}
             onMouseLeave={TrashCanMouseLeave}
@@ -444,9 +384,6 @@ export default function ControlsInput() {
                 onClick={() => {
                   DeleteAllObjects();
                   set_display_remove_all_models_question(false);
-                  if (audio) {
-                    AudioPlayer(delete_sound);
-                  }
                 }}
                 onMouseEnter={() => set_yes_answer_hovered(true)}
                 onMouseLeave={() => set_yes_answer_hovered(false)}

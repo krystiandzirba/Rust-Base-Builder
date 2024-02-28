@@ -69,30 +69,21 @@ const canvasModelsArraySlice = createSlice({
 });
 
 const controlsInputSlice = createSlice({
-  name: "keyboard input",
+  name: "controls input",
   initialState: {
-    keyboard_input: "",
     object_distance_multiplier: 1,
-    key_press_trigger: 0,
 
     button_input: "",
     button_trigger: 0,
     object_rotation_degree: 90,
 
     delete_object_mode: "none",
-    delete_object_trigger: 0,
+    delete_object_mouse_trigger: 0,
   },
   reducers: {
-    set_keyboard_input: (state, action) => {
-      return { ...state, keyboard_input: action.payload };
-    },
     set_object_distance_multiplier: (state, action) => {
       return { ...state, object_distance_multiplier: action.payload };
     },
-    set_key_press_trigger: (state, action) => {
-      return { ...state, key_press_trigger: action.payload };
-    },
-
     set_button_input: (state, action) => {
       return { ...state, button_input: action.payload };
     },
@@ -106,8 +97,8 @@ const controlsInputSlice = createSlice({
     set_delete_object_mode: (state, action) => {
       return { ...state, delete_object_mode: action.payload };
     },
-    set_delete_object_trigger: (state, action) => {
-      return { ...state, delete_object_trigger: action.payload };
+    set_delete_object_mouse_trigger: (state, action) => {
+      return { ...state, delete_object_mouse_trigger: action.payload };
     },
   },
 });
@@ -296,14 +287,12 @@ export const {
 } = camerasSettingsSlice.actions;
 
 export const {
-  set_keyboard_input,
   set_object_distance_multiplier,
-  set_key_press_trigger,
   set_button_input,
   set_button_trigger,
   set_object_rotation_degree,
   set_delete_object_mode,
-  set_delete_object_trigger,
+  set_delete_object_mouse_trigger,
 } = controlsInputSlice.actions;
 export const {
   set_model_type_to_create,
