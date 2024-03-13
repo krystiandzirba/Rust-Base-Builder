@@ -39,8 +39,14 @@ export default function ResourceCounter() {
 
   const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>();
 
+  //* ------------------------- ↓ Misc Cost Counter ↓ -------------------------
+  // (if enabled) this function is used to calculate the cost of the misc objects:
+  // (tool cupboard, large wood box, wood storage box, furnace, workbench tier 3, sleeping bag)
+  // the total misc cost is added on top of the "construction" objects cost (foundations, walls ... )
+  // it is displayed as a whole under the "build cost" window
+
   function CountMiscsCost(models: string[]) {
-    // - - - - - - - - - - - misc count - - - - - - - - - -
+    // -------------------------  count the number of misc items  -------------------------
 
     let misc_tool_cupboard_count = models.filter((model) => model === "ToolCupboard").length;
     let misc_large_wood_box_count = models.filter((model) => model === "LargeWoodBox").length;
@@ -58,7 +64,7 @@ export default function ResourceCounter() {
         misc_sleeping_bag_count
     );
 
-    // - - - - - - - - - - - wood - - - - - - - - - -
+    // -------------------------  total misc cost (wood) -------------------------
 
     let wood_misc_cost_1000 = misc_tool_cupboard_count * 1000;
 
@@ -68,38 +74,38 @@ export default function ResourceCounter() {
 
     set_total_wood_misc_cost(wood_misc_cost_1000 + wood_misc_cost_250 + wood_misc_cost_100);
 
-    // - - - - - - - - - - - stone - - - - - - - - - -
+    // -------------------------  total misc cost (stone) -------------------------
 
     let stone_misc_cost_200 = misc_furnace_count * 200;
     set_total_stone_misc_cost(stone_misc_cost_200);
 
-    // - - - - - - - - - - - metal - - - - - - - - - -
+    // -------------------------  total misc cost (metal) -------------------------
 
     let metal_misc_cost_1000 = misc_workbench_t3_count * 1000;
     let metal_misc_cost_50 = misc_large_wood_box_count * 50;
     set_total_metal_misc_cost(metal_misc_cost_1000 + metal_misc_cost_50);
 
-    // - - - - - - - - - - - hq metal - - - - - - - - - -
+    // -------------------------  total misc cost (hq metal) -------------------------
 
     let hq_metal_misc_cost_100 = misc_workbench_t3_count * 100;
     set_total_hq_metal_misc_cost(hq_metal_misc_cost_100);
 
-    // - - - - - - - - - - - scrap - - - - - - - - - -
+    // -------------------------  total misc cost (scrap) -------------------------
 
     let scrap_misc_cost_1250 = misc_workbench_t3_count * 1250;
     let total_scrap_misc_cost = scrap_misc_cost_1250;
 
-    // - - - - - - - - - - - gear - - - - - - - - - -
+    // -------------------------  total misc cost (gear) -------------------------
 
     let gear_misc_cost_2 = models.filter((model) => model === "GarageDoor").length * 2;
     let total_gear_misc_cost = gear_misc_cost_2;
 
-    // - - - - - - - - - - - lq fuel - - - - - - - - - -
+    // -------------------------  total misc cost (lq fuel) -------------------------
 
     let lq_fuel_misc_cost_50 = models.filter((model) => model === "Furnace").length * 50;
     let total_lq_fuel_misc_cost = lq_fuel_misc_cost_50;
 
-    // - - - - - - - - - - - display - - - - - - - - - -
+    // -------------------------  display the values -------------------------
 
     set_components_cost([
       { scrap: total_scrap_misc_cost },
@@ -109,8 +115,14 @@ export default function ResourceCounter() {
     ]);
   }
 
+  //* ------------------------- ↑ Misc Cost Counter ↑ -------------------------
+
+  //* ------------------------- ↓ Base Building Cost Counter ↓ -------------------------
+  // this function is calculating the building cost of the base objects like foundations, walls, floors ...
+  // displayed under the "build cost" window
+
   function CountBuildCost(models: string[]) {
-    // - - - - - - - - - - - wood - - - - - - - - - -
+    // -------------------------  total build cost (wood) -------------------------
     let wood_build_cost_200 =
       models.filter(
         (model) =>
@@ -153,8 +165,7 @@ models.filter(
 
     let total_wood_build_cost = wood_build_cost_200 + wood_build_cost_140 + wood_build_cost_100 + wood_build_cost_50;
 
-    // - - - - - - - - - - - wood - - - - - - - - - -
-    // - - - - - - - - - - - stone - - - - - - - - - -
+    // -------------------------  total build cost (stone) -------------------------
 
     let stone_build_cost_300 =
       models.filter(
@@ -204,8 +215,7 @@ models.filter(
     let total_stone_build_cost =
       stone_build_cost_300 + stone_build_cost_210 + stone_build_cost_150 + stone_build_cost_75;
 
-    // - - - - - - - - - - - stone - - - - - - - - - -
-    // - - - - - - - - - - - metal - - - - - - - - - -
+    // -------------------------  total build cost (metal) -------------------------
 
     // prettier-ignore
     let metal_build_cost_300 =
@@ -274,8 +284,7 @@ models.filter(
       metal_build_cost_100 +
       metal_build_cost_50;
 
-    // - - - - - - - - - - - metal - - - - - - - - - -
-    // - - - - - - - - - - - hqm - - - - - - - - - -
+    // -------------------------  total build cost (hq metal) -------------------------
 
     let hqm_build_cost_25 =
       models.filter(
@@ -318,8 +327,10 @@ models.filter(
 
     let total_hqm_build_cost = hqm_build_cost_25 + hqm_build_cost_18 + hqm_build_cost_13 + hqm_build_cost_7;
 
-    // - - - - - - - - - - - hqm - - - - - - - - - -
-    // - - - - - - - - - - - wood needed to upgrade from twig to higher quality  - - - - - - - - - -
+    //* ------------------------- ↓ wood needed to upgrade from twig to higher quality ↓ -------------------------
+    // building the base requires the objects to be upgraded from twig -> wood -> stone -> hq metal
+    // this app skips the twig and wood part and starts building the base from the stone and hq metal (soon)
+    // so the wood cost for previous tiers is calculated here
 
     let twig_wood_upgrade_50 =
       models.filter(
@@ -378,8 +389,9 @@ models.filter(
       twig_wood_upgrade_50 + twig_wood_upgrade_35 + twig_wood_upgrade_25 + twig_wood_upgrade_13
     );
 
-    // - - - - - - - - - - - wood needed to upgrade from twig to higher quality  - - - - - - - - - -
-    // - - - - - - - - - - - display - - - - - - - - - -
+    //* ------------------------- ↑ wood needed to upgrade from twig to higher quality ↑ -------------------------
+
+    // -------------------------  display build cost + misc cost -------------------------
 
     if (count_miscs_cost) {
       set_build_cost([
@@ -396,11 +408,17 @@ models.filter(
         { armored: total_hqm_build_cost },
       ]);
     }
-
-    // console.log("model count", models.length);
-
-    // - - - - - - - - - - - display - - - - - - - - - -
   }
+
+  //* ------------------------- ↑ Base Building Cost Counter ↑ -------------------------
+
+  //* ------------------------- ↓ Upkeep Dynamic Percentage ↓ -------------------------
+  // this function counts the weighted upkeep cost of currently placed objects based on its amount
+  // the upkeep counter is divided on 4 stages:
+  // - stage 0: first 15 objects adds 10% to the upkeep cost for every object
+  // - stage 1: objects 16-100 adds 15% to the upkeep cost
+  // - stage 2: objects 101-175 adds 20% to the upkeep cost
+  // - stage 3: every objects above 175 adds 30% to the upkeep cost
 
   function CountUpkeepPercentileRampup(models: string[]) {
     let total_object_count = models.length - total_misc_count;
@@ -415,19 +433,16 @@ models.filter(
     let stage_2_count_rampup: number = 0;
     let stage_3_count_rampup: number = 0;
 
-    if (total_object_count === 0) {
+    // -------------------------  stage 0 -------------------------
+
+    if (total_object_count === 0 || (total_object_count > 0 && total_object_count <= 15)) {
       stage_0_count_rampup = 0.1;
 
       set_total_upkeep_percentile_rampup(parseFloat(stage_0_count_rampup.toFixed(4)));
       set_upkeep_cost_text("upkeep cost");
     }
 
-    if (total_object_count > 0 && total_object_count <= 15) {
-      stage_0_count_rampup = 0.1;
-
-      set_total_upkeep_percentile_rampup(parseFloat(stage_0_count_rampup.toFixed(4)));
-      set_upkeep_cost_text("upkeep cost");
-    }
+    // -------------------------  stage 1 -------------------------
 
     if (total_object_count > 15 && total_object_count <= 100) {
       stage_0_count = 15;
@@ -438,6 +453,8 @@ models.filter(
       set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
 
+    // -------------------------  stage 2 -------------------------
+
     if (total_object_count > 100 && total_object_count <= 175) {
       stage_0_count = 15;
       stage_1_count = 100 - stage_0_count;
@@ -447,6 +464,8 @@ models.filter(
       set_total_upkeep_percentile_rampup(parseFloat(stage_2_count_rampup.toFixed(4)));
       set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
+
+    // -------------------------  stage 3 -------------------------
 
     if (total_object_count > 175) {
       stage_0_count = 15;
@@ -459,6 +478,8 @@ models.filter(
       set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
   }
+
+  //* ------------------------- ↑ Upkeep Dynamic Percentage ↑ -------------------------
 
   function DisplayCountedUpkeep() {
     if (build_cost && build_cost[0] && build_cost[0].wood !== undefined && count_miscs_cost) {

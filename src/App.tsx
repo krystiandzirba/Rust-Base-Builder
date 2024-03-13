@@ -83,3 +83,6 @@ export default App;
 // remove selected -> remove clicked object when active
 
 // react three fiber - pointer lock controls (first person camera control) + fps octree
+
+// add arrow input keys to object offset
+// add shift input to change the distance unit

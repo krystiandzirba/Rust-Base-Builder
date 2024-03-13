@@ -36,6 +36,8 @@ export default function CameraType() {
     return set_camera_2d_position(position);
   };
 
+  // -------------------------  change the camera buttons colors -------------------------
+
   function CameraButtonsColorChange(button: boolean) {
     if (camera_type === "camera_2d") {
       return {
@@ -59,6 +61,8 @@ export default function CameraType() {
       };
     }
   }
+
+  // -------------------------  rotate the 2D camera 90° to the left -------------------------
 
   function CameraLeftView() {
     if (camera_type === "camera_2d") {
@@ -90,6 +94,8 @@ export default function CameraType() {
     }
   }
 
+  // -------------------------  rotate the 2D camera 90° to the right -------------------------
+
   function CameraRightView() {
     if (camera_type === "camera_2d") {
       if (
@@ -120,6 +126,8 @@ export default function CameraType() {
     }
   }
 
+  // -------------------------  rotate the 2D camera to the top -------------------------
+
   function CameraTopView() {
     console.log(camera_2d_position);
     if (camera_type === "camera_2d") {
@@ -129,6 +137,9 @@ export default function CameraType() {
       dispatch(set_camera_2d_direction("top"));
     }
   }
+
+  // -------------------------  reset the camera position -------------------------
+
   function ResetPerspectiveCamera() {
     if (camera_type === "camera_3d") {
       dispatch(set_camera_3d_reset(!camera_3d_reset));

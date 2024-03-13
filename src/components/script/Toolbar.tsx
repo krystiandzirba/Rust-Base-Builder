@@ -33,6 +33,8 @@ const Toolbar = () => {
 
   const [toolbar_enabled, set_toolbar_enabled] = useState<boolean>(true);
 
+  // -------------------------  change the page mode to "Overview" mode -------------------------
+
   function PageModeOverview() {
     dispatch(set_page_mode("overview")),
       dispatch(set_object_selected(false)),
@@ -45,6 +47,8 @@ const Toolbar = () => {
     }
   }
 
+  // -------------------------  change the page mode to "Edit" mode -------------------------
+
   function PageModeEdit() {
     dispatch(set_page_mode("edit")),
       dispatch(set_object_selected(false)),
@@ -53,6 +57,8 @@ const Toolbar = () => {
       AudioPlayer(menu_sound);
     }
   }
+
+  // -------------------------  change the page mode to "Edit" mode -------------------------
 
   function PageModeRaid() {
     dispatch(set_page_mode("raid")),
@@ -63,9 +69,13 @@ const Toolbar = () => {
     }
   }
 
+  // -------------------------  enable|disable the toolbar visibility -------------------------
+
   function ToggleToolbar() {
     set_toolbar_enabled(!toolbar_enabled);
   }
+
+  // -------------------------  deselect the selected object and disable the model cretion state on page mode change -------------------------
 
   useEffect(() => {
     {

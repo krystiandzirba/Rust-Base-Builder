@@ -370,10 +370,20 @@ export default function CanvasContainer() {
     }
   }
 
-  // ------------------------- Canvas grid coordinates + models position -------------------------
+  function CaptureMouseCanvasDrag(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const currentTimestamp = Date.now();
+    const canvas_mouse_drag_time_since_last_execution = currentTimestamp - canvas_mouse_drag_last_execution_time;
 
-  // calculating the mouse cursor and invisible grid floor intersection point
-  // to create a X+Z coordinates at which models will be placed
+    canvas_mouse_drag_last_execution_time = currentTimestamp;
+
+    if (event.buttons === 1 && canvas_mouse_drag_time_since_last_execution >= 30) {
+      set_prevent_actions_after_canvas_drag("canvas_drag");
+    }
+  }
+
+  //* ------------------------- ↓ Canvas grid coordinates + models position ↓ -------------------------
+  // calculating the mouse cursor position (X+Y window position) and invisible grid floor intersection point
+  // to create a X+Z canvas coordinates at which models will be placed on mouse click
   // assign a default, 3x mirrored values for symmetrical objects
 
   function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
@@ -418,7 +428,11 @@ export default function CanvasContainer() {
     } else return;
   }
 
-  // --------------------------------------------------
+  //* ------------------------- ↑ Canvas grid coordinates + models position ↑ -------------------------
+
+  //* ------------------------- ↓ Adding models to the canvas ↓ -------------------------
+  // function that adds a models to the canvas on the previously calculated intersection point
+  // if symmetry is enabled, the models are added to the specifc axis
 
   function AddCanvasModel() {
     if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
@@ -498,16 +512,7 @@ export default function CanvasContainer() {
     }
   }
 
-  function CaptureMouseCanvasDrag(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    const currentTimestamp = Date.now();
-    const canvas_mouse_drag_time_since_last_execution = currentTimestamp - canvas_mouse_drag_last_execution_time;
-
-    canvas_mouse_drag_last_execution_time = currentTimestamp;
-
-    if (event.buttons === 1 && canvas_mouse_drag_time_since_last_execution >= 30) {
-      set_prevent_actions_after_canvas_drag("canvas_drag");
-    }
-  }
+  //* ------------------------- ↑ Adding models to the canvas ↑ -------------------------
 
   const RotateSelectedObject = (objectId: string, direction: string) => {
     setModelsData((prevTransforms) => {
@@ -668,8 +673,8 @@ export default function CanvasContainer() {
     set_modified_model_rotation(newRotation);
   }
 
-  // ------------------------- Prebuild Base -------------------------
-  // Adding a prebuild base to the canvas
+  //* ------------------------- ↓ Prebuild Base ↓ -------------------------
+  // Adding a prebuild base to the canvas on page load
 
   function CreatePrebuildBase() {
     const rotation_30deg = THREE.MathUtils.degToRad(30);
@@ -768,7 +773,7 @@ export default function CanvasContainer() {
     }
   }
 
-  // ------------------------- -------------------------
+  //* ------------------------- ↑ Prebuild Base ↑ -------------------------
 
   function IsOffsetActive() {
     if (model_x_position_offset) return true;
@@ -804,6 +809,13 @@ export default function CanvasContainer() {
       dispatch(set_canvas_models_array(storeCanvasModelsNames(models)));
     }
   }, [models]);
+
+  //* ------------------------- ↓ Keyboard input ↓ -------------------------
+  // move the selected object on the canvas using the WSAD or ARROW keys
+  // rotate the selected object using the QE keys
+  // elevate the selected object using the SPACE key
+  // lower the selected object using the L-CTRL key
+  // offset the selected object using the WSAD or ARROW keys
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
@@ -947,6 +959,11 @@ export default function CanvasContainer() {
     }
   }, [key_press_trigger]);
 
+  //* ------------------------- ↑ Keyboard Input ↑ -------------------------
+
+  //* ------------------------- ↓ Mouse + Button Input ↓ -------------------------
+  // change the position, rotation and elevation of selected objects using the mouse + controls button click
+
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
       if (audio && selected_model_id !== "empty") {
@@ -1044,6 +1061,14 @@ export default function CanvasContainer() {
     }
   }, [button_trigger]);
 
+  //* ------------------------- ↑ Mouse + Button Input ↑ -------------------------
+
+  //* ------------------------- ↓ Model Elevation Level ↓ -------------------------
+  // change the default object elevation level, based on the object type
+  // if currently selected object is in "foundation" category, place the model on the canvas at the default (0) elevation
+  // else, elevate the placed object on Y axis by 0.05 unit
+  // example: place the wall above the foundation and do not make them intersect with each other
+
   useEffect(() => {
     if (
       model_type_to_create &&
@@ -1067,6 +1092,14 @@ export default function CanvasContainer() {
       set_model_foundation_elevation(0.05);
     }
   }, [model_type_to_create]);
+
+  //* ------------------------- ↑ Model Elevation Level ↑ -------------------------
+
+  //* ------------------------- ↓ Model Prop ↓ -------------------------
+  // set the model prop category
+  // each model has a corresponding prop counterpart
+  // the prop is a ghost model that is displayed on the canvas
+  // it helps to visualize where the selected object will be placed with its respective shape and size
 
   useEffect(() => {
     if (
@@ -1135,6 +1168,8 @@ export default function CanvasContainer() {
     }
   }, [model_type_to_create]);
 
+  //* ------------------------- ↑ Model Prop ↑ -------------------------
+
   useEffect(() => {
     if (!prebuild_created.current) {
       CreatePrebuildBase();
@@ -1155,10 +1190,15 @@ export default function CanvasContainer() {
     set_model_z_position_offset(0);
   }, [selected_object_list]);
 
+  //* ------------------------- ↓ Keyboard Input Catcher ↓ -------------------------
+  // it catches the currently pressed keyboard key
+  // later used to manipulate the objects position, rotation ...
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       set_keyboard_key(event.code);
       set_key_press_trigger(key_press_trigger + 1);
+      console.log(event.code);
     };
     window.addEventListener("keydown", handleKeyDown);
 
@@ -1186,6 +1226,12 @@ export default function CanvasContainer() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [key_press_trigger]);
+
+  //* ------------------------- ↑ Keyboard Input Catcher ↑ -------------------------
+
+  //* ------------------------- ↓ Keyboard + Mouse Delete Input Catcher ↓ -------------------------
+  // it detects any DELETE and BACKSPACE keyboard input and mouse delete input (both bins to delete the selected objects)
+  // and deletes either the selected or all objects based on the input type
 
   useEffect(() => {
     const handleDelete = (event: KeyboardEvent) => {
@@ -1219,6 +1265,8 @@ export default function CanvasContainer() {
       window.removeEventListener("keydown", handleDelete);
     };
   }, [delete_object_trigger, delete_object_mouse_trigger]);
+
+  //* ------------------------- ↑ Keyboard + Mouse Delete Input Catcher ↑ -------------------------
 
   return (
     <>

@@ -73,6 +73,11 @@ export default function RaidCalculator() {
   const [animal_fat_cost, set_animal_fat_cost] = useState<number>(0);
   const [rope_cost, set_rope_cost] = useState<number>(0);
 
+  //* ------------------------- ↓ Reset the Raid ↓ -------------------------
+  // reset all the build cost
+  // dispatch the reset_raid_models to the Redux store, so each model component can trigger a function to
+  // show the previously hidden models due to the "raiding destruction"
+
   function ResetRaid() {
     dispatch(set_reset_raid_models(!reset_raid_models));
     set_rockets_cost(0);
@@ -88,6 +93,12 @@ export default function RaidCalculator() {
       AudioPlayer(menu_sound);
     }
   }
+
+  //* ------------------------- ↑ Reset the Raid ↑ -------------------------
+
+  //* ------------------------- ↓ Raid Cost Calculator: Efficiency ↓ -------------------------
+  // calculate the "efficiency" type of the raid mode
+  // this function counts the most efficient way to raid a selected object
 
   function CalculateEfficiencyCost() {
     if (
@@ -144,6 +155,12 @@ export default function RaidCalculator() {
     }
   }
 
+  //* ------------------------- ↑ Raid Cost Calculator: Efficiency ↑ -------------------------
+
+  //* ------------------------- ↓ Raid Cost Calculator: Rockets ↓ -------------------------
+  // calculate the "rockets" type of the raid mode
+  // this function counts only the rocket costs on selected objects
+
   function CalculateRocketCost() {
     if (model_to_destroy === "MetalDoor") {
       set_rockets_cost(rockets_cost + 2);
@@ -199,6 +216,12 @@ export default function RaidCalculator() {
     }
   }
 
+  //* ------------------------- ↑ Raid Cost Calculator: Rockets ↑ -------------------------
+
+  //* ------------------------- ↓ Raid Cost Calculator: Explosives ↓ -------------------------
+  // calculate the "explosives" type of the raid mode
+  // this function counts only the esplosives costs on selected objects
+
   function CalculateExplosivesCost() {
     if (model_to_destroy === "MetalDoor") {
       set_explosives_cost(explosives_cost + 1);
@@ -253,6 +276,12 @@ export default function RaidCalculator() {
       set_explosives_cost(explosives_cost + 4);
     }
   }
+
+  //* ------------------------- ↑ Raid Cost Calculator: Explosives ↑ -------------------------
+
+  //* ------------------------- ↓ Raid Cost Calculator: Exp. Ammo ↓ -------------------------
+  // calculate the "explosive ammo" type of the raid mode
+  // this function counts only the explosive ammo costs on selected objects
 
   function CalculateAmmoCost() {
     if (model_to_destroy === "MetalDoor") {
@@ -318,6 +347,12 @@ export default function RaidCalculator() {
     }
   }
 
+  //* ------------------------- ↑ Raid Cost Calculator: Exp. Ammo ↑ -------------------------
+
+  //* ------------------------- ↓ Raid Cost Calculator: Satchel Charge ↓ -------------------------
+  // calculate the "satchel charge" type of the raid mode
+  // this function counts only the satchel charge costs on selected objects
+
   function CalculateSatchelsCost() {
     if (model_to_destroy === "MetalDoor") {
       set_satchel_cost(satchel_cost + 4);
@@ -374,6 +409,10 @@ export default function RaidCalculator() {
     }
   }
 
+  //* ------------------------- ↑ Raid Cost Calculator: Satchel Charge ↑ -------------------------
+
+  // -------------------------  calculate the sulfur cost for every destroyed object -------------------------
+
   function CalculateSulfurCost() {
     if (!count_sub_ingredients) {
       const sulfur_cost_rocket = rockets_cost * 1400;
@@ -389,6 +428,8 @@ export default function RaidCalculator() {
       set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
     }
   }
+
+  // -------------------------  calculate the gunpowder cost for every destroyed object -------------------------
 
   function CalculateGunpowderCost() {
     if (!count_sub_ingredients) {
@@ -407,6 +448,8 @@ export default function RaidCalculator() {
     }
   }
 
+  // -------------------------  calculate the charcoal cost for every destroyed object -------------------------
+
   function CalculateCharcoalCost() {
     if (!count_sub_ingredients) {
       const charcoal_cost_rocket = rockets_cost * 1950;
@@ -423,6 +466,8 @@ export default function RaidCalculator() {
     }
   }
 
+  // -------------------------  calculate the metal frag. cost for every destroyed object -------------------------
+
   function CalculateMetalFragmentsCost() {
     const metal_fragments_cost_rocket = rockets_cost * 100;
     const metal_fragments_cost_explosives = explosives_cost * 200;
@@ -436,6 +481,8 @@ export default function RaidCalculator() {
     );
   }
 
+  // -------------------------  calculate the metal pipes cost for every destroyed object -------------------------
+
   function CalculateMetalPipesCost() {
     if (!count_sub_ingredients) {
       const metal_pipes_cost_rocket = rockets_cost * 2;
@@ -445,6 +492,8 @@ export default function RaidCalculator() {
       set_metal_pipe_cost(metal_pipes_cost_rocket);
     }
   }
+
+  // -------------------------  calculate the lq. fuel cost for every destroyed object -------------------------
 
   function CalculateLqFuelCost() {
     if (!count_sub_ingredients) {
@@ -457,6 +506,8 @@ export default function RaidCalculator() {
       set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
     }
   }
+
+  // -------------------------  calculate the cloth cost for every destroyed object -------------------------
 
   function CalculateClothCost() {
     if (!count_sub_ingredients) {
@@ -471,10 +522,14 @@ export default function RaidCalculator() {
     }
   }
 
+  // -------------------------  calculate the tech trash cost for every destroyed object -------------------------
+
   function CalculateTechTrashCost() {
     const tech_trash_cost_explosives = explosives_cost * 2;
     set_tech_trash_cost(tech_trash_cost_explosives);
   }
+
+  // -------------------------  calculate the hq. metal cost for every destroyed object -------------------------
 
   function CalculateHqMetalCost() {
     if (count_sub_ingredients) {
@@ -483,12 +538,16 @@ export default function RaidCalculator() {
     }
   }
 
+  // -------------------------  calculate the scrap cost for every destroyed object -------------------------
+
   function CalculateScrapCost() {
     if (count_sub_ingredients) {
       const scrap_cost_rocket = rockets_cost * 40;
       set_scrap_cost(scrap_cost_rocket);
     }
   }
+
+  // -------------------------  calculate the animal fat cost for every destroyed object -------------------------
 
   function CalculateAnimalFatCost() {
     if (count_sub_ingredients) {
@@ -500,6 +559,8 @@ export default function RaidCalculator() {
       set_animal_fat_cost(animal_fat_cost_explosives);
     }
   }
+
+  // -------------------------  calculate the rope cost for every destroyed object -------------------------
 
   function CalculateRRopeCost() {
     const rope_cost_satchel = satchel_cost * 1;
@@ -531,6 +592,9 @@ export default function RaidCalculator() {
     }
   }
 
+  //* ------------------------- ↓ Calculator Trigger ↓ -------------------------
+  // trigger the raid cost calculator when any model changes the value of the model_destroy_trigger in the Redux Store
+
   useEffect(() => {
     {
       if (raid_type === "rockets") {
@@ -547,12 +611,17 @@ export default function RaidCalculator() {
     }
   }, [model_destroy_tigger]);
 
+  //* ------------------------- ↑ Calculator Trigger ↑ -------------------------
+
   const HandleAdvancedResourceCountingState = () => {
     set_count_sub_ingredients(!count_sub_ingredients);
     if (audio) {
       AudioPlayer(buttons_sound);
     }
   };
+
+  //* ------------------------- ↓ Ingredients Cost ↓ -------------------------
+  // calculate all of the ingredients cost if any of the raid type tool amount changes
 
   useEffect(() => {
     {
@@ -570,6 +639,10 @@ export default function RaidCalculator() {
       CalculateRRopeCost();
     }
   }, [rockets_cost, explosives_cost, ammo_cost, satchel_cost, count_sub_ingredients]);
+
+  //* ------------------------- ↑ Ingredients Cost ↑ -------------------------
+
+  // -------------------------  reset the raid cost on page mode change -------------------------
 
   useEffect(() => {
     {
