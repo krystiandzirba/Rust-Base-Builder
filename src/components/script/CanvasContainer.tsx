@@ -7,7 +7,6 @@ import {
   PivotControls,
   Box,
   Environment,
-  KeyboardControls,
 } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -94,12 +93,6 @@ import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
-
-import ReactGA from "react-ga";
-
-useEffect(() => {
-ReactGA.pageview(window.location.pathname);
-}, []);
 
 interface CanvasModelsListProps {
   models: ModelType[];

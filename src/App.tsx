@@ -12,8 +12,6 @@ import Settings from "./components/script/Settings.tsx";
 import StructureVisibilityMode from "./components/script/StructureVisibilityMode.tsx";
 import Github from "./components/script/Github.tsx";
 
-import ReactGA from "react-ga";
-
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
 import "./components/styles/presets.css";
@@ -32,9 +30,6 @@ import { RootState } from "./Store";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
-
-const analytics_tracking_id = "G-RM1YVRB2CY";
-ReactGA.initialize(analytics_tracking_id);
 
 function App() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
