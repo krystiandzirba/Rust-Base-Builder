@@ -105,6 +105,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
   return <SearchBarField className="search_bar" label="Search..." type="search" value={value} onChange={onChange} />;
 };
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component provides a searchable list of all 3D objects available for user interaction.
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function ObjectList() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);

@@ -25,6 +25,12 @@ import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import menu_sound from "../../audio/menu_sound.mp3";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component serves as the main navigation tool, allowing users to change the page mode (overview, edit, raid).
+
+//? ----------------------------------------------------------------------------------------------------
+
 const Toolbar = () => {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);

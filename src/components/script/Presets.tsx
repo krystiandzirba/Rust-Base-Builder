@@ -1,6 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVectorSquare } from "@fortawesome/free-solid-svg-icons";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This placeholder component represents a "layouts" feature, which is yet to be implemented.
+
+//? Users will be able to switch between multiple instances of different unrelated setups.
+
+//? ----------------------------------------------------------------------------------------------------
+
 const Preset = () => {
   return (
     <>

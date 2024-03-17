@@ -1,6 +1,16 @@
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component houses the lighting setup for the canvas.
+
+//? It includes various types of lights such as ambient lights, directional lights, point lights, and spotlights.
+
+//! heavy performance impact, requires changing | rewriting
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function CanvasLights() {
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const better_lighting_state = useSelector((state: RootState) => state.pageSettings.better_lighting_state); //prettier-ignore

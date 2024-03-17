@@ -15,6 +15,13 @@ import {
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import buttons_sound from "../../audio/buttons_sound.mp3";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component allows users to change the visibility of specific object types.
+//? including enabling/disabling the X-Ray mode.
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function StructureVisibilityMode() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);

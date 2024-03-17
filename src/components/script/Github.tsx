@@ -2,6 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? GitHub icon and link
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function Github() {
   const [github_hovered, set_github_hovered] = useState<boolean>(false);
 

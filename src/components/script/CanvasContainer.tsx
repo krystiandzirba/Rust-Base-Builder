@@ -121,6 +121,29 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
   );
 };
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This is the main component for the React Three Fiber (R3F) canvas, where all 3D models are imported and positioned based on user input.
+
+//? It includes functionality to initialize a pre-built base upon page load and allows for the addition or removal of selected or all present objects.
+
+//? Each generated object is assigned a random ID and its transform settings ID.
+
+//? A raycaster is implemented to detect the 2D mouse position relative to the window coordinates and canvas grid intersections,
+//?  providing a point where user can place the objects.
+
+//? Pivot controls enable users to manipulate an object's position through mouse drag options.
+
+//? Symmetry (X+Z), placing objects with a mirroring on specifc (or both) axis, with 0,0,0 center point
+
+//? Capturing the keyboard input to serve as a transformation tool for objects, allowing users to adjust position, rotation, offset, etc., using WASD or ARROW keys.
+
+//? Model elevation feature enables users to adjust the height level of placed objects.
+
+//? Model props - a specific ghost model that is visible on the canvas grid, it acts as a visualization where the mouse cursor is and where any object will be placed
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function CanvasContainer() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);

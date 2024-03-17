@@ -4,6 +4,12 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component is responsible for displaying the currently available shortcuts or actions at the top of the screen (if enabled)
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function Hints() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);

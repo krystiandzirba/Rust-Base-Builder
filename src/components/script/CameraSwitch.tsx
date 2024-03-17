@@ -18,6 +18,16 @@ import { faUpLong, faRightLong, faLeftLong, faCameraRotate } from "@fortawesome/
 import camera2dThumbnail from "../../icons/camera_2d.png";
 import camera3dThumbnail from "../../icons/camera_3d.png";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component allows users to switch between 2D and 3D camera modes.
+
+//? Reset the 3D camera position.
+
+//? Change the perspective of the 2D camera (left, right, front, back, top).
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function CameraType() {
   const dispatch = useDispatch();
 

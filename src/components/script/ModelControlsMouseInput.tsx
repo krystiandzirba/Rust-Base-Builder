@@ -34,6 +34,16 @@ import trashCanClosedBw from "../../icons/trash_can_closed_bw.png";
 import trashCanClosed from "../../icons/trash_can_closed.png";
 import trashCanOpened from "../../icons/trash_can_opened.png";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? The control panel positioned at the center bottom of the app that serves as a transforming tool for objects via mouse input.
+
+//? It facilitates adjustments to object properties such as position, rotation, elevation and height.
+
+//? Users can also switch between distance units and delete either selected or all objects.
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function ControlsInput() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);

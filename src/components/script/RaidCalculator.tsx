@@ -43,6 +43,16 @@ import charge_sound from "../../audio/charge_sound.mp3";
 import ammo_sound from "../../audio/ammo_sound2.mp3";
 import satchel_sound from "../../audio/satchel_sound.mp3";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component calculates the raid cost, which is divided into five different types: efficiency, rockets, C4, explosive ammo, and satchels.
+
+//? Each raid type is further broken down into its required ingredients for crafting.
+
+//? Additionally, it includes a button to reset the calculator and the list of destroyed objects.
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function RaidCalculator() {
   const dispatch = useDispatch();
 

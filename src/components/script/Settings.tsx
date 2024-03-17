@@ -37,6 +37,17 @@ import {
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import menu_sound from "../../audio/menu_sound.mp3";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component provides access to multiple settings related to the app, divided into different sections:
+//? - UI settings
+//? - Audio
+//? - Performance | System
+//? - Postprocessing | Visuals
+//? - more in the future
+
+//? ----------------------------------------------------------------------------------------------------
+
 const Settings = () => {
   const dispatch = useDispatch();
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);

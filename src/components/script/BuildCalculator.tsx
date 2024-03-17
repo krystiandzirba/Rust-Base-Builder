@@ -15,6 +15,16 @@ import lq_fuelThumbnail from "../../icons/lq_fuel_thumbnail.png";
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import buttons_sound from "../../audio/buttons_sound.mp3";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component is used to calculate and display the building costs across various building types, including stone, metal, and armored tiers.
+
+//? Optional calculator aimed for miscellaneous objects — those not integral to the building's structure but serving as filler blocks.
+
+//? Dynamic upkeep calculator, which provides a weighted average upkeep cost based on all placed objects.
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function ResourceCounter() {
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array);
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore

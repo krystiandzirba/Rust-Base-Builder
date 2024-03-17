@@ -5,6 +5,14 @@ import { Bloom, EffectComposer, SMAA, SSAO, Pixelation } from "@react-three/post
 import { BlurPass, Resizer, KernelSize, Resolution, BlendFunction, SMAAPreset } from "postprocessing";
 import { Suspense } from "react";
 
+//? ----------------------------------------------------------------------------------------------------
+
+//? This component applies post-processing effects to the canvas scene and all 3D objects.
+
+//! heavy performance impact, requires changing | rewriting
+
+//? ----------------------------------------------------------------------------------------------------
+
 export default function Postprocessing() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
 
