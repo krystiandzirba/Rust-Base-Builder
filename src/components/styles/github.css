@@ -8,6 +8,19 @@
   transition: transform 0.2s ease;
 }
 
+.github_text {
+  color: #bbbbbb;
+  font-size: 0.65vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 0.7vh;
+  margin-left: 0.05vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .github:hover {
   transform: scale(1.075);
 }

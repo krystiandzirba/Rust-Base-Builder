@@ -476,7 +476,7 @@ export default function CanvasContainer() {
         set_generated_id(randomIdGenerator());
         addModel(modelClass, generated_id, default_object_rotation);
 
-        if (audio) {
+        if (audio && prevent_actions_after_canvas_drag === "allow") {
           AudioPlayer(build_sound);
         }
 
