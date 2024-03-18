@@ -61,12 +61,14 @@ export default function StructureVisibilityMode() {
         <div className="visibility_switch_row">
           <div
             onClick={() => {
-              dispatch(set_models_xray_active(!models_xray_active));
-              if (audio) {
-                AudioPlayer(buttons_sound);
+              if (page_mode === "edit") {
+                dispatch(set_models_xray_active(!models_xray_active));
+                if (audio) {
+                  AudioPlayer(buttons_sound);
+                }
               }
             }}
-            className={!models_xray_active ? "xray_switch_button visibility_switch_button_enabled" : "xray_switch_button visibility_switch_button_disabled"} // prettier-ignore
+            className={!models_xray_active && page_mode === "edit" ? "xray_switch_button visibility_switch_button_enabled" : "xray_switch_button visibility_switch_button_disabled"} // prettier-ignore
           >
             xray
           </div>

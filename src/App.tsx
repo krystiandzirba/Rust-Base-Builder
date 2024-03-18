@@ -88,4 +88,3 @@ export default App;
 
 // add arrow input keys to object offset
 // add shift input to change the distance unit
-// disable xray in overview mode
