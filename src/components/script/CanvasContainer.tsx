@@ -19,6 +19,7 @@ import {
   set_selected_model_id,
   set_camera_3d_direction,
   set_delete_object_mode,
+  set_object_distance_multiplier,
 } from "../../Store.tsx";
 
 import { Model as TrianglePropSolid } from "../models/TrianglePropSolid.tsx";
@@ -928,6 +929,14 @@ export default function CanvasContainer() {
           moveSelectedObjectY(+1);
         } else if (keyboard_key === "ControlLeft") {
           moveSelectedObjectY(-1);
+        } else if (keyboard_key === "ShiftLeft") {
+          if (object_distance_multiplier === 0.125) {
+            dispatch(set_object_distance_multiplier(1));
+          } else if (object_distance_multiplier === 1) {
+            dispatch(set_object_distance_multiplier(5));
+          } else if (object_distance_multiplier === 5) {
+            dispatch(set_object_distance_multiplier(0.125));
+          }
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
@@ -1234,13 +1243,16 @@ export default function CanvasContainer() {
         keyboard_key === "KeyD" ||
         keyboard_key === "Space" ||
         keyboard_key === "ControlLeft" ||
-        keyboard_key === "ShiftLeft" ||
         keyboard_key === "ArrowUp" ||
         keyboard_key === "ArrowDown" ||
         keyboard_key === "ArrowLeft" ||
         keyboard_key === "ArrowRight"
       ) {
         AudioPlayer(controls_sound);
+      }
+    } else if ((audio && model_creation_state) || selected_model_id === "empty") {
+      if (keyboard_key === "ShiftLeft") {
+        AudioPlayer(buttons_sound);
       }
     }
 
