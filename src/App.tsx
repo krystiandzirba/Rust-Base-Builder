@@ -11,6 +11,7 @@ import Hints from "./components/script/Hints.tsx";
 import Settings from "./components/script/Settings.tsx";
 import StructureVisibilityMode from "./components/script/StructureVisibilityMode.tsx";
 import Github from "./components/script/Github.tsx";
+import MobileAlert from "./components/script/MobileAlert.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -25,6 +26,7 @@ import "./components/styles/hints.css";
 import "./components/styles/settings.css";
 import "./components/styles/structure_visibility_mode.css";
 import "./components/styles/github.css";
+import "./components/styles/mobile_alert.css";
 
 import { RootState } from "./Store";
 import { useSelector } from "react-redux";
@@ -59,6 +61,7 @@ function App() {
         <Settings />
         {enable_structures_visibility && <StructureVisibilityMode />}
         <Github />
+        <MobileAlert />
       </KeyboardControls>
     </>
   );
