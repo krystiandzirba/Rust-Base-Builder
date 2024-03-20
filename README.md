@@ -4,6 +4,8 @@
 Rust Base Builder - an app for the popular video game "Rust" run by React Three Fiber. This tool allows you to create any base, simulate a raid and calculate all the building + upkeep cost.
 </p>
 
+App: https://krystiandzirba.github.io/Rust-Base-Builder/
+
 ![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/6851219d-808d-477e-9f78-c22a2eff6962)
 
 <h1 align="center">Key Features:</h1>
@@ -59,25 +61,6 @@ you can also manipulate the objects using the control buttons at the bottom of t
 
 <p align="center">
     <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/0f837ddc-573b-4440-b091-45d761ef20da" alt="Image">
-  </p>
-
-  <h2 align="center">Modifying the base | triangle foundation, honeycomb and walls</h2>
-
-
-<p align="center">Currently the fastest and the easiest way to make triangle honeycomb is to place all the walls around it and then edit it with the 0.125 distance unit</p>
-
-  _<p align="center">(however this design is not optimal and will change in the near future, example below)</p>_
-
-<p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/41531f1b-2d5f-4bb6-8333-f36a1cb20235" alt="Image">
-  </p>
-
-<p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/2d335b82-c4b2-41b4-a477-385098327562" alt="Image">
-  </p>
-
-<p align="center">
-    <img src="https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/a979c2a8-1d32-4fca-a2e4-005612428900" alt="Image">
   </p>
 
 
