@@ -1,8 +1,8 @@
 import { RootState } from "../../Store";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { Bloom, EffectComposer, SMAA, SSAO, Pixelation } from "@react-three/postprocessing";
-import { BlurPass, Resizer, KernelSize, Resolution, BlendFunction, SMAAPreset } from "postprocessing";
+import { Bloom, EffectComposer, SMAA, SSAO } from "@react-three/postprocessing";
+import { BlendFunction, SMAAPreset } from "postprocessing";
 import { Suspense } from "react";
 
 //? ----------------------------------------------------------------------------------------------------
@@ -15,7 +15,6 @@ import { Suspense } from "react";
 
 export default function Postprocessing() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const ssao_state = useSelector((state: RootState) => state.pageSettings.ssao_state); //prettier-ignore
   const antialiasing_state = useSelector((state: RootState) => state.pageSettings.antialiasing_state); //prettier-ignore

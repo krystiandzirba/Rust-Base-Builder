@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
-
 import { Slider, ThemeProvider, createTheme } from "@mui/material";
 
 import controls_a_Thumbnail from "../../icons/controls_a_thumbnail.png";

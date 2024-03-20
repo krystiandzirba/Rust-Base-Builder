@@ -2,8 +2,8 @@
   width: 10vw;
   height: 7vh;
   position: absolute;
-  left: 45%;
-  top: 83.5%;
+  left: 45.1%;
+  top: 83%;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
   display: flex;
@@ -34,15 +34,16 @@
 
 .model_rotation_previous,
 .model_rotation_next {
-  font-size: 0.65vw;
+  font-size: 0.9vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   color: rgba(191, 191, 191, 0.5);
 }
 
 .rotation_change_button {
-  background-color: rgba(0, 0, 0, 0);
-  font-size: 1vw;
+  background-color: rgba(252, 0, 0, 0);
+  width: 4vw;
+  font-size: 1.4vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   color: #ffd5b3;
@@ -65,22 +66,22 @@
 
 .indicator_top {
   left: 48.5%;
-  top: 76%;
+  top: 75.5%;
 }
 
 .indicator_right {
-  left: 57.35%;
-  top: 85.75%;
+  left: 57.55%;
+  top: 85.25%;
 }
 
 .indicator_bottom {
   left: 48.5%;
-  top: 95%;
+  top: 95.5%;
 }
 
 .indicator_left {
-  left: 39.65%;
-  top: 85.75%;
+  left: 39.45%;
+  top: 85.25%;
 }
 
 .object_move_button:hover,
@@ -106,7 +107,7 @@
 
 .object_move_right_button {
   left: 55%;
-  top: 84.5%;
+  top: 84%;
 }
 
 .object_move_back_button {
@@ -116,7 +117,7 @@
 
 .object_move_left_button {
   left: 42%;
-  top: 84.5%;
+  top: 84%;
 }
 
 .object_move_up_button {

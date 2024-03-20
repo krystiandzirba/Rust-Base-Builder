@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { RootState } from "../../Store.tsx";
 import {
@@ -355,9 +355,6 @@ export default function ControlsInput() {
             }}
             onClick={() => {
               DeleteSelectedObjectButton();
-              // if (audio && object_selected) {
-              //   AudioPlayer(delete_sound);
-              // }
             }}
             onMouseEnter={TrashCanMouseEnter}
             onMouseLeave={TrashCanMouseLeave}

@@ -84,10 +84,6 @@ export default App;
 // verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
 // fix the camera NSEW position, it is incorrectly calculated
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
-// remove selected -> remove clicked object when active
 // make more user input presets, that build 1 by 1 on the canvas (with timeout)
 
 // react three fiber - pointer lock controls (first person camera control) + fps octree
-
-// add arrow input keys to object offset
-// add shift input to change the distance unit

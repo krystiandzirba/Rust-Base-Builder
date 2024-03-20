@@ -132,49 +132,6 @@ export default function ResourceCounter() {
   // displayed under the "build cost" window
 
   function CountBuildCost(models: string[]) {
-    // -------------------------  total build cost (wood) -------------------------
-    let wood_build_cost_200 =
-      models.filter(
-        (model) =>
-          model === "WoodenFoundationSquareHigh" ||
-          model === "WoodenFoundationSquareMid" ||
-          model === "WoodenFoundationSquareLow" ||
-          model === "WoodenWallHigh" ||
-          model === "WoodenWallMid" ||
-          model === "WoodenStairsLShape" ||
-          model === "WoodenStairsUShape"
-      ).length * 200;
-
-    //prettier-ignore
-    let wood_build_cost_140 =
-    models.filter(
-      (model) =>
-        model === "WoodenDoorway" ||
-        model === "WoodenWindow"
-    ).length * 140;
-
-    let wood_build_cost_100 =
-      models.filter(
-        (model) =>
-          model === "WoodenFoundationTriangleHigh" ||
-          model === "WoodenFoundationTriangleMid" ||
-          model === "WoodenFoundationTriangleLow" ||
-          model === "WoodenFoundationStairs" ||
-          model === "WoodenSquareFloor" ||
-          model === "WoodenWallLow" ||
-          model === "WoodenWallFrame" ||
-          model === "WoodenFloorFrame"
-      ).length * 100;
-
-    //prettier-ignore
-    let wood_build_cost_50 =
-models.filter(
-  (model) =>
-    model === "WoodenTriangleFloor"
-).length * 50;
-
-    let total_wood_build_cost = wood_build_cost_200 + wood_build_cost_140 + wood_build_cost_100 + wood_build_cost_50;
-
     // -------------------------  total build cost (stone) -------------------------
 
     let stone_build_cost_300 =
@@ -405,14 +362,14 @@ models.filter(
 
     if (count_miscs_cost) {
       set_build_cost([
-        { wood: total_wood_build_cost + total_wood_misc_cost },
+        { wood: total_wood_misc_cost },
         { stone: total_stone_build_cost + total_stone_misc_cost },
         { metal: total_metal_build_cost + total_metal_misc_cost },
         { armored: total_hqm_build_cost + total_hq_metal_misc_cost },
       ]);
     } else if (!count_miscs_cost) {
       set_build_cost([
-        { wood: total_wood_build_cost },
+        { wood: 0 },
         { stone: total_stone_build_cost },
         { metal: total_metal_build_cost },
         { armored: total_hqm_build_cost },

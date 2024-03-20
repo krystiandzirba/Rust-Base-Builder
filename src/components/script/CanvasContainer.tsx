@@ -228,7 +228,8 @@ export default function CanvasContainer() {
   const [delete_object_trigger, set_delete_object_trigger] = useState<number>(0);
 
   const modelTypeMap = {
-    // Stone models
+    // -------------------------  Stone -------------------------
+
     StoneFoundationSquareHigh: StoneFoundationSquareHigh,
     StoneFoundationSquareMid: StoneFoundationSquareMid,
     StoneFoundationSquareLow: StoneFoundationSquareLow,
@@ -250,7 +251,8 @@ export default function CanvasContainer() {
     StoneRoofSquare: StoneRoofSquare,
     StoneRoofTriangle: StoneRoofTriangle,
 
-    // Metal models
+    // -------------------------  Metal -------------------------
+
     MetalFoundationSquareHigh: MetalFoundationSquareHigh,
     MetalFoundationSquareMid: MetalFoundationSquareMid,
     MetalFoundationSquareLow: MetalFoundationSquareLow,
@@ -274,11 +276,13 @@ export default function CanvasContainer() {
     MetalDoor: MetalDoor,
     GarageDoor: GarageDoor,
 
-    // Windows
+    // -------------------------  Windows -------------------------
+
     MetalVerticalEmbrasure: MetalVerticalEmbrasure,
     StrengthenedGlassWindow: StrenghtenedGlassWindow,
 
-    // Miscs
+    // -------------------------  Miscs -------------------------
+
     ToolCupboard: ToolCupboard,
     WoodStorageBox: WoodStorageBox,
     LargeWoodBox: LargeWoodBox,
@@ -833,7 +837,9 @@ export default function CanvasContainer() {
     }
   }, [models]);
 
-  //* ------------------------- ↓ Keyboard input ↓ -------------------------
+  //* ------------------------- ↓ Keyboard Input Catcher + Controls ↓ -------------------------
+  // Used to catch the currently pressed keyboard key
+
   // move the selected object on the canvas using the WSAD or ARROW keys
   // rotate the selected object using the QE keys
   // elevate the selected object using the SPACE key
@@ -841,6 +847,37 @@ export default function CanvasContainer() {
   // offset the selected object using the WSAD or ARROW keys
 
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      set_keyboard_key(event.code);
+      set_key_press_trigger(key_press_trigger + 1);
+      // console.log(event.code);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    if ((audio && model_creation_state) || selected_model_id !== "empty") {
+      if (keyboard_key === "KeyE" || keyboard_key === "KeyQ") {
+        AudioPlayer(rotation_sound);
+      } else if (
+        keyboard_key === "KeyW" ||
+        keyboard_key === "KeyA" ||
+        keyboard_key === "KeyS" ||
+        keyboard_key === "KeyD" ||
+        keyboard_key === "ArrowUp" ||
+        keyboard_key === "ArrowDown" ||
+        keyboard_key === "ArrowLeft" ||
+        keyboard_key === "ArrowRight"
+      ) {
+        AudioPlayer(controls_sound);
+      }
+    }
+    if (audio && page_mode === "edit" && !model_creation_state) {
+      if (keyboard_key === "ShiftLeft") {
+        AudioPlayer(buttons_sound);
+      } else if (selected_model_id !== "empty" && (keyboard_key === "ControlLeft" || keyboard_key === "Space")) {
+        AudioPlayer(controls_sound);
+      }
+    }
+
     if (page_mode === "edit" && !model_creation_state) {
       {
         if (keyboard_key === "KeyW" || keyboard_key === "ArrowUp") {
@@ -988,9 +1025,13 @@ export default function CanvasContainer() {
         }
       }
     }
-  }, [key_press_trigger]);
 
-  //* ------------------------- ↑ Keyboard Input ↑ -------------------------
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [key_press_trigger, model_creation_state]);
+
+  //* ------------------------- ↑ Keyboard Input Catcher + Controls ↑ -------------------------
 
   //* ------------------------- ↓ Mouse + Button Input ↓ -------------------------
   // change the position, rotation and elevation of selected objects using the mouse + controls button click
@@ -1220,48 +1261,6 @@ export default function CanvasContainer() {
     set_model_x_position_offset(0);
     set_model_z_position_offset(0);
   }, [selected_object_list]);
-
-  //* ------------------------- ↓ Keyboard Input Catcher ↓ -------------------------
-  // it catches the currently pressed keyboard key
-  // later used to manipulate the objects position, rotation ...
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      set_keyboard_key(event.code);
-      set_key_press_trigger(key_press_trigger + 1);
-      console.log(event.code);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-
-    if ((audio && model_creation_state) || selected_model_id !== "empty") {
-      if (keyboard_key === "KeyE" || keyboard_key === "KeyQ") {
-        AudioPlayer(rotation_sound);
-      } else if (
-        keyboard_key === "KeyW" ||
-        keyboard_key === "KeyA" ||
-        keyboard_key === "KeyS" ||
-        keyboard_key === "KeyD" ||
-        keyboard_key === "Space" ||
-        keyboard_key === "ControlLeft" ||
-        keyboard_key === "ArrowUp" ||
-        keyboard_key === "ArrowDown" ||
-        keyboard_key === "ArrowLeft" ||
-        keyboard_key === "ArrowRight"
-      ) {
-        AudioPlayer(controls_sound);
-      }
-    } else if ((audio && model_creation_state) || selected_model_id === "empty") {
-      if (keyboard_key === "ShiftLeft") {
-        AudioPlayer(buttons_sound);
-      }
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [key_press_trigger]);
-
-  //* ------------------------- ↑ Keyboard Input Catcher ↑ -------------------------
 
   //* ------------------------- ↓ Keyboard + Mouse Delete Input Catcher ↓ -------------------------
   // it detects any DELETE and BACKSPACE keyboard input and mouse delete input (both bins to delete the selected objects)

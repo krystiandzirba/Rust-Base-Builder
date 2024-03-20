@@ -36,7 +36,6 @@ export default function CameraType() {
   const camera_2d_position = useSelector((state: RootState) => state.camerasSettings.camera_2d_position);
 
   const [camera_switch_button_text, set_camera_switch_button_text] = useState<string>("3D");
-  const [camera_switch_button_hover, set_camera_switch_button_hover] = useState<boolean>(false);
   const [camera_2d_top_hover, set_camera_2d_top_hover] = useState<boolean>(false);
   const [camera_2d_right_hover, set_camera_2d_right_hover] = useState<boolean>(false);
   const [camera_2d_left_hover, set_camera_2d_left_hover] = useState<boolean>(false);
@@ -178,8 +177,6 @@ export default function CameraType() {
             dispatch(set_camera_3d_direction("north"));
           }
         }}
-        onMouseEnter={() => set_camera_switch_button_hover(true)}
-        onMouseLeave={() => set_camera_switch_button_hover(false)}
         style={{
           backgroundImage: `url(${camera_type === "camera_3d" ? camera3dThumbnail : camera2dThumbnail})`,
           backgroundSize: "contain",

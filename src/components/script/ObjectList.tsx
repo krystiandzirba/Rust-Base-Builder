@@ -1,6 +1,6 @@
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   set_model_type_to_create,
@@ -756,6 +756,24 @@ export default function ObjectList() {
   const filteredObjectList = object_list.filter((item) =>
     item.keywords.some((keyword) => keyword.includes(searchQuery.toLowerCase()))
   );
+
+  // -------------------------  prevent unwanted keyboard input -------------------------
+  // prevent the Space and Enter buttons to enable-disable the object list items, if the Search bar is empty
+  // (selecting-dedelecting with these two inputs was possible)
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if ((event.code === "Space" || event.code === "Enter") && searchQuery === "") {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [searchQuery]);
 
   return (
     <>
