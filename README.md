@@ -4,7 +4,7 @@
 Rust Base Builder - an app for the popular video game "Rust" run by React Three Fiber. This tool allows you to create any base, simulate a raid and calculate all the building + upkeep cost.
 </p>
 
-App: https://krystiandzirba.github.io/Rust-Base-Builder/
+<p align="center"> App: https://krystiandzirba.github.io/Rust-Base-Builder/ </p>
 
 ![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/6851219d-808d-477e-9f78-c22a2eff6962)
 
