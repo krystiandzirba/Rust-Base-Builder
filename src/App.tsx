@@ -53,9 +53,9 @@ function App() {
         {enable_presets && <Presets />}
         <Version />
         {enable_cameras && <CameraType />}
-        {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
         {page_mode === "raid" && <RaidCalculator />}
         <CanvasContainer />
+        {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
         <ObjectList />
         {enable_hints && <Hints />}
         <Settings />

@@ -1,7 +1,7 @@
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 
-import { Bloom, EffectComposer, SMAA, SSAO } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, N8AO, SMAA, SSAO } from "@react-three/postprocessing";
 import { BlendFunction, SMAAPreset } from "postprocessing";
 import { Suspense } from "react";
 
@@ -23,26 +23,20 @@ export default function Postprocessing() {
     <>
       <Suspense fallback={null}>
         <EffectComposer multisampling={antialiasing_state ? 3 : 0}>
+          <N8AO
+            aoRadius={ssao_state && page_mode !== "edit" ? 60 : 0}
+            distanceFalloff={0.2}
+            intensity={ssao_state && page_mode !== "edit" ? 6 : 0.01}
+            screenSpaceRadius
+            halfRes
+          />
+
           <Bloom
             intensity={bloom_state ? 0.5 : 0}
             luminanceThreshold={0.6}
             luminanceSmoothing={1}
             mipmapBlur={true}
             radius={0.4}
-          />
-          <SSAO
-            blendFunction={BlendFunction.MULTIPLY}
-            samples={50}
-            rings={8}
-            intensity={ssao_state && page_mode === "overview" ? 22 : 0}
-            worldDistanceThreshold={10}
-            worldDistanceFalloff={25}
-            worldProximityFalloff={25}
-            worldProximityThreshold={1}
-            luminanceInfluence={1}
-            radius={0.2}
-            resolutionScale={0.5}
-            bias={0.275}
           />
           <SMAA preset={SMAAPreset.ULTRA} blendFunction={BlendFunction.SET} />
         </EffectComposer>
