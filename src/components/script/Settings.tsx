@@ -34,6 +34,9 @@ import {
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import menu_sound from "../../audio/menu_sound.mp3";
 
+import controls_sound from "../../audio/controls_sound.mp3";
+import buttons_sound from "../../audio/buttons_sound.mp3";
+
 //? ----------------------------------------------------------------------------------------------------
 
 //? This component provides access to multiple settings related to the app, divided into different sections:
@@ -146,6 +149,9 @@ const Settings = () => {
     } else if (!toggle) {
       dispatch(set_enable_hints(false));
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandlePresetsSwitch(toggle: boolean) {
@@ -153,6 +159,9 @@ const Settings = () => {
       dispatch(set_enable_presets(true));
     } else if (!toggle) {
       dispatch(set_enable_presets(false));
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -162,6 +171,9 @@ const Settings = () => {
     } else if (!toggle) {
       dispatch(set_enable_cameras(false));
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleStructuresVisibilitySwitch(toggle: boolean) {
@@ -169,6 +181,9 @@ const Settings = () => {
       dispatch(set_enable_structures_visibility(true));
     } else if (!toggle) {
       dispatch(set_enable_structures_visibility(false));
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -178,6 +193,9 @@ const Settings = () => {
     } else if (!toggle) {
       dispatch(set_enable_resource_container(false));
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleModelControlsSwitch(toggle: boolean) {
@@ -186,6 +204,9 @@ const Settings = () => {
     } else if (!toggle) {
       dispatch(set_enable_model_transform_controls(false));
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleActiveModelsStateSwitch(toggle: boolean) {
@@ -193,6 +214,9 @@ const Settings = () => {
       dispatch(set_active_models_state(true));
     } else if (!toggle) {
       dispatch(set_active_models_state(false));
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -204,6 +228,9 @@ const Settings = () => {
         dispatch(set_enable_model_textures(false));
       }
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleModelMaterialSwitch(toggle: boolean) {
@@ -214,6 +241,9 @@ const Settings = () => {
         dispatch(set_enable_model_material(false));
       }
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleAudioSwitch(toggle: boolean) {
@@ -222,6 +252,9 @@ const Settings = () => {
     } else if (!toggle) {
       dispatch(set_audio(false));
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandlePerformanceMonitorStateSwitch(toggle: boolean) {
@@ -229,6 +262,9 @@ const Settings = () => {
       dispatch(set_performance_monitor_state(true));
     } else if (!toggle) {
       dispatch(set_performance_monitor_state(false));
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -254,6 +290,9 @@ const Settings = () => {
       dispatch(set_enable_model_textures(true));
       dispatch(set_enable_model_material(true));
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleBloomStateSwitch(toggle: boolean) {
@@ -263,6 +302,9 @@ const Settings = () => {
       } else if (!toggle) {
         dispatch(set_bloom_state(false));
       }
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -274,6 +316,9 @@ const Settings = () => {
         dispatch(set_better_lighting_state(false));
       }
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleSSAOStateSwitch(toggle: boolean) {
@@ -283,6 +328,9 @@ const Settings = () => {
       } else if (!toggle) {
         dispatch(set_ssao_state(false));
       }
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
@@ -294,6 +342,9 @@ const Settings = () => {
         dispatch(set_antialiasing_state(false));
       }
     }
+    if (audio) {
+      AudioPlayer(buttons_sound);
+    }
   }
 
   function HandleHDRStateSwitch(toggle: boolean) {
@@ -303,6 +354,9 @@ const Settings = () => {
       } else if (!toggle) {
         dispatch(set_HDR_state(false));
       }
+    }
+    if (audio) {
+      AudioPlayer(buttons_sound);
     }
   }
 
