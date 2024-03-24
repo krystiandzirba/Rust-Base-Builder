@@ -758,10 +758,16 @@ export default function ObjectList() {
   );
 
   // -------------------------  prevent unwanted keyboard input -------------------------
+  // deselect the current object on search bar input
+
   // prevent the Space and Enter buttons to enable-disable the object list items, if the Search bar is empty
   // (selecting-dedelecting with these two inputs was possible)
 
   useEffect(() => {
+    dispatch(set_selected_object_list(-1));
+    dispatch(set_model_creation_state(false));
+    dispatch(set_model_type_to_create(""));
+
     const handleKeyDown = (event: any) => {
       if ((event.code === "Space" || event.code === "Enter") && searchQuery === "") {
         event.preventDefault();

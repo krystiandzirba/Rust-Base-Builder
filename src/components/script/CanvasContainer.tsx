@@ -428,7 +428,13 @@ export default function CanvasContainer() {
       mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      raycaster.setFromCamera(mouse_window_click, perspectiveCameraControlsRef.current?.camera!);
+      const camera = perspectiveCameraControlsRef.current?.camera;
+
+      if (camera) {
+        raycaster.setFromCamera(mouse_window_click, camera);
+      } else {
+        console.error("Camera is null or undefined");
+      }
 
       const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
 
