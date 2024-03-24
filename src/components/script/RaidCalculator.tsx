@@ -630,6 +630,12 @@ export default function RaidCalculator() {
     }
   };
 
+  const NumbersFormatter = (number: any) => {
+    if (number > 9999) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    } else return number;
+  };
+
   //* ------------------------- ↓ Ingredients Cost ↓ -------------------------
   // calculate all of the ingredients cost if any of the raid type tool amount changes
 
@@ -764,7 +770,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>rocket</div>
-                <div>{rockets_cost}</div>
+                <div>{NumbersFormatter(rockets_cost)}</div>
               </div>
             </div>
           </div>
@@ -778,7 +784,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>C4</div>
-                <div>{explosives_cost}</div>
+                <div>{NumbersFormatter(explosives_cost)}</div>
               </div>
             </div>
           </div>
@@ -794,7 +800,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>exp. 5.56</div>
-                <div>{ammo_cost}</div>
+                <div>{NumbersFormatter(ammo_cost)}</div>
               </div>
             </div>
           </div>
@@ -808,7 +814,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>satchel</div>
-                <div>{satchel_cost}</div>
+                <div>{NumbersFormatter(satchel_cost)}</div>
               </div>
             </div>
           </div>
@@ -836,7 +842,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>sulfur</div>
-                <div>{sulfur_cost}</div>
+                <div>{NumbersFormatter(sulfur_cost)}</div>
               </div>
             </div>
           </div>
@@ -852,7 +858,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>gunpowder</div>
-                <div>{gunpowder_cost}</div>
+                <div>{NumbersFormatter(gunpowder_cost)}</div>
               </div>
             </div>
           </div>
@@ -868,7 +874,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>charcoal</div>
-                <div>{charcoal_cost}</div>
+                <div>{NumbersFormatter(charcoal_cost)}</div>
               </div>
             </div>
           </div>
@@ -882,7 +888,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>metal</div>
-                <div>{metal_fragments_cost}</div>
+                <div>{NumbersFormatter(metal_fragments_cost)}</div>
               </div>
             </div>
           </div>
@@ -904,7 +910,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>metal pipe</div>
-                <div>{metal_pipe_cost}</div>
+                <div>{NumbersFormatter(metal_pipe_cost)}</div>
               </div>
             </div>
           </div>
@@ -918,7 +924,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>lq. fuel</div>
-                <div>{lq_fuel_cost}</div>
+                <div>{NumbersFormatter(lq_fuel_cost)}</div>
               </div>
             </div>
           </div>
@@ -934,7 +940,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>cloth</div>
-                <div>{cloth_cost}</div>
+                <div>{NumbersFormatter(cloth_cost)}</div>
               </div>
             </div>
           </div>
@@ -948,7 +954,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>tech trash</div>
-                <div>{tech_trash_cost}</div>
+                <div>{NumbersFormatter(tech_trash_cost)}</div>
               </div>
             </div>
           </div>
@@ -970,7 +976,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>hq metal</div>
-                <div>{hq_metal_cost}</div>
+                <div>{NumbersFormatter(hq_metal_cost)}</div>
               </div>
             </div>
           </div>
@@ -984,7 +990,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>scrap</div>
-                <div>{scrap_cost}</div>
+                <div>{NumbersFormatter(scrap_cost)}</div>
               </div>
             </div>
           </div>
@@ -1002,7 +1008,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>animal fat</div>
-                <div>{animal_fat_cost}</div>
+                <div>{NumbersFormatter(animal_fat_cost)}</div>
               </div>
             </div>
           </div>
@@ -1016,7 +1022,7 @@ export default function RaidCalculator() {
             >
               <div className="raid_cost_display">
                 <div>rope</div>
-                <div>{rope_cost}</div>
+                <div>{NumbersFormatter(rope_cost)}</div>
               </div>
             </div>
           </div>

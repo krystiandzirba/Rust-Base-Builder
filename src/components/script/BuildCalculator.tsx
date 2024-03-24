@@ -481,6 +481,12 @@ export default function ResourceCounter() {
     }
   };
 
+  const NumbersFormatter = (number: any) => {
+    if (number > 9999) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    } else return number;
+  };
+
   useEffect(() => {
     CountBuildCost(canvas_models_array);
     CountMiscsCost(canvas_models_array);
@@ -515,7 +521,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>wood</div>
-                <div>{Number(build_cost[0].wood) + Number(twig_upgrade_wood_cost)}</div>
+                <div>{NumbersFormatter(Number(build_cost[0].wood) + Number(twig_upgrade_wood_cost))}</div>
               </div>
             </div>
           </div>
@@ -531,7 +537,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>stone</div>
-                <div>{build_cost[1].stone}</div>
+                <div>{NumbersFormatter(build_cost[1].stone)}</div>
               </div>
             </div>
           </div>
@@ -539,7 +545,7 @@ export default function ResourceCounter() {
             <div className="cost_cell" style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}>
               <div className="build_cost_display">
                 <div>metal f.</div>
-                <div>{build_cost[2].metal}</div>
+                <div>{NumbersFormatter(build_cost[2].metal)}</div>
               </div>
             </div>
           </div>
@@ -550,7 +556,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>hq. metal</div>
-                <div>{build_cost[3].armored}</div>
+                <div>{NumbersFormatter(build_cost[3].armored)}</div>
               </div>
             </div>
           </div>
@@ -574,7 +580,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>wood</div>
-                <div>{wood_upkeep_cost.toFixed(0)}</div>
+                <div>{NumbersFormatter(wood_upkeep_cost.toFixed(0))}</div>
               </div>
             </div>
           </div>
@@ -590,7 +596,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>stone</div>
-                <div>{stone_upkeep_cost.toFixed(0)}</div>
+                <div>{NumbersFormatter(stone_upkeep_cost.toFixed(0))}</div>
               </div>
             </div>
           </div>
@@ -598,7 +604,7 @@ export default function ResourceCounter() {
             <div className="cost_cell" style={{ backgroundImage: `url(${metalThumbnail})`, backgroundSize: "cover" }}>
               <div className="build_cost_display">
                 <div>metal f.</div>
-                <div>{metal_upkeep_cost.toFixed(0)}</div>
+                <div>{NumbersFormatter(metal_upkeep_cost.toFixed(0))}</div>
               </div>
             </div>
           </div>
@@ -609,7 +615,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>hq. metal</div>
-                <div>{hqm_upkeep_cost.toFixed(0)}</div>
+                <div>{NumbersFormatter(hqm_upkeep_cost.toFixed(0))}</div>
               </div>
             </div>
           </div>
@@ -631,7 +637,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>scrap</div>
-                <div>{components_cost[0].scrap}</div>
+                <div>{NumbersFormatter(components_cost[0].scrap)}</div>
               </div>
             </div>
           </div>
@@ -647,7 +653,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>gears</div>
-                <div>{components_cost[1].gear}</div>
+                <div>{NumbersFormatter(components_cost[1].gear)}</div>
               </div>
             </div>
           </div>
@@ -658,7 +664,7 @@ export default function ResourceCounter() {
             >
               <div className="build_cost_display">
                 <div>sewing kit</div>
-                <div>{components_cost[2].sewing_kit}</div>
+                <div>{NumbersFormatter(components_cost[2].sewing_kit)}</div>
               </div>
             </div>
           </div>
@@ -666,7 +672,7 @@ export default function ResourceCounter() {
             <div className="cost_cell" style={{ backgroundImage: `url(${lq_fuelThumbnail})`, backgroundSize: "cover" }}>
               <div className="build_cost_display">
                 <div>lq. fuel</div>
-                <div>{components_cost[3].lq_fuel}</div>
+                <div>{NumbersFormatter(components_cost[3].lq_fuel)}</div>
               </div>
             </div>
           </div>

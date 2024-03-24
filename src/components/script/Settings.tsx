@@ -249,7 +249,7 @@ const Settings = () => {
       dispatch(set_bloom_state(true));
       dispatch(set_better_lighting_state(true));
       dispatch(set_ssao_state(false));
-      dispatch(set_antialiasing_state(true));
+      dispatch(set_antialiasing_state(false));
       dispatch(set_HDR_state(false));
       dispatch(set_enable_model_textures(true));
       dispatch(set_enable_model_material(true));

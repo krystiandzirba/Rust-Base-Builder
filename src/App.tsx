@@ -87,3 +87,8 @@ export default App;
 // make more user input presets, that build 1 by 1 on the canvas (with timeout)
 
 // react three fiber - pointer lock controls (first person camera control) + fps octree
+
+// add a correct object rotation in mirrored axis
+// object in list selected, typed another object in search bar, new object appear selected (deselect the object on search box input)
+// add sound to settings
+// make the xray work in overview mode

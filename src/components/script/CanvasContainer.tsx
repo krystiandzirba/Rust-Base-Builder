@@ -2101,6 +2101,66 @@ export default function CanvasContainer() {
                     rotation={[0, modified_model_rotation + Math.PI, 0]}
                     scale={[2, 12, 1]}
                   ></ArrowProp>
+
+                  {symmetry_x_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[0.75, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[0.75, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <Box
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 2 + 0.04,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[0.75, default_model_height_position + 0.08, 0.75]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                      />
+                    </Box>
+                  )}
                 </>
               )}
             </>
