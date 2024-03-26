@@ -72,7 +72,6 @@ export default App;
 // object copy: "ctrl + C"
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
-// move every canvas item configs (position, rotation ...) to separate file
 // add custom rotation angle and distance unit to transform the object
 // prebuild base setups selector
 // add 1st person walking in overview and raid mode
@@ -89,5 +88,5 @@ export default App;
 // react three fiber - pointer lock controls (first person camera control) + fps octree
 
 // add a correct object rotation in mirrored axis
-// add sound to settings
 // make the xray work in overview mode
+// fix the lag while selecting the models when there is more than 200 objects

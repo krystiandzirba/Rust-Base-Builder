@@ -14,10 +14,10 @@ import raid_sound from "../../audio/raid_sound.mp3";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Cube001: THREE.Mesh;
+    Cube002: THREE.Mesh;
   };
   materials: {
-    ["Material.003"]: THREE.MeshStandardMaterial;
+    ["Material.009"]: THREE.MeshStandardMaterial;
   };
 };
 
@@ -116,8 +116,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           {enable_model_textures && !model_hover && (page_mode === "overview" || page_mode === "raid") ? (
             <mesh
               key="textured"
-              geometry={nodes.Cube001.geometry}
-              material={materials["Material.003"]}
+              geometry={nodes.Cube002.geometry}
+              material={materials["Material.009"]}
               onClick={() => ModelOnClick()}
               onPointerOver={(e) => {
                 e.stopPropagation(), ModelOnPointerOver();
@@ -128,7 +128,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           ) : (
             <mesh
               key="not-textured"
-              geometry={nodes.Cube001.geometry}
+              geometry={nodes.Cube002.geometry}
               onClick={() => ModelOnClick()}
               onPointerOver={(e) => {
                 e.stopPropagation(), ModelOnPointerOver();

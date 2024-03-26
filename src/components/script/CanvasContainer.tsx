@@ -796,13 +796,18 @@ export default function CanvasContainer() {
       { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: Math.PI, model: StoneFloorTriangle },
     ];
 
+    let prebuild_delay = 0;
     for (const { name, position, rotation, model } of prebuildObjects) {
-      setModelsData((prevTransforms) => ({
-        ...prevTransforms,
-        [name]: { position, rotation: new THREE.Euler(0, rotation, 0, "XYZ") },
-      }));
+      setTimeout(() => {
+        setModelsData((prevTransforms) => ({
+          ...prevTransforms,
+          [name]: { position, rotation: new THREE.Euler(0, rotation, 0, "XYZ") },
+        }));
 
-      addPrebuild(model, name, new THREE.Euler(0, rotation, 0));
+        addPrebuild(model, name, new THREE.Euler(0, rotation, 0));
+      }, prebuild_delay);
+
+      prebuild_delay += 35;
     }
   }
 
