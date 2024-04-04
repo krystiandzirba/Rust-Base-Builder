@@ -31,7 +31,7 @@ import "./components/styles/mobile_alert.css";
 import { RootState } from "./Store";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
+import { KeyboardControls, KeyboardControlsEntry, Loader } from "@react-three/drei";
 
 function App() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
@@ -63,6 +63,7 @@ function App() {
         <Github />
         <MobileAlert />
       </KeyboardControls>
+      <Loader />
     </>
   );
 }

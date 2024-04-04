@@ -380,9 +380,7 @@ export default function ControlsInput() {
             onMouseLeave={DumpsterMouseLeave}
           ></button>
           {display_remove_all_models_question && (
-            <div className="delete_all_question_container">
-              are you sure you want to delete all the objects? This process is irreversible.
-            </div>
+            <div className="delete_all_question_container">are you sure you want to delete all the objects?</div>
           )}
           {display_remove_all_models_question && (
             <div className="delete_all_question_buttons_container">

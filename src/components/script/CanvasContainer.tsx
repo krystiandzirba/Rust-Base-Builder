@@ -32,6 +32,8 @@ import controls_sound from "../../audio/controls_sound.mp3";
 import rotation_sound from "../../audio/rotation_sound.mp3";
 import buttons_sound from "../../audio/buttons_sound.mp3";
 import delete_sound from "../../audio/delete_sound.mp3";
+import menu_sound from "../../audio/menu_sound.mp3";
+import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
 
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
@@ -93,7 +95,7 @@ import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faEraser } from "@fortawesome/free-solid-svg-icons";
 
 interface CanvasModelsListProps {
   models: ModelType[];
@@ -173,7 +175,7 @@ export default function CanvasContainer() {
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
-  const [modelsData, setModelsData] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>({}); //prettier-ignore
+  const [modelsData, setModelsData] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>(() => {const storedData = localStorage.getItem('modelsData'); return storedData ? JSON.parse(storedData) : {}}); //prettier-ignore
   const [model_x_position, set_model_x_position] = useState<number>(0);
   const [model_z_position, set_model_z_position] = useState<number>(0);
   const [model_y_position, set_model_y_position] = useState<number>(0);
@@ -221,11 +223,17 @@ export default function CanvasContainer() {
   let canvas_mouse_over_last_execution_time = 0;
   let canvas_mouse_drag_last_execution_time = 0;
 
-  const prebuild_created = useRef(false);
-
   const [keyboard_key, set_keyboard_key] = useState<string>("");
   const [key_press_trigger, set_key_press_trigger] = useState<number>(0);
   const [delete_object_trigger, set_delete_object_trigger] = useState<number>(0);
+
+  const [hover_save_base, set_hover_save_base] = useState<boolean>(false);
+  const [hover_delete_save_base, set_hover_delete_save_base] = useState<boolean>(false);
+
+  const hasModelsDataChanged = useRef(false);
+  const [delete_saved_data_question, set_delete_saved_data_question] = useState<boolean>(false);
+  const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
+  const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
 
   const modelTypeMap = {
     // -------------------------  Stone -------------------------
@@ -279,7 +287,7 @@ export default function CanvasContainer() {
     // -------------------------  Windows -------------------------
 
     MetalVerticalEmbrasure: MetalVerticalEmbrasure,
-    StrengthenedGlassWindow: StrenghtenedGlassWindow,
+    StrenghtenedGlassWindow: StrenghtenedGlassWindow,
 
     // -------------------------  Miscs -------------------------
 
@@ -471,7 +479,7 @@ export default function CanvasContainer() {
     if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
       const modelClass = modelTypeMap[model_type_to_create as keyof typeof modelTypeMap];
 
-      if (modelClass) {
+      if (modelClass && prevent_actions_after_canvas_drag === "allow") {
         setModelsData((prevTransforms) => ({
           ...prevTransforms,
           [generated_id]: {
@@ -481,13 +489,14 @@ export default function CanvasContainer() {
               y: model_y_position,
             },
             rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+            model: model_type_to_create,
           },
         }));
 
         set_generated_id(randomIdGenerator());
         addModel(modelClass, generated_id, default_object_rotation);
 
-        if (audio && prevent_actions_after_canvas_drag === "allow") {
+        if (audio) {
           AudioPlayer(build_sound);
         }
 
@@ -501,6 +510,7 @@ export default function CanvasContainer() {
                 y: model_y_position,
               },
               rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+              model: model_type_to_create,
             },
           }));
 
@@ -518,6 +528,7 @@ export default function CanvasContainer() {
                 y: model_y_position,
               },
               rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+              model: model_type_to_create,
             },
           }));
 
@@ -535,6 +546,7 @@ export default function CanvasContainer() {
                 y: model_y_position,
               },
               rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
+              model: model_type_to_create,
             },
           }));
 
@@ -796,18 +808,58 @@ export default function CanvasContainer() {
       { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: Math.PI, model: StoneFloorTriangle },
     ];
 
+    //! rewrite the model to be stored and read as a string, not a 3D model
+
     let prebuild_delay = 0;
     for (const { name, position, rotation, model } of prebuildObjects) {
       setTimeout(() => {
         setModelsData((prevTransforms) => ({
           ...prevTransforms,
-          [name]: { position, rotation: new THREE.Euler(0, rotation, 0, "XYZ") },
+          [name]: {
+            position: {
+              x: position.x,
+              z: position.z,
+              y: position.y,
+            },
+            rotation: new THREE.Euler(0, rotation, 0, "XYZ"),
+            model: model.displayName,
+          },
         }));
 
         addPrebuild(model, name, new THREE.Euler(0, rotation, 0));
       }, prebuild_delay);
 
       prebuild_delay += 35;
+    }
+  }
+
+  function recreateSavedBase(modelsData: { [x: string]: any }) {
+    Object.keys(modelsData).forEach((id) => {
+      const model = modelsData[id];
+      const new_id = randomIdGenerator();
+
+      modelsData[new_id] = {
+        id: new_id,
+        position: {
+          x: model.position.x,
+          z: model.position.z,
+          y: model.position.y,
+        },
+        rotation: new THREE.Euler(model.rotation._x, model.rotation._y, model.rotation._z),
+        model: model.model,
+      };
+
+      delete modelsData[id];
+    });
+
+    setModelsData({});
+
+    setModelsData(modelsData);
+
+    for (const id in modelsData) {
+      const { model, rotation } = modelsData[id];
+      const corresponding_model = modelTypeMap[model as keyof typeof modelTypeMap];
+      addPrebuild(corresponding_model, id, new THREE.Euler(rotation._x, rotation._y, rotation._z));
     }
   }
 
@@ -836,6 +888,15 @@ export default function CanvasContainer() {
     }
   }
 
+  function SaveCurrentBaseToLocalStorage() {
+    localStorage.removeItem("modelsData");
+    localStorage.setItem("modelsData", JSON.stringify(modelsData));
+  }
+
+  function DeleteCurrentBaseFromLocalStorage() {
+    localStorage.removeItem("modelsData");
+  }
+
   document.body.style.cursor = cursor_type;
 
   useEffect(() => {
@@ -861,7 +922,6 @@ export default function CanvasContainer() {
     const handleKeyDown = (event: KeyboardEvent) => {
       set_keyboard_key(event.code);
       set_key_press_trigger(key_press_trigger + 1);
-      // console.log(event.code);
     };
     window.addEventListener("keydown", handleKeyDown);
 
@@ -1254,11 +1314,23 @@ export default function CanvasContainer() {
   //* ------------------------- ↑ Model Prop ↑ -------------------------
 
   useEffect(() => {
-    if (!prebuild_created.current) {
-      CreatePrebuildBase();
-      prebuild_created.current = true;
+    try {
+      if (!hasModelsDataChanged.current) {
+        try {
+          if (Object.keys(modelsData).length !== 0) {
+            recreateSavedBase(modelsData);
+          } else {
+            CreatePrebuildBase();
+          }
+          hasModelsDataChanged.current = true;
+        } catch (error) {
+          console.error("Error in recreateSavedBase or CreatePrebuildBase:", error);
+        }
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
     }
-  }, []);
+  }, [modelsData]);
 
   useEffect(() => {
     dispatch(set_selected_model_id("empty"));
@@ -2181,6 +2253,94 @@ export default function CanvasContainer() {
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}
+      <div className="local_storage_container">
+        <button
+          className="local_storage_button local_storage_save"
+          onMouseOver={() => {
+            set_hover_save_base(true);
+          }}
+          onClick={() => {
+            SaveCurrentBaseToLocalStorage();
+            if (audio) {
+              AudioPlayer(object_selecting_sound);
+            }
+          }}
+          onMouseLeave={() => {
+            set_hover_save_base(false);
+          }}
+        >
+          <FontAwesomeIcon icon={faFloppyDisk} size="3x" style={{ color: hover_save_base ? "#ffd5b3" : "#bbbbbb" }} />
+          <a className="local_storage_button_text">save</a>
+        </button>
+        <button
+          className="local_storage_button local_storage_delete_question"
+          onMouseOver={() => {
+            set_hover_delete_save_base(true);
+          }}
+          onClick={() => {
+            set_delete_saved_data_question(true);
+            if (audio) {
+              AudioPlayer(object_selecting_sound);
+            }
+          }}
+          onMouseLeave={() => {
+            set_hover_delete_save_base(false);
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faEraser}
+            size="2x"
+            style={{ color: hover_delete_save_base ? "#ffd5b3" : "#bbbbbb" }}
+          />
+          <a className="local_storage_button_text">delete</a>
+        </button>
+      </div>
+
+      <button
+        className="test_button"
+        onClick={() => {
+          console.log("models data", modelsData);
+        }}
+      ></button>
+
+      {delete_saved_data_question && (
+        <div className="delete_all_question_container">
+          are you sure you want to delete the saved data? This process is irreversible.
+        </div>
+      )}
+      {delete_saved_data_question && (
+        <div className="delete_all_question_buttons_container">
+          <button
+            className="delete_all_question_button"
+            onClick={() => {
+              set_delete_saved_data_question(false);
+              DeleteCurrentBaseFromLocalStorage();
+              if (audio) {
+                AudioPlayer(menu_sound);
+              }
+            }}
+            onMouseEnter={() => set_yes_answer_hovered(true)}
+            onMouseLeave={() => set_yes_answer_hovered(false)}
+            style={{ color: yes_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
+          >
+            yes
+          </button>
+          <button
+            className="delete_all_question_button"
+            onClick={() => {
+              set_delete_saved_data_question(false);
+              if (audio) {
+                AudioPlayer(menu_sound);
+              }
+            }}
+            onMouseEnter={() => set_no_answer_hovered(true)}
+            onMouseLeave={() => set_no_answer_hovered(false)}
+            style={{ color: no_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
+          >
+            no
+          </button>
+        </div>
+      )}
     </>
   );
 }

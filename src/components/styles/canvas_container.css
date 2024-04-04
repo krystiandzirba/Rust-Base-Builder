@@ -227,3 +227,40 @@ input::-webkit-inner-spin-button {
   flex-direction: row;
   align-items: center;
 }
+
+.local_storage_container {
+  position: absolute;
+  width: 7vw;
+  height: 7vh;
+  z-index: 55;
+  background-color: rgba(255, 0, 0, 0);
+  left: 65.5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  top: 1.5vh;
+}
+
+.local_storage_button {
+  width: 40%;
+  border: none;
+  background: rgba(255, 0, 0, 0);
+}
+
+.local_storage_button_text {
+  color: #bbbbbb;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.test_button {
+  display: none;
+  position: absolute;
+  width: 2vw;
+  height: 1vh;
+  background-color: red;
+  z-index: 125;
+  top: 98%;
+  left: 35%;
+}
