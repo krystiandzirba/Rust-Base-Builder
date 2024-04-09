@@ -834,33 +834,45 @@ export default function CanvasContainer() {
   }
 
   function recreateSavedBase(modelsData: { [x: string]: any }) {
+    let delay = 0;
+    let object_count = Object.keys(modelsData).length;
+
     Object.keys(modelsData).forEach((id) => {
-      const model = modelsData[id];
+      const recreated_model = modelsData[id];
       const new_id = randomIdGenerator();
 
-      modelsData[new_id] = {
-        id: new_id,
-        position: {
-          x: model.position.x,
-          z: model.position.z,
-          y: model.position.y,
-        },
-        rotation: new THREE.Euler(model.rotation._x, model.rotation._y, model.rotation._z),
-        model: model.model,
-      };
+      setTimeout(() => {
+        modelsData[new_id] = {
+          id: new_id,
+          position: {
+            x: recreated_model.position.x,
+            z: recreated_model.position.z,
+            y: recreated_model.position.y,
+          },
+          rotation: new THREE.Euler(
+            recreated_model.rotation._x,
+            recreated_model.rotation._y,
+            recreated_model.rotation._z
+          ),
+          model: recreated_model.model,
+        };
 
-      delete modelsData[id];
+        delete modelsData[id];
+
+        setModelsData({});
+        setModelsData(modelsData);
+
+        const { model, rotation } = modelsData[new_id];
+        const corresponding_model = modelTypeMap[model as keyof typeof modelTypeMap];
+        addPrebuild(corresponding_model, new_id, new THREE.Euler(rotation._x, rotation._y, rotation._z));
+      }, delay);
+
+      if (object_count < 200) {
+        delay += 35;
+      } else if (object_count > 200) {
+        delay += 3000 / object_count;
+      }
     });
-
-    setModelsData({});
-
-    setModelsData(modelsData);
-
-    for (const id in modelsData) {
-      const { model, rotation } = modelsData[id];
-      const corresponding_model = modelTypeMap[model as keyof typeof modelTypeMap];
-      addPrebuild(corresponding_model, id, new THREE.Euler(rotation._x, rotation._y, rotation._z));
-    }
   }
 
   //* ------------------------- ↑ Prebuild Base ↑ -------------------------

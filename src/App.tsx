@@ -45,6 +45,12 @@ function App() {
 
   const map = useMemo<KeyboardControlsEntry[]>(() => [], []);
 
+  const loaderStyles = {
+    dataStyles: {
+      fontSize: "1vw",
+    },
+  };
+
   return (
     <>
       <KeyboardControls map={map}>
@@ -63,7 +69,7 @@ function App() {
         <Github />
         <MobileAlert />
       </KeyboardControls>
-      <Loader />
+      <Loader {...loaderStyles} dataInterpolation={(p) => `Loading ${p.toFixed(0)}%`} />
     </>
   );
 }
