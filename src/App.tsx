@@ -96,4 +96,3 @@ export default App;
 
 // add a correct object rotation in mirrored axis
 // make the xray work in overview mode
-// fix the lag while selecting the models when there is more than 200 objects

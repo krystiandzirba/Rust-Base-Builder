@@ -6,6 +6,7 @@ import {
   CameraControls,
   PivotControls,
   Box,
+  Sphere,
   Environment,
 } from "@react-three/drei";
 import * as THREE from "three";
@@ -22,10 +23,6 @@ import {
   set_object_distance_multiplier,
 } from "../../Store.tsx";
 
-import { Model as TrianglePropSolid } from "../models/TrianglePropSolid.tsx";
-import { Model as TrianglePropWireframe } from "../models/TrianglePropWireframe.tsx";
-import { Model as ArrowProp } from "../models/ArrowProp.tsx";
-
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import build_sound from "../../audio/build_sound.mp3";
 import controls_sound from "../../audio/controls_sound.mp3";
@@ -34,6 +31,10 @@ import buttons_sound from "../../audio/buttons_sound.mp3";
 import delete_sound from "../../audio/delete_sound.mp3";
 import menu_sound from "../../audio/menu_sound.mp3";
 import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
+
+import { Model as TrianglePropSolid } from "../models/TrianglePropSolid.tsx";
+import { Model as TrianglePropWireframe } from "../models/TrianglePropWireframe.tsx";
+import { Model as ArrowProp } from "../models/ArrowProp.tsx";
 
 import { Model as StoneFoundationSquareHigh } from "../models/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "../models/StoneFoundationSquareMid.tsx";
@@ -126,9 +127,9 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 
 //? ----------------------------------------------------------------------------------------------------
 
-//? This is the main component for the React Three Fiber (R3F) canvas, where all 3D models are imported and positioned based on user input.
+//? Main component for the React Three Fiber (R3F) canvas, where all 3D models are imported and positioned based on user input.
 
-//? It includes functionality to initialize a pre-built base upon page load and allows for the addition or removal of selected or all present objects.
+//? Includes functionality to initialize a pre-built base upon page load and allows for the addition or removal of selected or all present objects.
 
 //? Each generated object is assigned a random ID and its transform settings ID.
 
@@ -216,7 +217,11 @@ export default function CanvasContainer() {
 
   const [camera_rotation, set_camera_rotation] = useState(true);
   const perspectiveCameraControlsRef = useRef<CameraControls>(null);
-  const raycasterBoxIntersector = useRef(null);
+  const raycasterBottomIntersector = useRef(null);
+  const raycasterFrontIntersector = useRef(null);
+  const raycasterRightIntersector = useRef(null);
+  const raycasterBackIntersector = useRef(null);
+  const raycasterLeftIntersector = useRef(null);
   const raycaster = new THREE.Raycaster();
 
   const [prevent_actions_after_canvas_drag, set_prevent_actions_after_canvas_drag] = useState<string>("default");
@@ -367,11 +372,9 @@ export default function CanvasContainer() {
   }
 
   function MeshOnMissed() {
-    if (page_mode === "edit" && !model_creation_state) {
-      dispatch(set_selected_model_id("empty"));
-      dispatch(set_object_selected(false));
-      dispatch(set_cursor_type("default"));
-    }
+    dispatch(set_selected_model_id("empty"));
+    dispatch(set_object_selected(false));
+    dispatch(set_cursor_type("default"));
   }
 
   const PerspectiveCameraReset = () => {
@@ -416,10 +419,12 @@ export default function CanvasContainer() {
     }
   }
 
-  //* ------------------------- ↓ Canvas grid coordinates + models position ↓ -------------------------
+  //* ------------------------- ↓ Canvas grid coordinates | models position + mouse mesh miss ↓ -------------------------
   // calculating the mouse cursor position (X+Y window position) and invisible grid floor intersection point
   // to create a X+Z canvas coordinates at which models will be placed on mouse click
   // assign a default, 3x mirrored values for symmetrical objects
+
+  // detect a miss when clicking outside of any object placed in the canvas, used to deselect the currently selected object
 
   function CanvasMouseOverIntersectionCoordinates(event: { clientX: number; clientY: number }) {
     const currentTimestamp = Date.now();
@@ -444,7 +449,7 @@ export default function CanvasContainer() {
         console.error("Camera is null or undefined");
       }
 
-      const intersects = raycaster.intersectObject(raycasterBoxIntersector.current!);
+      const intersects = raycaster.intersectObject(raycasterBottomIntersector.current!);
 
       if (intersects.length > 0) {
         const { x, z } = intersects[0].point;
@@ -469,7 +474,38 @@ export default function CanvasContainer() {
     } else return;
   }
 
-  //* ------------------------- ↑ Canvas grid coordinates + models position ↑ -------------------------
+  function detectMouseMeshMiss(event: { clientX: number; clientY: number }) {
+    if (page_mode === "edit" && !model_creation_state) {
+      mouse_window_click.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse_window_click.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      const camera = perspectiveCameraControlsRef.current?.camera;
+
+      if (camera) {
+        raycaster.setFromCamera(mouse_window_click, camera);
+      } else {
+        console.error("Camera is null or undefined");
+      }
+
+      const bottom_intersects = raycaster.intersectObject(raycasterBottomIntersector.current!);
+      const front_intersects = raycaster.intersectObject(raycasterFrontIntersector.current!);
+      const right_intersects = raycaster.intersectObject(raycasterRightIntersector.current!);
+      const back_intersects = raycaster.intersectObject(raycasterBackIntersector.current!);
+      const left_intersects = raycaster.intersectObject(raycasterLeftIntersector.current!);
+
+      if (
+        bottom_intersects.length > 0 ||
+        front_intersects.length > 0 ||
+        right_intersects.length > 0 ||
+        back_intersects.length > 0 ||
+        left_intersects.length > 0
+      ) {
+        MeshOnMissed();
+      }
+    }
+  }
+
+  //* ------------------------- ↑ Canvas grid coordinates | models position + mouse mesh miss ↑ -------------------------
 
   //* ------------------------- ↓ Adding models to the canvas ↓ -------------------------
   // function that adds a models to the canvas on the previously calculated intersection point
@@ -1496,7 +1532,9 @@ export default function CanvasContainer() {
 
       <div className="canvas_container">
         <Canvas
-          onPointerDown={(event) => CanvasPointerDown(event)}
+          onPointerDown={(event) => {
+            CanvasPointerDown(event);
+          }}
           onPointerUp={(event) => CanvasPointerUp(event)}
           onMouseMove={(event) => {
             CanvasMouseOverIntersectionCoordinates(event), CaptureMouseCanvasDrag(event);
@@ -1505,6 +1543,9 @@ export default function CanvasContainer() {
             AddCanvasModel();
           }}
           onMouseUp={() => Camera3DDirection()}
+          onPointerMissed={(e) => {
+            detectMouseMeshMiss(e);
+          }}
         >
           {performance_monitor_state && <PerformanceStats />}
           <CanvasLights />
@@ -1542,7 +1583,23 @@ export default function CanvasContainer() {
               <CameraControls enabled={camera_rotation} mouseButtons={{ left: 2, right: 2, middle: 0, wheel: 16 }} />
             </>
           )}
-          <Box ref={raycasterBoxIntersector} scale={[100, 0.1, 100]} position={[0, -0.5, 0]}>
+          <Box ref={raycasterBottomIntersector} scale={[100, 0.1, 100]} position={[0, -0.5, 0]}>
+            <meshStandardMaterial transparent opacity={0} />
+          </Box>
+
+          <Box ref={raycasterFrontIntersector} scale={[1000, 1000, 0.1]} position={[0, -0.5, -150]}>
+            <meshStandardMaterial transparent opacity={0} />
+          </Box>
+
+          <Box ref={raycasterRightIntersector} scale={[0.1, 1000, 1000]} position={[150, -0.5, 0]}>
+            <meshStandardMaterial transparent opacity={0} />
+          </Box>
+
+          <Box ref={raycasterBackIntersector} scale={[1000, 1000, 0.1]} position={[0, -0.5, 150]}>
+            <meshStandardMaterial transparent opacity={0} />
+          </Box>
+
+          <Box ref={raycasterLeftIntersector} scale={[0.1, 1000, 1000]} position={[-150, -0.5, 0]}>
             <meshStandardMaterial transparent opacity={0} />
           </Box>
 
@@ -1572,7 +1629,6 @@ export default function CanvasContainer() {
                   onClick={(e) => {
                     e.stopPropagation(), MeshOnClick(id);
                   }}
-                  onPointerMissed={() => MeshOnMissed()}
                 >
                   <ModelComponent />
                 </mesh>
