@@ -6,7 +6,6 @@ import {
   CameraControls,
   PivotControls,
   Box,
-  Sphere,
   Environment,
 } from "@react-three/drei";
 import * as THREE from "three";
@@ -138,13 +137,13 @@ const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
 
 //? Pivot controls enable users to manipulate an object's position through mouse drag options.
 
-//? Symmetry (X+Z), placing objects with a mirroring on specifc (or both) axis, with 0,0,0 center point
+//? Symmetry (X+Z), placing objects with a mirroring on specifc (or both) axis, with 0,0,0 center point.
 
 //? Capturing the keyboard input to serve as a transformation tool for objects, allowing users to adjust position, rotation, offset, etc., using WASD or ARROW keys.
 
 //? Model elevation feature enables users to adjust the height level of placed objects.
 
-//? Model props - a specific ghost model that is visible on the canvas grid, it acts as a visualization where the mouse cursor is and where any object will be placed
+//? Model props - a specific ghost model that is visible on the canvas grid, it acts as a visualization where the mouse cursor is and where any object will be placed.
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -177,9 +176,6 @@ export default function CanvasContainer() {
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [modelsData, setModelsData] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>(() => {const storedData = localStorage.getItem('modelsData'); return storedData ? JSON.parse(storedData) : {}}); //prettier-ignore
-  const [model_x_position, set_model_x_position] = useState<number>(0);
-  const [model_z_position, set_model_z_position] = useState<number>(0);
-  const [model_y_position, set_model_y_position] = useState<number>(0);
 
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
   const [mirror_x_generated_id, set_mirror_x_generated_id] = useState<string>(randomIdGenerator());
@@ -188,6 +184,7 @@ export default function CanvasContainer() {
 
   const [model_prop, set_model_prop] = useState<string>("none");
 
+  const [model_y_position, set_model_y_position] = useState<number>(0);
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
   const [default_model_height_position, set_default_model_height_position] = useState<number>(0);
   const [pivot_controls_state, set_pivot_controls_state] = useState<boolean>(false);
@@ -456,20 +453,21 @@ export default function CanvasContainer() {
         const rounded_x = parseFloat(x.toFixed(0));
         const rounded_z = parseFloat(z.toFixed(0));
 
+        //!lag when many objects are present, requires rewriting
         set_mouse_canvas_x_coordinate(rounded_x);
         set_mouse_canvas_z_coordinate(rounded_z);
-        set_model_x_position(mouse_canvas_x_coordinate);
-        set_model_z_position(mouse_canvas_z_coordinate);
         set_model_y_position(default_model_height_position + model_foundation_elevation);
 
-        set_model_x_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
-        set_model_x_mirror_z_position(mouse_canvas_z_coordinate + model_x_position_offset);
-
-        set_model_z_mirror_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
-        set_model_z_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
-
-        set_model_xz_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
-        set_model_xz_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
+        if (symmetry_x_enabled) {
+          set_model_x_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
+          set_model_x_mirror_z_position(mouse_canvas_z_coordinate + model_x_position_offset);
+        } else if (symmetry_z_enabled) {
+          set_model_z_mirror_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
+          set_model_z_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
+        } else if (symmetry_x_enabled || symmetry_z_enabled) {
+          set_model_xz_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
+          set_model_xz_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
+        }
       }
     } else return;
   }
@@ -520,8 +518,8 @@ export default function CanvasContainer() {
           ...prevTransforms,
           [generated_id]: {
             position: {
-              x: model_x_position + model_x_position_offset,
-              z: model_z_position + model_z_position_offset,
+              x: mouse_canvas_x_coordinate + model_x_position_offset,
+              z: mouse_canvas_z_coordinate + model_z_position_offset,
               y: model_y_position,
             },
             rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"),
@@ -1559,7 +1557,7 @@ export default function CanvasContainer() {
               fov={camera_fov} 
               position={[0, 15, 15]} 
               near={0.1} 
-              far={100} 
+              far={150} 
               />
 
               <CameraControls

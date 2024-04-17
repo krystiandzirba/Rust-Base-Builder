@@ -96,3 +96,10 @@ export default App;
 
 // add a correct object rotation in mirrored axis
 // make the xray work in overview mode
+
+// 1 second 3d text while creating, deleting and raiding the object
+// add current id storage to avoid id duplication
+// useIntersect, useProgress
+// add meshBounds / BVH raycaster to the existing models instead of the default raycaster
+// adaptive resolution for low end pcs and heavy performance loss
+// 3d day and night cycle as light and dark mode
