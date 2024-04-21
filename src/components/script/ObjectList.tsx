@@ -51,6 +51,10 @@ import metalFloorFrameTriangleThumbnail from "../../object_list_thumbnails/metal
 import metalRoofSquareThumbnail from "../../object_list_thumbnails/metal_roof_square_thumbnail.png";
 import metalRoofTriangleThumbnail from "../../object_list_thumbnails/metal_roof_triangle_thumbnail.png";
 
+import armoredFoundationSquareHighThumbnail from "../../object_list_thumbnails/armored_foundation_square_high_thumbnail.png";
+import armoredFoundationSquareMidThumbnail from "../../object_list_thumbnails/armored_foundation_square_mid_thumbnail.png";
+import armoredFoundationSquareLowThumbnail from "../../object_list_thumbnails/armored_foundation_square_low_thumbnail.png";
+
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
 
@@ -655,6 +659,70 @@ export default function ObjectList() {
         dispatch(set_model_type_to_create("MetalRoofTriangle"));
       },
     },
+
+    // armored
+
+    {
+      name: "armored found. square (high)",
+      thumbnail: armoredFoundationSquareHighThumbnail,
+      keywords: [
+        "armored",
+        "foundation",
+        "square",
+        "high",
+        "armored foundation",
+        "armored square",
+        "armored high",
+        "foundation square",
+        "foundation high",
+        "square high",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFoundationSquareHigh"));
+      },
+    },
+
+    {
+      name: "armored found. square (mid)",
+      thumbnail: armoredFoundationSquareMidThumbnail,
+      keywords: [
+        "armored",
+        "foundation",
+        "square",
+        "mid",
+        "armored foundation",
+        "armored square",
+        "armored mid",
+        "foundation square",
+        "foundation mid",
+        "square mid",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFoundationSquareMid"));
+      },
+    },
+
+    {
+      name: "armored found. square (low)",
+      thumbnail: armoredFoundationSquareLowThumbnail,
+      keywords: [
+        "armored",
+        "foundation",
+        "square",
+        "low",
+        "armored foundation",
+        "armored square",
+        "armored low",
+        "foundation square",
+        "foundation low",
+        "square low",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFoundationSquareLow"));
+      },
+    },
+
+    // doors
 
     {
       name: "metal door",

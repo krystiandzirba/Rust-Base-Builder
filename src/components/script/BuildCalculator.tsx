@@ -305,17 +305,20 @@ export default function ResourceCounter() {
           model === "StoneFoundationSquareHigh" ||
           model === "StoneFoundationSquareMid" ||
           model === "StoneFoundationSquareLow" ||
+          model === "StoneWallHigh" ||
+          model === "StoneWallMid" ||
+          model === "StoneStairsLShape" ||
+          model === "StoneStairsUShape" ||
           model === "MetalFoundationSquareHigh" ||
           model === "MetalFoundationSquareMid" ||
           model === "MetalFoundationSquareLow" ||
-          model === "StoneStairsLShape" ||
-          model === "StoneStairsUShape" ||
           model === "MetalStairsLShape" ||
           model === "MetalStairsUShape" ||
-          model === "StoneWallHigh" ||
-          model === "StoneWallMid" ||
           model === "MetalWallHigh" ||
-          model === "MetalWallMid"
+          model === "MetalWallMid" ||
+          model === "ArmoredFoundationSquareHigh" ||
+          model === "ArmoredFoundationSquareMid" ||
+          model === "ArmoredFoundationSquareLow"
       ).length * 50;
 
     let twig_wood_upgrade_35 =

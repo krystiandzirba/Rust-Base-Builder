@@ -255,7 +255,6 @@ input::-webkit-inner-spin-button {
 }
 
 .test_button {
-  display: none;
   position: absolute;
   width: 2vw;
   height: 1vh;

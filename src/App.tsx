@@ -103,3 +103,5 @@ export default App;
 // add meshBounds / BVH raycaster to the existing models instead of the default raycaster
 // adaptive resolution for low end pcs and heavy performance loss
 // 3d day and night cycle as light and dark mode
+// model upgrade (stone -> metal) button
+// change the foundation low (stone + metal) UV and texture size from 256 to 128

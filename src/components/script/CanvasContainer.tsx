@@ -77,6 +77,10 @@ import { Model as MetalFloorFrameTriangle } from "../models/MetalFloorFrameTrian
 import { Model as MetalRoofSquare } from "../models/MetalRoofSquare.tsx";
 import { Model as MetalRoofTriangle } from "../models/MetalRoofTriangle.tsx";
 
+import { Model as ArmoredFoundationSquareHigh } from "../models/ArmoredFoundationSquareHigh.tsx";
+import { Model as ArmoredFoundationSquareMid } from "../models/ArmoredFoundationSquareMid.tsx";
+import { Model as ArmoredFoundationSquareLow } from "../models/ArmoredFoundationSquareLow.tsx";
+
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
 
@@ -285,6 +289,12 @@ export default function CanvasContainer() {
     MetalRoofTriangle: MetalRoofTriangle,
     MetalDoor: MetalDoor,
     GarageDoor: GarageDoor,
+
+    // -------------------------  Armored -------------------------
+
+    ArmoredFoundationSquareHigh: ArmoredFoundationSquareHigh,
+    ArmoredFoundationSquareMid: ArmoredFoundationSquareMid,
+    ArmoredFoundationSquareLow: ArmoredFoundationSquareLow,
 
     // -------------------------  Windows -------------------------
 
@@ -1274,6 +1284,9 @@ export default function CanvasContainer() {
         "MetalFoundationTriangleHigh",
         "MetalFoundationTriangleMid",
         "MetalFoundationTriangleLow",
+        "ArmoredFoundationSquareHigh",
+        "ArmoredFoundationSquareMid",
+        "ArmoredFoundationSquareLow",
       ].includes(model_type_to_create)
     ) {
       set_model_foundation_elevation(0);
@@ -1295,17 +1308,20 @@ export default function CanvasContainer() {
       model_type_to_create === "StoneFoundationSquareHigh" ||
       model_type_to_create === "StoneFoundationSquareMid" ||
       model_type_to_create === "StoneFoundationSquareLow" ||
+      model_type_to_create === "StoneFloorSquare" ||
+      model_type_to_create === "StoneFloorFrameSquare" ||
+      model_type_to_create === "StoneStairsLShape" ||
+      model_type_to_create === "StoneStairsUShape" ||
       model_type_to_create === "MetalFoundationSquareHigh" ||
       model_type_to_create === "MetalFoundationSquareMid" ||
       model_type_to_create === "MetalFoundationSquareLow" ||
-      model_type_to_create === "StoneFloorSquare" ||
-      model_type_to_create === "StoneFloorFrameSquare" ||
       model_type_to_create === "MetalFloorSquare" ||
       model_type_to_create === "MetalFloorFrameSquare" ||
-      model_type_to_create === "StoneStairsLShape" ||
-      model_type_to_create === "StoneStairsUShape" ||
       model_type_to_create === "MetalStairsLShape" ||
-      model_type_to_create === "MetalStairsUShape"
+      model_type_to_create === "MetalStairsUShape" ||
+      model_type_to_create === "ArmoredFoundationSquareHigh" ||
+      model_type_to_create === "ArmoredFoundationSquareMid" ||
+      model_type_to_create === "ArmoredFoundationSquareLow"
     ) {
       set_model_prop("square_foundation_prop");
     } else if (
@@ -2362,12 +2378,12 @@ export default function CanvasContainer() {
         </button>
       </div>
 
-      <button
+      {/* <button
         className="test_button"
         onClick={() => {
           console.log("models data", modelsData);
         }}
-      ></button>
+      ></button> */}
 
       {delete_saved_data_question && (
         <div className="delete_all_question_container">
