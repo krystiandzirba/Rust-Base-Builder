@@ -309,6 +309,7 @@ export default function ResourceCounter() {
           model === "StoneWallMid" ||
           model === "StoneStairsLShape" ||
           model === "StoneStairsUShape" ||
+          //prettier-ignore
           model === "MetalFoundationSquareHigh" ||
           model === "MetalFoundationSquareMid" ||
           model === "MetalFoundationSquareLow" ||
@@ -316,6 +317,7 @@ export default function ResourceCounter() {
           model === "MetalStairsUShape" ||
           model === "MetalWallHigh" ||
           model === "MetalWallMid" ||
+          //prettier-ignore
           model === "ArmoredFoundationSquareHigh" ||
           model === "ArmoredFoundationSquareMid" ||
           model === "ArmoredFoundationSquareLow"
@@ -333,23 +335,28 @@ export default function ResourceCounter() {
           model === "StoneFoundationTriangleHigh" ||
           model === "StoneFoundationTriangleMid" ||
           model === "StoneFoundationTriangleLow" ||
+          model === "StoneWallLow" ||
+          model === "StoneFloorSquare" ||
+          model === "StoneWallFrame" ||
+          model === "StoneFloorFrameSquare" ||
+          model === "StoneFloorFrameTriangle" ||
+          model === "StoneRoofSquare" ||
+          model === "StoneRoofTriangle" ||
+          //prettier-ignore
           model === "MetalFoundationTriangleHigh" ||
           model === "MetalFoundationTriangleMid" ||
           model === "MetalFoundationTriangleLow" ||
-          model === "StoneWallLow" ||
           model === "MetalWallLow" ||
-          model === "StoneFloorSquare" ||
           model === "MetalFloorSquare" ||
-          model === "StoneWallFrame" ||
           model === "MetalWallFrame" ||
-          model === "StoneFloorFrameSquare" ||
           model === "MetaFloorFrameSquare" ||
-          model === "StoneFloorFrameTriangle" ||
           model === "MetalFloorFrameTriangle" ||
-          model === "StoneRoofSquare" ||
-          model === "StoneRoofTriangle" ||
           model === "MetalRoofSquare" ||
-          model === "MetalRoofTriangle"
+          model === "MetalRoofTriangle" ||
+          //prettier-ignore
+          model === "ArmoredFoundationTriangleHigh" ||
+          model === "ArmoredFoundationTriangleMid" ||
+          model === "ArmoredFoundationTriangleLow"
       ).length * 25;
 
     let twig_wood_upgrade_13 =

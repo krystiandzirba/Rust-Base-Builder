@@ -54,6 +54,9 @@ import metalRoofTriangleThumbnail from "../../object_list_thumbnails/metal_roof_
 import armoredFoundationSquareHighThumbnail from "../../object_list_thumbnails/armored_foundation_square_high_thumbnail.png";
 import armoredFoundationSquareMidThumbnail from "../../object_list_thumbnails/armored_foundation_square_mid_thumbnail.png";
 import armoredFoundationSquareLowThumbnail from "../../object_list_thumbnails/armored_foundation_square_low_thumbnail.png";
+import armoredFoundationTriangleHighThumbnail from "../../object_list_thumbnails/armored_foundation_triangle_high_thumbnail.png";
+import armoredFoundationTriangleMidThumbnail from "../../object_list_thumbnails/armored_foundation_triangle_mid_thumbnail.png";
+import armoredFoundationTriangleLowThumbnail from "../../object_list_thumbnails/armored_foundation_triangle_low_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -719,6 +722,66 @@ export default function ObjectList() {
       ],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredFoundationSquareLow"));
+      },
+    },
+
+    {
+      name: "armored found. triangle (high)",
+      thumbnail: armoredFoundationTriangleHighThumbnail,
+      keywords: [
+        "armored",
+        "foundation",
+        "triangle",
+        "high",
+        "armored foundation",
+        "armored triangle",
+        "armored high",
+        "foundation triangle",
+        "foundation high",
+        "triangle high",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFoundationTriangleHigh"));
+      },
+    },
+
+    {
+      name: "armored found. triangle (mid)",
+      thumbnail: armoredFoundationTriangleMidThumbnail,
+      keywords: [
+        "armored",
+        "foundation",
+        "triangle",
+        "mid",
+        "armored foundation",
+        "armored triangle",
+        "armored mid",
+        "foundation triangle",
+        "foundation mid",
+        "triangle mid",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFoundationTriangleMid"));
+      },
+    },
+
+    {
+      name: "armored found. triangle (low)",
+      thumbnail: armoredFoundationTriangleLowThumbnail,
+      keywords: [
+        "armored",
+        "foundation",
+        "triangle",
+        "low",
+        "armored foundation",
+        "armored triangle",
+        "armored low",
+        "foundation triangle",
+        "foundation low",
+        "triangle low",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFoundationTriangleLow"));
       },
     },
 

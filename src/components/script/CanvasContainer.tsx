@@ -80,6 +80,9 @@ import { Model as MetalRoofTriangle } from "../models/MetalRoofTriangle.tsx";
 import { Model as ArmoredFoundationSquareHigh } from "../models/ArmoredFoundationSquareHigh.tsx";
 import { Model as ArmoredFoundationSquareMid } from "../models/ArmoredFoundationSquareMid.tsx";
 import { Model as ArmoredFoundationSquareLow } from "../models/ArmoredFoundationSquareLow.tsx";
+import { Model as ArmoredFoundationTriangleHigh } from "../models/ArmoredFoundationTriangleHigh.tsx";
+import { Model as ArmoredFoundationTriangleMid } from "../models/ArmoredFoundationTriangleMid.tsx";
+import { Model as ArmoredFoundationTriangleLow } from "../models/ArmoredFoundationTriangleLow.tsx";
 
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
@@ -295,6 +298,9 @@ export default function CanvasContainer() {
     ArmoredFoundationSquareHigh: ArmoredFoundationSquareHigh,
     ArmoredFoundationSquareMid: ArmoredFoundationSquareMid,
     ArmoredFoundationSquareLow: ArmoredFoundationSquareLow,
+    ArmoredFoundationTriangleHigh: ArmoredFoundationTriangleHigh,
+    ArmoredFoundationTriangleMid: ArmoredFoundationTriangleMid,
+    ArmoredFoundationTriangleLow: ArmoredFoundationTriangleLow,
 
     // -------------------------  Windows -------------------------
 
@@ -1278,15 +1284,20 @@ export default function CanvasContainer() {
         "StoneFoundationTriangleHigh",
         "StoneFoundationTriangleMid",
         "StoneFoundationTriangleLow",
+        //
         "MetalFoundationSquareHigh",
         "MetalFoundationSquareMid",
         "MetalFoundationSquareLow",
         "MetalFoundationTriangleHigh",
         "MetalFoundationTriangleMid",
         "MetalFoundationTriangleLow",
+        //
         "ArmoredFoundationSquareHigh",
         "ArmoredFoundationSquareMid",
         "ArmoredFoundationSquareLow",
+        "ArmoredFoundationTriangleHigh",
+        "ArmoredFoundationTriangleMid",
+        "ArmoredFoundationTriangleLow",
       ].includes(model_type_to_create)
     ) {
       set_model_foundation_elevation(0);
@@ -1312,6 +1323,7 @@ export default function CanvasContainer() {
       model_type_to_create === "StoneFloorFrameSquare" ||
       model_type_to_create === "StoneStairsLShape" ||
       model_type_to_create === "StoneStairsUShape" ||
+      //prettier-ignore
       model_type_to_create === "MetalFoundationSquareHigh" ||
       model_type_to_create === "MetalFoundationSquareMid" ||
       model_type_to_create === "MetalFoundationSquareLow" ||
@@ -1319,6 +1331,7 @@ export default function CanvasContainer() {
       model_type_to_create === "MetalFloorFrameSquare" ||
       model_type_to_create === "MetalStairsLShape" ||
       model_type_to_create === "MetalStairsUShape" ||
+      //prettier-ignore
       model_type_to_create === "ArmoredFoundationSquareHigh" ||
       model_type_to_create === "ArmoredFoundationSquareMid" ||
       model_type_to_create === "ArmoredFoundationSquareLow"
@@ -1328,13 +1341,18 @@ export default function CanvasContainer() {
       model_type_to_create === "StoneFoundationTriangleHigh" ||
       model_type_to_create === "StoneFoundationTriangleMid" ||
       model_type_to_create === "StoneFoundationTriangleLow" ||
+      model_type_to_create === "StoneFloorTriangle" ||
+      model_type_to_create === "StoneFloorFrameTriangle" ||
+      //prettier-ignore
       model_type_to_create === "MetalFoundationTriangleHigh" ||
       model_type_to_create === "MetalFoundationTriangleMid" ||
       model_type_to_create === "MetalFoundationTriangleLow" ||
-      model_type_to_create === "StoneFloorTriangle" ||
-      model_type_to_create === "StoneFloorFrameTriangle" ||
       model_type_to_create === "MetalFloorTriangle" ||
-      model_type_to_create === "MetalFloorFrameTriangle"
+      model_type_to_create === "MetalFloorFrameTriangle" ||
+      //prettier-ignore
+      model_type_to_create === "ArmoredFoundationTriangleHigh" ||
+      model_type_to_create === "ArmoredFoundationTriangleMid" ||
+      model_type_to_create === "ArmoredFoundationTriangleLow"
     ) {
       set_model_prop("triangle_foundation_prop");
     } else if (
@@ -1345,15 +1363,18 @@ export default function CanvasContainer() {
       model_type_to_create === "StoneWindow" ||
       model_type_to_create === "StoneRoofSquare" ||
       model_type_to_create === "StoneRoofTriangle" ||
+      model_type_to_create === "StoneWallFrame" ||
+      //prettier-ignore
       model_type_to_create === "MetalWallHigh" ||
       model_type_to_create === "MetalWallMid" ||
       model_type_to_create === "MetalWallLow" ||
       model_type_to_create === "MetalDoorway" ||
       model_type_to_create === "MetalWindow" ||
-      model_type_to_create === "StoneWallFrame" ||
+      //prettier-ignore
       model_type_to_create === "MetalWallFrame" ||
       model_type_to_create === "MetalRoofSquare" ||
       model_type_to_create === "MetalRoofTriangle" ||
+      //prettier-ignore
       model_type_to_create === "GarageDoor" ||
       model_type_to_create === "MetalVerticalEmbrasure" ||
       model_type_to_create === "StrenghtenedGlassWindow"
