@@ -17,11 +17,16 @@ export default function CanvasLights() {
 
   return (
     <>
-      {better_lighting_state && <ambientLight intensity={0.55} />}
+      {better_lighting_state && <ambientLight intensity={0.8} />}
       {better_lighting_state && (
-        <group rotation={[Math.PI / 16, 3, Math.PI / 2]}>
-          <spotLight position={[155, 15, 14]} penumbra={1} decay={0} intensity={model_creation_state ? 3 : 4} />
-        </group>
+        <>
+          <group rotation={[Math.PI / 2, 1, Math.PI / 3]}>
+            <spotLight position={[155, 15, 14]} penumbra={1} decay={0} intensity={model_creation_state ? 3 : 3.5} />
+          </group>
+          <group rotation={[Math.PI / 4, -1, Math.PI]}>
+            <spotLight position={[155, 15, 14]} penumbra={1} decay={0} intensity={model_creation_state ? 3 : 1.5} />
+          </group>
+        </>
       )}
 
       {!better_lighting_state && <ambientLight />}
