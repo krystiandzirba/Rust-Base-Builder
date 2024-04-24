@@ -83,6 +83,9 @@ import { Model as ArmoredFoundationSquareLow } from "../models/ArmoredFoundation
 import { Model as ArmoredFoundationTriangleHigh } from "../models/ArmoredFoundationTriangleHigh.tsx";
 import { Model as ArmoredFoundationTriangleMid } from "../models/ArmoredFoundationTriangleMid.tsx";
 import { Model as ArmoredFoundationTriangleLow } from "../models/ArmoredFoundationTriangleLow.tsx";
+import { Model as ArmoredWallHigh } from "../models/ArmoredWallHigh.tsx";
+import { Model as ArmoredWallMid } from "../models/ArmoredWallMid.tsx";
+import { Model as ArmoredWallLow } from "../models/ArmoredWallLow.tsx";
 
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
@@ -301,6 +304,9 @@ export default function CanvasContainer() {
     ArmoredFoundationTriangleHigh: ArmoredFoundationTriangleHigh,
     ArmoredFoundationTriangleMid: ArmoredFoundationTriangleMid,
     ArmoredFoundationTriangleLow: ArmoredFoundationTriangleLow,
+    ArmoredWallHigh: ArmoredWallHigh,
+    ArmoredWallMid: ArmoredWallMid,
+    ArmoredWallLow: ArmoredWallLow,
 
     // -------------------------  Windows -------------------------
 
@@ -1370,10 +1376,13 @@ export default function CanvasContainer() {
       model_type_to_create === "MetalWallLow" ||
       model_type_to_create === "MetalDoorway" ||
       model_type_to_create === "MetalWindow" ||
-      //prettier-ignore
       model_type_to_create === "MetalWallFrame" ||
       model_type_to_create === "MetalRoofSquare" ||
       model_type_to_create === "MetalRoofTriangle" ||
+      //prettier-ignore
+      model_type_to_create === "ArmoredWallHigh" ||
+      model_type_to_create === "ArmoredWallMid" ||
+      model_type_to_create === "ArmoredWallLow" ||
       //prettier-ignore
       model_type_to_create === "GarageDoor" ||
       model_type_to_create === "MetalVerticalEmbrasure" ||

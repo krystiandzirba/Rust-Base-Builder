@@ -320,7 +320,9 @@ export default function ResourceCounter() {
           //prettier-ignore
           model === "ArmoredFoundationSquareHigh" ||
           model === "ArmoredFoundationSquareMid" ||
-          model === "ArmoredFoundationSquareLow"
+          model === "ArmoredFoundationSquareLow" ||
+          model === "ArmoredWallHigh" ||
+          model === "ArmoredWallMid"
       ).length * 50;
 
     let twig_wood_upgrade_35 =
@@ -356,7 +358,8 @@ export default function ResourceCounter() {
           //prettier-ignore
           model === "ArmoredFoundationTriangleHigh" ||
           model === "ArmoredFoundationTriangleMid" ||
-          model === "ArmoredFoundationTriangleLow"
+          model === "ArmoredFoundationTriangleLow" ||
+          model === "ArmoredWallLow"
       ).length * 25;
 
     let twig_wood_upgrade_13 =

@@ -57,6 +57,9 @@ import armoredFoundationSquareLowThumbnail from "../../object_list_thumbnails/ar
 import armoredFoundationTriangleHighThumbnail from "../../object_list_thumbnails/armored_foundation_triangle_high_thumbnail.png";
 import armoredFoundationTriangleMidThumbnail from "../../object_list_thumbnails/armored_foundation_triangle_mid_thumbnail.png";
 import armoredFoundationTriangleLowThumbnail from "../../object_list_thumbnails/armored_foundation_triangle_low_thumbnail.png";
+import armoredWallHighThumbnail from "../../object_list_thumbnails/armored_wall_high_thumbnail.png";
+import armoredWallMidThumbnail from "../../object_list_thumbnails/armored_wall_mid_thumbnail.png";
+import armoredWallLowThumbnail from "../../object_list_thumbnails/armored_wall_low_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -782,6 +785,33 @@ export default function ObjectList() {
       ],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredFoundationTriangleLow"));
+      },
+    },
+
+    {
+      name: "armored wall (high)",
+      thumbnail: armoredWallHighThumbnail,
+      keywords: ["armored", "wall", "high", "armored wall", "armored high", "wall high"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredWallHigh"));
+      },
+    },
+
+    {
+      name: "armored wall (mid)",
+      thumbnail: armoredWallMidThumbnail,
+      keywords: ["armored", "wall", "mid", "armored wall", "armored mid", "wall mid"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredWallMid"));
+      },
+    },
+
+    {
+      name: "armored wall (low)",
+      thumbnail: armoredWallLowThumbnail,
+      keywords: ["armored", "wall", "low", "armored wall", "armored low", "wall low"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredWallLow"));
       },
     },
 

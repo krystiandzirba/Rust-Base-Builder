@@ -132,12 +132,6 @@ export default function RaidCalculator() {
     ) {
       set_explosives_cost(explosives_cost + 2);
     } else if (
-      model_to_destroy === "StoneStairsLShape" ||
-      model_to_destroy === "StoneStairsUShape" ||
-      model_to_destroy === "MetalVerticalEmbrasure"
-    ) {
-      set_ammo_cost(ammo_cost + 173);
-    } else if (
       model_to_destroy === "MetalFoundationSquareHigh" ||
       model_to_destroy === "MetalFoundationSquareMid" ||
       model_to_destroy === "MetalFoundationSquareLow" ||
@@ -162,15 +156,24 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredFoundationSquareLow" ||
       model_to_destroy === "ArmoredFoundationTriangleHigh" ||
       model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow"
+      model_to_destroy === "ArmoredFoundationTriangleLow" ||
+      model_to_destroy === "ArmoredWallHigh" ||
+      model_to_destroy === "ArmoredWallMid" ||
+      model_to_destroy === "ArmoredWallLow"
     ) {
       set_explosives_cost(explosives_cost + 8);
     } else if (model_to_destroy === "MetalDoor") {
       set_ammo_cost(ammo_cost + 63);
-    } else if (model_to_destroy === "GarageDoor") {
-      set_ammo_cost(ammo_cost + 150);
     } else if (model_to_destroy === "StrenghtenedGlassWindow") {
       set_ammo_cost(ammo_cost + 140);
+    } else if (model_to_destroy === "GarageDoor") {
+      set_ammo_cost(ammo_cost + 150);
+    } else if (
+      model_to_destroy === "StoneStairsLShape" ||
+      model_to_destroy === "StoneStairsUShape" ||
+      model_to_destroy === "MetalVerticalEmbrasure"
+    ) {
+      set_ammo_cost(ammo_cost + 173);
     }
   }
 
@@ -238,7 +241,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredFoundationSquareLow" ||
       model_to_destroy === "ArmoredFoundationTriangleHigh" ||
       model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow"
+      model_to_destroy === "ArmoredFoundationTriangleLow" ||
+      model_to_destroy === "ArmoredWallHigh" ||
+      model_to_destroy === "ArmoredWallMid" ||
+      model_to_destroy === "ArmoredWallLow"
     ) {
       set_rockets_cost(rockets_cost + 15);
     }
@@ -308,7 +314,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredFoundationSquareLow" ||
       model_to_destroy === "ArmoredFoundationTriangleHigh" ||
       model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow"
+      model_to_destroy === "ArmoredFoundationTriangleLow" ||
+      model_to_destroy === "ArmoredWallHigh" ||
+      model_to_destroy === "ArmoredWallMid" ||
+      model_to_destroy === "ArmoredWallLow"
     ) {
       set_explosives_cost(explosives_cost + 8);
     }
@@ -387,7 +396,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredFoundationSquareLow" ||
       model_to_destroy === "ArmoredFoundationTriangleHigh" ||
       model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow"
+      model_to_destroy === "ArmoredFoundationTriangleLow" ||
+      model_to_destroy === "ArmoredWallHigh" ||
+      model_to_destroy === "ArmoredWallMid" ||
+      model_to_destroy === "ArmoredWallLow"
     ) {
       set_ammo_cost(ammo_cost + 799);
     }
@@ -458,7 +470,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredFoundationSquareLow" ||
       model_to_destroy === "ArmoredFoundationTriangleHigh" ||
       model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow"
+      model_to_destroy === "ArmoredFoundationTriangleLow" ||
+      model_to_destroy === "ArmoredWallHigh" ||
+      model_to_destroy === "ArmoredWallMid" ||
+      model_to_destroy === "ArmoredWallLow"
     ) {
       set_satchel_cost(satchel_cost + 46);
     }
