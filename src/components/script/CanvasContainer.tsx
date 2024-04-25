@@ -87,6 +87,9 @@ import { Model as ArmoredWallMid } from "../models/ArmoredWallMid.tsx";
 import { Model as ArmoredWallLow } from "../models/ArmoredWallLow.tsx";
 import { Model as ArmoredDoorway } from "../models/ArmoredDoorway.tsx";
 import { Model as ArmoredWindow } from "../models/ArmoredWindow.tsx";
+import { Model as ArmoredWallFrame } from "../models/ArmoredWallFrame.tsx";
+import { Model as ArmoredFloorFrameSquare } from "../models/ArmoredFloorFrameSquare.tsx";
+import { Model as ArmoredFloorFrameTriangle } from "../models/ArmoredFloorFrameTriangle.tsx";
 
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
@@ -310,6 +313,9 @@ export default function CanvasContainer() {
     ArmoredWallLow: ArmoredWallLow,
     ArmoredDoorway: ArmoredDoorway,
     ArmoredWindow: ArmoredWindow,
+    ArmoredWallFrame: ArmoredWallFrame,
+    ArmoredFloorFrameSquare: ArmoredFloorFrameSquare,
+    ArmoredFloorFrameTriangle: ArmoredFloorFrameTriangle,
 
     // -------------------------  Windows -------------------------
 
@@ -1343,7 +1349,8 @@ export default function CanvasContainer() {
       //prettier-ignore
       model_type_to_create === "ArmoredFoundationSquareHigh" ||
       model_type_to_create === "ArmoredFoundationSquareMid" ||
-      model_type_to_create === "ArmoredFoundationSquareLow"
+      model_type_to_create === "ArmoredFoundationSquareLow" ||
+      model_type_to_create === "ArmoredFloorFrameSquare"
     ) {
       set_model_prop("square_foundation_prop");
     } else if (
@@ -1361,7 +1368,8 @@ export default function CanvasContainer() {
       //prettier-ignore
       model_type_to_create === "ArmoredFoundationTriangleHigh" ||
       model_type_to_create === "ArmoredFoundationTriangleMid" ||
-      model_type_to_create === "ArmoredFoundationTriangleLow"
+      model_type_to_create === "ArmoredFoundationTriangleLow" ||
+      model_type_to_create === "ArmoredFloorFrameTriangle"
     ) {
       set_model_prop("triangle_foundation_prop");
     } else if (
@@ -1388,6 +1396,7 @@ export default function CanvasContainer() {
       model_type_to_create === "ArmoredWallLow" ||
       model_type_to_create === "ArmoredDoorway" ||
       model_type_to_create === "ArmoredWindow" ||
+      model_type_to_create === "ArmoredWallFrame" ||
       //prettier-ignore
       model_type_to_create === "GarageDoor" ||
       model_type_to_create === "MetalVerticalEmbrasure" ||

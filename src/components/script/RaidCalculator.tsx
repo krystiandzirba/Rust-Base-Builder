@@ -161,7 +161,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredWallMid" ||
       model_to_destroy === "ArmoredWallLow" ||
       model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow"
+      model_to_destroy === "ArmoredWindow" ||
+      model_to_destroy === "ArmoredWallFrame" ||
+      model_to_destroy === "ArmoredFloorFrameSquare" ||
+      model_to_destroy === "ArmoredFloorFrameTriangle"
     ) {
       set_explosives_cost(explosives_cost + 8);
     } else if (model_to_destroy === "MetalDoor") {
@@ -248,7 +251,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredWallMid" ||
       model_to_destroy === "ArmoredWallLow" ||
       model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow"
+      model_to_destroy === "ArmoredWindow" ||
+      model_to_destroy === "ArmoredWallFrame" ||
+      model_to_destroy === "ArmoredFloorFrameSquare" ||
+      model_to_destroy === "ArmoredFloorFrameTriangle"
     ) {
       set_rockets_cost(rockets_cost + 15);
     }
@@ -323,7 +329,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredWallMid" ||
       model_to_destroy === "ArmoredWallLow" ||
       model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow"
+      model_to_destroy === "ArmoredWindow" ||
+      model_to_destroy === "ArmoredWallFrame" ||
+      model_to_destroy === "ArmoredFloorFrameSquare" ||
+      model_to_destroy === "ArmoredFloorFrameTriangle"
     ) {
       set_explosives_cost(explosives_cost + 8);
     }
@@ -407,7 +416,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredWallMid" ||
       model_to_destroy === "ArmoredWallLow" ||
       model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow"
+      model_to_destroy === "ArmoredWindow" ||
+      model_to_destroy === "ArmoredWallFrame" ||
+      model_to_destroy === "ArmoredFloorFrameSquare" ||
+      model_to_destroy === "ArmoredFloorFrameTriangle"
     ) {
       set_ammo_cost(ammo_cost + 799);
     }
@@ -483,7 +495,10 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredWallMid" ||
       model_to_destroy === "ArmoredWallLow" ||
       model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow"
+      model_to_destroy === "ArmoredWindow" ||
+      model_to_destroy === "ArmoredWallFrame" ||
+      model_to_destroy === "ArmoredFloorFrameSquare" ||
+      model_to_destroy === "ArmoredFloorFrameTriangle"
     ) {
       set_satchel_cost(satchel_cost + 46);
     }

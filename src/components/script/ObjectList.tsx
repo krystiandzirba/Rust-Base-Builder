@@ -62,6 +62,9 @@ import armoredWallMidThumbnail from "../../object_list_thumbnails/armored_wall_m
 import armoredWallLowThumbnail from "../../object_list_thumbnails/armored_wall_low_thumbnail.png";
 import armoredDoorwayThumbnail from "../../object_list_thumbnails/armored_doorway_thumbnail.png";
 import armoredWindowThumbnail from "../../object_list_thumbnails/armored_window_thumbnail.png";
+import armoredWallFrameThumbnail from "../../object_list_thumbnails/armored_wall_frame_thumbnail.png";
+import armoredFloorFrameSquareThumbnail from "../../object_list_thumbnails/armored_floor_frame_square_thumbnail.png";
+import armoredFloorFrameTriangleThumbnail from "../../object_list_thumbnails/armored_floor_frame_triangle_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -832,6 +835,55 @@ export default function ObjectList() {
       keywords: ["armored", "wall", "window", "armored wall", "armored window", "wall window"],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredWindow"));
+      },
+    },
+
+    {
+      name: "armored wall frame",
+      thumbnail: armoredWallFrameThumbnail,
+      keywords: ["armored", "wall", "frame", "armored wall", "armored frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredWallFrame"));
+      },
+    },
+
+    {
+      name: "armored floor frame (square)",
+      thumbnail: armoredFloorFrameSquareThumbnail,
+      keywords: [
+        "armored",
+        "floor",
+        "frame",
+        "square",
+        "armored floor",
+        "armored frame",
+        "armored square",
+        "floor frame",
+        "floor square",
+        "frame square",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFloorFrameSquare"));
+      },
+    },
+
+    {
+      name: "armored floor frame (triangle)",
+      thumbnail: armoredFloorFrameTriangleThumbnail,
+      keywords: [
+        "armored",
+        "floor",
+        "frame",
+        "triangle",
+        "armored floor",
+        "armored frame",
+        "armored triangle",
+        "floor frame",
+        "floor triangle",
+        "frame triangle",
+      ],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFloorFrameTriangle"));
       },
     },
 

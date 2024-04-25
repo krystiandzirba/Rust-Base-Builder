@@ -105,3 +105,4 @@ export default App;
 // 3d day and night cycle as light and dark mode
 // model upgrade (stone -> metal) button
 // change the foundation low (stone + metal) UV and texture size from 256 to 128
+// object info, when selecting an object make it display its name
