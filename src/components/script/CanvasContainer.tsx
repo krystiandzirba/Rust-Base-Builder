@@ -29,7 +29,6 @@ import rotation_sound from "../../audio/rotation_sound.mp3";
 import buttons_sound from "../../audio/buttons_sound.mp3";
 import delete_sound from "../../audio/delete_sound.mp3";
 import menu_sound from "../../audio/menu_sound.mp3";
-import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
 
 import { Model as TrianglePropSolid } from "../models/TrianglePropSolid.tsx";
 import { Model as TrianglePropWireframe } from "../models/TrianglePropWireframe.tsx";
@@ -86,6 +85,8 @@ import { Model as ArmoredFoundationTriangleLow } from "../models/ArmoredFoundati
 import { Model as ArmoredWallHigh } from "../models/ArmoredWallHigh.tsx";
 import { Model as ArmoredWallMid } from "../models/ArmoredWallMid.tsx";
 import { Model as ArmoredWallLow } from "../models/ArmoredWallLow.tsx";
+import { Model as ArmoredDoorway } from "../models/ArmoredDoorway.tsx";
+import { Model as ArmoredWindow } from "../models/ArmoredWindow.tsx";
 
 import { Model as MetalDoor } from "../models/MetalDoor.tsx";
 import { Model as GarageDoor } from "../models/GarageDoor.tsx";
@@ -307,6 +308,8 @@ export default function CanvasContainer() {
     ArmoredWallHigh: ArmoredWallHigh,
     ArmoredWallMid: ArmoredWallMid,
     ArmoredWallLow: ArmoredWallLow,
+    ArmoredDoorway: ArmoredDoorway,
+    ArmoredWindow: ArmoredWindow,
 
     // -------------------------  Windows -------------------------
 
@@ -1383,6 +1386,8 @@ export default function CanvasContainer() {
       model_type_to_create === "ArmoredWallHigh" ||
       model_type_to_create === "ArmoredWallMid" ||
       model_type_to_create === "ArmoredWallLow" ||
+      model_type_to_create === "ArmoredDoorway" ||
+      model_type_to_create === "ArmoredWindow" ||
       //prettier-ignore
       model_type_to_create === "GarageDoor" ||
       model_type_to_create === "MetalVerticalEmbrasure" ||
@@ -2374,7 +2379,7 @@ export default function CanvasContainer() {
           onClick={() => {
             SaveCurrentBaseToLocalStorage();
             if (audio) {
-              AudioPlayer(object_selecting_sound);
+              AudioPlayer(menu_sound);
             }
           }}
           onMouseLeave={() => {
@@ -2392,7 +2397,7 @@ export default function CanvasContainer() {
           onClick={() => {
             set_delete_saved_data_question(true);
             if (audio) {
-              AudioPlayer(object_selecting_sound);
+              AudioPlayer(menu_sound);
             }
           }}
           onMouseLeave={() => {

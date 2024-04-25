@@ -328,7 +328,12 @@ export default function ResourceCounter() {
     let twig_wood_upgrade_35 =
       models.filter(
         (model) =>
-          model === "StoneDoorway" || model === "MetalDoorway" || model === "StoneWindow" || model === "MetalWindow"
+          model === "StoneDoorway" ||
+          model === "MetalDoorway" ||
+          model === "StoneWindow" ||
+          model === "MetalWindow" ||
+          model === "ArmoredDoorway" ||
+          model === "ArmoredWindow"
       ).length * 35;
 
     let twig_wood_upgrade_25 =
