@@ -260,7 +260,8 @@ export default function ResourceCounter() {
           model === "ArmoredFoundationSquareMid" ||
           model === "ArmoredFoundationSquareLow" ||
           model === "ArmoredWallHigh" ||
-          model === "ArmoredWallMid"
+          model === "ArmoredWallMid" ||
+          model === "ArmoredFloorSquare"
       ).length * 25;
 
     // prettier-ignore
@@ -280,7 +281,8 @@ export default function ResourceCounter() {
           model === "ArmoredWallLow" ||
           model === "ArmoredWallFrame" ||
           model === "ArmoredFloorFrameSquare" ||
-          model === "ArmoredFloorFrameTriangle"
+          model === "ArmoredFloorFrameTriangle" ||
+          model === "ArmoredFloorTriangle"
       ).length * 13;
 
     //prettier-ignore
@@ -365,11 +367,14 @@ export default function ResourceCounter() {
           model === "ArmoredWallLow" ||
           model === "ArmoredWallFrame" ||
           model === "ArmoredFloorFrameSquare" ||
-          model === "ArmoredFloorFrameTriangle"
+          model === "ArmoredFloorFrameTriangle" ||
+          model === "ArmoredFloorSquare"
       ).length * 25;
 
     let twig_wood_upgrade_13 =
-      models.filter((model) => model === "StoneFloorTriangle" || model === "MetalFloorTriangle").length * 13;
+      models.filter(
+        (model) => model === "StoneFloorTriangle" || model === "MetalFloorTriangle" || model === "ArmoredFloorTriangle"
+      ).length * 13;
 
     set_twig_upgrade_wood_cost(
       twig_wood_upgrade_50 + twig_wood_upgrade_35 + twig_wood_upgrade_25 + twig_wood_upgrade_13

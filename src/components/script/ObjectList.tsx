@@ -65,6 +65,8 @@ import armoredWindowThumbnail from "../../object_list_thumbnails/armored_window_
 import armoredWallFrameThumbnail from "../../object_list_thumbnails/armored_wall_frame_thumbnail.png";
 import armoredFloorFrameSquareThumbnail from "../../object_list_thumbnails/armored_floor_frame_square_thumbnail.png";
 import armoredFloorFrameTriangleThumbnail from "../../object_list_thumbnails/armored_floor_frame_triangle_thumbnail.png";
+import armoredFloorSquareThumbnail from "../../object_list_thumbnails/armored_floor_square_thumbnail.png";
+import armoredFloorTriangleThumbnail from "../../object_list_thumbnails/armored_floor_triangle_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -844,6 +846,24 @@ export default function ObjectList() {
       keywords: ["armored", "wall", "frame", "armored wall", "armored frame", "wall frame"],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredWallFrame"));
+      },
+    },
+
+    {
+      name: "armored floor square",
+      thumbnail: armoredFloorSquareThumbnail,
+      keywords: ["armored", "floor", "square", "armored floor", "armored square", "floor square"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFloorSquare"));
+      },
+    },
+
+    {
+      name: "armored floor triangle",
+      thumbnail: armoredFloorTriangleThumbnail,
+      keywords: ["armored", "floor", "triangle", "armored floor", "armored triangle", "floor triangle"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredFloorTriangle"));
       },
     },
 
