@@ -47,7 +47,7 @@ function App() {
 
   const loaderStyles = {
     dataStyles: {
-      fontSize: "1vw",
+      fontSize: "0.8vw",
     },
   };
 
