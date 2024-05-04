@@ -107,3 +107,4 @@ export default App;
 // change the foundation low (stone + metal) UV and texture size from 256 to 128
 // object info, when selecting an object make it display its name
 // missing raid cost in a object, find more and verify the build cost values
+// face the roof in the same direction as walls (same arrow direction)

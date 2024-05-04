@@ -94,6 +94,8 @@ import { Model as ArmoredFloorSquare } from "./../models/armored/ArmoredFloorSqu
 import { Model as ArmoredFloorTriangle } from "./../models/armored/ArmoredFloorTriangle.tsx";
 import { Model as ArmoredFloorFrameSquare } from "./../models/armored/ArmoredFloorFrameSquare.tsx";
 import { Model as ArmoredFloorFrameTriangle } from "./../models/armored/ArmoredFloorFrameTriangle.tsx";
+import { Model as ArmoredRoofSquare } from "./../models/armored/ArmoredRoofSquare.tsx";
+import { Model as ArmoredRoofTriangle } from "./../models/armored/ArmoredRoofTriangle.tsx";
 
 import { Model as MetalDoor } from "./../models/doors/MetalDoor.tsx";
 import { Model as GarageDoor } from "./../models/doors/GarageDoor.tsx";
@@ -324,6 +326,8 @@ export default function CanvasContainer() {
     ArmoredFloorTriangle: ArmoredFloorTriangle,
     ArmoredFloorFrameSquare: ArmoredFloorFrameSquare,
     ArmoredFloorFrameTriangle: ArmoredFloorFrameTriangle,
+    ArmoredRoofSquare: ArmoredRoofSquare,
+    ArmoredRoofTriangle: ArmoredRoofTriangle,
 
     // -------------------------  Windows -------------------------
 
@@ -1409,6 +1413,8 @@ export default function CanvasContainer() {
       model_type_to_create === "ArmoredDoorway" ||
       model_type_to_create === "ArmoredWindow" ||
       model_type_to_create === "ArmoredWallFrame" ||
+      model_type_to_create === "ArmoredRoofSquare" ||
+      model_type_to_create === "ArmoredRoofTriangle" ||
       //prettier-ignore
       model_type_to_create === "GarageDoor" ||
       model_type_to_create === "MetalVerticalEmbrasure" ||
