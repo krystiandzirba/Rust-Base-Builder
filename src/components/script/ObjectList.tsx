@@ -62,6 +62,8 @@ import armoredWallMidThumbnail from "../../object_list_thumbnails/armored_wall_m
 import armoredWallLowThumbnail from "../../object_list_thumbnails/armored_wall_low_thumbnail.png";
 import armoredDoorwayThumbnail from "../../object_list_thumbnails/armored_doorway_thumbnail.png";
 import armoredWindowThumbnail from "../../object_list_thumbnails/armored_window_thumbnail.png";
+import armoredStairsLShapeThumbnail from "../../object_list_thumbnails/armored_stairs_l_shape_thumbnail.png";
+import armoredStairsUShapeThumbnail from "../../object_list_thumbnails/armored_stairs_u_shape_thumbnail.png";
 import armoredWallFrameThumbnail from "../../object_list_thumbnails/armored_wall_frame_thumbnail.png";
 import armoredFloorFrameSquareThumbnail from "../../object_list_thumbnails/armored_floor_frame_square_thumbnail.png";
 import armoredFloorFrameTriangleThumbnail from "../../object_list_thumbnails/armored_floor_frame_triangle_thumbnail.png";
@@ -837,6 +839,24 @@ export default function ObjectList() {
       keywords: ["armored", "wall", "window", "armored wall", "armored window", "wall window"],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredWindow"));
+      },
+    },
+
+    {
+      name: "armored stairs (L shape)",
+      thumbnail: armoredStairsLShapeThumbnail,
+      keywords: ["armored", "stairs", "armored stairs"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredStairsLShape"));
+      },
+    },
+
+    {
+      name: "armored stairs (U shape)",
+      thumbnail: armoredStairsUShapeThumbnail,
+      keywords: ["armored", "stairs", "armored stairs"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredStairsUShape"));
       },
     },
 

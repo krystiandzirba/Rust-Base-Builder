@@ -106,3 +106,4 @@ export default App;
 // model upgrade (stone -> metal) button
 // change the foundation low (stone + metal) UV and texture size from 256 to 128
 // object info, when selecting an object make it display its name
+// missing raid cost in a object, find more and verify the build cost values

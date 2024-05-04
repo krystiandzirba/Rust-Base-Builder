@@ -261,7 +261,9 @@ export default function ResourceCounter() {
           model === "ArmoredFoundationSquareLow" ||
           model === "ArmoredWallHigh" ||
           model === "ArmoredWallMid" ||
-          model === "ArmoredFloorSquare"
+          model === "ArmoredFloorSquare" ||
+          model === "ArmoredStairsLShape" ||
+          model === "ArmoredStairsUShape"
       ).length * 25;
 
     // prettier-ignore
@@ -322,7 +324,9 @@ export default function ResourceCounter() {
           model === "ArmoredFoundationSquareMid" ||
           model === "ArmoredFoundationSquareLow" ||
           model === "ArmoredWallHigh" ||
-          model === "ArmoredWallMid"
+          model === "ArmoredWallMid" ||
+          model === "ArmoredStairsLShape" ||
+          model === "ArmoredStairsUShape"
       ).length * 50;
 
     let twig_wood_upgrade_35 =

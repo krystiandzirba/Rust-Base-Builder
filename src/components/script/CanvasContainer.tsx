@@ -87,6 +87,8 @@ import { Model as ArmoredWallMid } from "./../models/armored/ArmoredWallMid.tsx"
 import { Model as ArmoredWallLow } from "./../models/armored/ArmoredWallLow.tsx";
 import { Model as ArmoredDoorway } from "./../models/armored/ArmoredDoorway.tsx";
 import { Model as ArmoredWindow } from "./../models/armored/ArmoredWindow.tsx";
+import { Model as ArmoredStairsLShape } from "./../models/armored/ArmoredStairsLShape.tsx";
+import { Model as ArmoredStairsUShape } from "./../models/armored/ArmoredStairsUShape.tsx";
 import { Model as ArmoredWallFrame } from "./../models/armored/ArmoredWallFrame.tsx";
 import { Model as ArmoredFloorSquare } from "./../models/armored/ArmoredFloorSquare.tsx";
 import { Model as ArmoredFloorTriangle } from "./../models/armored/ArmoredFloorTriangle.tsx";
@@ -313,6 +315,8 @@ export default function CanvasContainer() {
     ArmoredWallHigh: ArmoredWallHigh,
     ArmoredWallMid: ArmoredWallMid,
     ArmoredWallLow: ArmoredWallLow,
+    ArmoredStairsLShape: ArmoredStairsLShape,
+    ArmoredStairsUShape: ArmoredStairsUShape,
     ArmoredDoorway: ArmoredDoorway,
     ArmoredWindow: ArmoredWindow,
     ArmoredWallFrame: ArmoredWallFrame,
@@ -1355,7 +1359,9 @@ export default function CanvasContainer() {
       model_type_to_create === "ArmoredFoundationSquareMid" ||
       model_type_to_create === "ArmoredFoundationSquareLow" ||
       model_type_to_create === "ArmoredFloorFrameSquare" ||
-      model_type_to_create === "ArmoredFloorSquare"
+      model_type_to_create === "ArmoredFloorSquare" ||
+      model_type_to_create === "ArmoredStairsLShape" ||
+      model_type_to_create === "ArmoredStairsUShape"
     ) {
       set_model_prop("square_foundation_prop");
     } else if (
