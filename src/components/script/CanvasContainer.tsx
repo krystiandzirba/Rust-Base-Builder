@@ -44,8 +44,8 @@ import { Model as StoneWallHigh } from "./../models/stone/StoneWallHigh.tsx";
 import { Model as StoneWallLow } from "./../models/stone/StoneWallLow.tsx";
 import { Model as StoneWallMid } from "./../models/stone/StoneWallMid.tsx";
 import { Model as StoneDoorway } from "./../models/stone/StoneDoorway.tsx";
-import { Model as StoneWallFrame } from "./../models/stone/StoneWallFrame.tsx";
 import { Model as StoneWindow } from "./../models/stone/StoneWindow.tsx";
+import { Model as StoneWallFrame } from "./../models/stone/StoneWallFrame.tsx";
 import { Model as StoneStairsLShape } from "./../models/stone/StoneStairsLShape.tsx";
 import { Model as StoneStairsUShape } from "./../models/stone/StoneStairsUShape.tsx";
 import { Model as StoneFloorSquare } from "./../models/stone/StoneFloorSquare.tsx";
@@ -65,8 +65,8 @@ import { Model as MetalWallHigh } from "./../models/metal/MetalWallHigh.tsx";
 import { Model as MetalWallMid } from "./../models/metal/MetalWallMid.tsx";
 import { Model as MetalWallLow } from "./../models/metal/MetalWallLow.tsx";
 import { Model as MetalDoorway } from "./../models/metal/MetalDoorway.tsx";
-import { Model as MetalWallFrame } from "./../models/metal/MetalWallFrame.tsx";
 import { Model as MetalWindow } from "./../models/metal/MetalWindow.tsx";
+import { Model as MetalWallFrame } from "./../models/metal/MetalWallFrame.tsx";
 import { Model as MetalStairsLShape } from "./../models/metal/MetalStairsLShape.tsx";
 import { Model as MetalStairsUShape } from "./../models/metal/MetalStairsUShape.tsx";
 import { Model as MetalFloorSquare } from "./../models/metal/MetalFloorSquare.tsx";
@@ -87,9 +87,9 @@ import { Model as ArmoredWallMid } from "./../models/armored/ArmoredWallMid.tsx"
 import { Model as ArmoredWallLow } from "./../models/armored/ArmoredWallLow.tsx";
 import { Model as ArmoredDoorway } from "./../models/armored/ArmoredDoorway.tsx";
 import { Model as ArmoredWindow } from "./../models/armored/ArmoredWindow.tsx";
+import { Model as ArmoredWallFrame } from "./../models/armored/ArmoredWallFrame.tsx";
 import { Model as ArmoredStairsLShape } from "./../models/armored/ArmoredStairsLShape.tsx";
 import { Model as ArmoredStairsUShape } from "./../models/armored/ArmoredStairsUShape.tsx";
-import { Model as ArmoredWallFrame } from "./../models/armored/ArmoredWallFrame.tsx";
 import { Model as ArmoredFloorSquare } from "./../models/armored/ArmoredFloorSquare.tsx";
 import { Model as ArmoredFloorTriangle } from "./../models/armored/ArmoredFloorTriangle.tsx";
 import { Model as ArmoredFloorFrameSquare } from "./../models/armored/ArmoredFloorFrameSquare.tsx";
@@ -270,8 +270,8 @@ export default function CanvasContainer() {
     StoneWallMid: StoneWallMid,
     StoneWallLow: StoneWallLow,
     StoneDoorway: StoneDoorway,
-    StoneWallFrame: StoneWallFrame,
     StoneWindow: StoneWindow,
+    StoneWallFrame: StoneWallFrame,
     StoneStairsLShape: StoneStairsLShape,
     StoneStairsUShape: StoneStairsUShape,
     StoneFloorSquare: StoneFloorSquare,
@@ -293,8 +293,8 @@ export default function CanvasContainer() {
     MetalWallMid: MetalWallMid,
     MetalWallLow: MetalWallLow,
     MetalDoorway: MetalDoorway,
-    MetalWallFrame: MetalWallFrame,
     MetalWindow: MetalWindow,
+    MetalWallFrame: MetalWallFrame,
     MetalStairsLShape: MetalStairsLShape,
     MetalStairsUShape: MetalStairsUShape,
     MetalFloorSquare: MetalFloorSquare,
@@ -303,8 +303,6 @@ export default function CanvasContainer() {
     MetalFloorFrameTriangle: MetalFloorFrameTriangle,
     MetalRoofSquare: MetalRoofSquare,
     MetalRoofTriangle: MetalRoofTriangle,
-    MetalDoor: MetalDoor,
-    GarageDoor: GarageDoor,
 
     // -------------------------  Armored -------------------------
 
@@ -317,17 +315,22 @@ export default function CanvasContainer() {
     ArmoredWallHigh: ArmoredWallHigh,
     ArmoredWallMid: ArmoredWallMid,
     ArmoredWallLow: ArmoredWallLow,
-    ArmoredStairsLShape: ArmoredStairsLShape,
-    ArmoredStairsUShape: ArmoredStairsUShape,
     ArmoredDoorway: ArmoredDoorway,
     ArmoredWindow: ArmoredWindow,
     ArmoredWallFrame: ArmoredWallFrame,
+    ArmoredStairsLShape: ArmoredStairsLShape,
+    ArmoredStairsUShape: ArmoredStairsUShape,
     ArmoredFloorSquare: ArmoredFloorSquare,
     ArmoredFloorTriangle: ArmoredFloorTriangle,
     ArmoredFloorFrameSquare: ArmoredFloorFrameSquare,
     ArmoredFloorFrameTriangle: ArmoredFloorFrameTriangle,
     ArmoredRoofSquare: ArmoredRoofSquare,
     ArmoredRoofTriangle: ArmoredRoofTriangle,
+
+    // -------------------------  Doors -------------------------
+
+    MetalDoor: MetalDoor,
+    GarageDoor: GarageDoor,
 
     // -------------------------  Windows -------------------------
 

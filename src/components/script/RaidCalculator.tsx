@@ -124,6 +124,7 @@ export default function RaidCalculator() {
       model_to_destroy === "StoneDoorway" ||
       model_to_destroy === "StoneWindow" ||
       model_to_destroy === "StoneWallFrame" ||
+      model_to_destroy === "StoneFloorSquare" ||
       model_to_destroy === "StoneFloorTriangle" ||
       model_to_destroy === "StoneFloorFrameSquare" ||
       model_to_destroy === "StoneFloorFrameTriangle" ||
@@ -135,6 +136,9 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalFoundationSquareHigh" ||
       model_to_destroy === "MetalFoundationSquareMid" ||
       model_to_destroy === "MetalFoundationSquareLow" ||
+      model_to_destroy === "MetalFoundationTriangleHigh" ||
+      model_to_destroy === "MetalFoundationTriangleMid" ||
+      model_to_destroy === "MetalFoundationTriangleLow" ||
       model_to_destroy === "MetalWallHigh" ||
       model_to_destroy === "MetalWallMid" ||
       model_to_destroy === "MetalWallLow" ||
@@ -143,6 +147,7 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalStairsLShape" ||
       model_to_destroy === "MetalStairsUShape" ||
       model_to_destroy === "MetalWallFrame" ||
+      model_to_destroy === "MetalFloorSquare" ||
       model_to_destroy === "MetalFloorTriangle" ||
       model_to_destroy === "MetalFloorFrameSquare" ||
       model_to_destroy === "MetalFloorFrameTriangle" ||

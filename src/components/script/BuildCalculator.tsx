@@ -49,31 +49,35 @@ export default function ResourceCounter() {
 
   const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>();
 
-  //* ------------------------- ↓ Misc Cost Counter ↓ -------------------------
+  //* ------------------------- ↓ Misc And Components Cost Counter ↓ -------------------------
   // (if enabled) this function is used to calculate the cost of the misc objects:
   // (tool cupboard, large wood box, wood storage box, furnace, workbench tier 3, sleeping bag)
   // the total misc cost is added on top of the "construction" objects cost (foundations, walls ... )
-  // it is displayed as a whole under the "build cost" window
+  // it is displayed as a whole under the "build cost" window and separate "components cost" window
 
-  function CountMiscsCost(models: string[]) {
+  function CountMiscsAndComponentsCost(models: string[]) {
     // -------------------------  count the number of misc items  -------------------------
 
     let misc_tool_cupboard_count = models.filter((model) => model === "ToolCupboard").length;
-    let misc_large_wood_box_count = models.filter((model) => model === "LargeWoodBox").length;
     let misc_wood_storage_box_count = models.filter((model) => model === "WoodStorageBox").length;
+    let misc_large_wood_box_count = models.filter((model) => model === "LargeWoodBox").length;
     let misc_furnace_count = models.filter((model) => model === "Furnace").length;
     let misc_workbench_t3_count = models.filter((model) => model === "WorkbenchT3").length;
     let misc_sleeping_bag_count = models.filter((model) => model === "SleepingBag").length;
 
+    let garage_door_count = models.filter((model) => model === "GarageDoor").length;
+
     set_total_misc_count(
       misc_tool_cupboard_count +
-        misc_large_wood_box_count +
         misc_wood_storage_box_count +
+        misc_large_wood_box_count +
         misc_furnace_count +
         misc_workbench_t3_count +
-        misc_sleeping_bag_count
+        misc_sleeping_bag_count +
+        garage_door_count
     );
 
+    // -------------------------  miscs cost -------------------------
     // -------------------------  total misc cost (wood) -------------------------
 
     let wood_misc_cost_1000 = misc_tool_cupboard_count * 1000;
@@ -100,19 +104,25 @@ export default function ResourceCounter() {
     let hq_metal_misc_cost_100 = misc_workbench_t3_count * 100;
     set_total_hq_metal_misc_cost(hq_metal_misc_cost_100);
 
-    // -------------------------  total misc cost (scrap) -------------------------
+    // -------------------------  components cost -------------------------
+    // -------------------------  total components cost (scrap) -------------------------
 
     let scrap_misc_cost_1250 = misc_workbench_t3_count * 1250;
     let total_scrap_misc_cost = scrap_misc_cost_1250;
 
-    // -------------------------  total misc cost (gear) -------------------------
+    // -------------------------  total components cost (gear) -------------------------
 
-    let gear_misc_cost_2 = models.filter((model) => model === "GarageDoor").length * 2;
+    let gear_misc_cost_2 = garage_door_count * 2;
     let total_gear_misc_cost = gear_misc_cost_2;
 
-    // -------------------------  total misc cost (lq fuel) -------------------------
+    // -------------------------  total components cost (sewing kit) -------------------------
 
-    let lq_fuel_misc_cost_50 = models.filter((model) => model === "Furnace").length * 50;
+    //
+    //
+
+    // -------------------------  total components cost (lq fuel) -------------------------
+
+    let lq_fuel_misc_cost_50 = misc_furnace_count * 50;
     let total_lq_fuel_misc_cost = lq_fuel_misc_cost_50;
 
     // -------------------------  display the values -------------------------
@@ -125,7 +135,7 @@ export default function ResourceCounter() {
     ]);
   }
 
-  //* ------------------------- ↑ Misc Cost Counter ↑ -------------------------
+  //* ------------------------- ↑ Misc And Components Cost Counter ↑ -------------------------
 
   //* ------------------------- ↓ Base Building Cost Counter ↓ -------------------------
   // this function is calculating the building cost of the base objects like foundations, walls, floors ...
@@ -142,7 +152,6 @@ export default function ResourceCounter() {
           model === "StoneFoundationSquareLow" ||
           model === "StoneWallHigh" ||
           model === "StoneWallMid" ||
-          model === "StoneWallThird" ||
           model === "StoneStairsLShape" ||
           model === "StoneStairsUShape"
       ).length * 300;
@@ -161,13 +170,10 @@ export default function ResourceCounter() {
           model === "StoneFoundationTriangleHigh" ||
           model === "StoneFoundationTriangleMid" ||
           model === "StoneFoundationTriangleLow" ||
-          model === "StoneFoundationStairs" ||
-          model === "StoneFloorSquare" ||
-          model === "StoneFoundationTriangleLow" ||
           model === "StoneWallLow" ||
           model === "StoneWallFrame" ||
           model === "StoneFloorFrameSquare" ||
-          model === "StoneFloorFrameTriangle" ||
+          model === "StoneFloorSquare" ||
           model === "StoneRoofSquare" ||
           model === "StoneRoofTriangle"
       ).length * 150;
@@ -176,6 +182,7 @@ export default function ResourceCounter() {
     let stone_build_cost_75 =
      models.filter(
         (model) =>
+          model === "StoneFloorFrameTriangle" ||
         model === "StoneFloorTriangle"
     ).length * 75;
 
@@ -197,7 +204,6 @@ export default function ResourceCounter() {
           model === "MetalFoundationSquareHigh" ||
           model === "MetalFoundationSquareMid" ||
           model === "MetalFoundationSquareLow" ||
-          model === "MetalFoundationStairs" ||
           model === "MetalWallHigh" ||
           model === "MetalWallMid" ||
           model === "MetalStairsUShape" ||
@@ -225,11 +231,10 @@ export default function ResourceCounter() {
           model === "MetalFoundationTriangleHigh" ||
           model === "MetalFoundationTriangleMid" ||
           model === "MetalFoundationTriangleLow" ||
-          model === "MetalFloorSquare" ||
           model === "MetalWallLow" ||
           model === "MetalWallFrame" ||
           model === "MetalFloorFrameSquare" ||
-          model === "MetalFloorFrameTriangle" ||
+          model === "MetalFloorSquare" ||
           model === "MetalVerticalEmbrasure" ||
           model === "MetalRoofSquare" ||
           model === "MetalRoofTriangle"
@@ -239,6 +244,7 @@ export default function ResourceCounter() {
     let metal_build_cost_50 =
         models.filter(
             (model) =>
+              model === "MetalFloorFrameTriangle" ||
             model === "MetalFloorTriangle" ||
             model === "StrenghtenedGlassWindow"
   ).length * 50;
@@ -261,7 +267,6 @@ export default function ResourceCounter() {
           model === "ArmoredFoundationSquareLow" ||
           model === "ArmoredWallHigh" ||
           model === "ArmoredWallMid" ||
-          model === "ArmoredFloorSquare" ||
           model === "ArmoredStairsLShape" ||
           model === "ArmoredStairsUShape"
       ).length * 25;
@@ -281,10 +286,9 @@ export default function ResourceCounter() {
           model === "ArmoredFoundationTriangleMid" ||
           model === "ArmoredFoundationTriangleLow" ||
           model === "ArmoredWallLow" ||
-          model === "ArmoredWallFrame" ||
           model === "ArmoredFloorFrameSquare" ||
-          model === "ArmoredFloorFrameTriangle" ||
-          model === "ArmoredFloorTriangle" ||
+          model === "ArmoredWallFrame" ||
+          model === "ArmoredFloorSquare" ||
           model === "ArmoredRoofSquare" ||
           model === "ArmoredRoofTriangle"
       ).length * 13;
@@ -293,7 +297,8 @@ export default function ResourceCounter() {
     let hqm_build_cost_7 =
         models.filter(
             (model) =>
-            model === "ArmoredTriangleFloor"
+              model === "ArmoredFloorFrameTriangle" ||
+            model === "ArmoredFloorTriangle"
         ).length * 7;
 
     let total_hqm_build_cost = hqm_build_cost_25 + hqm_build_cost_18 + hqm_build_cost_13 + hqm_build_cost_7;
@@ -362,7 +367,7 @@ export default function ResourceCounter() {
           model === "MetalWallLow" ||
           model === "MetalFloorSquare" ||
           model === "MetalWallFrame" ||
-          model === "MetaFloorFrameSquare" ||
+          model === "MetalFloorFrameSquare" ||
           model === "MetalFloorFrameTriangle" ||
           model === "MetalRoofSquare" ||
           model === "MetalRoofTriangle" ||
@@ -521,7 +526,7 @@ export default function ResourceCounter() {
 
   useEffect(() => {
     CountBuildCost(canvas_models_array);
-    CountMiscsCost(canvas_models_array);
+    CountMiscsAndComponentsCost(canvas_models_array);
     CountUpkeepPercentileRampup(canvas_models_array);
   }, [canvas_models_array, total_misc_count, count_miscs_cost]);
 

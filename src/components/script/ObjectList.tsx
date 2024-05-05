@@ -19,8 +19,8 @@ import stoneWallHighThumbnail from "../../object_list_thumbnails/stone_wall_high
 import stoneWallMidThumbnail from "../../object_list_thumbnails/stone_wall_mid_thumbnail.png";
 import stoneWallLowThumbnail from "../../object_list_thumbnails/stone_wall_low_thumbnail.png";
 import stoneDoorwayThumbnail from "../../object_list_thumbnails/stone_doorway_thumbnail.png";
-import stoneWallFrameThumbnail from "../../object_list_thumbnails/stone_wall_frame_thumbnail.png";
 import stoneWindowThumbnail from "../../object_list_thumbnails/stone_window_thumbnail.png";
+import stoneWallFrameThumbnail from "../../object_list_thumbnails/stone_wall_frame_thumbnail.png";
 import stoneStairsLShapeThumbnail from "../../object_list_thumbnails/stone_stairs_l_shape_thumbnail.png";
 import stoneStairsUShapeThumbnail from "../../object_list_thumbnails/stone_stairs_u_shape_thumbnail.png";
 import stoneFloorSquareThumbnail from "../../object_list_thumbnails/stone_floor_square_thumbnail.png";
@@ -40,8 +40,8 @@ import metalWallHighThumbnail from "../../object_list_thumbnails/metal_wall_high
 import metalWallMidThumbnail from "../../object_list_thumbnails/metal_wall_mid_thumbnail.png";
 import metalWallLowThumbnail from "../../object_list_thumbnails/metal_wall_low_thumbnail.png";
 import metalDoorwayThumbnail from "../../object_list_thumbnails/metal_doorway_thumbnail.png";
-import metalWallFrameThumbnail from "../../object_list_thumbnails/metal_wall_frame_thumbnail.png";
 import metalWindowThumbnail from "../../object_list_thumbnails/metal_window_thumbnail.png";
+import metalWallFrameThumbnail from "../../object_list_thumbnails/metal_wall_frame_thumbnail.png";
 import metalStairsLShapeThumbnail from "../../object_list_thumbnails/metal_stairs_l_shape_thumbnail.png";
 import metalStairsUShapeThumbnail from "../../object_list_thumbnails/metal_stairs_u_shape_thumbnail.png";
 import metalFloorSquareThumbnail from "../../object_list_thumbnails/metal_floor_square_thumbnail.png";
@@ -62,9 +62,9 @@ import armoredWallMidThumbnail from "../../object_list_thumbnails/armored_wall_m
 import armoredWallLowThumbnail from "../../object_list_thumbnails/armored_wall_low_thumbnail.png";
 import armoredDoorwayThumbnail from "../../object_list_thumbnails/armored_doorway_thumbnail.png";
 import armoredWindowThumbnail from "../../object_list_thumbnails/armored_window_thumbnail.png";
+import armoredWallFrameThumbnail from "../../object_list_thumbnails/armored_wall_frame_thumbnail.png";
 import armoredStairsLShapeThumbnail from "../../object_list_thumbnails/armored_stairs_l_shape_thumbnail.png";
 import armoredStairsUShapeThumbnail from "../../object_list_thumbnails/armored_stairs_u_shape_thumbnail.png";
-import armoredWallFrameThumbnail from "../../object_list_thumbnails/armored_wall_frame_thumbnail.png";
 import armoredFloorFrameSquareThumbnail from "../../object_list_thumbnails/armored_floor_frame_square_thumbnail.png";
 import armoredFloorFrameTriangleThumbnail from "../../object_list_thumbnails/armored_floor_frame_triangle_thumbnail.png";
 import armoredFloorSquareThumbnail from "../../object_list_thumbnails/armored_floor_square_thumbnail.png";
@@ -307,6 +307,15 @@ export default function ObjectList() {
     },
 
     {
+      name: "stone wall frame",
+      thumbnail: stoneWallFrameThumbnail,
+      keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneWallFrame"));
+      },
+    },
+
+    {
       name: "stone stairs (L shape)",
       thumbnail: stoneStairsLShapeThumbnail,
       keywords: ["stone", "stairs", "stone stairs"],
@@ -320,15 +329,6 @@ export default function ObjectList() {
       keywords: ["stone", "stairs", "stone stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("StoneStairsUShape"));
-      },
-    },
-
-    {
-      name: "stone wall frame",
-      thumbnail: stoneWallFrameThumbnail,
-      keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallFrame"));
       },
     },
 
@@ -576,6 +576,15 @@ export default function ObjectList() {
     },
 
     {
+      name: "metal wall frame",
+      thumbnail: metalWallFrameThumbnail,
+      keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalWallFrame"));
+      },
+    },
+
+    {
       name: "metal stairs (L shape)",
       thumbnail: metalStairsLShapeThumbnail,
       keywords: ["metal", "stairs", "metal stairs"],
@@ -589,15 +598,6 @@ export default function ObjectList() {
       keywords: ["metal", "stairs", "metal stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalStairsUShape"));
-      },
-    },
-
-    {
-      name: "metal wall frame",
-      thumbnail: metalWallFrameThumbnail,
-      keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWallFrame"));
       },
     },
 
@@ -845,6 +845,15 @@ export default function ObjectList() {
     },
 
     {
+      name: "armored wall frame",
+      thumbnail: armoredWallFrameThumbnail,
+      keywords: ["armored", "wall", "frame", "armored wall", "armored frame", "wall frame"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredWallFrame"));
+      },
+    },
+
+    {
       name: "armored stairs (L shape)",
       thumbnail: armoredStairsLShapeThumbnail,
       keywords: ["armored", "stairs", "armored stairs"],
@@ -859,15 +868,6 @@ export default function ObjectList() {
       keywords: ["armored", "stairs", "armored stairs"],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredStairsUShape"));
-      },
-    },
-
-    {
-      name: "armored wall frame",
-      thumbnail: armoredWallFrameThumbnail,
-      keywords: ["armored", "wall", "frame", "armored wall", "armored frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredWallFrame"));
       },
     },
 
