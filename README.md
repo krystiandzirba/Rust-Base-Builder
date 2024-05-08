@@ -133,7 +133,6 @@ You can also enable the sub-ingredients and gunpowder calculator.
 
 <p align="center">
 - Phone version<br>  
-- Add Armored structures tier<br>
 - Add External walls<br>
 - Add the most important of the remaining "misc" objects such as beds, fences, shelves, research table, large furnace, repair bench...<br>
 - Add Twig and Wood structures tiers (if needed)<br>
@@ -145,11 +144,13 @@ You can also enable the sub-ingredients and gunpowder calculator.
 - Object copy + paste<br>
 - Undo button<br>
 - Base share via link<br>
-- Bases saved in browser memory<br>
 - Different switchable layouts<br>
 - Performance Improvements<br>
 - UI | UX tweaking<br>
-- Object brush: instead of "click to place", add optional "click and hold to place multiple objects"<br>
+- Object brush: instead of "click to place", add optional "click and hold to place multiple objects<br>
+- 3D day and night cycle as a dark and light mode<br>
+- New menu to copy, upgrade, delete etc. a selected object<br>
+- New controls and hints instructions as a flat text around the objects<br>
 </p>
 
 _<h3 align="center">Please note that this app is GPU and Memory heavy, if you experience any performance issues, try using the ***Performance Mode*** available in the settings.</h3>_
