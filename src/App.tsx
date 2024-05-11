@@ -86,11 +86,8 @@ export default App;
 // base share as a link
 // detailed list of currently active models (number of doors, walls ...)
 
-// if performance issue = canvas lighting + postprocessing + click events
-// verify that every building costs the same as in game (wiki data) ( possible error in roofs and foundations)
 // fix the camera NSEW position, it is incorrectly calculated
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
-// make more user input presets, that build 1 by 1 on the canvas (with timeout)
 
 // react three fiber - pointer lock controls (first person camera control) + fps octree
 
@@ -100,10 +97,10 @@ export default App;
 // 1 second 3d text while creating, deleting and raiding the object
 // add current id storage to avoid id duplication
 // useIntersect, useProgress
-// add meshBounds / BVH raycaster to the existing models instead of the default raycaster
 // adaptive resolution for low end pcs and heavy performance loss
 // 3d day and night cycle as light and dark mode
 // model upgrade (stone -> metal) button
 // change the foundation low (stone + metal) UV and texture size from 256 to 128
 // object info, when selecting an object make it display its name
-// face the roof in the same direction as walls (same arrow direction)
+// add a ground control instructions (wasd around the selected objects)
+// change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid

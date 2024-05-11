@@ -2402,7 +2402,7 @@ export default function CanvasContainer() {
       {active_models_state && <CanvasModelsList models={models} />}
       <div className="local_storage_container">
         <button
-          className="local_storage_button local_storage_save"
+          className="local_storage_button"
           onMouseOver={() => {
             set_hover_save_base(true);
           }}
@@ -2420,7 +2420,7 @@ export default function CanvasContainer() {
           <a className="local_storage_button_text">save</a>
         </button>
         <button
-          className="local_storage_button local_storage_delete_question"
+          className="local_storage_button"
           onMouseOver={() => {
             set_hover_delete_save_base(true);
           }}
@@ -2436,7 +2436,7 @@ export default function CanvasContainer() {
         >
           <FontAwesomeIcon
             icon={faEraser}
-            size="2x"
+            size="3x"
             style={{ color: hover_delete_save_base ? "#ffd5b3" : "#bbbbbb" }}
           />
           <a className="local_storage_button_text">delete</a>

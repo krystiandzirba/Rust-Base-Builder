@@ -932,8 +932,8 @@ const Settings = () => {
       </div>
 
       <div className="controls_settings_description_container">
-        <div className="controls_settings_description_container_text">controls</div>
         <div className="controls_settings_description_container_text">settings</div>
+        <div className="controls_settings_description_container_text">controls</div>
       </div>
     </>
   );

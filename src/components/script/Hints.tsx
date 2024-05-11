@@ -21,26 +21,26 @@ export default function Hints() {
       {camera_type === "camera_3d" && !object_selected && !model_cretion_state && (
         <div className="hint_default_3d">
           <div className="hint_part">
-            <span className="orange_theme_color">LMB | MB1</span> - rotate camera
+            <span className="orange_theme_color">LMB | MB1</span> - rotate cam.
           </div>
 
           <div className="hint_part">
-            <span className="orange_theme_color">RMB | MB2</span> - move camera
+            <span className="orange_theme_color">RMB | MB2</span> - move cam.
           </div>
 
           <div className="hint_part">
-            <span className="orange_theme_color">mouse scroll</span> - zoom in-out
+            <span className="orange_theme_color">mouse scroll</span> - zoom
           </div>
         </div>
       )}
       {camera_type === "camera_2d" && !object_selected && (
         <div className="hint_default_2d">
           <div className="hint_part">
-            <span className="orange_theme_color">LMB | MB1 | RMB | MB2</span> - move camera
+            <span className="orange_theme_color">LMB | MB1 | RMB | MB2</span> - move cam.
           </div>
 
           <div className="hint_part">
-            <span className="orange_theme_color">mouse scroll</span> - zoom in-out
+            <span className="orange_theme_color">mouse scroll</span> - zoom
           </div>
         </div>
       )}
@@ -56,32 +56,26 @@ export default function Hints() {
           </div>
 
           <div className="hint_part">
-            <span className="orange_theme_color">SPACE/CTRL</span> - move up/down
+            <span className="orange_theme_color">SPACE/CTRL</span> - up/down
           </div>
 
           <div className="hint_part">
-            <span className="orange_theme_color">SHIFT</span> - change unit
+            <span className="orange_theme_color">SHIFT</span> - unit
           </div>
 
           <div className="hint_part">
-            <span className="orange_theme_color">DEL</span> - delete
+            <span className="orange_theme_color">DEL</span> - del.
           </div>
         </div>
       )}
       {model_cretion_state && (
         <div className="hint_creaton_state">
           <div className="hint_part">
-            <span className="orange_theme_color">LMB | MB1</span> - place object
+            <span className="orange_theme_color">LMB | MB1</span> - place obj.
           </div>
-
           <div className="hint_part">
-            <span className="orange_theme_color">RMB | MB2</span> - rotate camera
+            <span className="orange_theme_color">Q | E</span> - rotate obj.
           </div>
-
-          <div className="hint_part">
-            <span className="orange_theme_color">Q | E</span> - rotate
-          </div>
-
           <div className="hint_part">
             <span className="orange_theme_color">WASD</span> - change offset
           </div>

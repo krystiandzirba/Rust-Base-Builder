@@ -102,11 +102,11 @@
 }
 
 .settings_button_container {
-  width: 3.5vw;
-  height: 7.1vh;
+  width: 2.25vw;
+  height: 4.7vh;
   position: absolute;
-  top: 1vh;
-  left: 34vw;
+  top: 1.5vh;
+  left: 64.25vw;
   z-index: 25;
   background-color: transparent;
   display: flex;
@@ -128,11 +128,11 @@
 }
 
 .controls_button_container {
-  width: 4.5vw;
-  height: 8vh;
+  width: 2.925vw;
+  height: 5vh;
   position: absolute;
-  top: 0vh;
-  left: 26.25vw;
+  top: 1.125vh;
+  left: 67.5vw;
   z-index: 25;
   background-color: transparent;
   display: flex;
@@ -142,10 +142,10 @@
 
 .controls_settings_description_container {
   position: absolute;
-  width: 14.25vw;
+  width: 7.25vw;
   height: 2.5vh;
-  left: 25.1vw;
-  top: 8.75vh;
+  left: 63.5vw;
+  top: 6.25vh;
   z-index: 40;
   display: flex;
   flex-direction: row;

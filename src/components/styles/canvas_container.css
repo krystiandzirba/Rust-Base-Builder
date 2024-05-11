@@ -230,11 +230,11 @@ input::-webkit-inner-spin-button {
 
 .local_storage_container {
   position: absolute;
-  width: 7vw;
+  width: 5.25vw;
   height: 7vh;
   z-index: 55;
   background-color: rgba(255, 0, 0, 0);
-  left: 65.5vw;
+  left: 72.85vw;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -242,9 +242,9 @@ input::-webkit-inner-spin-button {
 }
 
 .local_storage_button {
-  width: 40%;
+  width: 50%;
   border: none;
-  background: rgba(255, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
 }
 
 .local_storage_button_text {

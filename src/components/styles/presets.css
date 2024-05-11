@@ -1,9 +1,9 @@
 .presets_container {
-  width: 12vw;
-  height: 8.5vh;
+  width: 6.25vw;
+  height: 5.5vh;
   position: absolute;
-  top: 1.25vh;
-  left: 74vw;
+  top: 2vh;
+  left: 80.5vw;
   z-index: 5;
   display: flex;
   justify-content: space-around;
@@ -11,14 +11,13 @@
 
 .preset {
   height: 100%;
-  width: 17.5%;
-  text-align: center;
   color: #bbbbbb;
   font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .preset_button {
