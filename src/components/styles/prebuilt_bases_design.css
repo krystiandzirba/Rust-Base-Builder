@@ -1,0 +1,145 @@
+.main_prebuilt_bases_design_navbar_container {
+  position: absolute;
+  z-index: 65;
+  width: 13vw;
+  height: 2vw;
+  top: 0.5vh;
+  left: 22.85vw;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.9vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: solid black 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  text-align: center;
+  transition: transform 0.15s ease-in-out;
+}
+
+.main_prebuilt_bases_design_navbar_container_displayed {
+  transform: translateY(0);
+}
+
+.main_prebuilt_bases_design_navbar_container_hidden {
+  transform: translateY(-120%);
+}
+
+.prebuilt_bases_design_icons_container {
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  text-align: center;
+}
+
+.main_prebuilt_bases_design_list_container {
+  position: absolute;
+  z-index: 1;
+  width: 13vw;
+  height: 26.5vw;
+  top: 5.5vh;
+  left: 22.85vw;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
+  border: solid black 1px;
+  transition: transform 0.15s ease-in-out;
+}
+
+.main_prebuilt_bases_design_list_container_displayed {
+  transform: translateY(0);
+}
+
+.main_prebuilt_bases_design_list_container_hidden {
+  transform: translateY(-120%);
+}
+
+.prebuilt_bases_design_list_divider_name {
+  width: 100%;
+  height: 1.75vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+  padding-bottom: 0.5vh;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 1vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: solid black 1px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.prebult_bases_design_type_container {
+  margin-top: 0.5vh;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  text-align: center;
+  padding-bottom: 0.5vh;
+  padding-top: 0.5vh;
+}
+
+.prebult_bases_design_type_container_cell {
+  width: 31.5%;
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.prebuilt_bases_design_type_buttons {
+  width: 100%;
+  height: 8vh;
+  background-color: #000000;
+  border: solid black 1px;
+}
+
+.type_buttons_active {
+  background-color: #ffd5b3;
+  color: #000000;
+}
+
+.type_buttons_inactive {
+  background-color: #bbbbbb;
+  color: #000000;
+}
+
+.prebuilt_bases_design_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.base_design_button {
+  width: 80%;
+  height: 2vh;
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: none;
+  margin-top: 0.5vh;
+}
+
+.base_design_button_selected {
+  color: #ffd5b3;
+}
+
+.base_design_button_deselected {
+  color: #bbbbbb;
+}

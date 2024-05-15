@@ -7,6 +7,7 @@ import {
   set_model_creation_state,
   set_selected_object_list,
   set_object_rotation_degree,
+  set_create_prebuilt_base_state,
 } from "../../Store.tsx";
 
 import stoneFoundationSquareHighThumbnail from "../../object_list_thumbnails/stone_foundation_square_high_thumbnail.png";
@@ -1103,6 +1104,7 @@ export default function ObjectList() {
                   dispatch(set_selected_object_list(-1));
                   dispatch(set_model_creation_state(false));
                 } else {
+                  dispatch(set_create_prebuilt_base_state(false));
                   dispatch(set_selected_object_list(index));
                   dispatch(set_model_creation_state(true));
                   dispatch(set_object_rotation_degree(90));

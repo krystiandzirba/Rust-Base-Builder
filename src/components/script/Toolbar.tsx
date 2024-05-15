@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { set_page_mode } from "../../Store.tsx";
+import { set_create_prebuilt_base_state, set_model_type_to_create, set_page_mode } from "../../Store.tsx";
 
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
@@ -87,6 +87,8 @@ const Toolbar = () => {
     {
       dispatch(set_selected_object_list(-1));
       dispatch(set_model_creation_state(false));
+      dispatch(set_create_prebuilt_base_state(false));
+      dispatch(set_model_type_to_create(""));
     }
   }, [page_mode]);
 

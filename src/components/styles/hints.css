@@ -1,6 +1,6 @@
 .hint_container_bottom {
   position: absolute;
-  z-index: 20;
+  z-index: 1;
   width: 50vw;
   height: 4vh;
   left: 25vw;

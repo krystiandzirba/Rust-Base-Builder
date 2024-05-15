@@ -33,6 +33,7 @@ import menu_sound from "../../audio/menu_sound.mp3";
 import { Model as TrianglePropSolid } from "./../models/props/TrianglePropSolid.tsx";
 import { Model as TrianglePropWireframe } from "./../models/props/TrianglePropWireframe.tsx";
 import { Model as ArrowProp } from "./../models/props/ArrowProp.tsx";
+import { Model as StarterBase2x1AProp } from "./../models/props/StarterBase2x1AProp.tsx";
 
 import { Model as StoneFoundationSquareHigh } from "./../models/stone/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "./../models/stone/StoneFoundationSquareMid.tsx";
@@ -178,6 +179,8 @@ export default function CanvasContainer() {
   const cursor_type = useSelector((state: RootState) => state.cursorType.cursor_type);
   const model_type_to_create = useSelector((state: RootState) => state.modelsData.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
+  const create_prebuilt_base_state = useSelector((state: RootState) => state.modelsData.create_prebuilt_base_state);
+  const prebuilt_base_material_type = useSelector((state: RootState) => state.modelsData.prebuilt_base_material_type);
   const object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
   const button_input = useSelector((state: RootState) => state.controlsInput.button_input);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
@@ -256,6 +259,27 @@ export default function CanvasContainer() {
   const [delete_saved_data_question, set_delete_saved_data_question] = useState<boolean>(false);
   const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
   const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
+
+  const object_north_direction = THREE.MathUtils.degToRad(0);
+  const object_south_direction = THREE.MathUtils.degToRad(180);
+  const object_east_direction = THREE.MathUtils.degToRad(270);
+  const object_west_direction = THREE.MathUtils.degToRad(90);
+
+  const object_north_east_1_direction = THREE.MathUtils.degToRad(300);
+  const object_north_east_2_direction = THREE.MathUtils.degToRad(315);
+  const object_north_east_3_direction = THREE.MathUtils.degToRad(330);
+
+  const object_north_west_1_direction = THREE.MathUtils.degToRad(30);
+  const object_north_west_2_direction = THREE.MathUtils.degToRad(45);
+  const object_north_west_3_direction = THREE.MathUtils.degToRad(60);
+
+  const object_south_east_1_direction = THREE.MathUtils.degToRad(210);
+  const object_south_east_2_direction = THREE.MathUtils.degToRad(225);
+  const object_south_east_3_direction = THREE.MathUtils.degToRad(240);
+
+  const object_south_west_1_direction = THREE.MathUtils.degToRad(120);
+  const object_south_west_2_direction = THREE.MathUtils.degToRad(135);
+  const object_south_west_3_direction = THREE.MathUtils.degToRad(150);
 
   const modelTypeMap = {
     // -------------------------  Stone -------------------------
@@ -353,7 +377,7 @@ export default function CanvasContainer() {
     }
   };
 
-  const addPrebuild = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
+  const AddStarterBase = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
     setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
   };
 
@@ -798,100 +822,90 @@ export default function CanvasContainer() {
     set_modified_model_rotation(newRotation);
   }
 
-  //* ------------------------- ↓ Prebuild Base ↓ -------------------------
-  // Adding a prebuild base to the canvas on page load
+  //* ------------------------- ↓ Starter Base ↓ -------------------------
+  // Adding a starter base to the canvas on page load
 
-  function CreatePrebuildBase() {
-    const rotation_30deg = THREE.MathUtils.degToRad(30);
-    const rotation_60deg = THREE.MathUtils.degToRad(60);
-    const rotation_120deg = THREE.MathUtils.degToRad(120);
-    const rotation_150deg = THREE.MathUtils.degToRad(150);
-    const rotation_210deg = THREE.MathUtils.degToRad(210);
-    const rotation_240deg = THREE.MathUtils.degToRad(240);
-    const rotation_300deg = THREE.MathUtils.degToRad(300);
-    const rotation_330deg = THREE.MathUtils.degToRad(330);
-
-    const prebuildObjects = [
-      { name: "T1", position: { x: -1, z: 1, y: 0 }, rotation: 0, model: StoneFoundationSquareMid },
-      { name: "T2", position: { x: 1, z: 1, y: 0 }, rotation: 0, model: StoneFoundationSquareMid },
-      { name: "T3", position: { x: -1, z: 3, y: 0 }, rotation: 0, model: StoneFoundationSquareMid },
-      { name: "T4", position: { x: 1, z: 3, y: 0 }, rotation: 0, model: StoneFoundationSquareMid },
-      { name: "T5", position: { x: 1, z: 4, y: 0 }, rotation: 0, model: StoneFoundationTriangleMid },
-      { name: "T6", position: { x: -1, z: 4, y: 0 }, rotation: 0, model: StoneFoundationTriangleMid },
-      { name: "T7", position: { x: 0, z: 5.725, y: 0 }, rotation: (Math.PI / 2) * 2, model: StoneFoundationTriangleMid}, //prettier-ignore
-      { name: "T8", position: { x: 0, z: -1.725, y: 0 }, rotation: 0, model: StoneFoundationTriangleMid },
-      { name: "T9", position: { x: -1, z: 0, y: 0 }, rotation: (Math.PI / 2) * 2, model: StoneFoundationTriangleMid },
-      { name: "T10", position: { x: 1, z: 0, y: 0 }, rotation: (Math.PI / 2) * 2, model: StoneFoundationTriangleMid },
-      { name: "T11", position: { x: 2, z: 3, y: 0 }, rotation: Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T12", position: { x: 2, z: 1, y: 0 }, rotation: Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T13", position: { x: 3.725, z: 2, y: 0 }, rotation: -Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T14", position: { x: -2, z: 1, y: 0 }, rotation: -Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T15", position: { x: -2, z: 1, y: 0 }, rotation: -Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T16", position: { x: -2, z: 3, y: 0 }, rotation: -Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T17", position: { x: -3.725, z: 2, y: 0 }, rotation: Math.PI / 2, model: StoneFoundationTriangleMid },
-      { name: "T18", position: { x: -2, z: 1, y: 1 }, rotation: Math.PI / 2, model: StoneWallHigh },
-      { name: "T19", position: { x: -2, z: 3, y: 1 }, rotation: Math.PI / 2, model: StoneWallHigh },
-      { name: "T20", position: { x: 1, z: 4, y: 1 }, rotation: Math.PI, model: StoneWallHigh },
-      { name: "T21", position: { x: -1, z: 4, y: 1 }, rotation: Math.PI, model: StoneDoorway },
-      { name: "T22", position: { x: 2, z: 3, y: 1 }, rotation: -Math.PI / 2, model: StoneWallHigh },
-      { name: "T23", position: { x: 2, z: 1, y: 1 }, rotation: -Math.PI / 2, model: StoneWallHigh },
-      { name: "T24", position: { x: -1, z: 0, y: 1 }, rotation: Math.PI * 2, model: StoneWallHigh },
-      { name: "T25", position: { x: 1, z: 0, y: 1 }, rotation: Math.PI * 2, model: StoneWallHigh },
-      { name: "T26", position: { x: -1, z: 2, y: 1 }, rotation: Math.PI, model: StoneWallFrame },
-      { name: "T27", position: { x: 1, z: 2, y: 1 }, rotation: Math.PI, model: StoneWallFrame },
-      { name: "T28", position: { x: 0, z: 1, y: 1 }, rotation: Math.PI / 2, model: StoneWallHigh },
-      { name: "T29", position: { x: 0, z: 3, y: 1 }, rotation: Math.PI / 2, model: StoneWallFrame },
-      { name: "T30", position: { x: 0, z: 3, y: 1 }, rotation: -Math.PI / 2, model: GarageDoor },
-      { name: "T31", position: { x: -1.5, z: 4.85, y: 1 }, rotation: rotation_120deg, model: StoneWallHigh },
-      { name: "T32", position: { x: -0.55, z: 4.85, y: 1 }, rotation: rotation_240deg, model: StoneDoorway },
-      { name: "T33", position: { x: 0, z: 5.725, y: 1 }, rotation: Math.PI, model: StoneWindow },
-      { name: "T34", position: { x: 1.5, z: 4.85, y: 1 }, rotation: rotation_240deg, model: StoneDoorway },
-      { name: "T35", position: { x: 1.5, z: 4.85, y: 1 }, rotation: rotation_240deg, model: MetalDoor },
-      { name: "T36", position: { x: -0.55, z: 4.85, y: 1 }, rotation: rotation_240deg, model: MetalDoor },
-      { name: "T37", position: { x: -1, z: 4, y: 1 }, rotation: Math.PI, model: MetalDoor },
-      { name: "T38", position: { x: -1, z: 2, y: 1 }, rotation: Math.PI, model: GarageDoor },
-      { name: "T39", position: { x: 1, z: 2, y: 1 }, rotation: Math.PI * 2, model: GarageDoor },
-      { name: "T40", position: { x: -1.5, z: -0.85, y: 1 }, rotation: rotation_60deg, model: StoneWallHigh },
-      { name: "T41", position: { x: 1.5, z: -0.85, y: 1 }, rotation: rotation_300deg, model: StoneWallHigh },
-      { name: "T42", position: { x: 0.55, z: -0.85, y: 1 }, rotation: rotation_60deg, model: StoneWallHigh },
-      { name: "T43", position: { x: -0.55, z: -0.85, y: 1 }, rotation: rotation_300deg, model: StoneWallHigh },
-      { name: "T44", position: { x: 0, z: -1.725, y: 1 }, rotation: Math.PI * 2, model: StoneWallHigh },
-      { name: "T45", position: { x: 3.725, z: 2, y: 1 }, rotation: -Math.PI / 2, model: StoneWallHigh },
-      { name: "T46", position: { x: 2.825, z: 2.5, y: 1 }, rotation: rotation_330deg, model: StoneWallHigh },
-      { name: "T47", position: { x: 2.825, z: 0.5, y: 1 }, rotation: rotation_330deg, model: StoneWallHigh },
-      { name: "T48", position: { x: 2.825, z: 3.5, y: 1 }, rotation: rotation_210deg, model: StoneWallHigh },
-      { name: "T49", position: { x: 2.825, z: 1.5, y: 1 }, rotation: rotation_210deg, model: StoneWallHigh },
-      { name: "T50", position: { x: -2.85, z: 0.5, y: 1 }, rotation: rotation_30deg, model: StoneWallHigh },
-      { name: "T51", position: { x: -2.85, z: 2.5, y: 1 }, rotation: rotation_30deg, model: StoneWallHigh },
-      { name: "T52", position: { x: -2.85, z: 3.5, y: 1 }, rotation: rotation_150deg, model: StoneWallHigh },
-      { name: "T53", position: { x: -2.85, z: 1.5, y: 1 }, rotation: rotation_150deg, model: StoneWallHigh },
-      { name: "T54", position: { x: -3.725, z: 2, y: 1 }, rotation: Math.PI / 2, model: StoneWallHigh },
-      { name: "T55", position: { x: 0.35, z: 1.3, y: 1.05 }, rotation: Math.PI / 2, model: LargeWoodBox },
-      { name: "T56", position: { x: 0.4, z: 0.35, y: 1.05 }, rotation: Math.PI * 2, model: ToolCupboard },
-      { name: "T57", position: { x: 1.4, z: 0.4, y: 1.05 }, rotation: Math.PI, model: LargeWoodBox },
-      { name: "T58", position: { x: 1.35, z: 1.675, y: 1.05 }, rotation: Math.PI, model: LargeWoodBox },
-      { name: "T59", position: { x: 1.6, z: 2.4, y: 1.05 }, rotation: -Math.PI / 2, model: Furnace },
-      { name: "T60", position: { x: 1.6, z: 3.1, y: 1.05 }, rotation: -Math.PI / 2, model: Furnace },
-      { name: "T61", position: { x: 1.6, z: 3.7, y: 1.05 }, rotation: -Math.PI / 2, model: WoodStorageBox },
-      { name: "T62", position: { x: -1.25, z: 0.325, y: 1.05 }, rotation: Math.PI / 2, model: WoodStorageBox },
-      { name: "T64", position: { x: -0.275, z: 0.325, y: 1.05 }, rotation: Math.PI / 2, model: WoodStorageBox },
-      { name: "T65", position: { x: 0, z: 5.725, y: 1 }, rotation: Math.PI * 2, model: StrenghtenedGlassWindow },
-      { name: "T66", position: { x: -1.25, z: 0.35, y: 1 }, rotation: Math.PI * 2, model: WorkbenchT3 },
-      { name: "T67", position: { x: 2, z: 1, y: 3 }, rotation: Math.PI / 2, model: StoneFloorTriangle },
-      { name: "T68", position: { x: 2, z: 3, y: 3 }, rotation: Math.PI / 2, model: StoneFloorTriangle },
-      { name: "T69", position: { x: 3.725, z: 2, y: 3 }, rotation: -Math.PI / 2, model: StoneFloorTriangle },
-      { name: "T70", position: { x: -2, z: 1, y: 3 }, rotation: -Math.PI / 2, model: StoneFloorTriangle },
-      { name: "T71", position: { x: -2, z: 3, y: 3 }, rotation: -Math.PI / 2, model: StoneFloorTriangle },
-      { name: "T72", position: { x: -3.725, z: 2, y: 3 }, rotation: Math.PI / 2, model: StoneFloorTriangle },
-      { name: "T73", position: { x: 0, z: -1.7, y: 3 }, rotation: Math.PI * 2, model: StoneFloorTriangle },
-      { name: "T74", position: { x: 1, z: 0, y: 3 }, rotation: Math.PI, model: StoneFloorTriangle },
-      { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: Math.PI, model: StoneFloorTriangle },
+  function CreateStarterBase() {
+    const starter_base_objects = [
+      { name: "T1", position: { x: -1, z: 1, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
+      { name: "T2", position: { x: 1, z: 1, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
+      { name: "T3", position: { x: -1, z: 3, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
+      { name: "T4", position: { x: 1, z: 3, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
+      { name: "T5", position: { x: 1, z: 4, y: 0 }, rotation: object_north_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T6", position: { x: -1, z: 4, y: 0 }, rotation: object_north_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T7", position: { x: 0, z: 5.725, y: 0 }, rotation: object_south_direction, model: StoneFoundationTriangleMid}, //prettier-ignore
+      { name: "T8", position: { x: 0, z: -1.725, y: 0 }, rotation: object_north_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T9", position: { x: -1, z: 0, y: 0 }, rotation: object_south_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T10", position: { x: 1, z: 0, y: 0 }, rotation: object_south_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T11", position: { x: 2, z: 3, y: 0 }, rotation: object_west_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T12", position: { x: 2, z: 1, y: 0 }, rotation: object_west_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T13", position: { x: 3.725, z: 2, y: 0 }, rotation: object_east_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T15", position: { x: -2, z: 1, y: 0 }, rotation: object_east_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T16", position: { x: -2, z: 3, y: 0 }, rotation: object_east_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T17", position: { x: -3.725, z: 2, y: 0 }, rotation: object_west_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
+      { name: "T18", position: { x: -2, z: 1, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T19", position: { x: -2, z: 3, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T20", position: { x: 1, z: 4, y: 1 }, rotation: object_south_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T21", position: { x: -1, z: 4, y: 1 }, rotation: object_south_direction, model: StoneDoorway }, //prettier-ignore
+      { name: "T22", position: { x: 2, z: 3, y: 1 }, rotation: object_east_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T23", position: { x: 2, z: 1, y: 1 }, rotation: object_east_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T24", position: { x: -1, z: 0, y: 1 }, rotation: object_north_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T25", position: { x: 1, z: 0, y: 1 }, rotation: object_north_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T26", position: { x: -1, z: 2, y: 1 }, rotation: object_south_direction, model: StoneWallFrame }, //prettier-ignore
+      { name: "T27", position: { x: 1, z: 2, y: 1 }, rotation: object_south_direction, model: StoneWallFrame }, //prettier-ignore
+      { name: "T28", position: { x: 0, z: 1, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T29", position: { x: 0, z: 3, y: 1 }, rotation: object_west_direction, model: StoneWallFrame }, //prettier-ignore
+      { name: "T30", position: { x: 0, z: 3, y: 1 }, rotation: object_east_direction, model: GarageDoor }, //prettier-ignore
+      { name: "T31", position: { x: -1.5, z: 4.85, y: 1 }, rotation: object_south_west_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T32", position: { x: -0.55, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: StoneDoorway }, //prettier-ignore
+      { name: "T33", position: { x: 0, z: 5.725, y: 1 }, rotation: object_south_direction, model: StoneWindow }, //prettier-ignore
+      { name: "T34", position: { x: 1.5, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: StoneDoorway }, //prettier-ignore
+      { name: "T35", position: { x: 1.5, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: MetalDoor }, //prettier-ignore
+      { name: "T36", position: { x: -0.55, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: MetalDoor }, //prettier-ignore
+      { name: "T37", position: { x: -1, z: 4, y: 1 }, rotation: object_south_direction, model: MetalDoor }, //prettier-ignore
+      { name: "T38", position: { x: -1, z: 2, y: 1 }, rotation: object_south_direction, model: GarageDoor }, //prettier-ignore
+      { name: "T39", position: { x: 1, z: 2, y: 1 }, rotation: object_north_direction, model: GarageDoor }, //prettier-ignore
+      { name: "T40", position: { x: -1.5, z: -0.85, y: 1 }, rotation: object_north_west_3_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T41", position: { x: 1.5, z: -0.85, y: 1 }, rotation: object_north_east_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T42", position: { x: 0.55, z: -0.85, y: 1 }, rotation: object_north_west_3_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T43", position: { x: -0.55, z: -0.85, y: 1 }, rotation: object_north_east_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T44", position: { x: 0, z: -1.725, y: 1 }, rotation: object_north_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T45", position: { x: 3.725, z: 2, y: 1 }, rotation: object_east_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T46", position: { x: 2.825, z: 2.5, y: 1 }, rotation: object_north_east_3_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T47", position: { x: 2.825, z: 0.5, y: 1 }, rotation: object_north_east_3_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T48", position: { x: 2.825, z: 3.5, y: 1 }, rotation: object_south_east_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T49", position: { x: 2.825, z: 1.5, y: 1 }, rotation: object_south_east_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T50", position: { x: -2.85, z: 0.5, y: 1 }, rotation: object_north_west_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T51", position: { x: -2.85, z: 2.5, y: 1 }, rotation: object_north_west_1_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T52", position: { x: -2.85, z: 3.5, y: 1 }, rotation: object_south_west_3_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T53", position: { x: -2.85, z: 1.5, y: 1 }, rotation: object_south_west_3_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T54", position: { x: -3.725, z: 2, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
+      { name: "T55", position: { x: 0.35, z: 1.3, y: 1.05 }, rotation: object_west_direction, model: LargeWoodBox }, //prettier-ignore
+      { name: "T56", position: { x: 0.4, z: 0.35, y: 1.05 }, rotation: object_north_direction, model: ToolCupboard }, //prettier-ignore
+      { name: "T57", position: { x: 1.4, z: 0.4, y: 1.05 }, rotation: object_south_direction, model: LargeWoodBox }, //prettier-ignore
+      { name: "T58", position: { x: 1.35, z: 1.675, y: 1.05 }, rotation: object_south_direction, model: LargeWoodBox }, //prettier-ignore
+      { name: "T59", position: { x: 1.6, z: 2.4, y: 1.05 }, rotation: object_east_direction, model: Furnace }, //prettier-ignore
+      { name: "T60", position: { x: 1.6, z: 3.1, y: 1.05 }, rotation: object_east_direction, model: Furnace }, //prettier-ignore
+      { name: "T61", position: { x: 1.6, z: 3.7, y: 1.05 }, rotation: object_east_direction, model: WoodStorageBox }, //prettier-ignore
+      { name: "T62", position: { x: -1.25, z: 0.325, y: 1.05 }, rotation: object_west_direction, model: WoodStorageBox }, //prettier-ignore
+      { name: "T64", position: { x: -0.275, z: 0.325, y: 1.05 }, rotation: object_west_direction, model: WoodStorageBox }, //prettier-ignore
+      { name: "T65", position: { x: 0, z: 5.725, y: 1 }, rotation: object_north_direction, model: StrenghtenedGlassWindow }, //prettier-ignore
+      { name: "T66", position: { x: -1.25, z: 0.35, y: 1 }, rotation: object_north_direction, model: WorkbenchT3 }, //prettier-ignore
+      { name: "T67", position: { x: 2, z: 1, y: 3 }, rotation: object_west_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T68", position: { x: 2, z: 3, y: 3 }, rotation: object_west_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T69", position: { x: 3.725, z: 2, y: 3 }, rotation: object_east_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T70", position: { x: -2, z: 1, y: 3 }, rotation: object_east_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T71", position: { x: -2, z: 3, y: 3 }, rotation: object_east_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T72", position: { x: -3.725, z: 2, y: 3 }, rotation: object_west_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T73", position: { x: 0, z: -1.7, y: 3 }, rotation: object_north_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T74", position: { x: 1, z: 0, y: 3 }, rotation: object_south_direction, model: StoneFloorTriangle }, //prettier-ignore
+      { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: object_south_direction, model: StoneFloorTriangle }, //prettier-ignore
     ];
 
     //! rewrite the model to be stored and read as a string, not a 3D model
 
-    let prebuild_delay = 0;
-    for (const { name, position, rotation, model } of prebuildObjects) {
+    let starter_base_build_delay = 0;
+    for (const { name, position, rotation, model } of starter_base_objects) {
       setTimeout(() => {
         setModelsData((prevTransforms) => ({
           ...prevTransforms,
@@ -906,10 +920,10 @@ export default function CanvasContainer() {
           },
         }));
 
-        addPrebuild(model, name, new THREE.Euler(0, rotation, 0));
-      }, prebuild_delay);
+        AddStarterBase(model, name, new THREE.Euler(0, rotation, 0));
+      }, starter_base_build_delay);
 
-      prebuild_delay += 35;
+      starter_base_build_delay += 35;
     }
   }
 
@@ -944,7 +958,7 @@ export default function CanvasContainer() {
 
         const { model, rotation } = modelsData[new_id];
         const corresponding_model = modelTypeMap[model as keyof typeof modelTypeMap];
-        addPrebuild(corresponding_model, new_id, new THREE.Euler(rotation._x, rotation._y, rotation._z));
+        AddStarterBase(corresponding_model, new_id, new THREE.Euler(rotation._x, rotation._y, rotation._z));
       }, delay);
 
       if (object_count < 200) {
@@ -955,7 +969,249 @@ export default function CanvasContainer() {
     });
   }
 
-  //* ------------------------- ↑ Prebuild Base ↑ -------------------------
+  //* ------------------------- ↑ Starter Base ↑ -------------------------
+
+  //* ------------------------- ↓ Prebuilt Bases ↓ -------------------------
+  // Adding a choosen prebuilt base to the canvas on user input
+
+  function CreateStarterBase2x1A() {
+    if (prevent_actions_after_canvas_drag === "allow") {
+      const starter_base_objects = [
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 2, y: 0 },
+          rotation: 0,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFoundationSquareMid : prebuilt_base_material_type === "metal" ? MetalFoundationSquareMid : prebuilt_base_material_type === "armored" ? ArmoredFoundationSquareMid: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate, y: 0 },
+          rotation: 0,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFoundationSquareMid : prebuilt_base_material_type === "metal" ? MetalFoundationSquareMid : prebuilt_base_material_type === "armored" ? ArmoredFoundationSquareMid: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 0 },
+          rotation: object_east_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFoundationTriangleMid : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleMid : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleMid: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 3, y: 1.05 },
+          rotation: 0,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate - 2, y: 1.05 },
+          rotation: object_east_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 1.05 },
+          rotation: object_east_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 2, y: 1.05 },
+          rotation: object_west_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 1.05 },
+          rotation: object_west_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneDoorway : prebuilt_base_material_type === "metal" ? MetalDoorway : prebuilt_base_material_type === "armored" ? ArmoredDoorway : null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1, y: 1.05 },
+          rotation: object_south_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate - 0.85, z: mouse_canvas_z_coordinate - 0.5, y: 1.05 },
+          rotation: object_north_west_1_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneDoorway : prebuilt_base_material_type === "metal" ? MetalDoorway : prebuilt_base_material_type === "armored" ? ArmoredDoorway: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate - 0.85, z: mouse_canvas_z_coordinate + 0.5, y: 1.05 },
+          rotation: object_south_west_3_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 1.05 },
+          rotation: object_west_direction,
+          model: MetalDoor,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate - 0.85, z: mouse_canvas_z_coordinate - 0.5, y: 1.05 },
+          rotation: object_north_west_1_direction,
+          model: MetalDoor,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1, y: 1.05 },
+          rotation: 0,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1, y: 1.05 },
+          rotation: 0,
+          model: GarageDoor,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate - 2, y: 2.05 },
+          rotation: object_east_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 0.4, z: mouse_canvas_z_coordinate - 2.7, y: 1.05 },
+          rotation: 0,
+          model: ToolCupboard,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.625, z: mouse_canvas_z_coordinate - 2.3, y: 1.05 },
+          rotation: object_east_direction,
+          model: LargeWoodBox,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 0.665, z: mouse_canvas_z_coordinate - 1.9, y: 1.05 },
+          rotation: object_north_direction,
+          model: LargeWoodBox,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.625, z: mouse_canvas_z_coordinate - 2.3, y: 2.05 },
+          rotation: object_east_direction,
+          model: LargeWoodBox,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 0.665, z: mouse_canvas_z_coordinate - 2.1, y: 2.05 },
+          rotation: object_north_direction,
+          model: LargeWoodBox,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.65, z: mouse_canvas_z_coordinate - 1.425, y: 2.05 },
+          rotation: object_north_direction,
+          model: WoodStorageBox,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.65, z: mouse_canvas_z_coordinate - 1.425, y: 1.05 },
+          rotation: object_north_direction,
+          model: WoodStorageBox,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.675, z: mouse_canvas_z_coordinate - 0.6, y: 1.05 },
+          rotation: object_east_direction,
+          model: Furnace,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.675, z: mouse_canvas_z_coordinate, y: 1.05 },
+          rotation: object_east_direction,
+          model: Furnace,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1.675, z: mouse_canvas_z_coordinate + 0.6, y: 1.05 },
+          rotation: object_east_direction,
+          model: Furnace,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 0.7, z: mouse_canvas_z_coordinate + 0.675, y: 1.05 },
+          rotation: object_south_direction,
+          model: WorkbenchT3,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 0.45, z: mouse_canvas_z_coordinate - 0.325, y: 1.05 },
+          rotation: object_east_direction,
+          model: SleepingBag,
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 2, y: 3.05 },
+          rotation: 0,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFloorSquare : prebuilt_base_material_type === "metal" ? MetalFloorSquare : prebuilt_base_material_type === "armored" ? ArmoredFloorSquare: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate, y: 3.05 },
+          rotation: 0,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFloorSquare : prebuilt_base_material_type === "metal" ? MetalFloorSquare : prebuilt_base_material_type === "armored" ? ArmoredFloorSquare: null, //prettier-ignore
+        },
+        {
+          name: randomIdGenerator(),
+          position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 3.05 },
+          rotation: object_east_direction,
+          model:
+          prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+        },
+      ];
+
+      //! rewrite the model to be stored and read as a string, not a 3D model
+
+      let prebuild_delay = 0;
+      for (const { name, position, rotation, model } of starter_base_objects) {
+        setTimeout(() => {
+          setModelsData((prevTransforms) => ({
+            ...prevTransforms,
+            [name]: {
+              position: {
+                x: position.x,
+                z: position.z,
+                y: position.y,
+              },
+              rotation: new THREE.Euler(0, rotation, 0, "XYZ"),
+              model: model!.displayName,
+            },
+          }));
+
+          if (audio) {
+            AudioPlayer(build_sound);
+          }
+
+          AddStarterBase(model!, name, new THREE.Euler(0, rotation, 0));
+        }, prebuild_delay);
+
+        prebuild_delay += 50;
+      }
+    }
+  }
+
+  //* ------------------------- ↑ Prebuilt Bases ↑ -------------------------
 
   function IsOffsetActive() {
     if (model_x_position_offset) return true;
@@ -1018,17 +1274,18 @@ export default function CanvasContainer() {
     window.addEventListener("keydown", handleKeyDown);
 
     if ((audio && model_creation_state) || selected_model_id !== "empty") {
-      if (keyboard_key === "KeyE" || keyboard_key === "KeyQ") {
+      if ((keyboard_key === "KeyE" || keyboard_key === "KeyQ") && !create_prebuilt_base_state) {
         AudioPlayer(rotation_sound);
       } else if (
-        keyboard_key === "KeyW" ||
-        keyboard_key === "KeyA" ||
-        keyboard_key === "KeyS" ||
-        keyboard_key === "KeyD" ||
-        keyboard_key === "ArrowUp" ||
-        keyboard_key === "ArrowDown" ||
-        keyboard_key === "ArrowLeft" ||
-        keyboard_key === "ArrowRight"
+        (keyboard_key === "KeyW" ||
+          keyboard_key === "KeyA" ||
+          keyboard_key === "KeyS" ||
+          keyboard_key === "KeyD" ||
+          keyboard_key === "ArrowUp" ||
+          keyboard_key === "ArrowDown" ||
+          keyboard_key === "ArrowLeft" ||
+          keyboard_key === "ArrowRight") &&
+        !create_prebuilt_base_state
       ) {
         AudioPlayer(controls_sound);
       }
@@ -1121,9 +1378,9 @@ export default function CanvasContainer() {
           } else if (camera_2d_direction === "top") {
             moveSelectedObjectX(+1);
           }
-        } else if (keyboard_key === "KeyQ") {
+        } else if (keyboard_key === "KeyQ" && !create_prebuilt_base_state) {
           RotateSelectedObject(selected_model_id, "right");
-        } else if (keyboard_key === "KeyE") {
+        } else if (keyboard_key === "KeyE" && !create_prebuilt_base_state) {
           RotateSelectedObject(selected_model_id, "left");
         } else if (keyboard_key === "Space") {
           moveSelectedObjectY(+1);
@@ -1140,13 +1397,13 @@ export default function CanvasContainer() {
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
-      if (keyboard_key === "KeyQ") {
+      if (keyboard_key === "KeyQ" && !create_prebuilt_base_state) {
         ChangeDefaultModelRotationLeft();
         RotateSelectedObject(selected_model_id, "left");
-      } else if (keyboard_key === "KeyE") {
+      } else if (keyboard_key === "KeyE" && !create_prebuilt_base_state) {
         ChangeDefaultModelRotationRight();
         RotateSelectedObject(selected_model_id, "right");
-      } else if (keyboard_key === "KeyW" && !symmetry_x_enabled && !symmetry_z_enabled) {
+      } else if (keyboard_key === "KeyW" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_z_position_offset(model_z_position_offset - 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1156,7 +1413,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         }
-      } else if (keyboard_key === "KeyS" && !symmetry_x_enabled && !symmetry_z_enabled) {
+      } else if (keyboard_key === "KeyS" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1166,7 +1423,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         }
-      } else if (keyboard_key === "KeyA" && !symmetry_x_enabled && !symmetry_z_enabled) {
+      } else if (keyboard_key === "KeyA" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1176,7 +1433,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         }
-      } else if (keyboard_key === "KeyD" && !symmetry_x_enabled && !symmetry_z_enabled) {
+      } else if (keyboard_key === "KeyD" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1328,6 +1585,8 @@ export default function CanvasContainer() {
         "ArmoredFoundationTriangleHigh",
         "ArmoredFoundationTriangleMid",
         "ArmoredFoundationTriangleLow",
+        //
+        "PrebuildBaseI",
       ].includes(model_type_to_create)
     ) {
       set_model_foundation_elevation(0);
@@ -1435,6 +1694,8 @@ export default function CanvasContainer() {
       model_type_to_create === "SleepingBag"
     ) {
       set_model_prop("storage_prop");
+    } else if (model_type_to_create === "PrebuildBaseI") {
+      set_model_prop("starter_base_2x1_a_prop");
     }
   }, [model_type_to_create]);
 
@@ -1447,11 +1708,11 @@ export default function CanvasContainer() {
           if (Object.keys(modelsData).length !== 0) {
             recreateSavedBase(modelsData);
           } else {
-            CreatePrebuildBase();
+            CreateStarterBase();
           }
           hasModelsDataChanged.current = true;
         } catch (error) {
-          console.error("Error in recreateSavedBase or CreatePrebuildBase:", error);
+          console.error("Error in recreateSavedBase or CreateStarterBase:", error);
         }
       }
     } catch (error) {
@@ -1619,7 +1880,13 @@ export default function CanvasContainer() {
             CanvasMouseOverIntersectionCoordinates(event), CaptureMouseCanvasDrag(event);
           }}
           onClick={() => {
-            AddCanvasModel();
+            if (create_prebuilt_base_state) {
+              if (model_type_to_create === "PrebuildBaseI") {
+                CreateStarterBase2x1A();
+              }
+            } else {
+              AddCanvasModel();
+            }
           }}
           onMouseUp={() => Camera3DDirection()}
           onPointerMissed={(e) => {
@@ -2392,6 +2659,26 @@ export default function CanvasContainer() {
                     </Box>
                   )}
                 </>
+              )}
+
+              {model_prop === "starter_base_2x1_a_prop" && (
+                <StarterBase2x1AProp
+                  position={[
+                    mouse_canvas_x_coordinate + model_x_position_offset,
+                    default_model_height_position / 2 + 0.04,
+                    mouse_canvas_z_coordinate + model_z_position_offset,
+                  ]}
+                  rotation={[0, modified_model_rotation, 0]}
+                  scale={[0.9, default_model_height_position + 0.8, 0.9]}
+                >
+                  <meshStandardMaterial
+                    transparent
+                    opacity={1}
+                    color={"#ffa463"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={bloom_state ? 3 : 0}
+                  />
+                </StarterBase2x1AProp>
               )}
             </>
           )}

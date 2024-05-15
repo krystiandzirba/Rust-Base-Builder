@@ -12,6 +12,7 @@ import Settings from "./components/script/Settings.tsx";
 import StructureVisibilityMode from "./components/script/StructureVisibilityMode.tsx";
 import Github from "./components/script/Github.tsx";
 import MobileAlert from "./components/script/MobileAlert.tsx";
+import PrebuiltBasesDesign from "./components/script/PrebuiltBasesDesign.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -27,6 +28,7 @@ import "./components/styles/settings.css";
 import "./components/styles/structure_visibility_mode.css";
 import "./components/styles/github.css";
 import "./components/styles/mobile_alert.css";
+import "./components/styles/prebuilt_bases_design.css";
 
 import { RootState } from "./Store";
 import { useSelector } from "react-redux";
@@ -54,20 +56,21 @@ function App() {
   return (
     <>
       <KeyboardControls map={map}>
-        {model_transform_controls && <ControlsInput />}
-        <Toolbar />
-        {enable_presets && <Presets />}
-        <Version />
-        {enable_cameras && <CameraType />}
-        {page_mode === "raid" && <RaidCalculator />}
         <CanvasContainer />
         {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
+        {page_mode === "raid" && <RaidCalculator />}
         <ObjectList />
+        {model_transform_controls && <ControlsInput />}
+        <Toolbar />
+        {enable_cameras && <CameraType />}
         {enable_hints && <Hints />}
-        <Settings />
         {enable_structures_visibility && <StructureVisibilityMode />}
-        <Github />
+        {enable_presets && <Presets />}
+        <Settings />
         <MobileAlert />
+        <Github />
+        <Version />
+        <PrebuiltBasesDesign />
       </KeyboardControls>
       <Loader {...loaderStyles} dataInterpolation={(p) => `Loading ${p.toFixed(0)}%`} />
     </>
@@ -104,3 +107,7 @@ export default App;
 // object info, when selecting an object make it display its name
 // add a ground control instructions (wasd around the selected objects)
 // change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
+// update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
+
+// fix: select any placed object -> select any object from list to create -> double the hints displayed
+// fix the  lighting during the model/prebuilt creation
