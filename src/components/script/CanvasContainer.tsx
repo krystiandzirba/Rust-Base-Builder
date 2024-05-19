@@ -524,20 +524,19 @@ export default function CanvasContainer() {
         const rounded_z = parseFloat(z.toFixed(0));
 
         //!lag when many objects are present, requires rewriting
+
         set_mouse_canvas_x_coordinate(rounded_x);
         set_mouse_canvas_z_coordinate(rounded_z);
         set_model_y_position(default_model_height_position + model_foundation_elevation);
 
-        if (symmetry_x_enabled) {
-          set_model_x_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
-          set_model_x_mirror_z_position(mouse_canvas_z_coordinate + model_x_position_offset);
-        } else if (symmetry_z_enabled) {
-          set_model_z_mirror_x_position(mouse_canvas_x_coordinate + model_x_position_offset);
-          set_model_z_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
-        } else if (symmetry_x_enabled || symmetry_z_enabled) {
-          set_model_xz_mirror_x_position(-mouse_canvas_x_coordinate + model_x_position_offset);
-          set_model_xz_mirror_z_position(-mouse_canvas_z_coordinate + model_x_position_offset);
-        }
+        set_model_x_mirror_x_position(-mouse_canvas_x_coordinate);
+        set_model_x_mirror_z_position(mouse_canvas_z_coordinate);
+
+        set_model_z_mirror_x_position(mouse_canvas_x_coordinate);
+        set_model_z_mirror_z_position(-mouse_canvas_z_coordinate);
+
+        set_model_xz_mirror_x_position(-mouse_canvas_x_coordinate);
+        set_model_xz_mirror_z_position(-mouse_canvas_z_coordinate);
       }
     } else return;
   }
@@ -822,7 +821,7 @@ export default function CanvasContainer() {
     set_modified_model_rotation(newRotation);
   }
 
-  //* ------------------------- ↓ Starter Base ↓ -------------------------
+  //* ------------------------- ↓ Starter Base On Page Load ↓ -------------------------
   // Adding a starter base to the canvas on page load
 
   function CreateStarterBase() {
@@ -969,9 +968,9 @@ export default function CanvasContainer() {
     });
   }
 
-  //* ------------------------- ↑ Starter Base ↑ -------------------------
+  //* ------------------------- ↑ Starter Base On Page Load ↑ -------------------------
 
-  //* ------------------------- ↓ Prebuilt Bases ↓ -------------------------
+  //* ------------------------- ↓ Prebuilt Bases On User Input ↓ -------------------------
   // Adding a choosen prebuilt base to the canvas on user input
 
   function CreateStarterBase2x1A() {
@@ -1211,7 +1210,7 @@ export default function CanvasContainer() {
     }
   }
 
-  //* ------------------------- ↑ Prebuilt Bases ↑ -------------------------
+  //* ------------------------- ↑ Prebuilt Bases On User Input ↑ -------------------------
 
   function IsOffsetActive() {
     if (model_x_position_offset) return true;
