@@ -24,7 +24,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
         <meshStandardMaterial
           color={"#ffa463"}
           emissive={"rgb(255, 206, 166)"}
-          emissiveIntensity={bloom_state ? 3 : 0}
+          emissiveIntensity={bloom_state ? 1 : 0}
+          transparent={true}
+          opacity={0.5}
         />
       </mesh>
     </group>

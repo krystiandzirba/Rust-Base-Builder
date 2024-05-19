@@ -81,15 +81,18 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   };
 
   const ModelMaterialColor = () => {
-    if (!model_creation_state && enable_model_material) {
-      if (page_mode === "edit") {
-        return model_selected ? "#5c3227" : model_hover ? "#5c3227" : "#401f16";
-      } else if (page_mode === "raid") {
-        return model_hover ? "red" : "#401f16";
+    if (!model_creation_state) {
+      if (enable_model_material) {
+        if (page_mode === "edit") {
+          return model_selected ? "#5c3227" : model_hover ? "#5c3227" : "#401f16";
+        } else if (page_mode === "raid") {
+          return model_hover ? "red" : "#401f16";
+        }
+      } else {
+        return model_selected ? "#5c3227" : "#401f16";
       }
-    } else if (!model_creation_state && !enable_model_material) {
-      return model_selected ? "#5c3227" : "#401f16";
     }
+    return "#5c3227";
   };
 
   const ModelMaterialWireframe = () => {
