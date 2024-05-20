@@ -1960,12 +1960,14 @@ export default function CanvasContainer() {
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
                 scale={selected_model_id === id && pivot_controls_state && pivot_controls_state ? 3 : 0}
-                lineWidth={0}
+                lineWidth={1}
                 depthTest={false}
                 activeAxes={[pivot_x_axis_state, pivot_y_axis_state, pivot_z_axis_state]}
-                axisColors={["orange", "yellow", "orange"]}
+                axisColors={["##ffbf5e", "##ffdaa3", "##ffbf5e"]}
                 onDragStart={() => PivotDragStart(id)}
                 onDragEnd={() => PivotDragEnd()}
+                disableScaling={true}
+                disableRotations={true}
               >
                 <mesh
                   position={[modelTransform.position.x, modelTransform.position.y, modelTransform.position.z]}
