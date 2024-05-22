@@ -47,7 +47,7 @@ export default function ResourceCounter() {
   const [total_metal_misc_cost, set_total_metal_misc_cost] = useState<number>(0);
   const [total_hq_metal_misc_cost, set_total_hq_metal_misc_cost] = useState<number>(0);
 
-  const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>();
+  const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>(0);
 
   //* ------------------------- ↓ Misc And Components Cost Counter ↓ -------------------------
   // (if enabled) this function is used to calculate the cost of the misc objects:
