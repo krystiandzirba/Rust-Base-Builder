@@ -12,6 +12,30 @@ const pageModeSlice = createSlice({
   },
 });
 
+const hardwareSlice = createSlice({
+  name: "hardware parameters",
+  initialState: {
+    hardware_gpu: "",
+    hardware_tier: "",
+    hardware_is_mobile: false,
+    hardware_monitor_resolution: {},
+  },
+  reducers: {
+    set_hardware_gpu: (state, action) => {
+      return { ...state, hardware_gpu: action.payload };
+    },
+    set_hardware_tier: (state, action) => {
+      return { ...state, hardware_tier: action.payload };
+    },
+    set_hardware_is_mobile: (state, action) => {
+      return { ...state, hardware_is_mobile: action.payload };
+    },
+    set_hardware_monitor_resolution: (state, action) => {
+      return { ...state, hardware_monitor_resolution: action.payload };
+    },
+  },
+});
+
 const camerasSettingsSlice = createSlice({
   name: "camera type",
   initialState: {
@@ -285,6 +309,9 @@ const pageSettingsSlice = createSlice({
 
 export const { set_page_mode } = pageModeSlice.actions;
 
+export const { set_hardware_gpu, set_hardware_tier, set_hardware_is_mobile, set_hardware_monitor_resolution } =
+  hardwareSlice.actions;
+
 export const { set_canvas_models_array } = canvasModelsArraySlice.actions;
 
 export const {
@@ -353,6 +380,7 @@ export const { set_cursor_type } = cursorTypeSlice.actions;
 export const store = configureStore({
   reducer: {
     pageMode: pageModeSlice.reducer,
+    hardware: hardwareSlice.reducer,
     canvasModelsArray: canvasModelsArraySlice.reducer,
     cursorType: cursorTypeSlice.reducer,
     camerasSettings: camerasSettingsSlice.reducer,

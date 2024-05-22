@@ -13,6 +13,7 @@ import StructureVisibilityMode from "./components/script/StructureVisibilityMode
 import Github from "./components/script/Github.tsx";
 import MobileAlert from "./components/script/MobileAlert.tsx";
 import PrebuiltBasesDesign from "./components/script/PrebuiltBasesDesign.tsx";
+import HardwareParameters from "./components/script/HardwareParameters.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -73,6 +74,7 @@ function App() {
         <PrebuiltBasesDesign />
       </KeyboardControls>
       <Loader {...loaderStyles} dataInterpolation={(p) => `Loading ${p.toFixed(0)}%`} />
+      <HardwareParameters />
     </>
   );
 }

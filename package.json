@@ -2,7 +2,7 @@
   "homepage": "https://krystiandzirba.github.io/Rust-Base-Builder",
   "name": "rust-base-builder",
   "private": true,
-  "version": "4.20.1",
+  "version": "4.21.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
@@ -26,6 +26,7 @@
     "@react-three/postprocessing": "^2.15.11",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/three": "^0.158.3",
+    "detect-gpu": "^5.0.38",
     "gh-pages": "^6.1.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
