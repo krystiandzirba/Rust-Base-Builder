@@ -12,8 +12,7 @@
   flex-direction: row;
 }
 
-.rotation_left,
-.rotation_right {
+.rotation_direction_button {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   width: 40%;
@@ -32,8 +31,7 @@
   padding: 0.5vh;
 }
 
-.model_rotation_previous,
-.model_rotation_next {
+.model_rotation_button {
   font-size: 0.9vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
@@ -130,54 +128,88 @@
   top: 92%;
 }
 
-.distance_unit_description {
-  width: 12vw;
-  height: 5vh;
+.distance_unit_main_container {
+  width: 15vw;
+  height: 8vh;
+  background-color: transparent;
   position: absolute;
-  z-index: 55;
+  z-index: 60;
   left: 23.25vw;
   top: 91.5vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.distance_unit_description_main_container {
+  width: 100%;
+  height: 50%;
   background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.distance_unit_description {
+  width: 50%;
+  height: 100%;
   font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   color: #bbbbbb;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
 }
 
 .change_distance_unit_container {
-  width: 11vw;
-  height: 4vh;
-  position: absolute;
-  z-index: 55;
-  left: 23vw;
-  top: 94vh;
+  width: 100%;
+  height: 50%;
   background-color: transparent;
-  border: none;
   display: flex;
-  flex-direction: row;
   backdrop-filter: blur(2px);
 }
 
 .object_movement_multiplier {
-  width: 34%;
+  width: 25%;
   height: 100%;
   color: rgb(0, 0, 0);
   border: none;
   font-size: 0.9vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  text-align: center;
+  padding: 0;
+  margin: 0;
 }
 
 .movement_multiplier_left {
   border-radius: 1vh 0 0 1vh;
 }
 
+.movement_multiplier_middle {
+  border-radius: 0;
+}
+
 .movement_multiplier_right {
   border-radius: 0 1vh 1vh 0;
 }
 
+.movement_multiplier_top_right {
+  border-radius: 0 1vh 0 0;
+}
+
+.movement_multiplier_bottom_right {
+  border-radius: 0 0 1vh 0;
+}
+
 .multiplier_active {
   background-color: #ffd5b3;
+}
+
+.custom_distance_hidden {
+  display: none;
 }
 
 .multiplier_inactive {

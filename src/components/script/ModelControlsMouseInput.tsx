@@ -8,6 +8,8 @@ import {
   set_object_rotation_degree,
   set_delete_object_mode,
   set_delete_object_mouse_trigger,
+  set_object_selected,
+  set_selected_model_id,
 } from "../../Store.tsx";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -62,9 +64,14 @@ export default function ControlsInput() {
   const [trash_can_hovered, set_trash_can_hovered] = useState<boolean>(false);
   const [dumpster_hovered, set_dumpster_hovered] = useState<boolean>(false);
 
+  const [unit_distance_type, set_unit_distance_type] = useState<string>("1");
+
   const [display_remove_all_models_question, set_display_remove_all_models_question] = useState<boolean>(false);
   const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
   const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
+
+  const [enable_custom_distance, set_enable_custom_distance] = useState<boolean>(false);
+  const [custom_distance_unit, set_custom_distance_unit] = useState<number>(0);
 
   function ChangeRotationDegree() {
     if (audio) {
@@ -167,6 +174,16 @@ export default function ControlsInput() {
     }
     dispatch(set_object_distance_multiplier(distance));
   }
+
+  function ToggleCustomDistance() {
+    set_enable_custom_distance(!enable_custom_distance);
+  }
+
+  const changeCustomDistanceUnit = (event: any) => {
+    const inputValue = event.target.value;
+    set_custom_distance_unit(inputValue);
+    ChangeDistanceUnitButton(inputValue);
+  };
 
   return (
     <>
@@ -282,41 +299,75 @@ export default function ControlsInput() {
               />
             </button>
           )}
-          <span className="distance_unit_description"> change distance units</span>
-          <div className="change_distance_unit_container">
-            <button
-              className={
-                object_distance_multiplier === 0.125
-                  ? "object_movement_multiplier movement_multiplier_left multiplier_active"
-                  : "object_movement_multiplier movement_multiplier_left multiplier_inactive"
-              }
-              onClick={() => ChangeDistanceUnitButton(0.125)}
-            >
-              x0.125
-            </button>
-            <button
-              className={
-                object_distance_multiplier === 1
-                  ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
-                  : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
-              }
-              onClick={() => ChangeDistanceUnitButton(1)}
-            >
-              x1
-            </button>
-            <button
-              className={
-                object_distance_multiplier === 5
-                  ? "object_movement_multiplier movement_multiplier_right multiplier_active"
-                  : "object_movement_multiplier movement_multiplier_right multiplier_inactive"
-              }
-              onClick={() => ChangeDistanceUnitButton(5)}
-            >
-              x5
-            </button>
+          <div className="distance_unit_main_container">
+            <div className="distance_unit_description_main_container">
+              <div className="distance_unit_description"> change distance units</div>
+              <input
+                onClick={() => {
+                  dispatch(set_selected_model_id(-1));
+                  dispatch(set_object_selected(false));
+                }}
+                className={
+                  unit_distance_type === "custom"
+                    ? "object_movement_multiplier movement_multiplier_top_right multiplier_active"
+                    : "object_movement_multiplier movement_multiplier_top_right custom_distance_hidden"
+                }
+                type="number"
+                value={custom_distance_unit}
+                onChange={changeCustomDistanceUnit}
+                placeholder="distance"
+                onFocus={(e) => e.target.select()}
+              />
+            </div>
+            <div className="change_distance_unit_container">
+              <button
+                className={
+                  unit_distance_type === "0.125"
+                    ? "object_movement_multiplier movement_multiplier_left multiplier_active"
+                    : "object_movement_multiplier movement_multiplier_left multiplier_inactive"
+                }
+                onClick={() => (ChangeDistanceUnitButton(0.125), set_unit_distance_type("0.125"))}
+              >
+                x0.125
+              </button>
+              <button
+                className={
+                  unit_distance_type === "1"
+                    ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
+                    : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
+                }
+                onClick={() => (ChangeDistanceUnitButton(1), set_unit_distance_type("1"))}
+              >
+                x1
+              </button>
+              <button
+                className={
+                  unit_distance_type === "5"
+                    ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
+                    : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
+                }
+                onClick={() => (ChangeDistanceUnitButton(5), set_unit_distance_type("5"))}
+              >
+                x5
+              </button>
+              <button
+                className={
+                  unit_distance_type === "custom"
+                    ? "object_movement_multiplier movement_multiplier_bottom_right multiplier_active"
+                    : "object_movement_multiplier movement_multiplier_right multiplier_inactive"
+                }
+                onClick={() => (
+                  ToggleCustomDistance(),
+                  set_unit_distance_type("custom"),
+                  ChangeDistanceUnitButton(custom_distance_unit)
+                )}
+              >
+                custom
+              </button>
+            </div>
           </div>
           <div className="object_rotation_container">
-            <button onClick={() => ObjectRotateButtonLeft()} className="rotation_left">
+            <button onClick={() => ObjectRotateButtonLeft()} className="rotation_direction_button">
               <FontAwesomeIcon
                 icon={faArrowRotateRight}
                 size="2xl"
@@ -324,13 +375,13 @@ export default function ControlsInput() {
               />
             </button>
             <div className="model_rotation_wheel">
-              <div className="model_rotation_next">{next_object_rotation_degree}°</div>
+              <div className="model_rotation_button">{next_object_rotation_degree}°</div>
               <button onClick={() => ChangeRotationDegree()} className="rotation_change_button">
                 -{object_rotation_degree}°-
               </button>
-              <div className="model_rotation_previous">{previous_object_rotation_degree}°</div>
+              <div className="model_rotation_button">{previous_object_rotation_degree}°</div>
             </div>
-            <button onClick={() => ObjectRotateButtonRight()} className="rotation_right">
+            <button onClick={() => ObjectRotateButtonRight()} className="rotation_direction_button">
               <FontAwesomeIcon
                 icon={faArrowRotateLeft}
                 size="2xl"
