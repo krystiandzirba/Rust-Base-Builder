@@ -1,5 +1,15 @@
 <h1 align="center">Rust Base Builder</h1>
 
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/krystiandzirba/Rust-Base-Builder?color=blue)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/krystiandzirba/Rust-Base-Builder?color=blue)
+![GitHub](https://img.shields.io/github/license/krystiandzirba/Rust-Base-Builder?color=orange)
+[![GitHub last commit](https://img.shields.io/github/last-commit/krystiandzirba/Rust-Base-Builder?color=green)](https://github.com/krystiandzirba/Rust-Base-Builder/commits/main)
+[![GitHub activity](https://img.shields.io/github/commit-activity/m/krystiandzirba/Rust-Base-Builder?color=green)](https://github.com/krystiandzirba/Rust-Base-Builder/commits)
+
+</div>
+
 <p align="center">
 Rust Base Builder - an app for the popular video game "Rust" run by React Three Fiber. This tool allows you to create any base, simulate a raid and calculate all the building + upkeep cost.
 </p>
