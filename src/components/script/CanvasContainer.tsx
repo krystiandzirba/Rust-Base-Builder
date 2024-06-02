@@ -1164,14 +1164,14 @@ export default function CanvasContainer() {
             position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate, y: 3.05 },
             rotation: 0,
             model:
-          prebuilt_base_material_type === "stone" ? StoneFloorSquare : prebuilt_base_material_type === "metal" ? MetalFloorSquare : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          prebuilt_base_material_type === "stone" ? StoneFloorSquare : prebuilt_base_material_type === "metal" ? MetalFloorSquare : prebuilt_base_material_type === "armored" ? ArmoredFloorSquare: null, //prettier-ignore
           },
           {
             name: randomIdGenerator(),
             position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate, y: 3.05 },
             rotation: 0,
             model:
-          prebuilt_base_material_type === "stone" ? StoneFloorSquare : prebuilt_base_material_type === "metal" ? MetalFloorSquare : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          prebuilt_base_material_type === "stone" ? StoneFloorSquare : prebuilt_base_material_type === "metal" ? MetalFloorSquare : prebuilt_base_material_type === "armored" ? ArmoredFloorSquare: null, //prettier-ignore
           },
           {
             name: randomIdGenerator(),
