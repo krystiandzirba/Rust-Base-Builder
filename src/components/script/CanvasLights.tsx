@@ -17,7 +17,7 @@ export default function CanvasLights() {
 
   return (
     <>
-      {better_lighting_state && <ambientLight intensity={0.8} />}
+      {better_lighting_state && <ambientLight intensity={1.2} />}
       {better_lighting_state && (
         <>
           <group rotation={[Math.PI / 2, 1, Math.PI / 3]}>
