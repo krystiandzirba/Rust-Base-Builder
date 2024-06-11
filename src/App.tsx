@@ -112,3 +112,5 @@ export default App;
 // update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
 
 // fix: select any placed object -> select any object from list to create -> double the hints displayed
+
+// remake the wall mid uv and lower the texture size
