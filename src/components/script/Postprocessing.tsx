@@ -24,11 +24,11 @@ export default function Postprocessing() {
       <Suspense fallback={null}>
         <EffectComposer multisampling={antialiasing_state ? 3 : 0}>
           <N8AO
-            aoRadius={ssao_state && page_mode !== "edit" ? 60 : 0}
-            distanceFalloff={0.2}
-            intensity={ssao_state && page_mode !== "edit" ? 6 : 0.01}
+            aoRadius={ssao_state && page_mode !== "edit" ? 27.5 : 0}
+            distanceFalloff={0.15}
+            intensity={ssao_state && page_mode !== "edit" ? 5 : 0.01}
             screenSpaceRadius
-            halfRes
+            halfRes={true}
           />
 
           <Bloom

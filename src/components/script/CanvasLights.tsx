@@ -29,8 +29,7 @@ export default function CanvasLights() {
         </>
       )}
 
-      {!better_lighting_state && <ambientLight />}
-      {!better_lighting_state && <directionalLight />}
+      {!better_lighting_state && <ambientLight intensity={3.5} />}
     </>
   );
 }
