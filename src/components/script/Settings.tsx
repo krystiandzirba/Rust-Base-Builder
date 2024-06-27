@@ -221,13 +221,12 @@ const Settings = () => {
   }
 
   function HandleEnableModelTexturesSwitch(toggle: boolean) {
-    if (!performance_mode) {
-      if (toggle) {
-        dispatch(set_enable_model_textures(true));
-      } else if (!toggle) {
-        dispatch(set_enable_model_textures(false));
-      }
+    if (toggle) {
+      dispatch(set_enable_model_textures(true));
+    } else if (!toggle) {
+      dispatch(set_enable_model_textures(false));
     }
+
     if (audio) {
       AudioPlayer(buttons_sound);
     }
@@ -277,7 +276,6 @@ const Settings = () => {
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(false));
       dispatch(set_HDR_state(false));
-      dispatch(set_enable_model_textures(false));
       dispatch(set_enable_model_material(false));
     } else if (!toggle) {
       dispatch(set_performance_mode(false));
@@ -287,7 +285,6 @@ const Settings = () => {
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(false));
       dispatch(set_HDR_state(false));
-      dispatch(set_enable_model_textures(true));
       dispatch(set_enable_model_material(true));
     }
     if (audio) {
@@ -670,7 +667,7 @@ const Settings = () => {
             <div
               onClick={() => HandleEnableModelTexturesSwitch(false)}
               className={
-                !enable_model_textures && !performance_mode
+                !enable_model_textures
                   ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
                   : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
               }
