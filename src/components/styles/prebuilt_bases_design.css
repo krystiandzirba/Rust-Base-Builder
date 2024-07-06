@@ -124,8 +124,8 @@
 }
 
 .base_design_button {
-  width: 80%;
-  height: 2vh;
+  width: 90%;
+  height: 4vh;
   background-color: rgb(0, 0, 0);
   text-align: center;
   color: #bbbbbb;
@@ -133,7 +133,7 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   border: none;
-  margin-top: 0.5vh;
+  margin-top: 1.5vh;
 }
 
 .base_design_button_selected {

@@ -24,7 +24,7 @@ import hq_metalThumbnail from "../../icons/hq_metal_thumbnail.png";
 export default function PrebuiltBasesDesign() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
   const prebuilt_base_material_type = useSelector((state: RootState) => state.modelsData.prebuilt_base_material_type);
   const create_prebuilt_base_state = useSelector((state: RootState) => state.modelsData.create_prebuilt_base_state);
@@ -33,6 +33,11 @@ export default function PrebuiltBasesDesign() {
   const [add_prebuild_base_button_click, set_add_prebuild_base_button_click] = useState<boolean>(false);
 
   const [base_prebuilt_selection, set_base_prebuilt_selection] = useState<string>("empty");
+
+  const prebuiltBases = [
+    { id: "PrebuildBaseI", label: "Simple Starter Base 2x1 I" },
+    { id: "PrebuildBaseII", label: '2x1 the "Chad Cube" by Reksmore (YT)' },
+  ];
 
   function ChangeBaseMetarial(material: string) {
     set_prebuilt_base_material_type(material);
@@ -43,8 +48,7 @@ export default function PrebuiltBasesDesign() {
   }
 
   function ChangePrebuiltBaseDesign(index: number, name: string) {
-    console.log("click");
-    if (selected_object_list === index) {
+    if (base_prebuilt_selection === name) {
       set_base_prebuilt_selection("empty");
       dispatch(set_selected_object_list(-1));
       dispatch(set_model_creation_state(false));
@@ -57,6 +61,7 @@ export default function PrebuiltBasesDesign() {
       dispatch(set_model_type_to_create(name));
       dispatch(set_create_prebuilt_base_state(true));
     }
+
     if (audio) {
       AudioPlayer(object_selecting_sound);
     }
@@ -95,7 +100,7 @@ export default function PrebuiltBasesDesign() {
       >
         <a>Add prebuilt base</a>
         <div className="prebuilt_bases_design_icons_container">
-          <FontAwesomeIcon icon={faHouse} size="2x" style={{ color: "#bbbbbb" }} />
+          <FontAwesomeIcon icon={faHouse} size="2x" />
           <FontAwesomeIcon
             icon={faPlus}
             size="lg"
@@ -180,18 +185,19 @@ export default function PrebuiltBasesDesign() {
           </div>
           <div className="prebuilt_bases_design_list">
             <div className="prebuilt_bases_design_list_divider_name">Starter Bases</div>
-            <button
-              className={
-                base_prebuilt_selection === "PrebuildBaseI"
-                  ? "base_design_button base_design_button_selected"
-                  : "base_design_button base_design_button_deselected"
-              }
-              onClick={() => {
-                ChangePrebuiltBaseDesign(1000, "PrebuildBaseI");
-              }}
-            >
-              Starter Base 2x1 I
-            </button>
+            {prebuiltBases.map((base) => (
+              <button
+                key={base.id}
+                className={
+                  base_prebuilt_selection === base.id
+                    ? "base_design_button base_design_button_selected"
+                    : "base_design_button base_design_button_deselected"
+                }
+                onClick={() => ChangePrebuiltBaseDesign(1000, base.id)}
+              >
+                {base.label}
+              </button>
+            ))}
           </div>
         </div>
       )}
