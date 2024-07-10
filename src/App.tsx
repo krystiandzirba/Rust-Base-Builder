@@ -110,6 +110,7 @@ export default App;
 // add a ground control instructions (wasd around the selected objects)
 // change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
 // update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
+// add drei outline to objects in edit mode
 
 // fix: select any placed object -> select any object from list to create -> double the hints displayed
 

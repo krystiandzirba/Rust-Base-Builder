@@ -1055,7 +1055,7 @@ export default function ObjectList() {
   // deselect the current object on search bar input
 
   // prevent the Space and Enter buttons to enable-disable the object list items, if the Search bar is empty
-  // (selecting-dedelecting with these two inputs was possible)
+  // (selecting-deselecting with these two inputs was possible)
 
   useEffect(() => {
     dispatch(set_selected_object_list(-1));
