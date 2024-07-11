@@ -61,18 +61,18 @@
 }
 
 .object_mirror_container_description {
-  top: 62vh;
-  left: 20vw;
+  top: 66vh;
+  left: 19.5vw;
 }
 .object_elevation_container_description {
-  top: 72vh;
-  left: 21.5vw;
+  top: 75vh;
+  left: 21.25vw;
 }
 
 .object_elevation_container,
 .object_mirror_container {
   position: absolute;
-  left: 23vw;
+  left: 23.25vw;
   height: 4vh;
   z-index: 45;
   display: flex;
@@ -81,11 +81,11 @@
 }
 
 .object_mirror_container {
-  top: 65vh;
+  top: 69vh;
   width: 5.5vw;
 }
 .object_elevation_container {
-  top: 75vh;
+  top: 78vh;
   width: 8vw;
 }
 
@@ -144,7 +144,7 @@ input::-webkit-inner-spin-button {
   left: 22.75vw;
   width: 9vw;
   height: 2vh;
-  top: 82vh;
+  top: 84.25vh;
   z-index: 45;
   color: #bbbbbb;
   font-size: 0.7vw;
@@ -155,10 +155,10 @@ input::-webkit-inner-spin-button {
 
 .pivot_controls_container {
   position: absolute;
-  left: 23vw;
+  left: 23.25vw;
   width: 8vw;
   height: 4vh;
-  top: 84.5vh;
+  top: 87vh;
   background-color: transparent;
   z-index: 40;
   display: flex;

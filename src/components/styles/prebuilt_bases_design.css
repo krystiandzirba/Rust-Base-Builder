@@ -1,7 +1,7 @@
 .main_prebuilt_bases_design_navbar_container {
   position: absolute;
   z-index: 65;
-  width: 13vw;
+  width: 16vw;
   height: 2vw;
   top: 0.5vh;
   left: 22.85vw;
@@ -30,7 +30,7 @@
 }
 
 .prebuilt_bases_design_icons_container {
-  width: 35%;
+  width: 22.5%;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -41,8 +41,8 @@
 .main_prebuilt_bases_design_list_container {
   position: absolute;
   z-index: 1;
-  width: 13vw;
-  height: 26.5vw;
+  width: 16vw;
+  height: 28.5vw;
   top: 5.5vh;
   left: 22.85vw;
   background-color: rgba(15, 16, 26, 0.4);
@@ -62,7 +62,7 @@
 .prebuilt_bases_design_list_divider_name {
   width: 100%;
   height: 1.75vh;
-  margin-top: 0.5vh;
+  margin-top: 2vh;
   margin-bottom: 0.5vh;
   padding-bottom: 0.5vh;
   text-align: center;
@@ -93,16 +93,18 @@
   background-color: black;
   text-align: center;
   color: #bbbbbb;
-  font-size: 0.7vw;
+  font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  padding: 0.1vh;
 }
 
 .prebuilt_bases_design_type_buttons {
-  width: 100%;
-  height: 8vh;
+  width: 97.5%;
+  height: 9.5vh;
   background-color: #000000;
   border: solid black 1px;
+  margin-top: 0.5vh;
 }
 
 .type_buttons_active {
@@ -124,7 +126,7 @@
 }
 
 .base_design_button {
-  width: 90%;
+  width: 96.5%;
   height: 4vh;
   background-color: rgb(0, 0, 0);
   text-align: center;
@@ -134,6 +136,10 @@
   font-weight: 300;
   border: none;
   margin-top: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .base_design_button_selected {
@@ -142,4 +148,22 @@
 
 .base_design_button_deselected {
   color: #bbbbbb;
+}
+
+.base_name {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.base_group_size_indicator {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }

@@ -9,7 +9,7 @@ import {
 } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 
-import { faPlus, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
@@ -35,8 +35,8 @@ export default function PrebuiltBasesDesign() {
   const [base_prebuilt_selection, set_base_prebuilt_selection] = useState<string>("empty");
 
   const prebuiltBases = [
-    { id: "PrebuildBaseI", label: "Simple Starter Base 2x1 I" },
-    { id: "PrebuildBaseII", label: '2x1 the "Chad Cube" by Reksmore (YT)' },
+    { id: "PrebuildBaseI", label: "Simple Starter Base 2x1", size: "solo" },
+    { id: "PrebuildBaseII", label: 'The "Chad Cube" 2x1 by Reksmore (YT)', size: "solo" },
   ];
 
   function ChangeBaseMetarial(material: string) {
@@ -100,7 +100,7 @@ export default function PrebuiltBasesDesign() {
       >
         <a>Add prebuilt base</a>
         <div className="prebuilt_bases_design_icons_container">
-          <FontAwesomeIcon icon={faHouse} size="2x" />
+          <FontAwesomeIcon icon={faHouse} size="xl" />
           <FontAwesomeIcon
             icon={faPlus}
             size="lg"
@@ -195,7 +195,38 @@ export default function PrebuiltBasesDesign() {
                 }
                 onClick={() => ChangePrebuiltBaseDesign(1000, base.id)}
               >
-                {base.label}
+                <div className="base_name"> {base.label}</div>
+                <div className="base_group_size_indicator">
+                  <FontAwesomeIcon icon={faUser} size="lg" style={{ color: "#ffd5b3" }} />
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    size="lg"
+                    style={{
+                      color:
+                        base.size === "duo" || base.size === "trio" || base.size === "squad" || base.size === "group"
+                          ? "#ffd5b3"
+                          : "#4a4a4a",
+                    }}
+                  />
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    size="lg"
+                    style={{
+                      color:
+                        base.size === "trio" || base.size === "squad" || base.size === "group" ? "#ffd5b3" : "#4a4a4a",
+                    }}
+                  />
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    size="lg"
+                    style={{ color: base.size === "squad" || base.size === "group" ? "#ffd5b3" : "#4a4a4a" }}
+                  />
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    size="lg"
+                    style={{ color: base.size === "group" ? "#ffd5b3" : "#4a4a4a" }}
+                  />
+                </div>
               </button>
             ))}
           </div>
