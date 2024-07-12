@@ -9,7 +9,7 @@ import {
 } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 
-import { faPlus, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faHouse, faUser, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
@@ -35,8 +35,8 @@ export default function PrebuiltBasesDesign() {
   const [base_prebuilt_selection, set_base_prebuilt_selection] = useState<string>("empty");
 
   const prebuiltBases = [
-    { id: "PrebuildBaseI", label: "Simple Starter Base 2x1", size: "solo" },
-    { id: "PrebuildBaseII", label: 'The "Chad Cube" 2x1 by Reksmore (YT)', size: "solo" },
+    { id: "PrebuildBaseI", label: "Simple Starter Base 2x1", size: "solo", tutorial_materials: false },
+    { id: "PrebuildBaseII", label: 'The "Chad Cube" 2x1 by Reksmore (YT)', size: "solo", tutorial_materials: false },
   ];
 
   function ChangeBaseMetarial(material: string) {
@@ -122,6 +122,36 @@ export default function PrebuiltBasesDesign() {
             <div
               className="prebult_bases_design_type_container_cell"
               onClick={() => {
+                if (base_prebuilt_selection !== "PrebuildBaseI" && base_prebuilt_selection !== "PrebuildBaseII") {
+                  ChangeBaseMetarial("tutorial");
+                }
+              }}
+            >
+              <button
+                className={
+                  base_prebuilt_selection === "PrebuildBaseI" || base_prebuilt_selection === "PrebuildBaseII"
+                    ? "prebuilt_bases_design_type_buttons_disabled"
+                    : prebuilt_base_material_type === "tutorial"
+                    ? "prebuilt_bases_design_type_buttons type_buttons_active"
+                    : "prebuilt_bases_design_type_buttons type_buttons_inactive"
+                }
+              >
+                <FontAwesomeIcon
+                  icon={faGraduationCap}
+                  size="3x"
+                  style={{
+                    color:
+                      base_prebuilt_selection === "PrebuildBaseI" || base_prebuilt_selection === "PrebuildBaseII"
+                        ? "rgba(179, 179, 179, 0.75)"
+                        : "black",
+                  }}
+                />
+              </button>
+              <a>tutorial</a>
+            </div>
+            <div
+              className="prebult_bases_design_type_container_cell"
+              onClick={() => {
                 ChangeBaseMetarial("stone");
               }}
             >
@@ -184,7 +214,6 @@ export default function PrebuiltBasesDesign() {
             </div>
           </div>
           <div className="prebuilt_bases_design_list">
-            <div className="prebuilt_bases_design_list_divider_name">Starter Bases</div>
             {prebuiltBases.map((base) => (
               <button
                 key={base.id}
@@ -193,7 +222,14 @@ export default function PrebuiltBasesDesign() {
                     ? "base_design_button base_design_button_selected"
                     : "base_design_button base_design_button_deselected"
                 }
-                onClick={() => ChangePrebuiltBaseDesign(1000, base.id)}
+                onClick={() => {
+                  ChangePrebuiltBaseDesign(1000, base.id);
+
+                  if (!base.tutorial_materials) {
+                    set_prebuilt_base_material_type("stone");
+                    dispatch(set_prebuilt_base_material_type("stone"));
+                  }
+                }}
               >
                 <div className="base_name"> {base.label}</div>
                 <div className="base_group_size_indicator">
@@ -203,7 +239,7 @@ export default function PrebuiltBasesDesign() {
                     size="lg"
                     style={{
                       color:
-                        base.size === "duo" || base.size === "trio" || base.size === "squad" || base.size === "group"
+                        base.size === "duo" || base.size === "trio" || base.size === "squad" || base.size === "clan"
                           ? "#ffd5b3"
                           : "#4a4a4a",
                     }}
@@ -213,18 +249,18 @@ export default function PrebuiltBasesDesign() {
                     size="lg"
                     style={{
                       color:
-                        base.size === "trio" || base.size === "squad" || base.size === "group" ? "#ffd5b3" : "#4a4a4a",
+                        base.size === "trio" || base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a",
                     }}
                   />
                   <FontAwesomeIcon
                     icon={faUser}
                     size="lg"
-                    style={{ color: base.size === "squad" || base.size === "group" ? "#ffd5b3" : "#4a4a4a" }}
+                    style={{ color: base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a" }}
                   />
                   <FontAwesomeIcon
                     icon={faPlus}
                     size="lg"
-                    style={{ color: base.size === "group" ? "#ffd5b3" : "#4a4a4a" }}
+                    style={{ color: base.size === "clan" ? "#ffd5b3" : "#4a4a4a" }}
                   />
                 </div>
               </button>

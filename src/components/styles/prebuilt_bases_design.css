@@ -59,22 +59,6 @@
   transform: translateY(-120%);
 }
 
-.prebuilt_bases_design_list_divider_name {
-  width: 100%;
-  height: 1.75vh;
-  margin-top: 2vh;
-  margin-bottom: 0.5vh;
-  padding-bottom: 0.5vh;
-  text-align: center;
-  color: #bbbbbb;
-  font-size: 1vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  border: solid black 1px;
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-}
-
 .prebult_bases_design_type_container {
   margin-top: 0.5vh;
   height: 10vh;
@@ -89,7 +73,8 @@
 }
 
 .prebult_bases_design_type_container_cell {
-  width: 31.5%;
+  width: 24%;
+  height: 11vh;
   background-color: black;
   text-align: center;
   color: #bbbbbb;
@@ -97,14 +82,32 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   padding: 0.1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .prebuilt_bases_design_type_buttons {
   width: 97.5%;
-  height: 9.5vh;
+  height: 8.5vh;
   background-color: #000000;
   border: solid black 1px;
-  margin-top: 0.5vh;
+  margin-top: 0.1vh;
+}
+
+.prebuilt_bases_design_type_buttons_disabled {
+  width: 97.5%;
+  height: 8.5vh;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent -8.5px,
+    transparent 6px,
+    rgba(105, 105, 105, 0.3) 0px,
+    rgba(105, 105, 105, 0.3) 15px
+  );
+  border: solid black 1px;
+  margin-top: 0.1vh;
 }
 
 .type_buttons_active {
