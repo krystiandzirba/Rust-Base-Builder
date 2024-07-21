@@ -36,6 +36,7 @@ import { Model as ArrowProp } from "./../models/props/ArrowProp.tsx";
 import { Model as StarterBase2x1AProp } from "./../models/props/StarterBase2x1AProp.tsx";
 import { Model as ChadCube2x1Prop } from "./../models/props/ChadCube2x1Prop.tsx";
 import { Model as TheHermitProp } from "./../models/props/TheHermitProp.tsx";
+import { Model as TheDiamondProp } from "./../models/props/TheDiamondProp.tsx";
 
 import { Model as StoneFoundationSquareHigh } from "./../models/stone/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "./../models/stone/StoneFoundationSquareMid.tsx";
@@ -2472,6 +2473,1485 @@ export default function CanvasContainer() {
             model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow: null, //prettier-ignore
           },
         ];
+      } else if (model_type_to_create === "PrebuildBaseIV") {
+        prebuilt_base_objects = [
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.75, y: 0.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.75, y: 0.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 1.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallMid : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.375, z: mouse_canvas_z_coordinate - 1.25, y: 0.05 },
+            rotation: object_south_west_1_direction,
+            model: ToolCupboard, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.35, z: mouse_canvas_z_coordinate - 1.35, y: 0.05 },
+            rotation: object_north_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.65, z: mouse_canvas_z_coordinate - 1.35, y: 0.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.35, z: mouse_canvas_z_coordinate - 1.35, y: 0.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 0.7, y: 0.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 0.5, y: 0.05 },
+            rotation: object_north_direction,
+            model: SleepingBag, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 0.5, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallFrame : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallFrame : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" || prebuilt_base_material_type === "tutorial" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" || prebuilt_base_material_type === "tutorial" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" || prebuilt_base_material_type === "tutorial" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFoundationTriangleMid : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationTriangleMid : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleMid: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 1.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallMid : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 1.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallMid : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 1.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallMid : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 0.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 1.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallMid : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 1, y: 0.05 },
+            rotation: object_south_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneWallHigh : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 3.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneDoorway : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalDoorway : prebuilt_base_material_type === "armored" ? ArmoredDoorway: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_direction,
+            model: MetalDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.7, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.425, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.7, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 2.6, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 2.6, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 2.6, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 2.6, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.45, y: 0.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.45, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate + 0.85, y: 0.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 0.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate + 0.85, y: 0.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate - 0.85, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 0.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 3.45, y: 0 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 0 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFoundationTriangleLow : prebuilt_base_material_type === "metal" ? MetalFoundationTriangleLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationTriangleLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 2.6, y: 0.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 2.6, y: 0.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 1.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 2.6, y: 1.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWindow : prebuilt_base_material_type === "metal" ? MetalWindow : prebuilt_base_material_type === "armored" ? ArmoredWindow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 2.6, y: 1.05 },
+            rotation: object_south_west_1_direction,
+            model: MetalVerticalEmbrasure, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 2.6, y: 1.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWindow : prebuilt_base_material_type === "metal" ? MetalWindow : prebuilt_base_material_type === "armored" ? ArmoredWindow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 2.6, y: 1.05 },
+            rotation: object_south_east_3_direction,
+            model: MetalVerticalEmbrasure, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.75, y: 3.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 2.6, y: 3.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 2.6, y: 3.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 2.55, y: 0.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 2.55, y: 0.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 3.5, y: 0.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 2.55, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneDoorway : prebuilt_base_material_type === "metal" ? MetalDoorway : prebuilt_base_material_type === "armored" ? ArmoredDoorway : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 2.55, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: MetalDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 2.55, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWindow : prebuilt_base_material_type === "metal" ? MetalWindow : prebuilt_base_material_type === "armored" ? ArmoredWindow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 2.55, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: MetalVerticalEmbrasure, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.75, y: 2.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneDoorway : prebuilt_base_material_type === "metal" ? MetalDoorway : prebuilt_base_material_type === "armored" ? ArmoredDoorway : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.75, y: 2.05 },
+            rotation: object_south_direction,
+            model: MetalDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 2.6, y: 2.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.45, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 2.6, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 2.6, y: 2.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.75, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.75, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 2.6, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 3.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 3.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_south_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_south_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: GarageDoor, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.35, y: 2.05 },
+            rotation: object_north_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.35, y: 3.05 },
+            rotation: object_north_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.35, y: 2.05 },
+            rotation: object_north_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.35, y: 3.05 },
+            rotation: object_north_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 0.75, y: 2.05 },
+            rotation: object_north_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 0.75, y: 3.05 },
+            rotation: object_north_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 0.75, y: 3.05 },
+            rotation: object_north_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.4, z: mouse_canvas_z_coordinate + 1.4, y: 2.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate + 1, y: 2.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.35, z: mouse_canvas_z_coordinate + 0.4, y: 2.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.35, z: mouse_canvas_z_coordinate - 0.3, y: 2.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate - 0.9, y: 2.05 },
+            rotation: object_north_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.6, z: mouse_canvas_z_coordinate, y: 2.05 },
+            rotation: object_north_east_1_direction,
+            model: SleepingBag, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.9, z: mouse_canvas_z_coordinate + 1, y: 2.05 },
+            rotation: object_south_east_3_direction,
+            model: SleepingBag, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate - 0.85, y: 2.05 },
+            rotation: object_north_west_3_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.25, z: mouse_canvas_z_coordinate + 0.55, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: WorkbenchT3, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.25, z: mouse_canvas_z_coordinate + 0.55, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.65, z: mouse_canvas_z_coordinate + 1.55, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: Furnace, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.25, z: mouse_canvas_z_coordinate + 2.35, y: 3.05 },
+            rotation: object_south_west_1_direction,
+            model: LargeWoodBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.65, z: mouse_canvas_z_coordinate + 2, y: 3.05 },
+            rotation: object_south_west_1_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.35, z: mouse_canvas_z_coordinate + 0.25, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: SleepingBag, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.85, z: mouse_canvas_z_coordinate + 1.55, y: 2.05 },
+            rotation: object_south_west_1_direction,
+            model: SleepingBag, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.3, z: mouse_canvas_z_coordinate + 0.35, y: 3.05 },
+            rotation: object_east_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.3, z: mouse_canvas_z_coordinate + 0.35, y: 3.05 },
+            rotation: object_east_direction,
+            model: WoodStorageBox, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.45, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 4.051 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 3.45, y: 4.051 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.45, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 2.6, y: 4.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 2.6, y: 4.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 3.45, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate + 2.6, y: 4.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 2.6, y: 4.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallLow : prebuilt_base_material_type === "metal" ? MetalWallLow : prebuilt_base_material_type === "armored" ? ArmoredWallLow : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate + 0.85, y: 4.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate - 0.85, y: 4.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 4.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 4.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate + 0.85, y: 4.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate - 0.85, y: 4.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 4.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 4.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 4.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate + 0.85, y: 4.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.5, z: mouse_canvas_z_coordinate - 0.85, y: 4.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.7, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.7, y: 4.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 4.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallMid : prebuilt_base_material_type === "metal" ? MetalWallMid : prebuilt_base_material_type === "armored" ? ArmoredWallMid : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 5.051 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 5.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2, z: mouse_canvas_z_coordinate, y: 5.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2, z: mouse_canvas_z_coordinate, y: 5.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.725, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.725, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.4, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorFrameTriangle : prebuilt_base_material_type === "metal" ? MetalFloorFrameTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorFrameTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate - 1.7, y: 5.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorFrameTriangle : prebuilt_base_material_type === "metal" ? MetalFloorFrameTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorFrameTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate - 1.7, y: 5.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorFrameTriangle : prebuilt_base_material_type === "metal" ? MetalFloorFrameTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorFrameTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 3.4, y: 5.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorFrameTriangle : prebuilt_base_material_type === "metal" ? MetalFloorFrameTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorFrameTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1, z: mouse_canvas_z_coordinate + 1.7, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorFrameTriangle : prebuilt_base_material_type === "metal" ? MetalFloorFrameTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorFrameTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1, z: mouse_canvas_z_coordinate + 1.7, y: 5.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorFrameTriangle : prebuilt_base_material_type === "metal" ? MetalFloorFrameTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorFrameTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 5.05 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 5.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate - 0.85, y: 5.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallHigh : prebuilt_base_material_type === "metal" ? MetalWallHigh : prebuilt_base_material_type === "armored" ? ArmoredWallHigh: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 0.5, z: mouse_canvas_z_coordinate + 0.85, y: 5.05 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneWallFrame : prebuilt_base_material_type === "metal" ? MetalWallFrame : prebuilt_base_material_type === "armored" ? ArmoredWallFrame : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 7.05 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate, y: 7.05 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneFloorTriangle : prebuilt_base_material_type === "metal" ? MetalFloorTriangle : prebuilt_base_material_type === "armored" ? ArmoredFloorTriangle : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate + 3.5, y: 5.35 },
+            rotation: object_south_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.75, z: mouse_canvas_z_coordinate + 2.3, y: 5.35 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.75, z: mouse_canvas_z_coordinate + 2.3, y: 5.35 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate + 1.1, y: 5.35 },
+            rotation: object_south_west_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.5, z: mouse_canvas_z_coordinate - 1.1, y: 5.35 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate + 1.1, y: 5.35 },
+            rotation: object_south_east_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.5, z: mouse_canvas_z_coordinate - 1.1, y: 5.35 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate, z: mouse_canvas_z_coordinate - 3.5, y: 5.35 },
+            rotation: object_north_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 1.75, z: mouse_canvas_z_coordinate - 2.3, y: 5.35 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 1.75, z: mouse_canvas_z_coordinate - 2.3, y: 5.35 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" || prebuilt_base_material_type === "tutorial" ? StoneRoofTriangle : prebuilt_base_material_type === "metal" ? MetalRoofTriangle : prebuilt_base_material_type === "armored" ? ArmoredRoofTriangle: null, //prettier-ignore
+          },
+        ];
       } else return;
 
       //! rewrite the model to be stored and read as a string, not a 3D model
@@ -2882,6 +4362,7 @@ export default function CanvasContainer() {
         "PrebuildBaseI",
         "PrebuildBaseII",
         "PrebuildBaseIII",
+        "PrebuildBaseIV",
       ].includes(model_type_to_create)
     ) {
       set_model_foundation_elevation(0);
@@ -2995,6 +4476,8 @@ export default function CanvasContainer() {
       set_model_prop("chad_cube_2x1_prop");
     } else if (model_type_to_create === "PrebuildBaseIII") {
       set_model_prop("the_hermit_prop");
+    } else if (model_type_to_create === "PrebuildBaseIV") {
+      set_model_prop("the_diamond_prop");
     }
   }, [model_type_to_create]);
 
@@ -4018,6 +5501,26 @@ export default function CanvasContainer() {
                     emissiveIntensity={bloom_state ? 3 : 0}
                   />
                 </TheHermitProp>
+              )}
+
+              {model_prop === "the_diamond_prop" && (
+                <TheDiamondProp
+                  position={[
+                    mouse_canvas_x_coordinate + model_x_position_offset,
+                    default_model_height_position / 2 + 0.04,
+                    mouse_canvas_z_coordinate + model_z_position_offset,
+                  ]}
+                  rotation={[0, modified_model_rotation, 0]}
+                  scale={[1.1, default_model_height_position + 1.05, 1.05]}
+                >
+                  <meshStandardMaterial
+                    transparent
+                    opacity={1}
+                    color={"#ffa463"}
+                    emissive={"rgb(255, 206, 166)"}
+                    emissiveIntensity={bloom_state ? 3 : 0}
+                  />
+                </TheDiamondProp>
               )}
             </>
           )}
