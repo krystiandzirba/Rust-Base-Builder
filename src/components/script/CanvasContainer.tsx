@@ -4007,7 +4007,7 @@ export default function CanvasContainer() {
           AddStarterBase(model!, name, new THREE.Euler(0, rotation, 0));
         }, prebuild_delay);
 
-        prebuild_delay += 5;
+        prebuild_delay += 70;
       }
     }
   }
