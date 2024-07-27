@@ -39,6 +39,7 @@ export default function PrebuiltBasesDesign() {
     { id: "PrebuildBaseII", label: 'The "Chad Cube" 2x1 by Reksmore (YT)', size: "solo", tutorial_materials: false },
     { id: "PrebuildBaseIII", label: 'The "Hermit" by Dust (YT)', size: "solo", tutorial_materials: true },
     { id: "PrebuildBaseIV", label: 'The "Diamond" by STELIC (YT)', size: "duo", tutorial_materials: true },
+    { id: "PrebuildBaseV", label: 'The "Vulcan" by Dust (YT)', size: "clan", tutorial_materials: true },
   ];
 
   function ChangeBaseMetarial(material: string) {
