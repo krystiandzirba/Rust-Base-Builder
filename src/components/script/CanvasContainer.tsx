@@ -2238,7 +2238,7 @@ export default function CanvasContainer() {
 
           {
             name: randomIdGenerator(),
-            position: { x: mouse_canvas_x_coordinate + 3.25, z: mouse_canvas_z_coordinate + 1.4, y: 0.2 },
+            position: { x: mouse_canvas_x_coordinate + 3.25, z: mouse_canvas_z_coordinate + 1.4, y: 0.05 },
             rotation: object_north_east_1_direction,
             model: prebuilt_base_material_type === "stone" ? StoneRoofSquare : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalRoofSquare : prebuilt_base_material_type === "armored" ? ArmoredRoofSquare: null, //prettier-ignore
           },
@@ -2266,7 +2266,7 @@ export default function CanvasContainer() {
 
           {
             name: randomIdGenerator(),
-            position: { x: mouse_canvas_x_coordinate - 3.25, z: mouse_canvas_z_coordinate + 1.4, y: 0.2 },
+            position: { x: mouse_canvas_x_coordinate - 3.25, z: mouse_canvas_z_coordinate + 1.4, y: 0.05 },
             rotation: object_north_west_3_direction,
             model: prebuilt_base_material_type === "stone" ? StoneRoofSquare : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalRoofSquare : prebuilt_base_material_type === "armored" ? ArmoredRoofSquare: null, //prettier-ignore
           },
