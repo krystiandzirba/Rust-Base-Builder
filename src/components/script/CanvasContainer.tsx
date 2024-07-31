@@ -33,6 +33,8 @@ import menu_sound from "../../audio/menu_sound.mp3";
 import { Model as TrianglePropSolid } from "./../models/props/TrianglePropSolid.tsx";
 import { Model as TrianglePropWireframe } from "./../models/props/TrianglePropWireframe.tsx";
 import { Model as ArrowProp } from "./../models/props/ArrowProp.tsx";
+import { Model as RoofWallProp } from "./../models/props/RoofWallProp.tsx";
+
 import { Model as StarterBase2x1AProp } from "./../models/props/StarterBase2x1AProp.tsx";
 import { Model as ChadCube2x1Prop } from "./../models/props/ChadCube2x1Prop.tsx";
 import { Model as TheHermitProp } from "./../models/props/TheHermitProp.tsx";
@@ -59,6 +61,8 @@ import { Model as StoneFloorFrameSquare } from "./../models/stone/StoneFloorFram
 import { Model as StoneFloorFrameTriangle } from "./../models/stone/StoneFloorFrameTriangle.tsx";
 import { Model as StoneRoofSquare } from "./../models/stone/StoneRoofSquare.tsx";
 import { Model as StoneRoofTriangle } from "./../models/stone/StoneRoofTriangle.tsx";
+import { Model as StoneRoofWallRight } from "./../models/stone/StoneRoofWallRight.tsx";
+import { Model as StoneRoofWallLeft } from "./../models/stone/StoneRoofWallLeft.tsx";
 
 import { Model as MetalFoundationSquareHigh } from "./../models/metal/MetalFoundationSquareHigh.tsx";
 import { Model as MetalFoundationSquareMid } from "./../models/metal/MetalFoundationSquareMid.tsx";
@@ -80,6 +84,8 @@ import { Model as MetalFloorFrameSquare } from "./../models/metal/MetalFloorFram
 import { Model as MetalFloorFrameTriangle } from "./../models/metal/MetalFloorFrameTriangle.tsx";
 import { Model as MetalRoofSquare } from "./../models/metal/MetalRoofSquare.tsx";
 import { Model as MetalRoofTriangle } from "./../models/metal/MetalRoofTriangle.tsx";
+import { Model as MetalRoofWallRight } from "./../models/metal/MetalRoofWallRight.tsx";
+import { Model as MetalRoofWallLeft } from "./../models/metal/MetalRoofWallLeft.tsx";
 
 import { Model as ArmoredFoundationSquareHigh } from "./../models/armored/ArmoredFoundationSquareHigh.tsx";
 import { Model as ArmoredFoundationSquareMid } from "./../models/armored/ArmoredFoundationSquareMid.tsx";
@@ -101,6 +107,8 @@ import { Model as ArmoredFloorFrameSquare } from "./../models/armored/ArmoredFlo
 import { Model as ArmoredFloorFrameTriangle } from "./../models/armored/ArmoredFloorFrameTriangle.tsx";
 import { Model as ArmoredRoofSquare } from "./../models/armored/ArmoredRoofSquare.tsx";
 import { Model as ArmoredRoofTriangle } from "./../models/armored/ArmoredRoofTriangle.tsx";
+import { Model as ArmoredRoofWallRight } from "./../models/armored/ArmoredRoofWallRight.tsx";
+import { Model as ArmoredRoofWallLeft } from "./../models/armored/ArmoredRoofWallLeft.tsx";
 
 import { Model as MetalDoor } from "./../models/doors/MetalDoor.tsx";
 import { Model as GarageDoor } from "./../models/doors/GarageDoor.tsx";
@@ -308,6 +316,8 @@ export default function CanvasContainer() {
     StoneFloorFrameTriangle: StoneFloorFrameTriangle,
     StoneRoofSquare: StoneRoofSquare,
     StoneRoofTriangle: StoneRoofTriangle,
+    StoneRoofWallRight: StoneRoofWallRight,
+    StoneRoofWallLeft: StoneRoofWallLeft,
 
     // -------------------------  Metal -------------------------
 
@@ -331,6 +341,8 @@ export default function CanvasContainer() {
     MetalFloorFrameTriangle: MetalFloorFrameTriangle,
     MetalRoofSquare: MetalRoofSquare,
     MetalRoofTriangle: MetalRoofTriangle,
+    MetalRoofWallRight: MetalRoofWallRight,
+    MetalRoofWallLeft: MetalRoofWallLeft,
 
     // -------------------------  Armored -------------------------
 
@@ -354,6 +366,8 @@ export default function CanvasContainer() {
     ArmoredFloorFrameTriangle: ArmoredFloorFrameTriangle,
     ArmoredRoofSquare: ArmoredRoofSquare,
     ArmoredRoofTriangle: ArmoredRoofTriangle,
+    ArmoredRoofWallRight: ArmoredRoofWallRight,
+    ArmoredRoofWallLeft: ArmoredRoofWallLeft,
 
     // -------------------------  Doors -------------------------
 
@@ -2231,9 +2245,23 @@ export default function CanvasContainer() {
 
           {
             name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate + 2.35, z: mouse_canvas_z_coordinate + 1.85, y: 0.05 },
+            rotation: object_north_east_1_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneRoofWallRight : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalRoofWallRight : prebuilt_base_material_type === "armored" ? ArmoredRoofWallRight : null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
             position: { x: mouse_canvas_x_coordinate - 2.4, z: mouse_canvas_z_coordinate + 1.87, y: 0 },
             rotation: object_north_west_3_direction,
             model: prebuilt_base_material_type === "stone" ? StoneFoundationSquareLow : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalFoundationSquareLow : prebuilt_base_material_type === "armored" ? ArmoredFoundationSquareLow: null, //prettier-ignore
+          },
+
+          {
+            name: randomIdGenerator(),
+            position: { x: mouse_canvas_x_coordinate - 2.35, z: mouse_canvas_z_coordinate + 1.85, y: 0.05 },
+            rotation: object_north_west_3_direction,
+            model: prebuilt_base_material_type === "stone" ? StoneRoofWallLeft : prebuilt_base_material_type === "metal" || prebuilt_base_material_type === "tutorial" ? MetalRoofWallLeft : prebuilt_base_material_type === "armored" ? ArmoredRoofWallLeft: null, //prettier-ignore
           },
 
           {
@@ -7260,6 +7288,15 @@ export default function CanvasContainer() {
       model_type_to_create === "StrenghtenedGlassWindow"
     ) {
       set_model_prop("wall_prop");
+    } else if (
+      model_type_to_create === "StoneRoofWallRight" ||
+      model_type_to_create === "StoneRoofWallLeft" ||
+      model_type_to_create === "MetalRoofWallRight" ||
+      model_type_to_create === "MetalRoofWallLeft" ||
+      model_type_to_create === "ArmoredRoofWallRight" ||
+      model_type_to_create === "ArmoredRoofWallLeft"
+    ) {
+      set_model_prop("roof_wall_prop");
     } else if (model_type_to_create === "MetalDoor") {
       set_model_prop("door_prop");
     } else if (model_type_to_create === "ToolCupboard" || model_type_to_create === "Furnace") {
@@ -7870,6 +7907,102 @@ export default function CanvasContainer() {
                   )}
                 </>
               )}
+
+              {model_prop === "roof_wall_prop" && (
+                <>
+                  <RoofWallProp
+                    position={[
+                      model_type_to_create === "StoneRoofWallLeft" ||
+                      model_type_to_create === "MetalRoofWallLeft" ||
+                      model_type_to_create === "ArmoredRoofWallLeft"
+                        ? mouse_canvas_x_coordinate + model_x_position_offset
+                        : mouse_canvas_x_coordinate + model_x_position_offset,
+                      default_model_height_position / 100,
+                      mouse_canvas_z_coordinate + model_z_position_offset,
+                    ]}
+                    rotation={[0, modified_model_rotation, 0]}
+                    scale={[
+                      model_type_to_create === "StoneRoofWallLeft" ||
+                      model_type_to_create === "MetalRoofWallLeft" ||
+                      model_type_to_create === "ArmoredRoofWallLeft"
+                        ? -1
+                        : 1,
+                      default_model_height_position * 100 + 10,
+                      1,
+                    ]}
+                  ></RoofWallProp>
+
+                  {symmetry_x_enabled && (
+                    <RoofWallProp
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 100,
+                        mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position * 100 + 10, 1]}
+                    ></RoofWallProp>
+                  )}
+
+                  {symmetry_z_enabled && (
+                    <RoofWallProp
+                      position={[
+                        mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 100,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[
+                        model_type_to_create === "StoneRoofWallLeft" ||
+                        model_type_to_create === "MetalRoofWallLeft" ||
+                        model_type_to_create === "ArmoredRoofWallLeft"
+                          ? -1
+                          : 1,
+                        default_model_height_position * 100 + 10,
+                        1,
+                      ]}
+                    ></RoofWallProp>
+                  )}
+
+                  {symmetry_x_enabled && symmetry_z_enabled && (
+                    <RoofWallProp
+                      position={[
+                        -mouse_canvas_x_coordinate + model_x_position_offset,
+                        default_model_height_position / 100,
+                        -mouse_canvas_z_coordinate + model_z_position_offset,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[1, default_model_height_position * 100 + 10, 1]}
+                    ></RoofWallProp>
+                  )}
+
+                  {IsOffsetActive() && (
+                    <Box
+                      position={[
+                        model_type_to_create === "StoneRoofWallLeft" ||
+                        model_type_to_create === "MetalRoofWallLeft" ||
+                        model_type_to_create === "ArmoredRoofWallLeft"
+                          ? mouse_canvas_x_coordinate - 1
+                          : mouse_canvas_x_coordinate + 1,
+                        default_model_height_position / 2 + 0.04,
+                        mouse_canvas_z_coordinate,
+                      ]}
+                      rotation={[0, modified_model_rotation, 0]}
+                      scale={[0.1, default_model_height_position + 0.08, 2]}
+                    >
+                      <meshStandardMaterial
+                        transparent
+                        opacity={1}
+                        color={"#ffa463"}
+                        emissive={"rgb(255, 206, 166)"}
+                        emissiveIntensity={bloom_state ? 3 : 0}
+                        wireframe={true}
+                      />
+                    </Box>
+                  )}
+                </>
+              )}
+
               {model_prop === "door_prop" && (
                 <>
                   <Box

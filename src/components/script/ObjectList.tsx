@@ -30,6 +30,8 @@ import stoneFloorFrameSquareThumbnail from "../../object_list_thumbnails/stone_f
 import stoneFloorFrameTriangleThumbnail from "../../object_list_thumbnails/stone_floor_frame_triangle_thumbnail.png";
 import stoneRoofSquareThumbnail from "../../object_list_thumbnails/stone_roof_square_thumbnail.png";
 import stoneRoofTriangleThumbnail from "../../object_list_thumbnails/stone_roof_triangle_thumbnail.png";
+import stoneRoofWallRight from "../../object_list_thumbnails/stone_roof_wall_right_thumbnail.png";
+import stoneRoofWallLeft from "../../object_list_thumbnails/stone_roof_wall_left_thumbnail.png";
 
 import metalFoundationSquareHighThumbnail from "../../object_list_thumbnails/metal_foundation_square_high_thumbnail.png";
 import metalFoundationSquareMidThumbnail from "../../object_list_thumbnails/metal_foundation_square_mid_thumbnail.png";
@@ -51,6 +53,8 @@ import metalFloorFrameSquareThumbnail from "../../object_list_thumbnails/metal_f
 import metalFloorFrameTriangleThumbnail from "../../object_list_thumbnails/metal_floor_frame_triangle_thumbnail.png";
 import metalRoofSquareThumbnail from "../../object_list_thumbnails/metal_roof_square_thumbnail.png";
 import metalRoofTriangleThumbnail from "../../object_list_thumbnails/metal_roof_triangle_thumbnail.png";
+import metalRoofWallRight from "../../object_list_thumbnails/metal_roof_wall_right_thumbnail.png";
+import metalRoofWallLeft from "../../object_list_thumbnails/metal_roof_wall_left_thumbnail.png";
 
 import armoredFoundationSquareHighThumbnail from "../../object_list_thumbnails/armored_foundation_square_high_thumbnail.png";
 import armoredFoundationSquareMidThumbnail from "../../object_list_thumbnails/armored_foundation_square_mid_thumbnail.png";
@@ -72,6 +76,8 @@ import armoredFloorSquareThumbnail from "../../object_list_thumbnails/armored_fl
 import armoredFloorTriangleThumbnail from "../../object_list_thumbnails/armored_floor_triangle_thumbnail.png";
 import armoredRoofSquareThumbnail from "../../object_list_thumbnails/armored_roof_square_thumbnail.png";
 import armoredRoofTriangleThumbnail from "../../object_list_thumbnails/armored_roof_triangle_thumbnail.png";
+import armoredRoofWallRight from "../../object_list_thumbnails/armored_roof_wall_right_thumbnail.png";
+import armoredRoofWallLeft from "../../object_list_thumbnails/armored_roof_wall_left_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -409,6 +415,24 @@ export default function ObjectList() {
       },
     },
 
+    {
+      name: "stone roof wall (left)",
+      thumbnail: stoneRoofWallLeft,
+      keywords: ["stone", "roof", "wall", "stone roof", "stone wall", "roof wall", "right"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneRoofWallLeft"));
+      },
+    },
+
+    {
+      name: "stone roof wall (right)",
+      thumbnail: stoneRoofWallRight,
+      keywords: ["stone", "roof", "wall", "stone roof", "stone wall", "roof wall", "right"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("StoneRoofWallRight"));
+      },
+    },
+
     // metal
 
     {
@@ -675,6 +699,24 @@ export default function ObjectList() {
       keywords: ["metal", "roof", "triangle", "metal roof", "metal triangle", "roof triangle"],
       onClick: () => {
         dispatch(set_model_type_to_create("MetalRoofTriangle"));
+      },
+    },
+
+    {
+      name: "metal roof wall (left)",
+      thumbnail: metalRoofWallLeft,
+      keywords: ["metal", "roof", "wall", "metal roof", "metal wall", "roof wall", "right"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalRoofWallLeft"));
+      },
+    },
+
+    {
+      name: "metal roof wall (right)",
+      thumbnail: metalRoofWallRight,
+      keywords: ["metal", "roof", "wall", "metal roof", "metal wall", "roof wall", "right"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("MetalRoofWallRight"));
       },
     },
 
@@ -945,6 +987,24 @@ export default function ObjectList() {
       keywords: ["armored", "roof", "triangle", "armored roof", "armored triangle", "roof triangle"],
       onClick: () => {
         dispatch(set_model_type_to_create("ArmoredRoofTriangle"));
+      },
+    },
+
+    {
+      name: "armored roof wall (left)",
+      thumbnail: armoredRoofWallLeft,
+      keywords: ["armored", "roof", "wall", "armored roof", "armored wall", "roof wall", "right"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredRoofWallLeft"));
+      },
+    },
+
+    {
+      name: "armored roof wall (right)",
+      thumbnail: armoredRoofWallRight,
+      keywords: ["armored", "roof", "wall", "armored roof", "armored wall", "roof wall", "right"],
+      onClick: () => {
+        dispatch(set_model_type_to_create("ArmoredRoofWallRight"));
       },
     },
 
