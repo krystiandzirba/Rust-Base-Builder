@@ -16,7 +16,7 @@ Rust Base Builder - an app for the popular video game "Rust" run by React Three 
 
 <p align="center"> App: https://krystiandzirba.github.io/Rust-Base-Builder/ </p>
 
-![image](https://github.com/krystiandzirba/Rust-Base-Builder/assets/120574986/6851219d-808d-477e-9f78-c22a2eff6962)
+![RBB1](https://github.com/user-attachments/assets/4210b89b-045d-433f-a98f-01eb15d356aa)
 
 <h1 align="center">Key Features:</h1>
 
