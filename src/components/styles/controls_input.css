@@ -1,9 +1,9 @@
 .object_rotation_container {
   width: 10vw;
-  height: 7vh;
+  height: 8.5vh;
   position: absolute;
   left: 45.1%;
-  top: 83%;
+  top: 82.5%;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
   display: flex;
@@ -16,9 +16,19 @@
   background-color: rgba(0, 0, 0, 0);
   border: none;
   width: 40%;
+  height: 95%;
   display: flex;
   justify-content: center;
   margin: 0.75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: none;
+  text-align: center;
 }
 
 .model_rotation_wheel {
@@ -64,28 +74,29 @@
 
 .indicator_top {
   left: 48.5%;
-  top: 75.5%;
+  top: 74.75%;
 }
 
 .indicator_right {
-  left: 57.55%;
-  top: 85.25%;
+  left: 57.5%;
+  top: 85.5%;
 }
 
 .indicator_bottom {
   left: 48.5%;
-  top: 95.5%;
+  top: 96%;
 }
 
 .indicator_left {
-  left: 39.45%;
-  top: 85.25%;
+  left: 39.75%;
+  top: 85.5%;
 }
 
 .object_move_button:hover,
 .rotation_left:hover,
 .rotation_right:hover,
-.rotation_change_button:hover {
+.rotation_change_button:hover,
+.rotation_direction_button:hover {
   transform: scale(1.2);
 }
 
@@ -100,32 +111,54 @@
 
 .object_move_front_button {
   left: 48.5%;
-  top: 77.5%;
+  top: 76.75%;
 }
 
 .object_move_right_button {
   left: 55%;
-  top: 84%;
+  top: 84.25%;
 }
 
 .object_move_back_button {
   left: 48.5%;
-  top: 90.5%;
+  top: 91.5%;
 }
 
 .object_move_left_button {
   left: 42%;
-  top: 84%;
+  top: 84.25%;
 }
 
 .object_move_up_button {
-  left: 43.5%;
-  top: 77%;
+  left: 40%;
+  top: 74.5%;
+  height: 7.5%;
+  width: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: none;
+  text-align: center;
 }
 
 .object_move_down_button {
-  left: 43.5%;
-  top: 92%;
+  left: 40%;
+  top: 91%;
+  height: 7.5%;
+  width: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: none;
+  text-align: center;
 }
 
 .distance_unit_main_container {

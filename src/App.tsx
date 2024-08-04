@@ -85,7 +85,6 @@ export default App;
 // different "save files / base plans"
 // add object list filters (walls / foundations / stairs / roofs / miscs )
 // add custom rotation angle and distance unit to transform the object
-// prebuild base setups selector
 // add 1st person walking in overview and raid mode
 // add new keyboard controls diescription - 2d camera (moving the objects) + creation mode
 // base share as a link
@@ -99,7 +98,7 @@ export default App;
 // add a correct object rotation in mirrored axis
 // make the xray work in overview mode
 
-// 1 second 3d text while creating, deleting and raiding the object
+// 1 second 3d text while creating, deleting and raiding the object (+build cost / +raid cost ...)
 // add current id storage to avoid id duplication
 // useIntersect, useProgress
 // adaptive resolution for low end pcs and heavy performance loss

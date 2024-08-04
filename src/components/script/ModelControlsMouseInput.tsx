@@ -195,13 +195,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "north" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "N (+Z)"
+                ? "W (+Z)"
                 : camera_3d_direction === "east"
-                ? "E (+X)"
+                ? "W (+X)"
                 : camera_3d_direction === "west"
                 ? "W (-X)"
                 : camera_3d_direction === "south"
-                ? "S (-Z)"
+                ? "W (-Z)"
                 : "unknown"}
             </div>
           )}
@@ -218,13 +218,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "west" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "E (+X)"
+                ? "D (+X)"
                 : camera_3d_direction === "east"
-                ? "S (-Z)"
+                ? "D (-Z)"
                 : camera_3d_direction === "west"
-                ? "N (+Z)"
+                ? "D (+Z)"
                 : camera_3d_direction === "south"
-                ? "W (-X)"
+                ? "D (-X)"
                 : "unknown"}
             </div>
           )}
@@ -243,11 +243,11 @@ export default function ControlsInput() {
               {camera_3d_direction === "north"
                 ? "S (-Z)"
                 : camera_3d_direction === "east"
-                ? "W (-X)"
+                ? "S (-X)"
                 : camera_3d_direction === "west"
-                ? "E (+X)"
+                ? "S (+X)"
                 : camera_3d_direction === "south"
-                ? "N (+Z)"
+                ? "S (+Z)"
                 : "unknown"}
             </div>
           )}
@@ -264,13 +264,13 @@ export default function ControlsInput() {
               style={{ color: camera_3d_direction === "east" ? "#ffd5b3" : "#bbbbbb" }}
             >
               {camera_3d_direction === "north"
-                ? "W (-X)"
+                ? "A (-X)"
                 : camera_3d_direction === "east"
-                ? "N (+Z)"
+                ? "A (+Z)"
                 : camera_3d_direction === "west"
-                ? "S (-Z)"
+                ? "A (-Z)"
                 : camera_3d_direction === "south"
-                ? "E (+X)"
+                ? "A (+X)"
                 : "unknown"}
             </div>
           )}
@@ -282,21 +282,23 @@ export default function ControlsInput() {
             />
           </button>
           {camera_type === "camera_3d" && (
-            <button onClick={() => ObjectMoveButtonUp()} className="object_move_button object_move_up_button">
-              <FontAwesomeIcon
-                icon={faCircleUp}
-                size="3x"
-                style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-              />
+            <button
+              onClick={() => ObjectMoveButtonUp()}
+              className="object_move_button object_move_up_button"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            >
+              SPACE
+              <FontAwesomeIcon icon={faCircleUp} size="3x" />
             </button>
           )}
           {camera_type === "camera_3d" && (
-            <button onClick={() => ObjectMoveButtonDown()} className="object_move_button object_move_down_button">
-              <FontAwesomeIcon
-                icon={faCircleDown}
-                size="3x"
-                style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-              />
+            <button
+              onClick={() => ObjectMoveButtonDown()}
+              className="object_move_button object_move_down_button"
+              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
+            >
+              <FontAwesomeIcon icon={faCircleDown} size="3x" />
+              CTRL
             </button>
           )}
           <div className="distance_unit_main_container">
@@ -367,12 +369,17 @@ export default function ControlsInput() {
             </div>
           </div>
           <div className="object_rotation_container">
-            <button onClick={() => ObjectRotateButtonLeft()} className="rotation_direction_button">
+            <button
+              onClick={() => ObjectRotateButtonLeft()}
+              className="rotation_direction_button"
+              style={{ color: object_selected ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
+            >
               <FontAwesomeIcon
                 icon={faArrowRotateRight}
                 size="2xl"
                 style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
               />
+              Q
             </button>
             <div className="model_rotation_wheel">
               <div className="model_rotation_button">{next_object_rotation_degree}°</div>
@@ -381,12 +388,17 @@ export default function ControlsInput() {
               </button>
               <div className="model_rotation_button">{previous_object_rotation_degree}°</div>
             </div>
-            <button onClick={() => ObjectRotateButtonRight()} className="rotation_direction_button">
+            <button
+              onClick={() => ObjectRotateButtonRight()}
+              className="rotation_direction_button"
+              style={{ color: object_selected ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
+            >
               <FontAwesomeIcon
                 icon={faArrowRotateLeft}
                 size="2xl"
                 style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
               />
+              E
             </button>
           </div>
           <div className="remove_selected_model_description" style={{ color: object_selected ? "#ffd5b3" : "#bbbbbb" }}>
