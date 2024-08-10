@@ -153,7 +153,8 @@ const modelsDataSlice = createSlice({
     reset_raid_models: false,
 
     create_prebuilt_base_state: false,
-    prebuilt_base_material_type: "stone",
+
+    prebuilt_base_objects_set: [],
   },
   reducers: {
     set_model_type_to_create: (state, action) => {
@@ -214,8 +215,9 @@ const modelsDataSlice = createSlice({
     set_create_prebuilt_base_state: (state, action) => {
       return { ...state, create_prebuilt_base_state: action.payload };
     },
-    set_prebuilt_base_material_type: (state, action) => {
-      return { ...state, prebuilt_base_material_type: action.payload };
+
+    set_prebuilt_base_objects_set: (state, action) => {
+      return { ...state, prebuilt_base_objects_set: action.payload };
     },
   },
 });
@@ -349,7 +351,7 @@ export const {
   set_model_destroy_trigger,
   set_reset_raid_models,
   set_create_prebuilt_base_state,
-  set_prebuilt_base_material_type,
+  set_prebuilt_base_objects_set,
 } = modelsDataSlice.actions;
 
 export const {
