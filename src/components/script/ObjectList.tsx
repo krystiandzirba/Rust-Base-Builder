@@ -144,6 +144,7 @@ export default function ObjectList() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
+  const allow_canvas_interaction_after_first_load = useSelector((state: RootState) => state.modelsData.allow_canvas_interaction_after_first_load); //prettier-ignore
 
   const [hovered_object_list, set_hovered_object_list] = useState<number>(-1);
 
@@ -1157,32 +1158,46 @@ export default function ObjectList() {
                   : "object object_deselected"
               }
               onClick={() => {
-                if (audio) {
-                  AudioPlayer(object_selecting_sound);
+                if (allow_canvas_interaction_after_first_load) {
+                  if (audio) {
+                    AudioPlayer(object_selecting_sound);
+                  }
+                  if (selected_object_list === index) {
+                    dispatch(set_selected_object_list(-1));
+                    dispatch(set_model_creation_state(false));
+                  } else {
+                    dispatch(set_create_prebuilt_base_state(false));
+                    dispatch(set_selected_object_list(index));
+                    dispatch(set_model_creation_state(true));
+                    dispatch(set_object_rotation_degree(90));
+                  }
+                  item.onClick?.();
                 }
-                if (selected_object_list === index) {
-                  dispatch(set_selected_object_list(-1));
-                  dispatch(set_model_creation_state(false));
-                } else {
-                  dispatch(set_create_prebuilt_base_state(false));
-                  dispatch(set_selected_object_list(index));
-                  dispatch(set_model_creation_state(true));
-                  dispatch(set_object_rotation_degree(90));
-                }
-                item.onClick?.();
               }}
               onMouseOver={() => {
-                set_hovered_object_list(index);
-                if (audio) {
-                  AudioPlayer(object_hover_sound);
+                if (allow_canvas_interaction_after_first_load) {
+                  set_hovered_object_list(index);
+                  if (audio) {
+                    AudioPlayer(object_hover_sound);
+                  }
                 }
               }}
               onMouseLeave={() => {
-                set_hovered_object_list(-1);
+                if (allow_canvas_interaction_after_first_load) {
+                  set_hovered_object_list(-1);
+                }
               }}
               style={{ backgroundImage: `url(${item.thumbnail})` }}
             >
-              <div className="object_list_description">{item.name}</div>
+              <div
+                className={
+                  allow_canvas_interaction_after_first_load
+                    ? "object_list_description"
+                    : "object_list_description_disabled"
+                }
+              >
+                {item.name}
+              </div>
             </button>
           ))}
         </div>

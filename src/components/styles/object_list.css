@@ -72,6 +72,27 @@ input[type="search"]::-webkit-search-cancel-button {
   justify-content: center;
 }
 
+.object_list_description_disabled {
+  width: 112.5%;
+  height: 130%;
+  margin-left: -0.675vh;
+  margin-top: 3.25vh;
+  color: #bbbbbb;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent -8.5px,
+    transparent 6px,
+    rgba(105, 105, 105, 0.3) 0px,
+    rgba(105, 105, 105, 0.3) 15px
+  );
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .object_deselected {
   background-color: rgb(201, 201, 201);
   border: 1px solid black;

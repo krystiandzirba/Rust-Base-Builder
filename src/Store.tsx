@@ -155,6 +155,8 @@ const modelsDataSlice = createSlice({
     create_prebuilt_base_state: false,
 
     prebuilt_base_objects_set: [],
+
+    allow_canvas_interaction_after_first_load: false,
   },
   reducers: {
     set_model_type_to_create: (state, action) => {
@@ -218,6 +220,10 @@ const modelsDataSlice = createSlice({
 
     set_prebuilt_base_objects_set: (state, action) => {
       return { ...state, prebuilt_base_objects_set: action.payload };
+    },
+
+    set_allow_canvas_interaction_after_first_load: (state, action) => {
+      return { ...state, allow_canvas_interaction_after_first_load: action.payload };
     },
   },
 });
@@ -352,6 +358,7 @@ export const {
   set_reset_raid_models,
   set_create_prebuilt_base_state,
   set_prebuilt_base_objects_set,
+  set_allow_canvas_interaction_after_first_load,
 } = modelsDataSlice.actions;
 
 export const {

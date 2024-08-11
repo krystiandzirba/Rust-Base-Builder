@@ -20,6 +20,7 @@ import {
   set_camera_3d_direction,
   set_delete_object_mode,
   set_object_distance_multiplier,
+  set_allow_canvas_interaction_after_first_load,
 } from "../../Store.tsx";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
@@ -208,6 +209,7 @@ export default function CanvasContainer() {
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
   const prebuilt_base_objects_set = useSelector((state: RootState) => state.modelsData.prebuilt_base_objects_set); //prettier-ignore
+  const allow_canvas_interaction_after_first_load = useSelector((state: RootState) => state.modelsData.allow_canvas_interaction_after_first_load); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
   const [modelsData, setModelsData] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>(() => {const storedData = localStorage.getItem('modelsData'); return storedData ? JSON.parse(storedData) : {}}); //prettier-ignore
@@ -266,6 +268,8 @@ export default function CanvasContainer() {
 
   const [hover_save_base, set_hover_save_base] = useState<boolean>(false);
   const [hover_delete_save_base, set_hover_delete_save_base] = useState<boolean>(false);
+
+  const [prebuilt_base_loaded, set_prebuilt_base_loaded] = useState<boolean>(false);
 
   const hasModelsDataChanged = useRef(false);
   const [delete_saved_data_question, set_delete_saved_data_question] = useState<boolean>(false);
@@ -923,6 +927,9 @@ export default function CanvasContainer() {
 
     let prebuild_delay = 0;
 
+    let current_loop_iteration = 0;
+    const data_length = starter_base_objects.length;
+
     for (const { name, position, rotation, model } of starter_base_objects) {
       setTimeout(() => {
         setModelsData((prevTransforms) => ({
@@ -938,6 +945,14 @@ export default function CanvasContainer() {
           },
         }));
 
+        current_loop_iteration += 1;
+
+        if (current_loop_iteration === data_length) {
+          //  set_prebuilt_base_loaded(true);
+          dispatch(set_allow_canvas_interaction_after_first_load(true));
+          // console.log(prebuilt_base_loaded, "preb");
+        }
+
         AddStarterBase(model, name, new THREE.Euler(0, rotation, 0));
       }, prebuild_delay);
 
@@ -947,6 +962,9 @@ export default function CanvasContainer() {
 
   function recreateSavedBase(modelsData: { [x: string]: any }) {
     let prebuild_delay = 0;
+
+    let current_loop_iteration = 0;
+    const data_length = Object.keys(modelsData).length;
 
     Object.keys(modelsData).forEach((id) => {
       const recreated_model = modelsData[id];
@@ -972,6 +990,14 @@ export default function CanvasContainer() {
 
         setModelsData({});
         setModelsData(modelsData);
+
+        current_loop_iteration += 1;
+
+        if (current_loop_iteration === data_length) {
+          // set_prebuilt_base_loaded(true);
+          //console.log(prebuilt_base_loaded, "recreated");
+          dispatch(set_allow_canvas_interaction_after_first_load(true));
+        }
 
         const { model, rotation } = modelsData[new_id];
         const corresponding_model = modelTypeMap[model as keyof typeof modelTypeMap];

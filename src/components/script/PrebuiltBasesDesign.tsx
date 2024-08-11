@@ -38,6 +38,8 @@ export default function PrebuiltBasesDesign() {
 
   const model_type_to_create = useSelector((state: RootState) => state.modelsData.model_type_to_create);
 
+  const allow_canvas_interaction_after_first_load = useSelector((state: RootState) => state.modelsData.allow_canvas_interaction_after_first_load); //prettier-ignore
+
   const prebuiltBases = [
     { id: "PrebuildBaseI", label: "Simple Starter Base 2x1", size: "solo", tutorial_materials: false },
     { id: "PrebuildBaseII", label: 'The "Chad Cube" 2x1 by Reksmore (YT)', size: "solo", tutorial_materials: false },
@@ -1191,15 +1193,19 @@ export default function PrebuiltBasesDesign() {
               <button
                 key={base.id}
                 className={
-                  base_prebuilt_selection === base.id
+                  !allow_canvas_interaction_after_first_load
+                    ? "base_design_button_disabled base_design_button"
+                    : base_prebuilt_selection === base.id
                     ? "base_design_button base_design_button_selected"
                     : "base_design_button base_design_button_deselected"
                 }
                 onClick={() => {
-                  if (!base.tutorial_materials) {
-                    set_material_type_test("stone");
+                  if (allow_canvas_interaction_after_first_load) {
+                    if (!base.tutorial_materials) {
+                      set_material_type_test("stone");
+                    }
+                    ChangePrebuiltBaseDesign(1000, base.id);
                   }
-                  ChangePrebuiltBaseDesign(1000, base.id);
                 }}
               >
                 <div className="base_name"> {base.label}</div>

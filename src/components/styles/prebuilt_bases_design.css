@@ -153,6 +153,30 @@
   color: #bbbbbb;
 }
 
+.base_design_button_disabled {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent -8.5px,
+    transparent 6px,
+    rgba(105, 105, 105, 0.3) 0px,
+    rgba(105, 105, 105, 0.3) 15px
+  );
+
+  width: 96.5%;
+  height: 4vh;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  border: none;
+  margin-top: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .base_name {
   width: 70%;
   height: 100%;
