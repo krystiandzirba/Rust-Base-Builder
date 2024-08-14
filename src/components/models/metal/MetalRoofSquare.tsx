@@ -22,27 +22,15 @@ type GLTFResult = GLTF & {
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const dispatch = useDispatch();
 
-  const {
-    page_mode,
-    models_xray_active,
-    roofs_active,
-    model_creation_state,
-    enable_model_textures,
-    enable_model_material,
-    model_destroy_tigger,
-    reset_raid_models,
-    audio,
-  } = useSelector((state: RootState) => ({
-    page_mode: state.pageMode.page_mode,
-    models_xray_active: state.modelsData.models_xray_active,
-    roofs_active: state.modelsData.roofs_active,
-    model_creation_state: state.modelsData.model_creation_state,
-    enable_model_textures: state.pageSettings.enable_model_textures,
-    enable_model_material: state.pageSettings.enable_model_material,
-    model_destroy_tigger: state.modelsData.model_destroy_trigger,
-    reset_raid_models: state.modelsData.reset_raid_models,
-    audio: state.pageSettings.audio,
-  }));
+  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode); //prettier-ignore
+  const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active); //prettier-ignore
+  const roofs_active = useSelector((state: RootState) => state.modelsData.roofs_active); //prettier-ignore
+  const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state); //prettier-ignore
+  const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); //prettier-ignore
+  const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
+  const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
+  const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/metal/metal_roof_square_textured.glb") as GLTFResult;
   const [model_hover, set_model_hover] = useState<boolean>(false);
@@ -57,6 +45,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     if (enable_model_textures && !model_hover && page_mode !== "edit") {
       return materials["Material.021"];
     } else if (model_hover && page_mode === "raid") {
+      return new THREE.MeshStandardMaterial({ color: "red" });
+    } else {
       return new THREE.MeshStandardMaterial({ color: "red" });
     }
   }, [enable_model_textures, model_hover, page_mode, materials]);
@@ -125,12 +115,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     set_model_destroyed(false);
     set_model_hover(false);
     set_model_selected(false);
-  }, [reset_raid_models]);
-
-  useEffect(() => {
-    set_model_hover(false);
-    set_model_selected(false);
-  }, [page_mode, model_creation_state]);
+  }, [reset_raid_models, page_mode, model_creation_state]);
 
   return (
     <>
