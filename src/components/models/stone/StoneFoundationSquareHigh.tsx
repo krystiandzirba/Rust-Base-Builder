@@ -46,9 +46,8 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
       return materials["Material.001"];
     } else if (model_hover && page_mode === "raid") {
       return new THREE.MeshStandardMaterial({ color: "red" });
-    } else {
-      return new THREE.MeshStandardMaterial({ color: "red" });
     }
+    return undefined;
   }, [enable_model_textures, model_hover, page_mode, materials]);
 
   function ModelOnClick() {
@@ -124,7 +123,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           <mesh
             key={meshKey}
             geometry={nodes.Cube.geometry}
-            material={meshMaterial}
+            {...(enable_model_textures && !model_hover && page_mode !== "edit"
+              ? { material: materials["Material.001"] }
+              : model_hover && page_mode === "raid"
+              ? { material: new THREE.MeshStandardMaterial({ color: "red" }) }
+              : {})}
             onClick={() => ModelOnClick()}
             onPointerOver={(e) => {
               e.stopPropagation(), ModelOnPointerOver();

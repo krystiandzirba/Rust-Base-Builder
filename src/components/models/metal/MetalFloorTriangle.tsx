@@ -41,16 +41,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     return enable_model_textures && !model_hover && page_mode !== "edit" ? "textured" : "not-textured";
   }, [enable_model_textures, model_hover, page_mode]);
 
-  const meshMaterial = useMemo(() => {
-    if (enable_model_textures && !model_hover && page_mode !== "edit") {
-      return materials["Material.017"];
-    } else if (model_hover && page_mode === "raid") {
-      return new THREE.MeshStandardMaterial({ color: "red" });
-    } else {
-      return new THREE.MeshStandardMaterial({ color: "red" });
-    }
-  }, [enable_model_textures, model_hover, page_mode, materials]);
-
   function ModelOnClick() {
     if (page_mode === "edit" && !model_creation_state) {
       set_model_selected(true);
@@ -124,7 +114,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           <mesh
             key={meshKey}
             geometry={nodes.Circle001.geometry}
-            material={meshMaterial}
+            {...(enable_model_textures && !model_hover && page_mode !== "edit"
+              ? { material: materials["Material.017"] }
+              : model_hover && page_mode === "raid"
+              ? { material: new THREE.MeshStandardMaterial({ color: "red" }) }
+              : {})}
             onClick={() => ModelOnClick()}
             onPointerOver={(e) => {
               e.stopPropagation(), ModelOnPointerOver();
