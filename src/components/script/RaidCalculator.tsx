@@ -190,7 +190,15 @@ export default function RaidCalculator() {
       model_to_destroy === "MetalVerticalEmbrasure"
     ) {
       set_ammo_cost(ammo_cost + 173);
-    }
+    } else if (
+      model_to_destroy === "Furnace" ||
+      model_to_destroy === "LargeWoodBox" ||
+      model_to_destroy === "SleepingBag" ||
+      model_to_destroy === "ToolCupboard" ||
+      model_to_destroy === "WoodStorageBox" ||
+      model_to_destroy === "WorkbenchT3"
+    )
+      return;
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Efficiency ↑ -------------------------
@@ -274,7 +282,15 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredRoofTriangle"
     ) {
       set_rockets_cost(rockets_cost + 15);
-    }
+    } else if (
+      model_to_destroy === "Furnace" ||
+      model_to_destroy === "LargeWoodBox" ||
+      model_to_destroy === "SleepingBag" ||
+      model_to_destroy === "ToolCupboard" ||
+      model_to_destroy === "WoodStorageBox" ||
+      model_to_destroy === "WorkbenchT3"
+    )
+      return;
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Rockets ↑ -------------------------
@@ -358,7 +374,15 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredRoofTriangle"
     ) {
       set_explosives_cost(explosives_cost + 8);
-    }
+    } else if (
+      model_to_destroy === "Furnace" ||
+      model_to_destroy === "LargeWoodBox" ||
+      model_to_destroy === "SleepingBag" ||
+      model_to_destroy === "ToolCupboard" ||
+      model_to_destroy === "WoodStorageBox" ||
+      model_to_destroy === "WorkbenchT3"
+    )
+      return;
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Explosives ↑ -------------------------
@@ -451,7 +475,15 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredRoofTriangle"
     ) {
       set_ammo_cost(ammo_cost + 799);
-    }
+    } else if (
+      model_to_destroy === "Furnace" ||
+      model_to_destroy === "LargeWoodBox" ||
+      model_to_destroy === "SleepingBag" ||
+      model_to_destroy === "ToolCupboard" ||
+      model_to_destroy === "WoodStorageBox" ||
+      model_to_destroy === "WorkbenchT3"
+    )
+      return;
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Exp. Ammo ↑ -------------------------
@@ -536,7 +568,15 @@ export default function RaidCalculator() {
       model_to_destroy === "ArmoredRoofTriangle"
     ) {
       set_satchel_cost(satchel_cost + 46);
-    }
+    } else if (
+      model_to_destroy === "Furnace" ||
+      model_to_destroy === "LargeWoodBox" ||
+      model_to_destroy === "SleepingBag" ||
+      model_to_destroy === "ToolCupboard" ||
+      model_to_destroy === "WoodStorageBox" ||
+      model_to_destroy === "WorkbenchT3"
+    )
+      return;
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Satchel Charge ↑ -------------------------
