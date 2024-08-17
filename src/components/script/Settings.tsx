@@ -22,7 +22,6 @@ import {
   set_active_models_state,
   set_camera_fov,
   set_enable_model_textures,
-  set_enable_model_material,
   set_bloom_state,
   set_better_lighting_state,
   set_ssao_state,
@@ -60,7 +59,6 @@ const Settings = () => {
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); //prettier-ignore
-  const enable_model_material= useSelector((state: RootState) => state.pageSettings.enable_model_material); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
 
@@ -232,19 +230,6 @@ const Settings = () => {
     }
   }
 
-  function HandleModelMaterialSwitch(toggle: boolean) {
-    if (!performance_mode) {
-      if (toggle) {
-        dispatch(set_enable_model_material(true));
-      } else if (!toggle) {
-        dispatch(set_enable_model_material(false));
-      }
-    }
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
-  }
-
   function HandleAudioSwitch(toggle: boolean) {
     if (toggle) {
       dispatch(set_audio(true));
@@ -276,7 +261,6 @@ const Settings = () => {
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(false));
       dispatch(set_HDR_state(false));
-      dispatch(set_enable_model_material(false));
     } else if (!toggle) {
       dispatch(set_performance_mode(false));
 
@@ -285,7 +269,6 @@ const Settings = () => {
       dispatch(set_ssao_state(false));
       dispatch(set_antialiasing_state(false));
       dispatch(set_HDR_state(false));
-      dispatch(set_enable_model_material(true));
     }
     if (audio) {
       AudioPlayer(buttons_sound);
@@ -673,32 +656,6 @@ const Settings = () => {
               }
             >
               {enable_model_textures ? "disable" : "disabled"}
-            </div>
-          </div>
-        </div>
-
-        <div className="settings_element">
-          <div className="settings_element_description">model transparency + color on hover:</div>
-          <div className="settings_element_buttons_container">
-            <div
-              onClick={() => HandleModelMaterialSwitch(true)}
-              className={
-                enable_model_material
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-              }
-            >
-              {!enable_model_material ? "enable" : "enabled"}
-            </div>
-            <div
-              onClick={() => HandleModelMaterialSwitch(false)}
-              className={
-                !enable_model_material && !performance_mode
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-              }
-            >
-              {enable_model_material ? "disable" : "disabled"}
             </div>
           </div>
         </div>

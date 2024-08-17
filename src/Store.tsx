@@ -244,7 +244,6 @@ const pageSettingsSlice = createSlice({
     camera_fov: 90,
 
     enable_model_textures: true,
-    enable_model_material: true,
     bloom_state: true,
     better_lighting_state: true,
     ssao_state: true,
@@ -303,10 +302,6 @@ const pageSettingsSlice = createSlice({
     },
     set_enable_model_textures: (state, action) => {
       return { ...state, enable_model_textures: action.payload };
-    },
-
-    set_enable_model_material: (state, action) => {
-      return { ...state, enable_model_material: action.payload };
     },
 
     set_audio: (state, action) => {
@@ -380,7 +375,6 @@ export const {
   set_antialiasing_state,
   set_HDR_state,
   set_enable_model_textures,
-  set_enable_model_material,
   set_audio,
 } = pageSettingsSlice.actions;
 

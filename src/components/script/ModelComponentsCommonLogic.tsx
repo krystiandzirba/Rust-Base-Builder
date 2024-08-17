@@ -13,7 +13,6 @@ export function ModelComponentsCommonLogic() {
   const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state); // prettier-ignore
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); // prettier-ignore
-  const enable_model_material = useSelector((state: RootState) => state.pageSettings.enable_model_material); // prettier-ignore
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active); // prettier-ignore
   const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); // prettier-ignore
   const audio = useSelector((state: RootState) => state.pageSettings.audio); // prettier-ignore
@@ -78,10 +77,10 @@ export function ModelComponentsCommonLogic() {
   //* ------------------------- ↓ Mesh Standard Material ↓ -------------------------
 
   const meshStandardMaterialOpacity = useMemo(() => {
-    if (!model_creation_state && enable_model_material) {
+    if (!model_creation_state) {
       return model_selected ? 1 : model_hover ? 0.6 : 1;
     } else return 1;
-  }, [model_creation_state, enable_model_material, model_selected, model_hover]);
+  }, [model_creation_state, model_selected, model_hover]);
 
   function meshStandardMaterialColor(model_type: "stone" | "metal" | "armored") {
     const default_colors = {stone: "#bbbbbb", metal: "#7d3823", armored: "#401f16"}; //prettier-ignore
@@ -91,12 +90,10 @@ export function ModelComponentsCommonLogic() {
     const raid_color = "#ff1c1c";
 
     if (!model_creation_state) {
-      if (enable_model_material) {
-        if (page_mode === "edit") {
-          return model_selected ? select_colors[model_type] : model_hover ? hover_colors[model_type] : base_color;
-        } else if (page_mode === "raid") {
-          return model_hover ? raid_color : base_color;
-        }
+      if (page_mode === "edit") {
+        return model_selected ? select_colors[model_type] : model_hover ? hover_colors[model_type] : base_color;
+      } else if (page_mode === "raid") {
+        return model_hover ? raid_color : base_color;
       } else {
         return model_selected ? select_colors[model_type] : base_color;
       }
