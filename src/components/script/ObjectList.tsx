@@ -76,8 +76,8 @@ import armoredFloorSquareThumbnail from "../../object_list_thumbnails/armored_fl
 import armoredFloorTriangleThumbnail from "../../object_list_thumbnails/armored_floor_triangle_thumbnail.png";
 import armoredRoofSquareThumbnail from "../../object_list_thumbnails/armored_roof_square_thumbnail.png";
 import armoredRoofTriangleThumbnail from "../../object_list_thumbnails/armored_roof_triangle_thumbnail.png";
-import armoredRoofWallRight from "../../object_list_thumbnails/armored_roof_wall_right_thumbnail.png";
-import armoredRoofWallLeft from "../../object_list_thumbnails/armored_roof_wall_left_thumbnail.png";
+import armoredRoofWallRightThumbnail from "../../object_list_thumbnails/armored_roof_wall_right_thumbnail.png";
+import armoredRoofWallLeftThumbnail from "../../object_list_thumbnails/armored_roof_wall_left_thumbnail.png";
 
 import metalDoorThumbnail from "../../object_list_thumbnails/metal_door_thumbnail.png";
 import garageDoorThumbnail from "../../object_list_thumbnails/garage_door_thumbnail.png";
@@ -148,971 +148,169 @@ export default function ObjectList() {
 
   const [hovered_object_list, set_hovered_object_list] = useState<number>(-1);
 
+  const create_object_list_item = (name: string, thumbnail: string, keywords: string[], modelType: string) => ({
+    name,
+    thumbnail,
+    keywords,
+    onClick: () => {
+      dispatch(set_model_type_to_create(modelType));
+    },
+  });
+
+  const object_list_keywords = (material: string, type: string, shape: string, height: string) => {
+    const keywords = [
+      material,
+      type,
+      shape,
+      height,
+      `${material} ${type}`,
+      `${material} ${shape}`,
+      `${material} ${height}`,
+      `${type} ${shape}`,
+      `${type} ${height}`,
+      `${shape} ${height}`,
+      `${material} ${type} ${shape}`,
+      `${material} ${type} ${height}`,
+      `${material} ${shape} ${height}`,
+      `${type} ${shape} ${height}`,
+      `${material} ${shape} ${type}`,
+      `${material} ${height} ${type}`,
+      `${material} ${height} ${shape}`,
+      `${type} ${shape} ${material}`,
+      `${type} ${height} ${material}`,
+      `${type} ${height} ${shape}`,
+      `${shape} ${height} ${material}`,
+      `${shape} ${material} ${type}`,
+      `${shape} ${type} ${material}`,
+      `${height} ${type} ${shape}`,
+      `${height} ${shape} ${material}`,
+      `${height} ${material} ${type}`,
+      `${height} ${material} ${shape}`,
+      `${height} ${shape} ${type}`,
+      `${shape} ${material} ${height}`,
+      `${type} ${material} ${shape}`,
+      `${type} ${shape} ${height}`,
+      `${shape} ${height} ${type}`,
+      `${material} ${shape} ${height} ${type}`,
+      `${material} ${height} ${shape} ${type}`,
+      `${material} ${type} ${height} ${shape}`,
+      `${type} ${material} ${height} ${shape}`,
+      `${type} ${shape} ${material} ${height}`,
+      `${shape} ${type} ${height} ${material}`,
+      `${shape} ${height} ${type} ${material}`,
+      `${height} ${shape} ${type} ${material}`,
+      `${height} ${type} ${material} ${shape}`,
+      `${height} ${material} ${shape} ${type}`,
+      `${shape} ${material} ${height} ${type}`,
+      `${type} ${shape} ${height} ${material}`,
+    ];
+
+    return keywords.filter(Boolean);
+  };
+
   const object_list = [
-    {
-      name: "stone foundation square (high)",
-      thumbnail: stoneFoundationSquareHighThumbnail,
-      keywords: [
-        "stone",
-        "foundation",
-        "square",
-        "high",
-        "stone foundation",
-        "stone square",
-        "stone high",
-        "foundation square",
-        "foundation high",
-        "square high",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationSquareHigh"));
-      },
-    },
+    //stone
 
-    {
-      name: "stone foundation square (mid)",
-      thumbnail: stoneFoundationSquareMidThumbnail,
-      keywords: [
-        "stone",
-        "foundation",
-        "square",
-        "mid",
-        "stone foundation",
-        "stone square",
-        "stone mid",
-        "foundation square",
-        "foundation mid",
-        "square mid ",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationSquareMid"));
-      },
-    },
-
-    {
-      name: "stone foundation square (low)",
-      thumbnail: stoneFoundationSquareLowThumbnail,
-      keywords: [
-        "stone",
-        "foundation",
-        "square",
-        "low",
-        "stone foundation",
-        "stone square",
-        "stone low",
-        "foundation square",
-        "foundation low",
-        "square low",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationSquareLow"));
-      },
-    },
-
-    {
-      name: "stone foundation triangle (high)",
-      thumbnail: stoneFoundationTriangleHighThumbnail,
-      keywords: [
-        "stone",
-        "foundation",
-        "triangle",
-        "high",
-        "stone foundation",
-        "stone triangle",
-        "stone high",
-        "foundation triangle",
-        "foundation high",
-        "triangle high",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationTriangleHigh"));
-      },
-    },
-
-    {
-      name: "stone foundation triangle (mid)",
-      thumbnail: stoneFoundationTriangleMidThumbnail,
-      keywords: [
-        "stone",
-        "foundation",
-        "triangle",
-        "mid",
-        "stone foundation",
-        "stone triangle",
-        "stone mid",
-        "foundation triangle",
-        "foundation mid",
-        "triangle mid",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationTriangleMid"));
-      },
-    },
-
-    {
-      name: "stone foundation triangle (low)",
-      thumbnail: stoneFoundationTriangleLowThumbnail,
-      keywords: [
-        "stone",
-        "foundation",
-        "triangle",
-        "low",
-        "stone foundation",
-        "stone triangle",
-        "stone low",
-        "foundation triangle",
-        "foundation low",
-        "triangle low",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFoundationTriangleLow"));
-      },
-    },
-
-    {
-      name: "stone wall (high)",
-      thumbnail: stoneWallHighThumbnail,
-      keywords: ["stone", "wall", "high", "stone wall", "stone high", "wall high"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallHigh"));
-      },
-    },
-
-    {
-      name: "stone wall (mid)",
-      thumbnail: stoneWallMidThumbnail,
-      keywords: ["stone", "wall", "mid", "stone wall", "stone mid", "wall mid"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallMid"));
-      },
-    },
-
-    {
-      name: "stone wall (third)",
-      thumbnail: stoneWallLowThumbnail,
-      keywords: ["stone", "wall", "low", "stone wall", "stone low", "wall low"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallLow"));
-      },
-    },
-
-    {
-      name: "stone doorway",
-      thumbnail: stoneDoorwayThumbnail,
-      keywords: ["stone", "doorway", "stone doorway"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneDoorway"));
-      },
-    },
-
-    {
-      name: "stone window",
-      thumbnail: stoneWindowThumbnail,
-      keywords: ["stone", "wall", "window", "stone wall", "stone window", "wall window"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWindow"));
-      },
-    },
-
-    {
-      name: "stone wall frame",
-      thumbnail: stoneWallFrameThumbnail,
-      keywords: ["stone", "wall", "frame", "stone wall", "stone frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneWallFrame"));
-      },
-    },
-
-    {
-      name: "stone stairs (L shape)",
-      thumbnail: stoneStairsLShapeThumbnail,
-      keywords: ["stone", "stairs", "stone stairs"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneStairsLShape"));
-      },
-    },
-    {
-      name: "stone stairs (U shape)",
-      thumbnail: stoneStairsUShapeThumbnail,
-      keywords: ["stone", "stairs", "stone stairs"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneStairsUShape"));
-      },
-    },
-
-    {
-      name: "stone floor square",
-      thumbnail: stoneFloorSquareThumbnail,
-      keywords: ["stone", "floor", "square", "stone floor", "stone square", "floor square"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFloorSquare"));
-      },
-    },
-
-    {
-      name: "stone floor triangle",
-      thumbnail: stoneFloorTriangleThumbnail,
-      keywords: ["stone", "floor", "triangle", "stone floor", "stone triangle", "floor triangle"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFloorTriangle"));
-      },
-    },
-
-    {
-      name: "stone floor frame (square)",
-      thumbnail: stoneFloorFrameSquareThumbnail,
-      keywords: [
-        "stone",
-        "floor",
-        "frame",
-        "square",
-        "stone floor",
-        "stone frame",
-        "stone square",
-        "floor frame",
-        "floor square",
-        "frame square",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFloorFrameSquare"));
-      },
-    },
-
-    {
-      name: "stone floor frame (triangle)",
-      thumbnail: stoneFloorFrameTriangleThumbnail,
-      keywords: [
-        "stone",
-        "floor",
-        "frame",
-        "triangle",
-        "stone floor",
-        "stone frame",
-        "stone triangle",
-        "floor frame",
-        "floor triangle",
-        "frame triangle",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneFloorFrameTriangle"));
-      },
-    },
-
-    {
-      name: "stone roof (square)",
-      thumbnail: stoneRoofSquareThumbnail,
-      keywords: ["stone", "roof", "square", "stone roof", "stone square", "roof square"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneRoofSquare"));
-      },
-    },
-
-    {
-      name: "stone roof (triangle)",
-      thumbnail: stoneRoofTriangleThumbnail,
-      keywords: ["stone", "roof", "triangle", "stone roof", "stone triangle", "roof triangle"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneRoofTriangle"));
-      },
-    },
-
-    {
-      name: "stone roof wall (left)",
-      thumbnail: stoneRoofWallLeft,
-      keywords: ["stone", "roof", "wall", "stone roof", "stone wall", "roof wall", "right"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneRoofWallLeft"));
-      },
-    },
-
-    {
-      name: "stone roof wall (right)",
-      thumbnail: stoneRoofWallRight,
-      keywords: ["stone", "roof", "wall", "stone roof", "stone wall", "roof wall", "right"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StoneRoofWallRight"));
-      },
-    },
+    create_object_list_item("stone foundation square (high)", stoneFoundationSquareHighThumbnail, object_list_keywords("stone", "foundation", "square", "high"), "StoneFoundationSquareHigh"), // prettier-ignore
+    create_object_list_item("stone foundation square (mid)", stoneFoundationSquareMidThumbnail, object_list_keywords("stone", "foundation", "square", "mid"), "StoneFoundationSquareMid"), // prettier-ignore
+    create_object_list_item("stone foundation square (low)", stoneFoundationSquareLowThumbnail, object_list_keywords("stone", "foundation", "square", "low"), "StoneFoundationSquareLow"), // prettier-ignore
+    create_object_list_item("stone foundation triangle (high)", stoneFoundationTriangleHighThumbnail, object_list_keywords("stone", "foundation", "triangle", "high"), "StoneFoundationTriangleHigh"), // prettier-ignore
+    create_object_list_item("stone foundation triangle (mid)", stoneFoundationTriangleMidThumbnail, object_list_keywords("stone", "foundation", "triangle", "mid"), "StoneFoundationTriangleMid"), // prettier-ignore
+    create_object_list_item("stone foundation triangle (low)", stoneFoundationTriangleLowThumbnail, object_list_keywords("stone", "foundation", "triangle", "low"), "StoneFoundationTriangleLow"), // prettier-ignore
+    create_object_list_item("stone wall (high)", stoneWallHighThumbnail, object_list_keywords("stone", "wall", "", "high"), "StoneWallHigh"), // prettier-ignore
+    create_object_list_item("stone wall (mid)", stoneWallMidThumbnail, object_list_keywords("stone", "wall", "", "mid"), "StoneWallMid"), // prettier-ignore
+    create_object_list_item("stone wall (low)", stoneWallLowThumbnail, object_list_keywords("stone", "wall", "", "low"), "StoneWallLow"), // prettier-ignore
+    create_object_list_item("stone doorway", stoneDoorwayThumbnail, object_list_keywords("stone", "doorway", "", ""), "StoneDoorway"), // prettier-ignore
+    create_object_list_item("stone window", stoneWindowThumbnail, object_list_keywords("stone", "window", "wall", ""), "StoneWindow"), // prettier-ignore
+    create_object_list_item("stone wall frame", stoneWallFrameThumbnail, object_list_keywords("stone", "wall", "frame", ""), "StoneWallFrame"), // prettier-ignore
+    create_object_list_item("stone stairs (L shape)", stoneStairsLShapeThumbnail, object_list_keywords("stone", "stairs", "L shape", ""), "StoneStairsLShape"), // prettier-ignore
+    create_object_list_item("stone stairs (U shape)", stoneStairsUShapeThumbnail, object_list_keywords("stone", "stairs", "U shape", ""), "StoneStairsUShape"), // prettier-ignore
+    create_object_list_item("stone floor square", stoneFloorSquareThumbnail, object_list_keywords("stone", "floor", "square", ""), "StoneFloorSquare"), // prettier-ignore
+    create_object_list_item("stone floor triangle", stoneFloorTriangleThumbnail, object_list_keywords("stone", "floor", "triangle", ""), "StoneFloorTriangle"), // prettier-ignore
+    create_object_list_item("stone floor frame (square)", stoneFloorFrameSquareThumbnail, object_list_keywords("stone", "floor", "frame", "square"), "StoneFloorFrameSquare"), // prettier-ignore
+    create_object_list_item("stone floor frame (triangle)", stoneFloorFrameTriangleThumbnail, object_list_keywords("stone", "floor", "frame", "triangle"), "StoneFloorFrameTriangle"), // prettier-ignore
+    create_object_list_item("stone roof (square)", stoneRoofSquareThumbnail, object_list_keywords("stone", "roof", "square", ""), "StoneRoofSquare"), // prettier-ignore
+    create_object_list_item("stone roof (triangle)", stoneRoofTriangleThumbnail, object_list_keywords("stone", "roof", "triangle", ""), "StoneRoofTriangle"), // prettier-ignore
+    create_object_list_item("stone roof wall (left)", stoneRoofWallLeft, object_list_keywords("stone", "roof", "wall", "left"), "StoneRoofWallLeft"), // prettier-ignore
+    create_object_list_item("stone roof wall (right)", stoneRoofWallRight, object_list_keywords("stone", "roof", "wall", "right"), "StoneRoofWallRight"), // prettier-ignore
 
     // metal
 
-    {
-      name: "metal foundation square (high)",
-      thumbnail: metalFoundationSquareHighThumbnail,
-      keywords: [
-        "metal",
-        "foundation",
-        "square",
-        "high",
-        "metal foundation",
-        "metal square",
-        "metal high",
-        "foundation square",
-        "foundation high",
-        "square high",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFoundationSquareHigh"));
-      },
-    },
-
-    {
-      name: "metal foundation square (mid)",
-      thumbnail: metalFoundationSquareMidThumbnail,
-      keywords: [
-        "metal",
-        "foundation",
-        "square",
-        "mid",
-        "metal foundation",
-        "metal square",
-        "metal mid",
-        "foundation square",
-        "foundation mid",
-        "square mid",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFoundationSquareMid"));
-      },
-    },
-
-    {
-      name: "metal foundation square (low)",
-      thumbnail: metalFoundationSquareLowThumbnail,
-      keywords: [
-        "metal",
-        "foundation",
-        "square",
-        "low",
-        "metal foundation",
-        "metal square",
-        "metal low",
-        "foundation square",
-        "foundation low",
-        "square low",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFoundationSquareLow"));
-      },
-    },
-
-    {
-      name: "metal foundation triangle (high)",
-      thumbnail: metalFoundationTriangleHighThumbnail,
-      keywords: [
-        "metal",
-        "foundation",
-        "triangle",
-        "high",
-        "metal foundation",
-        "metal triangle",
-        "metal high",
-        "foundation triangle",
-        "foundation high",
-        "triangle high",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFoundationTriangleHigh"));
-      },
-    },
-
-    {
-      name: "metal foundation triangle (mid)",
-      thumbnail: metalFoundationTriangleMidThumbnail,
-      keywords: [
-        "metal",
-        "foundation",
-        "triangle",
-        "mid",
-        "metal foundation",
-        "metal triangle",
-        "metal mid",
-        "foundation triangle",
-        "foundation mid",
-        "triangle mid",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFoundationTriangleMid"));
-      },
-    },
-
-    {
-      name: "metal foundation triangle (low)",
-      thumbnail: metalFoundationTriangleLowThumbnail,
-      keywords: [
-        "metal",
-        "foundation",
-        "triangle",
-        "low",
-        "metal foundation",
-        "metal triangle",
-        "metal low",
-        "foundation triangle",
-        "foundation low",
-        "triangle low",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFoundationTriangleLow"));
-      },
-    },
-
-    {
-      name: "metal wall (high)",
-      thumbnail: metalWallHighThumbnail,
-      keywords: ["metal", "wall", "high", "metal wall", "metal high", "wall high"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWallHigh"));
-      },
-    },
-
-    {
-      name: "metal wall (mid)",
-      thumbnail: metalWallMidThumbnail,
-      keywords: ["metal", "wall", "mid", "metal wall", "metal mid", "wall mid"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWallMid"));
-      },
-    },
-
-    {
-      name: "metal wall (low)",
-      thumbnail: metalWallLowThumbnail,
-      keywords: ["metal", "wall", "low", "metal wall", "metal low", "wall low"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWallLow"));
-      },
-    },
-
-    {
-      name: "metal doorway",
-      thumbnail: metalDoorwayThumbnail,
-      keywords: ["metal", "wall", "doorway", "metal wall", "metal doorway", "wall doorway"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalDoorway"));
-      },
-    },
-
-    {
-      name: "metal window",
-      thumbnail: metalWindowThumbnail,
-      keywords: ["metal", "wall", "window", "metal wall", "metal window", "wall window"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWindow"));
-      },
-    },
-
-    {
-      name: "metal wall frame",
-      thumbnail: metalWallFrameThumbnail,
-      keywords: ["metal", "wall", "frame", "metal wall", "metal frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalWallFrame"));
-      },
-    },
-
-    {
-      name: "metal stairs (L shape)",
-      thumbnail: metalStairsLShapeThumbnail,
-      keywords: ["metal", "stairs", "metal stairs"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalStairsLShape"));
-      },
-    },
-    {
-      name: "metal stairs (U shape)",
-      thumbnail: metalStairsUShapeThumbnail,
-      keywords: ["metal", "stairs", "metal stairs"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalStairsUShape"));
-      },
-    },
-
-    {
-      name: "metal floor square",
-      thumbnail: metalFloorSquareThumbnail,
-      keywords: ["metal", "floor", "square", "metal floor", "metal square", "floor square"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFloorSquare"));
-      },
-    },
-
-    {
-      name: "metal floor triangle",
-      thumbnail: metalFloorTriangleThumbnail,
-      keywords: ["metal", "floor", "triangle", "metal floor", "metal triangle", "floor triangle"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFloorTriangle"));
-      },
-    },
-
-    {
-      name: "metal floor frame (square)",
-      thumbnail: metalFloorFrameSquareThumbnail,
-      keywords: [
-        "metal",
-        "floor",
-        "frame",
-        "square",
-        "metal floor",
-        "metal frame",
-        "metal square",
-        "floor frame",
-        "floor square",
-        "frame square",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFloorFrameSquare"));
-      },
-    },
-
-    {
-      name: "metal floor frame (triangle)",
-      thumbnail: metalFloorFrameTriangleThumbnail,
-      keywords: [
-        "metal",
-        "floor",
-        "frame",
-        "triangle",
-        "metal floor",
-        "metal frame",
-        "metal triangle",
-        "floor frame",
-        "floor triangle",
-        "frame triangle",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalFloorFrameTriangle"));
-      },
-    },
-
-    {
-      name: "metal roof (square)",
-      thumbnail: metalRoofSquareThumbnail,
-      keywords: ["metal", "roof", "square", "metal roof", "metal square", "roof square"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalRoofSquare"));
-      },
-    },
-
-    {
-      name: "metal roof (triangle)",
-      thumbnail: metalRoofTriangleThumbnail,
-      keywords: ["metal", "roof", "triangle", "metal roof", "metal triangle", "roof triangle"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalRoofTriangle"));
-      },
-    },
-
-    {
-      name: "metal roof wall (left)",
-      thumbnail: metalRoofWallLeft,
-      keywords: ["metal", "roof", "wall", "metal roof", "metal wall", "roof wall", "right"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalRoofWallLeft"));
-      },
-    },
-
-    {
-      name: "metal roof wall (right)",
-      thumbnail: metalRoofWallRight,
-      keywords: ["metal", "roof", "wall", "metal roof", "metal wall", "roof wall", "right"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalRoofWallRight"));
-      },
-    },
+    create_object_list_item("metal foundation square (high)", metalFoundationSquareHighThumbnail, object_list_keywords("metal", "foundation", "square", "high"), "MetalFoundationSquareHigh"), // prettier-ignore
+    create_object_list_item("metal foundation square (mid)", metalFoundationSquareMidThumbnail, object_list_keywords("metal", "foundation", "square", "mid"), "MetalFoundationSquareMid"), // prettier-ignore
+    create_object_list_item("metal foundation square (low)", metalFoundationSquareLowThumbnail, object_list_keywords("metal", "foundation", "square", "low"), "MetalFoundationSquareLow"), // prettier-ignore
+    create_object_list_item("metal foundation triangle (high)", metalFoundationTriangleHighThumbnail, object_list_keywords("metal", "foundation", "triangle", "high"), "MetalFoundationTriangleHigh"), // prettier-ignore
+    create_object_list_item("metal foundation triangle (mid)", metalFoundationTriangleMidThumbnail, object_list_keywords("metal", "foundation", "triangle", "mid"), "MetalFoundationTriangleMid"), // prettier-ignore
+    create_object_list_item("metal foundation triangle (low)", metalFoundationTriangleLowThumbnail, object_list_keywords("metal", "foundation", "triangle", "low"), "MetalFoundationTriangleLow"), // prettier-ignore
+    create_object_list_item("metal wall (high)", metalWallHighThumbnail, object_list_keywords("metal", "wall", "", "high"), "MetalWallHigh"), // prettier-ignore
+    create_object_list_item("metal wall (mid)", metalWallMidThumbnail, object_list_keywords("metal", "wall", "", "mid"), "MetalWallMid"), // prettier-ignore
+    create_object_list_item("metal wall (low)", metalWallLowThumbnail, object_list_keywords("metal", "wall", "", "low"), "MetalWallLow"), // prettier-ignore
+    create_object_list_item("metal doorway", metalDoorwayThumbnail, object_list_keywords("metal", "doorway", "", ""), "MetalDoorway"), // prettier-ignore
+    create_object_list_item("metal window", metalWindowThumbnail, object_list_keywords("metal", "window", "wall", ""), "MetalWindow"), // prettier-ignore
+    create_object_list_item("metal wall frame", metalWallFrameThumbnail, object_list_keywords("metal", "wall", "frame", ""), "MetalWallFrame"), // prettier-ignore
+    create_object_list_item("metal stairs (L shape)", metalStairsLShapeThumbnail, object_list_keywords("metal", "stairs", "L shape", ""), "MetalStairsLShape"), // prettier-ignore
+    create_object_list_item("metal stairs (U shape)", metalStairsUShapeThumbnail, object_list_keywords("metal", "stairs", "U shape", ""), "MetalStairsUShape"), // prettier-ignore
+    create_object_list_item("metal floor square", metalFloorSquareThumbnail, object_list_keywords("metal", "floor", "square", ""), "MetalFloorSquare"), // prettier-ignore
+    create_object_list_item("metal floor triangle", metalFloorTriangleThumbnail, object_list_keywords("metal", "floor", "triangle", ""), "MetalFloorTriangle"), // prettier-ignore
+    create_object_list_item("metal floor frame (square)", metalFloorFrameSquareThumbnail, object_list_keywords("metal", "floor", "frame", "square"), "MetalFloorFrameSquare"), // prettier-ignore
+    create_object_list_item("metal floor frame (triangle)", metalFloorFrameTriangleThumbnail, object_list_keywords("metal", "floor", "frame", "triangle"), "MetalFloorFrameTriangle"), // prettier-ignore
+    create_object_list_item("metal roof (square)", metalRoofSquareThumbnail, object_list_keywords("metal", "roof", "square", ""), "MetalRoofSquare"), // prettier-ignore
+    create_object_list_item("metal roof (triangle)", metalRoofTriangleThumbnail, object_list_keywords("metal", "roof", "triangle", ""), "MetalRoofTriangle"), // prettier-ignore
+    create_object_list_item("metal roof wall (left)", metalRoofWallLeft, object_list_keywords("metal", "roof", "wall", "left"), "MetalRoofWallLeft"), // prettier-ignore
+    create_object_list_item("metal roof wall (right)", metalRoofWallRight, object_list_keywords("metal", "roof", "wall", "right"), "MetalRoofWallRight"), // prettier-ignore
 
     // armored
 
-    {
-      name: "armored found. square (high)",
-      thumbnail: armoredFoundationSquareHighThumbnail,
-      keywords: [
-        "armored",
-        "foundation",
-        "square",
-        "high",
-        "armored foundation",
-        "armored square",
-        "armored high",
-        "foundation square",
-        "foundation high",
-        "square high",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFoundationSquareHigh"));
-      },
-    },
-
-    {
-      name: "armored found. square (mid)",
-      thumbnail: armoredFoundationSquareMidThumbnail,
-      keywords: [
-        "armored",
-        "foundation",
-        "square",
-        "mid",
-        "armored foundation",
-        "armored square",
-        "armored mid",
-        "foundation square",
-        "foundation mid",
-        "square mid",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFoundationSquareMid"));
-      },
-    },
-
-    {
-      name: "armored found. square (low)",
-      thumbnail: armoredFoundationSquareLowThumbnail,
-      keywords: [
-        "armored",
-        "foundation",
-        "square",
-        "low",
-        "armored foundation",
-        "armored square",
-        "armored low",
-        "foundation square",
-        "foundation low",
-        "square low",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFoundationSquareLow"));
-      },
-    },
-
-    {
-      name: "armored found. triangle (high)",
-      thumbnail: armoredFoundationTriangleHighThumbnail,
-      keywords: [
-        "armored",
-        "foundation",
-        "triangle",
-        "high",
-        "armored foundation",
-        "armored triangle",
-        "armored high",
-        "foundation triangle",
-        "foundation high",
-        "triangle high",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFoundationTriangleHigh"));
-      },
-    },
-
-    {
-      name: "armored found. triangle (mid)",
-      thumbnail: armoredFoundationTriangleMidThumbnail,
-      keywords: [
-        "armored",
-        "foundation",
-        "triangle",
-        "mid",
-        "armored foundation",
-        "armored triangle",
-        "armored mid",
-        "foundation triangle",
-        "foundation mid",
-        "triangle mid",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFoundationTriangleMid"));
-      },
-    },
-
-    {
-      name: "armored found. triangle (low)",
-      thumbnail: armoredFoundationTriangleLowThumbnail,
-      keywords: [
-        "armored",
-        "foundation",
-        "triangle",
-        "low",
-        "armored foundation",
-        "armored triangle",
-        "armored low",
-        "foundation triangle",
-        "foundation low",
-        "triangle low",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFoundationTriangleLow"));
-      },
-    },
-
-    {
-      name: "armored wall (high)",
-      thumbnail: armoredWallHighThumbnail,
-      keywords: ["armored", "wall", "high", "armored wall", "armored high", "wall high"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredWallHigh"));
-      },
-    },
-
-    {
-      name: "armored wall (mid)",
-      thumbnail: armoredWallMidThumbnail,
-      keywords: ["armored", "wall", "mid", "armored wall", "armored mid", "wall mid"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredWallMid"));
-      },
-    },
-
-    {
-      name: "armored wall (low)",
-      thumbnail: armoredWallLowThumbnail,
-      keywords: ["armored", "wall", "low", "armored wall", "armored low", "wall low"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredWallLow"));
-      },
-    },
-
-    {
-      name: "armored doorway",
-      thumbnail: armoredDoorwayThumbnail,
-      keywords: ["armored", "wall", "doorway", "armored wall", "armored doorway", "wall doorway"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredDoorway"));
-      },
-    },
-
-    {
-      name: "armored window",
-      thumbnail: armoredWindowThumbnail,
-      keywords: ["armored", "wall", "window", "armored wall", "armored window", "wall window"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredWindow"));
-      },
-    },
-
-    {
-      name: "armored wall frame",
-      thumbnail: armoredWallFrameThumbnail,
-      keywords: ["armored", "wall", "frame", "armored wall", "armored frame", "wall frame"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredWallFrame"));
-      },
-    },
-
-    {
-      name: "armored stairs (L shape)",
-      thumbnail: armoredStairsLShapeThumbnail,
-      keywords: ["armored", "stairs", "armored stairs"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredStairsLShape"));
-      },
-    },
-
-    {
-      name: "armored stairs (U shape)",
-      thumbnail: armoredStairsUShapeThumbnail,
-      keywords: ["armored", "stairs", "armored stairs"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredStairsUShape"));
-      },
-    },
-
-    {
-      name: "armored floor square",
-      thumbnail: armoredFloorSquareThumbnail,
-      keywords: ["armored", "floor", "square", "armored floor", "armored square", "floor square"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFloorSquare"));
-      },
-    },
-
-    {
-      name: "armored floor triangle",
-      thumbnail: armoredFloorTriangleThumbnail,
-      keywords: ["armored", "floor", "triangle", "armored floor", "armored triangle", "floor triangle"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFloorTriangle"));
-      },
-    },
-
-    {
-      name: "armored floor frame (square)",
-      thumbnail: armoredFloorFrameSquareThumbnail,
-      keywords: [
-        "armored",
-        "floor",
-        "frame",
-        "square",
-        "armored floor",
-        "armored frame",
-        "armored square",
-        "floor frame",
-        "floor square",
-        "frame square",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFloorFrameSquare"));
-      },
-    },
-
-    {
-      name: "armored floor frame (triangle)",
-      thumbnail: armoredFloorFrameTriangleThumbnail,
-      keywords: [
-        "armored",
-        "floor",
-        "frame",
-        "triangle",
-        "armored floor",
-        "armored frame",
-        "armored triangle",
-        "floor frame",
-        "floor triangle",
-        "frame triangle",
-      ],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredFloorFrameTriangle"));
-      },
-    },
-
-    {
-      name: "armored roof (square)",
-      thumbnail: armoredRoofSquareThumbnail,
-      keywords: ["armored", "roof", "square", "armored roof", "armored square", "roof square"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredRoofSquare"));
-      },
-    },
-
-    {
-      name: "armored roof (triangle)",
-      thumbnail: armoredRoofTriangleThumbnail,
-      keywords: ["armored", "roof", "triangle", "armored roof", "armored triangle", "roof triangle"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredRoofTriangle"));
-      },
-    },
-
-    {
-      name: "armored roof wall (left)",
-      thumbnail: armoredRoofWallLeft,
-      keywords: ["armored", "roof", "wall", "armored roof", "armored wall", "roof wall", "right"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredRoofWallLeft"));
-      },
-    },
-
-    {
-      name: "armored roof wall (right)",
-      thumbnail: armoredRoofWallRight,
-      keywords: ["armored", "roof", "wall", "armored roof", "armored wall", "roof wall", "right"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ArmoredRoofWallRight"));
-      },
-    },
+    create_object_list_item("armored found. square (high)", armoredFoundationSquareHighThumbnail, object_list_keywords("armored", "foundation", "square", "high"), "ArmoredFoundationSquareHigh"), // prettier-ignore
+    create_object_list_item("armored found. square (mid)", armoredFoundationSquareMidThumbnail, object_list_keywords("armored", "foundation", "square", "mid"), "ArmoredFoundationSquareMid"), // prettier-ignore
+    create_object_list_item("armored found. square (low)", armoredFoundationSquareLowThumbnail, object_list_keywords("armored", "foundation", "square", "low"), "ArmoredFoundationSquareLow"), // prettier-ignore
+    create_object_list_item("armored found. triangle (high)", armoredFoundationTriangleHighThumbnail, object_list_keywords("armored", "foundation", "triangle", "high"), "ArmoredFoundationTriangleHigh"), // prettier-ignore
+    create_object_list_item("armored found. triangle (mid)", armoredFoundationTriangleMidThumbnail, object_list_keywords("armored", "foundation", "triangle", "mid"), "ArmoredFoundationTriangleMid"), // prettier-ignore
+    create_object_list_item("armored found. triangle (low)", armoredFoundationTriangleLowThumbnail, object_list_keywords("armored", "foundation", "triangle", "low"), "ArmoredFoundationTriangleLow"), // prettier-ignore
+    create_object_list_item("armored wall (high)", armoredWallHighThumbnail, object_list_keywords("armored", "wall", "", "high"), "ArmoredWallHigh"), // prettier-ignore
+    create_object_list_item("armored wall (mid)", armoredWallMidThumbnail, object_list_keywords("armored", "wall", "", "mid"), "ArmoredWallMid"), // prettier-ignore
+    create_object_list_item("armored wall (low)", armoredWallLowThumbnail, object_list_keywords("armored", "wall", "", "low"), "ArmoredWallLow"), // prettier-ignore
+    create_object_list_item("armored doorway", armoredDoorwayThumbnail, object_list_keywords("armored", "wall", "doorway", ""), "ArmoredDoorway"), // prettier-ignore
+    create_object_list_item("armored window", armoredWindowThumbnail, object_list_keywords("armored", "wall", "window", ""), "ArmoredWindow"), // prettier-ignore
+    create_object_list_item("armored wall frame", armoredWallFrameThumbnail, object_list_keywords("armored", "wall", "frame", ""), "ArmoredWallFrame"), // prettier-ignore
+    create_object_list_item("armored stairs (L shape)", armoredStairsLShapeThumbnail, object_list_keywords("armored", "stairs", "L shape", ""), "ArmoredStairsLShape"), // prettier-ignore
+    create_object_list_item("armored stairs (U shape)", armoredStairsUShapeThumbnail, object_list_keywords("armored", "stairs", "U shape", ""), "ArmoredStairsUShape"), // prettier-ignore
+    create_object_list_item("armored floor square", armoredFloorSquareThumbnail, object_list_keywords("armored", "floor", "square", ""), "ArmoredFloorSquare"), // prettier-ignore
+    create_object_list_item("armored floor triangle", armoredFloorTriangleThumbnail, object_list_keywords("armored", "floor", "triangle", ""), "ArmoredFloorTriangle"), // prettier-ignore
+    create_object_list_item("armored floor frame (square)", armoredFloorFrameSquareThumbnail, object_list_keywords("armored", "floor", "frame", "square"), "ArmoredFloorFrameSquare"), // prettier-ignore
+    create_object_list_item("armored floor frame (triangle)", armoredFloorFrameTriangleThumbnail, object_list_keywords("armored", "floor", "frame", "triangle"), "ArmoredFloorFrameTriangle"), // prettier-ignore
+    create_object_list_item("armored roof (square)", armoredRoofSquareThumbnail, object_list_keywords("armored", "roof", "square", ""), "ArmoredRoofSquare"), // prettier-ignore
+    create_object_list_item("armored roof (triangle)", armoredRoofTriangleThumbnail, object_list_keywords("armored", "roof", "triangle", ""), "ArmoredRoofTriangle"), // prettier-ignore
+    create_object_list_item("armored roof wall (left)", armoredRoofWallLeftThumbnail, object_list_keywords("armored", "roof", "wall", "left"), "ArmoredRoofWallLeft"), // prettier-ignore
+    create_object_list_item("armored roof wall (right)", armoredRoofWallRightThumbnail, object_list_keywords("armored", "roof", "wall", "right"), "ArmoredRoofWallRight"), // prettier-ignore
 
     // doors
 
-    {
-      name: "metal door",
-      thumbnail: metalDoorThumbnail,
-      keywords: ["metal", "door", "metal door"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalDoor"));
-      },
-    },
-
-    {
-      name: "garage door",
-      thumbnail: garageDoorThumbnail,
-      keywords: ["garage", "door", "garage door"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("GarageDoor"));
-      },
-    },
+    create_object_list_item("metal door", metalDoorThumbnail, object_list_keywords("metal", "door", "", ""), "MetalDoor"), // prettier-ignore
+    create_object_list_item("garage door", garageDoorThumbnail, object_list_keywords("garage", "door", "", ""), "GarageDoor"), // prettier-ignore
 
     // windows
 
-    {
-      name: "metal vertical embrasure",
-      thumbnail: metalVerticalEmbrasureThumbnail,
-      keywords: ["metal", "vertical", "embrasure", "metal vertical embrasure", "window", "metal window"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("MetalVerticalEmbrasure"));
-      },
-    },
-
-    {
-      name: "strenghtened glass window",
-      thumbnail: strenghtenedGlassWindowThumbnail,
-      keywords: ["strenghtened", "glass", "window", "strenghtened glass window", "window"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("StrenghtenedGlassWindow"));
-      },
-    },
+    create_object_list_item("metal vertical embrasure", metalVerticalEmbrasureThumbnail, object_list_keywords("metal", "vertical", "embrasure", ""), "MetalVerticalEmbrasure"), // prettier-ignore
+    create_object_list_item("strenghtened glass window", strenghtenedGlassWindowThumbnail, object_list_keywords("strenghtened", "glass", "window", ""), "StrenghtenedGlassWindow"), // prettier-ignore
 
     // miscs
 
-    {
-      name: "tool cupboard",
-      thumbnail: toolCupboardThumbnail,
-      keywords: ["tool", "cup", "board", "cupboard", "tool cupboard"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("ToolCupboard"));
-      },
-    },
-
-    {
-      name: "wood storage box",
-      thumbnail: woodStorageBoxThumbnail,
-      keywords: ["wood", "storage", "box", "wood storage", "wood box", "storage box"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("WoodStorageBox"));
-      },
-    },
-
-    {
-      name: "large wood box",
-      thumbnail: largeWoodBoxThumbnail,
-      keywords: ["large", "wood", "box", "large wood", "large box", "wood box"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("LargeWoodBox"));
-      },
-    },
-
-    {
-      name: "furnace",
-      thumbnail: furnaceThumbnail,
-      keywords: ["furnace"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("Furnace"));
-      },
-    },
-
-    {
-      name: "workbench T3",
-      thumbnail: workbench_t3_Thumbnail,
-      keywords: ["workbench", "work", "bench", "t3", "3", "workbench t3"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("WorkbenchT3"));
-      },
-    },
-
-    {
-      name: "sleeping bag",
-      thumbnail: sleeping_bag_Thumbnail,
-      keywords: ["sleeping", "bag", "sleeping bag"],
-      onClick: () => {
-        dispatch(set_model_type_to_create("SleepingBag"));
-      },
-    },
+    create_object_list_item("tool cupboard", toolCupboardThumbnail, object_list_keywords("tool", "cupboard", "", ""), "ToolCupboard"), // prettier-ignore
+    create_object_list_item("wood storage box", woodStorageBoxThumbnail, object_list_keywords("wood", "storage", "box", ""), "WoodStorageBox"), // prettier-ignore
+    create_object_list_item("large wood box", largeWoodBoxThumbnail, object_list_keywords("large", "wood", "box", ""), "LargeWoodBox"), // prettier-ignore
+    create_object_list_item("furnace", furnaceThumbnail, object_list_keywords("furnace", "", "", ""), "Furnace"), // prettier-ignore
+    create_object_list_item("workbench T3", workbench_t3_Thumbnail, object_list_keywords("workbench", "t3", "", ""), "WorkbenchT3"), // prettier-ignore
+    create_object_list_item("sleeping bag", sleeping_bag_Thumbnail, object_list_keywords("sleeping", "bag", "", ""), "SleepingBag"), // prettier-ignore
   ];
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [search_querry, set_search_querry] = useState<string>("");
 
-  const filteredObjectList = object_list.filter((item) =>
-    item.keywords.some((keyword) => keyword.includes(searchQuery.toLowerCase()))
+  const filtered_object_list = object_list.filter((item) =>
+    item.keywords.some((keyword) => keyword.includes(search_querry.toLowerCase()))
   );
 
-  // -------------------------  prevent unwanted keyboard input -------------------------
+  //* ------------------------- ↓ Prevent unwanted keyboard input ↓ -------------------------
   // deselect the current object on search bar input
 
   // prevent the Space and Enter buttons to enable-disable the object list items, if the Search bar is empty
@@ -1124,7 +322,7 @@ export default function ObjectList() {
     dispatch(set_model_type_to_create(""));
 
     const handleKeyDown = (event: any) => {
-      if ((event.code === "Space" || event.code === "Enter") && searchQuery === "") {
+      if ((event.code === "Space" || event.code === "Enter") && search_querry === "") {
         event.preventDefault();
       }
     };
@@ -1134,28 +332,30 @@ export default function ObjectList() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [searchQuery]);
+  }, [search_querry]);
+
+  //* ------------------------- ↑ Prevent unwanted keyboard input ↑ -------------------------
 
   return (
     <>
       <div
         className={
           page_mode === "edit"
-            ? "objects_container objects_container_displayed"
-            : "objects_container objects_container_hidden"
+            ? "object_list_main_container object_list_main_container_displayed"
+            : "object_list_main_container object_list_main_container_hidden"
         }
       >
-        <SearchBar value={searchQuery} onChange={(event: any) => setSearchQuery(event.target.value)} />
+        <SearchBar value={search_querry} onChange={(event: any) => set_search_querry(event.target.value)} />
         <div className="object_list">
-          {filteredObjectList.map((item, index) => (
-            <button
+          {filtered_object_list.map((item, index) => (
+            <div
               key={index}
               className={
                 selected_object_list === index
-                  ? "object object_selected"
+                  ? "object_list_entity object_list_entity_selected"
                   : hovered_object_list === index
-                  ? "object hovered_object"
-                  : "object object_deselected"
+                  ? "object_list_entity object_list_entity_hovered"
+                  : "object_list_entity object_list_entity_deselected"
               }
               onClick={() => {
                 if (allow_canvas_interaction_after_first_load) {
@@ -1174,7 +374,7 @@ export default function ObjectList() {
                   item.onClick?.();
                 }
               }}
-              onMouseOver={() => {
+              onMouseEnter={() => {
                 if (allow_canvas_interaction_after_first_load) {
                   set_hovered_object_list(index);
                   if (audio) {
@@ -1187,18 +387,17 @@ export default function ObjectList() {
                   set_hovered_object_list(-1);
                 }
               }}
-              style={{ backgroundImage: `url(${item.thumbnail})` }}
             >
               <div
                 className={
-                  allow_canvas_interaction_after_first_load
-                    ? "object_list_description"
-                    : "object_list_description_disabled"
+                  hovered_object_list === index
+                    ? "object_list_entity_thumbnail object_list_entity_thumbnail_hovered"
+                    : "object_list_entity_thumbnail"
                 }
-              >
-                {item.name}
-              </div>
-            </button>
+                style={{ backgroundImage: `url(${item.thumbnail})` }}
+              ></div>
+              <div className="object_list_entity_description">{item.name}</div>
+            </div>
           ))}
         </div>
       </div>

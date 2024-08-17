@@ -116,5 +116,6 @@ export default App;
 // fix: select any placed object -> select any object from list to create -> double the hints displayed
 // fix: add roof 1/2 walls to the raid cost?
 // object list: stone doorway does not present when "wall" is typed
+// fix: model textures in settings (off) does not work, the model is bright white / determine the use of the model_material and model_textures
 
 // remake the wall mid uv and lower the texture size

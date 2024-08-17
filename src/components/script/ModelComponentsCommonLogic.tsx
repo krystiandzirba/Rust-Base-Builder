@@ -85,13 +85,9 @@ export function ModelComponentsCommonLogic() {
 
   function meshStandardMaterialColor(model_type: "stone" | "metal" | "armored") {
     const default_colors = {stone: "#bbbbbb", metal: "#7d3823", armored: "#401f16"}; //prettier-ignore
-
     const hover_colors = {stone: "#ffdaba", metal: "#ff845e", armored: "#5c3227"}; //prettier-ignore
-
     const select_colors = {stone: "#f5b784", metal: "#f5b784", armored: "#5c3227"}; //prettier-ignore
-
     const base_color = default_colors[model_type] || "#bbbbbb";
-
     const raid_color = "#ff1c1c";
 
     if (!model_creation_state) {

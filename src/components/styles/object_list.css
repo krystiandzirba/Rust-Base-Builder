@@ -1,4 +1,6 @@
-.objects_container {
+/* * ------------------------- ↓ Main container ↓ ------------------------- */
+
+.object_list_main_container {
   width: 22.5vw;
   height: 100vh;
   position: absolute;
@@ -11,13 +13,17 @@
   border-right: solid black 1px;
 }
 
-.objects_container_displayed {
+.object_list_main_container_displayed {
   transform: translateX(0);
 }
 
-.objects_container_hidden {
+.object_list_main_container_hidden {
   transform: translateX(-110%);
 }
+
+/* * ------------------------- ↑ Main container ↑ ------------------------- */
+
+/* * ------------------------- ↓ Scrollbar + Search bar styling ↓ ------------------------- */
 
 .search_bar {
   position: absolute;
@@ -27,83 +33,6 @@
 
 input[type="search"]::-webkit-search-cancel-button {
   filter: invert(50%) sepia(25%) saturate(50%) hue-rotate(0deg);
-}
-
-.object_list {
-  width: 98%;
-  height: 87.5%;
-  position: absolute;
-  top: 9.5%;
-  left: -1%;
-  background-color: transparent;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
-  grid-column-gap: 1.5vh;
-  grid-row-gap: 3vh;
-  grid-auto-rows: 17vh;
-  overflow-y: auto;
-  margin: 1vh;
-}
-
-.object {
-  width: calc(100% - 1vh);
-  height: 13.7vh;
-  width: 6.5vw;
-  word-wrap: break-word;
-  background-size: cover;
-  background-position: center;
-  padding-top: 73%;
-  border: none;
-  margin-left: 0.15vh;
-}
-
-.object_list_description {
-  width: 112.5%;
-  height: 130%;
-  margin-left: -0.675vh;
-  margin-top: 3.25vh;
-  color: #bbbbbb;
-  background-color: black;
-  font-size: 0.75vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.object_list_description_disabled {
-  width: 112.5%;
-  height: 130%;
-  margin-left: -0.675vh;
-  margin-top: 3.25vh;
-  color: #bbbbbb;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent -8.5px,
-    transparent 6px,
-    rgba(105, 105, 105, 0.3) 0px,
-    rgba(105, 105, 105, 0.3) 15px
-  );
-  font-size: 0.75vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.object_deselected {
-  background-color: rgb(201, 201, 201);
-  border: 1px solid black;
-}
-
-.object_selected {
-  background-color: #ffcea6;
-}
-
-.hovered_object {
-  background-color: #ffe9d6;
 }
 
 ::-webkit-scrollbar {
@@ -120,5 +49,75 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
+  background-color: #ffcea6;
 }
+
+/* * ------------------------- ↑ Scrollbar + Search bar styling ↑ ------------------------- */
+
+/* * ------------------------- ↓ Object list + mapped object entities ↓ ------------------------- */
+
+.object_list {
+  width: 96.5%;
+  height: 87.5%;
+  position: absolute;
+  top: 9.5%;
+  left: -1%;
+  background-color: transparent;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+  grid-column-gap: 1vh;
+  grid-row-gap: 3vh;
+  grid-auto-rows: 17.5vh;
+  overflow-y: auto;
+  margin: 1vh;
+  padding: 0 0.5vh;
+}
+
+.object_list_entity {
+  height: 19vh;
+  width: 97.5%;
+  z-index: 15;
+  overflow: hidden;
+}
+
+.object_list_entity_deselected {
+  background-color: rgb(201, 201, 201);
+}
+
+.object_list_entity_selected {
+  background-color: #ffcea6;
+}
+
+.object_list_entity_hovered {
+  background-color: #ffe3cb;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.object_list_entity_thumbnail {
+  width: 100%;
+  height: 75.1%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.object_list_entity_thumbnail_hovered {
+  transform: scale(1.075);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.object_list_entity_description {
+  width: 100%;
+  height: 25%;
+  color: #bbbbbb;
+  background-color: black;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* * ------------------------- ↑ Object list + mapped object entities ↑ ------------------------- */
