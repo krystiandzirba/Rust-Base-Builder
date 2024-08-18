@@ -56,20 +56,24 @@ const Toolbar = () => {
   // -------------------------  change the page mode to "Edit" mode -------------------------
 
   function PageModeEdit() {
-    dispatch(set_page_mode("edit")),
-      dispatch(set_object_selected(false)),
-      dispatch(set_selected_model_id("empty"), dispatch(set_reset_raid_models(!reset_raid_models)));
-    if (audio) {
-      AudioPlayer(menu_sound);
-    }
+    dispatch(set_reset_raid_models(!reset_raid_models));
+    setTimeout(() => {
+      dispatch(set_page_mode("edit"));
+      dispatch(set_object_selected(false));
+      dispatch(set_selected_model_id("empty"));
+      if (audio) {
+        AudioPlayer(menu_sound);
+      }
+    }, 10);
   }
 
   // -------------------------  change the page mode to "Edit" mode -------------------------
 
   function PageModeRaid() {
-    dispatch(set_page_mode("raid")),
-      dispatch(set_object_selected(false)),
-      dispatch(set_selected_model_id("empty"), dispatch(set_reset_raid_models(!reset_raid_models)));
+    dispatch(set_reset_raid_models(!reset_raid_models));
+    dispatch(set_page_mode("raid"));
+    dispatch(set_object_selected(false));
+    dispatch(set_selected_model_id("empty"));
     if (audio) {
       AudioPlayer(menu_sound);
     }

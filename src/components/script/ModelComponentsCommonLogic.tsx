@@ -28,12 +28,18 @@ export function ModelComponentsCommonLogic() {
   }, [enable_model_textures, model_hover, page_mode]);
 
   function defaultMeshMaterial(model_material: THREE.Material) {
-    if (enable_model_textures && !model_hover && page_mode !== "edit") {
+    if (page_mode === "overview") {
       return { material: model_material };
-    } else if (model_hover && page_mode === "raid") {
-      return { material: new THREE.MeshStandardMaterial({ color: "red" }) };
-    } else {
+    }
+    if (page_mode === "edit") {
       return {};
+    }
+    if (page_mode === "raid") {
+      if (model_hover) {
+        return { material: new THREE.MeshStandardMaterial({ color: "red" }) };
+      } else if (!model_hover) {
+        return { material: model_material };
+      }
     }
   }
 
@@ -89,17 +95,11 @@ export function ModelComponentsCommonLogic() {
     const base_color = default_colors[model_type] || "#bbbbbb";
     const raid_color = "#ff1c1c";
 
-    if (!model_creation_state) {
-      if (page_mode === "edit") {
-        return model_selected ? select_colors[model_type] : model_hover ? hover_colors[model_type] : base_color;
-      } else if (page_mode === "raid") {
-        return model_hover ? raid_color : base_color;
-      } else {
-        return model_selected ? select_colors[model_type] : base_color;
-      }
-    }
-
-    return base_color;
+    if (page_mode === "edit") {
+      return model_selected ? select_colors[model_type] : model_hover ? hover_colors[model_type] : base_color;
+    } else if (page_mode === "raid") {
+      return model_hover ? raid_color : base_color;
+    } else return base_color;
   }
 
   const meshStandardMaterialWireframe = useMemo(() => {
@@ -113,6 +113,12 @@ export function ModelComponentsCommonLogic() {
     set_model_hover(false);
     set_model_selected(false);
   }, [reset_raid_models, page_mode, model_creation_state]);
+
+  useEffect(() => {
+    if (page_mode === "raid") {
+      set_model_hover(false);
+    }
+  }, [model_destroy_tigger]);
 
   return {
     defaultMeshKey,
