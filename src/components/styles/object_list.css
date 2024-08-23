@@ -29,6 +29,7 @@
   position: absolute;
   left: 25%;
   top: 2.5%;
+  width: 50%;
 }
 
 input[type="search"]::-webkit-search-cancel-button {

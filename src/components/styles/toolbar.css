@@ -1,8 +1,9 @@
 .toolbar_container {
   width: 22vw;
-  height: 15.75vh;
+  height: 15.25vh;
   position: absolute;
   left: 39vw;
+  top: 0.5vh;
   z-index: 5;
   display: flex;
   flex-direction: row;
