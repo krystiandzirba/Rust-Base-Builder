@@ -1,0 +1,243 @@
+/* * ------------------------- ↓ Raid type selector ↓ ------------------------- */
+
+.raid_type_main_container {
+  height: 17.5vh;
+  top: 81.5vh;
+  width: 30vw;
+  left: 35vw;
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.raid_type_title {
+  height: 13%;
+  width: 100%;
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.9vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.raid_type_buttons_container {
+  width: 100%;
+  height: 74%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.raid_type_buttons {
+  height: 100%;
+  width: 20%;
+  background-color: rgba(0, 128, 0, 0);
+  border: 1px black solid;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.raid_type_buttons_active {
+  background-color: rgb(201, 201, 201);
+}
+
+.raid_type_buttons_inactive {
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.raid_type_description_container {
+  height: 12.5%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.raid_type_description {
+  width: 20%;
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+.reset_raid_main_container {
+  left: 67.5vw;
+  top: 89.75vh;
+  width: 5vw;
+  height: 9vh;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.reset_raid_thumbnail {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset_raid_description {
+  width: 100%;
+  height: 21%;
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+}
+
+/* * ------------------------- ↑ Raid type selector ↑ ------------------------- */
+
+/* * ------------------------- ↓ Raid cost display ↓ ------------------------- */
+
+.raid_cost_main_container {
+  width: 21vw;
+  height: 67.5vh;
+  position: absolute;
+  z-index: 15;
+  left: 78.75vw;
+  top: 32vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.raid_tool_cost_main_container {
+  height: 25.5%;
+  width: 100%;
+}
+
+.raid_tool_cost_title {
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  height: 15%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.raid_tool_cost_content_container {
+  width: 100%;
+  height: 87.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+}
+
+.raid_tool_cost_content {
+  height: 100%;
+  width: 25%;
+  border: 1px black solid;
+}
+
+.raid_tool_cost_content_thumbnail,
+.raid_resources_cost_content_thumbnail {
+  width: 100%;
+  height: 75%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.raid_tool_cost_content_description,
+.raid_tool_cost_content_amount {
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  height: 12.5%;
+}
+
+/* /// */
+
+.raid_resources_cost_main_container {
+  height: 73%;
+  width: 100%;
+}
+
+.raid_resources_cost_title,
+.raid_resources_cost_sub_ingredients {
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  height: 5%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.raid_resources_cost_content_container {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+}
+
+.raid_resources_cost_content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.raid_resources_cost_content_description,
+.raid_resources_cost_content_amount {
+  background-color: black;
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 0.75vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  height: 12.5%;
+  width: 100%;
+}
+
+.raid_resources_cost_disabled {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent -8.5px,
+    transparent 6px,
+    rgba(105, 105, 105, 0.3) 0px,
+    rgba(105, 105, 105, 0.3) 15px
+  );
+}
