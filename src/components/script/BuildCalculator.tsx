@@ -547,50 +547,50 @@ export default function ResourceCounter() {
           </div>
 
           <div className="build_cost_content_container">
-            <div className="upkeep_cost_content">
+            <div className="build_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="build_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${woodThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">wood</div>
-              <div className="upkeep_cost_content_amount">
+              <div className="build_cost_content_description">wood</div>
+              <div className="build_cost_content_amount">
                 {NumbersFormatter(Number(build_cost[0].wood) + Number(twig_upgrade_wood_cost))}
               </div>
             </div>
 
-            <div className="upkeep_cost_content">
+            <div className="build_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="build_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${stoneThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">stone</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(build_cost[1].stone)}</div>
+              <div className="build_cost_content_description">stone</div>
+              <div className="build_cost_content_amount">{NumbersFormatter(build_cost[1].stone)}</div>
             </div>
 
-            <div className="upkeep_cost_content">
+            <div className="build_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="build_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${metalThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">metal</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(build_cost[2].metal)}</div>
+              <div className="build_cost_content_description">metal</div>
+              <div className="build_cost_content_amount">{NumbersFormatter(build_cost[2].metal)}</div>
             </div>
 
-            <div className="upkeep_cost_content">
+            <div className="build_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="build_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${hq_metalThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">armored</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(build_cost[3].armored)}</div>
+              <div className="build_cost_content_description">armored</div>
+              <div className="build_cost_content_amount">{NumbersFormatter(build_cost[3].armored)}</div>
             </div>
           </div>
         </div>
@@ -648,51 +648,51 @@ export default function ResourceCounter() {
         </div>
 
         <div className="component_cost_content">
-          <div className="upkeep_cost_title">components cost</div>
+          <div className="components_cost_title">components cost</div>
 
-          <div className="upkeep_cost_content_container">
-            <div className="upkeep_cost_content">
+          <div className="components_cost_content_container">
+            <div className="components_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="components_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${scrapThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">scrap</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(components_cost[0].scrap)}</div>
+              <div className="components_cost_content_description">scrap</div>
+              <div className="components_cost_content_amount">{NumbersFormatter(components_cost[0].scrap)}</div>
             </div>
 
-            <div className="upkeep_cost_content">
+            <div className="components_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="components_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${gearThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">gears</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(components_cost[1].gear)}</div>
+              <div className="components_cost_content_description">gears</div>
+              <div className="components_cost_content_amount">{NumbersFormatter(components_cost[1].gear)}</div>
             </div>
 
-            <div className="upkeep_cost_content">
+            <div className="components_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="components_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${sewing_kitThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">sewing kit</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(components_cost[2].sewing_kit)}</div>
+              <div className="components_cost_content_description">sewing kit</div>
+              <div className="components_cost_content_amount">{NumbersFormatter(components_cost[2].sewing_kit)}</div>
             </div>
 
-            <div className="upkeep_cost_content">
+            <div className="components_cost_content">
               <div
-                className="upkeep_cost_content_thumbnail"
+                className="components_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${lq_fuelThumbnail})`,
                 }}
               ></div>
-              <div className="upkeep_cost_content_description">lq. fuel</div>
-              <div className="upkeep_cost_content_amount">{NumbersFormatter(components_cost[3].lq_fuel)}</div>
+              <div className="components_cost_content_description">lq. fuel</div>
+              <div className="components_cost_content_amount">{NumbersFormatter(components_cost[3].lq_fuel)}</div>
             </div>
           </div>
         </div>

@@ -121,3 +121,4 @@ export default App;
 // remake the wall mid uv and lower the texture size
 // add github wiki
 // move if (audio) to the audio component
+// add google search console and posthog

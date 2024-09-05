@@ -5,12 +5,10 @@ import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 import { set_object_selected, set_selected_model_id, set_selected_object_list, set_model_creation_state, set_reset_raid_models,} from "../../Store.tsx"; // prettier-ignore
 
-import overviewRgbThumbnail from "../../icons/overview_rgb_thumbnail.png";
-import editRgbThumbnail from "../../icons/hammer_rgb_thumbnail.png";
-import raidRgbThumbnail from "../../icons/raid_rgb_thumbnail.png";
-import overviewBwThumbnail from "../../icons/overview_bw_thumbnail.png";
-import editBwThumbnail from "../../icons/hammer_bw_thumbnail.png";
-import raidBwThumbnail from "../../icons/raid_bw_thumbnail.png";
+import overviewToolbarThumbnail from "../../icons/overview_toolbar_thumbnail.png";
+import editToolbarThumbnail from "../../icons/edit_toolbar_thumbnail.png";
+import raidToolbarThumbnail from "../../icons/raid_toolbar_thumbnail.png";
+
 import { useEffect } from "react";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
@@ -71,11 +69,11 @@ const Toolbar = () => {
         >
           <div
             className="toolbar_container_button_thumbnail"
-            style={
-              page_mode === "overview"
-                ? { backgroundImage: `url(${overviewRgbThumbnail})` }
-                : { backgroundImage: `url(${overviewBwThumbnail})` }
-            }
+            style={{
+              backgroundImage: `url(${overviewToolbarThumbnail})`,
+              backgroundSize: "cover",
+              filter: page_mode === "overview" ? "grayscale(0%)" : "grayscale(100%)",
+            }}
           ></div>
           <div className="toolbar_container_button_description">overview</div>
         </div>
@@ -90,11 +88,11 @@ const Toolbar = () => {
         >
           <div
             className="toolbar_container_button_thumbnail"
-            style={
-              page_mode === "edit"
-                ? { backgroundImage: `url(${editRgbThumbnail})` }
-                : { backgroundImage: `url(${editBwThumbnail})` }
-            }
+            style={{
+              backgroundImage: `url(${editToolbarThumbnail})`,
+              backgroundSize: "cover",
+              filter: page_mode === "edit" ? "grayscale(0%)" : "grayscale(100%)",
+            }}
           ></div>
           <div className="toolbar_container_button_description">edit</div>
         </div>
@@ -109,11 +107,11 @@ const Toolbar = () => {
         >
           <div
             className="toolbar_container_button_thumbnail"
-            style={
-              page_mode === "raid"
-                ? { backgroundImage: `url(${raidRgbThumbnail})` }
-                : { backgroundImage: `url(${raidBwThumbnail})` }
-            }
+            style={{
+              backgroundImage: `url(${raidToolbarThumbnail})`,
+              backgroundSize: "cover",
+              filter: page_mode === "raid" ? "grayscale(0%)" : "grayscale(100%)",
+            }}
           ></div>
           <div className="toolbar_container_button_description">raid</div>
         </div>

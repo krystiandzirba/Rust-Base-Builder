@@ -4,20 +4,10 @@ import { useSelector } from "react-redux";
 import { set_reset_raid_models } from "../../Store.tsx";
 import { useEffect, useState } from "react";
 
-import efficiencyWhiteThumbnail from "../../icons/efficiency_white_thumbnail.png";
-import efficiencyBlackThumbnail from "../../icons/efficiency_black_thumbnail.png";
-
-import rocketRgbThumbnail from "../../icons/rocket_rgb_thumbnail.png";
-import rocketBwThumbnail from "../../icons/rocket_bw_thumbnail.png";
-
-import explosivesRgbThumbnail from "../../icons/explosives_rgb_thumbnail.png";
-import explosivesBwThumbnail from "../../icons/explosives_bw_thumbnail.png";
-
-import ammoRgbThumbnail from "../../icons/ammo_rgb_thumbnail.png";
-import ammoBwThumbnail from "../../icons/ammo_bw_thumbnail.png";
-
-import satchelRgbThumbnail from "../../icons/satchel_rgb_thumbnail.png";
-import satchelBwThumbnail from "../../icons/satchel_bw_thumbnail.png";
+import rocketThumbnail from "../../icons/rocket_thumbnail.png";
+import explosivesThumbnail from "../../icons/explosives_thumbnail.png";
+import ammoThumbnail from "../../icons/ammo_thumbnail.png";
+import satchelThumbnail from "../../icons/satchel_thumbnail.png";
 
 import sulfurThumbnail from "../../icons/sulfur_thumbnail.png";
 import gunpowderThumbnail from "../../icons/gunpowder_thumbnail.png";
@@ -840,79 +830,106 @@ export default function RaidCalculator() {
     <>
       <div className="raid_type_main_container">
         <div className="raid_type_title">raid the base with:</div>
-        <div className="raid_type_buttons_container">
+        <div className="raid_type_buttons_main_container">
           <div
+            className={
+              raid_type === "efficiency"
+                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
+            }
             onClick={() => ChangeRaidType("efficiency")}
-            className={
-              raid_type === "efficiency"
-                ? "raid_type_buttons raid_type_buttons_active"
-                : "raid_type_buttons raid_type_buttons_inactive"
-            }
-            style={
-              raid_type === "efficiency"
-                ? { backgroundImage: `url(${efficiencyBlackThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${efficiencyWhiteThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+          >
+            <div
+              className="raid_type_content_thumbnail"
+              style={{
+                backgroundImage: `url(${sulfurThumbnail})`,
+                backgroundSize: "cover",
+                filter: raid_type === "efficiency" ? "grayscale(0%)" : "grayscale(100%)",
+              }}
+            ></div>
+
+            <div className="raid_type_description">most efficient</div>
+          </div>
+
           <div
+            className={
+              raid_type === "rockets"
+                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
+            }
             onClick={() => ChangeRaidType("rockets")}
-            className={
-              raid_type === "rockets"
-                ? "raid_type_buttons raid_type_buttons_active"
-                : "raid_type_buttons raid_type_buttons_inactive"
-            }
-            style={
-              raid_type === "rockets"
-                ? { backgroundImage: `url(${rocketRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${rocketBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+          >
+            <div
+              className="raid_type_content_thumbnail"
+              style={{
+                backgroundImage: `url(${rocketThumbnail})`,
+                backgroundSize: "cover",
+                filter: raid_type === "rockets" ? "grayscale(0%)" : "grayscale(100%)",
+              }}
+            ></div>
+
+            <div className="raid_type_description">rockets</div>
+          </div>
+
           <div
+            className={
+              raid_type === "explosives"
+                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
+            }
             onClick={() => ChangeRaidType("explosives")}
-            className={
-              raid_type === "explosives"
-                ? "raid_type_buttons raid_type_buttons_active"
-                : "raid_type_buttons raid_type_buttons_inactive"
-            }
-            style={
-              raid_type === "explosives"
-                ? { backgroundImage: `url(${explosivesRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${explosivesBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+          >
+            <div
+              className="raid_type_content_thumbnail"
+              style={{
+                backgroundImage: `url(${explosivesThumbnail})`,
+                backgroundSize: "cover",
+                filter: raid_type === "explosives" ? "grayscale(0%)" : "grayscale(100%)",
+              }}
+            ></div>
+
+            <div className="raid_type_description">explosives</div>
+          </div>
+
           <div
+            className={
+              raid_type === "ammo"
+                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
+            }
             onClick={() => ChangeRaidType("ammo")}
-            className={
-              raid_type === "ammo"
-                ? "raid_type_buttons raid_type_buttons_active"
-                : "raid_type_buttons raid_type_buttons_inactive"
-            }
-            style={
-              raid_type === "ammo"
-                ? { backgroundImage: `url(${ammoRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${ammoBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
+          >
+            <div
+              className="raid_type_content_thumbnail"
+              style={{
+                backgroundImage: `url(${ammoThumbnail})`,
+                backgroundSize: "cover",
+                filter: raid_type === "ammo" ? "grayscale(0%)" : "grayscale(100%)",
+              }}
+            ></div>
+
+            <div className="raid_type_description">exp. 5.56</div>
+          </div>
+
           <div
-            onClick={() => ChangeRaidType("satchel")}
             className={
               raid_type === "satchel"
-                ? "raid_type_buttons raid_type_buttons_active"
-                : "raid_type_buttons raid_type_buttons_inactive"
+                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
             }
-            style={
-              raid_type === "satchel"
-                ? { backgroundImage: `url(${satchelRgbThumbnail})`, backgroundSize: "cover" }
-                : { backgroundImage: `url(${satchelBwThumbnail})`, backgroundSize: "cover" }
-            }
-          ></div>
-        </div>
-        <div className="raid_type_description_container">
-          <div className="raid_type_description">most efficient</div>
-          <div className="raid_type_description">rockets</div>
-          <div className="raid_type_description">C4's</div>
-          <div className="raid_type_description">exp. 5.56</div>
-          <div className="raid_type_description">satchels</div>
+            onClick={() => ChangeRaidType("satchel")}
+          >
+            <div
+              className="raid_type_content_thumbnail"
+              style={{
+                backgroundImage: `url(${satchelThumbnail})`,
+                backgroundSize: "cover",
+                filter: raid_type === "satchel" ? "grayscale(0%)" : "grayscale(100%)",
+              }}
+            ></div>
+
+            <div className="raid_type_description">satchels</div>
+          </div>
         </div>
       </div>
 
@@ -920,12 +937,8 @@ export default function RaidCalculator() {
         <div
           className="reset_raid_thumbnail"
           onClick={ResetRaid}
-          onMouseEnter={() => {
-            set_reset_raid_hover(true);
-          }}
-          onMouseLeave={() => {
-            set_reset_raid_hover(false);
-          }}
+          onMouseEnter={() => {set_reset_raid_hover(true)}} //prettier-ignore
+          onMouseLeave={() => {set_reset_raid_hover(false)}} //prettier-ignore
         >
           <FontAwesomeIcon
             icon={faArrowsRotate}
@@ -938,13 +951,13 @@ export default function RaidCalculator() {
 
       <div className="raid_cost_main_container">
         <div className="raid_tool_cost_main_container">
-          <div className="raid_tool_cost_title">raid cost tool (hard side)</div>
+          <div className="raid_tool_cost_title">raid tool cost (hard side)</div>
           <div className="raid_tool_cost_content_container">
             <div className="raid_tool_cost_content">
               <div
                 className="raid_tool_cost_content_thumbnail"
                 style={{
-                  backgroundImage: `url(${rocketRgbThumbnail})`,
+                  backgroundImage: `url(${rocketThumbnail})`,
                 }}
               ></div>
               <div className="raid_tool_cost_content_description">rocket</div>
@@ -955,7 +968,7 @@ export default function RaidCalculator() {
               <div
                 className="raid_tool_cost_content_thumbnail"
                 style={{
-                  backgroundImage: `url(${explosivesRgbThumbnail})`,
+                  backgroundImage: `url(${explosivesThumbnail})`,
                 }}
               ></div>
               <div className="raid_tool_cost_content_description">C4</div>
@@ -966,7 +979,7 @@ export default function RaidCalculator() {
               <div
                 className="raid_tool_cost_content_thumbnail"
                 style={{
-                  backgroundImage: `url(${ammoRgbThumbnail})`,
+                  backgroundImage: `url(${ammoThumbnail})`,
                 }}
               ></div>
               <div className="raid_tool_cost_content_description">exp. 5.56</div>
@@ -977,7 +990,7 @@ export default function RaidCalculator() {
               <div
                 className="raid_tool_cost_content_thumbnail"
                 style={{
-                  backgroundImage: `url(${satchelRgbThumbnail})`,
+                  backgroundImage: `url(${satchelThumbnail})`,
                 }}
               ></div>
               <div className="raid_tool_cost_content_description">satchel</div>
@@ -1104,6 +1117,7 @@ export default function RaidCalculator() {
                 className="raid_resources_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${hqMetalThumbnail})`,
+                  filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",
                 }}
               ></div>
               <div className="raid_resources_cost_content_description">hq. metal</div>
@@ -1121,6 +1135,7 @@ export default function RaidCalculator() {
                 className="raid_resources_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${scrapThumbnail})`,
+                  filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",
                 }}
               ></div>
               <div className="raid_resources_cost_content_description">scrap</div>
@@ -1138,6 +1153,7 @@ export default function RaidCalculator() {
                 className="raid_resources_cost_content_thumbnail"
                 style={{
                   backgroundImage: `url(${animalFatThumbnail})`,
+                  filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",
                 }}
               ></div>
               <div className="raid_resources_cost_content_description">animal fat</div>
