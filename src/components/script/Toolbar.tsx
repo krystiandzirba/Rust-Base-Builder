@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import menu_sound from "../../audio/menu_sound.mp3";
+import posthog from "posthog-js";
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -79,7 +80,9 @@ const Toolbar = () => {
         </div>
 
         <div
-          onClick={() => ChangePageMode("edit")}
+          onClick={() => {
+            ChangePageMode("edit"), posthog.capture("edit mode clicked");
+          }}
           className={
             page_mode === "edit"
               ? "toolbar_container_button toolbar_container_button_active"
@@ -98,7 +101,9 @@ const Toolbar = () => {
         </div>
 
         <div
-          onClick={() => ChangePageMode("raid")}
+          onClick={() => {
+            ChangePageMode("raid"), posthog.capture("raid mode clicked");
+          }}
           className={
             page_mode === "raid"
               ? "toolbar_container_button toolbar_container_button_active"
