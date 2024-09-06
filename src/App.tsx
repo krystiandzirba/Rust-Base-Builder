@@ -127,6 +127,6 @@ export default App;
 // roof wall left or right does not contain the edges highlight
 // compress new audio files
 
-// bug: double model selection in edit mode, when metal vertical embrasure is selected first
+// bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
 // while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed

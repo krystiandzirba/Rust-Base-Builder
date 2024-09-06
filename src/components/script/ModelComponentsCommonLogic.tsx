@@ -83,16 +83,10 @@ export function ModelComponentsCommonLogic() {
 
   //* ------------------------- ↓ Mesh Standard Material ↓ -------------------------
 
-  const meshStandardMaterialOpacity = useMemo(() => {
-    if (!model_creation_state) {
-      return model_selected ? 1 : model_hover ? 1 : 1;
-    } else return 1;
-  }, [model_creation_state, model_selected, model_hover]);
-
   function meshStandardMaterialColor(model_type: "stone" | "metal" | "armored") {
-    const default_colors = {stone: "#bcb4a9", metal: "#bb7e5d", armored: "#5c3d2e"}; //prettier-ignore
-    const hover_colors = {stone: "#dedad4", metal: "#febd9a", armored: "#aa7155"}; //prettier-ignore
-    const select_colors = {stone: "#eeecec", metal: "#feceb3", armored: "#bc8b71"}; //prettier-ignore
+    const default_colors = {stone: "#bcb4a9", metal: "#edb587", armored: "#5c3d2e"}; //prettier-ignore
+    const hover_colors = {stone: "#dedad4", metal: "#ffca9e", armored: "#aa7155"}; //prettier-ignore
+    const select_colors = {stone: "#eeecec", metal: "#FFDCC0", armored: "#bc8b71"}; //prettier-ignore
 
     const base_color = default_colors[model_type] || "#bbbbbb";
     const raid_color = "#ff1c1c";
@@ -133,7 +127,6 @@ export function ModelComponentsCommonLogic() {
     ModelOnPointerOver,
     ModelOnPointerOut,
     ModelMissedClick,
-    meshStandardMaterialOpacity,
     meshStandardMaterialColor,
     meshStandardMaterialWireframe,
     meshEdgesVisibility,

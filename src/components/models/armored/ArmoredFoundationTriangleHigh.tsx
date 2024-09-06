@@ -15,7 +15,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); // prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/armored/armored_foundation_triangle_high_textured.glb") as GLTFResult;
-  const {defaultMeshKey, defaultMeshMaterial, ModelOnClick, ModelOnPointerOver, ModelOnPointerOut, ModelMissedClick, meshStandardMaterialOpacity, meshStandardMaterialColor, meshStandardMaterialWireframe, meshEdgesVisibility, model_destroyed } = ModelComponentsCommonLogic(); //prettier-ignore
+  const {defaultMeshKey, defaultMeshMaterial, ModelOnClick, ModelOnPointerOver, ModelOnPointerOut, ModelMissedClick, meshStandardMaterialColor, meshStandardMaterialWireframe, meshEdgesVisibility, model_destroyed } = ModelComponentsCommonLogic(); //prettier-ignore
   return (
     <>
       {foundations_active && !model_destroyed && (
@@ -35,7 +35,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
               <>
                 <meshStandardMaterial
                   transparent={true}
-                  opacity={meshStandardMaterialOpacity}
                   color={meshStandardMaterialColor("armored")}
                   wireframe={meshStandardMaterialWireframe}
                 />
