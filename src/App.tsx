@@ -121,3 +121,7 @@ export default App;
 // remake the wall mid uv and lower the texture size
 // add github wiki
 // move if (audio) to the audio component
+
+// add arrowhelper to visualize directions, instead of baked into the models
+
+// while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed

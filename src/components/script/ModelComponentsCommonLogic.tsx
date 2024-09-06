@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
 import raid_sound from "../../audio/raid_sound.mp3";
+import { Edges } from "@react-three/drei";
 
 export function ModelComponentsCommonLogic() {
   const dispatch = useDispatch();
@@ -106,6 +107,10 @@ export function ModelComponentsCommonLogic() {
     return models_xray_active ? true : false;
   }, [models_xray_active]);
 
+  const meshEdgesVisibility = useMemo(() => {
+    return <Edges visible={model_selected ? true : false} linewidth={2} scale={1} threshold={25} color={"#2b2b2b"} />;
+  }, [model_selected]);
+
   //* ------------------------- ↑ Mesh Standard Material ↑ -------------------------
 
   useEffect(() => {
@@ -130,6 +135,7 @@ export function ModelComponentsCommonLogic() {
     meshStandardMaterialOpacity,
     meshStandardMaterialColor,
     meshStandardMaterialWireframe,
+    meshEdgesVisibility,
     model_destroyed,
   };
 }
