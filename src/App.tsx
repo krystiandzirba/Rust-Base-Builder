@@ -124,4 +124,9 @@ export default App;
 
 // add arrowhelper to visualize directions, instead of baked into the models
 
+// roof wall left or right does not contain the edges highlight
+// compress new audio files
+
+// bug: double model selection in edit mode, when metal vertical embrasure is selected first
+
 // while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed

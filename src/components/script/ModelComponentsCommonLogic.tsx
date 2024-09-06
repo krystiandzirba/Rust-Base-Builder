@@ -85,14 +85,15 @@ export function ModelComponentsCommonLogic() {
 
   const meshStandardMaterialOpacity = useMemo(() => {
     if (!model_creation_state) {
-      return model_selected ? 1 : model_hover ? 0.6 : 1;
+      return model_selected ? 1 : model_hover ? 1 : 1;
     } else return 1;
   }, [model_creation_state, model_selected, model_hover]);
 
   function meshStandardMaterialColor(model_type: "stone" | "metal" | "armored") {
-    const default_colors = {stone: "#bbbbbb", metal: "#7d3823", armored: "#401f16"}; //prettier-ignore
-    const hover_colors = {stone: "#ffdaba", metal: "#ff845e", armored: "#5c3227"}; //prettier-ignore
-    const select_colors = {stone: "#f5b784", metal: "#f5b784", armored: "#5c3227"}; //prettier-ignore
+    const default_colors = {stone: "#bcb4a9", metal: "#bb7e5d", armored: "#5c3d2e"}; //prettier-ignore
+    const hover_colors = {stone: "#dedad4", metal: "#febd9a", armored: "#aa7155"}; //prettier-ignore
+    const select_colors = {stone: "#eeecec", metal: "#feceb3", armored: "#bc8b71"}; //prettier-ignore
+
     const base_color = default_colors[model_type] || "#bbbbbb";
     const raid_color = "#ff1c1c";
 
@@ -108,7 +109,7 @@ export function ModelComponentsCommonLogic() {
   }, [models_xray_active]);
 
   const meshEdgesVisibility = useMemo(() => {
-    return <Edges visible={model_selected ? true : false} linewidth={2} scale={1} threshold={25} color={"#2b2b2b"} />;
+    return <Edges linewidth={1} scale={1} threshold={25} color={"#2b2b2b"} />;
   }, [model_selected]);
 
   //* ------------------------- ↑ Mesh Standard Material ↑ -------------------------
