@@ -275,33 +275,6 @@
   transform: scale(1);
 }
 
-.remove_selected_model_description {
-  position: absolute;
-  width: 5vw;
-  height: 2vh;
-  left: 71.5vw;
-  top: 97vh;
-  z-index: 45;
-  text-align: center;
-  font-size: 0.75vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-}
-
-.remove_selected_model {
-  position: absolute;
-  width: 5vw;
-  height: 10.5vh;
-  left: 71.5vw;
-  top: 85.5vh;
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  z-index: 15;
-  transition: transform 0.3s ease;
-  transform: scale(1);
-}
-
-.remove_selected_model:hover,
 .remove_all_models:hover {
   transform: scale(1.1);
 }

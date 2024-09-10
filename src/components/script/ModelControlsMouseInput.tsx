@@ -32,10 +32,6 @@ import menu_sound from "../../audio/menu_sound.mp3";
 import dumpsterClosed from "../../icons/dumpster_closed_bw.png";
 import dumpsterOpened from "../../icons/dumpster_opened.png";
 
-import trashCanClosedBw from "../../icons/trash_can_closed_bw.png";
-import trashCanClosed from "../../icons/trash_can_closed.png";
-import trashCanOpened from "../../icons/trash_can_opened.png";
-
 //? ----------------------------------------------------------------------------------------------------
 
 //? The control panel positioned at the center bottom of the app that serves as a transforming tool for objects via mouse input.
@@ -61,7 +57,6 @@ export default function ControlsInput() {
   const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
   const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
 
-  const [trash_can_hovered, set_trash_can_hovered] = useState<boolean>(false);
   const [dumpster_hovered, set_dumpster_hovered] = useState<boolean>(false);
 
   const [unit_distance_type, set_unit_distance_type] = useState<string>("1");
@@ -142,25 +137,12 @@ export default function ControlsInput() {
     dispatch(set_button_trigger(button_trigger + 1));
   }
 
-  function DeleteSelectedObjectButton() {
-    dispatch(set_delete_object_mode("delete_selected_object"));
-    dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
-  }
-
   function DumpsterMouseEnter() {
     set_dumpster_hovered(true);
   }
 
   function DumpsterMouseLeave() {
     set_dumpster_hovered(false);
-  }
-
-  function TrashCanMouseEnter() {
-    set_trash_can_hovered(true);
-  }
-
-  function TrashCanMouseLeave() {
-    set_trash_can_hovered(false);
   }
 
   function DeleteAllObjects() {
@@ -401,27 +383,6 @@ export default function ControlsInput() {
               E
             </button>
           </div>
-          <div className="remove_selected_model_description" style={{ color: object_selected ? "#ffd5b3" : "#bbbbbb" }}>
-            selected
-          </div>
-          <button
-            className="remove_selected_model"
-            style={{
-              backgroundImage: `url(${
-                trash_can_hovered && object_selected
-                  ? trashCanOpened
-                  : object_selected
-                  ? trashCanClosed
-                  : trashCanClosedBw
-              })`,
-              backgroundSize: "cover",
-            }}
-            onClick={() => {
-              DeleteSelectedObjectButton();
-            }}
-            onMouseEnter={TrashCanMouseEnter}
-            onMouseLeave={TrashCanMouseLeave}
-          ></button>
 
           <div className="remove_all_model_description" style={{ color: dumpster_hovered ? "#ffd5b3" : "#bbbbbb" }}>
             delete all

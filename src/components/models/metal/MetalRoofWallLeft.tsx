@@ -15,7 +15,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); // prettier-ignore
 
   const { nodes, materials } = useGLTF("./models/metal/metal_roof_wall_textured.glb") as GLTFResult;
-  const {defaultMeshKey, defaultMeshMaterial, ModelOnClick, ModelOnPointerOver, ModelOnPointerOut, ModelMissedClick, meshStandardMaterialColor, meshStandardMaterialWireframe, meshEdgesVisibility, model_destroyed } = ModelComponentsCommonLogic(); //prettier-ignore
+  const {defaultMeshKey, defaultMeshMaterial, ModelOnClick, ModelOnPointerOver, ModelOnPointerOut, ModelMissedClick, meshStandardMaterialColor, meshStandardMaterialWireframe, meshEdgesVisibility, meshAnnotationVisibility, model_destroyed } = ModelComponentsCommonLogic(); //prettier-ignore
   return (
     <>
       {roofs_active && !model_destroyed && (
@@ -40,6 +40,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
                   wireframe={meshStandardMaterialWireframe}
                 />
                 {meshEdgesVisibility}
+                {meshAnnotationVisibility(["Metal roof wall (left)", "upgradeable", "downgradeable"])}
               </>
             )}
           </mesh>

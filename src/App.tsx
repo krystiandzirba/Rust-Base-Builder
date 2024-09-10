@@ -109,7 +109,6 @@ export default App;
 // add a ground control instructions (wasd around the selected objects)
 // change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
 // update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
-// add drei outline to objects in edit mode
 // make the glass transparent
 // add campfire
 
@@ -130,3 +129,5 @@ export default App;
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
 // while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
+// make the build ghost models 1:1 the same models as selected, not simple planes, make the ghost model glow in and out
+// add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
