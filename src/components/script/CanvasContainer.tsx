@@ -197,6 +197,9 @@ export default function CanvasContainer() {
   const button_input = useSelector((state: RootState) => state.controlsInput.button_input);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
+  const model_upgrade_trigger = useSelector((state: RootState) => state.modelsData.model_upgrade_trigger); //prettier-ignore
+  const model_downgrade_trigger = useSelector((state: RootState) => state.modelsData.model_downgrade_trigger); //prettier-ignore
+  const model_tier_change = useSelector((state: RootState) => state.modelsData.model_tier_change); //prettier-ignore
   const delete_object_mode = useSelector((state: RootState) => state.controlsInput.delete_object_mode);
   const delete_object_mouse_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_mouse_trigger); //prettier-ignore
   const selected_model_id = useSelector((state: RootState) => state.modelsData.selected_model_id);
@@ -212,7 +215,7 @@ export default function CanvasContainer() {
   const allow_canvas_interaction_after_first_load = useSelector((state: RootState) => state.modelsData.allow_canvas_interaction_after_first_load); //prettier-ignore
 
   const [models, setModels] = useState<ModelType[]>([]);
-  const [modelsData, setModelsData] = useState<{[id: string]: { position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>(() => {const storedData = localStorage.getItem('modelsData'); return storedData ? JSON.parse(storedData) : {}}); //prettier-ignore
+  const [modelsData, setModelsData] = useState<{[id: string]: { model: string, position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>(() => {const storedData = localStorage.getItem('modelsData'); return storedData ? JSON.parse(storedData) : {}}); //prettier-ignore
 
   const [generated_id, set_generated_id] = useState<string>(randomIdGenerator());
   const [mirror_x_generated_id, set_mirror_x_generated_id] = useState<string>(randomIdGenerator());
@@ -394,9 +397,9 @@ export default function CanvasContainer() {
   };
 
   const addModel = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
-    if (prevent_actions_after_canvas_drag === "allow") {
-      setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
-    }
+    // if (prevent_actions_after_canvas_drag === "allow") {
+    setModels((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
+    // }
   };
 
   const AddStarterBase = (modelComponent: React.FC, id: string, rotation: THREE.Euler) => {
@@ -681,6 +684,63 @@ export default function CanvasContainer() {
       }
     }
   }
+
+  function UpdateSelectedModelTier(selected_model_id: string) {
+    const modelData = modelsData[selected_model_id];
+
+    if (modelData) {
+      let { model, position, rotation } = modelData;
+
+      console.log(`Model: ${model}`);
+      console.log(`Position - x: ${position.x}, y: ${position.y}, z: ${position.z}`);
+      console.log(`Rotation - x: ${rotation.x}, y: ${rotation.y}, z: ${rotation.z}, order: ${rotation.order}`);
+
+      if (model_tier_change === "upgrade") {
+        if (model.includes("Metal")) {
+          model = model.replace(/Metal/g, "Armored");
+        } else if (model.includes("Stone")) {
+          model = model.replace(/Stone/gi, "Metal");
+        } else return;
+      } else if (model_tier_change === "downgrade") {
+        if (model.includes("Metal")) {
+          model = model.replace(/Metal/gi, "Stone");
+        } else if (model.includes("Armored")) {
+          model = model.replace(/Armored/g, "Metal");
+        } else return;
+      }
+
+      const modelClass = modelTypeMap[model as keyof typeof modelTypeMap];
+
+      setModelsData((prevTransforms) => ({
+        ...prevTransforms,
+        [generated_id]: {
+          position: {
+            x: position.x,
+            z: position.z,
+            y: position.y,
+          },
+          rotation: new THREE.Euler(0, rotation.y, 0, "XYZ"),
+          model: model,
+        },
+      }));
+
+      if (audio) {
+        AudioPlayer(build_sound);
+      }
+
+      set_generated_id(randomIdGenerator());
+      addModel(modelClass, generated_id, default_object_rotation);
+    } else {
+      console.log(`No model found with ID: ${selected_model_id}`);
+    }
+  }
+
+  useEffect(() => {
+    set_prevent_actions_after_canvas_drag("allow");
+    RemoveSelectedModel(selected_model_id);
+    removeModelsDataObjectInfo(selected_model_id);
+    UpdateSelectedModelTier(selected_model_id);
+  }, [model_upgrade_trigger, model_downgrade_trigger]);
 
   //* ------------------------- ↑ Adding models to the canvas ↑ -------------------------
 
@@ -972,7 +1032,7 @@ export default function CanvasContainer() {
 
       setTimeout(() => {
         modelsData[new_id] = {
-          id: new_id,
+          //   id: new_id,
           position: {
             x: recreated_model.position.x,
             z: recreated_model.position.z,
@@ -1028,7 +1088,7 @@ export default function CanvasContainer() {
 
         setTimeout(() => {
           const newModel = {
-            id: new_id,
+            // id: new_id,
             position: {
               x: recreated_model.position.x + mouse_canvas_x_coordinate,
               z: recreated_model.position.z + mouse_canvas_z_coordinate,
@@ -2787,6 +2847,7 @@ export default function CanvasContainer() {
         className="test_button"
         onClick={() => {
           console.log("models data", modelsData);
+          UpdateSelectedModelTier(selected_model_id);
         }}
       ></button> */}
 

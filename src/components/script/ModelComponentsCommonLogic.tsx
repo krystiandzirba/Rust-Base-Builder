@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useEffect, useMemo, useState } from "react";
-import { RootState, set_model_to_destroy, set_model_destroy_trigger } from "../../Store.tsx";
+import { RootState, set_model_to_destroy, set_model_upgrade_trigger, set_model_downgrade_trigger, set_model_tier_change, set_model_destroy_trigger, set_delete_object_mode, set_delete_object_mouse_trigger } from "../../Store.tsx"; // prettier-ignore
 import { useSelector, useDispatch } from "react-redux";
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
@@ -17,6 +17,10 @@ export function ModelComponentsCommonLogic() {
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); // prettier-ignore
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active); // prettier-ignore
+  const model_upgrade_trigger = useSelector((state: RootState) => state.modelsData.model_upgrade_trigger); //prettier-ignore
+  const model_downgrade_trigger = useSelector((state: RootState) => state.modelsData.model_downgrade_trigger); //prettier-ignore
+  const model_tier_change = useSelector((state: RootState) => state.modelsData.model_tier_change); //prettier-ignore
+  const delete_object_mouse_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_mouse_trigger); //prettier-ignore
   const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); // prettier-ignore
   const audio = useSelector((state: RootState) => state.pageSettings.audio); // prettier-ignore
 
@@ -132,7 +136,7 @@ export function ModelComponentsCommonLogic() {
 
             <div className="annotation_buttons_container">
               {/* prettier-ignore */}
-              <div onClick={() => (console.log("upgrade"))} className={annotation_data[1] === "upgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_upgrade_button_hover(true)} onMouseLeave={() => set_annotation_upgrade_button_hover(false)}>
+              <div onClick={() => upgradeSelectedModelTrigger(annotation_data[1] === "upgradeable")} className={annotation_data[1] === "upgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_upgrade_button_hover(true)} onMouseLeave={() => set_annotation_upgrade_button_hover(false)}>
                   <div className="annotation_button_icons_container">
                     {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
@@ -142,7 +146,7 @@ export function ModelComponentsCommonLogic() {
                   <div className="annotation_button_description">upgrade</div>
                 </div>
               {/* prettier-ignore */}
-              <div onClick={() => (console.log("downgrade"))} className={annotation_data[2] === "downgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_downgrade_button_hover(true)} onMouseLeave={() => set_annotation_downgrade_button_hover(false)}>
+              <div onClick={() => downgradeSelectedModelTrigger(annotation_data[2] === "downgradeable")} className={annotation_data[2] === "downgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_downgrade_button_hover(true)} onMouseLeave={() => set_annotation_downgrade_button_hover(false)}>
                   <div className="annotation_button_icons_container">
                     {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
@@ -152,7 +156,7 @@ export function ModelComponentsCommonLogic() {
                   <div className="annotation_button_description">d. grade</div>
                 </div>
               {/* prettier-ignore */}
-              <div className="annotation_button" onMouseEnter={() => set_annotation_delete_button_hover(true)} onMouseLeave={() => set_annotation_delete_button_hover(false)}>
+              <div className="annotation_button" onClick={() => deleteSelectedModelTrigger()} onMouseEnter={() => set_annotation_delete_button_hover(true)} onMouseLeave={() => set_annotation_delete_button_hover(false)}>
                   <div className="annotation_button_icons_container">
                     {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faTrashCanArrowUp} style={{ width: "1vw", height: "2vh", color: annotation_delete_button_hover ? "#ffd5b3" : "#bbbbbb"}} />
@@ -175,6 +179,25 @@ export function ModelComponentsCommonLogic() {
         </div>
       </Html>
     );
+  }
+
+  function upgradeSelectedModelTrigger(active: boolean) {
+    if (active) {
+      dispatch(set_model_tier_change("upgrade"));
+      dispatch(set_model_upgrade_trigger(model_upgrade_trigger + 1));
+    }
+  }
+
+  function downgradeSelectedModelTrigger(active: boolean) {
+    if (active) {
+      dispatch(set_model_tier_change("downgrade"));
+      dispatch(set_model_downgrade_trigger(model_downgrade_trigger + 1));
+    }
+  }
+
+  function deleteSelectedModelTrigger() {
+    dispatch(set_delete_object_mode("delete_selected_object"));
+    dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
   }
 
   //* ------------------------- ↑ Model annotation UI ↑ -------------------------

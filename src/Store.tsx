@@ -149,6 +149,9 @@ const modelsDataSlice = createSlice({
     miscs_active: true,
 
     model_to_destroy: "none",
+    model_upgrade_trigger: 0,
+    model_downgrade_trigger: 0,
+    model_tier_change: "",
     model_destroy_trigger: 0,
     reset_raid_models: false,
 
@@ -208,6 +211,19 @@ const modelsDataSlice = createSlice({
     set_model_to_destroy: (state, action) => {
       return { ...state, model_to_destroy: action.payload };
     },
+
+    set_model_upgrade_trigger: (state, action) => {
+      return { ...state, model_upgrade_trigger: action.payload };
+    },
+
+    set_model_downgrade_trigger: (state, action) => {
+      return { ...state, model_downgrade_trigger: action.payload };
+    },
+
+    set_model_tier_change: (state, action) => {
+      return { ...state, model_tier_change: action.payload };
+    },
+
     set_model_destroy_trigger: (state, action) => {
       return { ...state, model_destroy_trigger: action.payload };
     },
@@ -349,6 +365,9 @@ export const {
   set_roofs_active,
   set_miscs_active,
   set_model_to_destroy,
+  set_model_upgrade_trigger,
+  set_model_downgrade_trigger,
+  set_model_tier_change,
   set_model_destroy_trigger,
   set_reset_raid_models,
   set_create_prebuilt_base_state,

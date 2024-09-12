@@ -88,7 +88,6 @@ export default App;
 // add custom rotation angle and distance unit to transform the object
 // add 1st person walking in overview and raid mode
 // add new keyboard controls description - 2d camera (moving the objects) + creation mode
-// base share as a link
 // detailed list of currently active models (number of doors, walls ...)
 
 // fix the camera NSEW position, it is incorrectly calculated
@@ -104,8 +103,6 @@ export default App;
 // useIntersect, useProgress
 // adaptive resolution for low end pcs and heavy performance loss
 // 3d day and night cycle as light and dark mode
-// model upgrade (stone -> metal) button
-// object info, when selecting an object make it display its name
 // add a ground control instructions (wasd around the selected objects)
 // change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
 // update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
@@ -131,3 +128,6 @@ export default App;
 // while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
 // make the build ghost models 1:1 the same models as selected, not simple planes, make the ghost model glow in and out
 // add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
+// disable prebuilt bases ghost models when the menu is closed
+
+// add a build + raid cost table on button click with selected models
