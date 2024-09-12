@@ -124,7 +124,7 @@ export function ModelComponentsCommonLogic() {
     if (!model_selected) return null;
 
     return (
-      <Html position={[0, 0.5, 0]} distanceFactor={30}>
+      <Html position={[0, 1, 0]} distanceFactor={25}>
         <div
           className="main_annotation_container"
           onClick={(e) => {
