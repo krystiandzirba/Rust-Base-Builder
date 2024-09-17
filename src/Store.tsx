@@ -256,7 +256,6 @@ const pageSettingsSlice = createSlice({
 
     performance_mode: false,
     performance_monitor_state: false,
-    active_models_state: false,
     camera_fov: 90,
 
     enable_model_textures: true,
@@ -292,9 +291,6 @@ const pageSettingsSlice = createSlice({
     },
     set_performance_monitor_state: (state, action) => {
       return { ...state, performance_monitor_state: action.payload };
-    },
-    set_active_models_state: (state, action) => {
-      return { ...state, active_models_state: action.payload };
     },
     set_camera_fov: (state, action) => {
       return { ...state, camera_fov: action.payload };
@@ -381,7 +377,6 @@ export const {
 
   set_performance_mode,
   set_performance_monitor_state,
-  set_active_models_state,
   set_camera_fov,
 
   set_bloom_state,

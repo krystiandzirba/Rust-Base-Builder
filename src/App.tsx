@@ -132,3 +132,6 @@ export default App;
 
 // add a build + raid cost table on button click with selected models
 // change else if for cases
+
+// change the color palette
+// prevent key elements to be selectible by user (text) but still be a clickable part of a button

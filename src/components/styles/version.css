@@ -5,9 +5,11 @@
   top: 98.1vh;
   left: 0.5vw;
   z-index: 999;
-
   color: #bbbbbb;
   font-size: 0.65vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+
+  padding: 0;
+  margin: 0;
 }

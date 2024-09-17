@@ -128,31 +128,10 @@ import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faEraser } from "@fortawesome/free-solid-svg-icons";
 
-interface CanvasModelsListProps {
-  models: ModelType[];
-}
-
 type ModelType = {
   id: string;
   component: React.FC;
   rotation: THREE.Euler;
-};
-
-const CanvasModelsList: React.FC<CanvasModelsListProps> = ({ models }) => {
-  return (
-    <>
-      <div className="canvas_models_list_title">active models:</div>
-      <div className="canvas_models_list_container">
-        <div>
-          {models.map(({ id, component: ModelComponent }, index) => (
-            <div key={id} className="canvas_model_list_element">
-              {ModelComponent.displayName} id: {id} in: {index}
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
 };
 
 //? ----------------------------------------------------------------------------------------------------
@@ -203,7 +182,6 @@ export default function CanvasContainer() {
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
-  const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
@@ -2033,7 +2011,6 @@ export default function CanvasContainer() {
           {!performance_mode && <Postprocessing />}
         </Canvas>
       </div>
-      {active_models_state && <CanvasModelsList models={models} />}
       <div className="local_storage_container">
         <button
           className="local_storage_button"

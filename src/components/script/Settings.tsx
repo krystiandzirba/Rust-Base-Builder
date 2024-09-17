@@ -19,7 +19,6 @@ import {
   set_enable_model_transform_controls,
   set_performance_mode,
   set_performance_monitor_state,
-  set_active_models_state,
   set_camera_fov,
   set_enable_model_textures,
   set_bloom_state,
@@ -58,7 +57,6 @@ const Settings = () => {
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); //prettier-ignore
-  const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
 
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
@@ -199,17 +197,6 @@ const Settings = () => {
       dispatch(set_enable_model_transform_controls(true));
     } else if (!toggle) {
       dispatch(set_enable_model_transform_controls(false));
-    }
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
-  }
-
-  function HandleActiveModelsStateSwitch(toggle: boolean) {
-    if (toggle) {
-      dispatch(set_active_models_state(true));
-    } else if (!toggle) {
-      dispatch(set_active_models_state(false));
     }
     if (audio) {
       AudioPlayer(buttons_sound);
@@ -489,32 +476,6 @@ const Settings = () => {
               }
             >
               {model_transform_controls ? "disable" : "disabled"}
-            </div>
-          </div>
-        </div>
-
-        <div className="settings_element">
-          <div className="settings_element_description">display active models:</div>
-          <div className="settings_element_buttons_container">
-            <div
-              onClick={() => HandleActiveModelsStateSwitch(true)}
-              className={
-                active_models_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-              }
-            >
-              {!active_models_state ? "enable" : "enabled"}
-            </div>
-            <div
-              onClick={() => HandleActiveModelsStateSwitch(false)}
-              className={
-                !active_models_state
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-              }
-            >
-              {active_models_state ? "disable" : "disabled"}
             </div>
           </div>
         </div>

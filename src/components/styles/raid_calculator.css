@@ -1,8 +1,8 @@
 /* * ------------------------- ↓ Raid type selector ↓ ------------------------- */
 
 .raid_type_main_container {
-  height: 17.5vh;
-  top: 82vh;
+  height: 16.75vh;
+  top: 82.75vh;
   width: 30vw;
   left: 35vw;
   position: absolute;
@@ -11,6 +11,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .raid_type_title {

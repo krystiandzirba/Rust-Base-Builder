@@ -1,3 +1,3 @@
 export default function Version() {
-  return <div className="version">RBB v.5.19.0</div>;
+  return <h2 className="version">Rust Base Builder v.5.20.0</h2>;
 }
