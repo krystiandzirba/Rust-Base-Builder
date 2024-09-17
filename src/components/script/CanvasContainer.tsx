@@ -205,7 +205,6 @@ export default function CanvasContainer() {
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const active_models_state = useSelector((state: RootState) => state.pageSettings.active_models_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
-  const HDR_state = useSelector((state: RootState) => state.pageSettings.HDR_state); //prettier-ignore
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
   const prebuilt_base_objects_set = useSelector((state: RootState) => state.modelsData.prebuilt_base_objects_set); //prettier-ignore
@@ -2032,7 +2031,6 @@ export default function CanvasContainer() {
             </>
           )}
           {!performance_mode && <Postprocessing />}
-          {HDR_state && <Environment files="./hdr/HDR2k.hdr" background blur={0} />}
         </Canvas>
       </div>
       {active_models_state && <CanvasModelsList models={models} />}

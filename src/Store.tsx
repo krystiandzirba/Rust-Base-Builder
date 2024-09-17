@@ -264,7 +264,6 @@ const pageSettingsSlice = createSlice({
     better_lighting_state: true,
     ssao_state: true,
     antialiasing_state: false,
-    HDR_state: false,
 
     audio: true,
   },
@@ -312,9 +311,6 @@ const pageSettingsSlice = createSlice({
     },
     set_antialiasing_state: (state, action) => {
       return { ...state, antialiasing_state: action.payload };
-    },
-    set_HDR_state: (state, action) => {
-      return { ...state, HDR_state: action.payload };
     },
     set_enable_model_textures: (state, action) => {
       return { ...state, enable_model_textures: action.payload };
@@ -392,7 +388,6 @@ export const {
   set_better_lighting_state,
   set_ssao_state,
   set_antialiasing_state,
-  set_HDR_state,
   set_enable_model_textures,
   set_audio,
 } = pageSettingsSlice.actions;
