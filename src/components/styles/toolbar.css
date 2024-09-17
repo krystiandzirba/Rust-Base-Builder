@@ -20,6 +20,8 @@
   justify-content: center;
   border: 1px black solid;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .toolbar_container_button_active {
@@ -34,9 +36,10 @@
 .toolbar_container_button_thumbnail {
   width: 100%;
   height: 85%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  object-fit: contain;
+  object-position: center;
+  margin: 0;
+  padding: 0;
 }
 
 .toolbar_container_button_description {

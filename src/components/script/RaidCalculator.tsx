@@ -828,10 +828,10 @@ export default function RaidCalculator() {
 
   return (
     <>
-      <div className="raid_type_main_container">
-        <div className="raid_type_title">raid the base with:</div>
+      <section className="raid_type_main_container">
+        <span className="raid_type_title">raid the base with:</span>
         <div className="raid_type_buttons_main_container">
-          <div
+          <button
             className={
               raid_type === "efficiency"
                 ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
@@ -839,19 +839,12 @@ export default function RaidCalculator() {
             }
             onClick={() => ChangeRaidType("efficiency")}
           >
-            <div
-              className="raid_type_content_thumbnail"
-              style={{
-                backgroundImage: `url(${sulfurThumbnail})`,
-                backgroundSize: "cover",
-                filter: raid_type === "efficiency" ? "grayscale(0%)" : "grayscale(100%)",
-              }}
-            ></div>
+            {/* prettier-ignore */}
+            <img className="raid_type_content_thumbnail" src={sulfurThumbnail} alt="Sulfur thumbnail" style={{ filter: raid_type === "efficiency" ? "grayscale(0%)" : "grayscale(100%)",}}/>
+            <span className="raid_type_description">most efficient</span>
+          </button>
 
-            <div className="raid_type_description">most efficient</div>
-          </div>
-
-          <div
+          <button
             className={
               raid_type === "rockets"
                 ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
@@ -859,19 +852,12 @@ export default function RaidCalculator() {
             }
             onClick={() => ChangeRaidType("rockets")}
           >
-            <div
-              className="raid_type_content_thumbnail"
-              style={{
-                backgroundImage: `url(${rocketThumbnail})`,
-                backgroundSize: "cover",
-                filter: raid_type === "rockets" ? "grayscale(0%)" : "grayscale(100%)",
-              }}
-            ></div>
+            {/* prettier-ignore */}
+            <img className="raid_type_content_thumbnail" src={rocketThumbnail} alt="Rocket thumbnail" style={{ filter: raid_type === "rockets" ? "grayscale(0%)" : "grayscale(100%)", }}/>
+            <span className="raid_type_description">rockets</span>
+          </button>
 
-            <div className="raid_type_description">rockets</div>
-          </div>
-
-          <div
+          <button
             className={
               raid_type === "explosives"
                 ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
@@ -879,19 +865,12 @@ export default function RaidCalculator() {
             }
             onClick={() => ChangeRaidType("explosives")}
           >
-            <div
-              className="raid_type_content_thumbnail"
-              style={{
-                backgroundImage: `url(${explosivesThumbnail})`,
-                backgroundSize: "cover",
-                filter: raid_type === "explosives" ? "grayscale(0%)" : "grayscale(100%)",
-              }}
-            ></div>
+            {/* prettier-ignore */}
+            <img className="raid_type_content_thumbnail" src={explosivesThumbnail} alt="Explosives thumbnail" style={{ filter: raid_type === "explosives" ? "grayscale(0%)" : "grayscale(100%)", }}/>
+            <span className="raid_type_description">explosives</span>
+          </button>
 
-            <div className="raid_type_description">explosives</div>
-          </div>
-
-          <div
+          <button
             className={
               raid_type === "ammo"
                 ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
@@ -899,19 +878,12 @@ export default function RaidCalculator() {
             }
             onClick={() => ChangeRaidType("ammo")}
           >
-            <div
-              className="raid_type_content_thumbnail"
-              style={{
-                backgroundImage: `url(${ammoThumbnail})`,
-                backgroundSize: "cover",
-                filter: raid_type === "ammo" ? "grayscale(0%)" : "grayscale(100%)",
-              }}
-            ></div>
+            {/* prettier-ignore */}
+            <img className="raid_type_content_thumbnail" src={ammoThumbnail} alt="Ammo thumbnail" style={{ filter: raid_type === "ammo" ? "grayscale(0%)" : "grayscale(100%)",}}/>
+            <span className="raid_type_description">exp. 5.56</span>
+          </button>
 
-            <div className="raid_type_description">exp. 5.56</div>
-          </div>
-
-          <div
+          <button
             className={
               raid_type === "satchel"
                 ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
@@ -919,19 +891,12 @@ export default function RaidCalculator() {
             }
             onClick={() => ChangeRaidType("satchel")}
           >
-            <div
-              className="raid_type_content_thumbnail"
-              style={{
-                backgroundImage: `url(${satchelThumbnail})`,
-                backgroundSize: "cover",
-                filter: raid_type === "satchel" ? "grayscale(0%)" : "grayscale(100%)",
-              }}
-            ></div>
-
-            <div className="raid_type_description">satchels</div>
-          </div>
+            {/* prettier-ignore */}
+            <img className="raid_type_content_thumbnail" src={satchelThumbnail} alt="Satchel thumbnail" style={{ filter: raid_type === "satchel" ? "grayscale(0%)" : "grayscale(100%)",}}/>
+            <span className="raid_type_description">satchels</span>
+          </button>
         </div>
-      </div>
+      </section>
 
       <div className="reset_raid_main_container">
         <div
@@ -940,67 +905,45 @@ export default function RaidCalculator() {
           onMouseEnter={() => {set_reset_raid_hover(true)}} //prettier-ignore
           onMouseLeave={() => {set_reset_raid_hover(false)}} //prettier-ignore
         >
-          <FontAwesomeIcon
-            icon={faArrowsRotate}
-            size="3x"
-            style={{ color: reset_raid_hover ? "#fdc89d" : "#a8a8a8" }}
-          />
+          {/* prettier-ignore */}
+          <FontAwesomeIcon icon={faArrowsRotate} style={{ width: "75%",
+      height: "75%", color: reset_raid_hover ? "#fdc89d" : "#a8a8a8" }}/>
         </div>
         <div className="reset_raid_description">reset raid</div>
       </div>
 
       <div className="raid_cost_main_container">
-        <div className="raid_tool_cost_main_container">
-          <div className="raid_tool_cost_title">raid tool cost (hard side)</div>
+        <section className="raid_tool_cost_main_container">
+          <span className="raid_tool_cost_title">raid tool cost (hard side)</span>
           <div className="raid_tool_cost_content_container">
             <div className="raid_tool_cost_content">
-              <div
-                className="raid_tool_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${rocketThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_tool_cost_content_description">rocket</div>
-              <div className="raid_tool_cost_content_amount">{NumbersFormatter(rockets_cost)}</div>
+              <img className="raid_tool_cost_content_thumbnail" src={rocketThumbnail} alt="Rocket thumbnail" />
+              <span className="raid_tool_cost_content_description">rocket</span>
+              <span className="raid_tool_cost_content_amount">{NumbersFormatter(rockets_cost)}</span>
             </div>
 
             <div className="raid_tool_cost_content">
-              <div
-                className="raid_tool_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${explosivesThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_tool_cost_content_description">C4</div>
-              <div className="raid_tool_cost_content_amount">{NumbersFormatter(explosives_cost)}</div>
+              <img className="raid_tool_cost_content_thumbnail" src={explosivesThumbnail} alt="Explosives thumbnail" />
+              <span className="raid_tool_cost_content_description">C4</span>
+              <span className="raid_tool_cost_content_amount">{NumbersFormatter(explosives_cost)}</span>
             </div>
 
             <div className="raid_tool_cost_content">
-              <div
-                className="raid_tool_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${ammoThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_tool_cost_content_description">exp. 5.56</div>
-              <div className="raid_tool_cost_content_amount">{NumbersFormatter(ammo_cost)}</div>
+              <img className="raid_tool_cost_content_thumbnail" src={ammoThumbnail} alt="Ammo thumbnail" />
+              <span className="raid_tool_cost_content_description">exp. 5.56</span>
+              <span className="raid_tool_cost_content_amount">{NumbersFormatter(ammo_cost)}</span>
             </div>
 
             <div className="raid_tool_cost_content">
-              <div
-                className="raid_tool_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${satchelThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_tool_cost_content_description">satchel</div>
-              <div className="raid_tool_cost_content_amount">{NumbersFormatter(satchel_cost)}</div>
+              <img className="raid_tool_cost_content_thumbnail" src={satchelThumbnail} alt="Satchel thumbnail" />
+              <span className="raid_tool_cost_content_description">satchel</span>
+              <span className="raid_tool_cost_content_amount">{NumbersFormatter(satchel_cost)}</span>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="raid_resources_cost_main_container">
-          <div className="raid_resources_cost_title">raid cost (resources)</div>
+        <section className="raid_resources_cost_main_container">
+          <span className="raid_resources_cost_title">raid cost (resources)</span>
           <div className="raid_resources_cost_sub_ingredients">
             <label>
               <input type="checkbox" checked={count_sub_ingredients} onChange={HandleAdvancedResourceCountingState} />
@@ -1009,169 +952,93 @@ export default function RaidCalculator() {
           </div>
           <div className="raid_resources_cost_content_container">
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${sulfurThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">sulfur</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(sulfur_cost)}</div>
+              <img src={sulfurThumbnail} alt="Sulfur thumbnail" className="raid_resources_cost_content_thumbnail" />
+              <span className="raid_resources_cost_content_description">sulfur</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(sulfur_cost)}</span>
             </div>
 
-            <div
-              className={
-                count_sub_ingredients
-                  ? "raid_resources_cost_content"
-                  : "raid_resources_cost_content raid_resources_cost_disabled"
-              }
-            >
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${gunpowderThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">gunpowder</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(gunpowder_cost)}</div>
+            {/* prettier-ignore */}
+            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled"}>
+              {/* prettier-ignore */}
+              <img src={gunpowderThumbnail} alt="Gunpowder thumbnail" className="raid_resources_cost_content_thumbnail"/>
+              <span className="raid_resources_cost_content_description">gunpowder</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(gunpowder_cost)}</span>
             </div>
 
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${charcoalThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">charcoal</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(charcoal_cost)}</div>
+              <img src={charcoalThumbnail} alt="Charcoal thumbnail" className="raid_resources_cost_content_thumbnail" />
+              <span className="raid_resources_cost_content_description">charcoal</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(charcoal_cost)}</span>
             </div>
 
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${metalThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">metal</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(metal_fragments_cost)}</div>
+              <img src={metalThumbnail} alt="Metal thumbnail" className="raid_resources_cost_content_thumbnail" />
+              <span className="raid_resources_cost_content_description">metal</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(metal_fragments_cost)}</span>
             </div>
           </div>
 
           <div className="raid_resources_cost_content_container">
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${metalPipeThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">metal pipe</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(metal_pipe_cost)}</div>
+              {/* prettier-ignore */}
+              <img src={metalPipeThumbnail} alt="Metal pipe thumbnail" className="raid_resources_cost_content_thumbnail"/>
+              <span className="raid_resources_cost_content_description">metal pipe</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(metal_pipe_cost)}</span>
             </div>
 
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${lqFuelThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">lq. fuel</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(lq_fuel_cost)}</div>
+              {/* prettier-ignore */}
+              <img src={lqFuelThumbnail} alt="Low quality fuel thumbnail" className="raid_resources_cost_content_thumbnail"/>
+              <span className="raid_resources_cost_content_description">lq. fuel</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(lq_fuel_cost)}</span>
             </div>
 
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${clothThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">cloth</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(cloth_cost)}</div>
+              <img src={clothThumbnail} alt="Cloth thumbnail" className="raid_resources_cost_content_thumbnail" />
+              <span className="raid_resources_cost_content_description">cloth</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(cloth_cost)}</span>
             </div>
 
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${techTrashThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">tech trash</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(tech_trash_cost)}</div>
+              {/* prettier-ignore */}
+              <img src={techTrashThumbnail} alt="Tech trash thumbnail" className="raid_resources_cost_content_thumbnail"/>
+              <span className="raid_resources_cost_content_description">tech trash</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(tech_trash_cost)}</span>
             </div>
           </div>
 
           <div className="raid_resources_cost_content_container">
-            <div
-              className={
-                count_sub_ingredients
-                  ? "raid_resources_cost_content"
-                  : "raid_resources_cost_content raid_resources_cost_disabled"
-              }
-            >
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${hqMetalThumbnail})`,
-                  filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">hq. metal</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(hq_metal_cost)}</div>
+            {/* prettier-ignore */}
+            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled"}>
+              {/* prettier-ignore */}
+              <img src={hqMetalThumbnail} alt="High quality metal thumbnail" className="raid_resources_cost_content_thumbnail" style={{ filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",}}/>
+              <span className="raid_resources_cost_content_description">hq. metal</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(hq_metal_cost)}</span>
             </div>
 
-            <div
-              className={
-                count_sub_ingredients
-                  ? "raid_resources_cost_content"
-                  : "raid_resources_cost_content raid_resources_cost_disabled"
-              }
-            >
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${scrapThumbnail})`,
-                  filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">scrap</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(scrap_cost)}</div>
+            {/* prettier-ignore */}
+            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled"}>
+              {/* prettier-ignore */}
+              <img src={scrapThumbnail} alt="Scrap thumbnail" className="raid_resources_cost_content_thumbnail" style={{ filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",}}/>
+              <span className="raid_resources_cost_content_description">scrap</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(scrap_cost)}</span>
             </div>
 
-            <div
-              className={
-                count_sub_ingredients
-                  ? "raid_resources_cost_content"
-                  : "raid_resources_cost_content raid_resources_cost_disabled"
-              }
-            >
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${animalFatThumbnail})`,
-                  filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">animal fat</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(animal_fat_cost)}</div>
+            {/* prettier-ignore */}
+            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled" }>
+              {/* prettier-ignore */}
+              <img src={animalFatThumbnail} alt="Animal fat thumbnail" className="raid_resources_cost_content_thumbnail" style={{ filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",}}/>
+              <span className="raid_resources_cost_content_description">animal fat</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(animal_fat_cost)}</span>
             </div>
 
             <div className="raid_resources_cost_content">
-              <div
-                className="raid_resources_cost_content_thumbnail"
-                style={{
-                  backgroundImage: `url(${ropeThumbnail})`,
-                }}
-              ></div>
-              <div className="raid_resources_cost_content_description">rope</div>
-              <div className="raid_resources_cost_content_amount">{NumbersFormatter(rope_cost)}</div>
+              <img src={ropeThumbnail} alt="Rope thumbnail" className="raid_resources_cost_content_thumbnail" />
+              <span className="raid_resources_cost_content_description">rope</span>
+              <span className="raid_resources_cost_content_amount">{NumbersFormatter(rope_cost)}</span>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );

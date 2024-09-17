@@ -131,3 +131,4 @@ export default App;
 // disable prebuilt bases ghost models when the menu is closed
 
 // add a build + raid cost table on button click with selected models
+// change else if for cases

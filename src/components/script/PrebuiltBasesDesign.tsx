@@ -1072,16 +1072,11 @@ export default function PrebuiltBasesDesign() {
           set_add_prebuild_base_button_hover(false);
         }}
       >
-        <a>Add prebuilt base</a>
+        <span>Add prebuilt base</span>
         <div className="prebuilt_bases_design_icons_container">
           <FontAwesomeIcon icon={faHouse} size="xl" />
-          <FontAwesomeIcon
-            icon={faPlus}
-            size="lg"
-            style={{
-              color: add_prebuild_base_button_hover || add_prebuild_base_button_click ? "#ffd5b3" : "#bbbbbb",
-            }}
-          />
+          {/* prettier-ignore */}
+          <FontAwesomeIcon icon={faPlus} size="lg" style={{ color: add_prebuild_base_button_hover || add_prebuild_base_button_click ? "#ffd5b3" : "#bbbbbb",}}/>
         </div>
       </div>
       {page_mode === "edit" && (
@@ -1093,7 +1088,7 @@ export default function PrebuiltBasesDesign() {
           }
         >
           <div className="prebult_bases_design_type_container">
-            <div
+            <button
               className="prebult_bases_design_type_container_cell"
               onClick={() => {
                 if (base_prebuilt_selection !== "PrebuildBaseI" && base_prebuilt_selection !== "PrebuildBaseII") {
@@ -1121,9 +1116,9 @@ export default function PrebuiltBasesDesign() {
                   }}
                 />
               </button>
-              <a>tutorial</a>
-            </div>
-            <div
+              <span>tutorial</span>
+            </button>
+            <button
               className="prebult_bases_design_type_container_cell"
               onClick={() => {
                 ChangeBaseMetarial("stone");
@@ -1142,9 +1137,9 @@ export default function PrebuiltBasesDesign() {
                   backgroundPosition: "center center",
                 }}
               ></button>
-              <a>stone</a>
-            </div>
-            <div
+              <span>stone</span>
+            </button>
+            <button
               className="prebult_bases_design_type_container_cell"
               onClick={() => {
                 ChangeBaseMetarial("metal");
@@ -1163,9 +1158,9 @@ export default function PrebuiltBasesDesign() {
                   backgroundPosition: "center center",
                 }}
               ></button>
-              <a>metal</a>
-            </div>
-            <div
+              <span>metal</span>
+            </button>
+            <button
               className="prebult_bases_design_type_container_cell"
               onClick={() => {
                 ChangeBaseMetarial("armored");
@@ -1184,8 +1179,8 @@ export default function PrebuiltBasesDesign() {
                   backgroundPosition: "center center",
                 }}
               ></button>
-              <a>armored</a>
-            </div>
+              <span>armored</span>
+            </button>
           </div>
           <div className="prebuilt_bases_design_list">
             {prebuiltBases.map((base) => (
@@ -1207,7 +1202,7 @@ export default function PrebuiltBasesDesign() {
                   }
                 }}
               >
-                <div className="base_name"> {base.label}</div>
+                <span className="base_name"> {base.label}</span>
                 <div className="base_group_size_indicator">
                   <FontAwesomeIcon icon={faUser} size="lg" style={{ color: "#ffd5b3" }} />
                   <FontAwesomeIcon

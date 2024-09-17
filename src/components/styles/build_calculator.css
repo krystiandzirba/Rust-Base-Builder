@@ -41,6 +41,8 @@ input[type="checkbox"] {
 .build_cost_misc_button,
 .upkeep_cost_title,
 .components_cost_title {
+  padding: 0;
+  margin: 0;
   text-align: center;
   color: #bbbbbb;
   font-size: 0.8vw;
@@ -73,6 +75,11 @@ input[type="checkbox"] {
   height: 100%;
   width: 25%;
   border: 1px black solid;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .build_cost_content_thumbnail,
@@ -80,9 +87,10 @@ input[type="checkbox"] {
 .components_cost_content_thumbnail {
   width: 100%;
   height: 75%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  object-fit: contain;
+  object-position: center;
+  margin: 0;
+  padding: 0;
 }
 
 .build_cost_content_description,
@@ -91,6 +99,8 @@ input[type="checkbox"] {
 .upkeep_cost_content_amount,
 .components_cost_content_description,
 .components_cost_content_amount {
+  padding: 0;
+  margin: 0;
   background-color: black;
   text-align: center;
   color: #bbbbbb;

@@ -26,7 +26,7 @@ export default function Github() {
   return (
     <div className="github" onMouseEnter={GithubMouseEnter} onMouseLeave={GithubMouseLeave} onClick={GithubMouseClick}>
       <FontAwesomeIcon icon={faGithub} size="xl" style={{ color: github_hovered ? "#ffd5b3" : "#bbbbbb" }} />
-      <div className="github_text">about</div>
+      <span className="github_text">about</span>
     </div>
   );
 }

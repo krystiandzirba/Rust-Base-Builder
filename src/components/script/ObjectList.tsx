@@ -1,6 +1,6 @@
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 import {
   set_model_type_to_create,
@@ -310,6 +310,40 @@ export default function ObjectList() {
     item.keywords.some((keyword) => keyword.includes(search_querry.toLowerCase()))
   );
 
+  //prettier-ignore
+  function ObjectListMouseClick(index: number, item: { name?: string; thumbnail?: string; keywords?: string[]; onClick: any }) {
+    if (allow_canvas_interaction_after_first_load) {
+      if (audio) {
+        AudioPlayer(object_selecting_sound);
+      }
+      if (selected_object_list === index) {
+        dispatch(set_selected_object_list(-1));
+        dispatch(set_model_creation_state(false));
+      } else {
+        dispatch(set_create_prebuilt_base_state(false));
+        dispatch(set_selected_object_list(index));
+        dispatch(set_model_creation_state(true));
+        dispatch(set_object_rotation_degree(90));
+      }
+      item.onClick?.();
+    }
+  }
+
+  function ObjectListMouseEnter(index: number) {
+    if (allow_canvas_interaction_after_first_load) {
+      set_hovered_object_list(index);
+      if (audio) {
+        AudioPlayer(object_hover_sound);
+      }
+    }
+  }
+
+  function ObjectListMouseLeave() {
+    if (allow_canvas_interaction_after_first_load) {
+      set_hovered_object_list(-1);
+    }
+  }
+
   //* ------------------------- ↓ Prevent unwanted keyboard input ↓ -------------------------
   // deselect the current object on search bar input
 
@@ -360,45 +394,25 @@ export default function ObjectList() {
                   : "object_list_entity object_list_entity_deselected"
               }
               onClick={() => {
-                if (allow_canvas_interaction_after_first_load) {
-                  if (audio) {
-                    AudioPlayer(object_selecting_sound);
-                  }
-                  if (selected_object_list === index) {
-                    dispatch(set_selected_object_list(-1));
-                    dispatch(set_model_creation_state(false));
-                  } else {
-                    dispatch(set_create_prebuilt_base_state(false));
-                    dispatch(set_selected_object_list(index));
-                    dispatch(set_model_creation_state(true));
-                    dispatch(set_object_rotation_degree(90));
-                  }
-                  item.onClick?.();
-                }
+                ObjectListMouseClick(index, item);
               }}
               onMouseEnter={() => {
-                if (allow_canvas_interaction_after_first_load) {
-                  set_hovered_object_list(index);
-                  if (audio) {
-                    AudioPlayer(object_hover_sound);
-                  }
-                }
+                ObjectListMouseEnter(index);
               }}
               onMouseLeave={() => {
-                if (allow_canvas_interaction_after_first_load) {
-                  set_hovered_object_list(-1);
-                }
+                ObjectListMouseLeave();
               }}
             >
-              <div
+              <img
                 className={
                   hovered_object_list === index
                     ? "object_list_entity_thumbnail object_list_entity_thumbnail_hovered"
                     : "object_list_entity_thumbnail"
                 }
-                style={{ backgroundImage: `url(${item.thumbnail})` }}
-              ></div>
-              <div className="object_list_entity_description">{item.name}</div>
+                src={item.thumbnail}
+                alt={`${item.name} thumbnail`}
+              />
+              <span className="object_list_entity_description">{item.name}</span>
             </div>
           ))}
         </div>

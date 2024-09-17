@@ -59,8 +59,8 @@ const Toolbar = () => {
 
   return (
     <>
-      <div className={"toolbar_container"}>
-        <div
+      <nav className={"toolbar_container"}>
+        <button
           onClick={() => ChangePageMode("overview")}
           className={
             page_mode === "overview"
@@ -68,18 +68,18 @@ const Toolbar = () => {
               : "toolbar_container_button toolbar_container_button_inactive"
           }
         >
-          <div
+          <img
+            src={overviewToolbarThumbnail}
+            alt="Overview mode thumbnail"
             className="toolbar_container_button_thumbnail"
             style={{
-              backgroundImage: `url(${overviewToolbarThumbnail})`,
-              backgroundSize: "cover",
               filter: page_mode === "overview" ? "grayscale(0%)" : "grayscale(100%)",
             }}
-          ></div>
-          <div className="toolbar_container_button_description">overview</div>
-        </div>
+          />
+          <span className="toolbar_container_button_description">overview</span>
+        </button>
 
-        <div
+        <button
           onClick={() => {
             ChangePageMode("edit"), posthog.capture("edit mode clicked");
           }}
@@ -89,18 +89,16 @@ const Toolbar = () => {
               : "toolbar_container_button toolbar_container_button_inactive"
           }
         >
-          <div
+          <img
+            src={editToolbarThumbnail}
+            alt="Edit mode thumbnail"
             className="toolbar_container_button_thumbnail"
-            style={{
-              backgroundImage: `url(${editToolbarThumbnail})`,
-              backgroundSize: "cover",
-              filter: page_mode === "edit" ? "grayscale(0%)" : "grayscale(100%)",
-            }}
-          ></div>
-          <div className="toolbar_container_button_description">edit</div>
-        </div>
+            style={{ filter: page_mode === "edit" ? "grayscale(0%)" : "grayscale(100%)" }}
+          />
+          <span className="toolbar_container_button_description">edit</span>
+        </button>
 
-        <div
+        <button
           onClick={() => {
             ChangePageMode("raid"), posthog.capture("raid mode clicked");
           }}
@@ -110,17 +108,17 @@ const Toolbar = () => {
               : "toolbar_container_button toolbar_container_button_inactive"
           }
         >
-          <div
+          <img
+            src={raidToolbarThumbnail}
+            alt="Raid mode thumbnail"
             className="toolbar_container_button_thumbnail"
             style={{
-              backgroundImage: `url(${raidToolbarThumbnail})`,
-              backgroundSize: "cover",
               filter: page_mode === "raid" ? "grayscale(0%)" : "grayscale(100%)",
             }}
-          ></div>
-          <div className="toolbar_container_button_description">raid</div>
-        </div>
-      </div>
+          />
+          <span className="toolbar_container_button_description">raid</span>
+        </button>
+      </nav>
     </>
   );
 };
