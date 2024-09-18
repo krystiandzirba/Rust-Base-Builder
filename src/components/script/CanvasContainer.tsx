@@ -31,12 +31,6 @@ import buttons_sound from "../../audio/buttons_sound.mp3";
 import delete_sound from "../../audio/delete_sound.mp3";
 import menu_sound from "../../audio/menu_sound.mp3";
 
-import { Model as StarterBase2x1AProp } from "./../models/props/StarterBase2x1AProp.tsx";
-import { Model as ChadCube2x1Prop } from "./../models/props/ChadCube2x1Prop.tsx";
-import { Model as TheHermitProp } from "./../models/props/TheHermitProp.tsx";
-import { Model as TheDiamondProp } from "./../models/props/TheDiamondProp.tsx";
-import { Model as TheVulcanProp } from "./../models/props/TheVulcanProp.tsx";
-
 import { Model as StoneFoundationSquareHigh } from "./../models/stone/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "./../models/stone/StoneFoundationSquareMid.tsx";
 import { Model as StoneFoundationSquareLow } from "./../models/stone/StoneFoundationSquareLow.tsx";
@@ -195,8 +189,6 @@ export default function CanvasContainer() {
   const [mirror_x_generated_id, set_mirror_x_generated_id] = useState<string>(randomIdGenerator());
   const [mirror_z_generated_id, set_mirror_z_generated_id] = useState<string>(randomIdGenerator());
   const [mirror_xz_generated_id, set_mirror_xz_generated_id] = useState<string>(randomIdGenerator());
-
-  const [model_prop, set_model_prop] = useState<string>("none");
 
   const [model_y_position, set_model_y_position] = useState<number>(0);
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
@@ -1491,127 +1483,6 @@ export default function CanvasContainer() {
 
   //* ------------------------- ↑ Model Elevation Level ↑ -------------------------
 
-  //* ------------------------- ↓ Model Prop ↓ -------------------------
-  // set the model prop category
-  // each model has a corresponding prop counterpart
-  // the prop is a ghost model that is displayed on the canvas
-  // it helps to visualize where the selected object will be placed with its respective shape and size
-
-  useEffect(() => {
-    if (
-      model_type_to_create === "StoneFoundationSquareHigh" ||
-      model_type_to_create === "StoneFoundationSquareMid" ||
-      model_type_to_create === "StoneFoundationSquareLow" ||
-      model_type_to_create === "StoneFloorSquare" ||
-      model_type_to_create === "StoneFloorFrameSquare" ||
-      model_type_to_create === "StoneStairsLShape" ||
-      model_type_to_create === "StoneStairsUShape" ||
-      //prettier-ignore
-      model_type_to_create === "MetalFoundationSquareHigh" ||
-      model_type_to_create === "MetalFoundationSquareMid" ||
-      model_type_to_create === "MetalFoundationSquareLow" ||
-      model_type_to_create === "MetalFloorSquare" ||
-      model_type_to_create === "MetalFloorFrameSquare" ||
-      model_type_to_create === "MetalStairsLShape" ||
-      model_type_to_create === "MetalStairsUShape" ||
-      //prettier-ignore
-      model_type_to_create === "ArmoredFoundationSquareHigh" ||
-      model_type_to_create === "ArmoredFoundationSquareMid" ||
-      model_type_to_create === "ArmoredFoundationSquareLow" ||
-      model_type_to_create === "ArmoredFloorFrameSquare" ||
-      model_type_to_create === "ArmoredFloorSquare" ||
-      model_type_to_create === "ArmoredStairsLShape" ||
-      model_type_to_create === "ArmoredStairsUShape"
-    ) {
-      set_model_prop("square_foundation_prop");
-    } else if (
-      model_type_to_create === "StoneFoundationTriangleHigh" ||
-      model_type_to_create === "StoneFoundationTriangleMid" ||
-      model_type_to_create === "StoneFoundationTriangleLow" ||
-      model_type_to_create === "StoneFloorTriangle" ||
-      model_type_to_create === "StoneFloorFrameTriangle" ||
-      //prettier-ignore
-      model_type_to_create === "MetalFoundationTriangleHigh" ||
-      model_type_to_create === "MetalFoundationTriangleMid" ||
-      model_type_to_create === "MetalFoundationTriangleLow" ||
-      model_type_to_create === "MetalFloorTriangle" ||
-      model_type_to_create === "MetalFloorFrameTriangle" ||
-      //prettier-ignore
-      model_type_to_create === "ArmoredFoundationTriangleHigh" ||
-      model_type_to_create === "ArmoredFoundationTriangleMid" ||
-      model_type_to_create === "ArmoredFoundationTriangleLow" ||
-      model_type_to_create === "ArmoredFloorFrameTriangle" ||
-      model_type_to_create === "ArmoredFloorTriangle"
-    ) {
-      set_model_prop("triangle_foundation_prop");
-    } else if (
-      model_type_to_create === "StoneWallHigh" ||
-      model_type_to_create === "StoneWallMid" ||
-      model_type_to_create === "StoneWallLow" ||
-      model_type_to_create === "StoneDoorway" ||
-      model_type_to_create === "StoneWindow" ||
-      model_type_to_create === "StoneRoofSquare" ||
-      model_type_to_create === "StoneRoofTriangle" ||
-      model_type_to_create === "StoneWallFrame" ||
-      //prettier-ignore
-      model_type_to_create === "MetalWallHigh" ||
-      model_type_to_create === "MetalWallMid" ||
-      model_type_to_create === "MetalWallLow" ||
-      model_type_to_create === "MetalDoorway" ||
-      model_type_to_create === "MetalWindow" ||
-      model_type_to_create === "MetalWallFrame" ||
-      model_type_to_create === "MetalRoofSquare" ||
-      model_type_to_create === "MetalRoofTriangle" ||
-      //prettier-ignore
-      model_type_to_create === "ArmoredWallHigh" ||
-      model_type_to_create === "ArmoredWallMid" ||
-      model_type_to_create === "ArmoredWallLow" ||
-      model_type_to_create === "ArmoredDoorway" ||
-      model_type_to_create === "ArmoredWindow" ||
-      model_type_to_create === "ArmoredWallFrame" ||
-      model_type_to_create === "ArmoredRoofSquare" ||
-      model_type_to_create === "ArmoredRoofTriangle" ||
-      //prettier-ignore
-      model_type_to_create === "GarageDoor" ||
-      model_type_to_create === "MetalVerticalEmbrasure" ||
-      model_type_to_create === "StrenghtenedGlassWindow"
-    ) {
-      set_model_prop("wall_prop");
-    } else if (
-      model_type_to_create === "StoneRoofWallRight" ||
-      model_type_to_create === "StoneRoofWallLeft" ||
-      model_type_to_create === "MetalRoofWallRight" ||
-      model_type_to_create === "MetalRoofWallLeft" ||
-      model_type_to_create === "ArmoredRoofWallRight" ||
-      model_type_to_create === "ArmoredRoofWallLeft"
-    ) {
-      set_model_prop("roof_wall_prop");
-    } else if (model_type_to_create === "MetalDoor") {
-      set_model_prop("door_prop");
-    } else if (model_type_to_create === "ToolCupboard" || model_type_to_create === "Furnace") {
-      set_model_prop("tool_cupboard_prop");
-    } else if (
-      model_type_to_create === "WoodStorageBox" ||
-      model_type_to_create === "LargeWoodBox" ||
-      model_type_to_create === "WorkbenchT3" ||
-      model_type_to_create === "SleepingBag"
-    ) {
-      set_model_prop("storage_prop");
-    } else if (model_type_to_create === "PrebuildBaseI") {
-      set_model_prop("starter_base_2x1_a_prop");
-    } else if (model_type_to_create === "PrebuildBaseII") {
-      set_model_prop("chad_cube_2x1_prop");
-    } else if (model_type_to_create === "PrebuildBaseIII") {
-      set_model_prop("the_hermit_prop");
-    } else if (model_type_to_create === "PrebuildBaseIV") {
-      set_model_prop("the_diamond_prop");
-    } else if (model_type_to_create === "PrebuildBaseV") {
-      set_model_prop("the_vulcan_prop");
-    }
-  }, [model_type_to_create]);
-
-  //* ------------------------- ↑ Model Prop ↑ -------------------------
-
   useEffect(() => {
     try {
       if (!hasModelsDataChanged.current) {
@@ -1905,107 +1776,8 @@ export default function CanvasContainer() {
                 model_offset_active={IsOffsetActive() || false}
                 model_x_offset_position={mouse_canvas_x_coordinate}
                 model_z_offset_position={mouse_canvas_z_coordinate}
+                prebuilt_base={create_prebuilt_base_state}
               />
-
-              {model_prop === "starter_base_2x1_a_prop" && (
-                <StarterBase2x1AProp
-                  position={[
-                    mouse_canvas_x_coordinate + model_x_position_offset,
-                    default_model_height_position / 2 + 0.04,
-                    mouse_canvas_z_coordinate + model_z_position_offset,
-                  ]}
-                  rotation={[0, modified_model_rotation, 0]}
-                  scale={[1.05, default_model_height_position + 1, 1.1]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"#ffa463"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={bloom_state ? 3 : 0}
-                  />
-                </StarterBase2x1AProp>
-              )}
-
-              {model_prop === "chad_cube_2x1_prop" && (
-                <ChadCube2x1Prop
-                  position={[
-                    mouse_canvas_x_coordinate + model_x_position_offset - 1,
-                    default_model_height_position / 2 + 0.04,
-                    mouse_canvas_z_coordinate + model_z_position_offset,
-                  ]}
-                  rotation={[0, modified_model_rotation, 0]}
-                  scale={[1.05, default_model_height_position + 1, 1.1]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"#ffa463"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={bloom_state ? 3 : 0}
-                  />
-                </ChadCube2x1Prop>
-              )}
-
-              {model_prop === "the_hermit_prop" && (
-                <TheHermitProp
-                  position={[
-                    mouse_canvas_x_coordinate + model_x_position_offset,
-                    default_model_height_position / 2 + 0.04,
-                    mouse_canvas_z_coordinate + model_z_position_offset - 0.2,
-                  ]}
-                  rotation={[0, modified_model_rotation, 0]}
-                  scale={[1.1, default_model_height_position + 1.05, 1.05]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"#ffa463"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={bloom_state ? 3 : 0}
-                  />
-                </TheHermitProp>
-              )}
-
-              {model_prop === "the_diamond_prop" && (
-                <TheDiamondProp
-                  position={[
-                    mouse_canvas_x_coordinate + model_x_position_offset,
-                    default_model_height_position / 2 + 0.04,
-                    mouse_canvas_z_coordinate + model_z_position_offset,
-                  ]}
-                  rotation={[0, modified_model_rotation, 0]}
-                  scale={[1.1, default_model_height_position + 1.05, 1.05]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"#ffa463"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={bloom_state ? 3 : 0}
-                  />
-                </TheDiamondProp>
-              )}
-
-              {model_prop === "the_vulcan_prop" && (
-                <TheVulcanProp
-                  position={[
-                    mouse_canvas_x_coordinate + model_x_position_offset,
-                    default_model_height_position / 2 + 1.1,
-                    mouse_canvas_z_coordinate + model_z_position_offset,
-                  ]}
-                  rotation={[0, modified_model_rotation, 0]}
-                  scale={[1.075, default_model_height_position + 1.05, 1.075]}
-                >
-                  <meshStandardMaterial
-                    transparent
-                    opacity={1}
-                    color={"#ffa463"}
-                    emissive={"rgb(255, 206, 166)"}
-                    emissiveIntensity={bloom_state ? 3 : 0}
-                  />
-                </TheVulcanProp>
-              )}
             </>
           )}
           {!performance_mode && <Postprocessing />}

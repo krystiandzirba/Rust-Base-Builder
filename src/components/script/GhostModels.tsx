@@ -25,6 +25,7 @@ type GhostModelProps = {
   model_offset_active: boolean;
   model_x_offset_position: number;
   model_z_offset_position: number;
+  prebuilt_base: boolean;
 };
 
 export function GhostModel({
@@ -38,6 +39,7 @@ export function GhostModel({
   model_offset_active,
   model_x_offset_position,
   model_z_offset_position,
+  prebuilt_base,
 }: GhostModelProps) {
   const { nodes: arrow_prop_nodes } = useGLTF("./models/props/arrow_prop.glb") as GLTFResult; //prettier-ignore
   const { nodes: foundation_square_high_nodes } = useGLTF("./models/props/foundation_square_high.glb") as GLTFResult; //prettier-ignore
@@ -71,6 +73,12 @@ export function GhostModel({
   const { nodes: furnace_nodes } = useGLTF("./models/props/furnace.glb") as GLTFResult; //prettier-ignore
   const { nodes: workbench_t3_nodes } = useGLTF("./models/props/workbench_t3.glb") as GLTFResult; //prettier-ignore
   const { nodes: sleeping_bag_nodes } = useGLTF("./models/props/sleeping_bag.glb") as GLTFResult; //prettier-ignore
+
+  const { nodes: starter_base_2x1_prop_nodes } = useGLTF("./models/props/starter_base_2x1_prop.glb") as GLTFResult; //prettier-ignore
+  const { nodes: chad_cube_prop_nodes } = useGLTF("./models/props/chad_cube_2x1_prop.glb") as GLTFResult; //prettier-ignore
+  const { nodes: hermit_prop_nodes } = useGLTF("./models/props/hermit_prop.glb") as GLTFResult; //prettier-ignore
+  const { nodes: diamond_prop_nodes } = useGLTF("./models/props/diamond_prop.glb") as GLTFResult; //prettier-ignore
+  const { nodes: vulcan_prop_nodes } = useGLTF("./models/props/vulcan_prop.glb") as GLTFResult; //prettier-ignore
 
   const bloom_state = useSelector((state: RootState) => state.pageSettings.bloom_state); //prettier-ignore
   const [enable_model_arrow, set_enable_model_arrow] = useState<boolean>(false);
@@ -109,7 +117,17 @@ export function GhostModel({
       case "Furnace": return furnace_nodes.Cube.geometry;
       case "WorkbenchT3": return workbench_t3_nodes.Cube.geometry;
       case "SleepingBag": return sleeping_bag_nodes.Cube.geometry;
+
+      case "PrebuildBaseI": return starter_base_2x1_prop_nodes.Cube.geometry;
+      case "PrebuildBaseII": return chad_cube_prop_nodes.Cube.geometry;
+      case "PrebuildBaseIII": return hermit_prop_nodes.Cube.geometry;
+      case "PrebuildBaseIV": return diamond_prop_nodes.Cube.geometry;
+      case "PrebuildBaseV": return vulcan_prop_nodes.Cube.geometry;
     }
+  }
+
+  function GhostModelBloomValue(is_prebuilt_base: boolean) {
+    return is_prebuilt_base ? 1 : bloom_state ? 2.5 : 0;
   }
 
   // prettier-ignore
@@ -118,12 +136,12 @@ export function GhostModel({
       <>
         {enable_model_arrow && (
           <group position={[0, 0, -1]} scale={[3.5, 1, 1.25]}>
-            <mesh geometry={arrow_prop_nodes.Cube.geometry}><meshStandardMaterial color={"#ffa463"} emissive={"rgb(255, 206, 166)"} emissiveIntensity={bloom_state ? 2.5 : 0}/></mesh>
+            <mesh geometry={arrow_prop_nodes.Cube.geometry}><meshStandardMaterial color={"#ffa463"} emissive={"rgb(255, 206, 166)"} emissiveIntensity={GhostModelBloomValue(prebuilt_base)}/></mesh>
           </group>
         )}
 
         <mesh geometry={ModelTypeGeometryNodes(model_type)}>
-          <meshStandardMaterial color={"#ffa463"} emissive={"rgb(255, 206, 166)"} emissiveIntensity={bloom_state ? 2.5 : 0} transparent={true} opacity={0.5} wireframe={wireframe_enabled}/>
+          <meshStandardMaterial color={"#ffa463"} emissive={"rgb(255, 206, 166)"} emissiveIntensity={GhostModelBloomValue(prebuilt_base)} transparent={true} opacity={0.5} wireframe={wireframe_enabled}/>
         </mesh>
       </>
     );
@@ -146,25 +164,25 @@ export function GhostModel({
       {/*prettier-ignore*/}
       <group position={[model_x_position, model_y_position, model_z_position]} rotation={[0, model_y_rotation, 0]} scale={0.99}>{GhostModelGeometry(false)}</group>
 
-      {symmetry_x_enabled && (
+      {!prebuilt_base && symmetry_x_enabled && (
         <group position={[-model_x_position, model_y_position, model_z_position]}>{GhostModelGeometry(false)}</group>
       )}
-      {symmetry_z_enabled && (
+      {!prebuilt_base && symmetry_z_enabled && (
         <group position={[model_x_position, model_y_position, -model_z_position]}>{GhostModelGeometry(false)}</group>
       )}
-      {symmetry_z_enabled && symmetry_x_enabled && (
+      {!prebuilt_base && symmetry_z_enabled && symmetry_x_enabled && (
         <group position={[-model_x_position, model_y_position, -model_z_position]}>{GhostModelGeometry(false)}</group>
       )}
-      {(model_offset_active || model_y_position > 0.05) && (
+      {!prebuilt_base && (model_offset_active || model_y_position > 0.05) && (
         <group position={[model_x_offset_position, 0, model_z_offset_position]}>{GhostModelGeometry(true)}</group>
       )}
-      {(model_offset_active || model_y_position > 0) && symmetry_x_enabled && (
+      {!prebuilt_base && (model_offset_active || model_y_position > 0) && symmetry_x_enabled && (
         <group position={[-model_x_offset_position, 0, model_z_offset_position]}>{GhostModelGeometry(true)}</group>
       )}
-      {(model_offset_active || model_y_position > 0) && symmetry_z_enabled && (
+      {!prebuilt_base && (model_offset_active || model_y_position > 0) && symmetry_z_enabled && (
         <group position={[model_x_offset_position, 0, -model_z_offset_position]}>{GhostModelGeometry(true)}</group>
       )}
-      {(model_offset_active || model_y_position > 0) && symmetry_x_enabled && symmetry_z_enabled && (
+      {!prebuilt_base && (model_offset_active || model_y_position > 0) && symmetry_x_enabled && symmetry_z_enabled && (
         <group position={[-model_x_offset_position, 0, -model_z_offset_position]}>{GhostModelGeometry(true)}</group>
       )}
     </>
@@ -203,5 +221,11 @@ useGLTF.preload("./models/props/large_wood_box.glb");
 useGLTF.preload("./models/props/furnace.glb");
 useGLTF.preload("./models/props/workbench_t3.glb");
 useGLTF.preload("./models/props/sleeping_bag.glb");
+
+useGLTF.preload("./models/props/starter_base_2x1_prop.glb");
+useGLTF.preload("./models/props/chad_cube_2x1_prop.glb");
+useGLTF.preload("./models/props/hermit_prop.glb");
+useGLTF.preload("./models/props/diamond_prop.glb");
+useGLTF.preload("./models/props/vulcan_prop.glb");
 
 GhostModel.displayName = "GhostModel";

@@ -103,7 +103,6 @@ export default App;
 // useIntersect, useProgress
 // adaptive resolution for low end pcs and heavy performance loss
 // 3d day and night cycle as light and dark mode
-// add a ground control instructions (wasd around the selected objects)
 // change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
 // update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
 // make the glass transparent
@@ -117,8 +116,6 @@ export default App;
 // remake the wall mid uv and lower the texture size
 // add github wiki
 // move if (audio) to the audio component
-
-// add arrowhelper to visualize directions, instead of baked into the models
 
 // roof wall left or right does not contain the edges highlight
 // compress new audio files
@@ -135,3 +132,16 @@ export default App;
 
 // change the color palette
 // prevent key elements to be selectible by user (text) but still be a clickable part of a button
+// change the cursor type when hovering over buttons
+// change the build checkbox for MUI checkbox
+// add MUI skeleton
+// change the fontawesome icons for MUI icons
+
+// compress all models in blender export
+
+//! edit mode performance impact: x + z mouse coordinates on model / preb. base hover,
+//! lower the update rate after a certain amount of models present in the canvas / rewrite the coordinates
+
+//! create a 10000 1x1 planes (100x100) that translate to the exact square coordinates on hover
+//! or
+//! divide whole canvas on 4 parts / if mouse is in part 1, divide this part into another 4 parts, repeat until last iteration end up in 1x1 square dimension
