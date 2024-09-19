@@ -1064,6 +1064,16 @@ export default function PrebuiltBasesDesign() {
           if (audio) {
             AudioPlayer(object_selecting_sound);
           }
+
+          if (add_prebuild_base_button_click) {
+            set_base_prebuilt_selection("empty");
+            dispatch(set_selected_object_list(-1));
+            dispatch(set_model_creation_state(false));
+            dispatch(set_object_rotation_degree(90));
+            dispatch(set_model_type_to_create("empty"));
+            dispatch(set_create_prebuilt_base_state(false));
+            dispatch(set_prebuilt_base_objects_set([]));
+          }
         }}
         onMouseEnter={() => {
           set_add_prebuild_base_button_hover(true);
@@ -1203,36 +1213,13 @@ export default function PrebuiltBasesDesign() {
                 }}
               >
                 <span className="base_name"> {base.label}</span>
+                {/* prettier-ignore */}
                 <div className="base_group_size_indicator">
                   <FontAwesomeIcon icon={faUser} size="lg" style={{ color: "#ffd5b3" }} />
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    size="lg"
-                    style={{
-                      color:
-                        base.size === "duo" || base.size === "trio" || base.size === "squad" || base.size === "clan"
-                          ? "#ffd5b3"
-                          : "#4a4a4a",
-                    }}
-                  />
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    size="lg"
-                    style={{
-                      color:
-                        base.size === "trio" || base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a",
-                    }}
-                  />
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    size="lg"
-                    style={{ color: base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a" }}
-                  />
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    size="lg"
-                    style={{ color: base.size === "clan" ? "#ffd5b3" : "#4a4a4a" }}
-                  />
+                  <FontAwesomeIcon icon={faUser} size="lg" style={{color: base.size === "duo" || base.size === "trio" || base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a",}}/>
+                  <FontAwesomeIcon icon={faUser} size="lg" style={{color: base.size === "trio" || base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a",}}/>
+                  <FontAwesomeIcon icon={faUser} size="lg" style={{ color: base.size === "squad" || base.size === "clan" ? "#ffd5b3" : "#4a4a4a" }}/>
+                  <FontAwesomeIcon icon={faPlus} size="lg" style={{ color: base.size === "clan" ? "#ffd5b3" : "#4a4a4a" }}/>
                 </div>
               </button>
             ))}

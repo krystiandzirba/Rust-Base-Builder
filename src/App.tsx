@@ -123,9 +123,7 @@ export default App;
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
 // while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
-// make the build ghost models 1:1 the same models as selected, not simple planes, make the ghost model glow in and out
 // add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
-// disable prebuilt bases ghost models when the menu is closed
 
 // add a build + raid cost table on button click with selected models
 // change else if for cases
