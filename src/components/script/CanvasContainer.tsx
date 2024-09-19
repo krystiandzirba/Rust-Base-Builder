@@ -120,7 +120,7 @@ import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faEraser } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 type ModelType = {
   id: string;
@@ -234,11 +234,6 @@ export default function CanvasContainer() {
   const [keyboard_key, set_keyboard_key] = useState<string>("");
   const [key_press_trigger, set_key_press_trigger] = useState<number>(0);
   const [delete_object_trigger, set_delete_object_trigger] = useState<number>(0);
-
-  const [hover_save_base, set_hover_save_base] = useState<boolean>(false);
-  const [hover_delete_save_base, set_hover_delete_save_base] = useState<boolean>(false);
-
-  const [prebuilt_base_loaded, set_prebuilt_base_loaded] = useState<boolean>(false);
 
   const hasModelsDataChanged = useRef(false);
   const [delete_saved_data_question, set_delete_saved_data_question] = useState<boolean>(false);
@@ -974,9 +969,7 @@ export default function CanvasContainer() {
         current_loop_iteration += 1;
 
         if (current_loop_iteration === data_length) {
-          //  set_prebuilt_base_loaded(true);
           dispatch(set_allow_canvas_interaction_after_first_load(true));
-          // console.log(prebuilt_base_loaded, "preb");
         }
 
         AddStarterBase(model, name, new THREE.Euler(0, rotation, 0));
@@ -1020,8 +1013,6 @@ export default function CanvasContainer() {
         current_loop_iteration += 1;
 
         if (current_loop_iteration === data_length) {
-          // set_prebuilt_base_loaded(true);
-          //console.log(prebuilt_base_loaded, "recreated");
           dispatch(set_allow_canvas_interaction_after_first_load(true));
         }
 
@@ -1783,47 +1774,37 @@ export default function CanvasContainer() {
           {!performance_mode && <Postprocessing />}
         </Canvas>
       </div>
+
       <div className="local_storage_container">
-        <button
-          className="local_storage_button"
-          onMouseOver={() => {
-            set_hover_save_base(true);
-          }}
-          onClick={() => {
-            SaveCurrentBaseToLocalStorage();
-            if (audio) {
-              AudioPlayer(menu_sound);
-            }
-          }}
-          onMouseLeave={() => {
-            set_hover_save_base(false);
-          }}
-        >
-          <FontAwesomeIcon icon={faFloppyDisk} size="3x" style={{ color: hover_save_base ? "#ffd5b3" : "#bbbbbb" }} />
-          <a className="local_storage_button_text">save</a>
-        </button>
-        <button
-          className="local_storage_button"
-          onMouseOver={() => {
-            set_hover_delete_save_base(true);
-          }}
-          onClick={() => {
-            set_delete_saved_data_question(true);
-            if (audio) {
-              AudioPlayer(menu_sound);
-            }
-          }}
-          onMouseLeave={() => {
-            set_hover_delete_save_base(false);
-          }}
-        >
-          <FontAwesomeIcon
-            icon={faEraser}
-            size="3x"
-            style={{ color: hover_delete_save_base ? "#ffd5b3" : "#bbbbbb" }}
-          />
-          <a className="local_storage_button_text">delete</a>
-        </button>
+        <div className="local_storage_button_container">
+          <button
+            className="local_storage_button"
+            onClick={() => {
+              SaveCurrentBaseToLocalStorage();
+              if (audio) {
+                AudioPlayer(menu_sound);
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={faFloppyDisk} style={{ width: "95%", height: "95%" }} />
+          </button>
+          <span className="local_storage_button_text">save</span>
+        </div>
+
+        <div className="local_storage_button_container">
+          <button
+            className="local_storage_button"
+            onClick={() => {
+              set_delete_saved_data_question(true);
+              if (audio) {
+                AudioPlayer(menu_sound);
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={faTrashCan} style={{ width: "90%", height: "80%" }} />
+          </button>
+          <span className="local_storage_button_text">delete</span>
+        </div>
       </div>
 
       {/* <button

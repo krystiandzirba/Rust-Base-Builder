@@ -136,6 +136,8 @@ export default App;
 
 // compress all models in blender export
 
+// change all icons color change on hover, from js function to css hover
+
 //! edit mode performance impact: x + z mouse coordinates on model / preb. base hover,
 //! lower the update rate after a certain amount of models present in the canvas / rewrite the coordinates
 
