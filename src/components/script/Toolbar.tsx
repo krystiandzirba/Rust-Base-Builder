@@ -81,7 +81,7 @@ const Toolbar = () => {
 
         <button
           onClick={() => {
-            ChangePageMode("edit"), posthog.capture("edit mode clicked");
+            ChangePageMode("edit");
           }}
           className={
             page_mode === "edit"

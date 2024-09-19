@@ -1106,7 +1106,7 @@ export default function PrebuiltBasesDesign() {
                 }
               }}
             >
-              <button
+              <div
                 className={
                   base_prebuilt_selection === "PrebuildBaseI" || base_prebuilt_selection === "PrebuildBaseII"
                     ? "prebuilt_bases_design_type_buttons_disabled"
@@ -1125,7 +1125,7 @@ export default function PrebuiltBasesDesign() {
                         : "black",
                   }}
                 />
-              </button>
+              </div>
               <span>tutorial</span>
             </button>
             <button
@@ -1134,7 +1134,7 @@ export default function PrebuiltBasesDesign() {
                 ChangeBaseMetarial("stone");
               }}
             >
-              <button
+              <div
                 className={
                   material_type_test === "stone"
                     ? "prebuilt_bases_design_type_buttons type_buttons_active"
@@ -1146,7 +1146,7 @@ export default function PrebuiltBasesDesign() {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center center",
                 }}
-              ></button>
+              ></div>
               <span>stone</span>
             </button>
             <button
@@ -1155,7 +1155,7 @@ export default function PrebuiltBasesDesign() {
                 ChangeBaseMetarial("metal");
               }}
             >
-              <button
+              <div
                 className={
                   material_type_test === "metal"
                     ? "prebuilt_bases_design_type_buttons type_buttons_active"
@@ -1167,7 +1167,7 @@ export default function PrebuiltBasesDesign() {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center center",
                 }}
-              ></button>
+              ></div>
               <span>metal</span>
             </button>
             <button
@@ -1176,7 +1176,7 @@ export default function PrebuiltBasesDesign() {
                 ChangeBaseMetarial("armored");
               }}
             >
-              <button
+              <div
                 className={
                   material_type_test === "armored"
                     ? "prebuilt_bases_design_type_buttons type_buttons_active"
@@ -1188,7 +1188,7 @@ export default function PrebuiltBasesDesign() {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center center",
                 }}
-              ></button>
+              ></div>
               <span>armored</span>
             </button>
           </div>

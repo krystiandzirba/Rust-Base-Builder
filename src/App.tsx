@@ -88,7 +88,6 @@ export default App;
 // add custom rotation angle and distance unit to transform the object
 // add 1st person walking in overview and raid mode
 // add new keyboard controls description - 2d camera (moving the objects) + creation mode
-// detailed list of currently active models (number of doors, walls ...)
 
 // fix the camera NSEW position, it is incorrectly calculated
 // fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
