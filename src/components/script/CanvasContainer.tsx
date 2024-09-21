@@ -10,7 +10,7 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 
-import { RootState } from "../../Store";
+import { RootState, set_delete_object_mouse_trigger } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 import {
   set_cursor_type,
@@ -120,7 +120,7 @@ import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan, faEraser, faDumpster} from "@fortawesome/free-solid-svg-icons"; //prettier-ignore
 
 type ModelType = {
   id: string;
@@ -234,11 +234,11 @@ export default function CanvasContainer() {
   const [keyboard_key, set_keyboard_key] = useState<string>("");
   const [key_press_trigger, set_key_press_trigger] = useState<number>(0);
   const [delete_object_trigger, set_delete_object_trigger] = useState<number>(0);
+  const [canvas_model_eraser, set_canvas_model_eraser] = useState<string>("off");
+  const [display_remove_all_models_question, set_display_remove_all_models_question] = useState<boolean>(false);
+  const [display_remove_saved_data_question, set_display_remove_saved_data_question] = useState<boolean>(false);
 
   const hasModelsDataChanged = useRef(false);
-  const [delete_saved_data_question, set_delete_saved_data_question] = useState<boolean>(false);
-  const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
-  const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
 
   const object_north_direction = THREE.MathUtils.degToRad(0);
   const object_south_direction = THREE.MathUtils.degToRad(180);
@@ -539,6 +539,8 @@ export default function CanvasContainer() {
       } else {
         console.error("Camera is null or undefined");
       }
+
+      //cleanup
 
       const bottom_intersects = raycaster.intersectObject(raycasterBottomIntersector.current!);
       const front_intersects = raycaster.intersectObject(raycasterFrontIntersector.current!);
@@ -1086,8 +1088,12 @@ export default function CanvasContainer() {
 
   //* ------------------------- ↑ Add prebuild bases ↑ -------------------------
 
+  function DeleteAllObjects() {
+    dispatch(set_delete_object_mode("delete_all_object"));
+    dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
+  }
+
   function IsOffsetActive(): boolean {
-    // Ensure it returns a boolean value.
     return !!(model_x_position_offset || model_z_position_offset);
   }
 
@@ -1658,6 +1664,17 @@ export default function CanvasContainer() {
             } else {
               AddCanvasModel();
             }
+
+            if (canvas_model_eraser === "on") {
+              RemoveSelectedModel(selected_model_id);
+              removeModelsDataObjectInfo(selected_model_id);
+              dispatch(set_selected_model_id("empty"));
+              dispatch(set_delete_object_mode("none"));
+              dispatch(set_object_selected(false));
+              if (audio) {
+                AudioPlayer(delete_sound);
+              }
+            }
           }}
           onMouseUp={() => Camera3DDirection()}
           onPointerMissed={(e) => {
@@ -1795,7 +1812,7 @@ export default function CanvasContainer() {
           <button
             className="local_storage_button"
             onClick={() => {
-              set_delete_saved_data_question(true);
+              set_display_remove_saved_data_question(true);
               if (audio) {
                 AudioPlayer(menu_sound);
               }
@@ -1807,6 +1824,58 @@ export default function CanvasContainer() {
         </div>
       </div>
 
+      {page_mode === "edit" && (
+        <div className="delete_canvas_models_main_container">
+          <div className="erase_canvas_models_button_container">
+            <button
+              className="erase_canvas_models_button"
+              onClick={() => {
+                if (canvas_model_eraser === "off") {set_canvas_model_eraser("on")} else set_canvas_model_eraser("off") //prettier-ignore
+                if (audio) {AudioPlayer(menu_sound)}}} //prettier-ignore
+            >
+              {/*prettier-ignore */}
+              <FontAwesomeIcon icon={faEraser} style={{ width: "80%", height: "80%", color: canvas_model_eraser === "on" ? "#ffd5b3" : "#bbbbbb"}} />
+            </button>
+            <span className="erase_canvas_models_button_description">model eraser ({canvas_model_eraser})</span>
+          </div>
+
+          <div className="delete_all_canvas_models_button_container">
+            <button
+              className="delete_all_canvas_models_button"
+              onClick={() => {set_display_remove_all_models_question(true); if (audio) {AudioPlayer(menu_sound)}}} //prettier-ignore
+            >
+              <FontAwesomeIcon icon={faDumpster} style={{ width: "80%", height: "80%" }} />
+            </button>
+            <span className="delete_all_canvas_models_button_description">delete all models</span>
+          </div>
+        </div>
+      )}
+
+      {display_remove_all_models_question && (
+        <div className="delete_all_models_question_main_container">
+          {/*prettier-ignore*/}
+          <div className="delete_all_models_question_description">are you sure you want to delete all the objects?</div>
+          {/*prettier-ignore*/}
+          <div className="delete_all_models_answer_container">
+            <div onClick={() => {DeleteAllObjects(), set_display_remove_all_models_question(false)}} className="delete_all_models_answer_button">yes</div>
+            <div onClick={() => {set_display_remove_all_models_question(false); if (audio) {AudioPlayer(menu_sound)}}} className="delete_all_models_answer_button">no</div>
+          </div>
+        </div>
+      )}
+
+      {display_remove_saved_data_question && (
+        <div className="delete_saved_data_question_main_container">
+          {/*prettier-ignore*/}
+          <div className="delete_saved_data_question_description">are you sure you want to delete the saved data? This process is irreversible.</div>
+          {/*prettier-ignore*/}
+          <div className="delete_saved_data_answer_container">
+            <div onClick={() => {set_display_remove_saved_data_question(false); DeleteCurrentBaseFromLocalStorage(); if (audio) {AudioPlayer(menu_sound)}}} 
+              className="delete_saved_data_answer_button">yes</div>
+            <div onClick={() => {set_display_remove_saved_data_question(false); if (audio) {AudioPlayer(menu_sound)}}} className="delete_saved_data_answer_button">no</div>
+          </div>
+        </div>
+      )}
+
       {/* <button
         className="test_button"
         onClick={() => {
@@ -1814,45 +1883,6 @@ export default function CanvasContainer() {
           UpdateSelectedModelTier(selected_model_id);
         }}
       ></button> */}
-
-      {delete_saved_data_question && (
-        <div className="delete_all_question_container">
-          are you sure you want to delete the saved data? This process is irreversible.
-        </div>
-      )}
-      {delete_saved_data_question && (
-        <div className="delete_all_question_buttons_container">
-          <button
-            className="delete_all_question_button"
-            onClick={() => {
-              set_delete_saved_data_question(false);
-              DeleteCurrentBaseFromLocalStorage();
-              if (audio) {
-                AudioPlayer(menu_sound);
-              }
-            }}
-            onMouseEnter={() => set_yes_answer_hovered(true)}
-            onMouseLeave={() => set_yes_answer_hovered(false)}
-            style={{ color: yes_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
-          >
-            yes
-          </button>
-          <button
-            className="delete_all_question_button"
-            onClick={() => {
-              set_delete_saved_data_question(false);
-              if (audio) {
-                AudioPlayer(menu_sound);
-              }
-            }}
-            onMouseEnter={() => set_no_answer_hovered(true)}
-            onMouseLeave={() => set_no_answer_hovered(false)}
-            style={{ color: no_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
-          >
-            no
-          </button>
-        </div>
-      )}
     </>
   );
 }

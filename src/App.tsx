@@ -134,6 +134,9 @@ export default App;
 // add MUI skeleton
 // change the fontawesome icons for MUI icons
 
+// dynamic performance settings based on users gpu
+// load textureless (prop) models on mobile instead of the textured ones
+
 // compress all models in blender export
 
 // change all icons color change on hover, from js function to css hover

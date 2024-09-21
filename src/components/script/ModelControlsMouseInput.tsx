@@ -27,10 +27,6 @@ import {
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import buttons_sound from "../../audio/buttons_sound.mp3";
-import menu_sound from "../../audio/menu_sound.mp3";
-
-import dumpsterClosed from "../../icons/dumpster_closed_bw.png";
-import dumpsterOpened from "../../icons/dumpster_opened.png";
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -57,13 +53,7 @@ export default function ControlsInput() {
   const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
   const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
 
-  const [dumpster_hovered, set_dumpster_hovered] = useState<boolean>(false);
-
   const [unit_distance_type, set_unit_distance_type] = useState<string>("1");
-
-  const [display_remove_all_models_question, set_display_remove_all_models_question] = useState<boolean>(false);
-  const [yes_answer_hovered, set_yes_answer_hovered] = useState<boolean>(false);
-  const [no_answer_hovered, set_no_answer_hovered] = useState<boolean>(false);
 
   const [enable_custom_distance, set_enable_custom_distance] = useState<boolean>(false);
   const [custom_distance_unit, set_custom_distance_unit] = useState<number>(0);
@@ -135,19 +125,6 @@ export default function ControlsInput() {
   function ObjectRotateButtonRight() {
     dispatch(set_button_input("rotate_right"));
     dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function DumpsterMouseEnter() {
-    set_dumpster_hovered(true);
-  }
-
-  function DumpsterMouseLeave() {
-    set_dumpster_hovered(false);
-  }
-
-  function DeleteAllObjects() {
-    dispatch(set_delete_object_mode("delete_all_object"));
-    dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
   }
 
   function ChangeDistanceUnitButton(distance: number) {
@@ -390,59 +367,6 @@ export default function ControlsInput() {
               E
             </button>
           </div>
-
-          <div className="remove_all_model_description" style={{ color: dumpster_hovered ? "#ffd5b3" : "#bbbbbb" }}>
-            delete all
-          </div>
-
-          <button
-            className="remove_all_models"
-            style={{
-              backgroundImage: `url(${dumpster_hovered ? dumpsterOpened : dumpsterClosed})`,
-              backgroundSize: "cover",
-            }}
-            onClick={() => {
-              set_display_remove_all_models_question(true);
-              if (audio) {
-                AudioPlayer(menu_sound);
-              }
-            }}
-            onMouseEnter={DumpsterMouseEnter}
-            onMouseLeave={DumpsterMouseLeave}
-          ></button>
-          {display_remove_all_models_question && (
-            <div className="delete_all_question_container">are you sure you want to delete all the objects?</div>
-          )}
-          {display_remove_all_models_question && (
-            <div className="delete_all_question_buttons_container">
-              <button
-                className="delete_all_question_button"
-                onClick={() => {
-                  DeleteAllObjects();
-                  set_display_remove_all_models_question(false);
-                }}
-                onMouseEnter={() => set_yes_answer_hovered(true)}
-                onMouseLeave={() => set_yes_answer_hovered(false)}
-                style={{ color: yes_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
-              >
-                yes
-              </button>
-              <button
-                className="delete_all_question_button"
-                onClick={() => {
-                  set_display_remove_all_models_question(false);
-                  if (audio) {
-                    AudioPlayer(menu_sound);
-                  }
-                }}
-                onMouseEnter={() => set_no_answer_hovered(true)}
-                onMouseLeave={() => set_no_answer_hovered(false)}
-                style={{ color: no_answer_hovered ? "#ffd5b3" : "#bbbbbb" }}
-              >
-                no
-              </button>
-            </div>
-          )}
         </>
       )}
     </>
