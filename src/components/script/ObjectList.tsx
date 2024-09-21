@@ -105,14 +105,30 @@ const SearchBarField = styled(TextField)({
   },
   "& label": {
     color: "#bbbbbb",
+    fontSize: "calc(0.7vw + 0.4vh)",
   },
   "& input": {
     color: "#bbbbbb",
+    height: "30%",
+    boxSizing: "border-box",
+    fontSize: "calc(0.7vw + 0.4vh)",
+    textAlign: "center",
+  },
+  "& .MuiInputBase-input": {
+    height: "30%",
+    fontSize: "calc(0.7vw + 0.4vh)",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   "& .MuiInput-underline:after": {
     borderBottomColor: "#ffcea6",
   },
   "& .MuiOutlinedInput-root": {
+    height: "30%",
     "& fieldset": {
       borderColor: "white",
     },
@@ -124,13 +140,16 @@ const SearchBarField = styled(TextField)({
     },
   },
 });
+
 interface SearchBarProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
-  return <SearchBarField className="search_bar" label="Search..." type="search" value={value} onChange={onChange} />;
+  return (
+    <SearchBarField className="search_bar" label="Search model..." type="search" value={value} onChange={onChange} />
+  );
 };
 
 //? ----------------------------------------------------------------------------------------------------

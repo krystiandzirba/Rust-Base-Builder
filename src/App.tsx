@@ -133,6 +133,7 @@ export default App;
 // change the build checkbox for MUI checkbox
 // add MUI skeleton
 // change the fontawesome icons for MUI icons
+// remove the mui search bar, change it for something different
 
 // dynamic performance settings based on users gpu
 // load textureless (prop) models on mobile instead of the textured ones
