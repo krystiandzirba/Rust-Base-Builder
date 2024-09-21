@@ -248,7 +248,6 @@ const pageSettingsSlice = createSlice({
   name: "page settings",
   initialState: {
     enable_hints: true,
-    enable_presets: true,
     enable_cameras: true,
     enable_structures_visibility: true,
     enable_resource_container: true,
@@ -269,9 +268,6 @@ const pageSettingsSlice = createSlice({
   reducers: {
     set_enable_hints: (state, action) => {
       return { ...state, enable_hints: action.payload };
-    },
-    set_enable_presets: (state, action) => {
-      return { ...state, enable_presets: action.payload };
     },
     set_enable_cameras: (state, action) => {
       return { ...state, enable_cameras: action.payload };
@@ -369,7 +365,6 @@ export const {
 
 export const {
   set_enable_hints,
-  set_enable_presets,
   set_enable_cameras,
   set_enable_structures_visibility,
   set_enable_resource_container,

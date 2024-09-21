@@ -1,5 +1,4 @@
 import Toolbar from "./components/script/Toolbar.tsx";
-import Presets from "./components/script/Presets.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
 import BuildCalculator from "./components/script/BuildCalculator.tsx";
@@ -17,7 +16,6 @@ import HardwareParameters from "./components/script/HardwareParameters.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
-import "./components/styles/presets.css";
 import "./components/styles/version.css";
 import "./components/styles/camera_switch.css";
 import "./components/styles/canvas_container.css";
@@ -41,7 +39,6 @@ function App() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
 
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
-  const enable_presets = useSelector((state: RootState) => state.pageSettings.enable_presets);
   const enable_cameras = useSelector((state: RootState) => state.pageSettings.enable_cameras);
   const enable_structures_visibility = useSelector((state: RootState) => state.pageSettings.enable_structures_visibility); //prettier-ignore
   const enable_resource_container = useSelector((state: RootState) => state.pageSettings.enable_resource_container);
@@ -67,7 +64,6 @@ function App() {
         {enable_cameras && <CameraType />}
         {enable_hints && <Hints />}
         {enable_structures_visibility && <StructureVisibilityMode />}
-        {enable_presets && <Presets />}
         <Settings />
         <MobileAlert />
         <Github />
@@ -141,6 +137,8 @@ export default App;
 // compress all models in blender export
 
 // change all icons color change on hover, from js function to css hover
+
+// add the presets back (later)
 
 //! edit mode performance impact: x + z mouse coordinates on model / preb. base hover,
 //! lower the update rate after a certain amount of models present in the canvas / rewrite the coordinates

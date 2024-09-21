@@ -166,7 +166,7 @@
   height: 8vh;
   background-color: transparent;
   position: absolute;
-  z-index: 60;
+  z-index: 40;
   left: 23.25vw;
   top: 91.5vh;
   display: flex;

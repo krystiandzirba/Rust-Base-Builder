@@ -12,7 +12,6 @@ import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 import {
   set_enable_hints,
-  set_enable_presets,
   set_enable_cameras,
   set_enable_structures_visibility,
   set_enable_resource_container,
@@ -48,7 +47,6 @@ import buttons_sound from "../../audio/buttons_sound.mp3";
 const Settings = () => {
   const dispatch = useDispatch();
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
-  const enable_presets = useSelector((state: RootState) => state.pageSettings.enable_presets);
   const enable_cameras = useSelector((state: RootState) => state.pageSettings.enable_cameras);
   const enable_structures_visibility = useSelector((state: RootState) => state.pageSettings.enable_structures_visibility); //prettier-ignore
   const enable_resource_container = useSelector((state: RootState) => state.pageSettings.enable_resource_container);
@@ -142,17 +140,6 @@ const Settings = () => {
       dispatch(set_enable_hints(true));
     } else if (!toggle) {
       dispatch(set_enable_hints(false));
-    }
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
-  }
-
-  function HandlePresetsSwitch(toggle: boolean) {
-    if (toggle) {
-      dispatch(set_enable_presets(true));
-    } else if (!toggle) {
-      dispatch(set_enable_presets(false));
     }
     if (audio) {
       AudioPlayer(buttons_sound);
@@ -346,32 +333,6 @@ const Settings = () => {
               }
             >
               {enable_hints ? "disable" : "disabled"}
-            </div>
-          </div>
-        </div>
-
-        <div className="settings_element">
-          <div className="settings_element_description">display base presets:</div>
-          <div className="settings_element_buttons_container">
-            <div
-              onClick={() => HandlePresetsSwitch(true)}
-              className={
-                enable_presets
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_left"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_left"
-              }
-            >
-              {!enable_presets ? "enable" : "enabled"}
-            </div>
-            <div
-              onClick={() => HandlePresetsSwitch(false)}
-              className={
-                !enable_presets
-                  ? "settings_element_buttons settings_element_buttons_enable settings_element_buttons_right"
-                  : "settings_element_buttons settings_element_buttons_disable settings_element_buttons_right"
-              }
-            >
-              {enable_presets ? "disable" : "disabled"}
             </div>
           </div>
         </div>
