@@ -1,3 +1,3 @@
 export default function Version() {
-  return <h2 className="version">Rust Base Builder v.5.23.0</h2>;
+  return <h2 className="version">Rust Base Builder v.5.24.0</h2>;
 }

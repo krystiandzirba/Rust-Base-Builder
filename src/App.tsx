@@ -57,7 +57,7 @@ function App() {
       <KeyboardControls map={map}>
         <CanvasContainer />
         {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
-        {page_mode === "raid" && <RaidCalculator />}
+        {enable_resource_container && page_mode === "raid" && <RaidCalculator />}
         <ObjectList />
         {model_transform_controls && <ControlsInput />}
         <Toolbar />
@@ -123,7 +123,6 @@ export default App;
 // add a build + raid cost table on button click with selected models
 // change else if for cases
 
-// change the color palette
 // prevent key elements to be selectible by user (text) but still be a clickable part of a button
 // change the cursor type when hovering over buttons
 // change the build checkbox for MUI checkbox
@@ -131,14 +130,21 @@ export default App;
 // change the fontawesome icons for MUI icons
 // remove the mui search bar, change it for something different
 
-// dynamic performance settings based on users gpu
-// load textureless (prop) models on mobile instead of the textured ones
-
 // compress all models in blender export
 
 // change all icons color change on hover, from js function to css hover
 
 // add the presets back (later)
+
+// bug: performance monitor(on) -> performance monitor(off) = stuttering
+// bug: lighting does not work after displaying the performance monitor
+
+// 6.x.x:
+
+// dynamic performance settings based on users gpu
+// load textureless (prop) models on mobile instead of the textured ones
+
+// change the color palette
 
 //! edit mode performance impact: x + z mouse coordinates on model / preb. base hover,
 //! lower the update rate after a certain amount of models present in the canvas / rewrite the coordinates

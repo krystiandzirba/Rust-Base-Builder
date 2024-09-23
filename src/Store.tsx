@@ -261,7 +261,7 @@ const pageSettingsSlice = createSlice({
     bloom_state: true,
     better_lighting_state: true,
     ssao_state: true,
-    antialiasing_state: false,
+    antialiasing_state: true,
 
     audio: true,
   },

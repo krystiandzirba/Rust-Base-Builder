@@ -1,3 +1,58 @@
+.settings_and_controls_main_container {
+  position: absolute;
+  width: 8.5vw;
+  height: 8.5vh;
+  z-index: 55;
+  left: 62.85vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  top: 0.75vh;
+}
+
+.settings_main_containter,
+.controls_main_containter {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings_main_containter_button,
+.controls_main_containter_button {
+  width: 100%;
+  height: 80%;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.settings_main_containter_description,
+.controls_main_containter_description {
+  width: 100%;
+  height: 20%;
+  color: #bbbbbb;
+  font-size: 0.7vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.settings_button_thumbnail,
+.controls_button_thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  margin: 0;
+  padding: 0;
+}
+
 .settings_container,
 .controls_container {
   width: 32%;
@@ -19,10 +74,10 @@
 
 .settings_container_hidden,
 .controls_container_hidden {
-  transform: translateY(100%);
+  transform: translateY(130%);
 }
 
-.settings_segment_title {
+.settings_and_controls_segment_title {
   height: 3vh;
   width: 100%;
   background-color: rgb(0, 0, 0);
@@ -36,7 +91,8 @@
   justify-content: center;
 }
 
-.settings_element {
+.settings_segment_container,
+.controls_segment_container {
   width: 95%;
   height: 5vh;
   display: flex;
@@ -49,7 +105,8 @@
   margin-left: 2.5%;
 }
 
-.settings_element_description {
+.settings_segment_type,
+.controls_segment_type {
   width: 55%;
   height: 80%;
   color: #bbbbbb;
@@ -62,7 +119,7 @@
   justify-content: center;
 }
 
-.settings_element_buttons_container {
+.settings_segment_buttons_container {
   width: 40%;
   height: 80%;
   display: flex;
@@ -101,74 +158,7 @@
   border-radius: 0 1vh 1vh 0;
 }
 
-.settings_button_container {
-  width: 2.25vw;
-  height: 4.7vh;
-  position: absolute;
-  top: 1.5vh;
-  left: 64.25vw;
-  z-index: 25;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.settings_button_container_spin {
-  animation: spin 5s infinite linear;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.controls_button_container {
-  width: 2.925vw;
-  height: 5vh;
-  position: absolute;
-  top: 1.125vh;
-  left: 67.5vw;
-  z-index: 25;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.controls_settings_description_container {
-  position: absolute;
-  width: 7.25vw;
-  height: 2.5vh;
-  left: 63.5vw;
-  top: 6.25vh;
-  z-index: 40;
-  display: flex;
-  flex-direction: row;
-  color: #bbbbbb;
-  font-size: 0.7vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-}
-
-.controls_settings_description_container_text {
-  width: 50%;
-  text-align: center;
-}
-
-.settings_button {
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  border: none;
-  background-color: transparent;
-}
-
-.controls_element {
+.controls_segment_description {
   width: 50%;
   height: 100%;
   color: #ffd5b3;
