@@ -67,25 +67,14 @@ export default function ResourceCounter() {
 
     let garage_door_count = models.filter((model) => model === "GarageDoor").length;
 
-    set_total_misc_count(
-      misc_tool_cupboard_count +
-        misc_wood_storage_box_count +
-        misc_large_wood_box_count +
-        misc_furnace_count +
-        misc_workbench_t3_count +
-        misc_sleeping_bag_count +
-        garage_door_count
-    );
+    set_total_misc_count(misc_tool_cupboard_count + misc_wood_storage_box_count + misc_large_wood_box_count + misc_furnace_count + misc_workbench_t3_count + misc_sleeping_bag_count + garage_door_count) //prettier-ignore
 
     // -------------------------  miscs cost -------------------------
     // -------------------------  total misc cost (wood) -------------------------
 
     let wood_misc_cost_1000 = misc_tool_cupboard_count * 1000;
-
     let wood_misc_cost_250 = misc_large_wood_box_count * 250;
-
     let wood_misc_cost_100 = (misc_large_wood_box_count + misc_furnace_count) * 100;
-
     set_total_wood_misc_cost(wood_misc_cost_1000 + wood_misc_cost_250 + wood_misc_cost_100);
 
     // -------------------------  total misc cost (stone) -------------------------
@@ -127,12 +116,7 @@ export default function ResourceCounter() {
 
     // -------------------------  display the values -------------------------
 
-    set_components_cost([
-      { scrap: total_scrap_misc_cost },
-      { gear: total_gear_misc_cost },
-      { sewing_kit: 0 },
-      { lq_fuel: total_lq_fuel_misc_cost },
-    ]);
+    set_components_cost([{ scrap: total_scrap_misc_cost }, { gear: total_gear_misc_cost }, { sewing_kit: 0 }, { lq_fuel: total_lq_fuel_misc_cost }]) //prettier-ignore
   }
 
   //* ------------------------- ↑ Misc And Components Cost Counter ↑ -------------------------
@@ -144,274 +128,179 @@ export default function ResourceCounter() {
   function CountBuildCost(models: string[]) {
     // -------------------------  total build cost (stone) -------------------------
 
-    let stone_build_cost_300 =
-      models.filter(
-        (model) =>
-          model === "StoneFoundationSquareHigh" ||
-          model === "StoneFoundationSquareMid" ||
-          model === "StoneFoundationSquareLow" ||
-          model === "StoneWallHigh" ||
-          model === "StoneWallMid" ||
-          model === "StoneStairsLShape" ||
-          model === "StoneStairsUShape"
-      ).length * 300;
+    const stone_models_cost_mapping: { [key: string]: number } = {
+      StoneFoundationSquareHigh: 300,
+      StoneFoundationSquareMid: 300,
+      StoneFoundationSquareLow: 300,
+      StoneWallHigh: 300,
+      StoneWallMid: 300,
+      StoneStairsLShape: 300,
+      StoneStairsUShape: 300,
+      StoneDoorway: 210,
+      StoneWindow: 210,
+      StoneFoundationTriangleHigh: 150,
+      StoneFoundationTriangleMid: 150,
+      StoneFoundationTriangleLow: 150,
+      StoneWallLow: 150,
+      StoneWallFrame: 150,
+      StoneFloorFrameSquare: 150,
+      StoneFloorSquare: 150,
+      StoneRoofSquare: 150,
+      StoneRoofTriangle: 150,
+      StoneFloorFrameTriangle: 75,
+      StoneFloorTriangle: 75,
+    };
 
-    // prettier-ignore
-    let stone_build_cost_210 =
-      models.filter(
-        (model) => 
-        model === "StoneDoorway" ||
-        model === "StoneWindow"
-    ).length * 210;
-
-    let stone_build_cost_150 =
-      models.filter(
-        (model) =>
-          model === "StoneFoundationTriangleHigh" ||
-          model === "StoneFoundationTriangleMid" ||
-          model === "StoneFoundationTriangleLow" ||
-          model === "StoneWallLow" ||
-          model === "StoneWallFrame" ||
-          model === "StoneFloorFrameSquare" ||
-          model === "StoneFloorSquare" ||
-          model === "StoneRoofSquare" ||
-          model === "StoneRoofTriangle"
-      ).length * 150;
-
-    // prettier-ignore
-    let stone_build_cost_75 =
-     models.filter(
-        (model) =>
-          model === "StoneFloorFrameTriangle" ||
-        model === "StoneFloorTriangle"
-    ).length * 75;
-
-    let total_stone_build_cost =
-      stone_build_cost_300 + stone_build_cost_210 + stone_build_cost_150 + stone_build_cost_75;
+    let total_stone_build_cost = models.reduce((total, model) => {
+      return total + (stone_models_cost_mapping[model] || 0);
+    }, 0);
 
     // -------------------------  total build cost (metal) -------------------------
 
-    // prettier-ignore
-    let metal_build_cost_300 =
-        models.filter(
-          (model) =>
-            model === "GarageDoor"
-        ).length * 300;
+    const metal_models_cost_mapping: { [key: string]: number } = {
+      GarageDoor: 300,
+      MetalFoundationSquareHigh: 200,
+      MetalFoundationSquareMid: 200,
+      MetalFoundationSquareLow: 200,
+      MetalWallHigh: 200,
+      MetalWallMid: 200,
+      MetalStairsUShape: 200,
+      MetalStairsLShape: 200,
+      MetalDoor: 150,
+      MetalDoorway: 140,
+      MetalWindow: 140,
+      MetalFoundationTriangleHigh: 100,
+      MetalFoundationTriangleMid: 100,
+      MetalFoundationTriangleLow: 100,
+      MetalWallLow: 100,
+      MetalWallFrame: 100,
+      MetalFloorFrameSquare: 100,
+      MetalFloorSquare: 100,
+      MetalVerticalEmbrasure: 100,
+      MetalRoofSquare: 100,
+      MetalRoofTriangle: 100,
+      MetalFloorFrameTriangle: 50,
+      MetalFloorTriangle: 50,
+      StrenghtenedGlassWindow: 50,
+    };
 
-    let metal_build_cost_200 =
-      models.filter(
-        (model) =>
-          model === "MetalFoundationSquareHigh" ||
-          model === "MetalFoundationSquareMid" ||
-          model === "MetalFoundationSquareLow" ||
-          model === "MetalWallHigh" ||
-          model === "MetalWallMid" ||
-          model === "MetalStairsUShape" ||
-          model === "MetalStairsLShape"
-      ).length * 200;
-
-    // prettier-ignore
-    let metal_build_cost_150 =
-      models.filter(
-        (model) =>
-          model === "MetalDoor" 
-      ).length * 150;
-
-    // prettier-ignore
-    let metal_build_cost_140 =
-      models.filter(
-        (model) =>
-          model === "MetalDoorway" ||
-          model === "MetalWindow"
-      ).length * 140;
-
-    let metal_build_cost_100 =
-      models.filter(
-        (model) =>
-          model === "MetalFoundationTriangleHigh" ||
-          model === "MetalFoundationTriangleMid" ||
-          model === "MetalFoundationTriangleLow" ||
-          model === "MetalWallLow" ||
-          model === "MetalWallFrame" ||
-          model === "MetalFloorFrameSquare" ||
-          model === "MetalFloorSquare" ||
-          model === "MetalVerticalEmbrasure" ||
-          model === "MetalRoofSquare" ||
-          model === "MetalRoofTriangle"
-      ).length * 100;
-
-    //prettier-ignore
-    let metal_build_cost_50 =
-        models.filter(
-            (model) =>
-              model === "MetalFloorFrameTriangle" ||
-            model === "MetalFloorTriangle" ||
-            model === "StrenghtenedGlassWindow"
-  ).length * 50;
-
-    let total_metal_build_cost =
-      metal_build_cost_300 +
-      metal_build_cost_200 +
-      metal_build_cost_150 +
-      metal_build_cost_140 +
-      metal_build_cost_100 +
-      metal_build_cost_50;
+    let total_metal_build_cost = models.reduce((total, model) => {
+      return total + (metal_models_cost_mapping[model] || 0);
+    }, 0);
 
     // -------------------------  total build cost (hq metal) -------------------------
 
-    let hqm_build_cost_25 =
-      models.filter(
-        (model) =>
-          model === "ArmoredFoundationSquareHigh" ||
-          model === "ArmoredFoundationSquareMid" ||
-          model === "ArmoredFoundationSquareLow" ||
-          model === "ArmoredWallHigh" ||
-          model === "ArmoredWallMid" ||
-          model === "ArmoredStairsLShape" ||
-          model === "ArmoredStairsUShape"
-      ).length * 25;
+    const armored_models_cost_mapping: { [key: string]: number } = {
+      ArmoredFoundationSquareHigh: 25,
+      ArmoredFoundationSquareMid: 25,
+      ArmoredFoundationSquareLow: 25,
+      ArmoredWallHigh: 25,
+      ArmoredWallMid: 25,
+      ArmoredStairsLShape: 25,
+      ArmoredStairsUShape: 25,
+      ArmoredDoorway: 18,
+      ArmoredWindow: 18,
+      ArmoredFoundationTriangleHigh: 13,
+      ArmoredFoundationTriangleMid: 13,
+      ArmoredFoundationTriangleLow: 13,
+      ArmoredWallLow: 13,
+      ArmoredFloorFrameSquare: 13,
+      ArmoredWallFrame: 13,
+      ArmoredFloorSquare: 13,
+      ArmoredRoofSquare: 13,
+      ArmoredRoofTriangle: 13,
+      ArmoredFloorFrameTriangle: 7,
+      ArmoredFloorTriangle: 7,
+    };
 
-    // prettier-ignore
-    let hqm_build_cost_18 =
-      models.filter(
-        (model) =>
-          model === "ArmoredDoorway" ||
-          model === "ArmoredWindow"
-      ).length * 18;
-
-    let hqm_build_cost_13 =
-      models.filter(
-        (model) =>
-          model === "ArmoredFoundationTriangleHigh" ||
-          model === "ArmoredFoundationTriangleMid" ||
-          model === "ArmoredFoundationTriangleLow" ||
-          model === "ArmoredWallLow" ||
-          model === "ArmoredFloorFrameSquare" ||
-          model === "ArmoredWallFrame" ||
-          model === "ArmoredFloorSquare" ||
-          model === "ArmoredRoofSquare" ||
-          model === "ArmoredRoofTriangle"
-      ).length * 13;
-
-    //prettier-ignore
-    let hqm_build_cost_7 =
-        models.filter(
-            (model) =>
-              model === "ArmoredFloorFrameTriangle" ||
-            model === "ArmoredFloorTriangle"
-        ).length * 7;
-
-    let total_hqm_build_cost = hqm_build_cost_25 + hqm_build_cost_18 + hqm_build_cost_13 + hqm_build_cost_7;
+    let total_hqm_build_cost = models.reduce((total, model) => {
+      return total + (armored_models_cost_mapping[model] || 0);
+    }, 0);
 
     //* ------------------------- ↓ wood needed to upgrade from twig to higher quality ↓ -------------------------
     // building the base requires the objects to be upgraded from twig -> wood -> stone -> hq metal
     // this app skips the twig and wood part and starts building the base from the stone and hq metal (soon)
     // so the wood cost for previous tiers is calculated here
 
-    let twig_wood_upgrade_50 =
-      models.filter(
-        (model) =>
-          model === "StoneFoundationSquareHigh" ||
-          model === "StoneFoundationSquareMid" ||
-          model === "StoneFoundationSquareLow" ||
-          model === "StoneWallHigh" ||
-          model === "StoneWallMid" ||
-          model === "StoneStairsLShape" ||
-          model === "StoneStairsUShape" ||
-          //prettier-ignore
-          model === "MetalFoundationSquareHigh" ||
-          model === "MetalFoundationSquareMid" ||
-          model === "MetalFoundationSquareLow" ||
-          model === "MetalStairsLShape" ||
-          model === "MetalStairsUShape" ||
-          model === "MetalWallHigh" ||
-          model === "MetalWallMid" ||
-          //prettier-ignore
-          model === "ArmoredFoundationSquareHigh" ||
-          model === "ArmoredFoundationSquareMid" ||
-          model === "ArmoredFoundationSquareLow" ||
-          model === "ArmoredWallHigh" ||
-          model === "ArmoredWallMid" ||
-          model === "ArmoredStairsLShape" ||
-          model === "ArmoredStairsUShape"
-      ).length * 50;
+    const upgrade_from_wood_model_cost: { [key: string]: number } = {
+      StoneFoundationSquareHigh: 50,
+      StoneFoundationSquareMid: 50,
+      StoneFoundationSquareLow: 50,
+      StoneWallHigh: 50,
+      StoneWallMid: 50,
+      StoneStairsLShape: 50,
+      StoneStairsUShape: 50,
+      MetalFoundationSquareHigh: 50,
+      MetalFoundationSquareMid: 50,
+      MetalFoundationSquareLow: 50,
+      MetalStairsLShape: 50,
+      MetalStairsUShape: 50,
+      MetalWallHigh: 50,
+      MetalWallMid: 50,
+      ArmoredFoundationSquareHigh: 50,
+      ArmoredFoundationSquareMid: 50,
+      ArmoredFoundationSquareLow: 50,
+      ArmoredWallHigh: 50,
+      ArmoredWallMid: 50,
+      ArmoredStairsLShape: 50,
+      ArmoredStairsUShape: 50,
+      StoneDoorway: 35,
+      MetalDoorway: 35,
+      StoneWindow: 35,
+      MetalWindow: 35,
+      ArmoredDoorway: 35,
+      ArmoredWindow: 35,
+      StoneFoundationTriangleHigh: 25,
+      StoneFoundationTriangleMid: 25,
+      StoneFoundationTriangleLow: 25,
+      StoneWallLow: 25,
+      StoneFloorSquare: 25,
+      StoneWallFrame: 25,
+      StoneFloorFrameSquare: 25,
+      StoneFloorFrameTriangle: 25,
+      StoneRoofSquare: 25,
+      StoneRoofTriangle: 25,
+      MetalFoundationTriangleHigh: 25,
+      MetalFoundationTriangleMid: 25,
+      MetalFoundationTriangleLow: 25,
+      MetalWallLow: 25,
+      MetalFloorSquare: 25,
+      MetalWallFrame: 25,
+      MetalFloorFrameSquare: 25,
+      MetalFloorFrameTriangle: 25,
+      MetalRoofSquare: 25,
+      MetalRoofTriangle: 25,
+      ArmoredFoundationTriangleHigh: 25,
+      ArmoredFoundationTriangleMid: 25,
+      ArmoredFoundationTriangleLow: 25,
+      ArmoredWallLow: 25,
+      ArmoredWallFrame: 25,
+      ArmoredFloorFrameSquare: 25,
+      ArmoredFloorFrameTriangle: 25,
+      ArmoredFloorSquare: 25,
+      ArmoredRoofSquare: 25,
+      ArmoredRoofTriangle: 25,
+      StoneFloorTriangle: 13,
+      MetalFloorTriangle: 13,
+      ArmoredFloorTriangle: 13,
+    };
 
-    let twig_wood_upgrade_35 =
-      models.filter(
-        (model) =>
-          model === "StoneDoorway" ||
-          model === "MetalDoorway" ||
-          model === "StoneWindow" ||
-          model === "MetalWindow" ||
-          model === "ArmoredDoorway" ||
-          model === "ArmoredWindow"
-      ).length * 35;
+    let total_twig_upgrade_cost = models.reduce((total, model) => {
+      return total + (upgrade_from_wood_model_cost[model] || 0);
+    }, 0);
 
-    let twig_wood_upgrade_25 =
-      models.filter(
-        (model) =>
-          model === "StoneFoundationTriangleHigh" ||
-          model === "StoneFoundationTriangleMid" ||
-          model === "StoneFoundationTriangleLow" ||
-          model === "StoneWallLow" ||
-          model === "StoneFloorSquare" ||
-          model === "StoneWallFrame" ||
-          model === "StoneFloorFrameSquare" ||
-          model === "StoneFloorFrameTriangle" ||
-          model === "StoneRoofSquare" ||
-          model === "StoneRoofTriangle" ||
-          //prettier-ignore
-          model === "MetalFoundationTriangleHigh" ||
-          model === "MetalFoundationTriangleMid" ||
-          model === "MetalFoundationTriangleLow" ||
-          model === "MetalWallLow" ||
-          model === "MetalFloorSquare" ||
-          model === "MetalWallFrame" ||
-          model === "MetalFloorFrameSquare" ||
-          model === "MetalFloorFrameTriangle" ||
-          model === "MetalRoofSquare" ||
-          model === "MetalRoofTriangle" ||
-          //prettier-ignore
-          model === "ArmoredFoundationTriangleHigh" ||
-          model === "ArmoredFoundationTriangleMid" ||
-          model === "ArmoredFoundationTriangleLow" ||
-          model === "ArmoredWallLow" ||
-          model === "ArmoredWallFrame" ||
-          model === "ArmoredFloorFrameSquare" ||
-          model === "ArmoredFloorFrameTriangle" ||
-          model === "ArmoredFloorSquare" ||
-          model === "ArmoredRoofSquare" ||
-          model === "ArmoredRoofTriangle"
-      ).length * 25;
-
-    let twig_wood_upgrade_13 =
-      models.filter(
-        (model) => model === "StoneFloorTriangle" || model === "MetalFloorTriangle" || model === "ArmoredFloorTriangle"
-      ).length * 13;
-
-    set_twig_upgrade_wood_cost(
-      twig_wood_upgrade_50 + twig_wood_upgrade_35 + twig_wood_upgrade_25 + twig_wood_upgrade_13
-    );
+    set_twig_upgrade_wood_cost(total_twig_upgrade_cost);
 
     //* ------------------------- ↑ wood needed to upgrade from twig to higher quality ↑ -------------------------
 
     // -------------------------  display build cost + misc cost -------------------------
 
-    if (count_miscs_cost) {
-      set_build_cost([
-        { wood: total_wood_misc_cost },
-        { stone: total_stone_build_cost + total_stone_misc_cost },
-        { metal: total_metal_build_cost + total_metal_misc_cost },
-        { armored: total_hqm_build_cost + total_hq_metal_misc_cost },
-      ]);
-    } else if (!count_miscs_cost) {
-      set_build_cost([
-        { wood: 0 },
-        { stone: total_stone_build_cost },
-        { metal: total_metal_build_cost },
-        { armored: total_hqm_build_cost },
-      ]);
-    }
+    set_build_cost([
+      { wood: count_miscs_cost ? total_wood_misc_cost : 0 },
+      { stone: total_stone_build_cost + (count_miscs_cost ? total_stone_misc_cost : 0) },
+      { metal: total_metal_build_cost + (count_miscs_cost ? total_metal_misc_cost : 0) },
+      { armored: total_hqm_build_cost + (count_miscs_cost ? total_hq_metal_misc_cost : 0) },
+    ]);
   }
 
   //* ------------------------- ↑ Base Building Cost Counter ↑ -------------------------
@@ -534,6 +423,16 @@ export default function ResourceCounter() {
     DisplayCountedUpkeep();
   }, [build_cost, total_upkeep_percentile_rampup]);
 
+  function CreateBuildCostSegment(thumbnail: string, description: string, build_cost: number) {
+    return (
+      <div className="build_cost_content">
+        <img src={thumbnail} alt="Wood thumbnail" className="build_cost_content_thumbnail" />
+        <span className="build_cost_content_description">{description}</span>
+        <span className="build_cost_content_amount">{NumbersFormatter(build_cost)}</span>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="build_calculator_main_container">
@@ -547,32 +446,10 @@ export default function ResourceCounter() {
           </h2>
 
           <div className="build_cost_content_container">
-            <div className="build_cost_content">
-              <img src={woodThumbnail} alt="Wood thumbnail" className="build_cost_content_thumbnail" />
-              <span className="build_cost_content_description">wood</span>
-              <span className="build_cost_content_amount">
-                {NumbersFormatter(Number(build_cost[0].wood) + Number(twig_upgrade_wood_cost))}
-              </span>
-            </div>
-
-            <div className="build_cost_content">
-              <img src={stoneThumbnail} alt="Stone thumbnail" className="build_cost_content_thumbnail" />
-              <span className="build_cost_content_description">stone</span>
-              <span className="build_cost_content_amount">{NumbersFormatter(build_cost[1].stone)}</span>
-            </div>
-
-            <div className="build_cost_content">
-              <img src={metalThumbnail} alt="Metal thumbnail" className="build_cost_content_thumbnail" />
-              <span className="build_cost_content_description">metal</span>
-              <span className="build_cost_content_amount">{NumbersFormatter(build_cost[2].metal)}</span>
-            </div>
-
-            <div className="build_cost_content">
-              {/* prettier-ignore */}
-              <img src={hqMetalThumbnail} alt="High quality metal thumbnail" className="build_cost_content_thumbnail" />
-              <span className="build_cost_content_description">armored</span>
-              <span className="build_cost_content_amount">{NumbersFormatter(build_cost[3].armored)}</span>
-            </div>
+            {CreateBuildCostSegment(woodThumbnail, "wood", Number(build_cost[0].wood) + Number(twig_upgrade_wood_cost))}
+            {CreateBuildCostSegment(stoneThumbnail, "stone", Number(build_cost[1].stone))}
+            {CreateBuildCostSegment(metalThumbnail, "metal", Number(build_cost[2].metal))}
+            {CreateBuildCostSegment(hqMetalThumbnail, "armored", Number(build_cost[3].armored))}
           </div>
         </section>
 
@@ -582,30 +459,10 @@ export default function ResourceCounter() {
           </h2>
 
           <div className="upkeep_cost_content_container">
-            <div className="upkeep_cost_content">
-              <img src={woodThumbnail} alt="Wood thumbnail" className="upkeep_cost_content_thumbnail" />
-              <span className="upkeep_cost_content_description">wood</span>
-              <span className="upkeep_cost_content_amount">{NumbersFormatter(wood_upkeep_cost.toFixed(0))}</span>
-            </div>
-
-            <div className="upkeep_cost_content">
-              <img src={stoneThumbnail} alt="Stone thumbnail" className="upkeep_cost_content_thumbnail" />
-              <span className="upkeep_cost_content_description">stone</span>
-              <span className="upkeep_cost_content_amount">{NumbersFormatter(stone_upkeep_cost.toFixed(0))}</span>
-            </div>
-
-            <div className="upkeep_cost_content">
-              <img src={metalThumbnail} alt="Metal thumbnail" className="upkeep_cost_content_thumbnail" />
-              <span className="upkeep_cost_content_description">metal</span>
-              <span className="upkeep_cost_content_amount">{NumbersFormatter(metal_upkeep_cost.toFixed(0))}</span>
-            </div>
-
-            <div className="upkeep_cost_content">
-              {/* prettier-ignore */}
-              <img src={hqMetalThumbnail} alt="High quality metal thumbnail" className="upkeep_cost_content_thumbnail" />
-              <span className="upkeep_cost_content_description">armored</span>
-              <span className="upkeep_cost_content_amount">{NumbersFormatter(hqm_upkeep_cost.toFixed(0))}</span>
-            </div>
+            {CreateBuildCostSegment(woodThumbnail, "wood", Number(wood_upkeep_cost.toFixed(0)))}
+            {CreateBuildCostSegment(stoneThumbnail, "stone", Number(stone_upkeep_cost.toFixed(0)))}
+            {CreateBuildCostSegment(metalThumbnail, "metal", Number(metal_upkeep_cost.toFixed(0)))}
+            {CreateBuildCostSegment(hqMetalThumbnail, "armored", Number(hqm_upkeep_cost.toFixed(0)))}
           </div>
         </section>
 
@@ -613,30 +470,10 @@ export default function ResourceCounter() {
           <h2 className="components_cost_title">components cost</h2>
 
           <div className="components_cost_content_container">
-            <div className="components_cost_content">
-              <img src={scrapThumbnail} alt="Scrap thumbnail" className="components_cost_content_thumbnail" />
-              <span className="components_cost_content_description">scrap</span>
-              <span className="components_cost_content_amount">{NumbersFormatter(components_cost[0].scrap)}</span>
-            </div>
-
-            <div className="components_cost_content">
-              <img src={gearThumbnail} alt="Gear thumbnail" className="components_cost_content_thumbnail" />
-              <span className="components_cost_content_description">gears</span>
-              <span className="components_cost_content_amount">{NumbersFormatter(components_cost[1].gear)}</span>
-            </div>
-
-            <div className="components_cost_content">
-              <img src={sewingKitThumbnail} alt="Sewing Kit thumbnail" className="components_cost_content_thumbnail" />
-              <span className="components_cost_content_description">sewing kit</span>
-              <span className="components_cost_content_amount">{NumbersFormatter(components_cost[2].sewing_kit)}</span>
-            </div>
-
-            <div className="components_cost_content">
-              {/* prettier-ignore */}
-              <img src={lqFuelThumbnail} alt="Low quality fuel thumbnail" className="components_cost_content_thumbnail" />
-              <span className="components_cost_content_description">lq. fuel</span>
-              <span className="components_cost_content_amount">{NumbersFormatter(components_cost[3].lq_fuel)}</span>
-            </div>
+            {CreateBuildCostSegment(scrapThumbnail, "scrap", Number(components_cost[0].scrap))}
+            {CreateBuildCostSegment(gearThumbnail, "gears", Number(components_cost[1].gear))}
+            {CreateBuildCostSegment(sewingKitThumbnail, "sewing kit", Number(components_cost[2].sewing_kit))}
+            {CreateBuildCostSegment(lqFuelThumbnail, "lq. fuel", Number(components_cost[3].lq_fuel))}
           </div>
         </section>
       </div>

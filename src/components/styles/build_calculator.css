@@ -69,9 +69,7 @@ input[type="checkbox"] {
   backdrop-filter: blur(3px);
 }
 
-.build_cost_content,
-.upkeep_cost_content,
-.components_cost_content {
+.build_cost_content {
   height: 100%;
   width: 25%;
   border: 1px black solid;
@@ -82,9 +80,7 @@ input[type="checkbox"] {
   justify-content: space-between;
 }
 
-.build_cost_content_thumbnail,
-.upkeep_cost_content_thumbnail,
-.components_cost_content_thumbnail {
+.build_cost_content_thumbnail {
   width: 100%;
   height: 75%;
   object-fit: contain;
@@ -94,11 +90,7 @@ input[type="checkbox"] {
 }
 
 .build_cost_content_description,
-.build_cost_content_amount,
-.upkeep_cost_content_description,
-.upkeep_cost_content_amount,
-.components_cost_content_description,
-.components_cost_content_amount {
+.build_cost_content_amount {
   padding: 0;
   margin: 0;
   background-color: black;

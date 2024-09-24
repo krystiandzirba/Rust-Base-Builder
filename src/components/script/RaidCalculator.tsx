@@ -802,6 +802,34 @@ export default function RaidCalculator() {
     } else return number;
   };
 
+  function CreateRaidToolSegment(type: string, thumbnail: string, description: string) {
+    return (
+      <button
+        className={
+          raid_type === type
+            ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+            : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
+        }
+        onClick={() => ChangeRaidType(type)}
+      >
+        {/* prettier-ignore */}
+        <img className="raid_type_content_thumbnail" src={thumbnail} alt={`${raid_type} thumbnail`} style={{ filter: raid_type === type ? "grayscale(0%)" : "grayscale(100%)"}}/>
+        <span className="raid_type_description">{description}</span>
+      </button>
+    );
+  }
+
+  //prettier-ignore
+  function CreateRaidToolCostSegment(is_segment_active: boolean, thumbnail: string, description: string, tool_cost: number) {
+    return (
+      <div className={is_segment_active ? "raid_tool_cost_content" : "raid_tool_cost_content raid_resources_cost_disabled"}>
+        <img className="raid_tool_cost_content_thumbnail" src={thumbnail} alt={`${description} thumbnail`} style={{ filter: is_segment_active ? "grayscale(0%)" : "grayscale(100%)"}}/>
+        <span className="raid_tool_cost_content_description">{description}</span>
+        <span className="raid_tool_cost_content_amount">{NumbersFormatter(tool_cost)}</span>
+      </div>
+    );
+  }
+
   //* ------------------------- ↓ Ingredients Cost ↓ -------------------------
   // calculate all of the ingredients cost if any of the raid type tool amount changes
 
@@ -830,44 +858,16 @@ export default function RaidCalculator() {
     ResetRaid();
   }, [page_mode]);
 
-  function BuildRaidCostSegment(type: string, thumbnail: string, description: string) {
-    return (
-      <button
-        className={
-          raid_type === type
-            ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
-            : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
-        }
-        onClick={() => ChangeRaidType(type)}
-      >
-        {/* prettier-ignore */}
-        <img className="raid_type_content_thumbnail" src={thumbnail} alt={`${raid_type} thumbnail`} style={{ filter: raid_type === type ? "grayscale(0%)" : "grayscale(100%)"}}/>
-        <span className="raid_type_description">{description}</span>
-      </button>
-    );
-  }
-
-  //prettier-ignore
-  function BuildRaidToolCostSegment(is_segment_active: boolean, thumbnail: string, description: string, tool_cost: number) {
-    return (
-      <div className={is_segment_active ? "raid_tool_cost_content" : "raid_tool_cost_content raid_resources_cost_disabled"}>
-        <img className="raid_tool_cost_content_thumbnail" src={thumbnail} alt={`${description} thumbnail`} style={{ filter: is_segment_active ? "grayscale(0%)" : "grayscale(100%)"}}/>
-        <span className="raid_tool_cost_content_description">{description}</span>
-        <span className="raid_tool_cost_content_amount">{NumbersFormatter(tool_cost)}</span>
-      </div>
-    );
-  }
-
   return (
     <>
       <section className="raid_type_main_container">
         <span className="raid_type_title">raid the base with:</span>
         <div className="raid_type_buttons_main_container">
-          {BuildRaidCostSegment("efficiency", sulfurThumbnail, "most efficient")}
-          {BuildRaidCostSegment("rockets", rocketThumbnail, "rockets")}
-          {BuildRaidCostSegment("explosives", explosivesThumbnail, "explosives")}
-          {BuildRaidCostSegment("ammo", ammoThumbnail, "exp. 5.56")}
-          {BuildRaidCostSegment("satchel", satchelThumbnail, "satchels")}
+          {CreateRaidToolSegment("efficiency", sulfurThumbnail, "most efficient")}
+          {CreateRaidToolSegment("rockets", rocketThumbnail, "rockets")}
+          {CreateRaidToolSegment("explosives", explosivesThumbnail, "explosives")}
+          {CreateRaidToolSegment("ammo", ammoThumbnail, "exp. 5.56")}
+          {CreateRaidToolSegment("satchel", satchelThumbnail, "satchels")}
         </div>
       </section>
 
@@ -875,10 +875,10 @@ export default function RaidCalculator() {
         <section className="raid_tool_cost_main_container">
           <span className="raid_tool_cost_title">raid tool cost (hard side)</span>
           <div className="raid_tool_cost_content_container">
-            {BuildRaidToolCostSegment(true, rocketThumbnail, "rocket", rockets_cost)}
-            {BuildRaidToolCostSegment(true, explosivesThumbnail, "C4", explosives_cost)}
-            {BuildRaidToolCostSegment(true, ammoThumbnail, "exp. 5.56", ammo_cost)}
-            {BuildRaidToolCostSegment(true, satchelThumbnail, "satchel", satchel_cost)}
+            {CreateRaidToolCostSegment(true, rocketThumbnail, "rocket", rockets_cost)}
+            {CreateRaidToolCostSegment(true, explosivesThumbnail, "C4", explosives_cost)}
+            {CreateRaidToolCostSegment(true, ammoThumbnail, "exp. 5.56", ammo_cost)}
+            {CreateRaidToolCostSegment(true, satchelThumbnail, "satchel", satchel_cost)}
           </div>
         </section>
 
@@ -891,24 +891,24 @@ export default function RaidCalculator() {
             </label>
           </div>
           <div className="raid_resources_cost_content_container">
-            {BuildRaidToolCostSegment(true, sulfurThumbnail, "sulfur", sulfur_cost)}
-            {BuildRaidToolCostSegment(!count_sub_ingredients, gunpowderThumbnail, "gunpowder", gunpowder_cost)}
-            {BuildRaidToolCostSegment(count_sub_ingredients, charcoalThumbnail, "charcoal", charcoal_cost)}
-            {BuildRaidToolCostSegment(true, metalThumbnail, "metal", metal_fragments_cost)}
+            {CreateRaidToolCostSegment(true, sulfurThumbnail, "sulfur", sulfur_cost)}
+            {CreateRaidToolCostSegment(!count_sub_ingredients, gunpowderThumbnail, "gunpowder", gunpowder_cost)}
+            {CreateRaidToolCostSegment(count_sub_ingredients, charcoalThumbnail, "charcoal", charcoal_cost)}
+            {CreateRaidToolCostSegment(true, metalThumbnail, "metal", metal_fragments_cost)}
           </div>
 
           <div className="raid_resources_cost_content_container">
-            {BuildRaidToolCostSegment(!count_sub_ingredients, metalPipeThumbnail, "metal pipe", metal_pipe_cost)}
-            {BuildRaidToolCostSegment(!count_sub_ingredients, lqFuelThumbnail, "lq. fuel", lq_fuel_cost)}
-            {BuildRaidToolCostSegment(true, clothThumbnail, "cloth", cloth_cost)}
-            {BuildRaidToolCostSegment(true, techTrashThumbnail, "tech trash", tech_trash_cost)}
+            {CreateRaidToolCostSegment(!count_sub_ingredients, metalPipeThumbnail, "metal pipe", metal_pipe_cost)}
+            {CreateRaidToolCostSegment(!count_sub_ingredients, lqFuelThumbnail, "lq. fuel", lq_fuel_cost)}
+            {CreateRaidToolCostSegment(true, clothThumbnail, "cloth", cloth_cost)}
+            {CreateRaidToolCostSegment(true, techTrashThumbnail, "tech trash", tech_trash_cost)}
           </div>
 
           <div className="raid_resources_cost_content_container">
-            {BuildRaidToolCostSegment(count_sub_ingredients, hqMetalThumbnail, "hq. metal", hq_metal_cost)}
-            {BuildRaidToolCostSegment(count_sub_ingredients, scrapThumbnail, "scrap", scrap_cost)}
-            {BuildRaidToolCostSegment(count_sub_ingredients, animalFatThumbnail, "animal fat", animal_fat_cost)}
-            {BuildRaidToolCostSegment(true, ropeThumbnail, "rope", rope_cost)}
+            {CreateRaidToolCostSegment(count_sub_ingredients, hqMetalThumbnail, "hq. metal", hq_metal_cost)}
+            {CreateRaidToolCostSegment(count_sub_ingredients, scrapThumbnail, "scrap", scrap_cost)}
+            {CreateRaidToolCostSegment(count_sub_ingredients, animalFatThumbnail, "animal fat", animal_fat_cost)}
+            {CreateRaidToolCostSegment(true, ropeThumbnail, "rope", rope_cost)}
           </div>
         </section>
       </div>
