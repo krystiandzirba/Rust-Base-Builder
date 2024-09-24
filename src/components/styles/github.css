@@ -25,6 +25,10 @@
   justify-content: center;
 }
 
-.github:hover {
-  transform: scale(1.075);
+.fa-github {
+  color: #bbbbbb;
+}
+
+.fa-github:hover {
+  color: #ffd5b3;
 }

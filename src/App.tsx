@@ -112,7 +112,6 @@ export default App;
 // add github wiki
 // move if (audio) to the audio component
 
-// roof wall left or right does not contain the edges highlight
 // compress new audio files
 
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
