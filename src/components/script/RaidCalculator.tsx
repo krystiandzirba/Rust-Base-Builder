@@ -48,7 +48,7 @@ export default function RaidCalculator() {
 
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
-  const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
+  const model_destroy_trigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
   const model_to_destroy = useSelector((state: RootState) => state.modelsData.model_to_destroy); //prettier-ignore
   const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
@@ -91,9 +91,15 @@ export default function RaidCalculator() {
     set_gunpowder_cost(0);
     set_charcoal_cost(0);
     set_metal_fragments_cost(0);
-    if (audio) {
-      AudioPlayer(menu_sound);
-    }
+
+    set_metal_pipe_cost(0);
+    set_lq_fuel_cost(0);
+    set_cloth_cost(0);
+    set_tech_trash_cost(0);
+    set_hq_metal_cost(0);
+    set_scrap_cost(0);
+    set_animal_fat_cost(0);
+    set_rope_cost(0);
   }
 
   //* ------------------------- ↑ Reset the Raid ↑ -------------------------
@@ -103,94 +109,100 @@ export default function RaidCalculator() {
   // this function counts the most efficient way to raid a selected object
 
   function CalculateEfficiencyCost() {
-    if (
-      model_to_destroy === "StoneFoundationSquareHigh" ||
-      model_to_destroy === "StoneFoundationSquareMid" ||
-      model_to_destroy === "StoneFoundationSquareLow" ||
-      model_to_destroy === "StoneFoundationTriangleHigh" ||
-      model_to_destroy === "StoneFoundationTriangleMid" ||
-      model_to_destroy === "StoneFoundationTriangleLow" ||
-      model_to_destroy === "StoneWallHigh" ||
-      model_to_destroy === "StoneWallMid" ||
-      model_to_destroy === "StoneWallLow" ||
-      model_to_destroy === "StoneDoorway" ||
-      model_to_destroy === "StoneWindow" ||
-      model_to_destroy === "StoneWallFrame" ||
-      model_to_destroy === "StoneFloorSquare" ||
-      model_to_destroy === "StoneFloorTriangle" ||
-      model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "StoneRoofSquare" ||
-      model_to_destroy === "StoneRoofTriangle"
-    ) {
-      set_explosives_cost(explosives_cost + 2);
-    } else if (
-      model_to_destroy === "MetalFoundationSquareHigh" ||
-      model_to_destroy === "MetalFoundationSquareMid" ||
-      model_to_destroy === "MetalFoundationSquareLow" ||
-      model_to_destroy === "MetalFoundationTriangleHigh" ||
-      model_to_destroy === "MetalFoundationTriangleMid" ||
-      model_to_destroy === "MetalFoundationTriangleLow" ||
-      model_to_destroy === "MetalWallHigh" ||
-      model_to_destroy === "MetalWallMid" ||
-      model_to_destroy === "MetalWallLow" ||
-      model_to_destroy === "MetalDoorway" ||
-      model_to_destroy === "MetalWindow" ||
-      model_to_destroy === "MetalStairsLShape" ||
-      model_to_destroy === "MetalStairsUShape" ||
-      model_to_destroy === "MetalWallFrame" ||
-      model_to_destroy === "MetalFloorSquare" ||
-      model_to_destroy === "MetalFloorTriangle" ||
-      model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle" ||
-      model_to_destroy === "MetalRoofSquare" ||
-      model_to_destroy === "MetalRoofTriangle"
-    ) {
-      set_explosives_cost(explosives_cost + 4);
-    } else if (
-      model_to_destroy === "ArmoredFoundationSquareHigh" ||
-      model_to_destroy === "ArmoredFoundationSquareMid" ||
-      model_to_destroy === "ArmoredFoundationSquareLow" ||
-      model_to_destroy === "ArmoredFoundationTriangleHigh" ||
-      model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow" ||
-      model_to_destroy === "ArmoredWallHigh" ||
-      model_to_destroy === "ArmoredWallMid" ||
-      model_to_destroy === "ArmoredWallLow" ||
-      model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow" ||
-      model_to_destroy === "ArmoredWallFrame" ||
-      model_to_destroy === "ArmoredFloorFrameSquare" ||
-      model_to_destroy === "ArmoredFloorFrameTriangle" ||
-      model_to_destroy === "ArmoredFloorSquare" ||
-      model_to_destroy === "ArmoredFloorTriangle" ||
-      model_to_destroy === "ArmoredStairsLShape" ||
-      model_to_destroy === "ArmoredStairsUShape" ||
-      model_to_destroy === "ArmoredRoofSquare" ||
-      model_to_destroy === "ArmoredRoofTriangle"
-    ) {
-      set_explosives_cost(explosives_cost + 8);
-    } else if (model_to_destroy === "MetalDoor") {
-      set_ammo_cost(ammo_cost + 63);
-    } else if (model_to_destroy === "StrenghtenedGlassWindow") {
-      set_ammo_cost(ammo_cost + 140);
-    } else if (model_to_destroy === "GarageDoor") {
-      set_ammo_cost(ammo_cost + 150);
-    } else if (
-      model_to_destroy === "StoneStairsLShape" ||
-      model_to_destroy === "StoneStairsUShape" ||
-      model_to_destroy === "MetalVerticalEmbrasure"
-    ) {
-      set_ammo_cost(ammo_cost + 173);
-    } else if (
-      model_to_destroy === "Furnace" ||
-      model_to_destroy === "LargeWoodBox" ||
-      model_to_destroy === "SleepingBag" ||
-      model_to_destroy === "ToolCupboard" ||
-      model_to_destroy === "WoodStorageBox" ||
-      model_to_destroy === "WorkbenchT3"
-    )
-      return;
+    switch (model_to_destroy) {
+      case "StoneFoundationSquareHigh":
+      case "StoneFoundationSquareMid":
+      case "StoneFoundationSquareLow":
+      case "StoneFoundationTriangleHigh":
+      case "StoneFoundationTriangleMid":
+      case "StoneFoundationTriangleLow":
+      case "StoneWallHigh":
+      case "StoneWallMid":
+      case "StoneWallLow":
+      case "StoneDoorway":
+      case "StoneWindow":
+      case "StoneWallFrame":
+      case "StoneFloorSquare":
+      case "StoneFloorTriangle":
+      case "StoneFloorFrameSquare":
+      case "StoneFloorFrameTriangle":
+      case "StoneRoofSquare":
+      case "StoneRoofTriangle":
+        set_explosives_cost(explosives_cost + 2);
+        break;
+
+      case "MetalFoundationSquareHigh":
+      case "MetalFoundationSquareMid":
+      case "MetalFoundationSquareLow":
+      case "MetalFoundationTriangleHigh":
+      case "MetalFoundationTriangleMid":
+      case "MetalFoundationTriangleLow":
+      case "MetalWallHigh":
+      case "MetalWallMid":
+      case "MetalWallLow":
+      case "MetalDoorway":
+      case "MetalWindow":
+      case "MetalStairsLShape":
+      case "MetalStairsUShape":
+      case "MetalWallFrame":
+      case "MetalFloorSquare":
+      case "MetalFloorTriangle":
+      case "MetalFloorFrameSquare":
+      case "MetalFloorFrameTriangle":
+      case "MetalRoofSquare":
+      case "MetalRoofTriangle":
+        set_explosives_cost(explosives_cost + 4);
+        break;
+
+      case "ArmoredFoundationSquareHigh":
+      case "ArmoredFoundationSquareMid":
+      case "ArmoredFoundationSquareLow":
+      case "ArmoredFoundationTriangleHigh":
+      case "ArmoredFoundationTriangleMid":
+      case "ArmoredFoundationTriangleLow":
+      case "ArmoredWallHigh":
+      case "ArmoredWallMid":
+      case "ArmoredWallLow":
+      case "ArmoredDoorway":
+      case "ArmoredWindow":
+      case "ArmoredWallFrame":
+      case "ArmoredFloorFrameSquare":
+      case "ArmoredFloorFrameTriangle":
+      case "ArmoredFloorSquare":
+      case "ArmoredFloorTriangle":
+      case "ArmoredStairsLShape":
+      case "ArmoredStairsUShape":
+      case "ArmoredRoofSquare":
+      case "ArmoredRoofTriangle":
+        set_explosives_cost(explosives_cost + 8);
+        break;
+
+      case "MetalDoor":
+        set_ammo_cost(ammo_cost + 63);
+        break;
+      case "StrenghtenedGlassWindow":
+        set_ammo_cost(ammo_cost + 140);
+        break;
+      case "GarageDoor":
+        set_ammo_cost(ammo_cost + 150);
+        break;
+      case "StoneStairsLShape":
+      case "StoneStairsUShape":
+      case "MetalVerticalEmbrasure":
+        set_ammo_cost(ammo_cost + 173);
+        break;
+
+      case "Furnace":
+      case "LargeWoodBox":
+      case "SleepingBag":
+      case "ToolCupboard":
+      case "WoodStorageBox":
+      case "WorkbenchT3":
+        return;
+
+      default:
+        break;
+    }
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Efficiency ↑ -------------------------
@@ -200,89 +212,94 @@ export default function RaidCalculator() {
   // this function counts only the rocket costs on selected objects
 
   function CalculateRocketCost() {
-    if (model_to_destroy === "MetalDoor") {
-      set_rockets_cost(rockets_cost + 2);
-    } else if (model_to_destroy === "GarageDoor" || model_to_destroy === "StrenghtenedGlassWindow") {
-      set_rockets_cost(rockets_cost + 3);
-    } else if (
-      model_to_destroy === "StoneFoundationSquareHigh" ||
-      model_to_destroy === "StoneFoundationSquareMid" ||
-      model_to_destroy === "StoneFoundationSquareLow" ||
-      model_to_destroy === "StoneFoundationTriangleHigh" ||
-      model_to_destroy === "StoneFoundationTriangleMid" ||
-      model_to_destroy === "StoneFoundationTriangleLow" ||
-      model_to_destroy === "StoneWallHigh" ||
-      model_to_destroy === "StoneWallMid" ||
-      model_to_destroy === "StoneWallLow" ||
-      model_to_destroy === "StoneDoorway" ||
-      model_to_destroy === "StoneWindow" ||
-      model_to_destroy === "StoneStairsLShape" ||
-      model_to_destroy === "StoneStairsUShape" ||
-      model_to_destroy === "StoneWallFrame" ||
-      model_to_destroy === "StoneFloorSquare" ||
-      model_to_destroy === "StoneFloorTriangle" ||
-      model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "MetalVerticalEmbrasure" ||
-      model_to_destroy === "StoneRoofSquare" ||
-      model_to_destroy === "StoneRoofTriangle"
-    ) {
-      set_rockets_cost(rockets_cost + 4);
-    } else if (
-      model_to_destroy === "MetalFoundationSquareHigh" ||
-      model_to_destroy === "MetalFoundationSquareMid" ||
-      model_to_destroy === "MetalFoundationSquareLow" ||
-      model_to_destroy === "MetalFoundationTriangleHigh" ||
-      model_to_destroy === "MetalFoundationTriangleMid" ||
-      model_to_destroy === "MetalFoundationTriangleLow" ||
-      model_to_destroy === "MetalWallHigh" ||
-      model_to_destroy === "MetalWallMid" ||
-      model_to_destroy === "MetalWallLow" ||
-      model_to_destroy === "MetalDoorway" ||
-      model_to_destroy === "MetalWindow" ||
-      model_to_destroy === "MetalStairsLShape" ||
-      model_to_destroy === "MetalStairsUShape" ||
-      model_to_destroy === "MetalWallFrame" ||
-      model_to_destroy === "MetalFloorSquare" ||
-      model_to_destroy === "MetalFloorTriangle" ||
-      model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle" ||
-      model_to_destroy === "MetalRoofSquare" ||
-      model_to_destroy === "MetalRoofTriangle"
-    ) {
-      set_rockets_cost(rockets_cost + 8);
-    } else if (
-      model_to_destroy === "ArmoredFoundationSquareHigh" ||
-      model_to_destroy === "ArmoredFoundationSquareMid" ||
-      model_to_destroy === "ArmoredFoundationSquareLow" ||
-      model_to_destroy === "ArmoredFoundationTriangleHigh" ||
-      model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow" ||
-      model_to_destroy === "ArmoredWallHigh" ||
-      model_to_destroy === "ArmoredWallMid" ||
-      model_to_destroy === "ArmoredWallLow" ||
-      model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow" ||
-      model_to_destroy === "ArmoredWallFrame" ||
-      model_to_destroy === "ArmoredFloorFrameSquare" ||
-      model_to_destroy === "ArmoredFloorFrameTriangle" ||
-      model_to_destroy === "ArmoredFloorSquare" ||
-      model_to_destroy === "ArmoredFloorTriangle" ||
-      model_to_destroy === "ArmoredStairsLShape" ||
-      model_to_destroy === "ArmoredStairsUShape" ||
-      model_to_destroy === "ArmoredRoofSquare" ||
-      model_to_destroy === "ArmoredRoofTriangle"
-    ) {
-      set_rockets_cost(rockets_cost + 15);
-    } else if (
-      model_to_destroy === "Furnace" ||
-      model_to_destroy === "LargeWoodBox" ||
-      model_to_destroy === "SleepingBag" ||
-      model_to_destroy === "ToolCupboard" ||
-      model_to_destroy === "WoodStorageBox" ||
-      model_to_destroy === "WorkbenchT3"
-    )
-      return;
+    switch (model_to_destroy) {
+      case "MetalDoor":
+        set_rockets_cost(rockets_cost + 2);
+        break;
+
+      case "GarageDoor":
+      case "StrenghtenedGlassWindow":
+        set_rockets_cost(rockets_cost + 3);
+        break;
+
+      case "StoneFoundationSquareHigh":
+      case "StoneFoundationSquareMid":
+      case "StoneFoundationSquareLow":
+      case "StoneFoundationTriangleHigh":
+      case "StoneFoundationTriangleMid":
+      case "StoneFoundationTriangleLow":
+      case "StoneWallHigh":
+      case "StoneWallMid":
+      case "StoneWallLow":
+      case "StoneDoorway":
+      case "StoneWindow":
+      case "StoneStairsLShape":
+      case "StoneStairsUShape":
+      case "StoneWallFrame":
+      case "StoneFloorSquare":
+      case "StoneFloorTriangle":
+      case "StoneFloorFrameSquare":
+      case "StoneFloorFrameTriangle":
+      case "MetalVerticalEmbrasure":
+      case "StoneRoofSquare":
+      case "StoneRoofTriangle":
+        set_rockets_cost(rockets_cost + 4);
+        break;
+
+      case "MetalFoundationSquareHigh":
+      case "MetalFoundationSquareMid":
+      case "MetalFoundationSquareLow":
+      case "MetalFoundationTriangleHigh":
+      case "MetalFoundationTriangleMid":
+      case "MetalFoundationTriangleLow":
+      case "MetalWallHigh":
+      case "MetalWallMid":
+      case "MetalWallLow":
+      case "MetalDoorway":
+      case "MetalWindow":
+      case "MetalStairsLShape":
+      case "MetalStairsUShape":
+      case "MetalWallFrame":
+      case "MetalFloorSquare":
+      case "MetalFloorTriangle":
+      case "MetalFloorFrameSquare":
+      case "MetalFloorFrameTriangle":
+      case "MetalRoofSquare":
+      case "MetalRoofTriangle":
+        set_rockets_cost(rockets_cost + 8);
+        break;
+
+      case "ArmoredFoundationSquareHigh":
+      case "ArmoredFoundationSquareMid":
+      case "ArmoredFoundationSquareLow":
+      case "ArmoredFoundationTriangleHigh":
+      case "ArmoredFoundationTriangleMid":
+      case "ArmoredFoundationTriangleLow":
+      case "ArmoredWallHigh":
+      case "ArmoredWallMid":
+      case "ArmoredWallLow":
+      case "ArmoredDoorway":
+      case "ArmoredWindow":
+      case "ArmoredWallFrame":
+      case "ArmoredFloorFrameSquare":
+      case "ArmoredFloorFrameTriangle":
+      case "ArmoredFloorSquare":
+      case "ArmoredFloorTriangle":
+      case "ArmoredStairsLShape":
+      case "ArmoredStairsUShape":
+      case "ArmoredRoofSquare":
+      case "ArmoredRoofTriangle":
+        set_rockets_cost(rockets_cost + 15);
+        break;
+
+      case "Furnace":
+      case "LargeWoodBox":
+      case "SleepingBag":
+      case "ToolCupboard":
+      case "WoodStorageBox":
+      case "WorkbenchT3":
+        return;
+    }
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Rockets ↑ -------------------------
@@ -292,89 +309,94 @@ export default function RaidCalculator() {
   // this function counts only the esplosives costs on selected objects
 
   function CalculateExplosivesCost() {
-    if (model_to_destroy === "MetalDoor") {
-      set_explosives_cost(explosives_cost + 1);
-    } else if (model_to_destroy === "GarageDoor" || model_to_destroy === "StrenghtenedGlassWindow") {
-      set_explosives_cost(explosives_cost + 2);
-    } else if (
-      model_to_destroy === "StoneFoundationSquareHigh" ||
-      model_to_destroy === "StoneFoundationSquareMid" ||
-      model_to_destroy === "StoneFoundationSquareLow" ||
-      model_to_destroy === "StoneFoundationTriangleHigh" ||
-      model_to_destroy === "StoneFoundationTriangleMid" ||
-      model_to_destroy === "StoneFoundationTriangleLow" ||
-      model_to_destroy === "StoneWallHigh" ||
-      model_to_destroy === "StoneWallMid" ||
-      model_to_destroy === "StoneWallLow" ||
-      model_to_destroy === "StoneDoorway" ||
-      model_to_destroy === "StoneWindow" ||
-      model_to_destroy === "StoneStairsLShape" ||
-      model_to_destroy === "StoneStairsUShape" ||
-      model_to_destroy === "StoneWallFrame" ||
-      model_to_destroy === "StoneFloorSquare" ||
-      model_to_destroy === "StoneFloorTriangle" ||
-      model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "MetalVerticalEmbrasure" ||
-      model_to_destroy === "StoneRoofSquare" ||
-      model_to_destroy === "StoneRoofTriangle"
-    ) {
-      set_explosives_cost(explosives_cost + 2);
-    } else if (
-      model_to_destroy === "MetalFoundationSquareHigh" ||
-      model_to_destroy === "MetalFoundationSquareMid" ||
-      model_to_destroy === "MetalFoundationSquareLow" ||
-      model_to_destroy === "MetalFoundationTriangleHigh" ||
-      model_to_destroy === "MetalFoundationTriangleMid" ||
-      model_to_destroy === "MetalFoundationTriangleLow" ||
-      model_to_destroy === "MetalWallHigh" ||
-      model_to_destroy === "MetalWallMid" ||
-      model_to_destroy === "MetalWallLow" ||
-      model_to_destroy === "MetalDoorway" ||
-      model_to_destroy === "MetalWindow" ||
-      model_to_destroy === "MetalStairsLShape" ||
-      model_to_destroy === "MetalStairsUShape" ||
-      model_to_destroy === "MetalWallFrame" ||
-      model_to_destroy === "MetalFloorSquare" ||
-      model_to_destroy === "MetalFloorTriangle" ||
-      model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle" ||
-      model_to_destroy === "MetalRoofSquare" ||
-      model_to_destroy === "MetalRoofTriangle"
-    ) {
-      set_explosives_cost(explosives_cost + 4);
-    } else if (
-      model_to_destroy === "ArmoredFoundationSquareHigh" ||
-      model_to_destroy === "ArmoredFoundationSquareMid" ||
-      model_to_destroy === "ArmoredFoundationSquareLow" ||
-      model_to_destroy === "ArmoredFoundationTriangleHigh" ||
-      model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow" ||
-      model_to_destroy === "ArmoredWallHigh" ||
-      model_to_destroy === "ArmoredWallMid" ||
-      model_to_destroy === "ArmoredWallLow" ||
-      model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow" ||
-      model_to_destroy === "ArmoredWallFrame" ||
-      model_to_destroy === "ArmoredFloorFrameSquare" ||
-      model_to_destroy === "ArmoredFloorFrameTriangle" ||
-      model_to_destroy === "ArmoredFloorSquare" ||
-      model_to_destroy === "ArmoredFloorTriangle" ||
-      model_to_destroy === "ArmoredStairsLShape" ||
-      model_to_destroy === "ArmoredStairsUShape" ||
-      model_to_destroy === "ArmoredRoofSquare" ||
-      model_to_destroy === "ArmoredRoofTriangle"
-    ) {
-      set_explosives_cost(explosives_cost + 8);
-    } else if (
-      model_to_destroy === "Furnace" ||
-      model_to_destroy === "LargeWoodBox" ||
-      model_to_destroy === "SleepingBag" ||
-      model_to_destroy === "ToolCupboard" ||
-      model_to_destroy === "WoodStorageBox" ||
-      model_to_destroy === "WorkbenchT3"
-    )
-      return;
+    switch (model_to_destroy) {
+      case "MetalDoor":
+        set_explosives_cost(explosives_cost + 1);
+        break;
+
+      case "GarageDoor":
+      case "StrenghtenedGlassWindow":
+        set_explosives_cost(explosives_cost + 2);
+        break;
+
+      case "StoneFoundationSquareHigh":
+      case "StoneFoundationSquareMid":
+      case "StoneFoundationSquareLow":
+      case "StoneFoundationTriangleHigh":
+      case "StoneFoundationTriangleMid":
+      case "StoneFoundationTriangleLow":
+      case "StoneWallHigh":
+      case "StoneWallMid":
+      case "StoneWallLow":
+      case "StoneDoorway":
+      case "StoneWindow":
+      case "StoneStairsLShape":
+      case "StoneStairsUShape":
+      case "StoneWallFrame":
+      case "StoneFloorSquare":
+      case "StoneFloorTriangle":
+      case "StoneFloorFrameSquare":
+      case "StoneFloorFrameTriangle":
+      case "MetalVerticalEmbrasure":
+      case "StoneRoofSquare":
+      case "StoneRoofTriangle":
+        set_explosives_cost(explosives_cost + 2);
+        break;
+
+      case "MetalFoundationSquareHigh":
+      case "MetalFoundationSquareMid":
+      case "MetalFoundationSquareLow":
+      case "MetalFoundationTriangleHigh":
+      case "MetalFoundationTriangleMid":
+      case "MetalFoundationTriangleLow":
+      case "MetalWallHigh":
+      case "MetalWallMid":
+      case "MetalWallLow":
+      case "MetalDoorway":
+      case "MetalWindow":
+      case "MetalStairsLShape":
+      case "MetalStairsUShape":
+      case "MetalWallFrame":
+      case "MetalFloorSquare":
+      case "MetalFloorTriangle":
+      case "MetalFloorFrameSquare":
+      case "MetalFloorFrameTriangle":
+      case "MetalRoofSquare":
+      case "MetalRoofTriangle":
+        set_explosives_cost(explosives_cost + 4);
+        break;
+
+      case "ArmoredFoundationSquareHigh":
+      case "ArmoredFoundationSquareMid":
+      case "ArmoredFoundationSquareLow":
+      case "ArmoredFoundationTriangleHigh":
+      case "ArmoredFoundationTriangleMid":
+      case "ArmoredFoundationTriangleLow":
+      case "ArmoredWallHigh":
+      case "ArmoredWallMid":
+      case "ArmoredWallLow":
+      case "ArmoredDoorway":
+      case "ArmoredWindow":
+      case "ArmoredWallFrame":
+      case "ArmoredFloorFrameSquare":
+      case "ArmoredFloorFrameTriangle":
+      case "ArmoredFloorSquare":
+      case "ArmoredFloorTriangle":
+      case "ArmoredStairsLShape":
+      case "ArmoredStairsUShape":
+      case "ArmoredRoofSquare":
+      case "ArmoredRoofTriangle":
+        set_explosives_cost(explosives_cost + 8);
+        break;
+
+      case "Furnace":
+      case "LargeWoodBox":
+      case "SleepingBag":
+      case "ToolCupboard":
+      case "WoodStorageBox":
+      case "WorkbenchT3":
+        return;
+    }
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Explosives ↑ -------------------------
@@ -384,98 +406,109 @@ export default function RaidCalculator() {
   // this function counts only the explosive ammo costs on selected objects
 
   function CalculateAmmoCost() {
-    if (model_to_destroy === "MetalDoor") {
-      set_ammo_cost(ammo_cost + 63);
-    } else if (model_to_destroy === "StrenghtenedGlassWindow") {
-      set_ammo_cost(ammo_cost + 140);
-    } else if (model_to_destroy === "GarageDoor") {
-      set_ammo_cost(ammo_cost + 150);
-    } else if (
-      model_to_destroy === "StoneStairsLShape" ||
-      model_to_destroy === "StoneStairsUShape" ||
-      model_to_destroy === "MetalVerticalEmbrasure"
-    ) {
-      set_ammo_cost(ammo_cost + 173);
-    } else if (
-      model_to_destroy === "StoneFoundationSquareHigh" ||
-      model_to_destroy === "StoneFoundationSquareMid" ||
-      model_to_destroy === "StoneFoundationSquareLow" ||
-      model_to_destroy === "StoneFoundationTriangleHigh" ||
-      model_to_destroy === "StoneFoundationTriangleMid" ||
-      model_to_destroy === "StoneFoundationTriangleLow" ||
-      model_to_destroy === "StoneWallHigh" ||
-      model_to_destroy === "StoneWallMid" ||
-      model_to_destroy === "StoneWallLow" ||
-      model_to_destroy === "StoneDoorway" ||
-      model_to_destroy === "StoneWindow" ||
-      model_to_destroy === "StoneWallFrame" ||
-      model_to_destroy === "StoneFloorSquare" ||
-      model_to_destroy === "StoneFloorTriangle" ||
-      model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "StoneRoofSquare" ||
-      model_to_destroy === "StoneRoofTriangle"
-    ) {
-      set_ammo_cost(ammo_cost + 185);
-    } else if (model_to_destroy === "MetalStairsLShape" || model_to_destroy === "MetalStairsUShape") {
-      set_ammo_cost(ammo_cost + 399);
-    } else if (
-      model_to_destroy === "MetalWallHigh" ||
-      model_to_destroy === "MetalWallMid" ||
-      model_to_destroy === "MetalWallLow" ||
-      model_to_destroy === "MetalDoorway" ||
-      model_to_destroy === "MetalWindow" ||
-      model_to_destroy === "MetalWallFrame" ||
-      model_to_destroy === "MetalFloorSquare" ||
-      model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle" ||
-      model_to_destroy === "MetalRoofSquare" ||
-      model_to_destroy === "MetalRoofTriangle"
-    ) {
-      set_ammo_cost(ammo_cost + 400);
-    } else if (model_to_destroy === "MetalFloorTriangle") {
-      set_ammo_cost(ammo_cost + 413);
-    } else if (
-      model_to_destroy === "MetalFoundationSquareHigh" ||
-      model_to_destroy === "MetalFoundationSquareMid" ||
-      model_to_destroy === "MetalFoundationSquareLow" ||
-      model_to_destroy === "MetalFoundationTriangleHigh" ||
-      model_to_destroy === "MetalFoundationTriangleMid" ||
-      model_to_destroy === "MetalFoundationTriangleLow"
-    ) {
-      set_ammo_cost(ammo_cost + 461);
-    } else if (
-      model_to_destroy === "ArmoredFoundationSquareHigh" ||
-      model_to_destroy === "ArmoredFoundationSquareMid" ||
-      model_to_destroy === "ArmoredFoundationSquareLow" ||
-      model_to_destroy === "ArmoredFoundationTriangleHigh" ||
-      model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow" ||
-      model_to_destroy === "ArmoredWallHigh" ||
-      model_to_destroy === "ArmoredWallMid" ||
-      model_to_destroy === "ArmoredWallLow" ||
-      model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow" ||
-      model_to_destroy === "ArmoredWallFrame" ||
-      model_to_destroy === "ArmoredFloorFrameSquare" ||
-      model_to_destroy === "ArmoredFloorFrameTriangle" ||
-      model_to_destroy === "ArmoredFloorSquare" ||
-      model_to_destroy === "ArmoredFloorTriangle" ||
-      model_to_destroy === "ArmoredStairsLShape" ||
-      model_to_destroy === "ArmoredStairsUShape" ||
-      model_to_destroy === "ArmoredRoofSquare" ||
-      model_to_destroy === "ArmoredRoofTriangle"
-    ) {
-      set_ammo_cost(ammo_cost + 799);
-    } else if (
-      model_to_destroy === "Furnace" ||
-      model_to_destroy === "LargeWoodBox" ||
-      model_to_destroy === "SleepingBag" ||
-      model_to_destroy === "ToolCupboard" ||
-      model_to_destroy === "WoodStorageBox" ||
-      model_to_destroy === "WorkbenchT3"
-    )
-      return;
+    switch (model_to_destroy) {
+      case "MetalDoor":
+        set_ammo_cost(ammo_cost + 63);
+        break;
+
+      case "StrenghtenedGlassWindow":
+        set_ammo_cost(ammo_cost + 140);
+        break;
+
+      case "GarageDoor":
+        set_ammo_cost(ammo_cost + 150);
+        break;
+
+      case "StoneStairsLShape":
+      case "StoneStairsUShape":
+      case "MetalVerticalEmbrasure":
+        set_ammo_cost(ammo_cost + 173);
+        break;
+
+      case "StoneFoundationSquareHigh":
+      case "StoneFoundationSquareMid":
+      case "StoneFoundationSquareLow":
+      case "StoneFoundationTriangleHigh":
+      case "StoneFoundationTriangleMid":
+      case "StoneFoundationTriangleLow":
+      case "StoneWallHigh":
+      case "StoneWallMid":
+      case "StoneWallLow":
+      case "StoneDoorway":
+      case "StoneWindow":
+      case "StoneWallFrame":
+      case "StoneFloorSquare":
+      case "StoneFloorTriangle":
+      case "StoneFloorFrameSquare":
+      case "StoneFloorFrameTriangle":
+      case "StoneRoofSquare":
+      case "StoneRoofTriangle":
+        set_ammo_cost(ammo_cost + 185);
+        break;
+
+      case "MetalStairsLShape":
+      case "MetalStairsUShape":
+        set_ammo_cost(ammo_cost + 399);
+        break;
+
+      case "MetalWallHigh":
+      case "MetalWallMid":
+      case "MetalWallLow":
+      case "MetalDoorway":
+      case "MetalWindow":
+      case "MetalWallFrame":
+      case "MetalFloorSquare":
+      case "MetalFloorFrameSquare":
+      case "MetalFloorFrameTriangle":
+      case "MetalRoofSquare":
+      case "MetalRoofTriangle":
+        set_ammo_cost(ammo_cost + 400);
+        break;
+
+      case "MetalFloorTriangle":
+        set_ammo_cost(ammo_cost + 413);
+        break;
+
+      case "MetalFoundationSquareHigh":
+      case "MetalFoundationSquareMid":
+      case "MetalFoundationSquareLow":
+      case "MetalFoundationTriangleHigh":
+      case "MetalFoundationTriangleMid":
+      case "MetalFoundationTriangleLow":
+        set_ammo_cost(ammo_cost + 461);
+        break;
+
+      case "ArmoredFoundationSquareHigh":
+      case "ArmoredFoundationSquareMid":
+      case "ArmoredFoundationSquareLow":
+      case "ArmoredFoundationTriangleHigh":
+      case "ArmoredFoundationTriangleMid":
+      case "ArmoredFoundationTriangleLow":
+      case "ArmoredWallHigh":
+      case "ArmoredWallMid":
+      case "ArmoredWallLow":
+      case "ArmoredDoorway":
+      case "ArmoredWindow":
+      case "ArmoredWallFrame":
+      case "ArmoredFloorFrameSquare":
+      case "ArmoredFloorFrameTriangle":
+      case "ArmoredFloorSquare":
+      case "ArmoredFloorTriangle":
+      case "ArmoredStairsLShape":
+      case "ArmoredStairsUShape":
+      case "ArmoredRoofSquare":
+      case "ArmoredRoofTriangle":
+        set_ammo_cost(ammo_cost + 799);
+        break;
+
+      case "Furnace":
+      case "LargeWoodBox":
+      case "SleepingBag":
+      case "ToolCupboard":
+      case "WoodStorageBox":
+      case "WorkbenchT3":
+        return;
+    }
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Exp. Ammo ↑ -------------------------
@@ -485,244 +518,216 @@ export default function RaidCalculator() {
   // this function counts only the satchel charge costs on selected objects
 
   function CalculateSatchelsCost() {
-    if (model_to_destroy === "MetalDoor") {
-      set_satchel_cost(satchel_cost + 4);
-    } else if (model_to_destroy === "GarageDoor" || model_to_destroy === "StrenghtenedGlassWindow") {
-      set_satchel_cost(satchel_cost + 9);
-    } else if (
-      model_to_destroy === "StoneFoundationSquareHigh" ||
-      model_to_destroy === "StoneFoundationSquareMid" ||
-      model_to_destroy === "StoneFoundationSquareLow" ||
-      model_to_destroy === "StoneFoundationTriangleHigh" ||
-      model_to_destroy === "StoneFoundationTriangleMid" ||
-      model_to_destroy === "StoneFoundationTriangleLow" ||
-      model_to_destroy === "StoneWallHigh" ||
-      model_to_destroy === "StoneWallMid" ||
-      model_to_destroy === "StoneWallLow" ||
-      model_to_destroy === "StoneDoorway" ||
-      model_to_destroy === "StoneWindow" ||
-      model_to_destroy === "StoneStairsLShape" ||
-      model_to_destroy === "StoneStairsUShape" ||
-      model_to_destroy === "StoneWallFrame" ||
-      model_to_destroy === "StoneFloorSquare" ||
-      model_to_destroy === "StoneFloorTriangle" ||
-      model_to_destroy === "StoneFloorFrameSquare" ||
-      model_to_destroy === "StoneFloorFrameTriangle" ||
-      model_to_destroy === "StoneRoofSquare" ||
-      model_to_destroy === "StoneRoofTriangle"
-    ) {
-      set_satchel_cost(satchel_cost + 10);
-    } else if (model_to_destroy === "MetalVerticalEmbrasure") {
-      set_satchel_cost(satchel_cost + 13);
-    } else if (
-      model_to_destroy === "MetalFoundationSquareHigh" ||
-      model_to_destroy === "MetalFoundationSquareMid" ||
-      model_to_destroy === "MetalFoundationSquareLow" ||
-      model_to_destroy === "MetalFoundationTriangleHigh" ||
-      model_to_destroy === "MetalFoundationTriangleMid" ||
-      model_to_destroy === "MetalFoundationTriangleLow" ||
-      model_to_destroy === "MetalWallHigh" ||
-      model_to_destroy === "MetalWallMid" ||
-      model_to_destroy === "MetalWallLow" ||
-      model_to_destroy === "MetalDoorway" ||
-      model_to_destroy === "MetalWindow" ||
-      model_to_destroy === "MetalStairsLShape" ||
-      model_to_destroy === "MetalStairsUShape" ||
-      model_to_destroy === "MetalWallFrame" ||
-      model_to_destroy === "MetalFloorSquare" ||
-      model_to_destroy === "MetalFloorTriangle" ||
-      model_to_destroy === "MetalFloorFrameSquare" ||
-      model_to_destroy === "MetalFloorFrameTriangle" ||
-      model_to_destroy === "MetalRoofSquare" ||
-      model_to_destroy === "MetalRoofTriangle"
-    ) {
-      set_satchel_cost(satchel_cost + 23);
-    } else if (
-      model_to_destroy === "ArmoredFoundationSquareHigh" ||
-      model_to_destroy === "ArmoredFoundationSquareMid" ||
-      model_to_destroy === "ArmoredFoundationSquareLow" ||
-      model_to_destroy === "ArmoredFoundationTriangleHigh" ||
-      model_to_destroy === "ArmoredFoundationTriangleMid" ||
-      model_to_destroy === "ArmoredFoundationTriangleLow" ||
-      model_to_destroy === "ArmoredWallHigh" ||
-      model_to_destroy === "ArmoredWallMid" ||
-      model_to_destroy === "ArmoredWallLow" ||
-      model_to_destroy === "ArmoredDoorway" ||
-      model_to_destroy === "ArmoredWindow" ||
-      model_to_destroy === "ArmoredWallFrame" ||
-      model_to_destroy === "ArmoredFloorFrameSquare" ||
-      model_to_destroy === "ArmoredFloorFrameTriangle" ||
-      model_to_destroy === "ArmoredFloorSquare" ||
-      model_to_destroy === "ArmoredFloorTriangle" ||
-      model_to_destroy === "ArmoredStairsLShape" ||
-      model_to_destroy === "ArmoredStairsUShape" ||
-      model_to_destroy === "ArmoredRoofSquare" ||
-      model_to_destroy === "ArmoredRoofTriangle"
-    ) {
-      set_satchel_cost(satchel_cost + 46);
-    } else if (
-      model_to_destroy === "Furnace" ||
-      model_to_destroy === "LargeWoodBox" ||
-      model_to_destroy === "SleepingBag" ||
-      model_to_destroy === "ToolCupboard" ||
-      model_to_destroy === "WoodStorageBox" ||
-      model_to_destroy === "WorkbenchT3"
-    )
-      return;
+    switch (model_to_destroy) {
+      case "MetalDoor":
+        set_satchel_cost(satchel_cost + 4);
+        break;
+
+      case "GarageDoor":
+      case "StrenghtenedGlassWindow":
+        set_satchel_cost(satchel_cost + 9);
+        break;
+
+      case "StoneFoundationSquareHigh":
+      case "StoneFoundationSquareMid":
+      case "StoneFoundationSquareLow":
+      case "StoneFoundationTriangleHigh":
+      case "StoneFoundationTriangleMid":
+      case "StoneFoundationTriangleLow":
+      case "StoneWallHigh":
+      case "StoneWallMid":
+      case "StoneWallLow":
+      case "StoneDoorway":
+      case "StoneWindow":
+      case "StoneStairsLShape":
+      case "StoneStairsUShape":
+      case "StoneWallFrame":
+      case "StoneFloorSquare":
+      case "StoneFloorTriangle":
+      case "StoneFloorFrameSquare":
+      case "StoneFloorFrameTriangle":
+      case "StoneRoofSquare":
+      case "StoneRoofTriangle":
+        set_satchel_cost(satchel_cost + 10);
+        break;
+
+      case "MetalVerticalEmbrasure":
+        set_satchel_cost(satchel_cost + 13);
+        break;
+
+      case "MetalFoundationSquareHigh":
+      case "MetalFoundationSquareMid":
+      case "MetalFoundationSquareLow":
+      case "MetalFoundationTriangleHigh":
+      case "MetalFoundationTriangleMid":
+      case "MetalFoundationTriangleLow":
+      case "MetalWallHigh":
+      case "MetalWallMid":
+      case "MetalWallLow":
+      case "MetalDoorway":
+      case "MetalWindow":
+      case "MetalStairsLShape":
+      case "MetalStairsUShape":
+      case "MetalWallFrame":
+      case "MetalFloorSquare":
+      case "MetalFloorTriangle":
+      case "MetalFloorFrameSquare":
+      case "MetalFloorFrameTriangle":
+      case "MetalRoofSquare":
+      case "MetalRoofTriangle":
+        set_satchel_cost(satchel_cost + 23);
+        break;
+
+      case "ArmoredFoundationSquareHigh":
+      case "ArmoredFoundationSquareMid":
+      case "ArmoredFoundationSquareLow":
+      case "ArmoredFoundationTriangleHigh":
+      case "ArmoredFoundationTriangleMid":
+      case "ArmoredFoundationTriangleLow":
+      case "ArmoredWallHigh":
+      case "ArmoredWallMid":
+      case "ArmoredWallLow":
+      case "ArmoredDoorway":
+      case "ArmoredWindow":
+      case "ArmoredWallFrame":
+      case "ArmoredFloorFrameSquare":
+      case "ArmoredFloorFrameTriangle":
+      case "ArmoredFloorSquare":
+      case "ArmoredFloorTriangle":
+      case "ArmoredStairsLShape":
+      case "ArmoredStairsUShape":
+      case "ArmoredRoofSquare":
+      case "ArmoredRoofTriangle":
+        set_satchel_cost(satchel_cost + 46);
+        break;
+
+      case "Furnace":
+      case "LargeWoodBox":
+      case "SleepingBag":
+      case "ToolCupboard":
+      case "WoodStorageBox":
+      case "WorkbenchT3":
+        return;
+    }
   }
 
   //* ------------------------- ↑ Raid Cost Calculator: Satchel Charge ↑ -------------------------
 
-  // -------------------------  calculate the sulfur cost for every destroyed object -------------------------
+  //* ------------------------- ↓ Calculate all the raid materials ↓ -------------------------
+
+  // ------------------------- sulfur cost -------------------------
 
   function CalculateSulfurCost() {
-    if (!count_sub_ingredients) {
-      const sulfur_cost_rocket = rockets_cost * 1400;
-      const sulfur_cost_explosives = explosives_cost * 2200;
-      const sulfur_cost_ammo = ammo_cost * 25;
-      const sulfur_cost_satchel = satchel_cost * 480;
-      set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
-    } else if (count_sub_ingredients) {
-      const sulfur_cost_rocket = rockets_cost * 100;
-      const sulfur_cost_explosives = explosives_cost * 100;
-      const sulfur_cost_ammo = ammo_cost * 5;
-      const sulfur_cost_satchel = satchel_cost * 0;
-      set_sulfur_cost(sulfur_cost_rocket + sulfur_cost_explosives + sulfur_cost_ammo + sulfur_cost_satchel);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 1400 : 100;
+    const explosives_multiplier = count_sub_ingredients ? 2200 : 200;
+    const ammo_multiplier = count_sub_ingredients ? 25 : 5;
+    const satchel_multiplier = count_sub_ingredients ? 480 : 0;
+
+    const sulfur_cost = (rockets_cost * rocket_multiplier) + (explosives_cost * explosives_multiplier) + (ammo_cost * ammo_multiplier) + (satchel_cost * satchel_multiplier) //prettier-ignore
+    set_sulfur_cost(sulfur_cost);
   }
 
-  // -------------------------  calculate the gunpowder cost for every destroyed object -------------------------
+  // ------------------------- gunpowder cost -------------------------
 
   function CalculateGunpowderCost() {
-    if (!count_sub_ingredients) {
-      const gunpowder_cost_explosives = explosives_cost * 0;
-      const gunpowder_cost_ammo = ammo_cost * 0;
+    const rocket_multiplier = count_sub_ingredients ? 0 : 650;
+    const explosives_multiplier = count_sub_ingredients ? 0 : 1000;
+    const ammo_multiplier = count_sub_ingredients ? 0 : 10;
+    const satchel_multiplier = count_sub_ingredients ? 0 : 240;
 
-      set_gunpowder_cost(gunpowder_cost_explosives + gunpowder_cost_ammo);
-    } else if (count_sub_ingredients) {
-      const gunpowder_cost_rocket = rockets_cost * 650;
-      const gunpowder_cost_explosives = explosives_cost * 1000;
-      const gunpowder_cost_ammo = ammo_cost * 10;
-      const gunpowder_cost_satchel = satchel_cost * 240;
-      set_gunpowder_cost(
-        gunpowder_cost_rocket + gunpowder_cost_explosives + gunpowder_cost_ammo + gunpowder_cost_satchel
-      );
-    }
+    const gunpowder_cost = (rockets_cost * rocket_multiplier) + (explosives_cost * explosives_multiplier) + (ammo_cost * ammo_multiplier) + (satchel_cost * satchel_multiplier) //prettier-ignore
+    set_gunpowder_cost(gunpowder_cost);
   }
 
-  // -------------------------  calculate the charcoal cost for every destroyed object -------------------------
+  // ------------------------- charcoal cost -------------------------
 
   function CalculateCharcoalCost() {
-    if (!count_sub_ingredients) {
-      const charcoal_cost_rocket = rockets_cost * 1950;
-      const charcoal_cost_explosives = explosives_cost * 3000;
-      const charcoal_cost_ammo = ammo_cost * 30;
-      const charcoal_cost_satchel = satchel_cost * 720;
-      set_charcoal_cost(charcoal_cost_rocket + charcoal_cost_explosives + charcoal_cost_ammo + charcoal_cost_satchel);
-    } else if (count_sub_ingredients) {
-      const charcoal_cost_rocket = rockets_cost * 1950;
-      const charcoal_cost_explosives = explosives_cost * 3000;
-      const charcoal_cost_ammo = ammo_cost * 30;
-      const charcoal_cost_satchel = satchel_cost * 720;
-      set_charcoal_cost(charcoal_cost_rocket + charcoal_cost_explosives + charcoal_cost_ammo + charcoal_cost_satchel);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 1950 : 0;
+    const explosives_multiplier = count_sub_ingredients ? 3000 : 0;
+    const ammo_multiplier = count_sub_ingredients ? 30 : 0;
+    const satchel_multiplier = count_sub_ingredients ? 720 : 0;
+
+    const charcoal_cost = (rockets_cost * rocket_multiplier) + (explosives_cost * explosives_multiplier) + (ammo_cost * ammo_multiplier) + (satchel_cost * satchel_multiplier) //prettier-ignore
+    set_charcoal_cost(charcoal_cost);
   }
 
-  // -------------------------  calculate the metal frag. cost for every destroyed object -------------------------
+  // ------------------------- metal frag. cost -------------------------
 
   function CalculateMetalFragmentsCost() {
     const metal_fragments_cost_rocket = rockets_cost * 100;
     const metal_fragments_cost_explosives = explosives_cost * 200;
     const metal_fragments_cost_ammo = ammo_cost * 5;
     const metal_fragments_cost_satchel = satchel_cost * 80;
-    set_metal_fragments_cost(
-      metal_fragments_cost_rocket +
-        metal_fragments_cost_explosives +
-        metal_fragments_cost_ammo +
-        metal_fragments_cost_satchel
-    );
+
+    set_metal_fragments_cost(metal_fragments_cost_rocket + metal_fragments_cost_explosives + metal_fragments_cost_ammo + metal_fragments_cost_satchel) //prettier-ignore
   }
 
-  // -------------------------  calculate the metal pipes cost for every destroyed object -------------------------
+  // ------------------------- metal pipes cost -------------------------
 
   function CalculateMetalPipesCost() {
-    if (!count_sub_ingredients) {
-      const metal_pipes_cost_rocket = rockets_cost * 2;
-      set_metal_pipe_cost(metal_pipes_cost_rocket);
-    } else if (count_sub_ingredients) {
-      const metal_pipes_cost_rocket = rockets_cost * 0;
-      set_metal_pipe_cost(metal_pipes_cost_rocket);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 0 : 2;
+
+    const metal_pipes_cost = rockets_cost * rocket_multiplier;
+    set_metal_pipe_cost(metal_pipes_cost);
   }
 
-  // -------------------------  calculate the lq. fuel cost for every destroyed object -------------------------
+  // ------------------------- lq. fuel cost -------------------------
 
   function CalculateLqFuelCost() {
-    if (!count_sub_ingredients) {
-      const lq_fuel_cost_rocket = rockets_cost * 30;
-      const lq_fuel_cost_explosives = explosives_cost * 60;
-      set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
-    } else if (count_sub_ingredients) {
-      const lq_fuel_cost_rocket = rockets_cost * 0;
-      const lq_fuel_cost_explosives = explosives_cost * 0;
-      set_lq_fuel_cost(lq_fuel_cost_rocket + lq_fuel_cost_explosives);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 0 : 30;
+    const explosives_multiplier = count_sub_ingredients ? 0 : 60;
+
+    const lq_fuel_cost = (rockets_cost * rocket_multiplier) + (explosives_cost * explosives_multiplier); // prettier-ignore
+    set_lq_fuel_cost(lq_fuel_cost);
   }
 
-  // -------------------------  calculate the cloth cost for every destroyed object -------------------------
+  // ------------------------- cloth cost -------------------------
 
   function CalculateClothCost() {
-    if (!count_sub_ingredients) {
-      const cloth_cost_explosives = explosives_cost * 5;
-      const cloth_cost_satchel = satchel_cost * 10;
-      set_cloth_cost(cloth_cost_explosives + cloth_cost_satchel);
-    } else if (count_sub_ingredients) {
-      const cloth_cost_rocket = rockets_cost * 8;
-      const cloth_cost_explosives = explosives_cost * 20;
-      const cloth_cost_satchel = satchel_cost * 10;
-      set_cloth_cost(cloth_cost_rocket + cloth_cost_explosives + cloth_cost_satchel);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 8 : 0;
+    const explosives_multiplier = count_sub_ingredients ? 20 : 5;
+    const satchel_multiplier = 10;
+
+    const cloth_cost = (rockets_cost * rocket_multiplier) + (explosives_cost * explosives_multiplier) + (satchel_cost * satchel_multiplier); // prettier-ignore
+    set_cloth_cost(cloth_cost);
   }
 
-  // -------------------------  calculate the tech trash cost for every destroyed object -------------------------
+  // ------------------------- tech trash cost -------------------------
 
   function CalculateTechTrashCost() {
     const tech_trash_cost_explosives = explosives_cost * 2;
     set_tech_trash_cost(tech_trash_cost_explosives);
   }
 
-  // -------------------------  calculate the hq. metal cost for every destroyed object -------------------------
+  // ------------------------- hq. metal cost -------------------------
 
   function CalculateHqMetalCost() {
-    if (count_sub_ingredients) {
-      const hq_metal_cost_explosives = rockets_cost * 4;
-      set_hq_metal_cost(hq_metal_cost_explosives);
-    }
+    const explosives_multiplier = count_sub_ingredients ? 2 : 0;
+
+    const hq_metal_cost = rockets_cost * explosives_multiplier;
+    set_hq_metal_cost(hq_metal_cost);
   }
 
-  // -------------------------  calculate the scrap cost for every destroyed object -------------------------
+  // ------------------------- scrap cost -------------------------
 
   function CalculateScrapCost() {
-    if (count_sub_ingredients) {
-      const scrap_cost_rocket = rockets_cost * 40;
-      set_scrap_cost(scrap_cost_rocket);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 10 : 0;
+
+    const scrap_cost = rockets_cost * rocket_multiplier; // prettier-ignore
+    set_scrap_cost(scrap_cost);
   }
 
-  // -------------------------  calculate the animal fat cost for every destroyed object -------------------------
+  // ------------------------- animal fat cost -------------------------
 
   function CalculateAnimalFatCost() {
-    if (count_sub_ingredients) {
-      const animal_fat_cost_rocket = rockets_cost * 24;
-      const animal_fat_cost_explosives = explosives_cost * 45;
-      set_animal_fat_cost(animal_fat_cost_rocket + animal_fat_cost_explosives);
-    } else if (!count_sub_ingredients) {
-      const animal_fat_cost_explosives = explosives_cost * 0;
-      set_animal_fat_cost(animal_fat_cost_explosives);
-    }
+    const rocket_multiplier = count_sub_ingredients ? 24 : 0;
+    const explosives_multiplier = count_sub_ingredients ? 45 : 0;
+
+    const animal_fat_cost = (rockets_cost * rocket_multiplier) + (explosives_cost * explosives_multiplier); // prettier-ignore
+    set_animal_fat_cost(animal_fat_cost);
   }
 
-  // -------------------------  calculate the rope cost for every destroyed object -------------------------
+  // ------------------------- rope cost -------------------------
 
   function CalculateRopeCost() {
     const rope_cost_satchel = satchel_cost * 1;
@@ -734,21 +739,24 @@ export default function RaidCalculator() {
       set_raid_type(type);
 
       if (audio) {
-        if (type === "efficiency") {
-          AudioPlayer(menu_sound);
-        }
-
-        if (type === "rockets") {
-          AudioPlayer(rocket_sound);
-        }
-        if (type === "explosives") {
-          AudioPlayer(charge_sound);
-        }
-        if (type === "ammo") {
-          AudioPlayer(ammo_sound);
-        }
-        if (type === "satchel") {
-          AudioPlayer(satchel_sound);
+        switch (type) {
+          case "efficiency":
+            AudioPlayer(menu_sound);
+            break;
+          case "rockets":
+            AudioPlayer(rocket_sound);
+            break;
+          case "explosives":
+            AudioPlayer(charge_sound);
+            break;
+          case "ammo":
+            AudioPlayer(ammo_sound);
+            break;
+          case "satchel":
+            AudioPlayer(satchel_sound);
+            break;
+          default:
+            break;
         }
       }
     }
@@ -758,24 +766,30 @@ export default function RaidCalculator() {
   // trigger the raid cost calculator when any model changes the value of the model_destroy_trigger in the Redux Store
 
   useEffect(() => {
-    {
-      if (raid_type === "rockets") {
+    switch (raid_type) {
+      case "rockets":
         CalculateRocketCost();
-      } else if (raid_type === "explosives") {
+        break;
+      case "explosives":
         CalculateExplosivesCost();
-      } else if (raid_type === "ammo") {
+        break;
+      case "ammo":
         CalculateAmmoCost();
-      } else if (raid_type === "satchel") {
+        break;
+      case "satchel":
         CalculateSatchelsCost();
-      } else if (raid_type === "efficiency") {
+        break;
+      case "efficiency":
         CalculateEfficiencyCost();
-      }
+        break;
+      default:
+        break;
     }
-  }, [model_destroy_tigger]);
+  }, [model_destroy_trigger]);
 
   //* ------------------------- ↑ Calculator Trigger ↑ -------------------------
 
-  const HandleAdvancedResourceCountingState = () => {
+  const ToggleSubIngredientsCalculator = () => {
     set_count_sub_ingredients(!count_sub_ingredients);
     if (audio) {
       AudioPlayer(buttons_sound);
@@ -813,132 +827,58 @@ export default function RaidCalculator() {
   // -------------------------  reset the raid cost on page mode change -------------------------
 
   useEffect(() => {
-    {
-      set_rockets_cost(0);
-      set_explosives_cost(0);
-      set_ammo_cost(0);
-      set_satchel_cost(0);
-
-      set_sulfur_cost(0);
-      set_gunpowder_cost(0);
-      set_charcoal_cost(0);
-      set_metal_fragments_cost(0);
-    }
+    ResetRaid();
   }, [page_mode]);
+
+  function BuildRaidCostSegment(type: string, thumbnail: string, description: string) {
+    return (
+      <button
+        className={
+          raid_type === type
+            ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
+            : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
+        }
+        onClick={() => ChangeRaidType(type)}
+      >
+        {/* prettier-ignore */}
+        <img className="raid_type_content_thumbnail" src={thumbnail} alt={`${raid_type} thumbnail`} style={{ filter: raid_type === type ? "grayscale(0%)" : "grayscale(100%)"}}/>
+        <span className="raid_type_description">{description}</span>
+      </button>
+    );
+  }
+
+  //prettier-ignore
+  function BuildRaidToolCostSegment(is_segment_active: boolean, thumbnail: string, description: string, tool_cost: number) {
+    return (
+      <div className={is_segment_active ? "raid_tool_cost_content" : "raid_tool_cost_content raid_resources_cost_disabled"}>
+        <img className="raid_tool_cost_content_thumbnail" src={thumbnail} alt={`${description} thumbnail`} style={{ filter: is_segment_active ? "grayscale(0%)" : "grayscale(100%)"}}/>
+        <span className="raid_tool_cost_content_description">{description}</span>
+        <span className="raid_tool_cost_content_amount">{NumbersFormatter(tool_cost)}</span>
+      </div>
+    );
+  }
 
   return (
     <>
       <section className="raid_type_main_container">
         <span className="raid_type_title">raid the base with:</span>
         <div className="raid_type_buttons_main_container">
-          <button
-            className={
-              raid_type === "efficiency"
-                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
-                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
-            }
-            onClick={() => ChangeRaidType("efficiency")}
-          >
-            {/* prettier-ignore */}
-            <img className="raid_type_content_thumbnail" src={sulfurThumbnail} alt="Sulfur thumbnail" style={{ filter: raid_type === "efficiency" ? "grayscale(0%)" : "grayscale(100%)",}}/>
-            <span className="raid_type_description">most efficient</span>
-          </button>
-
-          <button
-            className={
-              raid_type === "rockets"
-                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
-                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
-            }
-            onClick={() => ChangeRaidType("rockets")}
-          >
-            {/* prettier-ignore */}
-            <img className="raid_type_content_thumbnail" src={rocketThumbnail} alt="Rocket thumbnail" style={{ filter: raid_type === "rockets" ? "grayscale(0%)" : "grayscale(100%)", }}/>
-            <span className="raid_type_description">rockets</span>
-          </button>
-
-          <button
-            className={
-              raid_type === "explosives"
-                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
-                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
-            }
-            onClick={() => ChangeRaidType("explosives")}
-          >
-            {/* prettier-ignore */}
-            <img className="raid_type_content_thumbnail" src={explosivesThumbnail} alt="Explosives thumbnail" style={{ filter: raid_type === "explosives" ? "grayscale(0%)" : "grayscale(100%)", }}/>
-            <span className="raid_type_description">explosives</span>
-          </button>
-
-          <button
-            className={
-              raid_type === "ammo"
-                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
-                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
-            }
-            onClick={() => ChangeRaidType("ammo")}
-          >
-            {/* prettier-ignore */}
-            <img className="raid_type_content_thumbnail" src={ammoThumbnail} alt="Ammo thumbnail" style={{ filter: raid_type === "ammo" ? "grayscale(0%)" : "grayscale(100%)",}}/>
-            <span className="raid_type_description">exp. 5.56</span>
-          </button>
-
-          <button
-            className={
-              raid_type === "satchel"
-                ? "raid_type_buttons_content_container raid_type_buttons_content_container_active"
-                : "raid_type_buttons_content_container raid_type_buttons_content_container_inactive"
-            }
-            onClick={() => ChangeRaidType("satchel")}
-          >
-            {/* prettier-ignore */}
-            <img className="raid_type_content_thumbnail" src={satchelThumbnail} alt="Satchel thumbnail" style={{ filter: raid_type === "satchel" ? "grayscale(0%)" : "grayscale(100%)",}}/>
-            <span className="raid_type_description">satchels</span>
-          </button>
+          {BuildRaidCostSegment("efficiency", sulfurThumbnail, "most efficient")}
+          {BuildRaidCostSegment("rockets", rocketThumbnail, "rockets")}
+          {BuildRaidCostSegment("explosives", explosivesThumbnail, "explosives")}
+          {BuildRaidCostSegment("ammo", ammoThumbnail, "exp. 5.56")}
+          {BuildRaidCostSegment("satchel", satchelThumbnail, "satchels")}
         </div>
       </section>
-
-      <div className="reset_raid_main_container">
-        <div
-          className="reset_raid_thumbnail"
-          onClick={ResetRaid}
-          onMouseEnter={() => {set_reset_raid_hover(true)}} //prettier-ignore
-          onMouseLeave={() => {set_reset_raid_hover(false)}} //prettier-ignore
-        >
-          {/* prettier-ignore */}
-          <FontAwesomeIcon icon={faArrowsRotate} style={{ width: "75%",
-      height: "75%", color: reset_raid_hover ? "#fdc89d" : "#a8a8a8" }}/>
-        </div>
-        <div className="reset_raid_description">reset raid</div>
-      </div>
 
       <div className="raid_cost_main_container">
         <section className="raid_tool_cost_main_container">
           <span className="raid_tool_cost_title">raid tool cost (hard side)</span>
           <div className="raid_tool_cost_content_container">
-            <div className="raid_tool_cost_content">
-              <img className="raid_tool_cost_content_thumbnail" src={rocketThumbnail} alt="Rocket thumbnail" />
-              <span className="raid_tool_cost_content_description">rocket</span>
-              <span className="raid_tool_cost_content_amount">{NumbersFormatter(rockets_cost)}</span>
-            </div>
-
-            <div className="raid_tool_cost_content">
-              <img className="raid_tool_cost_content_thumbnail" src={explosivesThumbnail} alt="Explosives thumbnail" />
-              <span className="raid_tool_cost_content_description">C4</span>
-              <span className="raid_tool_cost_content_amount">{NumbersFormatter(explosives_cost)}</span>
-            </div>
-
-            <div className="raid_tool_cost_content">
-              <img className="raid_tool_cost_content_thumbnail" src={ammoThumbnail} alt="Ammo thumbnail" />
-              <span className="raid_tool_cost_content_description">exp. 5.56</span>
-              <span className="raid_tool_cost_content_amount">{NumbersFormatter(ammo_cost)}</span>
-            </div>
-
-            <div className="raid_tool_cost_content">
-              <img className="raid_tool_cost_content_thumbnail" src={satchelThumbnail} alt="Satchel thumbnail" />
-              <span className="raid_tool_cost_content_description">satchel</span>
-              <span className="raid_tool_cost_content_amount">{NumbersFormatter(satchel_cost)}</span>
-            </div>
+            {BuildRaidToolCostSegment(true, rocketThumbnail, "rocket", rockets_cost)}
+            {BuildRaidToolCostSegment(true, explosivesThumbnail, "C4", explosives_cost)}
+            {BuildRaidToolCostSegment(true, ammoThumbnail, "exp. 5.56", ammo_cost)}
+            {BuildRaidToolCostSegment(true, satchelThumbnail, "satchel", satchel_cost)}
           </div>
         </section>
 
@@ -946,99 +886,47 @@ export default function RaidCalculator() {
           <span className="raid_resources_cost_title">raid cost (resources)</span>
           <div className="raid_resources_cost_sub_ingredients">
             <label>
-              <input type="checkbox" checked={count_sub_ingredients} onChange={HandleAdvancedResourceCountingState} />
-              gunpowder + sub ingredients
+              <input type="checkbox" checked={count_sub_ingredients} onChange={ToggleSubIngredientsCalculator} />
+              charcoal + sulfur ( + sub ingredients)
             </label>
           </div>
           <div className="raid_resources_cost_content_container">
-            <div className="raid_resources_cost_content">
-              <img src={sulfurThumbnail} alt="Sulfur thumbnail" className="raid_resources_cost_content_thumbnail" />
-              <span className="raid_resources_cost_content_description">sulfur</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(sulfur_cost)}</span>
-            </div>
-
-            {/* prettier-ignore */}
-            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled"}>
-              {/* prettier-ignore */}
-              <img src={gunpowderThumbnail} alt="Gunpowder thumbnail" className="raid_resources_cost_content_thumbnail"/>
-              <span className="raid_resources_cost_content_description">gunpowder</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(gunpowder_cost)}</span>
-            </div>
-
-            <div className="raid_resources_cost_content">
-              <img src={charcoalThumbnail} alt="Charcoal thumbnail" className="raid_resources_cost_content_thumbnail" />
-              <span className="raid_resources_cost_content_description">charcoal</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(charcoal_cost)}</span>
-            </div>
-
-            <div className="raid_resources_cost_content">
-              <img src={metalThumbnail} alt="Metal thumbnail" className="raid_resources_cost_content_thumbnail" />
-              <span className="raid_resources_cost_content_description">metal</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(metal_fragments_cost)}</span>
-            </div>
+            {BuildRaidToolCostSegment(true, sulfurThumbnail, "sulfur", sulfur_cost)}
+            {BuildRaidToolCostSegment(!count_sub_ingredients, gunpowderThumbnail, "gunpowder", gunpowder_cost)}
+            {BuildRaidToolCostSegment(count_sub_ingredients, charcoalThumbnail, "charcoal", charcoal_cost)}
+            {BuildRaidToolCostSegment(true, metalThumbnail, "metal", metal_fragments_cost)}
           </div>
 
           <div className="raid_resources_cost_content_container">
-            <div className="raid_resources_cost_content">
-              {/* prettier-ignore */}
-              <img src={metalPipeThumbnail} alt="Metal pipe thumbnail" className="raid_resources_cost_content_thumbnail"/>
-              <span className="raid_resources_cost_content_description">metal pipe</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(metal_pipe_cost)}</span>
-            </div>
-
-            <div className="raid_resources_cost_content">
-              {/* prettier-ignore */}
-              <img src={lqFuelThumbnail} alt="Low quality fuel thumbnail" className="raid_resources_cost_content_thumbnail"/>
-              <span className="raid_resources_cost_content_description">lq. fuel</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(lq_fuel_cost)}</span>
-            </div>
-
-            <div className="raid_resources_cost_content">
-              <img src={clothThumbnail} alt="Cloth thumbnail" className="raid_resources_cost_content_thumbnail" />
-              <span className="raid_resources_cost_content_description">cloth</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(cloth_cost)}</span>
-            </div>
-
-            <div className="raid_resources_cost_content">
-              {/* prettier-ignore */}
-              <img src={techTrashThumbnail} alt="Tech trash thumbnail" className="raid_resources_cost_content_thumbnail"/>
-              <span className="raid_resources_cost_content_description">tech trash</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(tech_trash_cost)}</span>
-            </div>
+            {BuildRaidToolCostSegment(!count_sub_ingredients, metalPipeThumbnail, "metal pipe", metal_pipe_cost)}
+            {BuildRaidToolCostSegment(!count_sub_ingredients, lqFuelThumbnail, "lq. fuel", lq_fuel_cost)}
+            {BuildRaidToolCostSegment(true, clothThumbnail, "cloth", cloth_cost)}
+            {BuildRaidToolCostSegment(true, techTrashThumbnail, "tech trash", tech_trash_cost)}
           </div>
 
           <div className="raid_resources_cost_content_container">
-            {/* prettier-ignore */}
-            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled"}>
-              {/* prettier-ignore */}
-              <img src={hqMetalThumbnail} alt="High quality metal thumbnail" className="raid_resources_cost_content_thumbnail" style={{ filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",}}/>
-              <span className="raid_resources_cost_content_description">hq. metal</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(hq_metal_cost)}</span>
-            </div>
-
-            {/* prettier-ignore */}
-            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled"}>
-              {/* prettier-ignore */}
-              <img src={scrapThumbnail} alt="Scrap thumbnail" className="raid_resources_cost_content_thumbnail" style={{ filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",}}/>
-              <span className="raid_resources_cost_content_description">scrap</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(scrap_cost)}</span>
-            </div>
-
-            {/* prettier-ignore */}
-            <div className={count_sub_ingredients ? "raid_resources_cost_content" : "raid_resources_cost_content raid_resources_cost_disabled" }>
-              {/* prettier-ignore */}
-              <img src={animalFatThumbnail} alt="Animal fat thumbnail" className="raid_resources_cost_content_thumbnail" style={{ filter: count_sub_ingredients ? "grayscale(0%)" : "grayscale(100%)",}}/>
-              <span className="raid_resources_cost_content_description">animal fat</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(animal_fat_cost)}</span>
-            </div>
-
-            <div className="raid_resources_cost_content">
-              <img src={ropeThumbnail} alt="Rope thumbnail" className="raid_resources_cost_content_thumbnail" />
-              <span className="raid_resources_cost_content_description">rope</span>
-              <span className="raid_resources_cost_content_amount">{NumbersFormatter(rope_cost)}</span>
-            </div>
+            {BuildRaidToolCostSegment(count_sub_ingredients, hqMetalThumbnail, "hq. metal", hq_metal_cost)}
+            {BuildRaidToolCostSegment(count_sub_ingredients, scrapThumbnail, "scrap", scrap_cost)}
+            {BuildRaidToolCostSegment(count_sub_ingredients, animalFatThumbnail, "animal fat", animal_fat_cost)}
+            {BuildRaidToolCostSegment(true, ropeThumbnail, "rope", rope_cost)}
           </div>
         </section>
+      </div>
+
+      <div className="reset_raid_main_container">
+        <div
+          className="reset_raid_thumbnail"
+          onClick={() => {
+            ResetRaid();
+            if (audio) AudioPlayer(menu_sound);
+          }}
+          onMouseEnter={() => {set_reset_raid_hover(true)}} //prettier-ignore
+          onMouseLeave={() => {set_reset_raid_hover(false)}} //prettier-ignore
+        >
+          {/* prettier-ignore */}
+          <FontAwesomeIcon icon={faArrowsRotate} style={{ width: "75%", height: "75%", color: reset_raid_hover ? "#fdc89d" : "#a8a8a8" }}/>
+        </div>
+        <div className="reset_raid_description">reset raid</div>
       </div>
     </>
   );

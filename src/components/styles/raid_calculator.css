@@ -87,6 +87,10 @@
   background-repeat: no-repeat;
 }
 
+/* * ------------------------- ↑ Raid type selector ↑ ------------------------- */
+
+/* * ------------------------- ↓ Raid reset ↓ ------------------------- */
+
 .reset_raid_main_container {
   left: 67.5vw;
   top: 90.35vh;
@@ -127,7 +131,7 @@
   align-items: center;
 }
 
-/* * ------------------------- ↑ Raid type selector ↑ ------------------------- */
+/* * ------------------------- ↑ Raid reset ↑ ------------------------- */
 
 /* * ------------------------- ↓ Raid cost display ↓ ------------------------- */
 
@@ -187,8 +191,7 @@
   align-items: center;
 }
 
-.raid_tool_cost_content_thumbnail,
-.raid_resources_cost_content_thumbnail {
+.raid_tool_cost_content_thumbnail {
   width: 100%;
   height: 75%;
   object-fit: contain;
@@ -242,31 +245,6 @@
   align-items: center;
   background-color: rgba(15, 16, 26, 0.4);
   backdrop-filter: blur(3px);
-}
-
-.raid_resources_cost_content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px black solid;
-}
-
-.raid_resources_cost_content_description,
-.raid_resources_cost_content_amount {
-  background-color: black;
-  text-align: center;
-  color: #bbbbbb;
-  font-size: 0.75vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  height: 12.5%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .raid_resources_cost_disabled {
