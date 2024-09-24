@@ -14,7 +14,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const roofs_active = useSelector((state: RootState) => state.modelsData.roofs_active); // prettier-ignore
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); // prettier-ignore
 
-  const { nodes, materials } = useGLTF("./models/armored/armored_roof_wall_textured.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./models/armored/armored_roof_wall_left_textured.glb") as GLTFResult;
   const {defaultMeshKey, defaultMeshMaterial, ModelOnClick, ModelOnPointerOver, ModelOnPointerOut, ModelMissedClick, meshStandardMaterialColor, meshStandardMaterialWireframe, meshEdgesVisibility, meshAnnotationVisibility, model_destroyed } = ModelComponentsCommonLogic(); //prettier-ignore
   return (
     <>
@@ -30,7 +30,6 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             }}
             onPointerOut={() => ModelOnPointerOut()}
             onPointerMissed={() => ModelMissedClick()}
-            scale={[-1, 1, 1]}
           >
             {enable_model_textures && page_mode === "edit" && (
               <>
@@ -50,5 +49,5 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./models/armored/armored_roof_wall_textured.glb");
+useGLTF.preload("./models/armored/armored_roof_wall_left_textured.glb");
 Model.displayName = "ArmoredRoofWallLeft";

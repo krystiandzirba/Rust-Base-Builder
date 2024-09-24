@@ -7,14 +7,14 @@ import { ModelComponentsCommonLogic } from "../../script/ModelComponentsCommonLo
 
 type GLTFResult = GLTF & {
   nodes: {Cube001: THREE.Mesh}; //prettier-ignore
-  materials: {["Material.006"]: THREE.MeshStandardMaterial}}; //prettier-ignore
+  materials: {["Material.003"]: THREE.MeshStandardMaterial}}; //prettier-ignore
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode); // prettier-ignore
   const roofs_active = useSelector((state: RootState) => state.modelsData.roofs_active); // prettier-ignore
   const enable_model_textures = useSelector((state: RootState) => state.pageSettings.enable_model_textures); // prettier-ignore
 
-  const { nodes, materials } = useGLTF("./models/stone/stone_roof_wall_textured.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("./models/stone/stone_roof_wall_right_textured.glb") as GLTFResult;
   const {defaultMeshKey, defaultMeshMaterial, ModelOnClick, ModelOnPointerOver, ModelOnPointerOut, ModelMissedClick, meshStandardMaterialColor, meshStandardMaterialWireframe, meshEdgesVisibility, meshAnnotationVisibility, model_destroyed } = ModelComponentsCommonLogic(); //prettier-ignore
   return (
     <>
@@ -23,7 +23,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           <mesh
             key={defaultMeshKey}
             geometry={nodes.Cube001.geometry}
-            {...defaultMeshMaterial(materials["Material.006"])}
+            {...defaultMeshMaterial(materials["Material.003"])}
             onClick={() => ModelOnClick(Model.displayName)}
             onPointerOver={(e) => {
               e.stopPropagation(), ModelOnPointerOver();
@@ -49,5 +49,5 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("./models/stone/stone_roof_wall_textured.glb");
+useGLTF.preload("./models/stone/stone_roof_wall_right_textured.glb");
 Model.displayName = "StoneRoofWallRight";
