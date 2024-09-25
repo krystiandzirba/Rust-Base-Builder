@@ -119,6 +119,8 @@ export default function RaidCalculator() {
       case "StoneWallHigh":
       case "StoneWallMid":
       case "StoneWallLow":
+      case "StoneRoofWallLeft":
+      case "StoneRoofWallRight":
       case "StoneDoorway":
       case "StoneWindow":
       case "StoneWallFrame":
@@ -140,6 +142,8 @@ export default function RaidCalculator() {
       case "MetalWallHigh":
       case "MetalWallMid":
       case "MetalWallLow":
+      case "MetalRoofWallLeft":
+      case "MetalRoofWallRight":
       case "MetalDoorway":
       case "MetalWindow":
       case "MetalStairsLShape":
@@ -163,6 +167,8 @@ export default function RaidCalculator() {
       case "ArmoredWallHigh":
       case "ArmoredWallMid":
       case "ArmoredWallLow":
+      case "ArmoredRoofWallLeft":
+      case "ArmoredRoofWallRight":
       case "ArmoredDoorway":
       case "ArmoredWindow":
       case "ArmoredWallFrame":
@@ -231,6 +237,8 @@ export default function RaidCalculator() {
       case "StoneWallHigh":
       case "StoneWallMid":
       case "StoneWallLow":
+      case "StoneRoofWallLeft":
+      case "StoneRoofWallRight":
       case "StoneDoorway":
       case "StoneWindow":
       case "StoneStairsLShape":
@@ -255,6 +263,8 @@ export default function RaidCalculator() {
       case "MetalWallHigh":
       case "MetalWallMid":
       case "MetalWallLow":
+      case "MetalRoofWallLeft":
+      case "MetalRoofWallRight":
       case "MetalDoorway":
       case "MetalWindow":
       case "MetalStairsLShape":
@@ -278,6 +288,8 @@ export default function RaidCalculator() {
       case "ArmoredWallHigh":
       case "ArmoredWallMid":
       case "ArmoredWallLow":
+      case "ArmoredRoofWallLeft":
+      case "ArmoredRoofWallRight":
       case "ArmoredDoorway":
       case "ArmoredWindow":
       case "ArmoredWallFrame":
@@ -328,6 +340,8 @@ export default function RaidCalculator() {
       case "StoneWallHigh":
       case "StoneWallMid":
       case "StoneWallLow":
+      case "StoneRoofWallLeft":
+      case "StoneRoofWallRight":
       case "StoneDoorway":
       case "StoneWindow":
       case "StoneStairsLShape":
@@ -352,6 +366,8 @@ export default function RaidCalculator() {
       case "MetalWallHigh":
       case "MetalWallMid":
       case "MetalWallLow":
+      case "MetalRoofWallLeft":
+      case "MetalRoofWallRight":
       case "MetalDoorway":
       case "MetalWindow":
       case "MetalStairsLShape":
@@ -375,6 +391,8 @@ export default function RaidCalculator() {
       case "ArmoredWallHigh":
       case "ArmoredWallMid":
       case "ArmoredWallLow":
+      case "ArmoredRoofWallLeft":
+      case "ArmoredRoofWallRight":
       case "ArmoredDoorway":
       case "ArmoredWindow":
       case "ArmoredWallFrame":
@@ -434,6 +452,8 @@ export default function RaidCalculator() {
       case "StoneWallHigh":
       case "StoneWallMid":
       case "StoneWallLow":
+      case "StoneRoofWallLeft":
+      case "StoneRoofWallRight":
       case "StoneDoorway":
       case "StoneWindow":
       case "StoneWallFrame":
@@ -454,6 +474,8 @@ export default function RaidCalculator() {
       case "MetalWallHigh":
       case "MetalWallMid":
       case "MetalWallLow":
+      case "MetalRoofWallLeft":
+      case "MetalRoofWallRight":
       case "MetalDoorway":
       case "MetalWindow":
       case "MetalWallFrame":
@@ -487,6 +509,8 @@ export default function RaidCalculator() {
       case "ArmoredWallHigh":
       case "ArmoredWallMid":
       case "ArmoredWallLow":
+      case "ArmoredRoofWallLeft":
+      case "ArmoredRoofWallRight":
       case "ArmoredDoorway":
       case "ArmoredWindow":
       case "ArmoredWallFrame":
@@ -537,6 +561,8 @@ export default function RaidCalculator() {
       case "StoneWallHigh":
       case "StoneWallMid":
       case "StoneWallLow":
+      case "StoneRoofWallLeft":
+      case "StoneRoofWallRight":
       case "StoneDoorway":
       case "StoneWindow":
       case "StoneStairsLShape":
@@ -564,6 +590,8 @@ export default function RaidCalculator() {
       case "MetalWallHigh":
       case "MetalWallMid":
       case "MetalWallLow":
+      case "MetalRoofWallLeft":
+      case "MetalRoofWallRight":
       case "MetalDoorway":
       case "MetalWindow":
       case "MetalStairsLShape":
@@ -587,6 +615,8 @@ export default function RaidCalculator() {
       case "ArmoredWallHigh":
       case "ArmoredWallMid":
       case "ArmoredWallLow":
+      case "ArmoredRoofWallLeft":
+      case "ArmoredRoofWallRight":
       case "ArmoredDoorway":
       case "ArmoredWindow":
       case "ArmoredWallFrame":

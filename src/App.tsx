@@ -106,7 +106,6 @@ export default App;
 
 // fix: raid object destructon on mouse click (down) not the click (release/up)
 // fix: select any placed object -> select any object from list to create -> double the hints displayed
-// fix: add roof 1/2 walls to the raid cost?
 // fix: model textures in settings (off) does not work, the model is bright white / determine the use of the model_material and model_textures
 
 // remake the wall mid uv and lower the texture size
