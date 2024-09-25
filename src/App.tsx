@@ -69,6 +69,7 @@ function App() {
         <Github />
         <Version />
         <PrebuiltBasesDesign />
+        <HardwareParameters />
       </KeyboardControls>
       <Loader {...loaderStyles} dataInterpolation={(p) => `Loading ${p.toFixed(0)}%`} />
       <HardwareParameters />
