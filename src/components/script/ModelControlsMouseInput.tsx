@@ -1,29 +1,10 @@
 import { useState } from "react";
-
 import { RootState } from "../../Store.tsx";
-import {
-  set_object_distance_multiplier,
-  set_button_input,
-  set_button_trigger,
-  set_object_rotation_degree,
-  set_delete_object_mode,
-  set_delete_object_mouse_trigger,
-  set_object_selected,
-  set_selected_model_id,
-} from "../../Store.tsx";
+import { set_object_distance_multiplier, set_button_input, set_button_trigger, set_object_rotation_degree, set_object_selected, set_selected_model_id} from "../../Store.tsx" //prettier-ignore
 import { useSelector, useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRotateRight,
-  faArrowRotateLeft,
-  faArrowUp,
-  faArrowRight,
-  faArrowDown,
-  faArrowLeft,
-  faCircleUp,
-  faCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRotateRight, faArrowRotateLeft, faArrowUp, faArrowRight, faArrowDown, faArrowLeft, faCircleUp, faCircleDown} from "@fortawesome/free-solid-svg-icons" //prettier-ignore
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import buttons_sound from "../../audio/buttons_sound.mp3";
@@ -41,20 +22,17 @@ import buttons_sound from "../../audio/buttons_sound.mp3";
 export default function ControlsInput() {
   const dispatch = useDispatch();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  let object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
-  const delete_object_mouse_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_mouse_trigger); //prettier-ignore
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
+  const audio = useSelector((state: RootState) => state.pageSettings.audio);
 
   const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
   const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
 
   const [unit_distance_type, set_unit_distance_type] = useState<string>("1");
-
   const [enable_custom_distance, set_enable_custom_distance] = useState<boolean>(false);
   const [custom_distance_unit, set_custom_distance_unit] = useState<number>(0);
 
@@ -62,68 +40,41 @@ export default function ControlsInput() {
     if (audio) {
       AudioPlayer(buttons_sound);
     }
-    if (object_rotation_degree === 90) {
-      set_next_object_rotation_degree(30);
-      set_previous_object_rotation_degree(90);
-      dispatch(set_object_rotation_degree(15));
+
+    switch (object_rotation_degree) {
+      case 90:
+        set_next_object_rotation_degree(30);
+        set_previous_object_rotation_degree(90);
+        dispatch(set_object_rotation_degree(15));
+        break;
+
+      case 15:
+        set_next_object_rotation_degree(60);
+        set_previous_object_rotation_degree(15);
+        dispatch(set_object_rotation_degree(30));
+        break;
+
+      case 30:
+        set_next_object_rotation_degree(90);
+        set_previous_object_rotation_degree(30);
+        dispatch(set_object_rotation_degree(60));
+        break;
+
+      case 60:
+        set_next_object_rotation_degree(15);
+        set_previous_object_rotation_degree(60);
+        dispatch(set_object_rotation_degree(90));
+        break;
+
+      default:
+        set_next_object_rotation_degree(30);
+        set_previous_object_rotation_degree(90);
+        dispatch(set_object_rotation_degree(15));
     }
-
-    if (object_rotation_degree === 15) {
-      set_next_object_rotation_degree(60);
-      set_previous_object_rotation_degree(15);
-      dispatch(set_object_rotation_degree(30));
-    }
-
-    if (object_rotation_degree === 30) {
-      set_next_object_rotation_degree(90);
-      set_previous_object_rotation_degree(30);
-      dispatch(set_object_rotation_degree(60));
-    }
-
-    if (object_rotation_degree === 60) {
-      set_next_object_rotation_degree(15);
-      set_previous_object_rotation_degree(60);
-      dispatch(set_object_rotation_degree(90));
-    }
   }
 
-  function ObjectMoveButtonLeft() {
-    dispatch(set_button_input("move_left"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectMoveButtonFront() {
-    dispatch(set_button_input("move_front"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectMoveButtonRight() {
-    dispatch(set_button_input("move_right"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectMoveButtonBack() {
-    dispatch(set_button_input("move_back"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectMoveButtonUp() {
-    dispatch(set_button_input("move_up"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectMoveButtonDown() {
-    dispatch(set_button_input("move_down"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectRotateButtonLeft() {
-    dispatch(set_button_input("rotate_left"));
-    dispatch(set_button_trigger(button_trigger + 1));
-  }
-
-  function ObjectRotateButtonRight() {
-    dispatch(set_button_input("rotate_right"));
+  function ObjectTransformButton(action: string) {
+    dispatch(set_button_input(action));
     dispatch(set_button_trigger(button_trigger + 1));
   }
 
@@ -139,11 +90,12 @@ export default function ControlsInput() {
   }
 
   const changeCustomDistanceUnit = (event: any) => {
-    const inputValue = event.target.value;
-    set_custom_distance_unit(inputValue);
-    ChangeDistanceUnitButton(inputValue);
+    const custom_distance_input_value = event.target.value;
+    set_custom_distance_unit(custom_distance_input_value);
+    ChangeDistanceUnitButton(custom_distance_input_value);
   };
 
+  //prettier-ignore
   return (
     <>
       {page_mode === "edit" && (
@@ -165,12 +117,11 @@ export default function ControlsInput() {
                 : "unknown"}
             </div>
           )}
-          <button onClick={() => ObjectMoveButtonFront()} className="object_move_button object_move_front_button">
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              size="2xl"
-              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-            />
+          <button
+            onClick={() => ObjectTransformButton("move_front")}
+            className="object_move_button object_move_front_button"
+          >
+            <FontAwesomeIcon icon={faArrowUp} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
           </button>
           {camera_type === "camera_3d" && (
             <div
@@ -189,12 +140,11 @@ export default function ControlsInput() {
                 : "unknown"}
             </div>
           )}
-          <button onClick={() => ObjectMoveButtonRight()} className="object_move_button object_move_right_button">
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              size="2xl"
-              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-            />
+          <button
+            onClick={() => ObjectTransformButton("move_right")}
+            className="object_move_button object_move_right_button"
+          >
+            <FontAwesomeIcon icon={faArrowRight} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
           </button>
           {camera_type === "camera_3d" && (
             <div
@@ -213,12 +163,11 @@ export default function ControlsInput() {
                 : "unknown"}
             </div>
           )}
-          <button onClick={() => ObjectMoveButtonBack()} className="object_move_button object_move_back_button">
-            <FontAwesomeIcon
-              icon={faArrowDown}
-              size="2xl"
-              style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-            />
+          <button
+            onClick={() => ObjectTransformButton("move_back")}
+            className="object_move_button object_move_back_button"
+          >
+            <FontAwesomeIcon icon={faArrowDown} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
           </button>
           {camera_type === "camera_3d" && (
             <div
@@ -237,7 +186,10 @@ export default function ControlsInput() {
                 : "unknown"}
             </div>
           )}
-          <button onClick={() => ObjectMoveButtonLeft()} className="object_move_button object_move_left_button">
+          <button
+            onClick={() => ObjectTransformButton("move_left")}
+            className="object_move_button object_move_left_button"
+          >
             <FontAwesomeIcon
               icon={faArrowLeft}
               size="2xl"
@@ -246,7 +198,7 @@ export default function ControlsInput() {
           </button>
           {camera_type === "camera_3d" && (
             <button
-              onClick={() => ObjectMoveButtonUp()}
+              onClick={() => ObjectTransformButton("move_up")}
               className="object_move_button object_move_up_button"
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             >
@@ -256,7 +208,7 @@ export default function ControlsInput() {
           )}
           {camera_type === "camera_3d" && (
             <button
-              onClick={() => ObjectMoveButtonDown()}
+              onClick={() => ObjectTransformButton("move_down")}
               className="object_move_button object_move_down_button"
               style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
             >
@@ -268,10 +220,7 @@ export default function ControlsInput() {
             <div className="distance_unit_description_main_container">
               <div className="distance_unit_description"> change distance units</div>
               <input
-                onClick={() => {
-                  dispatch(set_selected_model_id(-1));
-                  dispatch(set_object_selected(false));
-                }}
+                onClick={() => { dispatch(set_selected_model_id(-1)); dispatch(set_object_selected(false))}}//prettier-ignore
                 className={
                   unit_distance_type === "custom"
                     ? "object_movement_multiplier movement_multiplier_top_right multiplier_active"
@@ -321,11 +270,7 @@ export default function ControlsInput() {
                     ? "object_movement_multiplier movement_multiplier_bottom_right multiplier_active"
                     : "object_movement_multiplier movement_multiplier_right multiplier_inactive"
                 }
-                onClick={() => (
-                  ToggleCustomDistance(),
-                  set_unit_distance_type("custom"),
-                  ChangeDistanceUnitButton(custom_distance_unit)
-                )}
+                onClick={() => (ToggleCustomDistance(), set_unit_distance_type("custom"), ChangeDistanceUnitButton(custom_distance_unit))}//prettier-ignore
               >
                 custom
               </button>
@@ -333,15 +278,11 @@ export default function ControlsInput() {
           </div>
           <div className="object_rotation_container">
             <button
-              onClick={() => ObjectRotateButtonLeft()}
+              onClick={() => ObjectTransformButton("rotate_left")}
               className="rotation_direction_button"
               style={{ color: object_selected ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
             >
-              <FontAwesomeIcon
-                icon={faArrowRotateRight}
-                size="2xl"
-                style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-              />
+              <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
               Q
             </button>
             <div onClick={() => ChangeRotationDegree()} className="model_rotation_wheel">
@@ -355,15 +296,11 @@ export default function ControlsInput() {
               <div className="model_rotation_button">{previous_object_rotation_degree}°</div>
             </div>
             <button
-              onClick={() => ObjectRotateButtonRight()}
+              onClick={() => ObjectTransformButton("rotate_right")}
               className="rotation_direction_button"
               style={{ color: object_selected ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
             >
-              <FontAwesomeIcon
-                icon={faArrowRotateLeft}
-                size="2xl"
-                style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}
-              />
+              <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
               E
             </button>
           </div>

@@ -161,14 +161,14 @@ const Settings = () => {
     {
       if (performance_mode) {
         dispatch(set_performance_mode(true));
-        // dispatch(set_enable_model_textures(false)) add when problem with dissapearing textures is resolved
+        dispatch(set_enable_model_textures(false));
         dispatch(set_bloom_state(false));
         dispatch(set_better_lighting_state(false));
         dispatch(set_ssao_state(false));
         dispatch(set_antialiasing_state(false));
       } else if (!performance_mode) {
         dispatch(set_performance_mode(false));
-        // dispatch(set_enable_model_textures(true)) add when problem with dissapearing textures is resolved
+        dispatch(set_enable_model_textures(true));
         dispatch(set_bloom_state(true));
         dispatch(set_better_lighting_state(true));
         dispatch(set_ssao_state(true));
