@@ -1,12 +1,4 @@
-import {
-  RootState,
-  set_model_creation_state,
-  set_model_type_to_create,
-  set_object_rotation_degree,
-  set_selected_object_list,
-  set_create_prebuilt_base_state,
-  set_prebuilt_base_objects_set,
-} from "../../Store";
+import { RootState, set_model_creation_state, set_model_type_to_create, set_object_rotation_degree, set_selected_object_list, set_create_prebuilt_base_state, set_prebuilt_base_objects_set} from "../../Store" //prettier-ignore
 import { useSelector, useDispatch } from "react-redux";
 
 import { faPlus, faHouse, faUser, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +7,6 @@ import { useEffect, useState } from "react";
 
 import { AudioPlayer } from "./AudioPlayer.tsx";
 import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
-import object_hover_sound from "../../audio/object_hover_sound.mp3";
 
 import stoneThumbnail from "../../icons/stone_thumbnail.png";
 import metalThumbnail from "../../icons/metal_thumbnail.png";
@@ -77,20 +68,23 @@ export default function PrebuiltBasesDesign() {
   }
 
   function ChangePrebuiltBaseDesign(index: number, name: string) {
-    if (base_prebuilt_selection === name) {
-      set_base_prebuilt_selection("empty");
-      dispatch(set_selected_object_list(-1));
-      dispatch(set_model_creation_state(false));
-      dispatch(set_create_prebuilt_base_state(false));
-    } else {
-      set_base_prebuilt_selection(name);
-      dispatch(set_selected_object_list(index));
-      dispatch(set_model_creation_state(true));
-      dispatch(set_object_rotation_degree(90));
-      dispatch(set_model_type_to_create(name));
-      dispatch(set_create_prebuilt_base_state(true));
-    }
+    switch (base_prebuilt_selection) {
+      case name:
+        set_base_prebuilt_selection("empty");
+        dispatch(set_selected_object_list(-1));
+        dispatch(set_model_creation_state(false));
+        dispatch(set_create_prebuilt_base_state(false));
+        break;
 
+      default:
+        set_base_prebuilt_selection(name);
+        dispatch(set_selected_object_list(index));
+        dispatch(set_model_creation_state(true));
+        dispatch(set_object_rotation_degree(90));
+        dispatch(set_model_type_to_create(name));
+        dispatch(set_create_prebuilt_base_state(true));
+        break;
+    }
     if (audio) {
       AudioPlayer(object_selecting_sound);
     }
@@ -106,7 +100,7 @@ export default function PrebuiltBasesDesign() {
     return random_id;
   }
 
-  //* ------------------------- ↓ Prebuilt bases data ↓ -------------------------
+  //* ------------------------- ↓ Prebuilt bases hardcoded data ↓ -------------------------
 
   // models data dumpster
   // hardcoded data for every prebuilt base model
@@ -1025,7 +1019,7 @@ export default function PrebuiltBasesDesign() {
     }
   }
 
-  //* ------------------------- ↑ Prebuilt bases data ↑ -------------------------
+  //* ------------------------- ↑ Prebuilt bases hardcoded data ↑ -------------------------
 
   useEffect(() => {
     set_add_prebuild_base_button_click(false);
@@ -1038,18 +1032,52 @@ export default function PrebuiltBasesDesign() {
   }, [create_prebuilt_base_state]);
 
   useEffect(() => {
-    if (model_type_to_create === "PrebuildBaseI") {
-      dispatchModelsSet("PrebuildBaseI", material_type_test);
-    } else if (model_type_to_create === "PrebuildBaseII") {
-      dispatchModelsSet("PrebuildBaseII", material_type_test);
-    } else if (model_type_to_create === "PrebuildBaseIII") {
-      dispatchModelsSet("PrebuildBaseIII", material_type_test);
-    } else if (model_type_to_create === "PrebuildBaseIV") {
-      dispatchModelsSet("PrebuildBaseIV", material_type_test);
-    } else if (model_type_to_create === "PrebuildBaseV") {
-      dispatchModelsSet("PrebuildBaseV", material_type_test);
+    switch (model_type_to_create) {
+      case "PrebuildBaseI":
+        dispatchModelsSet("PrebuildBaseI", material_type_test);
+        break;
+      case "PrebuildBaseII":
+        dispatchModelsSet("PrebuildBaseII", material_type_test);
+        break;
+      case "PrebuildBaseIII":
+        dispatchModelsSet("PrebuildBaseIII", material_type_test);
+        break;
+      case "PrebuildBaseIV":
+        dispatchModelsSet("PrebuildBaseIV", material_type_test);
+        break;
+      case "PrebuildBaseV":
+        dispatchModelsSet("PrebuildBaseV", material_type_test);
+        break;
+      default:
+        break;
     }
   }, [material_type_test, model_type_to_create]);
+
+  function BuildPrebuiltBasesDesignTypeButton(base_material: string, thumbnail: string) {
+    return (
+      <button
+        className="prebuilt_bases_design_type_container_cell"
+        onClick={() => {
+          ChangeBaseMetarial(base_material);
+        }}
+      >
+        <div
+          className={
+            material_type_test === base_material
+              ? "prebuilt_bases_design_type_buttons type_buttons_active"
+              : "prebuilt_bases_design_type_buttons type_buttons_inactive"
+          }
+          style={{
+            backgroundImage: `url(${thumbnail})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+          }}
+        ></div>
+        <span>{base_material}</span>
+      </button>
+    );
+  }
 
   return (
     <>
@@ -1075,12 +1103,8 @@ export default function PrebuiltBasesDesign() {
             dispatch(set_prebuilt_base_objects_set([]));
           }
         }}
-        onMouseEnter={() => {
-          set_add_prebuild_base_button_hover(true);
-        }}
-        onMouseLeave={() => {
-          set_add_prebuild_base_button_hover(false);
-        }}
+        onMouseEnter={() => {set_add_prebuild_base_button_hover(true)}} //prettier-ignore
+        onMouseLeave={() => {set_add_prebuild_base_button_hover(false)}} //prettier-ignore
       >
         <span>Add prebuilt base</span>
         <div className="prebuilt_bases_design_icons_container">
@@ -1099,7 +1123,7 @@ export default function PrebuiltBasesDesign() {
         >
           <div className="prebult_bases_design_type_container">
             <button
-              className="prebult_bases_design_type_container_cell"
+              className="prebuilt_bases_design_type_container_cell"
               onClick={() => {
                 if (base_prebuilt_selection !== "PrebuildBaseI" && base_prebuilt_selection !== "PrebuildBaseII") {
                   ChangeBaseMetarial("tutorial");
@@ -1128,69 +1152,9 @@ export default function PrebuiltBasesDesign() {
               </div>
               <span>tutorial</span>
             </button>
-            <button
-              className="prebult_bases_design_type_container_cell"
-              onClick={() => {
-                ChangeBaseMetarial("stone");
-              }}
-            >
-              <div
-                className={
-                  material_type_test === "stone"
-                    ? "prebuilt_bases_design_type_buttons type_buttons_active"
-                    : "prebuilt_bases_design_type_buttons type_buttons_inactive"
-                }
-                style={{
-                  backgroundImage: `url(${stoneThumbnail})`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center center",
-                }}
-              ></div>
-              <span>stone</span>
-            </button>
-            <button
-              className="prebult_bases_design_type_container_cell"
-              onClick={() => {
-                ChangeBaseMetarial("metal");
-              }}
-            >
-              <div
-                className={
-                  material_type_test === "metal"
-                    ? "prebuilt_bases_design_type_buttons type_buttons_active"
-                    : "prebuilt_bases_design_type_buttons type_buttons_inactive"
-                }
-                style={{
-                  backgroundImage: `url(${metalThumbnail})`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center center",
-                }}
-              ></div>
-              <span>metal</span>
-            </button>
-            <button
-              className="prebult_bases_design_type_container_cell"
-              onClick={() => {
-                ChangeBaseMetarial("armored");
-              }}
-            >
-              <div
-                className={
-                  material_type_test === "armored"
-                    ? "prebuilt_bases_design_type_buttons type_buttons_active"
-                    : "prebuilt_bases_design_type_buttons type_buttons_inactive"
-                }
-                style={{
-                  backgroundImage: `url(${hq_metalThumbnail})`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center center",
-                }}
-              ></div>
-              <span>armored</span>
-            </button>
+            {BuildPrebuiltBasesDesignTypeButton("stone", stoneThumbnail)}
+            {BuildPrebuiltBasesDesignTypeButton("metal", metalThumbnail)}
+            {BuildPrebuiltBasesDesignTypeButton("armored", hq_metalThumbnail)}
           </div>
           <div className="prebuilt_bases_design_list">
             {prebuiltBases.map((base) => (

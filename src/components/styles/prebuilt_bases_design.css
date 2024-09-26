@@ -56,7 +56,7 @@
 }
 
 .main_prebuilt_bases_design_list_container_hidden {
-  transform: translateY(-120%);
+  transform: translateY(-150%);
 }
 
 .prebult_bases_design_type_container {
@@ -72,7 +72,7 @@
   padding-top: 0.5vh;
 }
 
-.prebult_bases_design_type_container_cell {
+.prebuilt_bases_design_type_container_cell {
   width: 24%;
   height: 11vh;
   background-color: black;
@@ -112,6 +112,9 @@
   );
   border: solid black 1px;
   margin-top: 0.1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .type_buttons_active {
