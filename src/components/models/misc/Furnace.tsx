@@ -25,13 +25,11 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
             geometry={nodes.Plane002.geometry}
             {...defaultMeshMaterial(materials["Material.071"])}
             onClick={() => ModelOnClick(Model.displayName)}
-            onPointerOver={(e) => {
-              e.stopPropagation(), ModelOnPointerOver();
-            }}
+            onPointerOver={(e) => {e.stopPropagation(), ModelOnPointerOver()}} //prettier-ignore
             onPointerOut={() => ModelOnPointerOut()}
             onPointerMissed={() => ModelMissedClick()}
           >
-            {enable_model_textures && page_mode === "edit" && (
+            {(!enable_model_textures || page_mode === "edit") && (
               <>
                 <meshStandardMaterial
                   transparent={true}

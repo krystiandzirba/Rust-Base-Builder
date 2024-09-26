@@ -39,13 +39,11 @@ export function ModelComponentsCommonLogic() {
   }, [enable_model_textures, model_hover, page_mode]);
 
   function defaultMeshMaterial(model_material: THREE.Material) {
-    if (page_mode === "overview") {
+    if (enable_model_textures && page_mode === "overview") {
       return { material: model_material };
     }
-    if (page_mode === "edit") {
-      return {};
-    }
-    if (page_mode === "raid") {
+
+    if (enable_model_textures && page_mode === "raid") {
       if (model_hover) {
         return { material: new THREE.MeshStandardMaterial({ color: "red" }) };
       } else if (!model_hover) {
@@ -97,15 +95,15 @@ export function ModelComponentsCommonLogic() {
     const default_colors = {stone: "#bcb4a9", metal: "#edb587", armored: "#5c3d2e"}; //prettier-ignore
     const hover_colors = {stone: "#dedad4", metal: "#ffca9e", armored: "#aa7155"}; //prettier-ignore
     const select_colors = {stone: "#eeecec", metal: "#ffd5b3", armored: "#bc8b71"}; //prettier-ignore
-
-    const base_color = default_colors[model_type] || "#bbbbbb";
     const raid_color = "#ff1c1c";
 
     if (page_mode === "edit") {
-      return model_selected ? select_colors[model_type] : model_hover ? hover_colors[model_type] : base_color;
-    } else if (page_mode === "raid") {
-      return model_hover ? raid_color : base_color;
-    } else return base_color;
+      return model_selected ? select_colors[model_type] : model_hover ? hover_colors[model_type] : default_colors[model_type]; //prettier-ignore
+    }
+
+    if (page_mode === "raid") {
+      return model_hover ? raid_color : default_colors[model_type];
+    }
   }
 
   const meshStandardMaterialWireframe = useMemo(() => {
@@ -113,13 +111,16 @@ export function ModelComponentsCommonLogic() {
   }, [models_xray_active]);
 
   const meshEdgesVisibility = useMemo(() => {
-    return <Edges linewidth={1} scale={1} threshold={25} color={"#2b2b2b"} />;
-  }, [model_selected]);
+    if (!models_xray_active) {
+      return <Edges linewidth={1} scale={1} threshold={25} color={"#2b2b2b"} />;
+    }
+  }, [model_selected, models_xray_active]);
 
   //* ------------------------- ↑ Mesh Standard Material ↑ -------------------------
 
   //* ------------------------- ↓ Model annotation UI ↓ -------------------------
 
+  //prettier-ignore
   function meshAnnotationVisibility(annotation_data: [string, string, string]) {
     if (!model_selected) return null;
 
@@ -127,38 +128,30 @@ export function ModelComponentsCommonLogic() {
       <Html position={[0, 1, 0]} distanceFactor={25}>
         <div
           className="main_annotation_container"
-          onClick={(e) => {
-            e.stopPropagation(), set_model_selected(true);
-          }}
+          onClick={(e) => {e.stopPropagation(), set_model_selected(true)}}
         >
           <div className="annotation_content_container">
             <div className="annotation_model_name">{annotation_data[0]}</div>
-
             <div className="annotation_buttons_container">
-              {/* prettier-ignore */}
+
               <div onClick={() => upgradeSelectedModelTrigger(annotation_data[1] === "upgradeable")} className={annotation_data[1] === "upgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_upgrade_button_hover(true)} onMouseLeave={() => set_annotation_upgrade_button_hover(false)}>
                   <div className="annotation_button_icons_container">
-                    {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
-                    {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faAnglesUp} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
                   </div>
                   <div className="annotation_button_description">upgrade</div>
                 </div>
-              {/* prettier-ignore */}
+
               <div onClick={() => downgradeSelectedModelTrigger(annotation_data[2] === "downgradeable")} className={annotation_data[2] === "downgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_downgrade_button_hover(true)} onMouseLeave={() => set_annotation_downgrade_button_hover(false)}>
                   <div className="annotation_button_icons_container">
-                    {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
-                    {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faAnglesDown} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
                   </div>
                   <div className="annotation_button_description">d. grade</div>
                 </div>
-              {/* prettier-ignore */}
+
               <div className="annotation_button" onClick={() => deleteSelectedModelTrigger()} onMouseEnter={() => set_annotation_delete_button_hover(true)} onMouseLeave={() => set_annotation_delete_button_hover(false)}>
                   <div className="annotation_button_icons_container">
-                    {/* prettier-ignore */}
                     <FontAwesomeIcon icon={faTrashCanArrowUp} style={{ width: "1vw", height: "2vh", color: annotation_delete_button_hover ? "#ffd5b3" : "#bbbbbb"}} />
                   </div>
                   <div className="annotation_button_description">delete</div>
@@ -167,12 +160,7 @@ export function ModelComponentsCommonLogic() {
           </div>
 
           <div className="annotation_polyline_container">
-            <svg
-              className="annotation_line"
-              viewBox="0 0 250 100"
-              preserveAspectRatio="none"
-              vectorEffect="non-scaling-stroke"
-            >
+            <svg className="annotation_line" viewBox="0 0 250 100" preserveAspectRatio="none" vectorEffect="non-scaling-stroke">
               <polyline points="30,90 77.5,10 250,10" stroke="#ffd5b3" strokeWidth="3" fill="none" />
             </svg>
           </div>
@@ -206,6 +194,7 @@ export function ModelComponentsCommonLogic() {
     set_model_destroyed(false);
     set_model_hover(false);
     set_model_selected(false);
+    set_model_hover(false);
   }, [reset_raid_models, page_mode, model_creation_state]);
 
   useEffect(() => {
@@ -215,6 +204,7 @@ export function ModelComponentsCommonLogic() {
   }, [model_destroy_tigger]);
 
   return {
+    model_destroyed,
     defaultMeshKey,
     defaultMeshMaterial,
     ModelOnClick,
@@ -225,6 +215,5 @@ export function ModelComponentsCommonLogic() {
     meshStandardMaterialWireframe,
     meshEdgesVisibility,
     meshAnnotationVisibility,
-    model_destroyed,
   };
 }

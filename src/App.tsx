@@ -92,7 +92,6 @@ export default App;
 // react three fiber - pointer lock controls (first person camera control) + fps octree
 
 // add a correct object rotation in mirrored axis
-// make the xray work in overview mode
 
 // 1 second 3d text while creating, deleting and raiding the object (+build cost / +raid cost ...)
 // add current id storage to avoid id duplication
@@ -106,7 +105,6 @@ export default App;
 
 // fix: raid object destructon on mouse click (down) not the click (release/up)
 // fix: select any placed object -> select any object from list to create -> double the hints displayed
-// fix: model textures in settings (off) does not work, the model is bright white / determine the use of the model_material and model_textures
 
 // remake the wall mid uv and lower the texture size
 // add github wiki
