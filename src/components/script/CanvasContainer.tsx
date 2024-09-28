@@ -7,13 +7,7 @@ import { RootState, set_delete_object_mouse_trigger } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
 import { set_cursor_type, set_canvas_models_array, set_object_selected, set_selected_model_id, set_camera_3d_direction, set_delete_object_mode, set_object_distance_multiplier, set_allow_canvas_interaction_after_first_load} from "../../Store.tsx"; //prettier-ignore
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import build_sound from "../../audio/build_sound.mp3";
-import controls_sound from "../../audio/controls_sound.mp3";
-import rotation_sound from "../../audio/rotation_sound.mp3";
-import buttons_sound from "../../audio/buttons_sound.mp3";
-import delete_sound from "../../audio/delete_sound.mp3";
-import menu_sound from "../../audio/menu_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 
 import { Model as StoneFoundationSquareHigh } from "./../models/stone/StoneFoundationSquareHigh.tsx";
 import { Model as StoneFoundationSquareMid } from "./../models/stone/StoneFoundationSquareMid.tsx";
@@ -122,6 +116,7 @@ import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan, faEraser,
 
 export default function CanvasContainer() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
@@ -146,7 +141,6 @@ export default function CanvasContainer() {
   const performance_mode = useSelector((state: RootState) => state.pageSettings.performance_mode); //prettier-ignore
   const performance_monitor_state = useSelector((state: RootState) => state.pageSettings.performance_monitor_state); //prettier-ignore
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
   const prebuilt_base_objects_set = useSelector((state: RootState) => state.modelsData.prebuilt_base_objects_set); //prettier-ignore
 
   type models_data_type = {id: string; component: React.FC; rotation: THREE.Euler}; //prettier-ignore
@@ -387,9 +381,7 @@ export default function CanvasContainer() {
       dispatch(set_selected_model_id("empty"));
       dispatch(set_delete_object_mode("none"));
       dispatch(set_object_selected(false));
-      if (audio) {
-        AudioPlayer(delete_sound);
-      }
+      playSound("delete_sound");
     }
   }
 
@@ -479,10 +471,7 @@ export default function CanvasContainer() {
         if (symmetry_x_enabled && symmetry_z_enabled) {
           addModelData(randomIdGenerator(), model_xz_mirror_x_position, model_xz_mirror_z_position, model_y_position);
         }
-
-        if (audio) {
-          AudioPlayer(build_sound);
-        }
+        playSound("build_sound");
       }
     }
   }
@@ -523,9 +512,7 @@ export default function CanvasContainer() {
           const corresponding_model = model_type_map[model as keyof typeof model_type_map];
           AddModel(corresponding_model, new_id, new THREE.Euler(rotation.x, rotation.y, rotation.z));
 
-          if (audio) {
-            AudioPlayer(build_sound);
-          }
+          playSound("build_sound");
         }, prebuild_delay);
 
         prebuild_delay += 70;
@@ -672,10 +659,7 @@ export default function CanvasContainer() {
           model: model,
         },
       }));
-
-      if (audio) {
-        AudioPlayer(build_sound);
-      }
+      playSound("build_sound");
 
       set_generated_id(randomIdGenerator());
       AddModel(modelClass, generated_id, default_object_rotation);
@@ -742,10 +726,7 @@ export default function CanvasContainer() {
 
     if (new_default_model_height_position >= 0) {
       set_default_model_height_position(new_default_model_height_position);
-
-      if (audio) {
-        AudioPlayer(buttons_sound);
-      }
+      playSound("buttons_sound");
     }
   }
 
@@ -763,17 +744,13 @@ export default function CanvasContainer() {
 
   function HandlePivotStateSwitch() {
     set_pivot_controls_state(!pivot_controls_state);
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
   }
 
   function HandlePivotAxisStateSwitch(pivot: boolean, set_pivot: any) {
     if (pivot_controls_state) {
       set_pivot(!pivot);
-      if (audio) {
-        AudioPlayer(buttons_sound);
-      }
+      playSound("buttons_sound");
     }
   }
 
@@ -781,18 +758,14 @@ export default function CanvasContainer() {
     set_symmetry_x_enabled(!symmetry_x_enabled);
     set_model_x_position_offset(0);
     set_model_z_position_offset(0);
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
   }
 
   function ChangeZSymmetryState() {
     set_symmetry_z_enabled(!symmetry_z_enabled);
     set_model_x_position_offset(0);
     set_model_z_position_offset(0);
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
   }
 
   function IsOffsetActive(): boolean {
@@ -1027,9 +1000,7 @@ export default function CanvasContainer() {
 
     if (model_creation_state || selected_model_id !== "empty") {
       if ((keyboard_key === "KeyE" || keyboard_key === "KeyQ") && !create_prebuilt_base_state) {
-        if (audio) {
-          AudioPlayer(rotation_sound);
-        }
+        playSound("rotation_sound");
       } else if (
         (keyboard_key === "KeyW" ||
           keyboard_key === "KeyA" ||
@@ -1041,20 +1012,14 @@ export default function CanvasContainer() {
           keyboard_key === "ArrowRight") &&
         !create_prebuilt_base_state
       ) {
-        if (audio) {
-          AudioPlayer(controls_sound);
-        }
+        playSound("controls_sound");
       }
     }
     if (page_mode === "edit" && !model_creation_state) {
       if (keyboard_key === "ShiftLeft") {
-        if (audio) {
-          AudioPlayer(buttons_sound);
-        }
+        playSound("buttons_sound");
       } else if (selected_model_id !== "empty" && (keyboard_key === "ControlLeft" || keyboard_key === "Space")) {
-        if (audio) {
-          AudioPlayer(controls_sound);
-        }
+        playSound("controls_sound");
       }
     }
 
@@ -1216,8 +1181,8 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     if (page_mode === "edit" && !model_creation_state) {
-      if (audio && selected_model_id !== "empty") {
-        AudioPlayer(controls_sound);
+      if (selected_model_id !== "empty") {
+        playSound("controls_sound");
       }
       {
         if (button_input === "move_left") {
@@ -1325,8 +1290,8 @@ export default function CanvasContainer() {
     window.addEventListener("keydown", handleDelete);
 
     if (delete_object_mode === "delete_selected_object" || keyboard_key === "Backspace" || keyboard_key === "Delete") {
-      if (audio && selected_model_id !== "empty") {
-        AudioPlayer(delete_sound);
+      if (selected_model_id !== "empty") {
+        playSound("delete_sound");
       }
       RemoveSelectedModel(selected_model_id);
       removeModelsDataObjectInfo(selected_model_id);
@@ -1340,9 +1305,7 @@ export default function CanvasContainer() {
       dispatch(set_selected_model_id("empty"));
       dispatch(set_delete_object_mode("none"));
       dispatch(set_object_selected(false));
-      if (audio) {
-        AudioPlayer(delete_sound);
-      }
+      playSound("delete_sound");
     }
 
     return () => {
@@ -1600,9 +1563,7 @@ export default function CanvasContainer() {
             className="local_storage_button"
             onClick={() => {
               SaveCurrentBaseToLocalStorage();
-              if (audio) {
-                AudioPlayer(menu_sound);
-              }
+              playSound("menu_sound");
             }}
           >
             <FontAwesomeIcon icon={faFloppyDisk} style={{ width: "95%", height: "95%" }} />
@@ -1615,9 +1576,7 @@ export default function CanvasContainer() {
             className="local_storage_button"
             onClick={() => {
               set_display_remove_saved_data_question(true);
-              if (audio) {
-                AudioPlayer(menu_sound);
-              }
+              playSound("menu_sound");
             }}
           >
             <FontAwesomeIcon icon={faTrashCan} style={{ width: "90%", height: "80%" }} />
@@ -1633,7 +1592,8 @@ export default function CanvasContainer() {
               className="erase_canvas_models_button"
               onClick={() => {
                 if (canvas_model_eraser === "off") {set_canvas_model_eraser("on")} else set_canvas_model_eraser("off") //prettier-ignore
-                if (audio) {AudioPlayer(menu_sound)}}} //prettier-ignore
+                playSound("menu_sound");
+              }}
             >
               {/*prettier-ignore */}
               <FontAwesomeIcon icon={faEraser} style={{ width: "80%", height: "80%", color: canvas_model_eraser === "on" ? "#ffd5b3" : "#bbbbbb"}} />
@@ -1644,7 +1604,7 @@ export default function CanvasContainer() {
           <div className="delete_all_canvas_models_button_container">
             <button
               className="delete_all_canvas_models_button"
-              onClick={() => {set_display_remove_all_models_question(true); if (audio) {AudioPlayer(menu_sound)}}} //prettier-ignore
+              onClick={() => {set_display_remove_all_models_question(true); playSound("menu_sound")}} //prettier-ignore
             >
               <FontAwesomeIcon icon={faDumpster} style={{ width: "80%", height: "80%" }} />
             </button>
@@ -1660,7 +1620,7 @@ export default function CanvasContainer() {
           {/*prettier-ignore*/}
           <div className="delete_all_models_answer_container">
             <div onClick={() => {DeleteAllObjects(), set_display_remove_all_models_question(false)}} className="delete_all_models_answer_button">yes</div>
-            <div onClick={() => {set_display_remove_all_models_question(false); if (audio) {AudioPlayer(menu_sound)}}} className="delete_all_models_answer_button">no</div>
+            <div onClick={() => {set_display_remove_all_models_question(false); playSound("menu_sound")}} className="delete_all_models_answer_button">no</div>
           </div>
         </div>
       )}
@@ -1671,19 +1631,16 @@ export default function CanvasContainer() {
           <div className="delete_saved_data_question_description">are you sure you want to delete the saved data? This process is irreversible.</div>
           {/*prettier-ignore*/}
           <div className="delete_saved_data_answer_container">
-            <div onClick={() => {set_display_remove_saved_data_question(false); DeleteCurrentBaseFromLocalStorage(); if (audio) {AudioPlayer(menu_sound)}}} 
+            <div onClick={() => {set_display_remove_saved_data_question(false); DeleteCurrentBaseFromLocalStorage(); playSound("menu_sound");}} 
               className="delete_saved_data_answer_button">yes</div>
-            <div onClick={() => {set_display_remove_saved_data_question(false); if (audio) {AudioPlayer(menu_sound)}}} className="delete_saved_data_answer_button">no</div>
+            <div onClick={() => {set_display_remove_saved_data_question(false); playSound("menu_sound")}} className="delete_saved_data_answer_button">no</div>
           </div>
         </div>
       )}
 
       {/* <button
         className="test_button"
-        onClick={() => {
-          console.log("models data", modelsData);
-          UpdateSelectedModelTier(selected_model_id);
-        }}
+        onClick={() => {}}
       ></button> */}
     </>
   );

@@ -12,8 +12,7 @@ import {
   set_miscs_active,
 } from "../../Store.tsx";
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import buttons_sound from "../../audio/buttons_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 import { useEffect, useState } from "react";
 
 //? ----------------------------------------------------------------------------------------------------
@@ -25,6 +24,7 @@ import { useEffect, useState } from "react";
 
 export default function StructureVisibilityMode() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
   const canvas_models_array = useSelector((state: RootState) => state.canvasModelsArray.canvas_models_array as string[]); //prettier-ignore
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active);
@@ -36,7 +36,6 @@ export default function StructureVisibilityMode() {
   const frames_active = useSelector((state: RootState) => state.modelsData.frames_active);
   const roofs_active = useSelector((state: RootState) => state.modelsData.roofs_active);
   const miscs_active = useSelector((state: RootState) => state.modelsData.miscs_active);
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [models_count, set_models_count] = useState({
     foundations_count: 0,
@@ -51,9 +50,7 @@ export default function StructureVisibilityMode() {
 
   function toggleSpecificModels(set_specific_models: (arg0: boolean) => any, specific_models: boolean) {
     dispatch(set_specific_models(!specific_models));
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
   }
 
   useEffect(() => {

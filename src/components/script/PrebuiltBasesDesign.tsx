@@ -5,8 +5,7 @@ import { faPlus, faHouse, faUser, faGraduationCap } from "@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 
 import stoneThumbnail from "../../icons/stone_thumbnail.png";
 import metalThumbnail from "../../icons/metal_thumbnail.png";
@@ -15,8 +14,9 @@ import * as THREE from "three";
 
 export default function PrebuiltBasesDesign() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
+
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-  const audio = useSelector((state: RootState) => state.pageSettings.audio);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
   const create_prebuilt_base_state = useSelector((state: RootState) => state.modelsData.create_prebuilt_base_state);
 
@@ -62,9 +62,7 @@ export default function PrebuiltBasesDesign() {
 
   function ChangeBaseMetarial(material: string) {
     set_material_type_test(material);
-    if (audio) {
-      AudioPlayer(object_selecting_sound);
-    }
+    playSound("object_selecting_sound");
   }
 
   function ChangePrebuiltBaseDesign(index: number, name: string) {
@@ -85,9 +83,7 @@ export default function PrebuiltBasesDesign() {
         dispatch(set_create_prebuilt_base_state(true));
         break;
     }
-    if (audio) {
-      AudioPlayer(object_selecting_sound);
-    }
+    playSound("object_selecting_sound");
   }
 
   function randomIdGenerator() {
@@ -1089,9 +1085,7 @@ export default function PrebuiltBasesDesign() {
         }
         onClick={() => {
           set_add_prebuild_base_button_click(!add_prebuild_base_button_click);
-          if (audio) {
-            AudioPlayer(object_selecting_sound);
-          }
+          playSound("object_selecting_sound");
 
           if (add_prebuild_base_button_click) {
             set_base_prebuilt_selection("empty");

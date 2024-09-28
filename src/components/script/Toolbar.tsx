@@ -11,8 +11,7 @@ import raidToolbarThumbnail from "../../icons/raid_toolbar_thumbnail.png";
 
 import { useEffect } from "react";
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import menu_sound from "../../audio/menu_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 import posthog from "posthog-js";
 
 //? ----------------------------------------------------------------------------------------------------
@@ -23,9 +22,9 @@ import posthog from "posthog-js";
 
 const Toolbar = () => {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode); //prettier-ignore
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   function ChangePageMode(page_mode: string) {
     setTimeout(() => {
@@ -40,10 +39,7 @@ const Toolbar = () => {
     dispatch(set_reset_raid_models(!reset_raid_models));
     dispatch(set_selected_model_id("empty"));
     dispatch(set_object_selected(false));
-
-    if (audio) {
-      AudioPlayer(menu_sound);
-    }
+    playSound("menu_sound");
   }
 
   // -------------------------  deselect the selected object and disable the model cretion state on page mode change -------------------------

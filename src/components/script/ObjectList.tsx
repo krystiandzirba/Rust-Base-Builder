@@ -1,14 +1,8 @@
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import {
-  set_model_type_to_create,
-  set_model_creation_state,
-  set_selected_object_list,
-  set_object_rotation_degree,
-  set_create_prebuilt_base_state,
-} from "../../Store.tsx";
+import {set_model_type_to_create, set_model_creation_state, set_selected_object_list, set_object_rotation_degree, set_create_prebuilt_base_state} from "../../Store.tsx"; //prettier-ignore
 
 import stoneFoundationSquareHighThumbnail from "../../object_list_thumbnails/stone_foundation_square_high_thumbnail.png";
 import stoneFoundationSquareMidThumbnail from "../../object_list_thumbnails/stone_foundation_square_mid_thumbnail.png";
@@ -95,9 +89,7 @@ import sleeping_bag_Thumbnail from "../../object_list_thumbnails/sleeping_bag_th
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
-import object_hover_sound from "../../audio/object_hover_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 
 const SearchBarField = styled(TextField)({
   "& label.Mui-focused": {
@@ -160,9 +152,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
 
 export default function ObjectList() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
+
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const selected_object_list = useSelector((state: RootState) => state.modelsData.selected_object_list);
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
   const allow_canvas_interaction_after_first_load = useSelector((state: RootState) => state.modelsData.allow_canvas_interaction_after_first_load); //prettier-ignore
 
   const [hovered_object_list, set_hovered_object_list] = useState<number>(-1);
@@ -332,9 +325,7 @@ export default function ObjectList() {
   //prettier-ignore
   function ObjectListMouseClick(index: number, item: { name?: string; thumbnail?: string; keywords?: string[]; onClick: any }) {
     if (allow_canvas_interaction_after_first_load) {
-      if (audio) {
-        AudioPlayer(object_selecting_sound);
-      }
+      playSound("object_selecting_sound");
       if (selected_object_list === index) {
         dispatch(set_selected_object_list(-1));
         dispatch(set_model_creation_state(false));
@@ -351,9 +342,7 @@ export default function ObjectList() {
   function ObjectListMouseEnter(index: number) {
     if (allow_canvas_interaction_after_first_load) {
       set_hovered_object_list(index);
-      if (audio) {
-        AudioPlayer(object_hover_sound);
-      }
+      playSound("object_hover_sound");
     }
   }
 

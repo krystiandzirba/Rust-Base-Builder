@@ -2,15 +2,15 @@ import * as THREE from "three";
 import { useEffect, useMemo, useState } from "react";
 import { RootState, set_model_to_destroy, set_model_upgrade_trigger, set_model_downgrade_trigger, set_model_tier_change, set_model_destroy_trigger, set_delete_object_mode, set_delete_object_mouse_trigger } from "../../Store.tsx"; // prettier-ignore
 import { useSelector, useDispatch } from "react-redux";
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import object_selecting_sound from "../../audio/object_selecting_sound.mp3";
-import raid_sound from "../../audio/raid_sound.mp3";
 import { Edges, Html } from "@react-three/drei";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesDown, faAnglesUp, faHammer, faTrashCanArrowUp } from "@fortawesome/free-solid-svg-icons";
 
+import { useAudioPlayer } from "./AudioPlayer.tsx";
+
 export function ModelComponentsCommonLogic() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
 
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode); // prettier-ignore
   const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state); // prettier-ignore
@@ -19,10 +19,8 @@ export function ModelComponentsCommonLogic() {
   const models_xray_active = useSelector((state: RootState) => state.modelsData.models_xray_active); // prettier-ignore
   const model_upgrade_trigger = useSelector((state: RootState) => state.modelsData.model_upgrade_trigger); //prettier-ignore
   const model_downgrade_trigger = useSelector((state: RootState) => state.modelsData.model_downgrade_trigger); //prettier-ignore
-  const model_tier_change = useSelector((state: RootState) => state.modelsData.model_tier_change); //prettier-ignore
   const delete_object_mouse_trigger = useSelector((state: RootState) => state.controlsInput.delete_object_mouse_trigger); //prettier-ignore
   const model_destroy_tigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); // prettier-ignore
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); // prettier-ignore
 
   const [model_hover, set_model_hover] = useState<boolean>(false);
   const [model_selected, set_model_selected] = useState<boolean>(false);
@@ -55,17 +53,13 @@ export function ModelComponentsCommonLogic() {
   function ModelOnClick(model_name: string) {
     if (page_mode === "edit" && !model_creation_state) {
       set_model_selected(true);
-      if (audio) {
-        AudioPlayer(object_selecting_sound);
-      }
+      playSound("object_selecting_sound");
     } else if (page_mode === "raid") {
       set_model_selected(true);
       dispatch(set_model_to_destroy(model_name));
       set_model_destroyed(true);
       dispatch(set_model_destroy_trigger(model_destroy_tigger + 1));
-      if (audio) {
-        AudioPlayer(raid_sound);
-      }
+      playSound("raid_sound");
     }
   }
 

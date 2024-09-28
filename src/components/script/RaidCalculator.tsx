@@ -25,13 +25,7 @@ import ropeThumbnail from "../../icons/rope_thumbnail.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import menu_sound from "../../audio/menu_sound.mp3";
-import buttons_sound from "../../audio/buttons_sound.mp3";
-import rocket_sound from "../../audio/rocket_sound.mp3";
-import charge_sound from "../../audio/charge_sound.mp3";
-import ammo_sound from "../../audio/ammo_sound2.mp3";
-import satchel_sound from "../../audio/satchel_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -45,12 +39,12 @@ import satchel_sound from "../../audio/satchel_sound.mp3";
 
 export default function RaidCalculator() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
 
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const reset_raid_models = useSelector((state: RootState) => state.modelsData.reset_raid_models); //prettier-ignore
   const model_destroy_trigger = useSelector((state: RootState) => state.modelsData.model_destroy_trigger); //prettier-ignore
   const model_to_destroy = useSelector((state: RootState) => state.modelsData.model_to_destroy); //prettier-ignore
-  const audio = useSelector((state: RootState) => state.pageSettings.audio); //prettier-ignore
 
   const [raid_type, set_raid_type] = useState<string>("efficiency");
   const [rockets_cost, set_rockets_cost] = useState<number>(0);
@@ -768,26 +762,24 @@ export default function RaidCalculator() {
     if (type !== raid_type) {
       set_raid_type(type);
 
-      if (audio) {
-        switch (type) {
-          case "efficiency":
-            AudioPlayer(menu_sound);
-            break;
-          case "rockets":
-            AudioPlayer(rocket_sound);
-            break;
-          case "explosives":
-            AudioPlayer(charge_sound);
-            break;
-          case "ammo":
-            AudioPlayer(ammo_sound);
-            break;
-          case "satchel":
-            AudioPlayer(satchel_sound);
-            break;
-          default:
-            break;
-        }
+      switch (type) {
+        case "efficiency":
+          playSound("menu_sound");
+          break;
+        case "rockets":
+          playSound("rocket_sound");
+          break;
+        case "explosives":
+          playSound("charge_sound");
+          break;
+        case "ammo":
+          playSound("ammo_sound");
+          break;
+        case "satchel":
+          playSound("satchel_sound");
+          break;
+        default:
+          break;
       }
     }
   }
@@ -821,9 +813,7 @@ export default function RaidCalculator() {
 
   const ToggleSubIngredientsCalculator = () => {
     set_count_sub_ingredients(!count_sub_ingredients);
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
   };
 
   const NumbersFormatter = (number: any) => {
@@ -948,7 +938,7 @@ export default function RaidCalculator() {
           className="reset_raid_thumbnail"
           onClick={() => {
             ResetRaid();
-            if (audio) AudioPlayer(menu_sound);
+            playSound("menu_sound");
           }}
           onMouseEnter={() => {set_reset_raid_hover(true)}} //prettier-ignore
           onMouseLeave={() => {set_reset_raid_hover(false)}} //prettier-ignore

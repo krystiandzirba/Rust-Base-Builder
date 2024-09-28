@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRotateRight, faArrowRotateLeft, faArrowUp, faArrowRight, faArrowDown, faArrowLeft, faCircleUp, faCircleDown} from "@fortawesome/free-solid-svg-icons" //prettier-ignore
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import buttons_sound from "../../audio/buttons_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -21,13 +20,14 @@ import buttons_sound from "../../audio/buttons_sound.mp3";
 
 export default function ControlsInput() {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
+
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
-  const audio = useSelector((state: RootState) => state.pageSettings.audio);
 
   const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
   const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
@@ -37,9 +37,7 @@ export default function ControlsInput() {
   const [custom_distance_unit, set_custom_distance_unit] = useState<number>(0);
 
   function ChangeRotationDegree() {
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
 
     switch (object_rotation_degree) {
       case 90:
@@ -79,9 +77,7 @@ export default function ControlsInput() {
   }
 
   function ChangeDistanceUnitButton(distance: number) {
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound");
     dispatch(set_object_distance_multiplier(distance));
   }
 

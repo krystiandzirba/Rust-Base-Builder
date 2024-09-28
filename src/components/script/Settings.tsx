@@ -24,9 +24,7 @@ import controls_b_Thumbnail from "../../icons/controls_b_thumbnail.png";
 import settings_a_Thumbnail from "../../icons/settings_a_thumbnail.png";
 import settings_b_Thumbnail from "../../icons/settings_b_thumbnail.png";
 
-import { AudioPlayer } from "./AudioPlayer.tsx";
-import menu_sound from "../../audio/menu_sound.mp3";
-import buttons_sound from "../../audio/buttons_sound.mp3";
+import { useAudioPlayer } from "./AudioPlayer.tsx";
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -41,6 +39,8 @@ import buttons_sound from "../../audio/buttons_sound.mp3";
 
 const Settings = () => {
   const dispatch = useDispatch();
+  const playSound = useAudioPlayer();
+
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
   const enable_cameras = useSelector((state: RootState) => state.pageSettings.enable_cameras);
   const enable_structures_visibility = useSelector((state: RootState) => state.pageSettings.enable_structures_visibility); //prettier-ignore
@@ -94,19 +94,13 @@ const Settings = () => {
       set_controls_button_click(!controls_button_click);
       set_settings_button_click(false);
     }
-
-    if (audio) {
-      AudioPlayer(menu_sound);
-    }
+    playSound("menu_sound");
   }
 
   //prettier-ignore
   function handleToggleSwitch(actionCreator: (toggle: boolean) => { type: string; payload: boolean }, toggle: boolean) {
     dispatch(actionCreator(toggle));
-
-    if (audio) {
-      AudioPlayer(buttons_sound);
-    }
+    playSound("buttons_sound")
   }
 
   function BuildSettingsAndControlsSegmentTitle(segment_title: string) {
