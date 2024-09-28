@@ -12,6 +12,103 @@ import metalThumbnail from "../../icons/metal_thumbnail.png";
 import hq_metalThumbnail from "../../icons/hq_metal_thumbnail.png";
 import * as THREE from "three";
 
+const object_north_direction = THREE.MathUtils.degToRad(0);
+const object_south_direction = THREE.MathUtils.degToRad(180);
+const object_east_direction = THREE.MathUtils.degToRad(270);
+const object_west_direction = THREE.MathUtils.degToRad(90);
+
+const object_north_east_1_direction = THREE.MathUtils.degToRad(300);
+const object_north_east_2_direction = THREE.MathUtils.degToRad(315);
+const object_north_east_3_direction = THREE.MathUtils.degToRad(330);
+
+const object_north_west_1_direction = THREE.MathUtils.degToRad(30);
+const object_north_west_2_direction = THREE.MathUtils.degToRad(45);
+const object_north_west_3_direction = THREE.MathUtils.degToRad(60);
+
+const object_south_east_1_direction = THREE.MathUtils.degToRad(210);
+const object_south_east_2_direction = THREE.MathUtils.degToRad(225);
+const object_south_east_3_direction = THREE.MathUtils.degToRad(240);
+
+const object_south_west_1_direction = THREE.MathUtils.degToRad(120);
+const object_south_west_2_direction = THREE.MathUtils.degToRad(135);
+const object_south_west_3_direction = THREE.MathUtils.degToRad(150);
+
+export const starter_base_objects_data = [
+  { name: "T1", position: { x: -1, z: 1, y: 0 }, rotation: object_north_direction, model: "StoneFoundationSquareMid" }, //prettier-ignore
+  { name: "T2", position: { x: 1, z: 1, y: 0 }, rotation: object_north_direction, model: "StoneFoundationSquareMid" }, //prettier-ignore
+  { name: "T3", position: { x: -1, z: 3, y: 0 }, rotation: object_north_direction, model: "StoneFoundationSquareMid" }, //prettier-ignore
+  { name: "T4", position: { x: 1, z: 3, y: 0 }, rotation: object_north_direction, model: "StoneFoundationSquareMid" }, //prettier-ignore
+  { name: "T5", position: { x: 1, z: 4, y: 0 }, rotation: object_north_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T6", position: { x: -1, z: 4, y: 0 }, rotation: object_north_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T7", position: { x: 0, z: 5.725, y: 0 }, rotation: object_south_direction, model: "StoneFoundationTriangleMid"}, //prettier-ignore
+  { name: "T8", position: { x: 0, z: -1.725, y: 0 }, rotation: object_north_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T9", position: { x: -1, z: 0, y: 0 }, rotation: object_south_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T10", position: { x: 1, z: 0, y: 0 }, rotation: object_south_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T11", position: { x: 2, z: 3, y: 0 }, rotation: object_west_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T12", position: { x: 2, z: 1, y: 0 }, rotation: object_west_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T13", position: { x: 3.725, z: 2, y: 0 }, rotation: object_east_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T15", position: { x: -2, z: 1, y: 0 }, rotation: object_east_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T16", position: { x: -2, z: 3, y: 0 }, rotation: object_east_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T17", position: { x: -3.725, z: 2, y: 0 }, rotation: object_west_direction, model: "StoneFoundationTriangleMid" }, //prettier-ignore
+  { name: "T18", position: { x: -2, z: 1, y: 1 }, rotation: object_west_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T19", position: { x: -2, z: 3, y: 1 }, rotation: object_west_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T20", position: { x: 1, z: 4, y: 1 }, rotation: object_south_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T21", position: { x: -1, z: 4, y: 1 }, rotation: object_south_direction, model: "StoneDoorway" }, //prettier-ignore
+  { name: "T22", position: { x: 2, z: 3, y: 1 }, rotation: object_east_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T23", position: { x: 2, z: 1, y: 1 }, rotation: object_east_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T24", position: { x: -1, z: 0, y: 1 }, rotation: object_north_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T25", position: { x: 1, z: 0, y: 1 }, rotation: object_north_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T26", position: { x: -1, z: 2, y: 1 }, rotation: object_south_direction, model: "StoneWallFrame" }, //prettier-ignore
+  { name: "T27", position: { x: 1, z: 2, y: 1 }, rotation: object_south_direction, model: "StoneWallFrame" }, //prettier-ignore
+  { name: "T28", position: { x: 0, z: 1, y: 1 }, rotation: object_west_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T29", position: { x: 0, z: 3, y: 1 }, rotation: object_west_direction, model: "StoneWallFrame" }, //prettier-ignore
+  { name: "T30", position: { x: 0, z: 3, y: 1 }, rotation: object_east_direction, model: "GarageDoor" }, //prettier-ignore
+  { name: "T31", position: { x: -1.5, z: 4.85, y: 1 }, rotation: object_south_west_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T32", position: { x: -0.55, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: "StoneDoorway" }, //prettier-ignore
+  { name: "T33", position: { x: 0, z: 5.725, y: 1 }, rotation: object_south_direction, model: "StoneWindow" }, //prettier-ignore
+  { name: "T34", position: { x: 1.5, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: "StoneDoorway" }, //prettier-ignore
+  { name: "T35", position: { x: 1.5, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: "MetalDoor" }, //prettier-ignore
+  { name: "T36", position: { x: -0.55, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: "MetalDoor" }, //prettier-ignore
+  { name: "T37", position: { x: -1, z: 4, y: 1 }, rotation: object_south_direction, model: "MetalDoor" }, //prettier-ignore
+  { name: "T38", position: { x: -1, z: 2, y: 1 }, rotation: object_south_direction, model: "GarageDoor" }, //prettier-ignore
+  { name: "T39", position: { x: 1, z: 2, y: 1 }, rotation: object_north_direction, model: "GarageDoor" }, //prettier-ignore
+  { name: "T40", position: { x: -1.5, z: -0.85, y: 1 }, rotation: object_north_west_3_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T41", position: { x: 1.5, z: -0.85, y: 1 }, rotation: object_north_east_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T42", position: { x: 0.55, z: -0.85, y: 1 }, rotation: object_north_west_3_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T43", position: { x: -0.55, z: -0.85, y: 1 }, rotation: object_north_east_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T44", position: { x: 0, z: -1.725, y: 1 }, rotation: object_north_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T45", position: { x: 3.725, z: 2, y: 1 }, rotation: object_east_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T46", position: { x: 2.825, z: 2.5, y: 1 }, rotation: object_north_east_3_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T47", position: { x: 2.825, z: 0.5, y: 1 }, rotation: object_north_east_3_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T48", position: { x: 2.825, z: 3.5, y: 1 }, rotation: object_south_east_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T49", position: { x: 2.825, z: 1.5, y: 1 }, rotation: object_south_east_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T50", position: { x: -2.85, z: 0.5, y: 1 }, rotation: object_north_west_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T51", position: { x: -2.85, z: 2.5, y: 1 }, rotation: object_north_west_1_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T52", position: { x: -2.85, z: 3.5, y: 1 }, rotation: object_south_west_3_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T53", position: { x: -2.85, z: 1.5, y: 1 }, rotation: object_south_west_3_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T54", position: { x: -3.725, z: 2, y: 1 }, rotation: object_west_direction, model: "StoneWallHigh" }, //prettier-ignore
+  { name: "T55", position: { x: 0.35, z: 1.3, y: 1.05 }, rotation: object_west_direction, model: "LargeWoodBox" }, //prettier-ignore
+  { name: "T56", position: { x: 0.4, z: 0.35, y: 1.05 }, rotation: object_north_direction, model: "ToolCupboard" }, //prettier-ignore
+  { name: "T57", position: { x: 1.4, z: 0.4, y: 1.05 }, rotation: object_south_direction, model: "LargeWoodBox" }, //prettier-ignore
+  { name: "T58", position: { x: 1.35, z: 1.675, y: 1.05 }, rotation: object_south_direction, model: "LargeWoodBox" }, //prettier-ignore
+  { name: "T59", position: { x: 1.6, z: 2.4, y: 1.05 }, rotation: object_east_direction, model: "Furnace" }, //prettier-ignore
+  { name: "T60", position: { x: 1.6, z: 3.1, y: 1.05 }, rotation: object_east_direction, model: "Furnace" }, //prettier-ignore
+  { name: "T61", position: { x: 1.6, z: 3.7, y: 1.05 }, rotation: object_east_direction, model: "WoodStorageBox" }, //prettier-ignore
+  { name: "T62", position: { x: -1.25, z: 0.325, y: 1.05 }, rotation: object_west_direction, model: "WoodStorageBox" }, //prettier-ignore
+  { name: "T64", position: { x: -0.275, z: 0.325, y: 1.05 }, rotation: object_west_direction, model: "WoodStorageBox" }, //prettier-ignore
+  { name: "T65", position: { x: 0, z: 5.725, y: 1 }, rotation: object_north_direction, model: "StrenghtenedGlassWindow" }, //prettier-ignore
+  { name: "T66", position: { x: -1.25, z: 0.35, y: 1 }, rotation: object_north_direction, model: "WorkbenchT3" }, //prettier-ignore
+  { name: "T67", position: { x: 2, z: 1, y: 3 }, rotation: object_west_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T68", position: { x: 2, z: 3, y: 3 }, rotation: object_west_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T69", position: { x: 3.725, z: 2, y: 3 }, rotation: object_east_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T70", position: { x: -2, z: 1, y: 3 }, rotation: object_east_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T71", position: { x: -2, z: 3, y: 3 }, rotation: object_east_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T72", position: { x: -3.725, z: 2, y: 3 }, rotation: object_west_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T73", position: { x: 0, z: -1.7, y: 3 }, rotation: object_north_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T74", position: { x: 1, z: 0, y: 3 }, rotation: object_south_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+  { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: object_south_direction, model: "StoneFloorTriangle" }, //prettier-ignore
+];
+
 export default function PrebuiltBasesDesign() {
   const dispatch = useDispatch();
   const playSound = useAudioPlayer();
@@ -38,27 +135,6 @@ export default function PrebuiltBasesDesign() {
     { id: "PrebuildBaseIV", label: 'The "Diamond" by STELIC (YT)', size: "duo", tutorial_materials: true },
     { id: "PrebuildBaseV", label: 'The "Vulcan" by Dust (YT)', size: "clan", tutorial_materials: true },
   ];
-
-  const object_north_direction = THREE.MathUtils.degToRad(0);
-  const object_south_direction = THREE.MathUtils.degToRad(180);
-  const object_east_direction = THREE.MathUtils.degToRad(270);
-  const object_west_direction = THREE.MathUtils.degToRad(90);
-
-  const object_north_east_1_direction = THREE.MathUtils.degToRad(300);
-  const object_north_east_2_direction = THREE.MathUtils.degToRad(315);
-  const object_north_east_3_direction = THREE.MathUtils.degToRad(330);
-
-  const object_north_west_1_direction = THREE.MathUtils.degToRad(30);
-  const object_north_west_2_direction = THREE.MathUtils.degToRad(45);
-  const object_north_west_3_direction = THREE.MathUtils.degToRad(60);
-
-  const object_south_east_1_direction = THREE.MathUtils.degToRad(210);
-  const object_south_east_2_direction = THREE.MathUtils.degToRad(225);
-  const object_south_east_3_direction = THREE.MathUtils.degToRad(240);
-
-  const object_south_west_1_direction = THREE.MathUtils.degToRad(120);
-  const object_south_west_2_direction = THREE.MathUtils.degToRad(135);
-  const object_south_west_3_direction = THREE.MathUtils.degToRad(150);
 
   function ChangeBaseMetarial(material: string) {
     set_material_type_test(material);

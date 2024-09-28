@@ -38,7 +38,7 @@ export default function Postprocessing() {
             mipmapBlur={true}
             radius={0.4}
           />
-          <SMAA preset={SMAAPreset.ULTRA} blendFunction={BlendFunction.SET} />
+          <SMAA preset={SMAAPreset.HIGH} blendFunction={BlendFunction.SET} />
         </EffectComposer>
       </Suspense>
     </>

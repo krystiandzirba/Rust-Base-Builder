@@ -100,6 +100,8 @@ import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan, faEraser, faDumpster} from "@fortawesome/free-solid-svg-icons"; //prettier-ignore
 
+import { starter_base_objects_data } from "./PrebuiltBasesDesign.tsx";
+
 //Info ctrl+f ➜ [search] to jump between sections
 //Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //Component Main component for the React Three Fiber (R3F) canvas, where all 3D models are imported and positioned based on user input.
@@ -791,7 +793,6 @@ export default function CanvasContainer() {
     set_model_z_position_offset(0);
   }, [selected_object_list]);
 
-  //prettier-ignore
   useEffect(() => {
     if (
       model_type_to_create &&
@@ -835,97 +836,18 @@ export default function CanvasContainer() {
   //@ Adding a starter base to the canvas on page load
 
   function CreateStarterBase() {
-    const starter_base_objects = [
-      { name: "T1", position: { x: -1, z: 1, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
-      { name: "T2", position: { x: 1, z: 1, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
-      { name: "T3", position: { x: -1, z: 3, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
-      { name: "T4", position: { x: 1, z: 3, y: 0 }, rotation: object_north_direction, model: StoneFoundationSquareMid }, //prettier-ignore
-      { name: "T5", position: { x: 1, z: 4, y: 0 }, rotation: object_north_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T6", position: { x: -1, z: 4, y: 0 }, rotation: object_north_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T7", position: { x: 0, z: 5.725, y: 0 }, rotation: object_south_direction, model: StoneFoundationTriangleMid}, //prettier-ignore
-      { name: "T8", position: { x: 0, z: -1.725, y: 0 }, rotation: object_north_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T9", position: { x: -1, z: 0, y: 0 }, rotation: object_south_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T10", position: { x: 1, z: 0, y: 0 }, rotation: object_south_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T11", position: { x: 2, z: 3, y: 0 }, rotation: object_west_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T12", position: { x: 2, z: 1, y: 0 }, rotation: object_west_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T13", position: { x: 3.725, z: 2, y: 0 }, rotation: object_east_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T15", position: { x: -2, z: 1, y: 0 }, rotation: object_east_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T16", position: { x: -2, z: 3, y: 0 }, rotation: object_east_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T17", position: { x: -3.725, z: 2, y: 0 }, rotation: object_west_direction, model: StoneFoundationTriangleMid }, //prettier-ignore
-      { name: "T18", position: { x: -2, z: 1, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T19", position: { x: -2, z: 3, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T20", position: { x: 1, z: 4, y: 1 }, rotation: object_south_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T21", position: { x: -1, z: 4, y: 1 }, rotation: object_south_direction, model: StoneDoorway }, //prettier-ignore
-      { name: "T22", position: { x: 2, z: 3, y: 1 }, rotation: object_east_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T23", position: { x: 2, z: 1, y: 1 }, rotation: object_east_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T24", position: { x: -1, z: 0, y: 1 }, rotation: object_north_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T25", position: { x: 1, z: 0, y: 1 }, rotation: object_north_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T26", position: { x: -1, z: 2, y: 1 }, rotation: object_south_direction, model: StoneWallFrame }, //prettier-ignore
-      { name: "T27", position: { x: 1, z: 2, y: 1 }, rotation: object_south_direction, model: StoneWallFrame }, //prettier-ignore
-      { name: "T28", position: { x: 0, z: 1, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T29", position: { x: 0, z: 3, y: 1 }, rotation: object_west_direction, model: StoneWallFrame }, //prettier-ignore
-      { name: "T30", position: { x: 0, z: 3, y: 1 }, rotation: object_east_direction, model: GarageDoor }, //prettier-ignore
-      { name: "T31", position: { x: -1.5, z: 4.85, y: 1 }, rotation: object_south_west_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T32", position: { x: -0.55, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: StoneDoorway }, //prettier-ignore
-      { name: "T33", position: { x: 0, z: 5.725, y: 1 }, rotation: object_south_direction, model: StoneWindow }, //prettier-ignore
-      { name: "T34", position: { x: 1.5, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: StoneDoorway }, //prettier-ignore
-      { name: "T35", position: { x: 1.5, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: MetalDoor }, //prettier-ignore
-      { name: "T36", position: { x: -0.55, z: 4.85, y: 1 }, rotation: object_south_east_3_direction, model: MetalDoor }, //prettier-ignore
-      { name: "T37", position: { x: -1, z: 4, y: 1 }, rotation: object_south_direction, model: MetalDoor }, //prettier-ignore
-      { name: "T38", position: { x: -1, z: 2, y: 1 }, rotation: object_south_direction, model: GarageDoor }, //prettier-ignore
-      { name: "T39", position: { x: 1, z: 2, y: 1 }, rotation: object_north_direction, model: GarageDoor }, //prettier-ignore
-      { name: "T40", position: { x: -1.5, z: -0.85, y: 1 }, rotation: object_north_west_3_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T41", position: { x: 1.5, z: -0.85, y: 1 }, rotation: object_north_east_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T42", position: { x: 0.55, z: -0.85, y: 1 }, rotation: object_north_west_3_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T43", position: { x: -0.55, z: -0.85, y: 1 }, rotation: object_north_east_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T44", position: { x: 0, z: -1.725, y: 1 }, rotation: object_north_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T45", position: { x: 3.725, z: 2, y: 1 }, rotation: object_east_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T46", position: { x: 2.825, z: 2.5, y: 1 }, rotation: object_north_east_3_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T47", position: { x: 2.825, z: 0.5, y: 1 }, rotation: object_north_east_3_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T48", position: { x: 2.825, z: 3.5, y: 1 }, rotation: object_south_east_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T49", position: { x: 2.825, z: 1.5, y: 1 }, rotation: object_south_east_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T50", position: { x: -2.85, z: 0.5, y: 1 }, rotation: object_north_west_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T51", position: { x: -2.85, z: 2.5, y: 1 }, rotation: object_north_west_1_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T52", position: { x: -2.85, z: 3.5, y: 1 }, rotation: object_south_west_3_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T53", position: { x: -2.85, z: 1.5, y: 1 }, rotation: object_south_west_3_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T54", position: { x: -3.725, z: 2, y: 1 }, rotation: object_west_direction, model: StoneWallHigh }, //prettier-ignore
-      { name: "T55", position: { x: 0.35, z: 1.3, y: 1.05 }, rotation: object_west_direction, model: LargeWoodBox }, //prettier-ignore
-      { name: "T56", position: { x: 0.4, z: 0.35, y: 1.05 }, rotation: object_north_direction, model: ToolCupboard }, //prettier-ignore
-      { name: "T57", position: { x: 1.4, z: 0.4, y: 1.05 }, rotation: object_south_direction, model: LargeWoodBox }, //prettier-ignore
-      { name: "T58", position: { x: 1.35, z: 1.675, y: 1.05 }, rotation: object_south_direction, model: LargeWoodBox }, //prettier-ignore
-      { name: "T59", position: { x: 1.6, z: 2.4, y: 1.05 }, rotation: object_east_direction, model: Furnace }, //prettier-ignore
-      { name: "T60", position: { x: 1.6, z: 3.1, y: 1.05 }, rotation: object_east_direction, model: Furnace }, //prettier-ignore
-      { name: "T61", position: { x: 1.6, z: 3.7, y: 1.05 }, rotation: object_east_direction, model: WoodStorageBox }, //prettier-ignore
-      { name: "T62", position: { x: -1.25, z: 0.325, y: 1.05 }, rotation: object_west_direction, model: WoodStorageBox }, //prettier-ignore
-      { name: "T64", position: { x: -0.275, z: 0.325, y: 1.05 }, rotation: object_west_direction, model: WoodStorageBox }, //prettier-ignore
-      { name: "T65", position: { x: 0, z: 5.725, y: 1 }, rotation: object_north_direction, model: StrenghtenedGlassWindow }, //prettier-ignore
-      { name: "T66", position: { x: -1.25, z: 0.35, y: 1 }, rotation: object_north_direction, model: WorkbenchT3 }, //prettier-ignore
-      { name: "T67", position: { x: 2, z: 1, y: 3 }, rotation: object_west_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T68", position: { x: 2, z: 3, y: 3 }, rotation: object_west_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T69", position: { x: 3.725, z: 2, y: 3 }, rotation: object_east_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T70", position: { x: -2, z: 1, y: 3 }, rotation: object_east_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T71", position: { x: -2, z: 3, y: 3 }, rotation: object_east_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T72", position: { x: -3.725, z: 2, y: 3 }, rotation: object_west_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T73", position: { x: 0, z: -1.7, y: 3 }, rotation: object_north_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T74", position: { x: 1, z: 0, y: 3 }, rotation: object_south_direction, model: StoneFloorTriangle }, //prettier-ignore
-      { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: object_south_direction, model: StoneFloorTriangle }, //prettier-ignore
-    ];
-
-    //! rewrite the model to be stored and read as a string, not a 3D model
-
     let prebuild_delay = 0;
-
     let current_loop_iteration = 0;
-    const data_length = starter_base_objects.length;
+    const data_length = starter_base_objects_data.length;
 
-    for (const { name, position, rotation, model } of starter_base_objects) {
+    for (const { name, position, rotation, model } of starter_base_objects_data) {
       setTimeout(() => {
         set_models_data((prevTransforms) => ({
           ...prevTransforms,
           [name]: {
-            position: {x: position.x, z: position.z, y: position.y}, //prettier-ignore
-            rotation: new THREE.Euler(0, rotation, 0, "XYZ"),
-            model: model.displayName,
+            position: { x: position.x, z: position.z, y: position.y }, //prettier-ignore
+            rotation: new THREE.Euler(0, rotation, 0, "XYZ"), //prettier-ignore
+            model: model,
           },
         }));
 
@@ -935,7 +857,7 @@ export default function CanvasContainer() {
           dispatch(set_allow_canvas_interaction_after_first_load(true));
         }
 
-        AddModel(model, name, new THREE.Euler(0, rotation, 0));
+        AddModel(model_type_map[model as keyof typeof model_type_map], name, new THREE.Euler(0, rotation, 0));
       }, prebuild_delay);
 
       prebuild_delay += 35;
