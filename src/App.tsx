@@ -1,3 +1,8 @@
+import { RootState } from "./Store";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
+import { KeyboardControls, KeyboardControlsEntry, Loader } from "@react-three/drei";
+
 import Toolbar from "./components/script/Toolbar.tsx";
 import Version from "./components/script/Version.tsx";
 import CameraType from "./components/script/CameraSwitch.tsx";
@@ -30,14 +35,8 @@ import "./components/styles/github.css";
 import "./components/styles/mobile_alert.css";
 import "./components/styles/prebuilt_bases_design.css";
 
-import { RootState } from "./Store";
-import { useSelector } from "react-redux";
-import { useMemo } from "react";
-import { KeyboardControls, KeyboardControlsEntry, Loader } from "@react-three/drei";
-
 function App() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
-
   const enable_hints = useSelector((state: RootState) => state.pageSettings.enable_hints);
   const enable_cameras = useSelector((state: RootState) => state.pageSettings.enable_cameras);
   const enable_structures_visibility = useSelector((state: RootState) => state.pageSettings.enable_structures_visibility); //prettier-ignore
@@ -46,11 +45,7 @@ function App() {
 
   const map = useMemo<KeyboardControlsEntry[]>(() => [], []);
 
-  const loaderStyles = {
-    dataStyles: {
-      fontSize: "0.8vw",
-    },
-  };
+  const loaderStyles = {dataStyles: {fontSize: "0.8vw"}} //prettier-ignore
 
   return (
     <>
@@ -79,92 +74,63 @@ function App() {
 
 export default App;
 
-// object copy: "ctrl + C"
-// different "save files / base plans"
-// add object list filters (walls / foundations / stairs / roofs / miscs )
-// add custom rotation angle and distance unit to transform the object
-// add 1st person walking in overview and raid mode
-// add new keyboard controls description - 2d camera (moving the objects) + creation mode
-
-// fix the camera NSEW position, it is incorrectly calculated
-// fix: wsad object transform > mouse click up transform > wsad transform = double axis transform
-
-// react three fiber - pointer lock controls (first person camera control) + fps octree
-
-// add a correct object rotation in mirrored axis
-
-// 1 second 3d text while creating, deleting and raiding the object (+build cost / +raid cost ...)
-// add current id storage to avoid id duplication
-// useIntersect, useProgress
-// adaptive resolution for low end pcs and heavy performance loss
-// 3d day and night cycle as light and dark mode
-// change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
-// update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
-// make the glass transparent
-// add campfire
-
-// fix: raid object destructon on mouse click (down) not the click (release/up)
-// fix: select any placed object -> select any object from list to create -> double the hints displayed
-
-// remake the wall mid uv and lower the texture size
-// add github wiki
-// move if (audio) to the audio component
-
-// compress new audio files
-
-// bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
-
-// model textures off = heavy performance impact double the draw because of the edges?
-
-// while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
-// add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
-
-// add a build + raid cost table on button click with selected models
-// change else if for cases
-
-// prevent key elements to be selectible by user (text) but still be a clickable part of a button
-// change the cursor type when hovering over buttons
-// change the build checkbox for MUI checkbox
-// add MUI skeleton
-// change the fontawesome icons for MUI icons
-// remove the mui search bar, change it for something different
-
-// compress all models in blender export
-
-// change all icons color change on hover, from js function to css hover
-
-// add the presets back (later)
-
-// add draco model compression
-// add three.js layers while disabling multiple models at once
-
+// bug: the camera NSEW position, it is incorrectly calculated
+// bug: wsad object transform > mouse click up transform > wsad transform = double axis transform
 // bug: performance monitor(on) -> performance monitor(off) = stuttering
 // bug: lighting does not work after displaying the performance monitor
+// bug: something is wrong with ghost models offset wireframe and rotation
+// bug: raid object destructon on mouse click (down) not the click (release/up)
+// bug: select any placed object -> select any object from list to create -> double the hints displayed
+// bug: add a correct object rotation in mirrored axis
+// bug: add postprocessing model edges instead of direct addon edges, this current edges causes heavy performance drop, 2x calls and 4x triangles
+// bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
-// light up (make light orange) the model rotation degree box during a model creation state
-// fix: something is wrong with ghost models offset wireframe and rotation
+//feature: object copy: "ctrl + C"
+//feature: different "save files / base plans"
+//feature: add object list filters (walls / foundations / stairs / roofs / miscs )
+//feature: add custom rotation angle and distance unit to transform the object
+//feature: add 1st person walking in overview and raid mode
+//feature: react three fiber - pointer lock controls (first person camera control) + fps octree
+//feature: 1 second 3d text while creating, deleting and raiding the object (+build cost / +raid cost ...)
+//feature: add current id storage to avoid id duplication
+//feature: useIntersect, useProgress
+//feature: adaptive resolution for low end pcs and heavy performance loss
+//feature: 3d day and night cycle as light and dark mode
+//feature: update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
+//feature: make the glass transparent
+//feature: add campfire
+//feature: while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
+//feature: add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
+//feature: add MUI skeleton
+//feature: add a build + raid cost table on button click with selected models
+//feature: add draco model compression
+// feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
+//feature: add three.js layers while disabling multiple models at once
 
-// cleanup the canvas controls
+//other: add new keyboard controls description - 2d camera (moving the objects) + creation mode
+//other: change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
+//other: remake the wall mid uv and lower the texture size
+//other: add github wiki
+//other: compress new audio files
+//other:  else if for cases
+//other: prevent key elements to be selectible by user (text) but still be a clickable part of a button
+//other: change the cursor type when hovering over buttons
+//other: change the build checkbox for MUI checkbox
+//other: change the fontawesome icons for MUI icons
+//other: remove the mui search bar, change it for something different
+//other: cleanup the canvas controls
+//other: compress all models in blender export
+//other: light up (make light orange) the model rotation degree box during a model creation state
+//other: change all icons color change on hover, from js function to css hover
 
 // 6.x.x:
 
-// dynamic performance settings based on users gpu
-// load textureless (prop) models on mobile instead of the textured ones
+//feature: dynamic performance settings based on users gpu
+//feature: load textureless (prop) models on mobile instead of the textured ones
 
-// change the color palette
+//info edit mode performance impact: x + z mouse coordinates on model / preb. base hover,
+//info lower the update rate after a certain amount of models present in the canvas / rewrite the coordinates
 
-//! edit mode performance impact: x + z mouse coordinates on model / preb. base hover,
-//! lower the update rate after a certain amount of models present in the canvas / rewrite the coordinates
-
-//! create a 10000 1x1 planes (100x100) that translate to the exact square coordinates on hover
-//! or
-//! divide whole canvas on 4 parts / if mouse is in part 1, divide this part into another 4 parts, repeat until last iteration end up in 1x1 square dimension
-
-// bug: performance monitor(on) -> performance monitor(off) = stuttering
-// bug: lighting does not work after displaying the performance monitor
-
-//feature: performance monitor(on) -> performance monitor(off) = stuttering
-//feature: lighting does not work after displaying the performance monitor
-
-//other: performance monitor(on) -> performance monitor(off) = stuttering
-//other: lighting does not work after displaying the performance monitor
+//info create a 10000 1x1 planes (100x100) that translate to the exact square coordinates on hover
+//info or
+//info divide whole canvas on 4 parts / if mouse is in part 1, divide this part into another 4 parts, repeat until last iteration end up in 1x1 square dimension

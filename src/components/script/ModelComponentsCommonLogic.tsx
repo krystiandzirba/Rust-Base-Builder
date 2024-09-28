@@ -106,7 +106,8 @@ export function ModelComponentsCommonLogic() {
 
   const meshEdgesVisibility = useMemo(() => {
     if (!models_xray_active) {
-      return <Edges linewidth={1} scale={1} threshold={25} color={"#2b2b2b"} />;
+      // return <Edges linewidth={1} scale={1} threshold={25} color={"#2b2b2b"} />;
+      return;
     }
   }, [model_selected, models_xray_active]);
 

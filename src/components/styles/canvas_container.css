@@ -421,13 +421,7 @@ input::-webkit-inner-spin-button {
 }
 
 .annotation_button_disabled {
-  background: repeating-linear-gradient(
-    45deg,
-    transparent 5px,
-    transparent 10px,
-    rgba(105, 105, 105, 0.3) 0px,
-    rgba(105, 105, 105, 0.3) 15px
-  );
+  background: repeating-linear-gradient(45deg, transparent 5px, transparent 10px, #3b3b3b 0px, #3b3b3b 15px);
 }
 
 .annotation_button_icons_container {
