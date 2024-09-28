@@ -114,6 +114,8 @@ export default App;
 
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
+// model textures off = heavy performance impact double the draw because of the edges?
+
 // while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
 // add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
 
@@ -133,8 +135,16 @@ export default App;
 
 // add the presets back (later)
 
+// add draco model compression
+// add three.js layers while disabling multiple models at once
+
 // bug: performance monitor(on) -> performance monitor(off) = stuttering
 // bug: lighting does not work after displaying the performance monitor
+
+// light up (make light orange) the model rotation degree box during a model creation state
+// fix: something is wrong with ghost models offset wireframe and rotation
+
+// cleanup the canvas controls
 
 // 6.x.x:
 
@@ -149,3 +159,12 @@ export default App;
 //! create a 10000 1x1 planes (100x100) that translate to the exact square coordinates on hover
 //! or
 //! divide whole canvas on 4 parts / if mouse is in part 1, divide this part into another 4 parts, repeat until last iteration end up in 1x1 square dimension
+
+// bug: performance monitor(on) -> performance monitor(off) = stuttering
+// bug: lighting does not work after displaying the performance monitor
+
+//feature: performance monitor(on) -> performance monitor(off) = stuttering
+//feature: lighting does not work after displaying the performance monitor
+
+//other: performance monitor(on) -> performance monitor(off) = stuttering
+//other: lighting does not work after displaying the performance monitor
