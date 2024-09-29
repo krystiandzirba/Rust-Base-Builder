@@ -1,4 +1,4 @@
-import { RootState, set_model_creation_state, set_model_type_to_create, set_object_rotation_degree, set_selected_object_list, set_create_prebuilt_base_state, set_prebuilt_base_objects_set} from "../../Store" //prettier-ignore
+import { RootState, set_model_creation_state, set_model_type_to_create, set_object_rotation_degree, set_selected_object_list, set_create_prebuilt_base_state, set_prebuilt_base_objects_set} from "../../Store.tsx" //prettier-ignore
 import { useSelector, useDispatch } from "react-redux";
 
 import { faPlus, faHouse, faUser, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
@@ -109,6 +109,10 @@ export const starter_base_objects_data = [
   { name: "T75", position: { x: -1, z: 0, y: 3 }, rotation: object_south_direction, model: "StoneFloorTriangle" }, //prettier-ignore
 ];
 
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component Component that stores all the hardcoded data for starter and prebuilt bases
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 export default function PrebuiltBasesDesign() {
   const dispatch = useDispatch();
   const playSound = useAudioPlayer();
@@ -162,6 +166,32 @@ export default function PrebuiltBasesDesign() {
     playSound("object_selecting_sound");
   }
 
+  function BuildPrebuiltBasesDesignTypeButton(base_material: string, thumbnail: string) {
+    return (
+      <button
+        className="prebuilt_bases_design_type_container_cell"
+        onClick={() => {
+          ChangeBaseMetarial(base_material);
+        }}
+      >
+        <div
+          className={
+            material_type_test === base_material
+              ? "prebuilt_bases_design_type_buttons type_buttons_active"
+              : "prebuilt_bases_design_type_buttons type_buttons_inactive"
+          }
+          style={{
+            backgroundImage: `url(${thumbnail})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+          }}
+        ></div>
+        <span>{base_material}</span>
+      </button>
+    );
+  }
+
   function randomIdGenerator() {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let random_id = "";
@@ -172,10 +202,11 @@ export default function PrebuiltBasesDesign() {
     return random_id;
   }
 
-  //* ------------------------- ↓ Prebuilt bases hardcoded data ↓ -------------------------
+  //[SectionNav] prebuilt bases
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Prebuilt bases hardcoded data ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  // models data dumpster
-  // hardcoded data for every prebuilt base model
+  //@ models data dumpster
+  //@ hardcoded data for every prebuilt base model
 
   function dispatchModelsSet(name: string, material_type_test: string) {
     if (name === "PrebuildBaseI") {
@@ -1091,8 +1122,6 @@ export default function PrebuiltBasesDesign() {
     }
   }
 
-  //* ------------------------- ↑ Prebuilt bases hardcoded data ↑ -------------------------
-
   useEffect(() => {
     set_add_prebuild_base_button_click(false);
   }, [page_mode]);
@@ -1125,31 +1154,7 @@ export default function PrebuiltBasesDesign() {
     }
   }, [material_type_test, model_type_to_create]);
 
-  function BuildPrebuiltBasesDesignTypeButton(base_material: string, thumbnail: string) {
-    return (
-      <button
-        className="prebuilt_bases_design_type_container_cell"
-        onClick={() => {
-          ChangeBaseMetarial(base_material);
-        }}
-      >
-        <div
-          className={
-            material_type_test === base_material
-              ? "prebuilt_bases_design_type_buttons type_buttons_active"
-              : "prebuilt_bases_design_type_buttons type_buttons_inactive"
-          }
-          style={{
-            backgroundImage: `url(${thumbnail})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center center",
-          }}
-        ></div>
-        <span>{base_material}</span>
-      </button>
-    );
-  }
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   return (
     <>

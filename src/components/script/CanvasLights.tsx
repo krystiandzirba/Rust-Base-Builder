@@ -1,13 +1,10 @@
 import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component houses the conditional lighting setup for the canvas.
-
-//? It includes various types of lights such as ambient lights, directional lights, point lights, and spotlights.
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component houses the conditional lighting setup for the canvas.
+//Component It includes various types of lights such as ambient lights, directional lights, point lights, and spotlights.
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function CanvasLights() {
   const better_lighting_state = useSelector((state: RootState) => state.pageSettings.better_lighting_state); //prettier-ignore

@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component Alert box if mobile device is detected
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 export default function MobileAlert() {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const [continue_to_app, set_continue_to_app] = useState<boolean>(false);

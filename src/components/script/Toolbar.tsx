@@ -14,11 +14,9 @@ import { useEffect } from "react";
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 import posthog from "posthog-js";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component serves as the main navigation tool, allowing users to change the page mode (overview, edit, raid).
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component serves as the main navigation tool, allowing users to change the page mode (overview, edit, raid).
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const Toolbar = () => {
   const dispatch = useDispatch();
@@ -31,10 +29,10 @@ const Toolbar = () => {
       dispatch(set_page_mode(page_mode));
     }, 10);
 
-    // timeout is required because:
-    // 1. model ghost hover in raid mode,
-    // 2. switch to edit mode
-    // 3. ghost models become textureless and white
+    //% timeout is required because:
+    //% 1. model ghost hover in raid mode,
+    //% 2. switch to edit mode
+    //% 3. ghost models become textureless and white
 
     dispatch(set_reset_raid_models(!reset_raid_models));
     dispatch(set_selected_model_id("empty"));
@@ -42,7 +40,7 @@ const Toolbar = () => {
     playSound("menu_sound");
   }
 
-  // -------------------------  deselect the selected object and disable the model cretion state on page mode change -------------------------
+  //% deselect the selected object and disable the model cretion state on page mode change
 
   useEffect(() => {
     {

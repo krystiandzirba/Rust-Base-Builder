@@ -14,15 +14,12 @@ import lqFuelThumbnail from "../../icons/lq_fuel_thumbnail.png";
 
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component is used to calculate and display the building costs across various building types, including stone, metal, and armored tiers.
-
-//? Optional calculator aimed for miscellaneous objects — those not integral to the building's structure but serving as filler blocks.
-
-//? Dynamic upkeep calculator, which provides a weighted average upkeep cost based on all placed objects.
-
-//? ----------------------------------------------------------------------------------------------------
+//Info ctrl+f ➜ [search] to jump between sections
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component is used to calculate and display the building costs (stone, metal, armored).
+//Component Misc calculator — those not integral to the building's structure but serving as filler blocks.
+//Component upkeep calculator, which provides a weighted average upkeep cost based on all placed objects.
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function ResourceCounter() {
   const playSound = useAudioPlayer();
@@ -49,14 +46,16 @@ export default function ResourceCounter() {
 
   const [twig_upgrade_wood_cost, set_twig_upgrade_wood_cost] = useState<number>(0);
 
-  //* ------------------------- ↓ Misc And Components Cost Counter ↓ -------------------------
-  // (if enabled) this function is used to calculate the cost of the misc objects:
-  // (tool cupboard, large wood box, wood storage box, furnace, workbench tier 3, sleeping bag)
-  // the total misc cost is added on top of the "construction" objects cost (foundations, walls ... )
-  // it is displayed as a whole under the "build cost" window and separate "components cost" window
+  //[SectionNav] misc count, misc cost, component cost
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Counter ( 1.Misc / 2.Misc Cost / 3.Components Cost / 4. Display ) ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  //@ (if enabled) this function is used to calculate the cost of the misc objects:
+  //@ (tool cupboard, large wood box, wood storage box, furnace, workbench tier 3, sleeping bag)
+  //@ the total misc cost is added on top of the "construction" objects cost (foundations, walls ... )
+  //@ it is displayed as a whole under the "build cost" window and separate "components cost" window
 
   function CountMiscsAndComponentsCost(models: string[]) {
-    // -------------------------  count the number of misc items  -------------------------
+    //SubSection ───────────────────────── ↓ Counter 1.Misc Count ↓ ─────────────────────────
 
     let misc_tool_cupboard_count = models.filter((model) => model === "ToolCupboard").length;
     let misc_wood_storage_box_count = models.filter((model) => model === "WoodStorageBox").length;
@@ -69,64 +68,63 @@ export default function ResourceCounter() {
 
     set_total_misc_count(misc_tool_cupboard_count + misc_wood_storage_box_count + misc_large_wood_box_count + misc_furnace_count + misc_workbench_t3_count + misc_sleeping_bag_count + garage_door_count) //prettier-ignore
 
-    // -------------------------  miscs cost -------------------------
-    // -------------------------  total misc cost (wood) -------------------------
+    //SubSection ───────────────────────── ↓ Counter 2.Misc Cost ↓ ─────────────────────────
+    //% -------------------------  total misc cost (wood) -------------------------
 
     let wood_misc_cost_1000 = misc_tool_cupboard_count * 1000;
     let wood_misc_cost_250 = misc_large_wood_box_count * 250;
     let wood_misc_cost_100 = (misc_large_wood_box_count + misc_furnace_count) * 100;
     set_total_wood_misc_cost(wood_misc_cost_1000 + wood_misc_cost_250 + wood_misc_cost_100);
 
-    // -------------------------  total misc cost (stone) -------------------------
+    //% -------------------------  total misc cost (stone) -------------------------
 
     let stone_misc_cost_200 = misc_furnace_count * 200;
     set_total_stone_misc_cost(stone_misc_cost_200);
 
-    // -------------------------  total misc cost (metal) -------------------------
+    //% -------------------------  total misc cost (metal) -------------------------
 
     let metal_misc_cost_1000 = misc_workbench_t3_count * 1000;
     let metal_misc_cost_50 = misc_large_wood_box_count * 50;
     set_total_metal_misc_cost(metal_misc_cost_1000 + metal_misc_cost_50);
 
-    // -------------------------  total misc cost (hq metal) -------------------------
+    //% -------------------------  total misc cost (hq metal) -------------------------
 
     let hq_metal_misc_cost_100 = misc_workbench_t3_count * 100;
     set_total_hq_metal_misc_cost(hq_metal_misc_cost_100);
 
-    // -------------------------  components cost -------------------------
-    // -------------------------  total components cost (scrap) -------------------------
+    //SubSection ───────────────────────── ↓ Counter 3.Components Cost ↓ ─────────────────────────
+    //% -------------------------  total components cost (scrap) -------------------------
 
     let scrap_misc_cost_1250 = misc_workbench_t3_count * 1250;
     let total_scrap_misc_cost = scrap_misc_cost_1250;
 
-    // -------------------------  total components cost (gear) -------------------------
+    //% -------------------------  total components cost (gear) -------------------------
 
     let gear_misc_cost_2 = garage_door_count * 2;
     let total_gear_misc_cost = gear_misc_cost_2;
 
-    // -------------------------  total components cost (sewing kit) -------------------------
+    //% -------------------------  total components cost (sewing kit) -------------------------
 
-    //
-    //
+    //%
+    //%
 
-    // -------------------------  total components cost (lq fuel) -------------------------
+    //% -------------------------  total components cost (lq fuel) -------------------------
 
     let lq_fuel_misc_cost_50 = misc_furnace_count * 50;
     let total_lq_fuel_misc_cost = lq_fuel_misc_cost_50;
 
-    // -------------------------  display the values -------------------------
+    //SubSection ───────────────────────── ↓ Counter 4.Display ↓ ─────────────────────────
 
     set_components_cost([{ scrap: total_scrap_misc_cost }, { gear: total_gear_misc_cost }, { sewing_kit: 0 }, { lq_fuel: total_lq_fuel_misc_cost }]) //prettier-ignore
   }
 
-  //* ------------------------- ↑ Misc And Components Cost Counter ↑ -------------------------
+  //[SectionNav] build cost, twig cost, display the cost
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Build Cost ( 1.Models / 2.Twig / 3.Display ) ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  //* ------------------------- ↓ Base Building Cost Counter ↓ -------------------------
-  // this function is calculating the building cost of the base objects like foundations, walls, floors ...
-  // displayed under the "build cost" window
+  //SubSection ───────────────────────── ↓ Build Cost 1.Models ↓ ─────────────────────────
 
   function CountBuildCost(models: string[]) {
-    // -------------------------  total build cost (stone) -------------------------
+    //% -------------------------  total build cost (stone) -------------------------
 
     const stone_models_cost_mapping: { [key: string]: number } = {
       StoneFoundationSquareHigh: 300,
@@ -157,7 +155,7 @@ export default function ResourceCounter() {
       return total + (stone_models_cost_mapping[model] || 0);
     }, 0);
 
-    // -------------------------  total build cost (metal) -------------------------
+    //% -------------------------  total build cost (metal) -------------------------
 
     const metal_models_cost_mapping: { [key: string]: number } = {
       GarageDoor: 300,
@@ -192,7 +190,7 @@ export default function ResourceCounter() {
       return total + (metal_models_cost_mapping[model] || 0);
     }, 0);
 
-    // -------------------------  total build cost (hq metal) -------------------------
+    //% -------------------------  total build cost (hq metal) -------------------------
 
     const armored_models_cost_mapping: { [key: string]: number } = {
       ArmoredFoundationSquareHigh: 25,
@@ -223,10 +221,11 @@ export default function ResourceCounter() {
       return total + (armored_models_cost_mapping[model] || 0);
     }, 0);
 
-    //* ------------------------- ↓ wood needed to upgrade from twig to higher quality ↓ -------------------------
-    // building the base requires the objects to be upgraded from twig -> wood -> stone -> hq metal
-    // this app skips the twig and wood part and starts building the base from the stone and hq metal (soon)
-    // so the wood cost for previous tiers is calculated here
+    //SubSection ───────────────────────── ↓ Build Cost 2.Twig ↓ ─────────────────────────
+    //% wood needed to upgrade from twig to higher quality
+    //% building the base requires the objects to be upgraded from twig -> wood -> stone -> hq metal
+    //% this app skips the twig and wood part and starts building the base from the stone and hq metal (soon)
+    //% so the wood cost for previous tiers is calculated here
 
     const upgrade_from_wood_model_cost: { [key: string]: number } = {
       StoneFoundationSquareHigh: 50,
@@ -303,9 +302,8 @@ export default function ResourceCounter() {
 
     set_twig_upgrade_wood_cost(total_twig_upgrade_cost);
 
-    //* ------------------------- ↑ wood needed to upgrade from twig to higher quality ↑ -------------------------
-
-    // -------------------------  display build cost + misc cost -------------------------
+    //SubSection ───────────────────────── ↓ Build Cost 3.Display ↓ ─────────────────────────
+    //% display build cost + misc cost
 
     set_build_cost([
       { wood: count_miscs_cost ? total_wood_misc_cost : 0 },
@@ -315,15 +313,15 @@ export default function ResourceCounter() {
     ]);
   }
 
-  //* ------------------------- ↑ Base Building Cost Counter ↑ -------------------------
+  //[SectionNav] upkeep percentage
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Upkeep Dynamic Percentage ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  //* ------------------------- ↓ Upkeep Dynamic Percentage ↓ -------------------------
-  // this function counts the weighted upkeep cost of currently placed objects based on its amount
-  // the upkeep counter is divided on 4 stages:
-  // - stage 0: first 15 objects adds 10% to the upkeep cost for every object
-  // - stage 1: objects 16-100 adds 15% to the upkeep cost
-  // - stage 2: objects 101-175 adds 20% to the upkeep cost
-  // - stage 3: every objects above 175 adds 30% to the upkeep cost
+  //@ this function counts the weighted upkeep cost of currently placed objects based on its amount
+  //@ the upkeep counter is divided on 4 stages:
+  //@ - stage 0: first 15 objects adds 10% to the upkeep cost for every object
+  //@ - stage 1: objects 16-100 adds 15% to the upkeep cost
+  //@ - stage 2: objects 101-175 adds 20% to the upkeep cost
+  //@ - stage 3: every objects above 175 adds 30% to the upkeep cost
 
   function CountUpkeepPercentileRampup(models: string[]) {
     let total_object_count = models.length - total_misc_count;
@@ -338,7 +336,7 @@ export default function ResourceCounter() {
     let stage_2_count_rampup: number = 0;
     let stage_3_count_rampup: number = 0;
 
-    // -------------------------  stage 0 -------------------------
+    //% -------------------------  stage 0 -------------------------
 
     if (total_object_count === 0 || (total_object_count > 0 && total_object_count <= 15)) {
       stage_0_count_rampup = 0.1;
@@ -347,7 +345,7 @@ export default function ResourceCounter() {
       set_upkeep_cost_text("upkeep cost");
     }
 
-    // -------------------------  stage 1 -------------------------
+    //% -------------------------  stage 1 -------------------------
 
     if (total_object_count > 15 && total_object_count <= 100) {
       stage_0_count = 15;
@@ -358,7 +356,7 @@ export default function ResourceCounter() {
       set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
 
-    // -------------------------  stage 2 -------------------------
+    //% -------------------------  stage 2 -------------------------
 
     if (total_object_count > 100 && total_object_count <= 175) {
       stage_0_count = 15;
@@ -370,7 +368,7 @@ export default function ResourceCounter() {
       set_upkeep_cost_text("upkeep cost (estimated scaling)");
     }
 
-    // -------------------------  stage 3 -------------------------
+    //% -------------------------  stage 3 -------------------------
 
     if (total_object_count > 175) {
       stage_0_count = 15;
@@ -384,7 +382,12 @@ export default function ResourceCounter() {
     }
   }
 
-  //* ------------------------- ↑ Upkeep Dynamic Percentage ↑ -------------------------
+  //[SectionNav] values display, html, other
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Display the values + HTML + Other ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  //@ Display the upkeep cost values * the calculated percentage rampup
+  //@ create the repeating HTML segments
+  //@ number formatter for displayed values
 
   function DisplayCountedUpkeep() {
     if (build_cost && build_cost[0] && build_cost[0].wood !== undefined && count_miscs_cost) {
@@ -412,15 +415,25 @@ export default function ResourceCounter() {
     }
   }
 
-  const HandleMiscCostState = () => {
-    set_count_miscs_cost(!count_miscs_cost);
-    playSound("buttons_sound");
-  };
+  function CreateBuildCostSegment(thumbnail: string, description: string, build_cost: number) {
+    return (
+      <div className="build_cost_content">
+        <img src={thumbnail} alt="Wood thumbnail" className="build_cost_content_thumbnail" />
+        <span className="build_cost_content_description">{description}</span>
+        <span className="build_cost_content_amount">{NumbersFormatter(build_cost)}</span>
+      </div>
+    );
+  }
 
   const NumbersFormatter = (number: any) => {
     if (number > 9999) {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     } else return number;
+  };
+
+  const HandleMiscCostState = () => {
+    set_count_miscs_cost(!count_miscs_cost);
+    playSound("buttons_sound");
   };
 
   useEffect(() => {
@@ -433,15 +446,7 @@ export default function ResourceCounter() {
     DisplayCountedUpkeep();
   }, [build_cost, total_upkeep_percentile_rampup]);
 
-  function CreateBuildCostSegment(thumbnail: string, description: string, build_cost: number) {
-    return (
-      <div className="build_cost_content">
-        <img src={thumbnail} alt="Wood thumbnail" className="build_cost_content_thumbnail" />
-        <span className="build_cost_content_description">{description}</span>
-        <span className="build_cost_content_amount">{NumbersFormatter(build_cost)}</span>
-      </div>
-    );
-  }
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   return (
     <>

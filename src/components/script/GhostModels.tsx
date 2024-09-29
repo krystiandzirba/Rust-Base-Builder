@@ -6,12 +6,8 @@ import { RootState } from "../../Store";
 import { useEffect, useState } from "react";
 
 type GLTFResult = GLTF & {
-  nodes: {
-    Cube: THREE.Mesh;
-  };
-  materials: {
-    ["Material"]: THREE.MeshStandardMaterial;
-  };
+  nodes: {Cube: THREE.Mesh}; //prettier-ignore
+  materials: {["Material"]: THREE.MeshStandardMaterial}; //prettier-ignore
 };
 
 type GhostModelProps = {
@@ -27,6 +23,11 @@ type GhostModelProps = {
   model_z_offset_position: number;
   prebuilt_base: boolean;
 };
+
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component Component that provides a "ghost" model that it indicates a position of the mouse cursor on the canvas,
+//Component helping the user understand where and what kind of model is currently placing
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export function GhostModel({
   model_type,

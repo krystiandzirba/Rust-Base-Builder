@@ -8,15 +8,11 @@ import { faArrowRotateRight, faArrowRotateLeft, faArrowUp, faArrowRight, faArrow
 
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? The control panel positioned at the center bottom of the app that serves as a transforming tool for objects via mouse input.
-
-//? It facilitates adjustments to object properties such as position, rotation, elevation and height.
-
-//? Users can also switch between distance units and delete either selected or all objects.
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component The control panel positioned at the center bottom of the app that serves as a transforming tool for objects via mouse input.
+//Component It facilitates adjustments to object properties such as position, rotation, elevation and height.
+//Component Users can also switch between distance units and delete either selected or all objects.
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function ControlsInput() {
   const dispatch = useDispatch();

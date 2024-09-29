@@ -1,26 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Store.tsx";
-import {
-  set_models_xray_active,
-  set_foundations_active,
-  set_walls_active,
-  set_floors_active,
-  set_stairs_active,
-  set_doors_active,
-  set_frames_active,
-  set_roofs_active,
-  set_miscs_active,
-} from "../../Store.tsx";
+import {set_models_xray_active, set_foundations_active, set_walls_active, set_floors_active, set_stairs_active, set_doors_active, set_frames_active, set_roofs_active, set_miscs_active} from "../../Store.tsx"; //prettier-ignore
 
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 import { useEffect, useState } from "react";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component allows users to change the visibility of specific object types.
-//? including enabling/disabling the X-Ray mode.
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component allows users to change the visibility of specific object types.
+//Component including enabling/disabling the X-Ray mode.
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function StructureVisibilityMode() {
   const dispatch = useDispatch();

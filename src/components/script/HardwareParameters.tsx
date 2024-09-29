@@ -3,6 +3,10 @@ import { useDispatch } from "react-redux";
 import { set_hardware_gpu, set_hardware_tier, set_hardware_is_mobile, set_hardware_monitor_resolution } from "../../Store.tsx"; //prettier-ignore
 import { useEffect, useCallback } from "react";
 
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component Component that detects a user display resolution, mobile device and assings a GPU to a specific tier
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 const GetGpuTier = (gpu: string) => {
   const tier_3_gpus = [
     "nvidia geforce rtx 4090",

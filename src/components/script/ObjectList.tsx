@@ -144,11 +144,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
   );
 };
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component provides a searchable list of all 3D objects available for user interaction.
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component provides a searchable list of all 3D objects available for user interaction.
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function ObjectList() {
   const dispatch = useDispatch();
@@ -160,14 +158,12 @@ export default function ObjectList() {
 
   const [hovered_object_list, set_hovered_object_list] = useState<number>(-1);
 
-  const create_object_list_item = (name: string, thumbnail: string, keywords: string[], modelType: string) => ({
-    name,
-    thumbnail,
-    keywords,
-    onClick: () => {
-      dispatch(set_model_type_to_create(modelType));
-    },
-  });
+  const [search_querry, set_search_querry] = useState<string>("");
+
+  //[SectionNav] object list creator
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Object List Creator + Keywords + Interaction ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  //% create a reusable object list segment with specific data
 
   const object_list_keywords = (material: string, type: string, shape: string, height: string) => {
     const keywords = [
@@ -220,8 +216,17 @@ export default function ObjectList() {
     return keywords.filter(Boolean);
   };
 
+  const create_object_list_item = (name: string, thumbnail: string, keywords: string[], modelType: string) => ({
+    name,
+    thumbnail,
+    keywords,
+    onClick: () => {
+      dispatch(set_model_type_to_create(modelType));
+    },
+  });
+
   const object_list = [
-    //stone
+    //% stone object list
 
     create_object_list_item("stone foundation square (high)", stoneFoundationSquareHighThumbnail, object_list_keywords("stone", "foundation", "square", "high"), "StoneFoundationSquareHigh"), // prettier-ignore
     create_object_list_item("stone foundation square (mid)", stoneFoundationSquareMidThumbnail, object_list_keywords("stone", "foundation", "square", "mid"), "StoneFoundationSquareMid"), // prettier-ignore
@@ -246,7 +251,7 @@ export default function ObjectList() {
     create_object_list_item("stone roof wall (left)", stoneRoofWallLeft, object_list_keywords("stone", "roof", "wall", "left"), "StoneRoofWallLeft"), // prettier-ignore
     create_object_list_item("stone roof wall (right)", stoneRoofWallRight, object_list_keywords("stone", "roof", "wall", "right"), "StoneRoofWallRight"), // prettier-ignore
 
-    // metal
+    //% metal object list
 
     create_object_list_item("metal foundation square (high)", metalFoundationSquareHighThumbnail, object_list_keywords("metal", "foundation", "square", "high"), "MetalFoundationSquareHigh"), // prettier-ignore
     create_object_list_item("metal foundation square (mid)", metalFoundationSquareMidThumbnail, object_list_keywords("metal", "foundation", "square", "mid"), "MetalFoundationSquareMid"), // prettier-ignore
@@ -271,7 +276,7 @@ export default function ObjectList() {
     create_object_list_item("metal roof wall (left)", metalRoofWallLeft, object_list_keywords("metal", "roof", "wall", "left"), "MetalRoofWallLeft"), // prettier-ignore
     create_object_list_item("metal roof wall (right)", metalRoofWallRight, object_list_keywords("metal", "roof", "wall", "right"), "MetalRoofWallRight"), // prettier-ignore
 
-    // armored
+    //% armored object list
 
     create_object_list_item("armored found. square (high)", armoredFoundationSquareHighThumbnail, object_list_keywords("armored", "foundation", "square", "high"), "ArmoredFoundationSquareHigh"), // prettier-ignore
     create_object_list_item("armored found. square (mid)", armoredFoundationSquareMidThumbnail, object_list_keywords("armored", "foundation", "square", "mid"), "ArmoredFoundationSquareMid"), // prettier-ignore
@@ -296,17 +301,17 @@ export default function ObjectList() {
     create_object_list_item("armored roof wall (left)", armoredRoofWallLeftThumbnail, object_list_keywords("armored", "roof", "wall", "left"), "ArmoredRoofWallLeft"), // prettier-ignore
     create_object_list_item("armored roof wall (right)", armoredRoofWallRightThumbnail, object_list_keywords("armored", "roof", "wall", "right"), "ArmoredRoofWallRight"), // prettier-ignore
 
-    // doors
+    //% doors object list
 
     create_object_list_item("metal door", metalDoorThumbnail, object_list_keywords("metal", "door", "", ""), "MetalDoor"), // prettier-ignore
     create_object_list_item("garage door", garageDoorThumbnail, object_list_keywords("garage", "door", "", ""), "GarageDoor"), // prettier-ignore
 
-    // windows
+    //% windows object list
 
     create_object_list_item("metal vertical embrasure", metalVerticalEmbrasureThumbnail, object_list_keywords("metal", "vertical", "embrasure", ""), "MetalVerticalEmbrasure"), // prettier-ignore
     create_object_list_item("strenghtened glass window", strenghtenedGlassWindowThumbnail, object_list_keywords("strenghtened", "glass", "window", ""), "StrenghtenedGlassWindow"), // prettier-ignore
 
-    // miscs
+    //% miscs object list
 
     create_object_list_item("tool cupboard", toolCupboardThumbnail, object_list_keywords("tool", "cupboard", "", ""), "ToolCupboard"), // prettier-ignore
     create_object_list_item("wood storage box", woodStorageBoxThumbnail, object_list_keywords("wood", "storage", "box", ""), "WoodStorageBox"), // prettier-ignore
@@ -315,8 +320,6 @@ export default function ObjectList() {
     create_object_list_item("workbench T3", workbench_t3_Thumbnail, object_list_keywords("workbench", "t3", "", ""), "WorkbenchT3"), // prettier-ignore
     create_object_list_item("sleeping bag", sleeping_bag_Thumbnail, object_list_keywords("sleeping", "bag", "", ""), "SleepingBag"), // prettier-ignore
   ];
-
-  const [search_querry, set_search_querry] = useState<string>("");
 
   const filtered_object_list = object_list.filter((item) =>
     item.keywords.some((keyword) => keyword.includes(search_querry.toLowerCase()))
@@ -352,11 +355,12 @@ export default function ObjectList() {
     }
   }
 
-  //* ------------------------- ↓ Prevent unwanted keyboard input ↓ -------------------------
-  // deselect the current object on search bar input
+  //[SectionNav] unwanted keyboard input
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Prevent unwanted keyboard input ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  // prevent the Space and Enter buttons to enable-disable the object list items, if the Search bar is empty
-  // (selecting-deselecting with these two inputs was possible)
+  //% deselect the current object on search bar input
+  //% prevent the Space and Enter buttons to enable-disable the object list items, if the Search bar is empty
+  //% (selecting-deselecting with these two inputs was possible)
 
   useEffect(() => {
     dispatch(set_selected_object_list(-1));
@@ -376,7 +380,7 @@ export default function ObjectList() {
     };
   }, [search_querry]);
 
-  //* ------------------------- ↑ Prevent unwanted keyboard input ↑ -------------------------
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   return (
     <>
@@ -401,15 +405,9 @@ export default function ObjectList() {
                   ? "object_list_entity object_list_entity_hovered"
                   : "object_list_entity object_list_entity_deselected"
               }
-              onClick={() => {
-                ObjectListMouseClick(index, item);
-              }}
-              onMouseEnter={() => {
-                ObjectListMouseEnter(index);
-              }}
-              onMouseLeave={() => {
-                ObjectListMouseLeave();
-              }}
+              onClick={() => {ObjectListMouseClick(index, item)}} //prettier-ignore
+              onMouseEnter={() => {ObjectListMouseEnter(index)}} //prettier-ignore
+              onMouseLeave={() => {ObjectListMouseLeave()}} //prettier-ignore
             >
               <img
                 className={

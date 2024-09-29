@@ -4,14 +4,11 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component is responsible for displaying the currently available shortcuts or actions at the top of the screen (if enabled)
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component is responsible for displaying the currently available shortcuts or actions at the top of the screen (if enabled)
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function Hints() {
-  const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
   const model_cretion_state = useSelector((state: RootState) => state.modelsData.model_creation_state);

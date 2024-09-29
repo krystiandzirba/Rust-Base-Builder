@@ -2,22 +2,7 @@ import { useEffect, useState } from "react";
 import { Slider, ThemeProvider, createTheme } from "@mui/material";
 import { RootState } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  set_enable_hints,
-  set_enable_cameras,
-  set_enable_structures_visibility,
-  set_enable_resource_container,
-  set_enable_model_transform_controls,
-  set_performance_mode,
-  set_performance_monitor_state,
-  set_camera_fov,
-  set_enable_model_textures,
-  set_bloom_state,
-  set_better_lighting_state,
-  set_ssao_state,
-  set_antialiasing_state,
-  set_audio,
-} from "../../Store.tsx";
+import { set_enable_hints, set_enable_cameras, set_enable_structures_visibility, set_enable_resource_container, set_enable_model_transform_controls, set_performance_mode, set_performance_monitor_state, set_camera_fov, set_enable_model_textures, set_bloom_state, set_better_lighting_state, set_ssao_state, set_antialiasing_state, set_audio} from "../../Store.tsx"; //prettier-ignore
 
 import controls_a_Thumbnail from "../../icons/controls_a_thumbnail.png";
 import controls_b_Thumbnail from "../../icons/controls_b_thumbnail.png";
@@ -26,16 +11,10 @@ import settings_b_Thumbnail from "../../icons/settings_b_thumbnail.png";
 
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component provides access to multiple settings related to the app, divided into different sections:
-//? - UI settings
-//? - Audio
-//? - Performance | System
-//? - Postprocessing | Visuals
-//? - more in the future
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component provides access to multiple settings related to the app, divided into different sections:
+//Component UI settings, audio, performance, postprocessing, other
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const Settings = () => {
   const dispatch = useDispatch();

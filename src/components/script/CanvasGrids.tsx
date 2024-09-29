@@ -2,13 +2,10 @@ import { RootState } from "../../Store";
 import { useSelector } from "react-redux";
 import { Box, Grid } from "@react-three/drei";
 
-//? ----------------------------------------------------------------------------------------------------
-
-//? This component consists of multiple planes serving as the center point for the X and Z axes.
-
-//? In 2D mode, it displays a side grid aligned with the corresponding position of the 2D camera.
-
-//? ----------------------------------------------------------------------------------------------------
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component This component consists of multiple planes serving as the center point for the X and Z axes.
+//Component In 2D mode, it displays a side grid aligned with the corresponding position of the 2D camera.
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export default function CanvasGrids() {
   const camera_2d_direction = useSelector((state: RootState) => state.camerasSettings.camera_2d_direction);

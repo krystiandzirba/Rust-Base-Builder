@@ -100,9 +100,9 @@ import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan, faEraser, faDumpster} from "@fortawesome/free-solid-svg-icons"; //prettier-ignore
 
-import { starter_base_objects_data } from "./PrebuiltBasesDesign.tsx";
+import { starter_base_objects_data } from "./PrebuiltBasesData.tsx";
 
-//Info ctrl+f ➜ [search] to jump between sections
+//Info ctrl+f ➜ [SectionNav] to jump between sections
 //Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //Component Main component for the React Three Fiber (R3F) canvas, where all 3D models are imported and positioned based on user input.
 //Component Includes functionality to initialize a pre-built base upon page load and allows for the addition or removal of selected or all present objects.
@@ -199,29 +199,8 @@ export default function CanvasContainer() {
 
   const hasModelsDataChanged = useRef(false);
 
-  const object_north_direction = THREE.MathUtils.degToRad(0);
-  const object_south_direction = THREE.MathUtils.degToRad(180);
-  const object_east_direction = THREE.MathUtils.degToRad(270);
-  const object_west_direction = THREE.MathUtils.degToRad(90);
-
-  const object_north_east_1_direction = THREE.MathUtils.degToRad(300);
-  const object_north_east_2_direction = THREE.MathUtils.degToRad(315);
-  const object_north_east_3_direction = THREE.MathUtils.degToRad(330);
-
-  const object_north_west_1_direction = THREE.MathUtils.degToRad(30);
-  const object_north_west_2_direction = THREE.MathUtils.degToRad(45);
-  const object_north_west_3_direction = THREE.MathUtils.degToRad(60);
-
-  const object_south_east_1_direction = THREE.MathUtils.degToRad(210);
-  const object_south_east_2_direction = THREE.MathUtils.degToRad(225);
-  const object_south_east_3_direction = THREE.MathUtils.degToRad(240);
-
-  const object_south_west_1_direction = THREE.MathUtils.degToRad(120);
-  const object_south_west_2_direction = THREE.MathUtils.degToRad(135);
-  const object_south_west_3_direction = THREE.MathUtils.degToRad(150);
-
   const model_type_map = {
-    // -------------------------  Stone -------------------------
+    //% -------------------------  Stone -------------------------
 
     StoneFoundationSquareHigh: StoneFoundationSquareHigh,
     StoneFoundationSquareMid: StoneFoundationSquareMid,
@@ -246,7 +225,7 @@ export default function CanvasContainer() {
     StoneRoofWallRight: StoneRoofWallRight,
     StoneRoofWallLeft: StoneRoofWallLeft,
 
-    // -------------------------  Metal -------------------------
+    //% -------------------------  Metal -------------------------
 
     MetalFoundationSquareHigh: MetalFoundationSquareHigh,
     MetalFoundationSquareMid: MetalFoundationSquareMid,
@@ -271,7 +250,7 @@ export default function CanvasContainer() {
     MetalRoofWallRight: MetalRoofWallRight,
     MetalRoofWallLeft: MetalRoofWallLeft,
 
-    // -------------------------  Armored -------------------------
+    //% -------------------------  Armored -------------------------
 
     ArmoredFoundationSquareHigh: ArmoredFoundationSquareHigh,
     ArmoredFoundationSquareMid: ArmoredFoundationSquareMid,
@@ -296,17 +275,17 @@ export default function CanvasContainer() {
     ArmoredRoofWallRight: ArmoredRoofWallRight,
     ArmoredRoofWallLeft: ArmoredRoofWallLeft,
 
-    // -------------------------  Doors -------------------------
+    //% -------------------------  Doors -------------------------
 
     MetalDoor: MetalDoor,
     GarageDoor: GarageDoor,
 
-    // -------------------------  Windows -------------------------
+    //% -------------------------  Windows -------------------------
 
     MetalVerticalEmbrasure: MetalVerticalEmbrasure,
     StrenghtenedGlassWindow: StrenghtenedGlassWindow,
 
-    // -------------------------  Miscs -------------------------
+    //% -------------------------  Miscs -------------------------
 
     ToolCupboard: ToolCupboard,
     WoodStorageBox: WoodStorageBox,
@@ -316,8 +295,8 @@ export default function CanvasContainer() {
     SleepingBag: SleepingBag,
   };
 
-  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Canvas (1.Interaction / 2.Data) ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] canvas, interaction, data, canvas click, canvas pointer, mouse drag, pivot drag, local storage, symmetry
+  //[SectionNav] canvas, interaction, data, canvas click, canvas pointer, mouse drag, pivot drag, local storage, symmetry
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Canvas ( 1.Interaction / 2.Data ) ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   //SubSection ───────────────────────── ↓ Canvas 1.Interaction ↓ ─────────────────────────
   //% calculating the mouse cursor position (X+Y window position) and invisible grid floor intersection point
@@ -435,8 +414,8 @@ export default function CanvasContainer() {
     localStorage.removeItem("modelsData");
   }
 
+  //[SectionNav] add model, delete model, upgrade model, downgrade model, add prebuilt,
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Models (1.Creation / 2.Interaction / 3.Data) ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] add model, delete model, upgrade model, downgrade model, add prebuilt,
 
   //SubSection ───────────────────────── ↓ Models 1.Creation ↓ ─────────────────────────
   //% function that adds a models to the canvas on the previously calculated intersection point (Canvas Interaction section)
@@ -831,8 +810,9 @@ export default function CanvasContainer() {
     }
   }, [model_type_to_create]);
 
+  //[SectionNav] starter base
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Starter base on page load ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] starter base
+
   //@ Adding a starter base to the canvas on page load
 
   function CreateStarterBase() {
@@ -864,8 +844,9 @@ export default function CanvasContainer() {
     }
   }
 
+  //[SectionNav] perspective camera, ortographic camera, 3d camera, 2d camera
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Perspective (3D) + Ortographic (2D) camera ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] perspective camera, ortographic camera, 3d camera, 2d camera
+
   //@ Camera direction calculator based on the Pi rotation
 
   const Camera3DDirection = () => {
@@ -903,8 +884,8 @@ export default function CanvasContainer() {
     PerspectiveCameraReset();
   }, [camera_3d_reset]);
 
+  //[SectionNav] keyboard input, keyboard controls
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Keyboard Input Catcher + Controls ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] keyboard input, keyboard controls
 
   //@ Used to catch the currently pressed keyboard key
   //@ move the selected object on the canvas using the WSAD or ARROW keys
@@ -1096,8 +1077,8 @@ export default function CanvasContainer() {
     };
   }, [key_press_trigger, model_creation_state]);
 
+  //[SectionNav] mouse input, button input
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Mouse + Button Input ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] mouse input, button input
 
   //@ change the position, rotation and elevation of selected objects using the mouse + controls button click
 
@@ -1198,8 +1179,8 @@ export default function CanvasContainer() {
     }
   }, [button_trigger]);
 
+  //[SectionNav] model delete, backspace, delete input
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Keyboard + Mouse Delete Input Catcher ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] model delete, backspace, delete input
 
   //@ it detects any DELETE and BACKSPACE keyboard input and mouse delete input (both bins to delete the selected objects)
   //@ and deletes either the selected or all objects based on the input type
@@ -1235,8 +1216,8 @@ export default function CanvasContainer() {
     };
   }, [delete_object_trigger, delete_object_mouse_trigger]);
 
+  //[SectionNav] page load
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Execute on page load ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  //[search] page load
 
   useEffect(() => {
     try {
@@ -1250,9 +1231,11 @@ export default function CanvasContainer() {
           hasModelsDataChanged.current = true;
         } catch (error) {
           console.error("Error in recreateSavedBase or CreateStarterBase:", error);
+          DeleteCurrentBaseFromLocalStorage();
         }
       }
     } catch (error) {
+      DeleteCurrentBaseFromLocalStorage();
       console.error("Unexpected error:", error);
     }
   }, [modelsData]);

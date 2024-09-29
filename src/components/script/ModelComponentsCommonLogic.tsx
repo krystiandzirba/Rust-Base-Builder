@@ -8,6 +8,11 @@ import { faAnglesDown, faAnglesUp, faHammer, faTrashCanArrowUp } from "@fortawes
 
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//Component Component that combines a common logic for imported 3D models, such as model interaction,
+//Component default model mesh data, mesh standard material data, model annotation UI
+//Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 export function ModelComponentsCommonLogic() {
   const dispatch = useDispatch();
   const playSound = useAudioPlayer();
@@ -30,25 +35,8 @@ export function ModelComponentsCommonLogic() {
   const [annotation_downgrade_button_hover, set_annotation_downgrade_button_hover] = useState<boolean>(false);
   const [annotation_delete_button_hover, set_annotation_delete_button_hover] = useState<boolean>(false);
 
-  //* ------------------------- ↓ Default Mesh Interaction & Data ↓ -------------------------
-
-  const defaultMeshKey = useMemo(() => {
-    return enable_model_textures && !model_hover && page_mode !== "edit" ? "textured" : "not-textured";
-  }, [enable_model_textures, model_hover, page_mode]);
-
-  function defaultMeshMaterial(model_material: THREE.Material) {
-    if (enable_model_textures && page_mode === "overview") {
-      return { material: model_material };
-    }
-
-    if (enable_model_textures && page_mode === "raid") {
-      if (model_hover) {
-        return { material: new THREE.MeshStandardMaterial({ color: "red" }) };
-      } else if (!model_hover) {
-        return { material: model_material };
-      }
-    }
-  }
+  //[SectionNav] mesh interaction, mesh data
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Model Interaction + Default mesh material data ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   function ModelOnClick(model_name: string) {
     if (page_mode === "edit" && !model_creation_state) {
@@ -81,9 +69,26 @@ export function ModelComponentsCommonLogic() {
     }
   }
 
-  //* ------------------------- ↑ Default Mesh Interaction & Data ↑ -------------------------
+  const defaultMeshKey = useMemo(() => {
+    return enable_model_textures && !model_hover && page_mode !== "edit" ? "textured" : "not-textured";
+  }, [enable_model_textures, model_hover, page_mode]);
 
-  //* ------------------------- ↓ Mesh Standard Material ↓ -------------------------
+  function defaultMeshMaterial(model_material: THREE.Material) {
+    if (enable_model_textures && page_mode === "overview") {
+      return { material: model_material };
+    }
+
+    if (enable_model_textures && page_mode === "raid") {
+      if (model_hover) {
+        return { material: new THREE.MeshStandardMaterial({ color: "red" }) };
+      } else if (!model_hover) {
+        return { material: model_material };
+      }
+    }
+  }
+
+  //[SectionNav] mesh material
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Mesh Standard Material ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   function meshStandardMaterialColor(model_type: "stone" | "metal" | "armored") {
     const default_colors = {stone: "#bcb4a9", metal: "#edb587", armored: "#5c3d2e"}; //prettier-ignore
@@ -111,9 +116,8 @@ export function ModelComponentsCommonLogic() {
     }
   }, [model_selected, models_xray_active]);
 
-  //* ------------------------- ↑ Mesh Standard Material ↑ -------------------------
-
-  //* ------------------------- ↓ Model annotation UI ↓ -------------------------
+  //[SectionNav] model annotation
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ↓ Model annotation UI ↓ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   //prettier-ignore
   function meshAnnotationVisibility(annotation_data: [string, string, string]) {
@@ -183,7 +187,7 @@ export function ModelComponentsCommonLogic() {
     dispatch(set_delete_object_mouse_trigger(delete_object_mouse_trigger + 1));
   }
 
-  //* ------------------------- ↑ Model annotation UI ↑ -------------------------
+  //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   useEffect(() => {
     set_model_destroyed(false);
