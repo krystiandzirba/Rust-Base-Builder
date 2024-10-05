@@ -124,6 +124,8 @@ export function GhostModel({
       case "PrebuildBaseIII": return hermit_prop_nodes.Cube.geometry;
       case "PrebuildBaseIV": return diamond_prop_nodes.Cube.geometry;
       case "PrebuildBaseV": return vulcan_prop_nodes.Cube.geometry;
+
+      case "ImportedBase": return foundation_square_low_nodes.Cube.geometry;
     }
   }
 

@@ -34,6 +34,7 @@ import "./components/styles/structure_visibility_mode.css";
 import "./components/styles/github.css";
 import "./components/styles/mobile_alert.css";
 import "./components/styles/prebuilt_bases_data.css";
+import "./components/styles/transfer_models_data.css";
 
 function App() {
   const page_mode = useSelector((state: RootState) => state.pageMode.page_mode);
@@ -51,21 +52,21 @@ function App() {
     <>
       <KeyboardControls map={map}>
         <CanvasContainer />
-        {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
-        {enable_resource_container && page_mode === "raid" && <RaidCalculator />}
-        <ObjectList />
         {model_transform_controls && <ControlsInput />}
-        <Toolbar />
-        {enable_cameras && <CameraType />}
-        {enable_hints && <Hints />}
-        {enable_structures_visibility && <StructureVisibilityMode />}
-        <Settings />
-        <MobileAlert />
-        <Github />
-        <Version />
-        <PrebuiltBasesDesign />
-        <HardwareParameters />
       </KeyboardControls>
+      {enable_resource_container && page_mode === "edit" && <BuildCalculator />}
+      {enable_resource_container && page_mode === "raid" && <RaidCalculator />}
+      <ObjectList />
+      <Toolbar />
+      {enable_cameras && <CameraType />}
+      {enable_hints && <Hints />}
+      {enable_structures_visibility && <StructureVisibilityMode />}
+      <Settings />
+      <MobileAlert />
+      <Github />
+      <Version />
+      <PrebuiltBasesDesign />
+      <HardwareParameters />
       <Loader {...loaderStyles} dataInterpolation={(p) => `Loading ${p.toFixed(0)}%`} />
       <HardwareParameters />
     </>
@@ -93,7 +94,6 @@ export default App;
 //feature: react three fiber - pointer lock controls (first person camera control) + fps octree
 //feature: 1 second 3d text while creating, deleting and raiding the object (+build cost / +raid cost ...)
 //feature: add current id storage to avoid id duplication
-//feature: useIntersect, useProgress
 //feature: adaptive resolution for low end pcs and heavy performance loss
 //feature: 3d day and night cycle as light and dark mode
 //feature: update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
@@ -104,7 +104,7 @@ export default App;
 //feature: add MUI skeleton
 //feature: add a build + raid cost table on button click with selected models
 //feature: add draco model compression
-// feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
+//feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
 //feature: add three.js layers while disabling multiple models at once
 
 //other: add new keyboard controls description - 2d camera (moving the objects) + creation mode
@@ -112,7 +112,6 @@ export default App;
 //other: remake the wall mid uv and lower the texture size
 //other: add github wiki
 //other: compress new audio files
-//other:  else if for cases
 //other: prevent key elements to be selectible by user (text) but still be a clickable part of a button
 //other: change the cursor type when hovering over buttons
 //other: change the build checkbox for MUI checkbox
@@ -122,6 +121,7 @@ export default App;
 //other: compress all models in blender export
 //other: light up (make light orange) the model rotation degree box during a model creation state
 //other: change all icons color change on hover, from js function to css hover
+//other: search for onmouseenter and onmouseleave and change all the color changes based on js to css hover
 
 // 6.x.x:
 

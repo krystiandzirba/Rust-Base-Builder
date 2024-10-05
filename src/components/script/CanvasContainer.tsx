@@ -102,6 +102,8 @@ import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan, faEraser,
 
 import { starter_base_objects_data } from "./PrebuiltBasesData.tsx";
 
+import TransferModelsData from "./TransferModelsData.tsx";
+
 //Info ctrl+f ➜ [SectionNav] to jump between sections
 //Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //Component Main component for the React Three Fiber (R3F) canvas, where all 3D models are imported and positioned based on user input.
@@ -198,6 +200,8 @@ export default function CanvasContainer() {
   const [display_remove_saved_data_question, set_display_remove_saved_data_question] = useState<boolean>(false);
 
   const hasModelsDataChanged = useRef(false);
+
+  const [imported_base_data_length_index, set_imported_base_data_length_index] = useState<number>(0);
 
   const model_type_map = {
     //% -------------------------  Stone -------------------------
@@ -466,6 +470,7 @@ export default function CanvasContainer() {
       modelsData = cloneObjects(modelsData);
 
       let prebuild_delay = 0;
+      set_imported_base_data_length_index(0);
 
       Object.keys(modelsData).forEach((id) => {
         const recreated_model = modelsData[id];
@@ -483,10 +488,19 @@ export default function CanvasContainer() {
             [new_id]: newModel,
           }));
 
+          //! delete this? + add a random id generator above for imported bases?
+
           set_models_data((prevModelsData) => {
             const updatedModelsData = { ...prevModelsData };
             delete updatedModelsData[id];
             return updatedModelsData;
+          });
+
+          //! delete this?
+
+          set_imported_base_data_length_index((prevLength) => {
+            const newLength = prevLength + 1;
+            return newLength;
           });
 
           const { model, rotation } = newModel;
@@ -802,6 +816,7 @@ export default function CanvasContainer() {
         "PrebuildBaseIII",
         "PrebuildBaseIV",
         "PrebuildBaseV",
+        "ImportedBase",
       ].includes(model_type_to_create)
     ) {
       set_model_foundation_elevation(0);
@@ -1543,9 +1558,14 @@ export default function CanvasContainer() {
         </div>
       )}
 
+      {page_mode === "edit" && (
+        <TransferModelsData canvas_models_data={modelsData} data_index={imported_base_data_length_index} />
+      )}
       {/* <button
         className="test_button"
-        onClick={() => {}}
+        onClick={() => {
+          console.log(modelsData);
+        }}
       ></button> */}
     </>
   );
