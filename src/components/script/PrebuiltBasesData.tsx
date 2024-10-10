@@ -1149,6 +1149,9 @@ export default function PrebuiltBasesDesign() {
       case "PrebuildBaseV":
         dispatchModelsSet("PrebuildBaseV", material_type_test);
         break;
+      case "ImportedBase":
+        //      set_base_prebuilt_selection("empty");
+        break;
       default:
         break;
     }
@@ -1167,16 +1170,6 @@ export default function PrebuiltBasesDesign() {
         onClick={() => {
           set_add_prebuild_base_button_click(!add_prebuild_base_button_click);
           playSound("object_selecting_sound");
-
-          if (add_prebuild_base_button_click) {
-            set_base_prebuilt_selection("empty");
-            dispatch(set_selected_object_list(-1));
-            dispatch(set_model_creation_state(false));
-            dispatch(set_object_rotation_degree(90));
-            dispatch(set_model_type_to_create("empty"));
-            dispatch(set_create_prebuilt_base_state(false));
-            dispatch(set_prebuilt_base_objects_set([]));
-          }
         }}
         onMouseEnter={() => {set_add_prebuild_base_button_hover(true)}} //prettier-ignore
         onMouseLeave={() => {set_add_prebuild_base_button_hover(false)}} //prettier-ignore
@@ -1244,6 +1237,14 @@ export default function PrebuiltBasesDesign() {
                 }
                 onClick={() => {
                   if (allow_canvas_interaction_after_first_load) {
+                    set_base_prebuilt_selection("empty");
+                    dispatch(set_selected_object_list(-1));
+                    dispatch(set_model_creation_state(false));
+                    dispatch(set_object_rotation_degree(90));
+                    dispatch(set_model_type_to_create("empty"));
+                    dispatch(set_create_prebuilt_base_state(false));
+                    dispatch(set_prebuilt_base_objects_set([]));
+
                     if (!base.tutorial_materials) {
                       set_material_type_test("stone");
                     }

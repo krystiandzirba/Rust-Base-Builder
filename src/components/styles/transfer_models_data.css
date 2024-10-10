@@ -1,74 +1,95 @@
-.transfer_models_data_main_container {
+.transfer_models_data_main_settings_container {
   position: absolute;
-  width: 17.75vw;
-  height: 34vh;
+  width: 14.5vw;
+  height: 12.5vh;
   background-color: rgba(15, 16, 26, 0.4);
   backdrop-filter: blur(3px);
-  left: 60.75vw;
-  top: 65.325vh;
+  left: 63.9vw;
+  top: 71.75vh;
   z-index: 50;
   border: 1px solid black;
 }
 
-.transfer_models_data_progress_bar_container {
-  width: 100%;
-  height: 6%;
-  text-align: center;
-  color: #bbbbbb;
-  font-size: 0.8vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.transfer_models_data_progress_bar {
-  width: 100%;
-  height: 15%;
-  border: none;
-  appearance: none;
-}
-
-.transfer_models_data_progress_bar::-webkit-progress-bar {
-  background-color: rgba(255, 255, 255, 0);
-}
-
-.transfer_models_data_progress_bar::-webkit-progress-value {
-  background-color: #ffcea6;
-}
-
-.transfer_models_data_progress_bar::-moz-progress-bar {
-  background-color: #ffcea6;
-}
-
-.transfer_models_data_progress_bar_text {
+.transfer_models_data_dynamic_info {
   color: #bbbbbb;
   width: 100%;
-  height: 85%;
+  height: 16.5%;
   background-color: rgb(0, 0, 0);
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.75vw;
+  font-size: 0.8vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
 }
 
-.transfer_models_data_type_buttons {
-  height: 15%;
-  flex-direction: row;
+.transfer_models_data_progress_bar {
+  width: 100%;
+  height: 6.5%;
+  border: none;
+  appearance: none;
+}
+
+.progress {
+  display: flex;
+  height: 20px;
+  overflow: hidden;
+  font-size: 0.75rem;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+  transition: none !important;
+}
+
+.imported_data_progress_bar_inactive,
+.imported_data_progress_bar,
+.imported_data_progress_bar_invalid {
+  background-color: rgb(49, 49, 49) !important;
+  transition: none !important;
+  height: 5% !important;
+  border-radius: 0 !important;
+}
+
+.imported_data_progress_bar_inactive .progress-bar {
+  background-color: rgb(65, 65, 65);
+}
+
+.imported_data_progress_bar .progress-bar {
+  background-color: #ffcea6;
+}
+
+.imported_data_progress_bar_invalid .progress-bar {
+  background-color: #ff1616;
+}
+
+.transfer_models_data_type_buttons_container {
+  height: 77%;
+  flex-direction: column;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
+.transfer_models_data_type_buttons_container_row {
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .transfer_models_data_button {
-  height: 80%;
+  height: 75%;
   color: #000000;
   font-size: 0.8vw;
   font-family: "Quicksand", sans-serif;
@@ -78,98 +99,99 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 45%;
 }
 
+.transfer_models_data_base_place_button_enabled,
+.transfer_models_data_generate_base_code_button_enabled,
 .transfer_models_data_button_enabled {
   background-color: #ffcea6;
-  width: 60%;
 }
 
+.transfer_models_data_base_place_button_disabled,
+.transfer_models_data_generate_base_code_button_disabled,
 .transfer_models_data_button_disabled {
   background-color: rgb(201, 201, 201);
-  width: 30%;
 }
 
-.transfer_models_data_button:hover {
+.transfer_models_data_base_place_button:hover,
+.transfer_models_data_generate_base_code_button:hover,
+.transfer_models_data_button:hover,
+.transfer_models_data_code_button:hover {
   background-color: #ffe3cb;
   transition: transform 0.1s ease, background-color 0.1s ease;
 }
 
-.transfer_models_data_content_container {
-  height: 79%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.transfer_models_data_import_generate_base_button_container {
-  height: 20%;
+.transfer_models_data_button_description {
   width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.transfer_models_data_import_generate_base_button {
-  height: 70%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.75vh;
-  text-align: center;
-  color: #000000;
-  font-size: 0.7vw;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  cursor: pointer;
-}
-
-.transfer_models_data_import_generate_base_button_inactive {
-  background-color: rgb(49, 49, 49);
-  color: #bbbbbb;
-}
-
-.transfer_models_data_import_generate_base_button_disabled {
-  background-color: rgb(201, 201, 201);
-}
-
-.transfer_models_data_import_generate_base_button_enabled {
-  background-color: #ffcea6;
-}
-
-.transfer_models_data_import_generate_base_button:hover {
-  background-color: #ffe3cb;
-  transition: transform 0.1s ease, background-color 0.1s ease;
-}
-
-.transfer_models_data_code_container {
-  height: 20%;
-  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.transfer_models_data_code_container_button {
-  width: 15%;
-  height: 90%;
-  background-color: rgb(201, 201, 201);
+.transfer_models_data_button_icon {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* models data main settings container */
+
+/* import / export container */
+
+.transfer_models_data_main_content_container {
+  position: absolute;
+  width: 14.5vw;
+  height: 14vh;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+  left: 63.9vw;
+  top: 85.15vh;
+  z-index: 50;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  text-align: center;
+}
+
+.transfer_models_data_base_place_button_container,
+.transfer_models_data_generate_base_code_container {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer_models_data_base_place_button,
+.transfer_models_data_generate_base_code_button {
+  width: 80%;
+  height: 80%;
+  border-radius: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #000000;
   font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
 }
 
-.transfer_models_data_code_input {
-  width: 65%;
-  height: 85%;
+.transfer_models_data_import_via_code_container {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer_models_data_import_via_code_container_input {
+  width: 85%;
+  height: 95%;
   background-color: rgb(201, 201, 201);
   border: none;
   text-align: center;
@@ -179,27 +201,59 @@
   font-weight: 300;
 }
 
-.transfer_models_data_file {
-  width: 100%;
-  height: 60%;
+.transfer_models_data_code_buttons_container {
+  width: 90%;
+  height: 35%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  color: #bbbbbb;
-  font-size: 0.8vw;
+}
+
+.transfer_models_data_code_button {
+  width: 40%;
+  height: 70%;
+  background-color: rgb(201, 201, 201);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 1vh;
+}
+
+.transfer_models_data_code_button_icon,
+.transfer_models_data_code_button_description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #020202;
+  font-size: 0.75vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
 }
 
+.transfer_models_data_code_button_icon {
+  width: 30%;
+}
+
+.transfer_models_data_code_button_description {
+  width: 60%;
+}
+
 .transfer_models_data_file_download_button {
-  height: 40%;
+  height: 60%;
   width: 70%;
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: center;
-  border: 1px dashed #ffcea6;
+  border: 2px dashed #ffcea6;
   border-radius: 1vh;
+  color: #bbbbbb;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
 }
 
 .p-button:hover,
@@ -209,6 +263,15 @@
   background-color: #ffe3cb;
   color: black;
   cursor: pointer;
+}
+
+.transfer_models_data_import_remove_file_container {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .file_upload_container {
@@ -222,9 +285,12 @@
 .p-button {
   border: 1px dashed #ffcea6;
   border-radius: 1vh;
+  height: 3vh;
+  width: 7.5vw;
   color: #bbbbbb;
-  height: 4vh;
-  width: 8.5vw;
+  font-size: 0.8vw;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
 }
 
 .file_upload_container_text {
@@ -244,7 +310,7 @@
 
 .file_upload_container_remove_button {
   width: 40%;
-  height: 20%;
+  height: 80%;
   background-color: rgb(201, 201, 201);
   border: none;
   text-align: center;
@@ -259,7 +325,12 @@
   color: #bbbbbb;
 }
 
+.fa-download,
+.fa-upload,
+.fa-keyboard,
+.fa-file,
+.fa-check,
 .fa-eraser,
 .fa-copy {
-  color: #151515;
+  color: #000000;
 }

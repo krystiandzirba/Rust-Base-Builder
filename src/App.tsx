@@ -85,6 +85,7 @@ export default App;
 // bug: add a correct object rotation in mirrored axis
 // bug: add postprocessing model edges instead of direct addon edges, this current edges causes heavy performance drop, 2x calls and 4x triangles
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
+// bug: disabled building changes the object list models styling
 
 //feature: object copy: "ctrl + C"
 //feature: different "save files / base plans"

@@ -488,20 +488,12 @@ export default function CanvasContainer() {
             [new_id]: newModel,
           }));
 
-          //! delete this? + add a random id generator above for imported bases?
-
-          set_models_data((prevModelsData) => {
-            const updatedModelsData = { ...prevModelsData };
-            delete updatedModelsData[id];
-            return updatedModelsData;
-          });
-
-          //! delete this?
-
-          set_imported_base_data_length_index((prevLength) => {
-            const newLength = prevLength + 1;
-            return newLength;
-          });
+          if (model_type_to_create === "ImportedBase") {
+            set_imported_base_data_length_index((prevLength) => {
+              const newLength = prevLength + 1;
+              return newLength;
+            });
+          }
 
           const { model, rotation } = newModel;
           const corresponding_model = model_type_map[model as keyof typeof model_type_map];
@@ -1564,7 +1556,7 @@ export default function CanvasContainer() {
       {/* <button
         className="test_button"
         onClick={() => {
-          console.log(modelsData);
+          console.log(prebuilt_base_objects_set);
         }}
       ></button> */}
     </>
