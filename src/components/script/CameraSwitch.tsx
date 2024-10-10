@@ -17,6 +17,7 @@ import { faUpLong, faRightLong, faLeftLong, faCameraRotate } from "@fortawesome/
 
 import camera2dThumbnail from "../../icons/camera_2d.png";
 import camera3dThumbnail from "../../icons/camera_3d.png";
+import posthog from "posthog-js";
 
 //? ----------------------------------------------------------------------------------------------------
 
@@ -161,6 +162,7 @@ export default function CameraType() {
       <button
         className="camera_switch_button"
         onClick={() => {
+          posthog.capture("Camera type clicked (2d-3d)");
           if (camera_type === "camera_3d") {
             dispatch(set_camera_type("camera_2d"));
             dispatch(set_cursor_type("move"));

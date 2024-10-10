@@ -35,6 +35,7 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
   const [decompressed_data, set_decompressed_data] = useState<string>("");
   const [compressed_data, set_compressed_data] = useState<string>("");
   const [export_base_code, set_export_base_code] = useState<string>("");
+  const [base_export_custom_file_name, set_base_export_custom_file_name] = useState<string>("rust_base_builder_base");
   const inputRef = useRef(null);
   const fileUploadRef = useRef<any>(null);
 
@@ -47,9 +48,10 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "rust_base_builder_base.txt";
+    a.download = `${base_export_custom_file_name}.txt`;
     a.click();
     window.URL.revokeObjectURL(url);
+    set_compressed_data("");
   }
 
   const ImportCanvasModelsDataFile = (event: { files: any[] }) => {
@@ -150,6 +152,10 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
 
   const HandleBaseCodeImportValueChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     set_base_code_import_value(e.target.value);
+  };
+
+  const HandleBaseDownloadCustomFileName = (e: { target: { value: React.SetStateAction<string> } }) => {
+    set_base_export_custom_file_name(e.target.value);
   };
 
   function HandleTransferModelsDataModeSwitch(mode: string) {
@@ -358,8 +364,8 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
               </div>
             </div>
 
+            {/* prettier-ignore */}
             <div className="transfer_models_data_import_via_code_container">
-              {/* prettier-ignore */}
               <input className="transfer_models_data_import_via_code_container_input" ref={inputRef} type="text" value={export_base_code} readOnly placeholder="generated code"/>
             </div>
 
@@ -388,12 +394,23 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
         )}
 
         {transfer_models_data_mode === "export" && transfer_models_data_type === "file" && (
-          <div
-            onClick={() => {Base64DataCompression("export")}} //prettier-ignore
-            className="transfer_models_data_file_download_button"
-          >
-            download the base <br /> .txt file
-          </div>
+          <>
+            {/* prettier-ignore */}
+            <div className="transfer_models_data_custom_file_name_input_container">
+              <input className="transfer_models_data_custom_file_name_input" type="text" value={base_export_custom_file_name} onChange={HandleBaseDownloadCustomFileName} placeholder="name: rust_base_builder_base"/>
+              <div className="transfer_models_data_custom_file_name_input_description">.txt</div>
+            </div>
+            <div
+              onClick={() => {Base64DataCompression("export")}} //prettier-ignore
+              className="transfer_models_data_file_download_button"
+            >
+              download the base <br /> .txt file
+            </div>
+
+            <div className="transfer_models_data_file_download_info">
+              File not downloading = enable multiple file downloads in the browser (top-right corner)
+            </div>
+          </>
         )}
       </div>
     </>
