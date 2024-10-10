@@ -398,7 +398,7 @@ export default function ObjectList() {
               key={index}
               className={
                 !allow_canvas_interaction_after_first_load
-                  ? "object_list_entity_disabled"
+                  ? "object_list_entity object_list_entity_disabled"
                   : selected_object_list === index
                   ? "object_list_entity object_list_entity_selected"
                   : hovered_object_list === index
