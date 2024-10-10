@@ -72,7 +72,6 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
 
           try {
             set_decompressed_data(Base64DataDecompress(imported_file_content));
-            console.log(decompressed_data);
           } catch (error) {
             console.error("Error decompressing or parsing the file content", error);
           }
@@ -228,7 +227,6 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
 
   useEffect(() => {
     if (Object.keys(prebuilt_base_objects_set).length === 0 && model_type_to_create === "ImportedBase") {
-      console.log("empty");
       set_loading_bar_info("Base not imported / incorrect file");
     }
   }, [prebuilt_base_objects_set]);

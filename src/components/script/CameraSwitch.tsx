@@ -139,7 +139,6 @@ export default function CameraType() {
   // -------------------------  rotate the 2D camera to the top -------------------------
 
   function CameraTopView() {
-    console.log(camera_2d_position);
     if (camera_type === "camera_2d") {
       const new_camera_position = [0, 45, 0];
       set_camera_switch_button_text("2D top");
