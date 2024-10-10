@@ -75,7 +75,6 @@ function App() {
 
 export default App;
 
-// bug: 3d object visibility does not count every model
 // bug: the camera NSEW position, it is incorrectly calculated
 // bug: wsad object transform > mouse click up transform > wsad transform = double axis transform
 // bug: performance monitor(on) -> performance monitor(off) = stuttering

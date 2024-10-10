@@ -54,12 +54,12 @@ export default function StructureVisibilityMode() {
 
       canvas_models_array.forEach((model) => {
         if (model.includes("Foundation")) foundations_count++;
-        if ((model.includes("Wall") || model.includes("Strenghtened") || model.includes("Embrasure")) && !model.includes("Frame")) walls_count++; //prettier-ignore
-        if (model.includes("Floor") && model.includes("Frame")) floors_count++;
+        if ((model.includes("Wall") || model.includes("Doorway") || model.includes("Window") || model.includes("Strenghtened") || model.includes("Embrasure")) && !model.includes("Frame")) walls_count++; //prettier-ignore
+        if (model.includes("Floor") && !model.includes("Frame")) floors_count++;
         if (model.includes("Door") && !model.includes("Doorway")) doors_count++;
         if (model.includes("Frame")) frames_count++;
         if (model.includes("Stairs")) stairs_count++;
-        if (model.includes("Roof")) roofs_count++;
+        if (model.includes("Roof") && !model.includes("Wall")) roofs_count++;
         if (model.includes("Cupboard") || model.includes("Box") || model.includes("Furnace") || model.includes("Workbench") || model.includes("Sleeping")) miscs_count++; //prettier-ignore
       });
 
