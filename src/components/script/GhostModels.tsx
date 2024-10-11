@@ -162,31 +162,22 @@ export function GhostModel({
     }
   }, [model_type]);
 
+  //prettier-ignore
   return (
     <>
-      {/*prettier-ignore*/}
       <group position={[model_x_position, model_y_position, model_z_position]} rotation={[0, model_y_rotation, 0]} scale={0.99}>{GhostModelGeometry(false)}</group>
 
       {!prebuilt_base && symmetry_x_enabled && (
-        <group position={[-model_x_position, model_y_position, model_z_position]}>{GhostModelGeometry(false)}</group>
+        <group position={[-model_x_position, model_y_position, model_z_position]} rotation={[0, -model_y_rotation, 0]} >{GhostModelGeometry(false)}</group>
       )}
       {!prebuilt_base && symmetry_z_enabled && (
-        <group position={[model_x_position, model_y_position, -model_z_position]}>{GhostModelGeometry(false)}</group>
+        <group position={[model_x_position, model_y_position, -model_z_position]} rotation={[0, -model_y_rotation - Math.PI, 0]} >{GhostModelGeometry(false)}</group>
       )}
       {!prebuilt_base && symmetry_z_enabled && symmetry_x_enabled && (
-        <group position={[-model_x_position, model_y_position, -model_z_position]}>{GhostModelGeometry(false)}</group>
+        <group position={[-model_x_position, model_y_position, -model_z_position]} rotation={[0, model_y_rotation + Math.PI, 0]} >{GhostModelGeometry(false)}</group>
       )}
       {!prebuilt_base && (model_offset_active || model_y_position > 0.05) && (
-        <group position={[model_x_offset_position, 0, model_z_offset_position]}>{GhostModelGeometry(true)}</group>
-      )}
-      {!prebuilt_base && (model_offset_active || model_y_position > 0) && symmetry_x_enabled && (
-        <group position={[-model_x_offset_position, 0, model_z_offset_position]}>{GhostModelGeometry(true)}</group>
-      )}
-      {!prebuilt_base && (model_offset_active || model_y_position > 0) && symmetry_z_enabled && (
-        <group position={[model_x_offset_position, 0, -model_z_offset_position]}>{GhostModelGeometry(true)}</group>
-      )}
-      {!prebuilt_base && (model_offset_active || model_y_position > 0) && symmetry_x_enabled && symmetry_z_enabled && (
-        <group position={[-model_x_offset_position, 0, -model_z_offset_position]}>{GhostModelGeometry(true)}</group>
+        <group position={[model_x_offset_position, 0, model_z_offset_position]} rotation={[0, model_y_rotation, 0]} >{GhostModelGeometry(true)}</group>
       )}
     </>
   );

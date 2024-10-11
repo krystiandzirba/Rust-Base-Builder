@@ -79,10 +79,8 @@ export default App;
 // bug: wsad object transform > mouse click up transform > wsad transform = double axis transform
 // bug: performance monitor(on) -> performance monitor(off) = stuttering
 // bug: lighting does not work after displaying the performance monitor
-// bug: something is wrong with ghost models offset wireframe and rotation
 // bug: raid object destructon on mouse click (down) not the click (release/up)
 // bug: select any placed object -> select any object from list to create -> double the hints displayed
-// bug: add a correct object rotation in mirrored axis
 // bug: add postprocessing model edges instead of direct addon edges, this current edges causes heavy performance drop, 2x calls and 4x triangles
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
@@ -107,7 +105,6 @@ export default App;
 // feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
 // feature: add three.js layers while disabling multiple models at once
 
-// other: update the metatags
 // other: add new keyboard controls description - 2d camera (moving the objects) + creation mode
 // other: change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
 // other: remake the wall mid uv and lower the texture size

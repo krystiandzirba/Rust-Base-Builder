@@ -430,31 +430,32 @@ export default function CanvasContainer() {
     set_models((prevModels) => [...prevModels, { id, component: modelComponent, rotation }]);
   };
 
+  //prettier-ignore
   function AddCanvasModel() {
     if (page_mode === "edit" && camera_type === "camera_3d" && model_creation_state) {
       const modelClass = model_type_map[model_type_to_create as keyof typeof model_type_map];
 
       if (modelClass && prevent_actions_after_canvas_drag === "allow") {
-        const addModelData = (id: string, x: number, z: number, y: number) => {
+        const addModelData = (id: string, x: number, z: number, y: number, y_rotation:THREE.Euler ) => {
           set_models_data((prevTransforms) => ({
             ...prevTransforms,
-            [id]: {position: { x, z, y }, rotation: new THREE.Euler(0, modified_model_rotation, 0, "XYZ"), model: model_type_to_create}, //prettier-ignore
+            [id]: {position: { x, z, y }, rotation: y_rotation, model: model_type_to_create}, //prettier-ignore
           }));
           AddModel(modelClass, id, default_object_rotation);
         };
 
-        addModelData(randomIdGenerator(), mouse_canvas_x_coordinate + model_x_position_offset, mouse_canvas_z_coordinate + model_z_position_offset, model_y_position); //prettier-ignore
+        addModelData(randomIdGenerator(), mouse_canvas_x_coordinate + model_x_position_offset, mouse_canvas_z_coordinate + model_z_position_offset, model_y_position, new THREE.Euler(0, modified_model_rotation, 0, "XYZ")); //prettier-ignore
 
         if (symmetry_x_enabled) {
-          addModelData(randomIdGenerator(), model_x_mirror_x_position, model_x_mirror_z_position, model_y_position);
+          addModelData(randomIdGenerator(), model_x_mirror_x_position, model_x_mirror_z_position, model_y_position, new THREE.Euler(0, -modified_model_rotation, 0, "XYZ"));
         }
 
         if (symmetry_z_enabled) {
-          addModelData(randomIdGenerator(), model_z_mirror_x_position, model_z_mirror_z_position, model_y_position);
+          addModelData(randomIdGenerator(), model_z_mirror_x_position, model_z_mirror_z_position, model_y_position, new THREE.Euler(0, -modified_model_rotation - Math.PI, 0, "XYZ"));
         }
 
         if (symmetry_x_enabled && symmetry_z_enabled) {
-          addModelData(randomIdGenerator(), model_xz_mirror_x_position, model_xz_mirror_z_position, model_y_position);
+          addModelData(randomIdGenerator(), model_xz_mirror_x_position, model_xz_mirror_z_position, model_y_position, new THREE.Euler(0, modified_model_rotation + Math.PI, 0, "XYZ"));
         }
         playSound("build_sound");
       }

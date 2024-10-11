@@ -135,16 +135,16 @@ export function ModelComponentsCommonLogic() {
 
               <div onClick={() => upgradeSelectedModelTrigger(annotation_data[1] === "upgradeable")} className={annotation_data[1] === "upgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_upgrade_button_hover(true)} onMouseLeave={() => set_annotation_upgrade_button_hover(false)}>
                   <div className="annotation_button_icons_container">
-                    <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
-                    <FontAwesomeIcon icon={faAnglesUp} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
+                    <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "black"}} />
+                    <FontAwesomeIcon icon={faAnglesUp} style={{ width: "1vw", height: "2vh", color: annotation_data[1] === "upgradeable" ? annotation_upgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "black"}} />
                   </div>
                   <div className="annotation_button_description">upgrade</div>
                 </div>
 
               <div onClick={() => downgradeSelectedModelTrigger(annotation_data[2] === "downgradeable")} className={annotation_data[2] === "downgradeable" ? "annotation_button" : "annotation_button annotation_button_disabled"} onMouseEnter={() => set_annotation_downgrade_button_hover(true)} onMouseLeave={() => set_annotation_downgrade_button_hover(false)}>
                   <div className="annotation_button_icons_container">
-                    <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
-                    <FontAwesomeIcon icon={faAnglesDown} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "#696969"}} />
+                    <FontAwesomeIcon icon={faHammer} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "black"}} />
+                    <FontAwesomeIcon icon={faAnglesDown} style={{ width: "1vw", height: "2vh", color: annotation_data[2] === "downgradeable" ? annotation_downgrade_button_hover ? "#ffd5b3" : "#bbbbbb" : "black"}} />
                   </div>
                   <div className="annotation_button_description">d. grade</div>
                 </div>
