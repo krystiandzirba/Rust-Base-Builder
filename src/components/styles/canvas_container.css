@@ -29,6 +29,7 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
+  user-select: none;
 }
 
 .object_mirror_container_description {
@@ -70,6 +71,7 @@
   align-items: center;
   border: none;
   cursor: pointer;
+  user-select: none;
 }
 
 .mirror_button {
@@ -123,6 +125,7 @@ input::-webkit-inner-spin-button {
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   text-align: center;
+  user-select: none;
 }
 
 .pivot_controls_container {
@@ -137,6 +140,7 @@ input::-webkit-inner-spin-button {
   flex-direction: row;
   justify-content: center;
   backdrop-filter: blur(2px);
+  user-select: none;
 }
 
 .pivot_controls_button {
@@ -222,6 +226,7 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .local_storage_button {
@@ -270,6 +275,7 @@ input::-webkit-inner-spin-button {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  user-select: none;
 }
 
 .erase_canvas_models_button_container,
@@ -324,6 +330,7 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .delete_all_models_question_description,
@@ -347,6 +354,7 @@ input::-webkit-inner-spin-button {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  user-select: none;
 }
 
 .delete_all_models_answer_button,

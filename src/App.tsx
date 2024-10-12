@@ -76,16 +76,14 @@ function App() {
 export default App;
 
 // bug: the camera NSEW position, it is incorrectly calculated
-// bug: wsad object transform > mouse click up transform > wsad transform = double axis transform
 // bug: performance monitor(on) -> performance monitor(off) = stuttering
 // bug: lighting does not work after displaying the performance monitor
 // bug: raid object destructon on mouse click (down) not the click (release/up)
-// bug: select any placed object -> select any object from list to create -> double the hints displayed
-// bug: add postprocessing model edges instead of direct addon edges, this current edges causes heavy performance drop, 2x calls and 4x triangles
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
 // feature: object copy: "ctrl + C"
 // feature: different "save files / base plans"
+// feature: add postprocessing model edges instead of direct addon edges, current edges causes heavy performance drop, 2x calls and 4x triangles
 // feature: add object list filters (walls / foundations / stairs / roofs / miscs )
 // feature: add custom rotation angle and distance unit to transform the object
 // feature: add 1st person walking in overview and raid mode
@@ -95,7 +93,6 @@ export default App;
 // feature: adaptive resolution for low end pcs and heavy performance loss
 // feature: 3d day and night cycle as light and dark mode
 // feature: update the building sound, make it different for stone, metal and armored structures, add a explosion to the raid_sound
-// feature: make the glass transparent
 // feature: add campfire
 // feature: while removing the 3d camera, change the 3d camera to orbital controls and cap the max distance, pan/zoom/rotation speed
 // feature: add a build "cloud / dust" effect when building and upgrading models, and moving 2d hammer animation
@@ -116,12 +113,10 @@ export default App;
 // other: remove the mui search bar, change it for something different
 // other: cleanup the canvas controls
 // other: compress all models in blender export
-// other: change all icons color change on hover, from js function to css hover
-// other: search for onmouseenter and onmouseleave and change all the color changes based on js to css hover
 
 // 6.x.x:
 
-// feature: dynamic performance settings based on users gpu
+// feature: dynamic performance settings based on users gpu (quality - performance)
 // feature: load textureless (prop) models on mobile instead of the textured ones
 
 // info edit mode performance impact: x + z mouse coordinates on model / preb. base hover,

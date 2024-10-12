@@ -24,6 +24,7 @@ input[type="checkbox"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .build_cost_main_container {
@@ -54,6 +55,7 @@ input[type="checkbox"] {
   justify-content: center;
   align-items: center;
   width: 100%;
+  user-select: none;
 }
 
 .build_cost_content_container,

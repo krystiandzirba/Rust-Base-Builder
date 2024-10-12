@@ -390,7 +390,7 @@ export default function ObjectList() {
         <SearchBar value={search_querry} onChange={(event: any) => set_search_querry(event.target.value)} />
         <div className="object_list">
           {filtered_object_list.map((item, index) => (
-            <div
+            <button
               key={index}
               className={!allow_canvas_interaction_after_first_load ? "object_list_entity object_list_entity_disabled" : selected_object_list === index ? "object_list_entity object_list_entity_selected" : hovered_object_list === index ? "object_list_entity object_list_entity_hovered" : "object_list_entity object_list_entity_deselected"} //prettier-ignore
               style={{ cursor: !allow_canvas_interaction_after_first_load ? "not-allowed" : hovered_object_list ? "pointer" : "default" }} //prettier-ignore
@@ -404,7 +404,7 @@ export default function ObjectList() {
                 alt={`${item.name} thumbnail`}
               />
               <span className="object_list_entity_description">{item.name}</span>
-            </div>
+            </button>
           ))}
         </div>
       </div>

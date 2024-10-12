@@ -82,6 +82,10 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 97.5%;
   z-index: 15;
   overflow: hidden;
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
 .object_list_entity_deselected {

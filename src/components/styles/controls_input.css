@@ -196,6 +196,7 @@
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  user-select: none;
 }
 
 .change_distance_unit_container {
@@ -218,6 +219,7 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
+  user-select: none;
 }
 
 .movement_multiplier_left {

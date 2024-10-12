@@ -20,6 +20,7 @@
   text-align: center;
   transition: transform 0.15s ease-in-out;
   cursor: pointer;
+  user-select: none;
 }
 
 .main_prebuilt_bases_design_navbar_container_displayed {

@@ -768,6 +768,7 @@ export default function CanvasContainer() {
 
   useEffect(() => {
     dispatch(set_selected_model_id("empty"));
+    dispatch(set_object_selected(false));
   }, [model_creation_state]);
 
   useEffect(() => {

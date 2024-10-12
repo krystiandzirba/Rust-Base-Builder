@@ -19,6 +19,7 @@
   flex-direction: row;
   background-color: transparent;
   height: 100%;
+  user-select: none;
 }
 
 .hint_default_3d {

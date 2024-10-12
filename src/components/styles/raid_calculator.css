@@ -27,6 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .raid_type_buttons_main_container {
@@ -49,6 +50,7 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
+  user-select: none;
 }
 
 .raid_type_buttons_content_container_active {
@@ -131,6 +133,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 /* * ------------------------- ↑ Raid reset ↑ ------------------------- */
@@ -170,6 +173,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .raid_tool_cost_content_container {
@@ -191,6 +195,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .raid_tool_cost_content_thumbnail {
@@ -236,6 +241,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .raid_resources_cost_content_container {

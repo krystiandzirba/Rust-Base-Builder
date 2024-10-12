@@ -1,4 +1,4 @@
-import { Stats } from "@react-three/drei";
+import { PerformanceMonitor, Stats } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 
 //Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -10,14 +10,9 @@ export default function PerformanceStats() {
   return (
     <>
       {/* <Stats showPanel={2} /> */}
-
+      {/* prettier-ignore */}
       <Perf
-        style={{
-          position: "absolute",
-          top: "0vh",
-          left: "0vw",
-          width: "20vw",
-        }}
+        style={{position: "absolute", top: "0vh", left: "0vw", width: "20vw"}}
         logsPerSecond={3}
         matrixUpdate={true}
         showGraph={true}
