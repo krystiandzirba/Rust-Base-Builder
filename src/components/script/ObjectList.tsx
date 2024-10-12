@@ -385,36 +385,21 @@ export default function ObjectList() {
   return (
     <>
       <div
-        className={
-          page_mode === "edit"
-            ? "object_list_main_container object_list_main_container_displayed"
-            : "object_list_main_container object_list_main_container_hidden"
-        }
+        className={page_mode === "edit" ? "object_list_main_container object_list_main_container_displayed" : "object_list_main_container object_list_main_container_hidden"} //prettier-ignore
       >
         <SearchBar value={search_querry} onChange={(event: any) => set_search_querry(event.target.value)} />
         <div className="object_list">
           {filtered_object_list.map((item, index) => (
             <div
               key={index}
-              className={
-                !allow_canvas_interaction_after_first_load
-                  ? "object_list_entity object_list_entity_disabled"
-                  : selected_object_list === index
-                  ? "object_list_entity object_list_entity_selected"
-                  : hovered_object_list === index
-                  ? "object_list_entity object_list_entity_hovered"
-                  : "object_list_entity object_list_entity_deselected"
-              }
+              className={!allow_canvas_interaction_after_first_load ? "object_list_entity object_list_entity_disabled" : selected_object_list === index ? "object_list_entity object_list_entity_selected" : hovered_object_list === index ? "object_list_entity object_list_entity_hovered" : "object_list_entity object_list_entity_deselected"} //prettier-ignore
+              style={{ cursor: !allow_canvas_interaction_after_first_load ? "not-allowed" : hovered_object_list ? "pointer" : "default" }} //prettier-ignore
               onClick={() => {ObjectListMouseClick(index, item)}} //prettier-ignore
               onMouseEnter={() => {ObjectListMouseEnter(index)}} //prettier-ignore
               onMouseLeave={() => {ObjectListMouseLeave()}} //prettier-ignore
             >
               <img
-                className={
-                  hovered_object_list === index
-                    ? "object_list_entity_thumbnail object_list_entity_thumbnail_hovered"
-                    : "object_list_entity_thumbnail"
-                }
+                className={hovered_object_list === index ? "object_list_entity_thumbnail object_list_entity_thumbnail_hovered" : "object_list_entity_thumbnail"} //prettier-ignore
                 src={item.thumbnail}
                 alt={`${item.name} thumbnail`}
               />

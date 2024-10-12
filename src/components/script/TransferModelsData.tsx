@@ -231,6 +231,12 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
     }
   }, [prebuilt_base_objects_set]);
 
+  useEffect(() => {
+    if (Object.keys(prebuilt_base_objects_set).length === data_index) {
+      set_loading_bar_info(`Base imported correctly! ${data_index}/${imported_base_data_length}`);
+    }
+  }, [data_index]);
+
   //Section ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   return (

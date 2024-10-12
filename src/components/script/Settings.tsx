@@ -194,7 +194,7 @@ const Settings = () => {
           </ThemeProvider>
         </div>
 
-        {BuildSettingsAndControlsSegmentTitle("postprocessing | visuals " + (performance_mode ? "(performance mode = disabled)" : ""))}
+        {BuildSettingsAndControlsSegmentTitle("postprocessing | visuals " + (performance_mode ? "(disabled in performance mode)" : ""))}
          {!performance_mode && (
           <>{BuildSettingsSegments("model textures:", enable_model_textures, set_enable_model_textures)}
           {BuildSettingsSegments("bloom:", bloom_state, set_bloom_state)}

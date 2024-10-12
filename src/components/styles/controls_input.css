@@ -29,6 +29,7 @@
   font-weight: 300;
   border: none;
   text-align: center;
+  cursor: pointer;
 }
 
 .model_rotation_wheel {
@@ -39,13 +40,12 @@
   width: 70%;
   text-align: center;
   padding: 0.5vh;
+  cursor: pointer;
 }
 
 .model_rotation_button {
-  font-size: 0.9vw;
+  font-size: 1vw;
   font-family: "Quicksand", sans-serif;
-  font-weight: 300;
-  color: rgba(191, 191, 191, 0.5);
 }
 
 .rotation_change_button {
@@ -57,6 +57,7 @@
   color: #ffd5b3;
   border: none;
   text-align: center;
+  cursor: pointer;
 }
 
 .camera_direction_indicator {
@@ -107,6 +108,7 @@
   position: absolute;
   z-index: 15;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 .object_move_front_button {
@@ -215,6 +217,7 @@
   text-align: center;
   padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 
 .movement_multiplier_left {

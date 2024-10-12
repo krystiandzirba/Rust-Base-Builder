@@ -105,19 +105,17 @@ export default App;
 // feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
 // feature: add three.js layers while disabling multiple models at once
 
+// other: make the settings+controls buttons / save_delete buttons encapsulate in the black square boxes like toolbar
 // other: add new keyboard controls description - 2d camera (moving the objects) + creation mode
-// other: change the font size from vw/vh to em / make the settings-controls-save/delete in the black boxes such as overview, edit and raid
 // other: remake the wall mid uv and lower the texture size
 // other: add github wiki
 // other: compress new audio files
 // other: prevent key elements to be selectible by user (text) but still be a clickable part of a button
-// other: change the cursor type when hovering over buttons
 // other: change the build checkbox for MUI checkbox
 // other: change the fontawesome icons for MUI icons
 // other: remove the mui search bar, change it for something different
 // other: cleanup the canvas controls
 // other: compress all models in blender export
-// other: light up (make light orange) the model rotation degree box during a model creation state
 // other: change all icons color change on hover, from js function to css hover
 // other: search for onmouseenter and onmouseleave and change all the color changes based on js to css hover
 

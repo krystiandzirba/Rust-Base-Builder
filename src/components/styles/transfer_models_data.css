@@ -51,7 +51,8 @@
 
 .imported_data_progress_bar_inactive,
 .imported_data_progress_bar,
-.imported_data_progress_bar_invalid {
+.imported_data_progress_bar_invalid,
+.imported_data_progress_bar_correct {
   background-color: rgb(49, 49, 49) !important;
   transition: none !important;
   height: 5% !important;
@@ -60,14 +61,27 @@
 
 .imported_data_progress_bar_inactive .progress-bar {
   background-color: rgb(65, 65, 65);
+  background-image: repeating-linear-gradient(
+    45deg,
+    #000000 0%,
+    #000000 2.5%,
+    rgb(65, 65, 65) 2.5%,
+    rgb(65, 65, 65) 5%
+  );
 }
 
 .imported_data_progress_bar .progress-bar {
   background-color: #ffcea6;
+  background-image: repeating-linear-gradient(45deg, #000000 0%, #000000 2.5%, #e0b58f 2.5%, #e0b58f 5%);
+  background-size: 100px 100px;
 }
 
 .imported_data_progress_bar_invalid .progress-bar {
   background-color: #ff1616;
+}
+
+.imported_data_progress_bar_correct .progress-bar {
+  background-color: #c3ff5c;
 }
 
 .transfer_models_data_type_buttons_container {
@@ -179,6 +193,7 @@
   font-size: 0.7vw;
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
+  cursor: pointer;
 }
 
 .transfer_models_data_import_via_code_container {
@@ -253,6 +268,7 @@
   flex-direction: row;
   justify-content: center;
   border-radius: 1vh;
+  cursor: pointer;
 }
 
 .transfer_models_data_code_button_icon,

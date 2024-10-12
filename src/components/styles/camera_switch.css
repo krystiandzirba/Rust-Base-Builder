@@ -13,6 +13,7 @@
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   transition: transform 0.1s;
+  cursor: pointer;
 }
 
 .camera_text {
@@ -31,6 +32,7 @@
   background-color: rgba(0, 0, 0, 0);
   border: none;
   transition: transform 0.1s;
+  cursor: pointer;
 }
 
 .camera_button_switch:hover {
@@ -62,6 +64,7 @@
   transition: transform 0.1s;
   top: 2vh;
   left: 96vw;
+  cursor: pointer;
 }
 
 .camera_3d_reset:hover {

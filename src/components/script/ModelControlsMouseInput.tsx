@@ -24,6 +24,7 @@ export default function ControlsInput() {
   const object_selected = useSelector((state: RootState) => state.modelsData.object_selected);
   const camera_3d_direction = useSelector((state: RootState) => state.camerasSettings.camera_3d_direction);
   const camera_type = useSelector((state: RootState) => state.camerasSettings.camera_type);
+  const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
 
   const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
   const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
@@ -96,7 +97,7 @@ export default function ControlsInput() {
             <div
               className="camera_direction_indicator indicator_top"
               // prettier-ignore
-              style={{color: !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "north"  ? "#ffd5b3"  : "#bbbbbb"}}
+              style={{color: model_creation_state  ? "#ffd5b3" : !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "north"  ? "#ffd5b3"  : "#bbbbbb"}}
             >
               {camera_3d_direction === "north"
                 ? "W (+Z)"
@@ -119,7 +120,7 @@ export default function ControlsInput() {
             <div
               className="camera_direction_indicator indicator_right"
               // prettier-ignore
-              style={{color: !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "west"  ? "#ffd5b3"  : "#bbbbbb"}}
+              style={{color: model_creation_state  ? "#ffd5b3" : !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "west"  ? "#ffd5b3"  : "#bbbbbb"}}
             >
               {camera_3d_direction === "north"
                 ? "D (+X)"
@@ -142,7 +143,7 @@ export default function ControlsInput() {
             <div
               className="camera_direction_indicator indicator_bottom"
               // prettier-ignore
-              style={{color: !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "south"  ? "#ffd5b3"  : "#bbbbbb"}}
+              style={{color: model_creation_state  ? "#ffd5b3" : !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "south"  ? "#ffd5b3"  : "#bbbbbb"}}
             >
               {camera_3d_direction === "north"
                 ? "S (-Z)"
@@ -165,7 +166,8 @@ export default function ControlsInput() {
             <div
               className="camera_direction_indicator indicator_left"
               // prettier-ignore
-              style={{color: !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "east"  ? "#ffd5b3"  : "#bbbbbb"}}
+              style={{color: model_creation_state  ? "#ffd5b3" : !object_selected  ? "rgba(191, 191, 191, 0.5)"  : camera_3d_direction === "east"  ? "#ffd5b3"  : "#bbbbbb"}}
+              
             >
               {camera_3d_direction === "north"
                 ? "A (-X)"
@@ -272,25 +274,25 @@ export default function ControlsInput() {
             <button
               onClick={() => ObjectTransformButton("rotate_left")}
               className="rotation_direction_button"
-              style={{ color: object_selected ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
+              style={{ color: object_selected || model_creation_state ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
             >
-              <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
+              <FontAwesomeIcon icon={faArrowRotateRight} size="2xl" style={{ color: object_selected  ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
               Q
             </button>
             <div onClick={() => ChangeRotationDegree()} className="model_rotation_wheel">
-              <div className="model_rotation_button">{next_object_rotation_degree}°</div>
+              <div className="model_rotation_button" style={{ color: object_selected || model_creation_state ? "#a8a8a8" : "rgba(191, 191, 191, 0.5)" }} >{next_object_rotation_degree}°</div>
               <button
                 className="rotation_change_button"
-                style={{ color: object_selected ? "#ffd5b3" : "rgba(191, 191, 191, 0.5)" }}
+                style={{ color: object_selected || model_creation_state ? "#ffd5b3" : "rgba(191, 191, 191, 0.5)" }}
               >
                 -{object_rotation_degree}°-
               </button>
-              <div className="model_rotation_button">{previous_object_rotation_degree}°</div>
+              <div className="model_rotation_button" style={{ color: object_selected || model_creation_state ? "#a8a8a8" : "rgba(191, 191, 191, 0.5)" }}>{previous_object_rotation_degree}°</div>
             </div>
             <button
               onClick={() => ObjectTransformButton("rotate_right")}
               className="rotation_direction_button"
-              style={{ color: object_selected ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
+              style={{ color: object_selected || model_creation_state ? "#ffd5b3" : "rgba(120, 120, 120, 0.5)" }}
             >
               <FontAwesomeIcon icon={faArrowRotateLeft} size="2xl" style={{ color: object_selected ? "#a8a8a8" : "rgba(120, 120, 120, 0.5)" }}/>
               E

@@ -69,6 +69,7 @@
   justify-content: center;
   align-items: center;
   border: none;
+  cursor: pointer;
 }
 
 .mirror_button {
@@ -151,6 +152,7 @@ input::-webkit-inner-spin-button {
   font-family: "Quicksand", sans-serif;
   font-weight: 300;
   background-color: rgba(120, 120, 120, 0.5);
+  cursor: pointer;
 }
 
 .pivot_controls_button_active {
@@ -229,6 +231,7 @@ input::-webkit-inner-spin-button {
   padding: 0;
   margin: 0;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 .local_storage_button_text {
@@ -287,6 +290,7 @@ input::-webkit-inner-spin-button {
   padding: 0;
   margin: 0;
   background-color: rgba(255, 0, 0, 0);
+  cursor: pointer;
 }
 
 .erase_canvas_models_button_description,

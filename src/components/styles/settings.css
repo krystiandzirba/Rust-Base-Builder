@@ -28,6 +28,7 @@
   padding: 0;
   margin: 0;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 .settings_main_containter_description,

@@ -1230,11 +1230,12 @@ export default function PrebuiltBasesDesign() {
                 key={base.id}
                 className={
                   !allow_canvas_interaction_after_first_load
-                    ? "base_design_button_disabled base_design_button"
+                    ? "base_design_button base_design_button_disabled"
                     : base_prebuilt_selection === base.id
                     ? "base_design_button base_design_button_selected"
                     : "base_design_button base_design_button_deselected"
                 }
+                style={{ cursor: !allow_canvas_interaction_after_first_load ? "not-allowed" : base_prebuilt_selection ? "pointer" : "default" }} //prettier-ignore
                 onClick={() => {
                   if (allow_canvas_interaction_after_first_load) {
                     set_base_prebuilt_selection("empty");
