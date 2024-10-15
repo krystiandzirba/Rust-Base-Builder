@@ -18,6 +18,7 @@ import Github from "./components/script/Github.tsx";
 import MobileAlert from "./components/script/MobileAlert.tsx";
 import PrebuiltBasesDesign from "./components/script/PrebuiltBasesData.tsx";
 import HardwareParameters from "./components/script/HardwareParameters.tsx";
+import CanvasModelsPlacingSettings from "./components/script/CanvasModelsPlacingSettings.tsx";
 
 import "./components/styles/global.css";
 import "./components/styles/toolbar.css";
@@ -70,13 +71,13 @@ function App() {
       <HardwareParameters />
       <Loader {...loaderStyles} dataInterpolation={(p) => `Loading ${p.toFixed(0)}%`} />
       <HardwareParameters />
+      {page_mode === "edit" && <CanvasModelsPlacingSettings />}
     </>
   );
 }
 
 export default App;
 
-// bug: custom distance unit does not work
 // bug: the camera NSEW position, it is incorrectly calculated
 // bug: performance monitor(on) -> performance monitor(off) = stuttering
 // bug: lighting does not work after displaying the performance monitor
@@ -99,6 +100,7 @@ export default App;
 // feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
 // feature: add three.js layers while disabling multiple models at once
 
+// other: go through the redux store and remove unnecessery data
 // other: create separate component for wasd and mouse input, rework current one, move the remaining controls from the canvas to the new component
 // other: make the settings+controls buttons / save_delete buttons encapsulate in the black square boxes like toolbar
 // other: make a separate component from symmetry, height level, pivot and distance units buttons

@@ -314,6 +314,42 @@ const pageSettingsSlice = createSlice({
   },
 });
 
+const modelsPlacementSettingsSlice = createSlice({
+  name: "model placement settings",
+  initialState: {
+    symmetry_x_enabled: false,
+    symmetry_z_enabled: false,
+    unit_distance_number: 1,
+    model_build_height_level: 0,
+    pivot_controls_x_enabled: false,
+    pivot_controls_y_enabled: false,
+    pivot_controls_z_enabled: false,
+  },
+  reducers: {
+    set_symmetry_x_enabled: (state, action) => {
+      return { ...state, symmetry_x_enabled: action.payload };
+    },
+    set_symmetry_z_enabled: (state, action) => {
+      return { ...state, symmetry_z_enabled: action.payload };
+    },
+    set_unit_distance_number: (state, action) => {
+      return { ...state, unit_distance_number: action.payload };
+    },
+    set_model_build_height_level: (state, action) => {
+      return { ...state, model_build_height_level: action.payload };
+    },
+    set_pivot_controls_x_enabled: (state, action) => {
+      return { ...state, pivot_controls_x_enabled: action.payload };
+    },
+    set_pivot_controls_y_enabled: (state, action) => {
+      return { ...state, pivot_controls_y_enabled: action.payload };
+    },
+    set_pivot_controls_z_enabled: (state, action) => {
+      return { ...state, pivot_controls_z_enabled: action.payload };
+    },
+  },
+});
+
 export const { set_page_mode } = pageModeSlice.actions;
 
 export const { set_hardware_gpu, set_hardware_tier, set_hardware_is_mobile, set_hardware_monitor_resolution } =
@@ -337,6 +373,7 @@ export const {
   set_delete_object_mode,
   set_delete_object_mouse_trigger,
 } = controlsInputSlice.actions;
+
 export const {
   set_model_type_to_create,
   set_model_creation_state,
@@ -382,6 +419,16 @@ export const {
   set_audio,
 } = pageSettingsSlice.actions;
 
+export const {
+  set_symmetry_x_enabled,
+  set_symmetry_z_enabled,
+  set_unit_distance_number,
+  set_model_build_height_level,
+  set_pivot_controls_x_enabled,
+  set_pivot_controls_y_enabled,
+  set_pivot_controls_z_enabled,
+} = modelsPlacementSettingsSlice.actions;
+
 export const { set_cursor_type } = cursorTypeSlice.actions;
 
 export const store = configureStore({
@@ -394,6 +441,7 @@ export const store = configureStore({
     controlsInput: controlsInputSlice.reducer,
     modelsData: modelsDataSlice.reducer,
     pageSettings: pageSettingsSlice.reducer,
+    modelsPlacementSettings: modelsPlacementSettingsSlice.reducer,
   },
 });
 
