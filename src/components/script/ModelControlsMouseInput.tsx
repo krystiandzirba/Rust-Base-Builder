@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RootState } from "../../Store.tsx";
-import { set_object_distance_multiplier, set_button_input, set_button_trigger, set_object_rotation_degree, set_object_selected, set_selected_model_id} from "../../Store.tsx" //prettier-ignore
+import { set_button_input, set_button_trigger, set_object_rotation_degree } from "../../Store.tsx" //prettier-ignore
 import { useSelector, useDispatch } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,10 +28,6 @@ export default function ControlsInput() {
 
   const [previous_object_rotation_degree, set_previous_object_rotation_degree] = useState<number>(60);
   const [next_object_rotation_degree, set_next_object_rotation_degree] = useState<number>(15);
-
-  const [unit_distance_type, set_unit_distance_type] = useState<string>("1");
-  const [enable_custom_distance, set_enable_custom_distance] = useState<boolean>(false);
-  const [custom_distance_unit, set_custom_distance_unit] = useState<number>(0);
 
   function ChangeRotationDegree() {
     playSound("buttons_sound");
@@ -72,21 +68,6 @@ export default function ControlsInput() {
     dispatch(set_button_input(action));
     dispatch(set_button_trigger(button_trigger + 1));
   }
-
-  function ChangeDistanceUnitButton(distance: number) {
-    playSound("buttons_sound");
-    dispatch(set_object_distance_multiplier(distance));
-  }
-
-  function ToggleCustomDistance() {
-    set_enable_custom_distance(!enable_custom_distance);
-  }
-
-  const changeCustomDistanceUnit = (event: any) => {
-    const custom_distance_input_value = event.target.value;
-    set_custom_distance_unit(custom_distance_input_value);
-    ChangeDistanceUnitButton(custom_distance_input_value);
-  };
 
   //prettier-ignore
   return (
@@ -210,66 +191,6 @@ export default function ControlsInput() {
               CTRL
             </button>
           )}
-          <div className="distance_unit_main_container">
-            <div className="distance_unit_description_main_container">
-              <div className="distance_unit_description"> change distance units</div>
-              <input
-                onClick={() => { dispatch(set_selected_model_id(-1)); dispatch(set_object_selected(false))}}//prettier-ignore
-                className={
-                  unit_distance_type === "custom"
-                    ? "object_movement_multiplier movement_multiplier_top_right multiplier_active"
-                    : "object_movement_multiplier movement_multiplier_top_right custom_distance_hidden"
-                }
-                type="number"
-                value={custom_distance_unit}
-                onChange={changeCustomDistanceUnit}
-                placeholder="distance"
-                onFocus={(e) => e.target.select()}
-              />
-            </div>
-            <div className="change_distance_unit_container">
-              <button
-                className={
-                  unit_distance_type === "0.125"
-                    ? "object_movement_multiplier movement_multiplier_left multiplier_active"
-                    : "object_movement_multiplier movement_multiplier_left multiplier_inactive"
-                }
-                onClick={() => (ChangeDistanceUnitButton(0.125), set_unit_distance_type("0.125"))}
-              >
-                x0.125
-              </button>
-              <button
-                className={
-                  unit_distance_type === "1"
-                    ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
-                    : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
-                }
-                onClick={() => (ChangeDistanceUnitButton(1), set_unit_distance_type("1"))}
-              >
-                x1
-              </button>
-              <button
-                className={
-                  unit_distance_type === "5"
-                    ? "object_movement_multiplier movement_multiplier_middle multiplier_active"
-                    : "object_movement_multiplier movement_multiplier_middle multiplier_inactive"
-                }
-                onClick={() => (ChangeDistanceUnitButton(5), set_unit_distance_type("5"))}
-              >
-                x5
-              </button>
-              <button
-                className={
-                  unit_distance_type === "custom"
-                    ? "object_movement_multiplier movement_multiplier_bottom_right multiplier_active"
-                    : "object_movement_multiplier movement_multiplier_right multiplier_inactive"
-                }
-                onClick={() => (ToggleCustomDistance(), set_unit_distance_type("custom"), ChangeDistanceUnitButton(custom_distance_unit))}//prettier-ignore
-              >
-                custom
-              </button>
-            </div>
-          </div>
           <div className="object_rotation_container">
             <button
               onClick={() => ObjectTransformButton("rotate_left")}

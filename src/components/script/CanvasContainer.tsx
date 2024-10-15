@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import { RootState, set_delete_object_mouse_trigger } from "../../Store";
 import { useSelector, useDispatch } from "react-redux";
-import { set_cursor_type, set_canvas_models_array, set_object_selected, set_selected_model_id, set_camera_3d_direction, set_delete_object_mode, set_object_distance_multiplier, set_allow_canvas_interaction_after_first_load} from "../../Store.tsx"; //prettier-ignore
+import { set_cursor_type, set_canvas_models_array, set_object_selected, set_selected_model_id, set_camera_3d_direction, set_delete_object_mode, set_allow_canvas_interaction_after_first_load} from "../../Store.tsx"; //prettier-ignore
 
 import { useAudioPlayer } from "./AudioPlayer.tsx";
 
@@ -93,16 +93,16 @@ import { Model as SleepingBag } from "./../models/misc/SleepingBag.tsx";
 
 import { GhostModel as GhostModel } from "./GhostModels.tsx";
 
+import TransferModelsData from "./TransferModelsData.tsx";
+import { CanvasModelsPlacingSettings } from "./CanvasModelsPlacingSettings.tsx";
 import CanvasGrids from "./CanvasGrids.tsx";
 import CanvasLights from "./CanvasLights.tsx";
 import PerformanceStats from "./PerformanceStats.tsx";
 import Postprocessing from "./Postprocessing.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faUpDownLeftRight, faFloppyDisk, faTrashCan, faEraser, faDumpster} from "@fortawesome/free-solid-svg-icons"; //prettier-ignore
+import { faFloppyDisk, faTrashCan, faEraser, faDumpster} from "@fortawesome/free-solid-svg-icons"; //prettier-ignore
 
 import { starter_base_objects_data } from "./PrebuiltBasesData.tsx";
-
-import TransferModelsData from "./TransferModelsData.tsx";
 
 //Info ctrl+f ➜ [SectionNav] to jump between sections
 //Component ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -131,7 +131,6 @@ export default function CanvasContainer() {
   const model_type_to_create = useSelector((state: RootState) => state.modelsData.model_type_to_create);
   const model_creation_state = useSelector((state: RootState) => state.modelsData.model_creation_state);
   const create_prebuilt_base_state = useSelector((state: RootState) => state.modelsData.create_prebuilt_base_state);
-  const object_distance_multiplier = useSelector((state: RootState) => state.controlsInput.object_distance_multiplier);
   const button_input = useSelector((state: RootState) => state.controlsInput.button_input);
   const button_trigger = useSelector((state: RootState) => state.controlsInput.button_trigger);
   const object_rotation_degree = useSelector((state: RootState) => state.controlsInput.object_rotation_degree);
@@ -147,6 +146,8 @@ export default function CanvasContainer() {
   const camera_fov = useSelector((state: RootState) => state.pageSettings.camera_fov); //prettier-ignore
   const prebuilt_base_objects_set = useSelector((state: RootState) => state.modelsData.prebuilt_base_objects_set); //prettier-ignore
 
+  const {symmetry_enabled, unit_distance_number, model_build_height_level, pivot_controls_enabled, ModelPlacingSettingsMainContainer } = CanvasModelsPlacingSettings(); //prettier-ignore
+
   type models_data_type = {id: string; component: React.FC; rotation: THREE.Euler}; //prettier-ignore
   const [models, set_models] = useState<models_data_type[]>([]);
   const [modelsData, set_models_data] = useState<{[id: string]: { model: string, position: { x: number; z: number; y: number }; rotation: THREE.Euler }}>(() => {const storedData = localStorage.getItem('modelsData'); return storedData ? JSON.parse(storedData) : {}}); //prettier-ignore
@@ -157,11 +158,6 @@ export default function CanvasContainer() {
   const [model_y_position, set_model_y_position] = useState<number>(0);
 
   const [model_foundation_elevation, set_model_foundation_elevation] = useState<number>(0);
-  const [default_model_height_position, set_default_model_height_position] = useState<number>(0);
-  const [pivot_controls_state, set_pivot_controls_state] = useState<boolean>(false);
-  const [pivot_x_axis_state, set_pivot_x_axis_state] = useState<boolean>(false);
-  const [pivot_y_axis_state, set_pivot_y_axis_state] = useState<boolean>(false);
-  const [pivot_z_axis_state, set_pivot_z_axis_state] = useState<boolean>(false);
   const default_object_rotation = new THREE.Euler(0, 0, 0);
   const [modified_model_rotation, set_modified_model_rotation] = useState<number>(0);
   const [model_x_position_offset, set_model_x_position_offset] = useState<number>(0);
@@ -173,9 +169,6 @@ export default function CanvasContainer() {
   const [model_z_mirror_z_position, set_model_z_mirror_z_position] = useState<number>(0);
   const [model_xz_mirror_x_position, set_model_xz_mirror_x_position] = useState<number>(0);
   const [model_xz_mirror_z_position, set_model_xz_mirror_z_position] = useState<number>(0);
-
-  const [symmetry_x_enabled, set_symmetry_x_enabled] = useState<boolean>(false);
-  const [symmetry_z_enabled, set_symmetry_z_enabled] = useState<boolean>(false);
 
   const mouse_window_click = new THREE.Vector2();
 
@@ -339,7 +332,7 @@ export default function CanvasContainer() {
 
         set_mouse_canvas_x_coordinate(rounded_x);
         set_mouse_canvas_z_coordinate(rounded_z);
-        set_model_y_position(default_model_height_position + model_foundation_elevation);
+        set_model_y_position(model_build_height_level + model_foundation_elevation);
 
         set_model_x_mirror_x_position(-mouse_canvas_x_coordinate);
         set_model_x_mirror_z_position(mouse_canvas_z_coordinate);
@@ -446,15 +439,15 @@ export default function CanvasContainer() {
 
         addModelData(randomIdGenerator(), mouse_canvas_x_coordinate + model_x_position_offset, mouse_canvas_z_coordinate + model_z_position_offset, model_y_position, new THREE.Euler(0, modified_model_rotation, 0, "XYZ")); //prettier-ignore
 
-        if (symmetry_x_enabled) {
+        if (symmetry_enabled.x) {
           addModelData(randomIdGenerator(), model_x_mirror_x_position, model_x_mirror_z_position, model_y_position, new THREE.Euler(0, -modified_model_rotation, 0, "XYZ"));
         }
 
-        if (symmetry_z_enabled) {
+        if (symmetry_enabled.z) {
           addModelData(randomIdGenerator(), model_z_mirror_x_position, model_z_mirror_z_position, model_y_position, new THREE.Euler(0, -modified_model_rotation - Math.PI, 0, "XYZ"));
         }
 
-        if (symmetry_x_enabled && symmetry_z_enabled) {
+        if (symmetry_enabled.x && symmetry_enabled.z) {
           addModelData(randomIdGenerator(), model_xz_mirror_x_position, model_xz_mirror_z_position, model_y_position, new THREE.Euler(0, modified_model_rotation + Math.PI, 0, "XYZ"));
         }
         playSound("build_sound");
@@ -584,7 +577,7 @@ export default function CanvasContainer() {
       if (selected_model_id !== "empty" && updatedModelTransforms[selected_model_id]) {
         const newPosition = { ...updatedModelTransforms[selected_model_id].position };
 
-        newPosition[axis] += direction * object_distance_multiplier;
+        newPosition[axis] += direction * unit_distance_number;
 
         updatedModelTransforms[selected_model_id] = {
           ...updatedModelTransforms[selected_model_id],
@@ -709,15 +702,6 @@ export default function CanvasContainer() {
     return random_id;
   }
 
-  function ChangeModelElevationValue(value: number) {
-    const new_default_model_height_position = default_model_height_position + value;
-
-    if (new_default_model_height_position >= 0) {
-      set_default_model_height_position(new_default_model_height_position);
-      playSound("buttons_sound");
-    }
-  }
-
   const removeModelsDataObjectInfo = (id: string) => {
     const updatedModelsData = { ...modelsData };
     if (updatedModelsData[id]) {
@@ -728,32 +712,6 @@ export default function CanvasContainer() {
 
   function storeCanvasModelsNames(models: any[]) {
     return models.map((model) => model.component.displayName);
-  }
-
-  function HandlePivotStateSwitch() {
-    set_pivot_controls_state(!pivot_controls_state);
-    playSound("buttons_sound");
-  }
-
-  function HandlePivotAxisStateSwitch(pivot: boolean, set_pivot: any) {
-    if (pivot_controls_state) {
-      set_pivot(!pivot);
-      playSound("buttons_sound");
-    }
-  }
-
-  function ChangeXSymmetryState() {
-    set_symmetry_x_enabled(!symmetry_x_enabled);
-    set_model_x_position_offset(0);
-    set_model_z_position_offset(0);
-    playSound("buttons_sound");
-  }
-
-  function ChangeZSymmetryState() {
-    set_symmetry_z_enabled(!symmetry_z_enabled);
-    set_model_x_position_offset(0);
-    set_model_z_position_offset(0);
-    playSound("buttons_sound");
   }
 
   function IsOffsetActive(): boolean {
@@ -928,9 +886,7 @@ export default function CanvasContainer() {
       }
     }
     if (page_mode === "edit" && !model_creation_state) {
-      if (keyboard_key === "ShiftLeft") {
-        playSound("buttons_sound");
-      } else if (selected_model_id !== "empty" && (keyboard_key === "ControlLeft" || keyboard_key === "Space")) {
+      if (selected_model_id !== "empty" && (keyboard_key === "ControlLeft" || keyboard_key === "Space")) {
         playSound("controls_sound");
       }
     }
@@ -1023,14 +979,6 @@ export default function CanvasContainer() {
           moveSelectedObject("y", +1);
         } else if (keyboard_key === "ControlLeft") {
           moveSelectedObject("y", -1);
-        } else if (keyboard_key === "ShiftLeft") {
-          if (object_distance_multiplier === 0.125) {
-            dispatch(set_object_distance_multiplier(1));
-          } else if (object_distance_multiplier === 1) {
-            dispatch(set_object_distance_multiplier(5));
-          } else if (object_distance_multiplier === 5) {
-            dispatch(set_object_distance_multiplier(0.125));
-          }
         }
       }
     } else if (page_mode === "edit" && model_creation_state) {
@@ -1038,7 +986,7 @@ export default function CanvasContainer() {
         ChangeDefaultModelRotation("left");
       } else if (keyboard_key === "KeyE" && !create_prebuilt_base_state) {
         ChangeDefaultModelRotation("right");
-      } else if (keyboard_key === "KeyW" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
+      } else if (keyboard_key === "KeyW" && !symmetry_enabled.x && !symmetry_enabled.z && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_z_position_offset(model_z_position_offset - 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1048,7 +996,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         }
-      } else if (keyboard_key === "KeyS" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
+      } else if (keyboard_key === "KeyS" && !symmetry_enabled.x && !symmetry_enabled.z && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1058,7 +1006,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         }
-      } else if (keyboard_key === "KeyA" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
+      } else if (keyboard_key === "KeyA" && !symmetry_enabled.x && !symmetry_enabled.z && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_x_position_offset(model_x_position_offset - 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1068,7 +1016,7 @@ export default function CanvasContainer() {
         } else if (camera_3d_direction === "west") {
           set_model_z_position_offset(model_z_position_offset + 0.125);
         }
-      } else if (keyboard_key === "KeyD" && !symmetry_x_enabled && !symmetry_z_enabled && !create_prebuilt_base_state) {
+      } else if (keyboard_key === "KeyD" && !symmetry_enabled.x && !symmetry_enabled.z && !create_prebuilt_base_state) {
         if (camera_3d_direction === "north") {
           set_model_x_position_offset(model_x_position_offset + 0.125);
         } else if (camera_3d_direction === "south") {
@@ -1257,90 +1205,7 @@ export default function CanvasContainer() {
     <>
       {page_mode === "edit" && (
         <>
-          <div className="pivot_controls_container_description">
-            pivot controls {pivot_controls_state ? "(enabled)" : "(disabled)"}
-          </div>
-          <div className="pivot_controls_container">
-            <button className="pivot_controls_button pivot_controls_left" onClick={HandlePivotStateSwitch}>
-              <FontAwesomeIcon
-                icon={faUpDownLeftRight}
-                size="xl"
-                style={{ color: !pivot_controls_state ? "#bbbbbb" : "#ffd5b3" }}
-              />
-            </button>
-            <button
-              className={
-                !pivot_controls_state
-                  ? "pivot_controls_button"
-                  : pivot_x_axis_state
-                  ? "pivot_controls_button pivot_controls_button_enabled"
-                  : "pivot_controls_button pivot_controls_button_active"
-              }
-              onClick={() => HandlePivotAxisStateSwitch(pivot_x_axis_state, set_pivot_x_axis_state)}
-            >
-              X
-            </button>
-            <button
-              className={
-                !pivot_controls_state
-                  ? "pivot_controls_button"
-                  : pivot_y_axis_state
-                  ? "pivot_controls_button pivot_controls_button_enabled"
-                  : "pivot_controls_button pivot_controls_button_active"
-              }
-              onClick={() => HandlePivotAxisStateSwitch(pivot_y_axis_state, set_pivot_y_axis_state)}
-            >
-              Y
-            </button>
-            <button
-              className={
-                !pivot_controls_state
-                  ? "pivot_controls_button pivot_controls_right"
-                  : pivot_z_axis_state
-                  ? "pivot_controls_button pivot_controls_button_enabled pivot_controls_right"
-                  : "pivot_controls_button pivot_controls_button_active pivot_controls_right"
-              }
-              onClick={() => HandlePivotAxisStateSwitch(pivot_z_axis_state, set_pivot_z_axis_state)}
-            >
-              Z
-            </button>
-          </div>
-          <div className="object_elevation_container_description">build on height level:</div>
-          <div className="object_elevation_container">
-            <button className="elevation_button elevation_button_left" onClick={() => ChangeModelElevationValue(-1)}>
-              <FontAwesomeIcon icon={faMinus} size="1x" style={{ color: "black" }} />
-            </button>
-            <div className="elevation_input_field">{default_model_height_position / 2}</div>
-
-            <button className="elevation_button elevation_button_right" onClick={() => ChangeModelElevationValue(+1)}>
-              <FontAwesomeIcon icon={faPlus} size="1x" style={{ color: "black" }} />
-            </button>
-          </div>
-
-          <div className="object_mirror_container_description">symmetry:</div>
-          <div className="object_mirror_container">
-            <button
-              className={
-                symmetry_x_enabled
-                  ? "mirror_button mirror_button_left symmetry_button_enabled"
-                  : "mirror_button mirror_button_left"
-              }
-              onClick={() => ChangeXSymmetryState()}
-            >
-              X
-            </button>
-
-            <button
-              className={
-                symmetry_z_enabled
-                  ? "mirror_button mirror_button_right symmetry_button_enabled"
-                  : "mirror_button mirror_button_right"
-              }
-              onClick={() => ChangeZSymmetryState()}
-            >
-              Z
-            </button>
-          </div>
+          <ModelPlacingSettingsMainContainer />
 
           {model_creation_state && (
             <div className="offset_container_main">
@@ -1427,10 +1292,10 @@ export default function CanvasContainer() {
                 offset={[modelTransform.position.x, modelTransform.position.y, modelTransform.position.z]}
                 visible={selected_model_id === id && page_mode === "edit" ? true : false}
                 key={id}
-                scale={selected_model_id === id && pivot_controls_state && pivot_controls_state ? 3 : 0}
+                scale={selected_model_id === id && Object.values(pivot_controls_enabled).some(Boolean) ? 3 : 0} //prettier-ignore
                 lineWidth={1}
                 depthTest={false}
-                activeAxes={[pivot_x_axis_state, pivot_y_axis_state, pivot_z_axis_state]}
+                activeAxes={[pivot_controls_enabled.x, pivot_controls_enabled.y, pivot_controls_enabled.z]}
                 axisColors={["##ffbf5e", "##ffdaa3", "##ffbf5e"]}
                 onDragStart={() => PivotDrag("start", id)}
                 onDragEnd={() => PivotDrag("end", id)}
@@ -1458,8 +1323,8 @@ export default function CanvasContainer() {
                 model_y_position={model_y_position}
                 model_z_position={mouse_canvas_z_coordinate + model_z_position_offset}
                 model_y_rotation={modified_model_rotation}
-                symmetry_x_enabled={symmetry_x_enabled}
-                symmetry_z_enabled={symmetry_z_enabled}
+                symmetry_x_enabled={symmetry_enabled.x}
+                symmetry_z_enabled={symmetry_enabled.z}
                 model_offset_active={IsOffsetActive() || false}
                 model_x_offset_position={mouse_canvas_x_coordinate}
                 model_z_offset_position={mouse_canvas_z_coordinate}
