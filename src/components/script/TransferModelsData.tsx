@@ -227,12 +227,12 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
 
   useEffect(() => {
     if (Object.keys(prebuilt_base_objects_set).length === 0 && model_type_to_create === "ImportedBase") {
-      set_loading_bar_info("Base not imported / incorrect file");
+      set_loading_bar_info("Base not imported / incorrect data");
     }
   }, [prebuilt_base_objects_set]);
 
   useEffect(() => {
-    if (Object.keys(prebuilt_base_objects_set).length === data_index) {
+    if (enable_base_placing && Object.keys(prebuilt_base_objects_set).length === data_index) {
       set_loading_bar_info(`Base imported correctly! ${data_index}/${imported_base_data_length}`);
     }
   }, [data_index]);
@@ -247,7 +247,7 @@ const TransferModelsData: React.FC<TransferModelsDataProps> = ({ canvas_models_d
           {loading_bar_info} {loading_bar_info === "Imported base models" && ` ${data_index}/${imported_base_data_length}`}
         </div>
         {/* prettier-ignore */}
-        <ProgressBar className={!enable_base_placing ? "imported_data_progress_bar_inactive" : loading_bar_info === "Base not imported / incorrect file" ? "imported_data_progress_bar_invalid" : "imported_data_progress_bar"} striped now={enable_base_placing ? data_index : 1} max={enable_base_placing ? imported_base_data_length : 1} />
+        <ProgressBar className={!enable_base_placing ? "imported_data_progress_bar_inactive" : loading_bar_info === "Base not imported / incorrect data" ? "imported_data_progress_bar_invalid" : "imported_data_progress_bar"} striped now={enable_base_placing ? data_index : 1} max={enable_base_placing ? imported_base_data_length : 1} />
         <div className="transfer_models_data_type_buttons_container">
           <div className="transfer_models_data_type_buttons_container_row">
             <div
