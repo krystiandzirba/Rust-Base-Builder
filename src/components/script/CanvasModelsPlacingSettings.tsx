@@ -97,19 +97,19 @@ export default function CanvasModelsPlacingSettings() {
               className= {unit_distance_number === 0.125 ? "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_distance_units_button_enabled canvas_models_placing_settings_button_left" : "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_distance_units_button_disabled canvas_models_placing_settings_button_left"} // prettier-ignore
               onClick={() => HandleUnitDistanceChange(0.125)} //prettier-ignore
             >
-              x0.125
+              0.125
             </div>
             <div
               className= {unit_distance_number === 1 ? "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_distance_units_button_enabled" : "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_distance_units_button_disabled"} // prettier-ignore
               onClick={() => HandleUnitDistanceChange(1)} //prettier-ignore
             >
-              x1
+              1
             </div>
             <div
               className= {unit_distance_number === 5 ? "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_distance_units_button_enabled" : "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_distance_units_button_disabled"} // prettier-ignore
               onClick={() => HandleUnitDistanceChange(5)} //prettier-ignore
             >
-              x5
+              5
             </div>
             {/* prettier-ignore */}
             <input min={0} max={50} style={{ width: '32.5%' }} type="number" value={custom_unit_distance_number} onChange={HandleCustomUnitDistanceChange} onFocus={(e) => e.target.select()} placeholder="custom" className={unit_distance_number !== 0.125 && unit_distance_number !== 1 && unit_distance_number !== 5 ? "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_pivot_controls_button_enabled canvas_models_placing_settings_button_right" : "canvas_models_placing_settings_distance_units_button canvas_models_placing_settings_pivot_controls_button_disabled canvas_models_placing_settings_button_right"}/>

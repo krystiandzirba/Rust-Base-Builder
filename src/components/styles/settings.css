@@ -1,24 +1,31 @@
 .settings_and_controls_main_container {
   position: absolute;
-  width: 8.5vw;
-  height: 8.5vh;
+  width: 7.5vw;
+  height: 7.5vh;
   z-index: 55;
-  left: 62.85vw;
+  left: 66.5vw;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  top: 0.75vh;
+  top: 0.5vh;
+  border: 1px black solid;
 }
 
 .settings_main_containter,
 .controls_main_containter {
-  width: 45%;
+  background-color: rgba(15, 16, 26, 0.4);
+  backdrop-filter: blur(3px);
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+
+.settings_main_containter {
+  border-right: 1px black solid;
 }
 
 .settings_main_containter_button,
@@ -43,6 +50,7 @@
   text-align: center;
   padding: 0;
   margin: 0;
+  background-color: black;
 }
 
 .settings_button_thumbnail,

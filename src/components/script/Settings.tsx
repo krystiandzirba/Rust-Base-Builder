@@ -225,7 +225,6 @@ const Settings = () => {
           {BuildControlsSegments("E", "rotate selected object clockwise")}
           {BuildControlsSegments("SPACE", "move selected object up (height)")}
           {BuildControlsSegments("CTRL", "move selected object down (height)")}
-          {BuildControlsSegments("SHIFT", "change the object (moving) distance unit")}
           {BuildControlsSegments("DEL | BACKSPACE", "delete selected model")}
       </div>
     </>

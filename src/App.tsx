@@ -84,6 +84,7 @@ export default App;
 // bug: raid object destructon on mouse click (down) not the click (release/up)
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
 
+// feature: add different buttons descriptions on "?" hover (mui tooltip?)
 // feature: object copy: "ctrl + C"
 // feature: different "save files / base plans"
 // feature: add postprocessing model edges instead of direct addon edges, current edges causes heavy performance drop, 2x calls and 4x triangles

@@ -1340,7 +1340,7 @@ export default function CanvasContainer() {
       </div>
 
       <div className="local_storage_container">
-        <div className="local_storage_button_container">
+        <div className="local_storage_delete_button_container">
           <button
             className="local_storage_button"
             onClick={() => {
@@ -1348,12 +1348,12 @@ export default function CanvasContainer() {
               playSound("menu_sound");
             }}
           >
-            <FontAwesomeIcon icon={faFloppyDisk} style={{ width: "95%", height: "95%" }} />
+            <FontAwesomeIcon icon={faFloppyDisk} style={{ width: "70%", height: "70%" }} />
           </button>
           <span className="local_storage_button_text">save</span>
         </div>
 
-        <div className="local_storage_button_container">
+        <div className="local_storage_save_button_container">
           <button
             className="local_storage_button"
             onClick={() => {
@@ -1361,7 +1361,7 @@ export default function CanvasContainer() {
               playSound("menu_sound");
             }}
           >
-            <FontAwesomeIcon icon={faTrashCan} style={{ width: "90%", height: "80%" }} />
+            <FontAwesomeIcon icon={faTrashCan} style={{ width: "65%", height: "60%" }} />
           </button>
           <span className="local_storage_button_text">delete</span>
         </div>
