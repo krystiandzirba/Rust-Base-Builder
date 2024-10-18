@@ -101,6 +101,7 @@ export default App;
 // feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
 // feature: add three.js layers while disabling multiple models at once
 
+// other: add sliding animation to the rest of the components (just like object list / prebuilt list in edit mode)
 // other: go through the redux store and remove unnecessery data
 // other: create separate component for wasd and mouse input, rework current one, move the remaining controls from the canvas to the new component
 // other: make the settings+controls buttons / save_delete buttons encapsulate in the black square boxes like toolbar

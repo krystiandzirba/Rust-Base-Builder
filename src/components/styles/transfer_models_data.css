@@ -177,7 +177,7 @@
 .transfer_models_data_base_place_button_container,
 .transfer_models_data_generate_base_code_container {
   width: 100%;
-  height: 25%;
+  height: 35%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,8 +185,8 @@
 
 .transfer_models_data_base_place_button,
 .transfer_models_data_generate_base_code_button {
-  width: 80%;
-  height: 80%;
+  width: 77.5%;
+  height: 70%;
   border-radius: 1vh;
   display: flex;
   align-items: center;
@@ -200,7 +200,7 @@
 }
 
 .transfer_models_data_import_via_code_container {
-  height: 20%;
+  height: 32.5%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -209,7 +209,7 @@
 
 .transfer_models_data_import_via_code_container_input {
   width: 85%;
-  height: 95%;
+  height: 70%;
   background-color: rgb(201, 201, 201);
   border: none;
   text-align: center;
@@ -257,7 +257,7 @@
 
 .transfer_models_data_code_buttons_container {
   width: 90%;
-  height: 35%;
+  height: 32.5%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -265,7 +265,7 @@
 
 .transfer_models_data_code_button {
   width: 40%;
-  height: 70%;
+  height: 75%;
   background-color: rgb(201, 201, 201);
   display: flex;
   align-items: center;
@@ -340,7 +340,7 @@
 
 .transfer_models_data_import_remove_file_container {
   width: 100%;
-  height: 25%;
+  height: 30%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -368,7 +368,7 @@
 
 .file_upload_container_text {
   width: 90%;
-  height: 19%;
+  height: 17.5%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
