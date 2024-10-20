@@ -501,7 +501,7 @@ export default function CanvasContainer() {
           playSound("build_sound");
         }, prebuild_delay);
 
-        prebuild_delay += 70;
+        prebuild_delay += 60;
       });
     }
   }
@@ -1299,7 +1299,8 @@ export default function CanvasContainer() {
                 lineWidth={1}
                 depthTest={false}
                 activeAxes={[pivot_controls_x_enabled, pivot_controls_y_enabled, pivot_controls_z_enabled]}
-                axisColors={["##ffbf5e", "##ffdaa3", "##ffbf5e"]}
+                axisColors={["#ffcc80", "#ffcc80", "#ffcc80"]}
+                hoveredColor={"#ffe0b3"}
                 onDragStart={() => PivotDrag("start", id)}
                 onDragEnd={() => PivotDrag("end", id)}
                 disableScaling={true}

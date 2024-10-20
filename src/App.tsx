@@ -83,9 +83,9 @@ export default App;
 // bug: lighting does not work after displaying the performance monitor
 // bug: raid object destructon on mouse click (down) not the click (release/up)
 // bug: double model selection during selection of the closest model, when currently selected model is in the mouse position behind
+// bug: model offset active if previously placed model was moved, clear the input on model select
 
 // feature: add different buttons descriptions on "?" hover (mui tooltip?)
-// feature: object copy: "ctrl + C"
 // feature: different "save files / base plans"
 // feature: add postprocessing model edges instead of direct addon edges, current edges causes heavy performance drop, 2x calls and 4x triangles
 // feature: add custom rotation angle and distance unit to transform the object
@@ -101,11 +101,10 @@ export default App;
 // feature: changes the textures to be multiplication of 2 (remove 386x386 ...)
 // feature: add three.js layers while disabling multiple models at once
 
+// other: add the unoptimized outline only to the offset models, to remove 0 degree edges
 // other: add sliding animation to the rest of the components (just like object list / prebuilt list in edit mode)
 // other: go through the redux store and remove unnecessery data
 // other: create separate component for wasd and mouse input, rework current one, move the remaining controls from the canvas to the new component
-// other: make the settings+controls buttons / save_delete buttons encapsulate in the black square boxes like toolbar
-// other: make a separate component from symmetry, height level, pivot and distance units buttons
 // other: add new keyboard controls description - 2d camera (moving the objects) + creation mode
 // other: remake the wall mid uv and lower the texture size
 // other: add github wiki
