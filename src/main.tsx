@@ -16,7 +16,9 @@ ReactGA.send({
   page: window.location.pathname,
 });
 
-posthog.init('phc_FfxugPbfWc8Al71t7xnLlYZK0H3keOozhI5nq19YM2z', { api_host: 'https://us.i.posthog.com', person_profiles: 'always' }) //prettier-ignore
+posthog.init('phc_FfxugPbfWc8Al71t7xnLlYZK0H3keOozhI5nq19YM2z', { api_host: 'https://us.i.posthog.com', person_profiles: 'always', capture_pageview: false, }) //prettier-ignore
+
+posthog.capture("$pageview", { domain: window.location.hostname });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
