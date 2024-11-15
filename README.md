@@ -14,9 +14,9 @@
 Rust Base Builder - 3D building environment for a popular video game "Rust". Create and customize structures, simulate raids, calculate building costs and import/export your designs with ease.
 </p>
 
-<p align="center"> App: https://krystiandzirba.github.io/Rust-Base-Builder/ </p>
-<p align="center">or</p>
 <p align="center">www.rustbasebuilder.eu</p>
+<p align="center">or</p>
+<p align="center"> App: https://krystiandzirba.github.io/Rust-Base-Builder/ </p>
 
 ![RBB1](https://github.com/user-attachments/assets/a37cfb86-2bda-46d8-9b0b-aff557e48a49)
 
