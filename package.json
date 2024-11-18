@@ -2,7 +2,7 @@
   "homepage": "https://krystiandzirba.github.io/Rust-Base-Builder",
   "name": "rust-base-builder",
   "private": true,
-  "version": "5.35.6",
+  "version": "6.0.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
